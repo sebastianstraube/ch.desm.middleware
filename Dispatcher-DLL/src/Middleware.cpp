@@ -3,7 +3,13 @@
 #include <string.h>
 
 #include <iostream>
-#include <sstream>
+#include <limits>
+#include <list>
+#include <map>
+#include <set>
+
+#include <json/json.h>
+
 #include "Middleware.h"
 #include "Thread.h"
 
@@ -11,12 +17,29 @@
 
 namespace desm {
 
+	enum MESSAGE_TYPE {
+		MESSAGE_TYPE_SET_KILOMETER_DIRECTION = 1,
+		MESSAGE_TYPE_SET_ISOLIERSTOSS
+	};
+
 	struct Middleware::Impl {
 
 		////////////////////////////////////////////////////////////////////////
 		// types
 
 		typedef Thread<typename Middleware::Impl, void*> tFetchThread;
+
+		struct tGleis {
+			tGleis(int _id = std::numeric_limits<int>::max()) : id(_id) {}
+			bool isValid() const { return this->id != std::numeric_limits<int>::max(); }
+			int id;
+			std::set<double> isolierstoesse;
+		};
+
+		struct tState {
+			int kilometerDirection;
+			std::map<int, tGleis> gleise;
+		};
 
 		////////////////////////////////////////////////////////////////////////
 		// member
@@ -26,8 +49,7 @@ namespace desm {
 		tFetchThread* m_fetchThread;
 		bool m_fetchThreadStop;
 
-		// the state...
-		int m_kilometerDirection;
+		tState m_state;
 
 		////////////////////////////////////////////////////////////////////////
 		// lifetime
@@ -36,8 +58,9 @@ namespace desm {
 			: m_cc(NULL)
 			, m_fetchThread(NULL)
 			, m_fetchThreadStop(false)
-			, m_kilometerDirection(0)
 		{
+			resetState();
+			
 			// TODO: load config
 			CommunicationController::eMode mode = (configPath == "server")
 				? CommunicationController::MODE_SERVER
@@ -69,21 +92,55 @@ namespace desm {
 			return 0;
 		}
 
-		void parseMessage(const std::string& msg) {
-			if(msg.substr(0, 2) == "KD") {
-				std::string kd = msg.substr(2);
-				m_kilometerDirection = atoi(kd.c_str());
-				std::cout << "updated Kilometer Direction to " << m_kilometerDirection << std::endl;
-			} else {
-				std::cerr << "INVALID MESSAGE RECEIVED!" << std::endl;
-			}
+		void resetState() {
+			m_state.kilometerDirection = 0;
 		}
 
-		template<class T>
-		void broadcastUpdate(const std::string& id, const T& v) {
-			std::ostringstream ss;
-			ss << id << v;
-			m_cc->send(ss.str());
+		void sendMessage(int msgType, const Json::Value& v) {
+			Json::FastWriter writer;
+			Json::Value root;
+			root["t"] = msgType;
+			root["v"] = v;
+			m_cc->send(writer.write(root));
+		}
+
+		void parseMessage(const std::string& msg) {
+			Json::Value root;
+			Json::Reader reader;
+			if(!reader.parse(msg, root)) {
+				std::cerr << "INVALID MESSAGE RECEIVED!" << reader.getFormatedErrorMessages() << std::endl;
+				return;
+			}
+			unsigned msgType = root.get("t", Json::Value::maxInt).asInt();
+			if(msgType == Json::Value::maxInt) {
+				std::cerr << "INVALID MESSAGE (no message type available)" << std::endl;
+				return;
+			}
+			parseJsonValue(msgType, root.get("v", Json::Value()));
+		}
+
+		void parseJsonValue(int msgType, const Json::Value& v) {
+			switch(msgType) {
+			case MESSAGE_TYPE_SET_KILOMETER_DIRECTION:
+				if(v.isInt()) {
+					m_state.kilometerDirection = v.asInt();
+				}
+				break;
+			case MESSAGE_TYPE_SET_ISOLIERSTOSS:
+				if(v.isObject()) {
+					int gleisId = v.get("gleisId", Json::Value::maxInt).asInt();
+					double position = v.get("position", std::numeric_limits<double>::max()).asDouble();
+					if(gleisId != Json::Value::maxInt && position != std::numeric_limits<double>::max()) {
+						if(m_state.gleise.find(gleisId) != m_state.gleise.end()) {
+							m_state.gleise[gleisId].isolierstoesse.insert(position);
+						}
+					}
+				}
+				break;
+			default:
+				std::cerr << "RECEIVED UNKNOWN MESSAGE " << msgType << std::endl;
+				break;
+			}
 		}
 
 	};
@@ -100,6 +157,7 @@ namespace desm {
 	}
 
 	int Middleware::onLoadStrecke() {
+		m_pImpl->resetState();
 		return 0;
 	}
 
@@ -124,16 +182,27 @@ namespace desm {
 	}
 
 	int Middleware::setIsolierstoss (int gleisId, double position) {
+		if(m_pImpl->m_state.gleise.find(gleisId) == m_pImpl->m_state.gleise.end()) {
+			// TODO fehlercode für unbekanntes gleis
+			return EXIT_FAILURE;
+		}
+		if(m_pImpl->m_state.gleise[gleisId].isolierstoesse.find(position) == m_pImpl->m_state.gleise[gleisId].isolierstoesse.end()) {
+			m_pImpl->m_state.gleise[gleisId].isolierstoesse.insert(position);
+			Json::Value v(Json::objectValue);
+			v["gleisId"] = Json::Value(gleisId);
+			v["position"] = Json::Value(position);
+			m_pImpl->sendMessage(MESSAGE_TYPE_SET_ISOLIERSTOSS, v);
+		}
 		return 0;
 	}
 	
 	void Middleware::setKilometerDirection(int direction) {
-		m_pImpl->m_kilometerDirection = direction;
-		m_pImpl->broadcastUpdate("KD", direction);
+		m_pImpl->m_state.kilometerDirection = direction;
+		m_pImpl->sendMessage(MESSAGE_TYPE_SET_KILOMETER_DIRECTION, Json::Value(direction));
 	}
 
 	int Middleware::getKilometerDirection() {
-		return m_pImpl->m_kilometerDirection;
+		return m_pImpl->m_state.kilometerDirection;
 	}
 
 	int Middleware::onStartSimulation() {
