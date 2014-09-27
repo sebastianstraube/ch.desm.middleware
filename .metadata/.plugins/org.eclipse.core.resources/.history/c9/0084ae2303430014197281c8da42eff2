@@ -1,0 +1,7 @@
+package ch.desm.middleware.communication.broker;
+
+public interface BrokerClientInterface {
+	
+	abstract protected void onIncomingBrokerMessage(String message);
+	
+}

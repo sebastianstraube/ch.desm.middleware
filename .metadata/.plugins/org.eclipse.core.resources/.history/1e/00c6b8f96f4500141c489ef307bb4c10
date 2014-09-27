@@ -1,0 +1,30 @@
+package ch.desm.middleware.component.virtual.management;
+
+import ch.desm.middleware.communication.broker.Broker;
+
+public class Mgt extends MgtBase{
+
+	public Mgt(Broker broker) {
+		super(broker);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void onIncomingEndpointMessage(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onIncomingBrokerMessage(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void intializeSignedTopic() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

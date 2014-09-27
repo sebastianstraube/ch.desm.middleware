@@ -1,0 +1,5 @@
+package ch.desm.middleware.component.virtual.management;
+
+public class Mgt extends MgtBase{
+
+}

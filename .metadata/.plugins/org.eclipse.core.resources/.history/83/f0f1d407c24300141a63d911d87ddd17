@@ -1,0 +1,12 @@
+package ch.desm.middleware.webapp;
+
+
+public class MyEchoServlet extends WebSocketServlet
+{
+    @Override
+    public void configure(WebSocketServerFactory factory)
+    {
+        // register a socket class as default
+        factory.register(MyEchoSocket.class);
+    }
+}
