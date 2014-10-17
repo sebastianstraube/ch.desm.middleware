@@ -1,6 +1,0 @@
-package ch.desm.middleware.communication.endpoint.gui;
-
-public class Snippet {
-	signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-}
-

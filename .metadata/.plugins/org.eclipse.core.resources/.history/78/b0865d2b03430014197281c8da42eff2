@@ -1,7 +1,0 @@
-package ch.desm.middleware.communication.broker;
-
-public interface BrokerClientInterface {
-	
-	abstract void onIncomingBrokerMessage(String message);
-	
-}
