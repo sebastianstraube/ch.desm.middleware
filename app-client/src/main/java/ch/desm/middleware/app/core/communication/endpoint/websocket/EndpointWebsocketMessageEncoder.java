@@ -5,23 +5,21 @@ import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
 
-import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
-	 
-	public class EndpointWebsocketMessageEncoder implements Encoder.Text<MessageWebsocket> {
-		@Override
-		public void init(final EndpointConfig config) {
-		}
-	 
-		@Override
-		public void destroy() {
-		}
-	 
-		@Override
-		public String encode(final MessageWebsocket chatMessage) throws EncodeException {
-			
-			return Json.createObjectBuilder()
-					.add("payload", chatMessage.getPayload())
-					.add("topic", chatMessage.getTopic()).build()
-					.toString();
-		}
+public class EndpointWebsocketMessageEncoder implements Encoder.Text<MessageWebsocket> {
+    @Override
+    public void init(final EndpointConfig config) {
+    }
+
+    @Override
+    public void destroy() {
+    }
+
+    @Override
+    public String encode(final MessageWebsocket chatMessage) throws EncodeException {
+
+        return Json.createObjectBuilder()
+                .add("payload", chatMessage.getPayload())
+                .add("topic", chatMessage.getTopic()).build()
+                .toString();
+    }
 }

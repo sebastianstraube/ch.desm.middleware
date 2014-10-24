@@ -11,7 +11,7 @@ public class ManagementEndpointMessageFetch extends DaemonThreadBase {
 			ManagementEndpoint endpoint) {
 		this.management = management;
 		this.endpoint = endpoint;
-//		this.run();
+		this.run();
 	}
 
 	public void checkMessages() {

@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ejb" name="app-client">
+    <output-path>$PROJECT_DIR$/out/artifacts/app_client</output-path>
+    <root id="root">
+      <element id="module-output" name="app-client" />
+      <element id="library" level="project" name="Maven: javax.websocket:javax.websocket-api:1.1" />
+      <element id="library" level="project" name="Maven: javax:javaee-web-api:7.0" />
+      <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+      <element id="library" level="project" name="Maven: org.scream3r:jssc:2.8.0" />
+    </root>
+  </artifact>
+</component>

@@ -1,14 +1,11 @@
 package ch.desm.middleware.app.core.communication.endpoint.websocket;
 
-import java.io.StringReader;
-
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
-
-import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
+import java.io.StringReader;
 
 public class EndpointWebsocketMessageDecoder implements
 		Decoder.Text<MessageWebsocket> {
@@ -27,7 +24,6 @@ public class EndpointWebsocketMessageDecoder implements
 				.readObject();
 		
 		MessageWebsocket wsMessage = new MessageWebsocket(obj.getString("payload"), obj.getString("topic"));
-		wsMessage.setMessageId(String.valueOf(System.currentTimeMillis()));
 	
 		return wsMessage;
 	}

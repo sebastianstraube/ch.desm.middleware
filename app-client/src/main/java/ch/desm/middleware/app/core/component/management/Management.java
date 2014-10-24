@@ -6,7 +6,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServer;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessor;
@@ -44,9 +43,10 @@ public class Management extends ManagementBase{
 		ArrayList<MessageMiddleware> messageList = translator.toMiddlewareMessageList(message);
 		
 		//send all messages
-		for(MessageMiddleware element: messageList){
+		/*for(MessageMiddleware element: messageList){
 			EndpointWebsocketServer.sendMessage(element.getPayload());
 		}
+		*/
 	}
 
 	@Override

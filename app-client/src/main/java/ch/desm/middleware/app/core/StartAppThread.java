@@ -6,6 +6,8 @@ import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
 import ch.desm.middleware.app.core.communication.endpoint.serial.fabisch.EndpointFabisch;
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketClient;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServer;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
@@ -21,9 +23,18 @@ import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs2
 import ch.desm.middleware.app.core.handle.DaemonThreadBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.eclipse.jetty.util.component.LifeCycle;
+
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.websocket.ContainerProvider;
+import javax.websocket.DeploymentException;
+import javax.websocket.Session;
+import javax.websocket.WebSocketContainer;
+import javax.websocket.server.ServerContainer;
+import java.io.IOException;
+import java.net.URI;
 import java.util.Properties;
 
 public class StartAppThread extends DaemonThreadBase {
@@ -41,11 +52,11 @@ public class StartAppThread extends DaemonThreadBase {
 	}
 
 	public void run(){
-		
-		
+
+        startWebsocketServer();
+        startWebsocketClient();
 		startManagement();
-		startOmlPetrinet();
-				
+
 	//	startOmlStellwerk(broker, EnumSerialPorts.COM9);
 		
 	//	testEndpointTcpIp();
@@ -68,8 +79,61 @@ public class StartAppThread extends DaemonThreadBase {
 		
 	//	testCaseOMLEndpointUbw32();
 		
-//		hangoutThread();
+		hangoutThread();
 	}
+
+    public boolean startWebsocketServer(){
+        StartWebSocketServer server = new StartWebSocketServer();
+        server.start();
+
+        return true;
+    }
+
+    public boolean startWebsocketClient(){
+        URI uri = URI.create("ws://localhost:8080/gui/management");
+        WebSocketContainer container = null;
+
+        try {
+            container = ContainerProvider.getWebSocketContainer();
+            // Attempt Connect
+            Session session = container.connectToServer(EndpointWebsocketClient.class, uri);
+            // Send a message
+            session.getBasicRemote().sendText("{\"payload\":\"websocket client started ...\", \"topic\":\"EndpointWebsocketClient\"}");
+            // Close session
+            session.close();
+
+
+        } catch (DeploymentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // Force lifecycle stop when done with container.
+            // This is to free up threads and resources that the
+            // JSR-356 container allocates. But unfortunately
+            // the JSR-356 spec does not handle lifecycles (yet)
+            if (container instanceof LifeCycle)
+            {
+                try {
+                    ((LifeCycle)container).stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean stopWebsocketClient(WebSocketContainer container, Session session) throws Exception {
+
+
+
+
+        return false;
+    }
+
 	
 	public boolean startManagement(){
 		ManagementEndpoint endpoint = new ManagementEndpoint();

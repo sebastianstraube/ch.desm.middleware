@@ -59,6 +59,19 @@
             <version>1.1</version>
         </dependency>
 
+        <!-- JSF -->
+        <!--
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.2.8-02</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>2.2.8-02</version>
+        </dependency>
+        -->
         <!-- maven plugin bug -->
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -80,12 +93,14 @@
         </dependency>
 
         <!-- Project -->
+        <!--
         <dependency>
             <groupId>ch.desm.middleware</groupId>
             <artifactId>app-client</artifactId>
             <version>0.1</version>
             <type>app-client</type>
         </dependency>
+        -->
         <dependency>
             <groupId>ch.desm.middleware</groupId>
             <artifactId>webapp</artifactId>
@@ -102,11 +117,6 @@
                 <version>2.9.1</version>
                 <configuration>
 					<modules>
-						<appClientModule>
-							<groupId>ch.desm.middleware</groupId>
-							<artifactId>app-client</artifactId>
-							<bundleFileName>middleware-client.jar</bundleFileName>
-						</appClientModule>
 						<webModule>
 							<groupId>ch.desm.middleware</groupId>
 							<artifactId>webapp</artifactId>

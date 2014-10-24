@@ -1,21 +1,24 @@
 package ch.desm.middleware.app.core.component.management;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
+import org.eclipse.jetty.websocket.client.WebSocketClient;
+
+import java.net.URI;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javax.ejb.Stateless;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
-
-import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServer;
-
-@Stateless
 public class ManagementEndpoint {
-	
+
+    private static final Logger LOGGER = Logger
+            .getLogger(ManagementEndpoint.class);
+
 	private static Queue<String> messages = new ConcurrentLinkedQueue<>();
-	 
-	public void onIncomingEndpointMessage(String message){
+
+
+	public static void onIncomingEndpointMessage(String message){
 		messages.add(message);
 	}
 	
@@ -28,10 +31,4 @@ public class ManagementEndpoint {
 		messages.clear();
 		return tmp;
 	}
-	
-	@AroundInvoke
-    public Object manageTransaction(InvocationContext ctx) throws Exception {
-        EndpointWebsocketServer.addListener(this);
-        return ctx.proceed();
-    }
 }

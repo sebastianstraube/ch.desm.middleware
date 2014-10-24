@@ -9,8 +9,6 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: org.scream3r:jssc:2.8.0" />
-          <element id="library" level="project" name="Maven: javax:javaee-web-api:7.0" />
-          <element id="library" level="project" name="Maven: javax.websocket:javax.websocket-api:1.1" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="webapp/web/Web" />

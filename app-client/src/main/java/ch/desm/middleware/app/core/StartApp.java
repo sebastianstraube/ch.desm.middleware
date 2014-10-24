@@ -9,6 +9,7 @@ public class StartApp {
 
     public static void main(String[] args) {
 
-        LOGGER.log(Level.ERROR, "StartApp Main loaded ! ");
+        LOGGER.log(Level.TRACE, "StartApp");
+        StartAppThread.getSingleton().run();
     }
 }

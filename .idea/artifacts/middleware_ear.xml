@@ -2,9 +2,7 @@
   <artifact type="ear" name="middleware-ear">
     <output-path>$PROJECT_DIR$/out/artifacts/middleware_ear</output-path>
     <root id="archive" name="middleware-ear.ear">
-      <element id="extracted-dir" path="$PROJECT_DIR$/app-client/target/app-client-0.1.jar" path-in-jar="/" />
-      <element id="module-output" name="webapp" />
-      <element id="dir-copy" path="$PROJECT_DIR$/app-client/src/main/resources" />
+      <element id="artifact" artifact-name="webapp:war" />
     </root>
   </artifact>
 </component>
