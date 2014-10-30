@@ -74,15 +74,7 @@ public class OMLPetriNet extends OMLPetriNetBase {
     @Override
     public void onIncomingEndpointMessage(String firedTransition) {
         try {
-        	LOGGER.log(Level.TRACE, "petrinet (" + this.getClass() + ") received endpoint message: " + firedTransition);
-            String globalId;
-            try{
-                globalId = petriNetMap.mapEndpointToBrokerMessage(firedTransition);
-            }catch(Exception e){
-                globalId = firedTransition;
-                LOGGER.warn("forwarding transition: "+ firedTransition + " as middleware message.");
-            }
-            String message = getMiddlewareMessages().getValue(globalId);
+            String message = getMiddlewareMessages().getValue(firedTransition);
             
             //TODO refactoring
         	message = message.replaceAll("\\?", "on");

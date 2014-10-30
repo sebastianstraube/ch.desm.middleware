@@ -11,14 +11,6 @@ public class OMLMapPetrinetOml extends ComponentMapBase{
 		return map;
 	}
 
-    public String mapEndpointToBrokerMessage(String message) throws Exception {
-        String mappedMessage = this.getKey(message);
-        if(mappedMessage.isEmpty()) {
-            throw new Exception("unable to map petri net message \"" + message + "\"");
-        }
-        return mappedMessage;
-    }
-
     public String mapBrokerToEndpointMessage(String globalId) throws Exception {
         String message = this.getKey(globalId);
         if(message.isEmpty()) {
