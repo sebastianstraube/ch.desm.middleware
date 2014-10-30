@@ -2,6 +2,7 @@ package ch.desm.middleware.app.core.component.cabine.re420.elements;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapFahrschalter;
@@ -113,7 +114,7 @@ public class Re420ElementFahrschalter {
 			
 			else{
 				if(keyListFahrschalter.contains(key)){
-					LOGGER.trace("fahrschalter position unknown with key " + key);
+					LOGGER.log(Level.TRACE, "fahrschalter position unknown with key " + key);
 					key = "";
 				}
 			}

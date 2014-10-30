@@ -2,6 +2,7 @@ package ch.desm.middleware.app.core.communication.endpoint.dll;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.Dll;
@@ -36,7 +37,7 @@ public class EndpointDllThread extends EndpointThreadBase {
 		try {
 
 			while (!isInterrupted()) {
-				LOGGER.trace("Polling Thread active: " + this.getName() + " wait time: " + POLLING_WAIT_TIME);
+				LOGGER.log(Level.TRACE, "Polling Thread active: " + this.getName() + " wait time: " + POLLING_WAIT_TIME);
 				pollingDllEvents();
 				Thread.sleep(POLLING_WAIT_TIME);
 			}

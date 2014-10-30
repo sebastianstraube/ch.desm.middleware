@@ -77,7 +77,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 		while (!isInterrupted()) {
 			try {
 
-				LOGGER.trace("Thread active: " + this.getName() + " wait time: "
+				LOGGER.log(Level.TRACE,"Thread active: " + this.getName() + " wait time: "
 						+ POLLING_WAIT_TIME);
 
 				receive();

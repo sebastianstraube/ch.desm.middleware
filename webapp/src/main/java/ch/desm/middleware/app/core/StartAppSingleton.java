@@ -19,6 +19,7 @@ import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 public class StartAppSingleton extends DaemonThreadBase {
@@ -74,7 +75,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	 * 
 	 */
 	public void testCaseLocsimEndpointDllRs232() {
-		LOGGER.trace(System.getProperty("java.library.path"));
+		LOGGER.log(Level.TRACE, System.getProperty("java.library.path"));
 
 		//Test Cabine
 		Re420EndpointUbw32 re420EndpointUbw32 = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM13);
@@ -180,7 +181,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	 * 
 	 */
 	public void testCaseDll(Broker broker) {
-//		LOGGER.trace("java.library.path");
+//		LOGGER.log(Level.TRACE,"java.library.path");
 		
 		LocsimEndpointDll locsimEndpointDll = new LocsimEndpointDll("dispatcher.json");
 		LocsimEndpointRs232 locsimEndpointRs232 = new LocsimEndpointRs232(EndpointRs232.EnumSerialPorts.COM22);

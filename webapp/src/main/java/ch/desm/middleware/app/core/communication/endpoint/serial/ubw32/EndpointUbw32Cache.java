@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import jssc.SerialPort;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 public class EndpointUbw32Cache {
@@ -35,7 +36,7 @@ public class EndpointUbw32Cache {
 	public boolean isStateChanged(String message, SerialPort serialPort) {
 
 		if(!isCacheEnabled){
-			LOGGER.trace("cache is disabled in class: " + this.getClass());
+			LOGGER.log(Level.TRACE, "cache is disabled in class: " + this.getClass());
 			return true;
 		}
 		
@@ -80,7 +81,7 @@ public class EndpointUbw32Cache {
 						|| driftOld > EndpointUbw32Config.ANALOG_DRIFT_MAX;
 
 				if (isChanged) {
-					LOGGER.trace("analog state significantly changed> " + "drift new: " +driftNew+ ", driftOld" +driftOld+ ", message:" + message);
+					LOGGER.log(Level.TRACE, "analog state significantly changed> " + "drift new: " + driftNew + ", driftOld" + driftOld + ", message:" + message);
 					stateMapIA.replace(pinbitmask, inputValue);
 				}
 
@@ -232,7 +233,7 @@ public class EndpointUbw32Cache {
 				payload.length());
 		String parts[] = payload.split(",");
 
-		LOGGER.trace("analog sensor values: " + payload);
+		LOGGER.log(Level.TRACE, "analog sensor values: " + payload);
 		
 		ArrayList<String> list = new ArrayList<String>(Arrays.asList(parts));
 

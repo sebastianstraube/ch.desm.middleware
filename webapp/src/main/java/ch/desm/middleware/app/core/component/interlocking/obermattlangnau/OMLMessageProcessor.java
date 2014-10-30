@@ -235,7 +235,7 @@ public class OMLMessageProcessor extends MessageProcessorBase {
 			}
 		}
 
-		LOGGER.trace("processing middleware message: " + middlewareMessagesInput);
+		LOGGER.log(Level.TRACE,"processing middleware message: " + middlewareMessagesInput);
 
 		return middlewareMessagesInput;
 	}

@@ -3,6 +3,7 @@ package ch.desm.middleware.app.core.component.simulation.locsim;
 import java.util.ArrayList;
 
 import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageTranslatorRs232;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
@@ -39,11 +40,11 @@ public class Locsim extends LocsimBase implements
 
 		if(!message.isEmpty()){
 			if (isLocsimDllMessage(message)) {
-				LOGGER.trace("endpoint (" + this.getClass() + ") received message DLL: " + message);
+				LOGGER.log(Level.TRACE, "endpoint (" + this.getClass() + ") received message DLL: " + message);
 				processor.processIncomingDataDll(this, message);
 
 			} else {
-				LOGGER.trace("endpoint (" + this.getClass() + ") received message RS232: " + message);
+				LOGGER.log(Level.TRACE, "endpoint (" + this.getClass() + ") received message RS232: " + message);
 				processor.processIncomingDataRs232(this, message);
 			}
 		}
@@ -55,7 +56,7 @@ public class Locsim extends LocsimBase implements
 	@Override
 	protected void onIncomingBrokerMessage(String message) {
 		
-		LOGGER.trace("broker (" + this.getClass() + ") received message: " + message);
+		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: " + message);
 
 		ArrayList<MessageMiddleware> messageList = translator
 				.toMiddlewareMessageList(message);

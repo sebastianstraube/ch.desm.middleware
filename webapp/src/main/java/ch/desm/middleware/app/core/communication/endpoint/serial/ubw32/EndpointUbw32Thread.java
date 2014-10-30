@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointThreadBase;
@@ -27,7 +28,7 @@ class EndpointUbw32Thread extends EndpointThreadBase {
 		try {
 
 			while (!isInterrupted()) {
-				LOGGER.trace("Polling Thread active: " + this.getName() + " wait time: " + EndpointUbw32Config.SLEEP_POLLING);
+				LOGGER.log(Level.TRACE, "Polling Thread active: " + this.getName() + " wait time: " + EndpointUbw32Config.SLEEP_POLLING);
 				endpoint.pollingCommand();
 				Thread.sleep(EndpointUbw32Config.SLEEP_POLLING);
 			}

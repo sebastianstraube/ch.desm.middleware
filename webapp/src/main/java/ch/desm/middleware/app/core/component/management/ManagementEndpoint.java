@@ -61,7 +61,7 @@ public class ManagementEndpoint extends EndpointCommon {
         } catch (IOException e) {
             LOGGER.error(e);
         } catch (IllegalStateException e){
-            LOGGER.warn(e);
+            LOGGER.log(Level.WARN,e);
         } finally {
             // Force lifecycle stop when done with container.
             // This is to free up threads and resources that the

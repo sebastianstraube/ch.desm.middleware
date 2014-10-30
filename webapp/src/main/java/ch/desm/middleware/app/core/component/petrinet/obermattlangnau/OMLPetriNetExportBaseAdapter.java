@@ -26,7 +26,7 @@ public class OMLPetriNetExportBaseAdapter extends OMLPetriNetExportBase {
 	public void fire(String s) {
         synchronized (firedTransitionsLock){
             firedTransitions.add(s);
-            LOGGER.trace("petrinet has fired transition buffer: "
+            LOGGER.log(Level.TRACE,"petrinet has fired transition buffer: "
                     + firedTransitions.toString());
         }
 	}
@@ -46,14 +46,14 @@ public class OMLPetriNetExportBaseAdapter extends OMLPetriNetExportBase {
 
 	public void setSensor(String name, int value) {
 		try {
-			LOGGER.log(Level.TRACE, "setting sensor: " + name + " to: " + value);
+			LOGGER.log(Level.INFO, "setting sensor: " + name + " to: " + value);
 
 			Class<?> petriNetClass = super.getClass();
 			Field field = petriNetClass.getField(name);
 			field.setInt(this, value);
 		} catch (NoSuchFieldException e) {
 
-			LOGGER.warn("unknown petrinet sensor " + name);
+			LOGGER.log(Level.WARN,"unknown petrinet sensor " + name);
 
 		} catch (IllegalAccessException e) {
 

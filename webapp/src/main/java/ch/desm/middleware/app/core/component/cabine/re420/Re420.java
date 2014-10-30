@@ -3,6 +3,7 @@ package ch.desm.middleware.app.core.component.cabine.re420;
 import java.util.ArrayList;
 
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
@@ -37,8 +38,8 @@ public class Re420 extends Re420Base implements
 	 */
 	protected void onIncomingBrokerMessage(String message) {
 
-		LOGGER.trace("broker (" + this.getClass() + ") received message: "
-				+ message);
+		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: "
+                + message);
 
 		ArrayList<MessageMiddleware> messageCommon = translator
 				.toMiddlewareMessageList(message);
@@ -53,15 +54,15 @@ public class Re420 extends Re420Base implements
 	 */
 	public void onIncomingEndpointMessage(String message) {
 
-		LOGGER.trace("endpoint (" + this.getClass() + ") received message: "
-				+ message.replaceAll("\n", ""));
+		LOGGER.log(Level.TRACE, "endpoint (" + this.getClass() + ") received message: "
+                + message.replaceAll("\n", ""));
 
 		if (!message.isEmpty()) {
 			
 			if(message.startsWith("#fabisch#")){
 				
-				LOGGER.trace("endpoint (" + this.getClass()
-						+ ") received message fabisch: " + message);
+				LOGGER.log(Level.TRACE, "endpoint (" + this.getClass()
+                        + ") received message fabisch: " + message);
 				
 				//do nothing
 			}else{

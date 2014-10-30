@@ -3,6 +3,7 @@ package ch.desm.middleware.app.core.communication.endpoint.serial.fabisch;
 import jssc.SerialPortEvent;
 import jssc.SerialPortException;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
@@ -109,7 +110,7 @@ public class EndpointFabisch extends EndpointRs232 {
 			}
 		}
 		
-		LOGGER.trace("endpoint (" +this.getClass()+ ") received message : [" + message + "], bytes: ["+s+"]");
+		LOGGER.log(Level.TRACE, "endpoint (" + this.getClass() + ") received message : [" + message + "], bytes: [" + s + "]");
 		
 		super.onIncomingEndpointMessage(message);
 	}

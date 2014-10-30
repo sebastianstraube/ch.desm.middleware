@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.dll;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.Dll;
@@ -41,7 +42,7 @@ public abstract class EndpointDll extends EndpointCommon implements
 
 	public void receiveEndpointObject(Object obj){
 		
-		LOGGER.trace("receive in endpoint " + this.getClass() + " an object " + obj.getClass());
+		LOGGER.log(Level.TRACE, "receive in endpoint " + this.getClass() + " an object " + obj.getClass());
 		
 		String message = "";
 		

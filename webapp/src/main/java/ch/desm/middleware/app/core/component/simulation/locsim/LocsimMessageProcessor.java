@@ -8,6 +8,7 @@ import ch.desm.middleware.app.core.communication.message.processor.MessageProces
 import ch.desm.middleware.app.core.component.simulation.locsim.elements.LocsimElementFahrschalter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
 import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageDll;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -119,7 +120,7 @@ public class LocsimMessageProcessor extends MessageProcessorBase {
 
                         String channelData = element.getKey();
                         if (channelData.isEmpty()) {
-                            LOGGER.warn("no locsim mapping with message: "
+                            LOGGER.log(Level.WARN, "no locsim mapping with message: "
                                     + message);
                         }
                         String channelType = channelData.substring(0, 1);
@@ -134,7 +135,7 @@ public class LocsimMessageProcessor extends MessageProcessorBase {
 
                 String channelData = fahrschalter.getKey(message.getGlobalId());
                 if (channelData.isEmpty()) {
-                    LOGGER.warn("no locsim mapping with message: " + message);
+                    LOGGER.log(Level.WARN, "no locsim mapping with message: " + message);
                 }
                 String channelType = channelData.substring(0, 1);
                 String channel = channelData.substring(1, 3);
@@ -184,7 +185,7 @@ public class LocsimMessageProcessor extends MessageProcessorBase {
                     }
 
                     if (channelData.isEmpty()) {
-                        LOGGER.warn("no locsim mapping with message: " + message);
+                        LOGGER.log(Level.WARN, "no locsim mapping with message: " + message);
                     }
 
                     String locsimCommand = "X" + channelType + channel
@@ -208,7 +209,7 @@ public class LocsimMessageProcessor extends MessageProcessorBase {
         String message;
         while ((message = impl.endpointRs232.parser.pop()) != null) {
 
-            LOGGER.trace("receive endpoint("+ impl.endpointRs232.getSerialPortName()+") locsim message: " + message);
+            LOGGER.log(Level.TRACE,"receive endpoint("+ impl.endpointRs232.getSerialPortName()+") locsim message: " + message);
             if (message.startsWith("INI")) {
 
                 //TODO implementation different states of locsim (INI8)
@@ -228,7 +229,7 @@ public class LocsimMessageProcessor extends MessageProcessorBase {
                 }
 
                 else{
-                    LOGGER.warn("not implemented or skipped initialisation message: " + message);
+                    LOGGER.log(Level.WARN, "not implemented or skipped initialisation message: " + message);
                 }
             } else {
 

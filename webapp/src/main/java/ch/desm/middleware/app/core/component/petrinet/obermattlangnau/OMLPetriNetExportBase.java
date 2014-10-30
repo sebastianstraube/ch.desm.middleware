@@ -1,5 +1,7 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
+import org.apache.log4j.Logger;
+
 public abstract class OMLPetriNetExportBase {
 	public int W1_Endlage_plus;
 	public int W1_Endlage_minus;

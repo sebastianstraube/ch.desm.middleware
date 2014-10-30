@@ -2,6 +2,7 @@ package ch.desm.middleware.app.core.communication.message.processor;
 
 import java.util.Map.Entry;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
@@ -137,8 +138,8 @@ public class MessageProcessorUtil {
 			locsimParameter = locsimParameter + "0";
 		}
 
-		LOGGER.trace("x: " + x + ", locsimValue: " + locsimValue
-				+ ", locsimParameter: " + locsimParameter);
+		LOGGER.log(Level.TRACE, "x: " + x + ", locsimValue: " + locsimValue
+                + ", locsimParameter: " + locsimParameter);
 
 		return locsimParameter;
 	}

@@ -73,7 +73,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 		
 		try {
 			if (serialPort.isOpened()) {
-				LOGGER.trace("disconnecting serial port:" + serialPort.getPortName());
+				LOGGER.log(Level.TRACE,"disconnecting serial port:" + serialPort.getPortName());
 				
 				serialPort.purgePort(SerialPort.PURGE_RXABORT);
 				serialPort.purgePort(SerialPort.PURGE_TXABORT);
@@ -110,7 +110,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 		
 		if (stream!=null && serialPort.writeBytes(stream)) {
 			
-			LOGGER.trace(serialPort.getPortName() + " send stream:" + stream.toString());
+			LOGGER.log(Level.TRACE,serialPort.getPortName() + " send stream:" + stream.toString());
 		}else{
 			LOGGER.error(serialPort.getPortName() + " stream not send: " + stream.toString());
 		}
@@ -126,7 +126,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 		
 		if (stream!=null && serialPort.writeIntArray(stream)) {
 			
-			LOGGER.trace(serialPort.getPortName() + " send stream:" + stream.toString());
+			LOGGER.log(Level.TRACE,serialPort.getPortName() + " send stream:" + stream.toString());
 		}else{
 			LOGGER.error(serialPort.getPortName() + " stream not send: " + stream.toString());
 		}
@@ -169,15 +169,15 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 		// event.getEventValue() returns 1 if the line is ON and 0 if it is OFF.
 		else if (event.isCTS()) {
 			if (event.getEventValue() == 1) {
-				LOGGER.trace(this.serialPort.getClass() + ": CTS - ON");
+				LOGGER.log(Level.TRACE,this.serialPort.getClass() + ": CTS - ON");
 			} else {
-				LOGGER.trace(this.serialPort.getClass() + ":CTS - OFF");
+				LOGGER.log(Level.TRACE,this.serialPort.getClass() + ":CTS - OFF");
 			}
 		} else if (event.isDSR()) {
 			if (event.getEventValue() == 1) {
-				LOGGER.trace(this.serialPort.getClass() + ":DSR - ON");
+				LOGGER.log(Level.TRACE,this.serialPort.getClass() + ":DSR - ON");
 			} else {
-				LOGGER.trace(this.serialPort.getClass() + ":DSR - OFF");
+				LOGGER.log(Level.TRACE,this.serialPort.getClass() + ":DSR - OFF");
 			}
 		}
 

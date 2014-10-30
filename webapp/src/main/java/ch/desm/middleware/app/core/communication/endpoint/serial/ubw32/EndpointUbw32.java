@@ -3,6 +3,7 @@ package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
 import jssc.SerialPortEvent;
 import jssc.SerialPortException;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232Config;
@@ -168,14 +169,14 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 						
 						if (cache.isStateChanged(singleMessage, this.serialPort)) {
 							
-							LOGGER.trace("received message on ubw(" + serialPort.getPortName()
-									+ "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
+							LOGGER.log(Level.TRACE, "received message on ubw(" + serialPort.getPortName()
+                                    + "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
 							
 							super.onIncomingEndpointMessage(singleMessage);
 						}
 						else {
-							LOGGER.trace("skipped received message on ubw(" + serialPort.getPortName()
-							+ "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
+							LOGGER.log(Level.TRACE, "skipped received message on ubw(" + serialPort.getPortName()
+                                    + "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
 						}
 					}
 
@@ -187,8 +188,8 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 			}
 		} else {
 
-			LOGGER.trace("empty message received on ubw("
-					+ serialPort.getPortName() + "): " + message);
+			LOGGER.log(Level.TRACE, "empty message received on ubw("
+                    + serialPort.getPortName() + "): " + message);
 		}
 	}
 
@@ -202,8 +203,8 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 			Thread.sleep(EndpointUbw32Config.SLEEP_SENDING);
 			command += EndpointUbw32Config.MESSAGE_TERMINATOR;
 			
-			LOGGER.trace("message send to ubw(" + serialPort.getPortName()
-					+ "): " + command.replaceAll("\n", ""));
+			LOGGER.log(Level.TRACE, "message send to ubw(" + serialPort.getPortName()
+                    + "): " + command.replaceAll("\n", ""));
 			
 			super.sendStream(command);
 
