@@ -26,13 +26,13 @@ public class ManagementEndpointWebsocketClient {
     @OnOpen
     public void onOpen(Session session) {
         this.sessionSet.add(session);
-        LOGGER.info("Websocket client is Connected with session: " + session.getId());
+        LOGGER.log(Level.TRACE, "Websocket client is Connected with session: " + session.getId());
     }
 
     @OnMessage
     public String onMessage(String message, Session session) {
 
-        LOGGER.info("EndpointWebsocketClient reveived: " + message);
+        LOGGER.log(Level.TRACE, "EndpointWebsocketClient reveived: " + message);
         ManagementEndpointThread.addMessages(message);
         return message;
     }
@@ -45,13 +45,13 @@ public class ManagementEndpointWebsocketClient {
         for(Session element : sessionSet){
             if(element.equals(session)){
                 sessionSet.remove(element);
-                LOGGER.info(String.format("Session %s closed because of %s.", session.getId(), closeReason));
+                LOGGER.log(Level.TRACE, String.format("Session %s closed because of %s.", session.getId(), closeReason));
             }
         }
     }
 
     public static void sendMessage(String message){
-        LOGGER.info("EndpointWebsocketClient send: " + message);
+        LOGGER.log(Level.TRACE, "EndpointWebsocketClient send: " + message);
         try {
             for(Session session : sessionSet)
             if(session != null){

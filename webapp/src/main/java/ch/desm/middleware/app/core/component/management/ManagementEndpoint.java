@@ -40,10 +40,10 @@ public class ManagementEndpoint extends EndpointCommon {
             //webSocketSession.getBasicRemote().sendText("{\"payload\":\"websocket client started ...\", \"topic\":\"EndpointWebsocketClient\"}");
 
         } catch (DeploymentException e) {
-            LOGGER.log(Level.ERROR, e);
+            LOGGER.error(e);
             stopWebsocketClient();
         } catch (IOException e) {
-            LOGGER.log(Level.ERROR, e);
+            LOGGER.error(e);
             stopWebsocketClient();
         }
     }
@@ -59,7 +59,7 @@ public class ManagementEndpoint extends EndpointCommon {
                 throw new IllegalStateException("Websocket Client is null.");
             }
         } catch (IOException e) {
-            LOGGER.log(Level.ERROR, e);
+            LOGGER.error(e);
         } catch (IllegalStateException e){
             LOGGER.warn(e);
         } finally {

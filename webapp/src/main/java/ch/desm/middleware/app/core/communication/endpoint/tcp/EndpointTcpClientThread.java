@@ -34,11 +34,11 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 			byte[] byteBuffer = stream.getBytes();
 			out.write(byteBuffer); // Send the encoded string to the server
 
-			LOGGER.info("Client (" + this.getClass() + ") send stream: "
-					+ new String(byteBuffer));
+			LOGGER.log(Level.TRACE, "Client (" + this.getClass() + ") send stream: "
+                    + new String(byteBuffer));
 
 		} catch (IOException e) {
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		}
 
 	}
@@ -61,8 +61,8 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 			
 			receiveBuffer = new String();
 
-			LOGGER.info("Client (" + this.getClass() + ") received stream: "
-					+ in.toString());
+			LOGGER.log(Level.TRACE, "Client (" + this.getClass() + ") received stream: "
+                    + in.toString());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -99,7 +99,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 			interrupt();
 			endpoint.socket.close();
 		} catch (IOException e) {
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		}
 	}
 }

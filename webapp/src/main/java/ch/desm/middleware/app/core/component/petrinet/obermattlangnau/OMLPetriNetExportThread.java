@@ -53,7 +53,7 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
             try {
                 Thread.sleep(SLEEP_INTERVAL);
             } catch (InterruptedException e) {
-                LOGGER.log(Level.ERROR, e);
+                LOGGER.error(e);
             }
         }
 

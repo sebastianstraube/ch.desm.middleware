@@ -2,7 +2,6 @@ package ch.desm.middleware.app.core.communication.message.translator;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.message.MessageBase;
@@ -61,7 +60,7 @@ abstract class MessageTranslatorMiddlewareBase {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		}
 		return messageCommon;
 	}

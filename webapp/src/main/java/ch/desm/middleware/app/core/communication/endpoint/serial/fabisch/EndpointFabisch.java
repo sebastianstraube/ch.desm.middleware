@@ -3,7 +3,6 @@ package ch.desm.middleware.app.core.communication.endpoint.serial.fabisch;
 import jssc.SerialPortEvent;
 import jssc.SerialPortException;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
@@ -129,10 +128,10 @@ public class EndpointFabisch extends EndpointRs232 {
 
 		} catch (SerialPortException e) {
 			// TODO Auto-generated catch block
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		}
 	}
 	
@@ -150,7 +149,7 @@ public class EndpointFabisch extends EndpointRs232 {
 
 		} catch (SerialPortException e) {
 			// TODO Auto-generated catch block
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		}
 	}
 	

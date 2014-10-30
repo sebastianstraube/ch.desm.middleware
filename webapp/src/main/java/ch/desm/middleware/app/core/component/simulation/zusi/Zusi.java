@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
@@ -19,14 +20,14 @@ public class Zusi extends ZusiBase implements EndpointTcpClientListenerInterface
 	@Override
 	public void onIncomingEndpointMessage(String message) {
 
-		LOGGER.info("zusi (" + this.getClass() + ") received endpoint message: " + message);
+		LOGGER.log(Level.TRACE, "zusi (" + this.getClass() + ") received endpoint message: " + message);
 		
 	}
 
 	@Override
 	protected void onIncomingBrokerMessage(String message) {
 		
-		LOGGER.info("zusi (" + this.getClass() + ") received broker message: " + message);
+		LOGGER.log(Level.TRACE, "zusi (" + this.getClass() + ") received broker message: " + message);
 		
 	}
 

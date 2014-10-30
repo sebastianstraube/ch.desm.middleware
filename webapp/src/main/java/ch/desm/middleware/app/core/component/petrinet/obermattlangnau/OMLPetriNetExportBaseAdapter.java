@@ -19,7 +19,7 @@ public class OMLPetriNetExportBaseAdapter extends OMLPetriNetExportBase {
     private Object firedTransitionsLock = new Object();
 
 	public boolean canFire(String s) {
-		LOGGER.info("can fire: " + s);
+		LOGGER.log(Level.TRACE, "can fire: " + s);
 		return super.canFire(s);
 	}
 
@@ -46,7 +46,7 @@ public class OMLPetriNetExportBaseAdapter extends OMLPetriNetExportBase {
 
 	public void setSensor(String name, int value) {
 		try {
-			LOGGER.info("setting sensor: " + name + " to: " + value);
+			LOGGER.log(Level.TRACE, "setting sensor: " + name + " to: " + value);
 
 			Class<?> petriNetClass = super.getClass();
 			Field field = petriNetClass.getField(name);
@@ -57,7 +57,7 @@ public class OMLPetriNetExportBaseAdapter extends OMLPetriNetExportBase {
 
 		} catch (IllegalAccessException e) {
 
-			LOGGER.log(Level.ERROR, "unable to set sensor", e);
+			LOGGER.error("unable to set sensor", e);
 		}
 	}
 

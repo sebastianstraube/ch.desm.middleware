@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.cabine.re420.elements.Re420ElementFahrschalter;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapBinding;
@@ -97,7 +96,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 												+ " in message: " + message);
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
-								LOGGER.log(Level.ERROR, e);
+								LOGGER.error(e);
 							}
 						}
 
@@ -172,7 +171,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 												+ " in message: " + message);
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
-								LOGGER.log(Level.ERROR, e);
+								LOGGER.error(e);
 							}
 						}
 
@@ -206,7 +205,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 											+ " in message: " + message);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							LOGGER.log(Level.ERROR, e);
+							LOGGER.error(e);
 						}
 					}
 
@@ -316,7 +315,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
-                    LOGGER.log(Level.ERROR, e);
+                    LOGGER.error(e);
                 }
                 impl.getEndpointUbw32().setCacheEnabled(true);
             }

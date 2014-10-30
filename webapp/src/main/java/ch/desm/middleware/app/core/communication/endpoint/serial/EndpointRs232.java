@@ -35,7 +35,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			serialPort.writeString("Write Test to Serialport ..."
 					+ serialPort.getPortName() + "\r\n");
 		} catch (SerialPortException e) {
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		}
 	}
 
@@ -59,10 +59,10 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			serialPort.setEventsMask(config.getEventMask());
 			serialPort.addEventListener(this);
 
-			LOGGER.log(Level.ERROR, "serial port: "+ serialPort.getPortName()+" is initialized.");
+			LOGGER.log(Level.TRACE, "serial port: "+ serialPort.getPortName()+" is initialized.");
 			
 		} catch (SerialPortException e) {
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		}
 	}
 
@@ -80,7 +80,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 				serialPort.closePort();
 			}
 		} catch (SerialPortException e) {
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		}
 	}
 
@@ -96,7 +96,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			
 			LOGGER.log(Level.TRACE, serialPort.getPortName() + " send stream: [" + stream + "]");
 		}else{
-			LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream);
+			LOGGER.error(serialPort.getPortName() + " stream not send: " + stream);
 		}
 	}
 	
@@ -112,7 +112,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			
 			LOGGER.trace(serialPort.getPortName() + " send stream:" + stream.toString());
 		}else{
-			LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream.toString());
+			LOGGER.error(serialPort.getPortName() + " stream not send: " + stream.toString());
 		}
 	}
 	
@@ -128,7 +128,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			
 			LOGGER.trace(serialPort.getPortName() + " send stream:" + stream.toString());
 		}else{
-			LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream.toString());
+			LOGGER.error(serialPort.getPortName() + " stream not send: " + stream.toString());
 		}
 	}
 

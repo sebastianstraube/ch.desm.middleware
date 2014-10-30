@@ -32,7 +32,7 @@ public class OMLPetriNet extends OMLPetriNetBase {
 
     @Override
     protected void onIncomingBrokerMessage(String message) {
-    	LOGGER.info("petrinet (" + this.getClass() + ") received broker message: " + message);
+    	LOGGER.log(Level.TRACE, "petrinet (" + this.getClass() + ") received broker message: " + message);
     	
         ArrayList<MessageMiddleware> messages = translator.toMiddlewareMessageList(message);
 
@@ -74,7 +74,7 @@ public class OMLPetriNet extends OMLPetriNetBase {
     @Override
     public void onIncomingEndpointMessage(String firedTransition) {
         try {
-        	LOGGER.info("petrinet (" + this.getClass() + ") received endpoint message: " + firedTransition);
+        	LOGGER.log(Level.TRACE, "petrinet (" + this.getClass() + ") received endpoint message: " + firedTransition);
             String globalId;
             try{
                 globalId = petriNetMap.mapEndpointToBrokerMessage(firedTransition);
@@ -90,7 +90,7 @@ public class OMLPetriNet extends OMLPetriNetBase {
             this.publish(message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
 
         } catch (Exception e) {
-        	LOGGER.log(Level.ERROR, e.getMessage());
+        	LOGGER.error(e.getMessage());
         }
     }
 

@@ -3,6 +3,7 @@ package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
 import java.util.ArrayList;
 
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapInterlockingPetrinet;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
@@ -32,7 +33,7 @@ public class OML extends OMLBase implements
 
 	protected void onIncomingBrokerMessage(String message) {
 		
-		LOGGER.info("broker (" + this.getClass() + ") received message: " + message);
+		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: " + message);
 		
 		ArrayList<MessageMiddleware> messageCommon = translator
 				.toMiddlewareMessageList(message);
@@ -46,7 +47,7 @@ public class OML extends OMLBase implements
 	 * @param message
 	 */
 	public void onIncomingEndpointMessage(String message) {
-		LOGGER.info("endpoint (" + getEndpoint().getSerialPortName() + ") received message: " + message);
+		LOGGER.log(Level.TRACE, "endpoint (" + getEndpoint().getSerialPortName() + ") received message: " + message);
 		
 		//TODO implementation
 		MessageUbw32Base ubw32Message = translator

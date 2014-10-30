@@ -25,7 +25,7 @@ public class OMLPetriNetEndpoint extends EndpointCommon {
     }
 
     public void onTransitionFired(String message) {
-        LOGGER.log(Level.ERROR, "transition: " +message+ " fired to onIncomingEndpointMessage.");
+        LOGGER.log(Level.TRACE, "transition: " +message+ " fired to onIncomingEndpointMessage.");
         onIncomingEndpointMessage(message);
     }
 

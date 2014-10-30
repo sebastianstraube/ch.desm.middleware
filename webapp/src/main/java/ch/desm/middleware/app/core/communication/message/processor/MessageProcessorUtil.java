@@ -2,7 +2,6 @@ package ch.desm.middleware.app.core.communication.message.processor;
 
 import java.util.Map.Entry;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
@@ -63,7 +62,7 @@ public class MessageProcessorUtil {
                 throw new IllegalStateException("wrong parameter value: " + value);
             }
         } catch(IllegalStateException e){
-            LOGGER.log(Level.ERROR, e);
+            LOGGER.error(e);
         }
 
         return returnValue;

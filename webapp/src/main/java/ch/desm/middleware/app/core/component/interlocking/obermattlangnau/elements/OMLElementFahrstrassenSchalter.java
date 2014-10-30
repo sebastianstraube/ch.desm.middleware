@@ -38,7 +38,7 @@ public class OMLElementFahrstrassenSchalter {
 //				throw new Exception("no mapping defined for analog register: AN0, value: " + value);
 //			} catch (Exception e) {
 //				// TODO Auto-generated catch block
-//				LOGGER.log(Level.ERROR, e);
+//				LOGGER.error(e);
 //			}
 			
 		}

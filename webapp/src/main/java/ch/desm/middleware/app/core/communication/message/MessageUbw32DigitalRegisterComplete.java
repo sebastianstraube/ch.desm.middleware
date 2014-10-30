@@ -2,7 +2,6 @@ package ch.desm.middleware.app.core.communication.message;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32RegisterDigital;
@@ -303,7 +302,7 @@ public class MessageUbw32DigitalRegisterComplete extends MessageUbw32Base {
         } else if (register.equals("G15")) {
             isInputOn = getInput(portG.getPinBitMask(), pin);
         } else {
-        		LOGGER.log(Level.ERROR, "register is not assignable: " + register);
+        		LOGGER.error("register is not assignable: " + register);
         }
 	
 		return isInputOn;

@@ -3,7 +3,6 @@ package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
 import jssc.SerialPortEvent;
 import jssc.SerialPortException;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232Config;
@@ -182,8 +181,8 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 
 				}
 			} else {
-				LOGGER.log(Level.ERROR, "error message received on ubw("
-                        + serialPort.getPortName() + "): " + message);
+				LOGGER.error("error message received on ubw("
+						+ serialPort.getPortName() + "): " + message);
 
 			}
 		} else {
@@ -210,7 +209,7 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			LOGGER.log(Level.ERROR, e);
+			LOGGER.error(e);
 		}
 	}
 
