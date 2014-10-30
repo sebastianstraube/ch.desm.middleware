@@ -18,7 +18,7 @@ public class EndpointWebsocketServer {
 	
 	private static final Logger LOGGER = Logger
 			.getLogger(EndpointWebsocketServer.class);
-    private static final int MAX_CLIENT_IDLE_TIME = 1000*60*60*24;
+    private static final int MAX_CLIENT_IDLE_TIME = 1000*60*60;
 
 	/* Queue for all open WebSocket sessions */
 	private static Queue<Session> sessions = new ConcurrentLinkedQueue<>();
@@ -61,7 +61,7 @@ public class EndpointWebsocketServer {
         for (Session session : sessionList) {
             if(!session.isOpen()){
                 sessions.remove(session);
-                LOGGER.log(Level.TRACE, "Websocket removed session: " + session.getId());
+                LOGGER.log(Level.TRACE, "WebsocketServer removed session: " + session.getId());
             }
         }
     }

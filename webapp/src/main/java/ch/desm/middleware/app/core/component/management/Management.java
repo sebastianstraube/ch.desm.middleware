@@ -1,23 +1,17 @@
 package ch.desm.middleware.app.core.component.management;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageDecoder;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageEncoder;
 import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
 import ch.desm.middleware.app.core.communication.message.converter.MessageConverter;
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessor;
-import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-
-import javax.json.JsonObjectBuilder;
 import javax.websocket.DecodeException;
 import javax.websocket.EncodeException;
 
@@ -26,16 +20,14 @@ public class Management extends ManagementBase{
 	private static Logger LOGGER = Logger.getLogger(Management.class);
 	
 	private ManagementMessageTranslator translator;
-	private MessageProcessor processor;
-	private ManagementEndpointMessageFetch endpointThread;
+	private ManagementMessageProcessor processor;
 	private EndpointWebsocketMessageEncoder encoder;
     private MessageConverter converter;
 
 	public Management(Broker broker, ManagementEndpoint endpoint) {
-		super(broker);
+		super(broker, endpoint);
 		translator = new ManagementMessageTranslator();
-		processor = new MessageProcessor();
-		endpointThread = new ManagementEndpointMessageFetch(this, endpoint);
+		processor = new ManagementMessageProcessor();
         encoder = new EndpointWebsocketMessageEncoder();
         converter = new MessageConverter();
 	}
@@ -58,7 +50,6 @@ public class Management extends ManagementBase{
 
 	@Override
 	protected void onIncomingBrokerMessage(String message) {
-		// TODO Auto-generated method stub
 		LOGGER.log(Level.INFO, "receive broker message: " + message);
 		
 		//translation
@@ -78,7 +69,6 @@ public class Management extends ManagementBase{
 
 	@Override
 	protected void intializeSignedTopic() {
-		// TODO Auto-generated method stub
 		signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
 		signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420_FABISCH);
 		signForTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU);

@@ -25,5 +25,14 @@ public class OMLEndpointUbw32 extends EndpointUbw32 {
     public OMLMapUbw32Analog getMapAnalog(){
         return this.mapAnalog;
     }
-	
+
+    public void testDigitalMapSetAll(String value){
+
+        for(String element : mapDigital.getMap().values())
+        {
+            String port = element.substring(0,1);
+            String pin = element.substring(1,2);
+            this.sendCommandPinOutput(port, pin, value);
+        }
+    }
 }

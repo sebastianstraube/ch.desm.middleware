@@ -11,6 +11,7 @@ import org.eclipse.jetty.websocket.jsr356.server.ServerContainer;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 
 import java.io.File;
+import java.net.InetSocketAddress;
 import java.net.URL;
 import java.security.ProtectionDomain;
 
@@ -19,13 +20,19 @@ import java.security.ProtectionDomain;
  */
 public class JettyServer extends DaemonThreadBase {
 
+    private InetSocketAddress inetSocketAddress;
+
+    public JettyServer(){
+        this.inetSocketAddress = new InetSocketAddress("Heisenberg", 80);
+    }
+
     private static Logger LOGGER = Logger.getLogger(JettyServer.class);
     private Server server;
 
     public void run(){
         LOGGER.log(Level.INFO, "Jetty Webserver is starting ...");
-        int port = Integer.parseInt(System.getProperty("port", "8080"));
-        this.server = new Server(port);
+        //int port = Integer.parseInt(System.getProperty("port", port));
+        this.server = new Server(inetSocketAddress);
 
         ProtectionDomain domain = StartApp.class.getProtectionDomain();
         URL location = domain.getCodeSource().getLocation();

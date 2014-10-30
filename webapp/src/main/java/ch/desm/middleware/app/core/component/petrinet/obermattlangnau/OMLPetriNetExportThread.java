@@ -3,45 +3,48 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
 import ch.desm.middleware.app.core.utility.Pair;
 
-public class OMLPetriNetThread extends DaemonThreadBase {
+public class OMLPetriNetExportThread extends DaemonThreadBase {
 
-    protected static Logger LOGGER = Logger.getLogger(OMLPetriNetThread.class);
-
+    private static Logger LOGGER = Logger.getLogger(OMLPetriNetExportThread.class);
     private static int SLEEP_INTERVAL = 512;
 
-    private Object pendingSensorEventsLock = new Object();
-    private List<Pair<String, Integer>> pendingSensorEvents = new ArrayList<Pair<String, Integer>>();
-
+    private Object pendingSensorEventsLock;
+    private List<Pair<String, Integer>> pendingSensorEvents;
+    private OMLPetriNetExportBaseAdapter petriNet;
     private OMLPetriNetEndpoint endpoint;
-    private OMLPetriNetAdapter petriNet;
 
-    public OMLPetriNetThread(String threadName, OMLPetriNetEndpoint endpoint) {
+    public OMLPetriNetExportThread(String threadName, OMLPetriNetEndpoint endpoint) {
         super(threadName);
+
+        pendingSensorEventsLock = new Object();
+        pendingSensorEvents = new ArrayList<Pair<String, Integer>>();
+        petriNet = new OMLPetriNetExportBaseAdapter();
         this.endpoint = endpoint;
-        petriNet = new OMLPetriNetAdapter();
     }
-    
+
     /*
      * initialize sequence
      */
-    public void intialize(){
-    	petriNet.init();
+    public void intialize() {
+        petriNet.init();
         petriNet.initMarker();
     }
 
     public void setSensor(String signalName, int value) {
-        synchronized (pendingSensorEvents) {
-            pendingSensorEvents.add(new Pair<String, Integer>(signalName, value));
+        synchronized (pendingSensorEventsLock) {
+            Pair<String, Integer> pair = new Pair<String, Integer>(signalName, value);
+            pendingSensorEvents.add(pair);
         }
     }
 
     public void run() {
-        while(!isInterrupted()) {
+        while (!isInterrupted()) {
 
             applySensorEvents();
             simulatePetriNet();
@@ -55,9 +58,9 @@ public class OMLPetriNetThread extends DaemonThreadBase {
         }
 
     }
-    
+
     private void applySensorEvents() {
-    	List<Pair<String, Integer>> pendingSensorEventsCopy = new ArrayList<Pair<String, Integer>>();
+        List<Pair<String, Integer>> pendingSensorEventsCopy = new ArrayList<Pair<String, Integer>>();
         synchronized (pendingSensorEventsLock) {
             pendingSensorEventsCopy.addAll(pendingSensorEvents);
             pendingSensorEvents.clear();
@@ -75,13 +78,8 @@ public class OMLPetriNetThread extends DaemonThreadBase {
     }
 
     private void applyFiredTransitions() {
-        List<String> firedTransitions = new ArrayList<String>();
-        firedTransitions.addAll(petriNet.firedTransitions);
-        petriNet.firedTransitions.clear();
-
-        for (String firedTransition : firedTransitions) {
+        for (String firedTransition : petriNet.moveFiredTransitions()) {
             endpoint.onTransitionFired(firedTransition);
         }
     }
-
 }

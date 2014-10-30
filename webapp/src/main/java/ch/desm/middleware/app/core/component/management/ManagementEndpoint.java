@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.management;
 
+import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.util.component.LifeCycle;
@@ -16,33 +17,19 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class ManagementEndpoint {
+public class ManagementEndpoint extends EndpointCommon {
 
     private static final Logger LOGGER = Logger
             .getLogger(ManagementEndpoint.class);
 
-	private static Queue<String> messages = new ConcurrentLinkedQueue<>();
+    private Session webSocketSession;
+    private WebSocketContainer container;
+    private ManagementEndpointThread thread;
 
     public ManagementEndpoint(){
-        this.startWebsocketClient("ws://localhost:8080/gui/management");
+        thread = new ManagementEndpointThread(this);
+        this.startWebsocketClient("ws://Heisenberg:80/gui/management");
     }
-
-	public static void onIncomingEndpointMessage(String message){
-		messages.add(message);
-	}
-	
-	public boolean hasMessages(){
-		return !messages.isEmpty();
-	}
-	
-	public Queue<String> getMessages(){
-		final Queue<String> tmp = new LinkedList<String>(messages);
-		messages.clear();
-		return tmp;
-	}
-
-    private Session webSocketSession;
-    private WebSocketContainer container = null;
 
     public void startWebsocketClient(String uri) {
         try {
@@ -50,7 +37,7 @@ public class ManagementEndpoint {
             // Attempt Connect
             webSocketSession = container.connectToServer(ManagementEndpointWebsocketClient.class, URI.create(uri));
             // Send a message
-            webSocketSession.getBasicRemote().sendText("{\"payload\":\"websocket client started ...\", \"topic\":\"EndpointWebsocketClient\"}");
+            //webSocketSession.getBasicRemote().sendText("{\"payload\":\"websocket client started ...\", \"topic\":\"EndpointWebsocketClient\"}");
 
         } catch (DeploymentException e) {
             LOGGER.error(e);

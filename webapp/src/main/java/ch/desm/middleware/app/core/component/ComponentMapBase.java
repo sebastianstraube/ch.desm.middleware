@@ -12,7 +12,7 @@ public abstract class ComponentMapBase {
 	 * 
 	 */
 	public ComponentMapBase() {
-		this.map = new HashMap<String, String>();
+        this.map = new HashMap<String, String>();
 		this.initialize();
 	}
 	

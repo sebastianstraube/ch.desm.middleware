@@ -5,9 +5,16 @@ import ch.desm.middleware.app.core.component.ComponentBase;
 
 abstract class ManagementBase extends ComponentBase {
 
-	public ManagementBase(Broker broker) {
+    private ManagementEndpoint endpoint;
+
+	public ManagementBase(Broker broker, ManagementEndpoint endpoint) {
 		super(broker);
-//		this.registerEndpointListener(endpoint);
+        this.endpoint = endpoint;
+        this.registerEndpointListener(endpoint);
 	}
+
+    public ManagementEndpoint getEndpoint(){
+        return this.endpoint;
+    }
 
 }

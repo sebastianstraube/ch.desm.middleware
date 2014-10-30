@@ -1,32 +1,31 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 
 public class OMLPetriNetEndpoint extends EndpointCommon {
 
-    protected static Logger LOGGER = Logger.getLogger(OMLPetriNetEndpoint.class);
+    private static Logger LOGGER = Logger.getLogger(OMLPetriNetEndpoint.class);
 
-    OMLPetriNetThread petriNetThread;
+    OMLPetriNetExportThread petriNetThread;
 
-    public OMLPetriNetEndpoint() {
-        petriNetThread = new OMLPetriNetThread("PetriNetThread", this);
-    }
-    
     public void init(){
+        petriNetThread = new OMLPetriNetExportThread("OMLPetriNetSimulationThread", this);
     	petriNetThread.intialize();
     }
     
     public void start(){
-    	petriNetThread.start();
+        petriNetThread.start();
     }
-    
+
     public void stop(){
     	petriNetThread.interrupt();
     }
 
-    protected void onTransitionFired(String message) {
+    public void onTransitionFired(String message) {
+        LOGGER.log(Level.INFO, "transition: " +message+ " fired to onIncomingEndpointMessage.");
         onIncomingEndpointMessage(message);
     }
 

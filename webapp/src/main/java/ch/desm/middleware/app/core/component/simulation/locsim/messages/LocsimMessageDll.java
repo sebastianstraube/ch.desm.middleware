@@ -9,7 +9,6 @@ public class LocsimMessageDll extends MessageBase {
 	public static final String DLL_MESSAGE_SIGNAL = "locsim.dll.signal;";
 	public static final String DLL_MESSAGE_WEICHE = "locsim.dll.weiche;";
 	public static final String DLL_MESSAGE_TRACK = "locsim.dll.track;";
-	public static final String DLL_MESSAGE_CONFIG_INI1 = "locsim.rs232.config.ini1;";
 	
 	private String globalId;
 	private String dataId;

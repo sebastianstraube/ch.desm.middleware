@@ -1,0 +1,290 @@
+package ch.desm.middleware.app.core.component.simulation.locsim;
+
+import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
+import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
+import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
+import ch.desm.middleware.app.core.component.simulation.locsim.elements.LocsimElementFahrschalter;
+import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
+import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageDll;
+import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by Sebastian on 29.10.2014.
+ */
+public class LocsimMessageProcessor extends MessageProcessorBase {
+
+    private static Logger LOGGER = Logger.getLogger(LocsimMessageProcessor.class);
+    private LocsimElementFahrschalter fahrschalter;
+
+    public LocsimMessageProcessor(){
+        fahrschalter = new LocsimElementFahrschalter();
+    }
+    /**
+     *
+     * @param impl
+     * @param messages
+     */
+    public void processBrokerMessage(Locsim impl,
+                                     ArrayList<MessageMiddleware> messages) {
+
+        for (MessageMiddleware message : messages) {
+            this.processBrokerMessage(impl, message);
+        }
+    }
+
+    /**
+     * @param impl
+     * @param message
+     */
+    protected void processBrokerMessage(Locsim impl, MessageMiddleware message) {
+
+        if (impl.isLocsimDllMessage(message.getGlobalId())) {
+
+            // TODO implementation of dll messages
+            // ....
+        }
+
+        else if (MessageProcessorUtil.isSoftwareMessage(message.getOutputInput())) {
+
+            // send locsim interface ready to start simulation
+            if (message.getGlobalId().equalsIgnoreCase(
+                    "locsim.initialization.ready.ini1")) {
+                // init message
+            }
+
+            else if (message.getGlobalId().equalsIgnoreCase(
+                    "locsim.initialization.ready.ini2")) {
+                impl.getEndpointRs232().sendMessage("INI2");
+            }
+
+            else if (message.getGlobalId().equalsIgnoreCase(
+                    "mgmt.simulation.locsim.rs232")) {
+
+                switch (message.getParameter()) {
+                    case ("init"): {
+                        impl.getEndpointRs232().initialize();
+                        break;
+                    }
+                    case ("start"): {
+
+                        break;
+                    }
+                    case ("stop"): {
+                        impl.getEndpointRs232().closePort();
+                        break;
+                    }
+                }
+            }
+
+            else if (message.getGlobalId().equalsIgnoreCase(
+                    "mgmt.simulation.locsim.dll")) {
+
+                switch (message.getParameter()) {
+                    case ("init"): {
+                        impl.getEndpointDll().initialize();
+                        break;
+                    }
+                    case ("start"): {
+                        impl.getEndpointDll().run();
+                        break;
+                    }
+                    case ("stop"): {
+                        impl.getEndpointDll().interrupt();
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        else {
+
+            // delegate needed fahrschalter messages
+            if (fahrschalter.getMap().containsValue(message.getGlobalId())) {
+
+                // find locsim needed keys
+                HashMap<String, String> fahrschalterKeys = fahrschalter
+                        .getLocsimNeededKeys(message.getGlobalId());
+
+                if (!fahrschalterKeys.isEmpty()) {
+
+                    for (Map.Entry<String, String> element : fahrschalterKeys
+                            .entrySet()) {
+
+                        String channelData = element.getKey();
+                        if (channelData.isEmpty()) {
+                            LOGGER.warn("no locsim mapping with message: "
+                                    + message);
+                        }
+                        String channelType = channelData.substring(0, 1);
+                        String channel = channelData.substring(1, 3);
+                        String parameter = "0000";
+                        String locsimCommand = "X" + channelType + channel
+                                + parameter + "Y";
+
+                        impl.getEndpointRs232().sendMessage(locsimCommand);
+                    }
+                }
+
+                String channelData = fahrschalter.getKey(message.getGlobalId());
+                if (channelData.isEmpty()) {
+                    LOGGER.warn("no locsim mapping with message: " + message);
+                }
+                String channelType = channelData.substring(0, 1);
+                String channel = channelData.substring(1, 3);
+                String parameter = util.getParameterValueLocsim(message
+                        .getParameter());
+                String locsimCommand = "X" + channelType + channel + parameter
+                        + "Y";
+
+                impl.getEndpointRs232().sendMessage(locsimCommand);
+
+                // no fahrschalter command
+            } else {
+
+                LocsimMapRs232 locsimMap = new LocsimMapRs232();
+                String channelData = locsimMap.getKey(message.getGlobalId());
+
+                if (channelData.isEmpty()) {
+                    try {
+                        throw new Exception("processBrokerMessage: " + message
+                                + ", has no mapping");
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        LOGGER.error(e);
+                    }
+                } else {
+
+                    String parameter = message.getParameter();
+                    String channelType = channelData.substring(0, 1);
+                    String channel = channelData.substring(1, 3);
+
+                    // conversion Hauptleitung, Bremszylinder pressure
+                    if (channelData.equals("V00") || channelData.equals("V01")) {
+
+                        parameter = util.conversionFahrschalter(parameter);
+
+                    } else if (channelData.equals("V02")) {
+
+                        parameter = util.conversionFahrschalter(parameter);
+
+                    } else if (channelData.equals("V03")) {
+
+                    }
+
+                    else {
+
+                        parameter = util.getParameterValueLocsim(parameter);
+                    }
+
+                    if (channelData.isEmpty()) {
+                        LOGGER.warn("no locsim mapping with message: " + message);
+                    }
+
+                    String locsimCommand = "X" + channelType + channel
+                            + parameter + "Y";
+
+                    impl.getEndpointRs232().sendMessage(locsimCommand);
+
+                }
+            }
+        }
+    }
+
+    /**
+     * processing all incoming rs232 data from locsim
+     *
+     * @param data
+     */
+    public void processIncomingDataRs232(Locsim impl, String data) {
+        impl.endpointRs232.parser.addData(data);
+
+        String message;
+        while ((message = impl.endpointRs232.parser.pop()) != null) {
+
+            LOGGER.trace("receive endpoint("+ impl.endpointRs232.getSerialPortName()+") locsim message: " + message);
+            if (message.startsWith("INI")) {
+
+                //TODO implementation different states of locsim (INI8)
+                if (!impl.initialisiert && message.equalsIgnoreCase("INI1")) {
+                    message = "locsim.initialization.ready.ini1;os;0;message;initialisiation;ini1;on;locsim-rs232;#";
+                    processEndpointMessage(impl, message,
+                            MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232);
+                    impl.initialisiert = true;
+
+                    impl.endpointRs232.sendMessage("INI2");
+                }
+
+                else if (message.equalsIgnoreCase("INI7")) {
+                    message = "locsim.initialization.ready.ini7;os;0;message;initialisiation;ini7;on;locsim-rs232;#";
+                    impl.processor.processEndpointMessage(impl, message,
+                            MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232);
+                }
+
+                else{
+                    LOGGER.warn("not implemented or skipped initialisation message: " + message);
+                }
+            } else {
+
+                message = impl.translatorRs232
+                        .translateToCommonMiddlewareMessage(message, MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232);
+
+                processEndpointMessage(impl, message,
+                        MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232);
+            }
+        }
+    }
+
+
+    /**
+     * TODO implementation
+     *
+     * @param message
+     */
+    public void processIncomingDataDll(Locsim impl, String message) {
+
+        LocsimMessageDll messageDll = new LocsimMessageDll(message,
+                MessageCommon.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
+
+        String stream = "";
+
+        if (messageDll.isGleislistMessage()) {
+            System.out
+                    .println("processEndpointDataDll: not yet supported message: "
+                            + message);
+
+        } else if (messageDll.isSignalMessage()) {
+            // TODO implementation
+            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
+                    + message);
+        } else if (messageDll.isTrackMessage()) {
+            // TODO implementation
+            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
+                    + message);
+
+        } else if (messageDll.isTrainpositionMessage()) {
+            // TODO implementation
+            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
+                    + message);
+
+        } else if (messageDll.isWeicheMessage()) {
+            // TODO implementation
+            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
+                    + message);
+
+        } else {
+            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
+                    + message);
+        }
+
+        processEndpointMessage(impl, stream,
+                MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
+    }
+
+}

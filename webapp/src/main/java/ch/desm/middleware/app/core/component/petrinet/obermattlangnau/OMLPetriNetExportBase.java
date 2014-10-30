@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
-public abstract class OMLPetriNetExport {
+public abstract class OMLPetriNetExportBase {
 	public int W1_Endlage_plus;
 	public int W1_Endlage_minus;
 	public int W1_gestoert_p;

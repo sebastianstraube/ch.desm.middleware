@@ -7,9 +7,13 @@ import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
 import ch.desm.middleware.app.core.communication.message.converter.MessageConverter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.eclipse.jetty.websocket.api.WebSocketListener;
 
 import javax.websocket.*;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @ClientEndpoint(encoders = EndpointWebsocketMessageEncoder.class, decoders = EndpointWebsocketMessageDecoder.class)
 public class ManagementEndpointWebsocketClient {
@@ -17,16 +21,11 @@ public class ManagementEndpointWebsocketClient {
     private static final Logger LOGGER = Logger
             .getLogger(ManagementEndpointWebsocketClient.class);
 
-    private static Session session;
-    private EndpointWebsocketMessageEncoder encoder;
-    private EndpointWebsocketMessageDecoder decoder;
+    private final static Set<Session> sessionSet = new HashSet<Session>();
 
     @OnOpen
     public void onOpen(Session session) {
-        this.session = session;
-        encoder = new EndpointWebsocketMessageEncoder();
-        decoder = new EndpointWebsocketMessageDecoder();
-
+        this.sessionSet.add(session);
         LOGGER.info("Websocket client is Connected with session: " + session.getId());
     }
 
@@ -34,19 +33,27 @@ public class ManagementEndpointWebsocketClient {
     public String onMessage(String message, Session session) {
 
         LOGGER.info("EndpointWebsocketClient reveived: " + message);
-        ManagementEndpoint.onIncomingEndpointMessage(message);
-        return "";
+        ManagementEndpointThread.addMessages(message);
+        return message;
     }
 
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
-        LOGGER.info(String.format("Session %s close because of %s", session.getId(), closeReason));
-        this.session = null;
+
+        //delete session
+        HashSet<Session> SessionSetCopy = new HashSet<>(sessionSet);
+        for(Session element : sessionSet){
+            if(element.equals(session)){
+                sessionSet.remove(element);
+                LOGGER.info(String.format("Session %s closed because of %s.", session.getId(), closeReason));
+            }
+        }
     }
 
     public static void sendMessage(String message){
         LOGGER.info("EndpointWebsocketClient send: " + message);
         try {
+            for(Session session : sessionSet)
             if(session != null){
                 session.getBasicRemote().sendText(message);
             }else{

@@ -94,7 +94,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 		
 		if (stream != null && !stream.isEmpty() && serialPort.writeString(stream)) {
 			
-			LOGGER.log(Level.INFO, serialPort.getPortName() + " send stream: [" + stream + "]");
+			LOGGER.log(Level.TRACE, serialPort.getPortName() + " send stream: [" + stream + "]");
 		}else{
 			LOGGER.error(serialPort.getPortName() + " stream not send: " + stream);
 		}

@@ -19,11 +19,11 @@ public class EndpointWebsocketMessageEncoder implements Encoder.Text<MessageWebs
     }
 
     @Override
-    public String encode(final MessageWebsocket chatMessage) throws EncodeException {
+    public String encode(final MessageWebsocket message) throws EncodeException {
 
         JsonObjectBuilder builder = Json.createObjectBuilder()
-                .add("topic", chatMessage.getTopic())
-                .add("payload", chatMessage.getPayload());
+                .add("topic", message.getTopic())
+                .add("payload", message.getPayload());
 
         return builder.build().toString();
 

@@ -1,21 +1,19 @@
 package ch.desm.middleware.app.core.component.simulation.locsim.messages;
 
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
-import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorRs232;
-import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapMiddleware;
+import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorRs232Base;
+import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapMiddlewareParameter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
-import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageRs232;
 
-public class LocsimMessageTranslatorRs232 extends MessageTranslatorRs232 {
+public class LocsimMessageTranslatorRs232 extends MessageTranslatorRs232Base {
 
 	private LocsimMapRs232 mapRs232;
-	private LocsimMapMiddleware middlewareMessages;
 	private LocsimMapMiddlewareParameter mapParameter;
-	
+    private static final ComponentMapMiddleware mapMiddlewareMessages = new ComponentMapMiddleware();
+
 	public LocsimMessageTranslatorRs232(){
 		mapRs232 = new LocsimMapRs232();
-		middlewareMessages = new LocsimMapMiddleware();
 		mapParameter = new LocsimMapMiddlewareParameter();
 	}
 	
@@ -24,7 +22,7 @@ public class LocsimMessageTranslatorRs232 extends MessageTranslatorRs232 {
 		
 		LocsimMessageRs232 locsimMessage = new LocsimMessageRs232(payload, topic);
 		String middlewareKey = mapRs232.getValue(locsimMessage.getSignalType(), locsimMessage.getChannel());
-		String commonMessage = middlewareMessages.getValue(middlewareKey);
+		String commonMessage = mapMiddlewareMessages.getValue(middlewareKey);
 		
 		String dataValue = locsimMessage.getData();
 		commonMessage = replaceMiddlewareMessageParameter(MessageCommon.PARAMETER_PLACEHOLDER, mapParameter.getValue(dataValue), commonMessage);

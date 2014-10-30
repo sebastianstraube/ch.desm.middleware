@@ -10,7 +10,6 @@ public class StartApp {
 
     public static void main(String[] args){
 
-        StartAppSingleton.getSingleton().start();
         JettyServer server = new JettyServer();
         server.start();
 
@@ -22,6 +21,6 @@ public class StartApp {
                 e.printStackTrace();
             }
         }
-        StartAppSingleton.getSingleton().startHangout(10000000);
+        StartAppSingleton.getSingleton().start();
     }
 }

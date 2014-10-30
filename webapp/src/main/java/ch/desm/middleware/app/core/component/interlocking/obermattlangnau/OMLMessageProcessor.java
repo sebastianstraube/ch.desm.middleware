@@ -1,37 +1,112 @@
 package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
 
+import java.util.ArrayList;
 import java.util.Map.Entry;
 
+import ch.desm.middleware.app.core.communication.message.*;
+import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
+import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
+import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapInterlockingPetrinet;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import ch.desm.middleware.app.core.communication.message.MessageCommon;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessor;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements.OMLElementFahrstrassenSchalter;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapMiddleware;
 
-public class OMLMessageProcessor extends MessageProcessor {
+public class OMLMessageProcessor extends MessageProcessorBase {
 
 	private static Logger LOGGER = Logger.getLogger(OMLMessageProcessor.class);
 
 	private OMLElementFahrstrassenSchalter fahrStrassenSchalter;
 
-	public OMLMessageProcessor() {
+    public OMLMessageProcessor() {
 		fahrStrassenSchalter = new OMLElementFahrstrassenSchalter();
 	}
+
+    /**
+     * @param impl
+     * @param messages
+     */
+    public void processBrokerMessage(OML impl, ArrayList<MessageMiddleware> messages, OMLMapInterlockingPetrinet mapPetrinet) {
+        for(MessageMiddleware message : messages){
+            processBrokerMessage(impl, message, mapPetrinet);
+        }
+    }
+
+    public void processBrokerMessage(OML impl, MessageMiddleware message, OMLMapInterlockingPetrinet mapPetrinet) {
+        LOGGER.log(Level.INFO, "OML processing Broker Message: " + message);
+
+        if (MessageProcessorUtil.isSoftwareMessage(message.getOutputInput())) {
+
+            if (message.getGlobalId().equalsIgnoreCase(
+                    "mgmt.stellwerk.obermattlangnau")) {
+
+                switch (message.getParameter()) {
+                    case ("init"): {
+                        //impl.getEndpoint().initialize();
+                        //impl.getEndpoint().testDigitalMapSetAll("1");
+                        break;
+                    }
+                    case ("start"): {
+                        impl.getEndpoint().run();
+                        //impl.getEndpoint().testDigitalMapSetAll("0");
+                        break;
+                    }
+                    case ("stop"): {
+                        impl.getEndpoint().interrupt();
+                        break;
+                    }
+                }
+            }
+        }
+        //is hardware message
+        else{
+            String parameter = util.getParameterValueMiddleware(message.getParameter());
+            boolean isInput = message.getOutputInput().equals(
+                    MessageUbw32Base.MESSAGE_CHAR_INPUT);
+
+            //is mapped message from petrinet
+            String omlKey = mapPetrinet.getValue(message.getGlobalId());
+            if(!omlKey.isEmpty()){
+                // is ubw digital message
+                if (impl.getEndpoint().getMapDigital()
+                        .isKeyAvailable(omlKey)) {
+
+                    String endpointRegister = impl.getEndpoint()
+                            .getMapDigital().getMap().get(omlKey);
+                    String registerName = String
+                            .valueOf(endpointRegister.charAt(0));
+                    String pin = String.valueOf(endpointRegister.substring(1));
+
+                    if (isInput) {
+                        impl.getEndpoint().getPinInputDigital(registerName,
+                                pin);
+                    } else {
+                        impl.getEndpoint().setPinOutputDigital(registerName,
+                                pin, parameter);
+                    }
+                }
+                // is ubw analog message
+                else if (impl.getEndpoint().getMapAnalog()
+                        .isKeyAvailable(omlKey)) {
+
+                    String endpointRegister = impl.getEndpoint()
+                            .getMapAnalog().getMap().get(omlKey);
+
+                    if (isInput) {
+                        impl.getEndpoint().getPinInputAnalog(endpointRegister);
+                    }
+                }
+            }
+        }
+    }
 
 	/**
 	 * 
 	 * @param impl
 	 * @param message
-	 * @param mapMiddlewareMessages
 	 * @return
 	 */
 	public String convertToMiddlewareMessage(OML impl,
-			MessageUbw32Base message, OMLMapMiddleware mapMiddlewareMessages) {
+			MessageUbw32Base message) {
 
 		String middlewareMessagesInput = "";
 
@@ -50,7 +125,7 @@ public class OMLMessageProcessor extends MessageProcessor {
 
 					String stream = null;
 
-					stream = mapMiddlewareMessages.getMap().get(key);
+					stream = impl.getMapMiddlewareMessages().get(key);
 
 					if (stream == null) {
 						try {
@@ -88,7 +163,7 @@ public class OMLMessageProcessor extends MessageProcessor {
 
 				String stream = null;
 
-				stream = mapMiddlewareMessages.getMap().get(key);
+				stream = impl.getMapMiddlewareMessages().get(key);
 
 				if (stream == null) {
 					try {
@@ -119,7 +194,7 @@ public class OMLMessageProcessor extends MessageProcessor {
 				String key = entry.getKey();
 
 				if (!key.isEmpty()) {
-					String stream = mapMiddlewareMessages.getMap().get(key);
+					String stream = impl.getMapMiddlewareMessages().get(key);
 
 					if (stream == null) {
 						try {

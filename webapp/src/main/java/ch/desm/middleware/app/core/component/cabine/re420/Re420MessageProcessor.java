@@ -1,32 +1,30 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
+import java.util.ArrayList;
 import java.util.Map.Entry;
 
+import ch.desm.middleware.app.core.communication.message.*;
+import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
+import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
 import org.apache.log4j.Logger;
-
-import ch.desm.middleware.app.core.communication.message.MessageCommon;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessor;
 import ch.desm.middleware.app.core.component.cabine.re420.elements.Re420ElementFahrschalter;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapBinding;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapFabischValue;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapMiddleware;
 
-public class Re420MessageProcessor extends MessageProcessor {
+public class Re420MessageProcessor extends MessageProcessorBase {
 
 	private static Logger LOGGER = Logger.getLogger(Re420MessageProcessor.class);
 
 	private Re420ElementFahrschalter fahrschalter;
 	private Re420MapBinding binding;
 	private Re420MapFabischValue mapValues;
+    private MessageProcessorUtil util;
 
 	public Re420MessageProcessor() {
 		fahrschalter = new Re420ElementFahrschalter();
 		binding = new Re420MapBinding();
 		mapValues = new Re420MapFabischValue();
+        this.util = new MessageProcessorUtil();
 	}
 
 	public String handleMessageFahrschalter(String key, boolean isEnabled) {
@@ -41,11 +39,10 @@ public class Re420MessageProcessor extends MessageProcessor {
 	 * 
 	 * @param impl
 	 * @param message
-	 * @param mapMiddlewareMessages
 	 * @return
 	 */
 	public String convertToMiddlewareMessage(Re420 impl,
-			MessageUbw32Base message, Re420MapMiddleware mapMiddlewareMessages) {
+			MessageUbw32Base message) {
 
 		String middlewareMessagesInput = "";
 
@@ -87,7 +84,7 @@ public class Re420MessageProcessor extends MessageProcessor {
 					}
 
 					else {
-						stream = mapMiddlewareMessages.getMap().get(key);
+						stream = impl.getMapMiddlewareMessages().get(key);
 						
 						if (stream == null) {
 							try {
@@ -162,7 +159,7 @@ public class Re420MessageProcessor extends MessageProcessor {
 						}
 					} else {
 
-						stream = mapMiddlewareMessages.getMap().get(key);
+						stream = impl.getMapMiddlewareMessages().get(key);
 						
 						if (stream == null) {
 							try {
@@ -197,7 +194,7 @@ public class Re420MessageProcessor extends MessageProcessor {
 				String key = entry.getKey();
 
 				if (!key.isEmpty()) {
-					String stream = mapMiddlewareMessages.getMap().get(key);
+					String stream = impl.getMapMiddlewareMessages().get(key);
 
 					if (stream == null) {
 						try {
@@ -258,4 +255,154 @@ public class Re420MessageProcessor extends MessageProcessor {
 		return parameter;
 
 	}
+
+    public void processBrokerMessage(Re420 impl, ArrayList<MessageMiddleware> messages) {
+        for(MessageMiddleware message : messages){
+            this.processBrokerMessage(impl, message);
+        }
+    }
+    /**
+     * @param impl
+     * @param message
+     */
+    public void processBrokerMessage(Re420 impl, MessageMiddleware message) {
+
+        // is fabisch endpoint digital message
+        if (impl.getEndpointFabisch().getMapDigital()
+                .isKeyAvailable(message.getGlobalId())) {
+
+            String channel = impl.getEndpointFabisch().getMapDigital()
+                    .getValue(message.getGlobalId());
+            String data = message.getParameter();
+
+            data = util.convertParameter(channel, data);
+
+            impl.getEndpointFabisch().sendStream(channel + data);
+
+            // is fabisch endpoint analog message
+        } else if (impl.getEndpointFabisch().getMapAnalog()
+                .isKeyAvailable(message.getGlobalId())) {
+            String channel = impl.getEndpointFabisch().getMapAnalog()
+                    .getValue(message.getGlobalId());
+            String data = message.getParameter();
+
+            // TODO convert from locsim values to fabisch values
+
+            impl.getEndpointFabisch().sendStream(channel + data);
+        }
+
+        // is software message
+        else if (MessageProcessorUtil.isSoftwareMessage(message.getOutputInput())) {
+
+            if (message.getGlobalId().equalsIgnoreCase(
+                    "locsim.initialization.ready.ini1")
+                    && !util.init1) {
+                impl.getEndpointUbw32().setCacheEnabled(false);
+                impl.getEndpointUbw32().run();
+                util.init1 = true;
+            }
+
+            else if (message.getGlobalId().equalsIgnoreCase(
+                    "locsim.initialization.ready.ini2")) {
+                // nothing to do
+            }
+
+            else if (message.getGlobalId().equalsIgnoreCase(
+                    "locsim.initialization.ready.ini7")) {
+                impl.getEndpointUbw32().pollingCommand();
+                impl.getEndpointUbw32().setCacheEnabled(false);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    LOGGER.error(e);
+                }
+                impl.getEndpointUbw32().setCacheEnabled(true);
+            }
+
+            else if (message.getGlobalId().equalsIgnoreCase(
+                    "locsim.initialization.ready.ini8")) {
+                // nothing to do
+            }
+
+            else if (message.getGlobalId().equalsIgnoreCase(
+                    "mgmt.cabine.re420.fabisch")) {
+
+                switch (message.getParameter()) {
+                    case ("init"): {
+                        impl.getEndpointFabisch().initialize();
+                        break;
+                    }
+                    case ("start"): {
+                        //nothing to do
+                        break;
+                    }
+                    case ("stop"): {
+                        //nothing to do
+                        break;
+                    }
+                }
+            }
+
+            else if (message.getGlobalId().equalsIgnoreCase(
+                    "mgmt.cabine.re420.ubw32")) {
+
+                switch (message.getParameter()) {
+                    case ("init"): {
+                        impl.getEndpointUbw32().initialize();
+                        break;
+                    }
+                    case ("start"): {
+                        impl.getEndpointUbw32().run();
+                        break;
+                    }
+                    case ("stop"): {
+                        impl.getEndpointUbw32().interrupt();
+                        break;
+                    }
+                }
+            }
+
+            // is hardware message
+        } else {
+
+            String value = util.getParameterValueRe420(message.getParameter());
+            boolean isInput = message.getOutputInput().equals(
+                    MessageUbw32Base.MESSAGE_CHAR_INPUT);
+
+            // is ubw message
+            if (impl.getEndpointUbw32().getMapDigital()
+                    .isKeyAvailable(message.getGlobalId())) {
+
+                String endpointRegister = impl.getEndpointUbw32()
+                        .getMapDigital().getMap().get(message.getGlobalId());
+                String registerName = String
+                        .valueOf(endpointRegister.charAt(0));
+                String pin = String.valueOf(endpointRegister.substring(1));
+
+                if (isInput) {
+                    impl.getEndpointUbw32().getPinInputDigital(registerName,
+                            pin);
+                } else {
+                    impl.getEndpointUbw32().setPinOutputDigital(registerName,
+                            pin, value);
+                }
+
+                // is analog message
+            } else if (impl.getEndpointUbw32().getMapAnalog()
+                    .isKeyAvailable(message.getGlobalId())) {
+
+                String endpointRegister = impl.getEndpointUbw32()
+                        .getMapAnalog().getMap().get(message.getGlobalId());
+
+                if (isInput) {
+                    impl.getEndpointUbw32().getPinInputAnalog(endpointRegister);
+                }
+
+            } else {
+                LOGGER.warn(impl.getClass() + "> processBrokerMessage skipped:"
+                        + message);
+            }
+        }
+    }
 }

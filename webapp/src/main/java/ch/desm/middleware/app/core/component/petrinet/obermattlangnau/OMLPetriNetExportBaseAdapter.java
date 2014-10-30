@@ -10,26 +10,34 @@ import org.apache.log4j.Logger;
  * wrapper class around the petri net class provided by the pnlm export that is
  * caring about the event communication between enpoint and petri net.
  */
-public class OMLPetriNetAdapter extends OMLPetriNetExport {
+public class OMLPetriNetExportBaseAdapter extends OMLPetriNetExportBase {
 
-	private static Logger LOGGER = Logger.getLogger(OMLPetriNetAdapter.class);
+	private static Logger LOGGER = Logger.getLogger(OMLPetriNetExportBaseAdapter.class);
 
-	public List<String> firedTransitions = new ArrayList<String>();
+	private List<String> firedTransitions = new ArrayList<String>();
+    private Object firedTransitionsLock = new Object();
 
 	public boolean canFire(String s) {
-
 		LOGGER.info("can fire: " + s);
-
 		return super.canFire(s);
 	}
 
 	public void fire(String s) {
-
-		firedTransitions.add(s);
-
-		LOGGER.info("petrinet has fired transition buffer: "
-				+ firedTransitions.toString());
+        synchronized (firedTransitionsLock){
+            firedTransitions.add(s);
+            LOGGER.trace("petrinet has fired transition buffer: "
+                    + firedTransitions.toString());
+        }
 	}
+
+    public List<String> moveFiredTransitions(){
+        ArrayList<String> firedTransitionsCopy = new ArrayList<String>();
+        synchronized (firedTransitionsLock){
+            firedTransitionsCopy.addAll(firedTransitions);
+            firedTransitions.clear();
+        }
+        return firedTransitionsCopy;
+    }
 
 	public void setSensor(String name) {
 		setSensor(name, 1);
@@ -67,10 +75,10 @@ public class OMLPetriNetAdapter extends OMLPetriNetExport {
 					// send marker to broker clients
 					// which are initialized with 1
 					if(value == 1){
-						String name = classField.getName();
-						fire(name);
-					}					
-				} catch (IllegalArgumentException e) {
+                        String name = classField.getName();
+                        fire(name);
+                    }
+                } catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {

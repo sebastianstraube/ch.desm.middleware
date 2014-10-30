@@ -2,6 +2,7 @@ package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
 
 import java.util.ArrayList;
 
+import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapInterlockingPetrinet;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
@@ -11,7 +12,6 @@ import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapMiddleware;
 
 public class OML extends OMLBase implements
 		EndpointUbw32ListenerInterface {
@@ -20,14 +20,14 @@ public class OML extends OMLBase implements
 
 	private MessageTranslatorMiddleware translator;
 	private OMLMessageProcessor processor;
-	private OMLMapMiddleware map;
-	
+	private OMLMapInterlockingPetrinet mapPetrinet;
+
 	public OML(Broker broker, OMLEndpointUbw32 endpoint) {
 		super(broker, endpoint);
 		
 		this.translator = new MessageTranslatorMiddleware();
 		this.processor = new OMLMessageProcessor();
-		this.map = new OMLMapMiddleware();
+        mapPetrinet = new OMLMapInterlockingPetrinet();
 	}
 
 	protected void onIncomingBrokerMessage(String message) {
@@ -37,7 +37,7 @@ public class OML extends OMLBase implements
 		ArrayList<MessageMiddleware> messageCommon = translator
 				.toMiddlewareMessageList(message);
 
-		processor.processBrokerMessage(this, messageCommon);
+		processor.processBrokerMessage(this, messageCommon, mapPetrinet);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class OML extends OMLBase implements
 		//processable message
 		if(ubw32Message != null){
 					
-			String messages = processor.convertToMiddlewareMessage(this, ubw32Message, map);
+			String messages = processor.convertToMiddlewareMessage(this, ubw32Message);
 			
 			processor.processEndpointMessage(this, messages,
 					MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU);

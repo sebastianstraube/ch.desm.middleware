@@ -86,10 +86,6 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 	 */
 	public void initialize() {
         super.initialize();
-        reset();
-    }
-
-    public void reset(){
         this.sendCommandReset();
 
 //		this.sendCommandConfigureUbw32(); //OK Packet OFF
@@ -103,7 +99,6 @@ public class EndpointUbw32 extends EndpointUbw32Base {
         if (isPinBitMaskAnalogAvailable()) {
             this.sendCommandConfigureAnalogInputs(pinbitMaskInputAnalog);
         }
-
         setCacheEnabled(true);
     }
 

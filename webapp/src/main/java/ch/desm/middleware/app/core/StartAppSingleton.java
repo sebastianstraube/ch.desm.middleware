@@ -37,8 +37,12 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 	public void run(){
 		startManagement();
-		startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM3);
+		startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM8);
         startOmlPetrinet();
+        //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
+
+        startHangout(10000000);
+
 	}
 
 	public boolean startManagement(){
@@ -64,18 +68,6 @@ public class StartAppSingleton extends DaemonThreadBase {
 		LocsimEndpointDll endpointDll = new LocsimEndpointDll("dispatcher.json");
 		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(portRs232);
 		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232, endpointDll);
-	}
-	
-	/**
-	 * 
-	 */
-	public void testEndpointTcpIp(){
-		
-//		EndpointTcpServer_ s = new EndpointTcp(7100);
-		
-		EndpointTcpClient c = new EndpointTcpClient("EndpointTcpClient", "127.0.0.1", 7100);
-		
-//		c.sendStream("test stream!");		
 	}
 	
 	/**
@@ -115,19 +107,13 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 		
 		//FSS 10°
-		omlPetriNet.emulateBrokerMessage("10.99.07;i;1;kontakt;isolierung;belegt;on;stellwerkobermattlangnau;#");		
-
-		
-		
+		omlPetriNet.emulateBrokerMessage("10.99.07;i;1;kontakt;isolierung;belegt;on;stellwerkobermattlangnau;#");
 	}
 
 	/**
 	 * 
 	 */
 	public void testCabine(){
-		
-		
-
 		Re420EndpointUbw32 re420Endpoint = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM30);
 		Re420EndpointFabisch re420EndpointFabisch = new Re420EndpointFabisch(EndpointRs232.EnumSerialPorts.COM31);
 		Re420 re420Impl = new Re420(Broker.getInstance(), re420Endpoint, re420EndpointFabisch);
@@ -143,9 +129,6 @@ public class StartAppSingleton extends DaemonThreadBase {
 	 * 
 	 */
 	public void testCaseLocsimEndpointRs232_to_CabineUbw32(Broker broker) {
-		
-		
-
 		//Test Cabine
 		Re420EndpointUbw32 re420Endpoint = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM24);
 		Re420EndpointFabisch re420EndpointFabisch = new Re420EndpointFabisch(EndpointRs232.EnumSerialPorts.COM25);
@@ -180,17 +163,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	/**
 	 * 
 	 */
-	public void testEndpointFabisch(Broker broker){
-		
-		EndpointFabisch endpointFabisch = new EndpointFabisch(EndpointRs232.EnumSerialPorts.COM31);
-		
-	}
-	
-	/**
-	 * 
-	 */
 	public void testEndpointPetriNet(Broker broker){
-
         OMLPetriNetEndpoint endpoint = new OMLPetriNetEndpoint();
         OMLPetriNet petriNetBase = new OMLPetriNet(broker, endpoint);
         
@@ -378,7 +351,8 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 	}
 
-    private boolean isHangout = true;
+    //TODO refactoring
+    public boolean isHangout = true;
     public void startHangout(long val){
 
         while(isHangout){
