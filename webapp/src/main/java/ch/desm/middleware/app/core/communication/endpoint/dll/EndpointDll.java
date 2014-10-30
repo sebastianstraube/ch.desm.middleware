@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.dll;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.Dll;
@@ -55,7 +56,7 @@ public abstract class EndpointDll extends EndpointCommon implements
 			message = new LocsimMessageTranslatorDll().translateToMiddlewareMessage((EndpointObjectDllWeiche)obj);
 		}else{
 			
-			LOGGER.error("Translation does not support yet endpoint object: " + obj.getClass());
+			LOGGER.log(Level.ERROR, "Translation does not support yet endpoint object: " + obj.getClass());
 		}
 		
 		if(!message.isEmpty()){

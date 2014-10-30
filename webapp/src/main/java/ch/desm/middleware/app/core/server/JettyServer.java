@@ -30,7 +30,7 @@ public class JettyServer extends DaemonThreadBase {
     private Server server;
 
     public void run(){
-        LOGGER.log(Level.INFO, "Jetty Webserver is starting ...");
+        LOGGER.log(Level.ERROR, "Jetty Webserver is starting ...");
         //int port = Integer.parseInt(System.getProperty("port", port));
         this.server = new Server(inetSocketAddress);
 

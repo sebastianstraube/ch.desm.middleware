@@ -34,7 +34,7 @@ public class Management extends ManagementBase{
 
 	@Override
 	public void onIncomingEndpointMessage(String message) {
-		LOGGER.log(Level.INFO, "receive endpoint message: " + message);
+		LOGGER.log(Level.ERROR, "receive endpoint message: " + message);
 
         try {
             //check message syntax
@@ -43,14 +43,14 @@ public class Management extends ManagementBase{
             //publish message
             processor.processEndpointMessage(this, messageWebsocket.getPayload(), messageWebsocket.getTopic());
         } catch (DecodeException e) {
-            LOGGER.error("wrong format of endpoint message: " + message, e);
+            LOGGER.log(Level.ERROR, "wrong format of endpoint message: " + message, e);
         }
 
 	}
 
 	@Override
 	protected void onIncomingBrokerMessage(String message) {
-		LOGGER.log(Level.INFO, "receive broker message: " + message);
+		LOGGER.log(Level.ERROR, "receive broker message: " + message);
 		
 		//translation
 		ArrayList<MessageMiddleware> messageList = translator.toMiddlewareMessageList(message);
@@ -61,7 +61,7 @@ public class Management extends ManagementBase{
                 String messageWebsocket = encoder.encode(converter.convertToMessageWebsocket(element));
                 ManagementEndpointWebsocketClient.sendMessage(messageWebsocket);
             } catch (EncodeException e) {
-                LOGGER.error(e);
+                LOGGER.log(Level.ERROR, e);
             }
 
 		}

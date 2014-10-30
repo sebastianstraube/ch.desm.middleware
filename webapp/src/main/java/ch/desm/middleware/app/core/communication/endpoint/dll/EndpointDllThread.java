@@ -2,6 +2,7 @@ package ch.desm.middleware.app.core.communication.endpoint.dll;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.Dll;
@@ -43,10 +44,10 @@ public class EndpointDllThread extends EndpointThreadBase {
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 

@@ -30,7 +30,7 @@ public class EndpointWebsocketServer {
         session.setMaxIdleTimeout(MAX_CLIENT_IDLE_TIME);
         sessions.add(session);
 
-        LOGGER.log(Level.INFO, "Websocket Connected: " + session);
+        LOGGER.log(Level.ERROR, "Websocket Connected: " + session);
     }
 
     @OnMessage
@@ -41,7 +41,7 @@ public class EndpointWebsocketServer {
                 for (Session element : sessionList) {
                     if(!element.equals(session)){
                         element.getBasicRemote().sendText(message);
-                        LOGGER.log(Level.INFO, "Websocket sent message: " + message +" to Websocket client" + element.getId()+")" );
+                        LOGGER.log(Level.ERROR, "Websocket sent message: " + message +" to Websocket client" + element.getId()+")" );
                     }
                 }
             }catch (IOException e) {
@@ -54,7 +54,7 @@ public class EndpointWebsocketServer {
 
     @OnClose
     public void onWebSocketClose(CloseReason reason){
-        LOGGER.log(Level.INFO, "Websocket Closed: " + reason);
+        LOGGER.log(Level.ERROR, "Websocket Closed: " + reason);
 
         HashSet<Session> sessionList = new HashSet<Session>(sessions);
 

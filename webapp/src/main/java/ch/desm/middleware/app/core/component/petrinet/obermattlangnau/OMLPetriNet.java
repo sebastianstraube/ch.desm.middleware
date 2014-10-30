@@ -90,7 +90,7 @@ public class OMLPetriNet extends OMLPetriNetBase {
             this.publish(message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
 
         } catch (Exception e) {
-        	LOGGER.error(e.getMessage());
+        	LOGGER.log(Level.ERROR, e.getMessage());
         }
     }
 

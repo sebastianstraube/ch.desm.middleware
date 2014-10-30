@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointThreadBase;
@@ -37,7 +38,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 					+ new String(byteBuffer));
 
 		} catch (IOException e) {
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 
 	}
@@ -98,7 +99,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 			interrupt();
 			endpoint.socket.close();
 		} catch (IOException e) {
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 }

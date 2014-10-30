@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
@@ -28,7 +29,7 @@ public abstract class ComponentBase extends BrokerClient
         try {
             listener.addEndpointListener(this);
         } catch (Exception e) {
-            LOGGER.error(e);
+            LOGGER.log(Level.ERROR, e);
         }
     }
 

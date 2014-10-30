@@ -19,6 +19,7 @@ import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 public class StartAppSingleton extends DaemonThreadBase {
@@ -145,7 +146,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 //			Thread.sleep(1000);
 //		} catch (InterruptedException e) {
 //			// TODO Auto-generated catch block
-//			LOGGER.error(e);
+//			LOGGER.log(Level.ERROR, e);
 //		}
 //		
 //		locsimEndpointRs232.emulateEndpointMessage("INI1");
@@ -154,7 +155,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 //			Thread.sleep(1000);
 //		} catch (InterruptedException e) {
 //			// TODO Auto-generated catch block
-//			LOGGER.error(e);
+//			LOGGER.log(Level.ERROR, e);
 //		}
 //		
 //		locsimEndpointRs232.emulateEndpointMessage("INI7");
@@ -239,7 +240,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 
 		if (args.length == 1) {

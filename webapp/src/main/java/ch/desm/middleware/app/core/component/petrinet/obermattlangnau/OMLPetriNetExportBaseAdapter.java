@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -56,7 +57,7 @@ public class OMLPetriNetExportBaseAdapter extends OMLPetriNetExportBase {
 
 		} catch (IllegalAccessException e) {
 
-			LOGGER.error("unable to set sensor", e);
+			LOGGER.log(Level.ERROR, "unable to set sensor", e);
 		}
 	}
 

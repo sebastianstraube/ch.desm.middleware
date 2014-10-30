@@ -8,6 +8,7 @@ import ch.desm.middleware.app.core.communication.message.processor.MessageProces
 import ch.desm.middleware.app.core.component.simulation.locsim.elements.LocsimElementFahrschalter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
 import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageDll;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -157,7 +158,7 @@ public class LocsimMessageProcessor extends MessageProcessorBase {
                                 + ", has no mapping");
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
-                        LOGGER.error(e);
+                        LOGGER.log(Level.ERROR, e);
                     }
                 } else {
 
