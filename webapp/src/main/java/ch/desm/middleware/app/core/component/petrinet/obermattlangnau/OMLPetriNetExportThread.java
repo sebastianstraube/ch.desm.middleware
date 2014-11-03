@@ -16,7 +16,7 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
 
     private Object pendingSensorEventsLock;
     private List<Pair<String, Integer>> pendingSensorEvents;
-    private OMLPetriNetExportBaseAdapter petriNet;
+    private OMLPetriNetExportAdapter petriNet;
     private OMLPetriNetEndpoint endpoint;
 
     public OMLPetriNetExportThread(String threadName, OMLPetriNetEndpoint endpoint) {
@@ -24,7 +24,7 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
 
         pendingSensorEventsLock = new Object();
         pendingSensorEvents = new ArrayList<Pair<String, Integer>>();
-        petriNet = new OMLPetriNetExportBaseAdapter();
+        petriNet = new OMLPetriNetExportAdapter();
         this.endpoint = endpoint;
     }
 
@@ -33,7 +33,6 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
      */
     public void intialize() {
         petriNet.init();
-        petriNet.initMarker();
     }
 
     public void setSensor(String signalName, int value) {
@@ -48,19 +47,18 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
 
             applySensorEvents();
             simulatePetriNet();
-            applyFiredTransitions();
+            applyPlaces();
 
             try {
                 Thread.sleep(SLEEP_INTERVAL);
             } catch (InterruptedException e) {
-                LOGGER.error(e);
+                LOGGER.log(Level.ERROR, e);
             }
         }
-
     }
 
     private void applySensorEvents() {
-        List<Pair<String, Integer>> pendingSensorEventsCopy = new ArrayList<Pair<String, Integer>>();
+        List<Pair<String, Integer>> pendingSensorEventsCopy = new ArrayList<>();
         synchronized (pendingSensorEventsLock) {
             pendingSensorEventsCopy.addAll(pendingSensorEvents);
             pendingSensorEvents.clear();
@@ -77,9 +75,9 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
         }
     }
 
-    private void applyFiredTransitions() {
-        for (String firedTransition : petriNet.moveFiredTransitions()) {
-            endpoint.onTransitionFired(firedTransition);
+    private void applyPlaces() {
+        for (Pair<String, Integer> changedPlace : petriNet.getChangedPlaces()) {
+            endpoint.onPlaceChanged(changedPlace);
         }
     }
 }

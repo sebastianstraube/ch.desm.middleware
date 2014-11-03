@@ -3,7 +3,9 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 import java.util.ArrayList;
 
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
+import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageDecoder;
 import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.OMLMapPetrinetOml;
+import ch.desm.middleware.app.core.utility.Pair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -21,6 +23,7 @@ public class OMLPetriNet extends OMLPetriNetBase {
 
     OMLMapPetrinetOml petriNetMap;
     MessageTranslatorMiddleware translator;
+    PetrinetMessageDecoder decoder;
 
     public OMLPetriNet(Broker broker, OMLPetriNetEndpoint endpoint) {
         super(broker, endpoint);
@@ -28,6 +31,7 @@ public class OMLPetriNet extends OMLPetriNetBase {
 
         petriNetMap = new OMLMapPetrinetOml();
         translator = new MessageTranslatorMiddleware();
+        decoder = new PetrinetMessageDecoder();
     }
 
     @Override
@@ -72,17 +76,18 @@ public class OMLPetriNet extends OMLPetriNetBase {
     }
 
     @Override
-    public void onIncomingEndpointMessage(String firedTransition) {
+    public void onIncomingEndpointMessage(String jsonMessagePlace) {
         try {
-            String message = getMiddlewareMessages().getValue(firedTransition);
-            
-            //TODO refactoring
-        	message = message.replaceAll("\\?", "on");
-            
+            Pair<String, Integer> pair = decoder.decode(jsonMessagePlace);
+            String message = getMiddlewareMessages().getValue(pair.getLeft());
+            String parameter = pair.getRight() == 0? "off" : "on";
+        	message = message.replaceAll("\\?", parameter);
             this.publish(message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
 
+        } catch (ClassCastException e) {
+            LOGGER.log(Level.ERROR, "Error on message: " + jsonMessagePlace + "with: " + e);
         } catch (Exception e) {
-        	LOGGER.error(e.getMessage());
+        	LOGGER.log(Level.ERROR, e);
         }
     }
 

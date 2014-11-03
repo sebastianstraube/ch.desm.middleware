@@ -325,10 +325,9 @@ public class OMLMapPetrinetOml extends ComponentMapBase{
         map.put("Kontakte_6_NAL","6.91.13"); //
         map.put("Kontakte_6_Gleist_ZB","6.91.14"); //
         map.put("Kontakte_6_ISU_Sign","6.91.15"); //
-        map.put("Kontakte_7_WS1_plus0","7.91.01"); //
-// map.put("Kontakte_7_WS1_plus1",""); //
-        map.put("Kontakte_7_WS1_minus0","7.91.04"); //
-        map.put("Kontakte_7_WS1_minus1","7.91.02"); //
+        map.put("Kontakte_7_WS1_plus","7.91.01"); //
+        map.put("Kontakte_7_WS1_minus","7.91.04"); //
+        map.put("Kontakte_7_WS1_1","7.91.02"); //
         map.put("Kontakte_8_FSS_10EG","8.91.19"); //
         map.put("Kontakte_8_FSS_30EG","8.91.20"); //
         map.put("Kontakte_8_FSS_45EG","8.91.21"); //
@@ -394,6 +393,7 @@ public class OMLMapPetrinetOml extends ComponentMapBase{
 // map.put("Fstr_ef_geprueft1",""); //
 // map.put("Fstr_ef_geprueft2",""); //
 // map.put("Fstr_ef_P6",""); //
+
     }
 
 }

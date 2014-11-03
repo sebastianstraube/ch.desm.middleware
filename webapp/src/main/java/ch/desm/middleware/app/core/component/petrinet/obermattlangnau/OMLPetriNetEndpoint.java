@@ -1,19 +1,26 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
+import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageDecoder;
+import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageEncoder;
+import ch.desm.middleware.app.core.utility.Pair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 
+import javax.websocket.EncodeException;
+
 public class OMLPetriNetEndpoint extends EndpointCommon {
 
     private static Logger LOGGER = Logger.getLogger(OMLPetriNetEndpoint.class);
 
-    OMLPetriNetExportThread petriNetThread;
+    private OMLPetriNetExportThread petriNetThread;
+    private PetrinetMessageEncoder encoder;
 
     public void init(){
         petriNetThread = new OMLPetriNetExportThread("OMLPetriNetSimulationThread", this);
     	petriNetThread.intialize();
+        encoder = new PetrinetMessageEncoder();
     }
     
     public void start(){
@@ -24,9 +31,13 @@ public class OMLPetriNetEndpoint extends EndpointCommon {
     	petriNetThread.interrupt();
     }
 
-    public void onTransitionFired(String message) {
-        LOGGER.log(Level.TRACE, "fired transition: " +message);
-        onIncomingEndpointMessage(message);
+    public void onPlaceChanged(Pair<String, Integer> place) {
+        LOGGER.log(Level.TRACE, "place changed: " +place.toString());
+        try {
+            onIncomingEndpointMessage(encoder.encode(place));
+        } catch (EncodeException e) {
+            LOGGER.log(Level.ERROR, e);
+        }
     }
 
     public void setSensor(String message, int value) {
