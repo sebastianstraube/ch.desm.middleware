@@ -42,7 +42,7 @@ public class StartAppSingleton extends DaemonThreadBase {
         startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
 
-        startHangout(10000000);
+        startHangout(Integer.MAX_VALUE);
 
 	}
 
@@ -146,7 +146,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 //			Thread.sleep(1000);
 //		} catch (InterruptedException e) {
 //			// TODO Auto-generated catch block
-//			LOGGER.error(e);
+//			LOGGER.log(Level.ERROR, e);
 //		}
 //		
 //		locsimEndpointRs232.emulateEndpointMessage("INI1");
@@ -155,7 +155,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 //			Thread.sleep(1000);
 //		} catch (InterruptedException e) {
 //			// TODO Auto-generated catch block
-//			LOGGER.error(e);
+//			LOGGER.log(Level.ERROR, e);
 //		}
 //		
 //		locsimEndpointRs232.emulateEndpointMessage("INI7");
@@ -240,7 +240,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 
 		if (args.length == 1) {
