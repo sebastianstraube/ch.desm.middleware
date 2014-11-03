@@ -75,6 +75,10 @@
                     <span class="glyphicon glyphicon-user"></span> GUI
                 </button>
 
+                <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_remote">
+                    <span class="glyphicon glyphicon-transfer"></span> REMOTE CONTROL
+                </button>
+
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_log">
                     <span class="glyphicon glyphicon-list"></span> LOG
                 </button>
@@ -180,9 +184,9 @@
             <fieldset>
                 <legend>GUI</legend>
                 <div class="gui">
-                    <div id="w1">
+                    <div class="remote_object" style="left:263px; top:237px;">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img id="w1_image" src="/img/iltis_arrowright-red.png">
+                            <img id="w1_image" src="img/iltis_arrowright-red.png">
                         </a>
                         <ul class="dropdown-menu">
                             <li id="w1_change">Change</li>
@@ -191,6 +195,24 @@
                 </div>
             </fieldset>
         </div>
+
+        <div class="container-fluid remote-wrapper">
+            <fieldset>
+                <legend>REMOTE CONTROL</legend>
+                <div class="remote">
+                    <div class="remote_object" style="left: 58px; top: 78px;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="img/remote_off.png" alt="" id="remote_img_1">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li id="remote_change_on_1">On</li>
+                            <li id="remote_change_off_1">Off</li>
+                      </ul>
+                  </div>
+              </div>
+            </fieldset>
+        </div>
+
 
         <div class="container-fluid log-wrapper">
             <fieldset>

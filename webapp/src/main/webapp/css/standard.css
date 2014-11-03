@@ -4,14 +4,23 @@
 }
 
 .gui{
+    width: 100%;
+    background-color: black;
     background:url('../img/iltis_background.png') no-repeat;
     height: 395px;
+    display: block;
 }
 
-#w1{
+.remote{
+    width: 100%;
+    background-color: #f0f0f0;
+    background:url('../img/petrinetz-iltis.png') no-repeat;
+    height: 684px;
+    display: block;
+}
+
+.remote_object{
     position: relative;
-    left:263px;
-    top:237px;
 }
 
 .dropdown-menu ul{
@@ -20,7 +29,7 @@
 
 legend{
     margin-bottom: 5px !important;
-        padding-top: 25px !important;
+    padding-top: 25px !important;
 }
 
 .btn-desm {

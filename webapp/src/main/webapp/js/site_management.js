@@ -34,6 +34,7 @@ $(document).ready(function() {
         $('.init-wrapper').hide();
         $('.communication-wrapper').hide();
         $('.status-wrapper').hide();
+        $('.remote-wrapper').hide();
 
         setInterval(function(){blink()}, 1000);
     }
@@ -85,6 +86,7 @@ $(document).ready(function() {
         $('.communication-wrapper').hide();
         $('.control-wrapper').hide();
         $('.status-wrapper').hide();
+        $('.remote-wrapper').hide();
 
         $('#status_text').empty();
         $logWindow.empty();
@@ -97,6 +99,8 @@ $(document).ready(function() {
 	});
 
 	$('#connect').click(function(evt) {
+        $('#switch_exit').removeClass('btn-primary');
+        $('#switch_exit').addClass('btn-success');
 		evt.preventDefault();
         connectWebsocketServer();
 
@@ -108,9 +112,12 @@ $(document).ready(function() {
 		$('.log-wrapper').hide();
 		$('.gui-wrapper').hide();
         $('.communication-wrapper').hide();
+        $('.remote-wrapper').hide();
 	});
 
 	$('#switch_exit').click(function(){
+        $('#connect').removeClass('btn-primary');
+        $('#connect').addClass('btn-danger');
         leaveComponent();
 	});
 	
@@ -133,6 +140,10 @@ $(document).ready(function() {
 
     $('#switch_status').click(function(){
         $('.status-wrapper').toggle();
+    });
+
+    $('#switch_remote').click(function(){
+        $('.remote-wrapper').toggle();
     });
 
     //INIT
@@ -169,7 +180,6 @@ $(document).ready(function() {
     //start
     $('#start_interlocking').click(function(){
         $(this).toggleClass('btn-success');
-        sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;start;management;#")
     });
 
     $('#start_petrinet').click(function(){
@@ -233,6 +243,19 @@ $(document).ready(function() {
     $('#w1_change').on({
         'click': function(){
             $('#w1_image').attr('src','../img/iltis_arrowright-green.png');
+        }
+    });
+
+    //REMOTE
+    $('#remote_change_on_1').on({
+        'click': function(){
+            $('#remote_img_1').attr('src','../img/remote_on.png');
+        }
+    });
+
+    $('#remote_change_off_1').on({
+        'click': function(){
+            $('#remote_img_1').attr('src','../img/remote_off.png');
         }
     });
 
