@@ -97,7 +97,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 												+ " in message: " + message);
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
-								LOGGER.error(e);
+								LOGGER.log(Level.ERROR, e);
 							}
 						}
 
@@ -172,7 +172,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 												+ " in message: " + message);
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
-								LOGGER.error(e);
+								LOGGER.log(Level.ERROR, e);
 							}
 						}
 
@@ -206,7 +206,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 											+ " in message: " + message);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							LOGGER.error(e);
+							LOGGER.log(Level.ERROR, e);
 						}
 					}
 
@@ -316,7 +316,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
-                    LOGGER.error(e);
+                    LOGGER.log(Level.ERROR, e);
                 }
                 impl.getEndpointUbw32().setCacheEnabled(true);
             }

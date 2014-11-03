@@ -68,7 +68,7 @@ public class LocsimEndpointRs232Parser {
 			
 			// buffer does not look like it contains valid data.
 			// lets remove the first byte and retry parsing
-			//LOGGER.error("skipping invalid byte: " + buffer.charAt(0));
+			//LOGGER.log(Level.ERROR, "skipping invalid byte: " + buffer.charAt(0));
 			buffer = buffer.substring(1);
 		}
 	}

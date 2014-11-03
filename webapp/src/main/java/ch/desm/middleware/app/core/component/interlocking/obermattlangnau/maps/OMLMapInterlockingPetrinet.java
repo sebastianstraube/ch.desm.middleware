@@ -98,9 +98,9 @@ public class OMLMapInterlockingPetrinet extends ComponentMapBase{
         map.put("6.91.13","Kontakte_6_NAL"); //Notauflösung
         map.put("6.91.14","Kontakte_6_Gleist_ZB"); //Richtung Zollbrück
         map.put("6.91.15","Kontakte_6_ISU_Sign"); //Isolierumgehung für Signalfahrtstellung
-        map.put("7.91.01","Kontakte_7_WS1_plus0"); //WS1 Grundstellung +
-        map.put("7.91.02","Kontakte_7_WS1_minus1"); //WS1 gedrückt
-        map.put("7.91.04","Kontakte_7_WS1_minus0"); //WS1 in Grundstellung - (45° Lage)
+        map.put("7.91.01","Kontakte_7_WS1_plus"); //WS1 Grundstellung +
+        map.put("7.91.02","Kontakte_7_WS1_1"); //WS1 gedrückt
+        map.put("7.91.04","Kontakte_7_WS1_minus"); //WS1 in Grundstellung - (45° Lage)
 // map.put("8.91.02",""); //FSS Grundstellung gedrückt
 // map.put("8.91.01",""); //FSS in Endlage
         map.put("8.91.03","Kontakte_8_FSS_10F"); //FSS in 10°-Lage von Langnau
@@ -164,6 +164,7 @@ public class OMLMapInterlockingPetrinet extends ComponentMapBase{
 // map.put("90.99.17",""); //Signallampe defekt; G rot
 // map.put("90.99.18",""); //Signallampe defekt; G Reserve-rot
 // map.put("90.99.19",""); //Signallampe defekt; G grün FB3
+
     }
 
 }

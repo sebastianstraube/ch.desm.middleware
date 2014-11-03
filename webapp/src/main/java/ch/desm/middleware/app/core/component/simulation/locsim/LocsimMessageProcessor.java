@@ -158,7 +158,7 @@ public class LocsimMessageProcessor extends MessageProcessorBase {
                                 + ", has no mapping");
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
-                        LOGGER.error(e);
+                        LOGGER.log(Level.ERROR, e);
                     }
                 } else {
 

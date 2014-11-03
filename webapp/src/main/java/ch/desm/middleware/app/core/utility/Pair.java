@@ -25,4 +25,13 @@ public class Pair<L,R> {
                 this.right.equals(pairo.getRight());
     }
 
+    public String toString(){
+        String s="";
+        s+= left;
+        s+= ": ";
+        s+= right;
+
+        return s;
+    }
+
 }

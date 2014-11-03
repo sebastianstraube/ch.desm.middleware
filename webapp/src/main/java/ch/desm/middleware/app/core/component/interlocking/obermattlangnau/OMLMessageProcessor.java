@@ -136,7 +136,7 @@ public class OMLMessageProcessor extends MessageProcessorBase {
 											+ " in message: " + message);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							LOGGER.error(e);
+							LOGGER.log(Level.ERROR, e);
 						}
 					}
 
@@ -174,7 +174,7 @@ public class OMLMessageProcessor extends MessageProcessorBase {
 										+ message);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						LOGGER.error(e);
+						LOGGER.log(Level.ERROR, e);
 					}
 				}else{
 					
@@ -205,7 +205,7 @@ public class OMLMessageProcessor extends MessageProcessorBase {
 											+ " in message: " + message);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							LOGGER.error(e);
+							LOGGER.log(Level.ERROR, e);
 						}
 					}
 

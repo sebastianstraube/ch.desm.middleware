@@ -129,10 +129,10 @@ public class EndpointFabisch extends EndpointRs232 {
 
 		} catch (SerialPortException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 	
@@ -150,7 +150,7 @@ public class EndpointFabisch extends EndpointRs232 {
 
 		} catch (SerialPortException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 	

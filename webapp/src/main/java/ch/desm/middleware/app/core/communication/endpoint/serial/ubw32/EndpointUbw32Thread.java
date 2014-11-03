@@ -35,10 +35,10 @@ class EndpointUbw32Thread extends EndpointThreadBase {
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 

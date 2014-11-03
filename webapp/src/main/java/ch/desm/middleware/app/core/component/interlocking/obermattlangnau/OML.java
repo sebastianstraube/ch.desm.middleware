@@ -56,9 +56,7 @@ public class OML extends OMLBase implements
 
 		//processable message
 		if(ubw32Message != null){
-					
 			String messages = processor.convertToMiddlewareMessage(this, ubw32Message);
-			
 			processor.processEndpointMessage(this, messages,
 					MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU);
 		}

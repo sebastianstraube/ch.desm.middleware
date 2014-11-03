@@ -35,7 +35,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			serialPort.writeString("Write Test to Serialport ..."
 					+ serialPort.getPortName() + "\r\n");
 		} catch (SerialPortException e) {
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 
@@ -62,7 +62,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			LOGGER.log(Level.TRACE, "serial port: "+ serialPort.getPortName()+" is initialized.");
 			
 		} catch (SerialPortException e) {
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 
@@ -80,7 +80,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 				serialPort.closePort();
 			}
 		} catch (SerialPortException e) {
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 
@@ -96,7 +96,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			
 			LOGGER.log(Level.TRACE, serialPort.getPortName() + " send stream: [" + stream + "]");
 		}else{
-			LOGGER.error(serialPort.getPortName() + " stream not send: " + stream);
+			LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream);
 		}
 	}
 	
@@ -112,7 +112,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			
 			LOGGER.log(Level.TRACE,serialPort.getPortName() + " send stream:" + stream.toString());
 		}else{
-			LOGGER.error(serialPort.getPortName() + " stream not send: " + stream.toString());
+			LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream.toString());
 		}
 	}
 	
@@ -128,7 +128,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			
 			LOGGER.log(Level.TRACE,serialPort.getPortName() + " send stream:" + stream.toString());
 		}else{
-			LOGGER.error(serialPort.getPortName() + " stream not send: " + stream.toString());
+			LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream.toString());
 		}
 	}
 

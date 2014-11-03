@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
@@ -48,7 +49,7 @@ public class EndpointTcpClient extends EndpointCommon {
 			socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 	
@@ -60,7 +61,7 @@ public class EndpointTcpClient extends EndpointCommon {
 			start();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 	

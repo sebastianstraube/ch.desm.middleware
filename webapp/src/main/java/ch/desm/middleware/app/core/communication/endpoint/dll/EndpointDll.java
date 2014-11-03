@@ -56,7 +56,7 @@ public abstract class EndpointDll extends EndpointCommon implements
 			message = new LocsimMessageTranslatorDll().translateToMiddlewareMessage((EndpointObjectDllWeiche)obj);
 		}else{
 			
-			LOGGER.error("Translation does not support yet endpoint object: " + obj.getClass());
+			LOGGER.log(Level.ERROR, "Translation does not support yet endpoint object: " + obj.getClass());
 		}
 		
 		if(!message.isEmpty()){

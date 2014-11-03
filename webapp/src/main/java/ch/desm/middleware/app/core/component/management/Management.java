@@ -43,7 +43,7 @@ public class Management extends ManagementBase{
             //publish message
             processor.processEndpointMessage(this, messageWebsocket.getPayload(), messageWebsocket.getTopic());
         } catch (DecodeException e) {
-            LOGGER.error("wrong format of endpoint message: " + message, e);
+            LOGGER.log(Level.ERROR, "wrong format of endpoint message: " + message, e);
         }
 
 	}
@@ -61,7 +61,7 @@ public class Management extends ManagementBase{
                 String messageWebsocket = encoder.encode(converter.convertToMessageWebsocket(element));
                 ManagementEndpointWebsocketClient.sendMessage(messageWebsocket);
             } catch (EncodeException e) {
-                LOGGER.error(e);
+                LOGGER.log(Level.ERROR, e);
             }
 
 		}

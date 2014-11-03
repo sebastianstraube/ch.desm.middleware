@@ -182,7 +182,7 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 
 				}
 			} else {
-				LOGGER.error("error message received on ubw("
+				LOGGER.log(Level.ERROR, "error message received on ubw("
 						+ serialPort.getPortName() + "): " + message);
 
 			}
@@ -210,7 +210,7 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 

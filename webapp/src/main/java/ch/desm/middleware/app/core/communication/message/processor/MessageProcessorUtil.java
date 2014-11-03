@@ -63,7 +63,7 @@ public class MessageProcessorUtil {
                 throw new IllegalStateException("wrong parameter value: " + value);
             }
         } catch(IllegalStateException e){
-            LOGGER.error(e);
+            LOGGER.log(Level.ERROR, e);
         }
 
         return returnValue;

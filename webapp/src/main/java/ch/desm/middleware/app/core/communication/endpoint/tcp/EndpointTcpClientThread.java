@@ -38,7 +38,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
                     + new String(byteBuffer));
 
 		} catch (IOException e) {
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 
 	}
@@ -99,7 +99,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 			interrupt();
 			endpoint.socket.close();
 		} catch (IOException e) {
-			LOGGER.error(e);
+			LOGGER.log(Level.ERROR, e);
 		}
 	}
 }
