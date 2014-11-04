@@ -23,10 +23,10 @@ public class LocsimMessageDll extends MessageBase {
 	public LocsimMessageDll(String payload, String topic) {
 		super(payload, topic);
 		
-		this.initialize();
+		this.init();
 	}
 	
-	private void initialize(){
+	private void init(){
 		String[] parts = getPayload().split(";");
 		
 		this.globalId = parts[0];

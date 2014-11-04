@@ -62,17 +62,15 @@ public class OMLPetriNetExportAdapter extends OMLPetriNetExportBase {
     }
 
     public List<Pair<String, Integer>> getChangedPlaces(){
-        List<Pair<String, Integer>> moveList = new ArrayList<>();
+        List<Pair<String, Integer>> changeList = new ArrayList<>();
         if(!changedPlacesList.isEmpty()){
             synchronized (lockChangedPlacesList){
-                moveList.addAll(changedPlacesList);
+                changeList.addAll(changedPlacesList);
                 changedPlacesList.clear();
             }
-            LOGGER.log(Level.TRACE, "move changed places: " + moveList);
+            LOGGER.log(Level.TRACE, "move changed places: " + changeList);
         }
-
-
-        return moveList;
+        return changeList;
     }
 
     private void addAllPlacesToChangedPlaces(List<Pair<String, Integer>> base){

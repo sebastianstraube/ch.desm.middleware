@@ -15,12 +15,11 @@ public class OMLPetriNetEndpoint extends EndpointCommon {
     private static Logger LOGGER = Logger.getLogger(OMLPetriNetEndpoint.class);
 
     private OMLPetriNetExportThread petriNetThread;
-    private PetrinetMessageEncoder encoder;
+
 
     public void init(){
         petriNetThread = new OMLPetriNetExportThread("OMLPetriNetSimulationThread", this);
     	petriNetThread.intialize();
-        encoder = new PetrinetMessageEncoder();
     }
     
     public void start(){
@@ -29,15 +28,6 @@ public class OMLPetriNetEndpoint extends EndpointCommon {
 
     public void stop(){
     	petriNetThread.interrupt();
-    }
-
-    public void onPlaceChanged(Pair<String, Integer> place) {
-        LOGGER.log(Level.TRACE, "place changed: " +place.toString());
-        try {
-            onIncomingEndpointMessage(encoder.encode(place));
-        } catch (EncodeException e) {
-            LOGGER.log(Level.ERROR, e);
-        }
     }
 
     public void setSensor(String message, int value) {

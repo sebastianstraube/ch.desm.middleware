@@ -21,17 +21,17 @@ public class OMLPetriNet extends OMLPetriNetBase {
 
     private static Logger LOGGER = Logger.getLogger(OMLPetriNet.class);
 
-    OMLMapPetrinetOml petriNetMap;
-    MessageTranslatorMiddleware translator;
-    PetrinetMessageDecoder decoder;
+    private MessageTranslatorMiddleware translator;
+    private PetrinetMessageDecoder decoder;
+    private OmlPetrinetMessageProcessor processor;
 
     public OMLPetriNet(Broker broker, OMLPetriNetEndpoint endpoint) {
         super(broker, endpoint);
         this.registerEndpointListener(endpoint);
 
-        petriNetMap = new OMLMapPetrinetOml();
         translator = new MessageTranslatorMiddleware();
         decoder = new PetrinetMessageDecoder();
+        processor = new OmlPetrinetMessageProcessor();
     }
 
     @Override
@@ -41,37 +41,7 @@ public class OMLPetriNet extends OMLPetriNetBase {
         ArrayList<MessageMiddleware> messages = translator.toMiddlewareMessageList(message);
 
         for(MessageMiddleware element : messages){
-            if (MessageProcessorUtil.isSoftwareMessage(element.getOutputInput())) {
-
-                if (element.getGlobalId().equalsIgnoreCase(
-                        "mgmt.petrinet.obermatlangnau")) {
-
-                    switch (element.getParameter()) {
-                        case ("init"): {
-                            getEndpoint().init();
-                            break;
-                        }
-                        case ("start"): {
-                            getEndpoint().start();
-                            break;
-                        }
-                        case ("stop"): {
-                            getEndpoint().stop();
-                            break;
-                        }
-                    }
-                }
-            }else{
-                String globalId = element.getGlobalId();
-                String sensorName = null;
-                try {
-                    sensorName = petriNetMap.mapBrokerToEndpointMessage(globalId);
-                } catch (Exception e) {
-                    LOGGER.log(Level.ERROR, e);
-                }
-                int sensorValue = element.getParameter().equals("on") ? 1 : 0;
-                getEndpoint().setSensor(sensorName, sensorValue);
-            }
+            processor.processBrokerMessage(getEndpoint(), element);
         }
     }
 
@@ -80,14 +50,16 @@ public class OMLPetriNet extends OMLPetriNetBase {
         try {
             Pair<String, Integer> pair = decoder.decode(jsonMessagePlace);
             String message = getMiddlewareMessages().getValue(pair.getLeft());
-            String parameter = pair.getRight() == 0? "off" : "on";
-        	message = message.replaceAll("\\?", parameter);
-            this.publish(message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
-
+            if(!message.isEmpty()){
+                String parameter = pair.getRight() == 0? "off" : "on";
+                message = message.replaceAll("\\?", parameter);
+                processor.processEndpointMessage(this,
+                        message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
+            }
         } catch (ClassCastException e) {
             LOGGER.log(Level.ERROR, "Error on message: " + jsonMessagePlace + "with: " + e);
         } catch (Exception e) {
-        	LOGGER.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, e);
         }
     }
 

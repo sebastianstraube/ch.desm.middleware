@@ -26,7 +26,7 @@ public class Re420MapFabischDigital extends ComponentMapBase {
 	/**
 	 *	
 	 */
-	protected void initialize() {
+	protected void init() {
 
 		map.put("w238_t","5d5c");//Tiefton (Schnellgang, Signum, Totmann)
 		map.put("w238_h","5d5c");//Hochton (Langsamgang)

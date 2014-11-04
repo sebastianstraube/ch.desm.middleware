@@ -331,7 +331,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 
                 switch (message.getParameter()) {
                     case ("init"): {
-                        impl.getEndpointFabisch().initialize();
+                        impl.getEndpointFabisch().init();
                         break;
                     }
                     case ("start"): {
@@ -350,7 +350,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 
                 switch (message.getParameter()) {
                     case ("init"): {
-                        impl.getEndpointUbw32().initialize();
+                        impl.getEndpointUbw32().init();
                         break;
                     }
                     case ("start"): {

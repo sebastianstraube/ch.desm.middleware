@@ -26,6 +26,8 @@ public class OMLEndpointUbw32 extends EndpointUbw32 {
         return this.mapAnalog;
     }
 
+
+
     public void testDigitalMapSetAll(String value){
 
         for(String element : mapDigital.getMap().values())

@@ -5,6 +5,7 @@ import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
+import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.simulation.locsim.elements.LocsimElementFahrschalter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
 import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageDll;
@@ -18,7 +19,7 @@ import java.util.Map;
 /**
  * Created by Sebastian on 29.10.2014.
  */
-public class LocsimMessageProcessor extends MessageProcessorBase {
+public class LocsimMessageProcessor extends ComponentMessageProcessor {
 
     private static Logger LOGGER = Logger.getLogger(LocsimMessageProcessor.class);
     private LocsimElementFahrschalter fahrschalter;
@@ -69,7 +70,7 @@ public class LocsimMessageProcessor extends MessageProcessorBase {
 
                 switch (message.getParameter()) {
                     case ("init"): {
-                        impl.getEndpointRs232().initialize();
+                        impl.getEndpointRs232().init();
                         break;
                     }
                     case ("start"): {
@@ -88,7 +89,7 @@ public class LocsimMessageProcessor extends MessageProcessorBase {
 
                 switch (message.getParameter()) {
                     case ("init"): {
-                        impl.getEndpointDll().initialize();
+                        impl.getEndpointDll().init();
                         break;
                     }
                     case ("start"): {

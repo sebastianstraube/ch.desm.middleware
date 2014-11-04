@@ -28,7 +28,7 @@ public class Re420MapBinding extends ComponentMapBase  {
 	 * binding is needed to set a function directly in the component
 	 */
 	@Override
-	protected void initialize() {
+	protected void init() {
 		
 		map.put("s182.3", "l182.3"); //Türfreigabe links
 		map.put("s182.4", "l182.4"); //Türfreigabe rechts

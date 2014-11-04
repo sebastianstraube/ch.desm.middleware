@@ -3,11 +3,14 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageEncoder;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
 import ch.desm.middleware.app.core.utility.Pair;
+
+import javax.websocket.EncodeException;
 
 public class OMLPetriNetExportThread extends DaemonThreadBase {
 
@@ -18,6 +21,7 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
     private List<Pair<String, Integer>> pendingSensorEvents;
     private OMLPetriNetExportAdapter petriNet;
     private OMLPetriNetEndpoint endpoint;
+    private PetrinetMessageEncoder encoder;
 
     public OMLPetriNetExportThread(String threadName, OMLPetriNetEndpoint endpoint) {
         super(threadName);
@@ -26,6 +30,7 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
         pendingSensorEvents = new ArrayList<Pair<String, Integer>>();
         petriNet = new OMLPetriNetExportAdapter();
         this.endpoint = endpoint;
+        encoder = new PetrinetMessageEncoder();
     }
 
     /*
@@ -77,7 +82,12 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
 
     private void applyPlaces() {
         for (Pair<String, Integer> changedPlace : petriNet.getChangedPlaces()) {
-            endpoint.onPlaceChanged(changedPlace);
+            try {
+                String encodedMessage = encoder.encode(changedPlace);
+                endpoint.onIncomingEndpointMessage(encodedMessage);
+            } catch (EncodeException e) {
+                LOGGER.log(Level.ERROR, e);
+            }
         }
     }
 }

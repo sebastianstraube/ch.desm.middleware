@@ -25,7 +25,7 @@ public class LocsimMapRs232 extends ComponentMapBase {
 	}
 	
 	@Override
-	protected void initialize(){
+	protected void init(){
 		
 		map.put("OS_INI1","locsim.initialization.ready.ini1"); //Locsim Schnittstellen Initialisation
 		map.put("OS_INI2","locsim.initialization.ready.ini2");

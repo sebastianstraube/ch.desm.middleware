@@ -49,7 +49,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	/**
 	 * 
 	 */
-	public void initialize() {
+	public void init() {
 
 		try {
 			serialPort.openPort();

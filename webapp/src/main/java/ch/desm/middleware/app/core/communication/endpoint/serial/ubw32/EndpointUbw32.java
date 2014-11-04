@@ -1,5 +1,7 @@
 package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
 
+import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapUbw32Analog;
+import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapUbw32Digital;
 import jssc.SerialPortEvent;
 import jssc.SerialPortException;
 
@@ -74,19 +76,9 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 		this.cache = new EndpointUbw32Cache();
 	}
 
-	public String getPinBitMaskInputAnalog() {
-		return this.pinbitMaskInputAnalog;
-	}
-
-	public void setCacheEnabled(boolean isEnabled) {
-		cache.setCacheEnabled(isEnabled);
-	}
-
-	/**
-	 * do work to initialze the controller
-	 */
-	public void initialize() {
-        super.initialize();
+    @Override
+    public void init() {
+        super.init();
         this.sendCommandReset();
 
 //		this.sendCommandConfigureUbw32(); //OK Packet OFF
@@ -103,7 +95,25 @@ public class EndpointUbw32 extends EndpointUbw32Base {
         setCacheEnabled(true);
     }
 
-	/**
+    @Override
+    public void start() {
+        //TODO implementation
+    }
+
+    @Override
+    public void stop() {
+        //TODO implementation
+    }
+
+	public String getPinBitMaskInputAnalog() {
+		return this.pinbitMaskInputAnalog;
+	}
+
+	public void setCacheEnabled(boolean isEnabled) {
+		cache.setCacheEnabled(isEnabled);
+	}
+
+    /**
 	 * send digital and analog state to ubw
 	 */
 	public void pollingCommand() {

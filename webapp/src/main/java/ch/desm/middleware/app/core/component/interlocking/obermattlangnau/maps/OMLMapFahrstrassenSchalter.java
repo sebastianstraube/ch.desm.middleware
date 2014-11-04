@@ -12,7 +12,7 @@ public class OMLMapFahrstrassenSchalter extends ComponentMapBase {
 	}
 
 	@Override
-	protected void initialize() {
+	protected void init() {
 		map.put("8.91.02", "8.91.02;i;0;schalterkontakt;fssegf;endlage_gedrückt;?;stellwerkobermattlangnau;#");
 		map.put("8.91.01", "8.91.01;ia;0;schalterkontakt;fssegf;endlage;?;stellwerkobermattlangnau;#"); //FSS Grundstellung
 		map.put("8.91.03", "8.91.03;ia;0;schalterkontakt;fssegf;10°f;?;stellwerkobermattlangnau;#"); //FSS 10� F

@@ -3,378 +3,379 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 import org.apache.log4j.Logger;
 
 public abstract class OMLPetriNetExportBase {
-    public int W1_keine_Endlage;
-    public int W1_Endlage_plus;
-    public int W1_Endlage_minus;
-    public int W1_gestoert_p;
-    public int W1_gestoert_m;
-    public int Lampen_P16;
-    public int Lampen_P26;
-    public int Lampen_1_WS1_Ueberw;
-    public int Lampen_P4;
-    public int Lampen_P6;
-    public int Lampen_P33;
-    public int Lampen_P34;
-    public int Lampen_P117;
-    public int Lampen_Iso_cd_ein;
-    public int Lampen_P17;
-    public int Lampen_P1;
-    public int Lampen_P49;
-    public int Lampen_1_WS1_Freig;
-    public int Lampen_2_Block;
-    public int Lampen_P48;
-    public int Lampen_P8;
-    public int Lampen_1_FBV_vZB;
-    public int Lampen_P20;
-    public int Lampen_P15;
-    public int Lampen_1_F_rot;
-    public int Lampen_P23;
-    public int Lampen_2_Signal;
-    public int Lampen_1_Stoer_Wecker;
-    public int Lampen_P41;
-    public int Lampen_P32;
-    public int Lampen_P35;
-    public int Lampen_P38;
-    public int Lampen_P12;
-    public int Lampen_P30;
-    public int Lampen_P13;
-    public int Lampen_2_Weiche;
-    public int Lampen_P112;
-    public int Lampen_Iso_cd_aus;
-    public int Lampen_Iso_1_aus;
-    public int Lampen_P21;
-    public int Lampen_P18;
-    public int Lampen_P27;
-    public int Lampen_P40;
-    public int Lampen_P22;
-    public int Lampen_P39;
-    public int Lampen_P135;
-    public int Kontakte_6_NAL;
-    public int Kontakte_7_WS1_plus;
-    public int Lampen_Iso_egf_ein;
-    public int Kontakte_8_FSS_90EG;
-    public int Kontakte_7_WS1_minus;
-    public int Kontakte_6_ISU_Sign;
-    public int Lampen_Iso_ef_aus;
-    public int Lampen_Iso_ef_ein;
-    public int Kontakte_6_NT_W1;
-    public int Kontakte_7_WS1_1;
-    public int Lampen_Iso_1_ein;
-    public int Kontakte_6_Gleist_ZB;
-    public int Kontakte_8_FSS_30EG;
-    public int Lampen_Iso_egf_aus;
-    public int Kontakte_8_FSS_45EG;
-    public int Kontakte_8_FSS_10EG;
-    public int Kontakte_6_RM_nLN;
-    public int Kontakte_6_FBA_nZB;
-    public int Kontakte_6_RM_nZB;
-    public int Kontakte_6_FBA_nLN;
-    public int Kontakte_6_FBF_nZB;
-    public int Kontakte_6_FBF_nLN;
-    public int Kontakte_6_BLU_EG;
-    public int Kontakte_6_Gleist_EMM;
-    public int Kontakte_8_FSS_30F;
-    public int Kontakte_8_FSS_90F;
-    public int Kontakte_8_FSS_10F;
-    public int Kontakte_8_FSS_45F;
+    public int W1_keine_Endlage_minus;
     public int Fstr_ef_E_Halt;
     public int Fstr_ef_E_Fahrt1;
     public int Fstr_ef_aufgeloest;
     public int Fstr_ef_verschlossen;
-    public int Fstr_ef_P1;
-    public int BL_OM_LN_vorgebl_n;
-    public int BL_OM_LN_Grundstlg_n;
-    public int BL_OM_LN_Grundstlg_v;
     public int Fstr_ef_geprueft2;
-    public int Iso_ef_belegt;
-    public int Iso_ef_Zug_einfahren;
-    public int Fstr_ef_P6;
-    public int BL_OM_LN_1;
-    public int Iso_ef_frei;
-    public int BL_OM_LN_3;
-    public int BL_OM_LN_belegt_n;
     public int Fstr_ef_Stoerung_E;
-    public int Iso_ef_Zug_ausfahren;
-    public int Fstr_ef_geprueft1;
+    public int BL_OM_LN_3;
     public int Fstr_ef_P2;
+    public int Iso_ef_frei;
+    public int Fstr_ef_P1;
+    public int Iso_ef_belegt;
+    public int BL_OM_LN_belegt_n;
+    public int BL_OM_LN_Grundstlg_v;
+    public int Iso_ef_Zug_ausfahren;
     public int BL_OM_LN_vorgebl_v;
+    public int Fstr_ef_geprueft1;
+    public int BL_OM_LN_1;
     public int BL_OM_LN_2;
+    public int Fstr_ef_P6;
+    public int Iso_ef_Zug_einfahren;
+    public int BL_OM_LN_Grundstlg_n;
     public int Fstr_ef_Zug_eingefahren;
-    public int BL_ZB_OM_vorgebl_n;
-    public int BL_ZB_OM_2;
     public int Fstr_fe_geprueft;
-    public int Fstr_fe_Stoerung_F;
-    public int BL_ZB_OM_belegt_n;
-    public int Stw_FSS_Kuppelm_ein;
-    public int Stw_FSS_Kuppelm_aus;
-    public int Stw_WS_Sperrm_ein;
-    public int BL_ZB_OM_Grundstlg_v;
-    public int Stw_P11;
-    public int Fstr_fe_aufgeloest;
-    public int Fstr_fe_F_Fahrt1;
-    public int BL_OM_LN_RMM_nLN;
-    public int BL_ZB_OM_Grundstlg_n;
-    public int BL_OM_LN_belegt_v;
-    public int BL_ZB_OM_3;
-    public int Stw_FSS_Sperrm_ein;
-    public int Stw_FSS_Sperrm_aus;
-    public int Stw_WS_Sperrm_aus;
-    public int BL_ZB_OM_vorgebl_v;
-    public int Fstr_fe_F_Halt;
-    public int Fstr_fe_verschlossen;
-    public int Fstr_gf_P4;
-    public int BL_ZB_OM_belegt_v;
-    public int Fstr_fe_P2b;
-    public int BL_ZB_OM_1;
-    public int Stw_P10;
-    public int Fstr_fe_P1;
-    public int BL_ZB_OM_RMM_nZB;
-    public int Fstr_fe_Zug_eingefahren;
-    public int Fstr_gf_geprueft1;
-    public int Fstr_gf_Zug_eingefahren;
-    public int Fstr_gf_aufgeloest;
-    public int Fstr_fe_P2;
     public int Fstr_gf_geprueft2;
-    public int Fstr_gf_G_Fahrt3;
+    public int Fstr_fe_F_Fahrt1;
+    public int Stw_FSS_Sperrm_aus;
+    public int BL_ZB_OM_3;
+    public int BL_ZB_OM_RMM_nZB;
+    public int Stw_WS_Sperrm_aus;
+    public int BL_ZB_OM_vorgebl_n;
+    public int Stw_FSS_Kuppelm_aus;
+    public int BL_OM_LN_belegt_v;
+    public int BL_ZB_OM_belegt_n;
+    public int BL_OM_LN_vorgebl_n;
+    public int Stw_WS_Sperrm_ein;
+    public int Stw_P11;
+    public int Stw_FSS_Kuppelm_ein;
+    public int Fstr_fe_P1;
+    public int BL_ZB_OM_Grundstlg_n;
+    public int BL_ZB_OM_Grundstlg_v;
+    public int Fstr_fe_verschlossen;
+    public int BL_ZB_OM_1;
+    public int BL_ZB_OM_2;
+    public int Stw_P10;
+    public int Fstr_fe_P2b;
+    public int Fstr_fe_Zug_eingefahren;
+    public int BL_OM_LN_RMM_nLN;
+    public int BL_ZB_OM_vorgebl_v;
+    public int BL_ZB_OM_belegt_v;
+    public int Fstr_fe_aufgeloest;
+    public int Fstr_fe_F_Halt;
+    public int Stw_FSS_Sperrm_ein;
+    public int Fstr_fe_Stoerung_F;
     public int Fstr_gf_G_Halt;
+    public int Fstr_gf_aufgeloest;
+    public int Fstr_gf_G_Fahrt3;
+    public int Fstr_fe_P2;
+    public int Fstr_gf_Zug_eingefahren;
     public int Fstr_gf_verschlossen;
     public int Fstr_gf_Stoerung_G;
-    public int Iso_egf_Zug_einfahren;
-    public int Iso_cd_Zug_ausfahren;
-    public int Fstr_fg_P2;
-    public int Iso_gf_Zug_ausfahren;
-    public int Iso_gf_belegt;
-    public int Fstr_fg_F_Fahrt3;
+    public int Fstr_gf_geprueft1;
     public int Fstr_fg_geprueft0;
-    public int Iso_gf_frei;
-    public int Lampen_1_F_gruenFB1;
-    public int Fstr_fg_P1;
-    public int Lampen_1_BL_vLN_rot;
-    public int Iso_cd_frei;
-    public int Lampen_1_G_VS_Stoer;
-    public int Fstr_fg_aufgeloest;
-    public int Iso_egf_Zug_ausfahren;
-    public int Iso_cd_belegt;
-    public int Fstr_fg_geprueft2;
-    public int Fstr_fg_Zug_eingefahren;
-    public int Iso_1_belegt;
-    public int Iso_1_Zug_einfahren;
-    public int Iso_1_frei;
-    public int Fstr_fg_geprueft1;
-    public int Fstr_fg_Stoerung_F;
-    public int Fstr_fg_F_Halt;
-    public int Fstr_fg_verschlossen;
-    public int Iso_1_Zug_ausfahren;
-    public int Iso_egf_frei;
-    public int Iso_cd_Zug_einfahren;
     public int Lampen_1_F_VS_Stoer;
-    public int Iso_egf_belegt;
-    public int Lampen_1_BL_vZB_rot;
+    public int Iso_cd_Zug_ausfahren;
+    public int Lampen_1_F_gruenFB1;
+    public int Lampen_1_G_VS_Stoer;
     public int Iso_gf_Zug_einfahren;
     public int Lampen_1_BL_vZB_weiss;
-    public int Lampen_1_BL_vLN_weiss;
-    public int Lampen_1_Fstr_ef;
-    public int Lampen_1_BL_nZB_rot;
-    public int Lampen_1_BL_nZB_weiss;
-    public int Lampen_1_BL_nLN_rot;
-    public int Lampen_1_FBV_vLN;
-    public int Lampen_1_BL_nLN_weiss;
+    public int Iso_gf_belegt;
+    public int Iso_egf_Zug_einfahren;
+    public int Fstr_fg_Zug_eingefahren;
+    public int Fstr_fg_F_Fahrt3;
+    public int Fstr_fg_verschlossen;
+    public int Iso_1_Zug_ausfahren;
+    public int Iso_1_belegt;
+    public int Fstr_fg_geprueft1;
+    public int Fstr_fg_geprueft2;
+    public int Fstr_fg_P1;
+    public int Fstr_fg_P2;
+    public int Fstr_fg_F_Halt;
+    public int Fstr_gf_P4;
+    public int Fstr_fg_Stoerung_F;
+    public int Iso_1_Zug_einfahren;
+    public int Iso_1_frei;
+    public int Iso_gf_Zug_ausfahren;
+    public int Iso_egf_belegt;
+    public int Fstr_fg_aufgeloest;
+    public int Iso_egf_Zug_ausfahren;
+    public int Iso_egf_frei;
+    public int Iso_gf_frei;
+    public int Iso_cd_frei;
+    public int Iso_cd_belegt;
+    public int Iso_cd_Zug_einfahren;
     public int Lampen_1_Fstr_gf;
-    public int ext_Vb_F_VS_Lampe_Warn_def;
-    public int ext_Vb_F_VS_Lampe_Fahrt_def;
+    public int Lampen_1_BL_nZB_weiss;
+    public int Lampen_1_BL_vZB_rot;
+    public int Lampen_1_BL_nLN_weiss;
+    public int Lampen_1_BL_nZB_rot;
+    public int Lampen_1_BL_vLN_rot;
+    public int Lampen_1_BL_vLN_weiss;
+    public int Lampen_1_BL_nLN_rot;
+    public int Lampen_1_Fstr_ef;
     public int ext_Vb_Ueberw_W1_minus;
     public int ext_Vb_G_VS_Lampe_Fahrt_def;
-    public int ext_Vb_Ueberw_W1_plus;
-    public int ext_Vb_G_VS_Lampe_Warn_def;
-    public int EMM_geprueft2A2;
-    public int EMM_EMM_W7_pA2;
-    public int EMM_EMM_W7_mA1;
-    public int EMM_OM_E_Fahrt;
-    public int EMM_geprueft1A2;
     public int EMM_EMM_W10_pA2;
+    public int ext_Vb_G_VS_Lampe_Warn_def;
+    public int ext_Vb_F_VS_Lampe_Warn_def;
+    public int ext_Vb_Ueberw_W1_plus;
+    public int ext_Vb_F_VS_Lampe_Fahrt_def;
+    public int EMM_geprueft1A2;
     public int EMM_EMM_W10_pA1;
-    public int EMM_geprueft2A1;
-    public int EMM_geprueft1A1;
     public int EMM_EMM_Grundstlg;
-    public int EMM_EMM_W9_pA3;
-    public int EMM_EMM_W10_pE2;
-    public int EMM_EMM_W9_mA5;
-    public int EMM_geprueft1E5;
-    public int EMM_EMM_W9_mE5;
-    public int EMM_EMM_W10_mE5;
-    public int EMM_geprueft2A4;
-    public int LN_geprueft1A5;
-    public int EMM_EMM_W10_mA3;
-    public int EMM_EMM_W9_mA4;
-    public int EMM_EMM_W8_pA4;
-    public int EMM_geprueft1A3;
-    public int EMM_geprueft2A5;
-    public int EMM_EMM_W7_mE1;
-    public int EMM_geprueft1E4;
-    public int EMM_EMM_W10_mA4;
-    public int EMM_EMM_W10_pE1;
-    public int EMM_EMM_W8_mA5;
-    public int EMM_EMM_W7_pE2;
+    public int EMM_EMM_W7_mA1;
+    public int EMM_geprueft2A1;
+    public int EMM_OM_E_Fahrt;
+    public int EMM_geprueft2A2;
+    public int EMM_geprueft1A1;
     public int EMM_EMM_W10_mE3;
-    public int EMM_geprueft1A5;
+    public int EMM_EMM_W10_pE2;
+    public int EMM_geprueft2A5;
+    public int EMM_EMM_W10_mE5;
+    public int EMM_C_Halt;
+    public int EMM_C_FB1;
+    public int EMM_EMM_W10_pE1;
     public int EMM_geprueft1E1;
-    public int EMM_geprueft1E2;
-    public int EMM_geprueft1E3;
-    public int EMM_geprueft1A4;
-    public int EMM_EMM_W9_pE3;
     public int EMM_EMM_W9_mE4;
-    public int EMM_geprueft2A3;
+    public int LN_geprueft1A5;
+    public int EMM_geprueft1E5;
     public int EMM_EMM_W8_pE4;
+    public int EMM_EMM_W10_mA4;
+    public int EMM_EMM_W9_pE3;
     public int EMM_EMM_W8_mE5;
     public int EMM_EMM_W10_mA5;
     public int EMM_EMM_W10_mE4;
     public int EMM_C_FB2;
-    public int EMM_C_Halt;
-    public int EMM_C_FB1;
     public int EMM_D_Halt;
-    public int EMM_D_FB1;
     public int EMM_D_FB2;
-    public int EMM_D_Fahrt;
+    public int EMM_geprueft1E4;
+    public int EMM_EMM_W8_mA5;
+    public int EMM_EMM_W9_mE5;
+    public int EMM_geprueft1E2;
     public int EMM_C_Fahrt;
-    public int LN_LN_W1_pA3;
-    public int LN_geprueft1E5;
-    public int LN_geprueft1E2;
-    public int LN_geprueft1A1;
-    public int LN_LN_W1_pA4;
-    public int LN_LN_W5_mA4;
-    public int LN_EMM_Grundstlg;
-    public int LN_geprueft1A3;
-    public int LN_geprueft2A5;
-    public int LN_geprueft1E4;
-    public int LN_geprueft1A2;
-    public int LN_geprueft2A3;
-    public int LN_LN_W1_pA2;
-    public int LN_geprueft2A2;
+    public int EMM_geprueft1A5;
+    public int EMM_geprueft1E3;
+    public int EMM_D_Fahrt;
+    public int EMM_EMM_W9_mA5;
+    public int EMM_EMM_W7_mE1;
+    public int EMM_EMM_W8_pA4;
+    public int EMM_EMM_W7_pE2;
+    public int EMM_geprueft1A4;
+    public int EMM_geprueft2A4;
+    public int EMM_geprueft2A3;
+    public int EMM_D_FB1;
+    public int EMM_EMM_W9_mA4;
+    public int EMM_geprueft1A3;
+    public int EMM_EMM_W10_mA3;
+    public int EMM_EMM_W7_pA2;
+    public int EMM_EMM_W9_pA3;
+    public int LN_LN_W1_pE4;
     public int LN_LN_W2_pA2;
+    public int LN_LN_W1_pA2;
     public int LN_ce_belegt;
-    public int LN_LN_W3_pA3;
-    public int LN_geprueft2A4;
-    public int LN_LN_W3_pA4;
-    public int LN_LN_W5_pA3;
-    public int LN_LN_W4_pA5;
-    public int LN_LN_W3_mA5;
-    public int LN_LN_W1_pA5;
-    public int LN_LN_W2_mA5;
+    public int LN_geprueft1A2;
+    public int LN_geprueft1E5;
     public int LN_geprueft1A4;
+    public int LN_geprueft1E2;
     public int LN_LN_W2_mA3;
-    public int LN_LN_W6_mA5;
-    public int LN_geprueft1E3;
+    public int LN_LN_W3_pA3;
+    public int LN_geprueft2A3;
+    public int LN_geprueft2A4;
     public int LN_LN_W2_mA4;
+    public int LN_LN_W3_pA4;
+    public int LN_LN_W5_mA4;
     public int LN_geprueft2A1;
-    public int LN_geprueft1E1;
+    public int LN_LN_W1_pA3;
+    public int LN_LN_W1_pA5;
+    public int LN_LN_W3_mA5;
+    public int LN_LN_W4_pA5;
     public int LN_LN_W1_mA1;
-    public int LN_LN_W3_mE5;
-    public int LN_LN_W1_pA6;
+    public int LN_geprueft1A3;
+    public int LN_geprueft2A2;
+    public int LN_LN_W5_pA3;
+    public int LN_geprueft1E3;
+    public int LN_LN_W1_pA4;
+    public int LN_LN_W2_mA5;
+    public int LN_EMM_Grundstlg;
+    public int LN_geprueft1A1;
+    public int LN_geprueft1E4;
+    public int LN_geprueft1E1;
+    public int LN_geprueft2A5;
+    public int LN_geprueft1A6;
     public int LN_LN_W4_pA6;
     public int LN_LN_W6_mA6;
-    public int LN_LN_W3_mA6;
-    public int LN_geprueft2A6;
-    public int LN_geprueft1A6;
-    public int LN_LN_W1_pE4;
-    public int LN_LN_W2_pE2;
     public int LN_LN_W2_mA6;
-    public int LN_LN_W2_mE6;
-    public int LN_C26_FB1;
-    public int LN_LN_W2_mE3;
-    public int ZB_ZB_W2_pA2;
-    public int LN_LN_W6_mE6;
-    public int LN_LN_W1_pE2;
-    public int LN_LN_W3_pE3;
-    public int LN_LN_W3_pE4;
-    public int LN_C26_FB2;
-    public int LN_LN_W1_pE6;
-    public int LN_LN_W4_pE5;
-    public int LN_C26_Fahrt;
-    public int LN_C26_Halt;
-    public int LN_C1_Fahrt2;
-    public int LN_E_FB2;
-    public int LN_LN_W1_pE5;
-    public int LN_LN_W4_pE6;
-    public int LN_C1_Halt;
-    public int LN_e_Halt;
+    public int LN_LN_W3_mA6;
+    public int LN_LN_W6_mA5;
+    public int LN_geprueft2A6;
+    public int LN_LN_W1_pA6;
+    public int LN_LN_W3_mE5;
     public int ZB_C_Fahrt;
-    public int LN_LN_W1_pE3;
+    public int ZB_geprueft1A1;
+    public int LN_C26_Fahrt;
     public int LN_LN_W2_mE5;
     public int LN_LN_W2_mE4;
+    public int LN_C1_Halt;
+    public int LN_LN_W1_pE5;
+    public int LN_LN_W6_mE6;
     public int LN_LN_W3_mE6;
-    public int LN_geprueft1E6;
-    public int LN_LN_W5_pE3;
-    public int LN_E_FB1;
-    public int ZB_geprueft1A2;
     public int LN_LN_W6_mE5;
-    public int LN_E_Fahrt;
-    public int LN_LN_W1_mE1;
+    public int LN_LN_W1_pE3;
     public int LN_LN_W5_mE4;
+    public int LN_C26_FB2;
+    public int LN_LN_W5_pE3;
+    public int LN_C26_Halt;
+    public int LN_C26_FB1;
+    public int LN_E_FB2;
+    public int LN_LN_W4_pE6;
+    public int LN_LN_W2_mE3;
+    public int LN_C1_Fahrt2;
+    public int LN_LN_W4_pE5;
+    public int LN_geprueft1E6;
+    public int LN_e_Halt;
+    public int LN_LN_W2_mE6;
+    public int LN_LN_W1_pE6;
+    public int LN_LN_W3_pE4;
+    public int LN_LN_W2_pE2;
+    public int LN_LN_W3_pE3;
+    public int LN_E_Fahrt;
+    public int LN_E_FB1;
+    public int LN_LN_W1_pE2;
+    public int LN_LN_W1_mE1;
     public int ZB_ZB_W2_mE1;
-    public int ZB_EMM_Grundstlg;
-    public int ZB_cd_belegt;
-    public int ZB_ZB_W2_mA1;
     public int ZB_ZB_W2_pE2;
-    public int ZB_D_Halt;
-    public int ZB_D_Fahrt;
-    public int ZB_geprueft1A1;
+    public int ZB_EMM_Grundstlg;
     public int ZB_geprueft1E2;
-    public int ZB_geprueft2A1;
-    public int ZB_ZB_W1_pA2;
-    public int ILTIS_EMM_833_1;
-    public int ILTIS_ZB_138_2;
-    public int ZB_geprueft2A2;
-    public int ZB_C_FB2;
-    public int ILTIS_EMM_2_833;
-    public int ILTIS_EMM_1_833;
-    public int ILTIS_EMM_5_833;
+    public int ZB_D_Fahrt;
+    public int ZB_ZB_W2_mA1;
+    public int ZB_ZB_W2_pA2;
+    public int ZB_geprueft1A2;
+    public int ZB_cd_belegt;
+    public int W1_keine_Endlage_plus;
+    public int W1_Endlage_plus;
+    public int W1_Endlage_minus;
+    public int W1_gestoert_p;
+    public int W1_gestoert_m;
+    public int Lampen_1_F_rot;
+    public int Lampen_P16;
+    public int Lampen_P17;
+    public int Lampen_P49;
+    public int Lampen_P23;
+    public int Lampen_P32;
+    public int Lampen_P33;
+    public int Lampen_P4;
+    public int Lampen_P48;
+    public int Lampen_P112;
+    public int Lampen_2_Signal;
+    public int Lampen_P26;
+    public int Lampen_P34;
+    public int Lampen_1_FBV_vLN;
+    public int Lampen_2_Weiche;
+    public int Lampen_P30;
+    public int Lampen_P35;
+    public int Lampen_1_WS1_Ueberw;
+    public int Lampen_P38;
+    public int Lampen_1_WS1_Freig;
+    public int Lampen_2_Block;
+    public int Lampen_P1;
+    public int Lampen_P12;
+    public int Lampen_P13;
+    public int Lampen_P6;
+    public int Lampen_P8;
+    public int Lampen_P20;
+    public int Lampen_Iso_cd_aus;
+    public int Lampen_1_Stoer_Wecker;
+    public int Lampen_P15;
+    public int Lampen_P41;
+    public int Lampen_1_FBV_vZB;
+    public int Lampen_P18;
+    public int Lampen_P39;
+    public int Lampen_Iso_cd_ein;
+    public int Lampen_P22;
+    public int Lampen_P117;
+    public int Lampen_P21;
+    public int Lampen_P40;
+    public int Lampen_P135;
+    public int Lampen_P27;
+    public int Kontakte_6_NT_W1;
+    public int Kontakte_6_ISU_Sign;
+    public int Kontakte_6_RM_nLN;
+    public int Kontakte_7_WS1_minus;
+    public int Kontakte_8_FSS_90EG;
+    public int Kontakte_8_FSS_10F;
+    public int Kontakte_8_FSS_30F;
+    public int Kontakte_6_Gleist_EMM;
+    public int Kontakte_6_NAL;
+    public int Kontakte_7_WS1_1;
+    public int Kontakte_7_WS1_plus;
+    public int Kontakte_8_FSS_30EG;
+    public int Kontakte_8_FSS_45EG;
+    public int Kontakte_6_Gleist_ZB;
+    public int Kontakte_8_FSS_45F;
+    public int Kontakte_8_FSS_90F;
+    public int Kontakte_6_FBF_nLN;
+    public int Kontakte_8_FSS_10EG;
+    public int Kontakte_6_RM_nZB;
+    public int Kontakte_6_FBA_nLN;
+    public int Kontakte_6_BLU_EG;
+    public int Lampen_Iso_egf_aus;
+    public int Lampen_Iso_egf_ein;
+    public int Kontakte_6_FBA_nZB;
+    public int Lampen_Iso_ef_aus;
+    public int Kontakte_6_FBF_nZB;
+    public int Lampen_Iso_1_aus;
+    public int Lampen_Iso_ef_ein;
+    public int Lampen_Iso_1_ein;
+    public int ILTIS_EMM_833_3;
     public int ILTIS_EMM_833_5;
     public int ILTIS_ZB_1_138;
-    public int ILTIS_LN_834_4;
-    public int ZB_ZB_W1_mE1;
-    public int ILTIS_EMM_3_833;
-    public int ILTIS_EMM_833_2;
-    public int ZB_C_Halt;
-    public int ZB_D_FB2;
-    public int ZB_C_FB1;
-    public int ILTIS_EMM_4_833;
-    public int ILTIS_LN_834_1;
-    public int ILTIS_LN_834_2;
-    public int ILTIS_LN_834_5;
-    public int ILTIS_LN_834_3;
-    public int ILTIS_EMM_833_4;
-    public int ZB_D_FB1;
-    public int ILTIS_ZB_138_1;
-    public int ZB_ZB_W1_pE2;
-    public int ZB_geprueft1E1;
-    public int ZB_ZB_W1_mA1;
-    public int ILTIS_EMM_833_3;
     public int ILTIS_ZB_2_138;
-    public int ILTIS_festgehalten_v_ZB;
+    public int ILTIS_ZB_138_1;
+    public int ILTIS_ZB_138_2;
+    public int ILTIS_LN_834_2;
+    public int ILTIS_EMM_3_833;
+    public int ZB_ZB_W1_pE2;
+    public int ZB_ZB_W1_mE1;
+    public int ILTIS_EMM_2_833;
+    public int ILTIS_LN_834_1;
+    public int ZB_C_FB1;
+    public int ILTIS_LN_834_3;
+    public int ZB_D_Halt;
+    public int ZB_geprueft2A1;
+    public int ILTIS_LN_834_4;
+    public int ZB_ZB_W1_pA2;
+    public int ZB_ZB_W1_mA1;
+    public int ILTIS_EMM_833_4;
+    public int ZB_geprueft2A2;
+    public int ZB_C_Halt;
+    public int ZB_geprueft1E1;
+    public int ZB_D_FB2;
+    public int ILTIS_EMM_4_833;
+    public int ILTIS_EMM_5_833;
+    public int ILTIS_EMM_833_1;
+    public int ILTIS_EMM_833_2;
+    public int ILTIS_EMM_1_833;
+    public int ZB_C_FB2;
+    public int ZB_D_FB1;
     public int ILTIS_LN_834_6;
-    public int ILTIS_LN_1_834;
-    public int ILTIS_LN_4_834;
-    public int ILTIS_LN_5_834;
-    public int ILTIS_anfordern_vZB;
     public int ILTIS_freigeben_vLN;
-    public int ILTIS_festhalten_vLN;
-    public int ILTIS_freigeben_vZB;
-    public int ILTIS_RM_moeglich2;
-    public int ILTIS_RM_ZB_OM;
-    public int ILTIS_festhalten_vZB;
-    public int ILTIS_rueckmelden_LN_OM;
-    public int ILTIS_LN_6_834;
-    public int ILTIS_anfordern_vLN;
-    public int ILTIS_rueckmelden_ZB_OM;
-    public int ILTIS_festgehalten_vLN;
-    public int ILTIS_P130;
-    public int ILTIS_LN_2_834;
-    public int ILTIS_LN_3_834;
-    public int ILTIS_freigegeben_vZB;
-    public int ILTIS_RM_moeglich1;
-    public int ILTIS_P230;
+    public int ILTIS_festgehalten_v_ZB;
     public int ILTIS_RM_LN_OM;
+    public int ILTIS_anfordern_vLN;
+    public int ILTIS_RM_ZB_OM;
+    public int ILTIS_LN_5_834;
+    public int ILTIS_LN_6_834;
+    public int ILTIS_LN_3_834;
+    public int ILTIS_rueckmelden_LN_OM;
+    public int ILTIS_rueckmelden_ZB_OM;
+    public int ILTIS_festhalten_vLN;
+    public int ILTIS_RM_moeglich2;
+    public int ILTIS_freigegeben_vZB;
+    public int ILTIS_freigeben_vZB;
     public int ILTIS_freigegeben_vLN;
+    public int ILTIS_LN_2_834;
+    public int ILTIS_festhalten_vZB;
+    public int ILTIS_P230;
+    public int ILTIS_RM_moeglich1;
+    public int ILTIS_LN_834_5;
+    public int ILTIS_LN_4_834;
+    public int ILTIS_LN_1_834;
+    public int ILTIS_anfordern_vZB;
+    public int ILTIS_P130;
+    public int ILTIS_festgehalten_vLN;
 
     //unused places
     public int Kontakte_6_Anf_Durchf_nEMM;
@@ -435,121 +436,494 @@ public abstract class OMLPetriNetExportBase {
     }
 
     public void readSensors() {
-        //Lampen_P41 = ?
-        //Kontakte_6_NAL = ?
-        //Kontakte_7_WS1_plus = ?
-        //Kontakte_8_FSS_90EG = ?
-        //Kontakte_7_WS1_minus = ?
-        //Kontakte_6_ISU_Sign = ?
-        //Kontakte_6_NT_W1 = ?
-        //Kontakte_7_WS1_1 = ?
-        //Kontakte_6_Gleist_ZB = ?
-        //Kontakte_8_FSS_30EG = ?
-        //Kontakte_8_FSS_45EG = ?
-        //Kontakte_8_FSS_10EG = ?
-        //Kontakte_6_RM_nLN = ?
-        //Kontakte_6_FBA_nZB = ?
-        //Kontakte_6_RM_nZB = ?
-        //Kontakte_6_FBA_nLN = ?
-        //Kontakte_6_FBF_nZB = ?
-        //Kontakte_6_FBF_nLN = ?
-        //Kontakte_6_BLU_EG = ?
-        //Kontakte_6_Gleist_EMM = ?
-        //Kontakte_8_FSS_30F = ?
-        //Kontakte_8_FSS_90F = ?
-        //Kontakte_8_FSS_10F = ?
-        //Kontakte_8_FSS_45F = ?
-        //Iso_ef_Zug_einfahren = ?
         //Fstr_ef_Stoerung_E = ?
         //Iso_ef_Zug_ausfahren = ?
+        //Iso_ef_Zug_einfahren = ?
         //Fstr_fe_Stoerung_F = ?
         //Fstr_gf_Stoerung_G = ?
-        //Iso_egf_Zug_einfahren = ?
         //Iso_cd_Zug_ausfahren = ?
+        //Iso_gf_Zug_einfahren = ?
+        //Iso_egf_Zug_einfahren = ?
+        //Iso_1_Zug_ausfahren = ?
+        //Fstr_fg_Stoerung_F = ?
+        //Iso_1_Zug_einfahren = ?
         //Iso_gf_Zug_ausfahren = ?
         //Iso_egf_Zug_ausfahren = ?
-        //Iso_1_Zug_einfahren = ?
-        //Fstr_fg_Stoerung_F = ?
-        //Iso_1_Zug_ausfahren = ?
         //Iso_cd_Zug_einfahren = ?
-        //Iso_gf_Zug_einfahren = ?
-        //ext_Vb_F_VS_Lampe_Warn_def = ?
-        //ext_Vb_F_VS_Lampe_Fahrt_def = ?
         //ext_Vb_Ueberw_W1_minus = ?
         //ext_Vb_G_VS_Lampe_Fahrt_def = ?
-        //ext_Vb_Ueberw_W1_plus = ?
         //ext_Vb_G_VS_Lampe_Warn_def = ?
+        //ext_Vb_F_VS_Lampe_Warn_def = ?
+        //ext_Vb_Ueberw_W1_plus = ?
+        //ext_Vb_F_VS_Lampe_Fahrt_def = ?
         //EMM_OM_E_Fahrt = ?
         //LN_ce_belegt = ?
         //ZB_cd_belegt = ?
-        //ILTIS_EMM_833_1 = ?
-        //ILTIS_ZB_138_2 = ?
-        //ILTIS_EMM_2_833 = ?
-        //ILTIS_EMM_1_833 = ?
-        //ILTIS_EMM_5_833 = ?
+        //Lampen_P41 = ?
+        //Kontakte_6_NT_W1 = ?
+        //Kontakte_6_ISU_Sign = ?
+        //Kontakte_6_RM_nLN = ?
+        //Kontakte_7_WS1_minus = ?
+        //Kontakte_8_FSS_90EG = ?
+        //Kontakte_8_FSS_10F = ?
+        //Kontakte_8_FSS_30F = ?
+        //Kontakte_6_Gleist_EMM = ?
+        //Kontakte_6_NAL = ?
+        //Kontakte_7_WS1_1 = ?
+        //Kontakte_7_WS1_plus = ?
+        //Kontakte_8_FSS_30EG = ?
+        //Kontakte_8_FSS_45EG = ?
+        //Kontakte_6_Gleist_ZB = ?
+        //Kontakte_8_FSS_45F = ?
+        //Kontakte_8_FSS_90F = ?
+        //Kontakte_6_FBF_nLN = ?
+        //Kontakte_8_FSS_10EG = ?
+        //Kontakte_6_RM_nZB = ?
+        //Kontakte_6_FBA_nLN = ?
+        //Kontakte_6_BLU_EG = ?
+        //Kontakte_6_FBA_nZB = ?
+        //Kontakte_6_FBF_nZB = ?
+        //ILTIS_EMM_833_3 = ?
         //ILTIS_EMM_833_5 = ?
         //ILTIS_ZB_1_138 = ?
-        //ILTIS_LN_834_4 = ?
-        //ILTIS_EMM_3_833 = ?
-        //ILTIS_EMM_833_2 = ?
-        //ILTIS_EMM_4_833 = ?
-        //ILTIS_LN_834_1 = ?
-        //ILTIS_LN_834_2 = ?
-        //ILTIS_LN_834_5 = ?
-        //ILTIS_LN_834_3 = ?
-        //ILTIS_EMM_833_4 = ?
-        //ILTIS_ZB_138_1 = ?
-        //ILTIS_EMM_833_3 = ?
         //ILTIS_ZB_2_138 = ?
+        //ILTIS_ZB_138_1 = ?
+        //ILTIS_ZB_138_2 = ?
+        //ILTIS_LN_834_2 = ?
+        //ILTIS_EMM_3_833 = ?
+        //ILTIS_EMM_2_833 = ?
+        //ILTIS_LN_834_1 = ?
+        //ILTIS_LN_834_3 = ?
+        //ILTIS_LN_834_4 = ?
+        //ILTIS_EMM_833_4 = ?
+        //ILTIS_EMM_4_833 = ?
+        //ILTIS_EMM_5_833 = ?
+        //ILTIS_EMM_833_1 = ?
+        //ILTIS_EMM_833_2 = ?
+        //ILTIS_EMM_1_833 = ?
         //ILTIS_LN_834_6 = ?
-        //ILTIS_LN_1_834 = ?
-        //ILTIS_LN_4_834 = ?
-        //ILTIS_LN_5_834 = ?
-        //ILTIS_anfordern_vZB = ?
         //ILTIS_freigeben_vLN = ?
+        //ILTIS_anfordern_vLN = ?
+        //ILTIS_LN_5_834 = ?
+        //ILTIS_LN_6_834 = ?
+        //ILTIS_LN_3_834 = ?
+        //ILTIS_rueckmelden_LN_OM = ?
+        //ILTIS_rueckmelden_ZB_OM = ?
         //ILTIS_festhalten_vLN = ?
         //ILTIS_freigeben_vZB = ?
-        //ILTIS_festhalten_vZB = ?
-        //ILTIS_rueckmelden_LN_OM = ?
-        //ILTIS_LN_6_834 = ?
-        //ILTIS_anfordern_vLN = ?
-        //ILTIS_rueckmelden_ZB_OM = ?
         //ILTIS_LN_2_834 = ?
-        //ILTIS_LN_3_834 = ?
+        //ILTIS_festhalten_vZB = ?
+        //ILTIS_LN_834_5 = ?
+        //ILTIS_LN_4_834 = ?
+        //ILTIS_LN_1_834 = ?
+        //ILTIS_anfordern_vZB = ?
     }
     public void writeActors() {
-        //myData.Lampen_1_Stoer_Wecker = Lampen_1_Stoer_Wecker;
-        Lampen_1_Stoer_Wecker = 0;
-        //myData.Lampen_1_G_VS_Stoer = Lampen_1_G_VS_Stoer;
-        Lampen_1_G_VS_Stoer = 0;
         //myData.Lampen_1_F_VS_Stoer = Lampen_1_F_VS_Stoer;
         Lampen_1_F_VS_Stoer = 0;
-        //myData.EMM_C_FB2 = EMM_C_FB2;
-        EMM_C_FB2 = 0;
+        //myData.Lampen_1_G_VS_Stoer = Lampen_1_G_VS_Stoer;
+        Lampen_1_G_VS_Stoer = 0;
         //myData.EMM_C_FB1 = EMM_C_FB1;
         EMM_C_FB1 = 0;
-        //myData.EMM_D_FB1 = EMM_D_FB1;
-        EMM_D_FB1 = 0;
+        //myData.EMM_C_FB2 = EMM_C_FB2;
+        EMM_C_FB2 = 0;
         //myData.EMM_D_FB2 = EMM_D_FB2;
         EMM_D_FB2 = 0;
-        //myData.LN_C26_FB1 = LN_C26_FB1;
-        LN_C26_FB1 = 0;
+        //myData.EMM_D_FB1 = EMM_D_FB1;
+        EMM_D_FB1 = 0;
         //myData.LN_C26_FB2 = LN_C26_FB2;
         LN_C26_FB2 = 0;
+        //myData.LN_C26_FB1 = LN_C26_FB1;
+        LN_C26_FB1 = 0;
         //myData.LN_E_FB2 = LN_E_FB2;
         LN_E_FB2 = 0;
         //myData.LN_E_FB1 = LN_E_FB1;
         LN_E_FB1 = 0;
-        //myData.ZB_C_FB2 = ZB_C_FB2;
-        ZB_C_FB2 = 0;
-        //myData.ZB_D_FB2 = ZB_D_FB2;
-        ZB_D_FB2 = 0;
+        //myData.Lampen_1_Stoer_Wecker = Lampen_1_Stoer_Wecker;
+        Lampen_1_Stoer_Wecker = 0;
         //myData.ZB_C_FB1 = ZB_C_FB1;
         ZB_C_FB1 = 0;
+        //myData.ZB_D_FB2 = ZB_D_FB2;
+        ZB_D_FB2 = 0;
+        //myData.ZB_C_FB2 = ZB_C_FB2;
+        ZB_C_FB2 = 0;
         //myData.ZB_D_FB1 = ZB_D_FB1;
         ZB_D_FB1 = 0;
     }
     public void init() {
+        W1_keine_Endlage_minus = 0;
+        Fstr_ef_E_Halt = 1;
+        Fstr_ef_E_Fahrt1 = 0;
+        Fstr_ef_aufgeloest = 1;
+        Fstr_ef_verschlossen = 0;
+        Fstr_ef_geprueft2 = 0;
+        Fstr_ef_Stoerung_E = 0;
+        BL_OM_LN_3 = 0;
+        Fstr_ef_P2 = 0;
+        Iso_ef_frei = 1;
+        Fstr_ef_P1 = 0;
+        Iso_ef_belegt = 0;
+        BL_OM_LN_belegt_n = 0;
+        BL_OM_LN_Grundstlg_v = 0;
+        Iso_ef_Zug_ausfahren = 0;
+        BL_OM_LN_vorgebl_v = 0;
+        Fstr_ef_geprueft1 = 0;
+        BL_OM_LN_1 = 0;
+        BL_OM_LN_2 = 0;
+        Fstr_ef_P6 = 0;
+        Iso_ef_Zug_einfahren = 0;
+        BL_OM_LN_Grundstlg_n = 1;
+        Fstr_ef_Zug_eingefahren = 0;
+        Fstr_fe_geprueft = 0;
+        Fstr_gf_geprueft2 = 0;
+        Fstr_fe_F_Fahrt1 = 0;
+        Stw_FSS_Sperrm_aus = 1;
+        BL_ZB_OM_3 = 0;
+        BL_ZB_OM_RMM_nZB = 0;
+        Stw_WS_Sperrm_aus = 1;
+        BL_ZB_OM_vorgebl_n = 0;
+        Stw_FSS_Kuppelm_aus = 1;
+        BL_OM_LN_belegt_v = 0;
+        BL_ZB_OM_belegt_n = 0;
+        BL_OM_LN_vorgebl_n = 0;
+        Stw_WS_Sperrm_ein = 0;
+        Stw_P11 = 0;
+        Stw_FSS_Kuppelm_ein = 0;
+        Fstr_fe_P1 = 0;
+        BL_ZB_OM_Grundstlg_n = 1;
+        BL_ZB_OM_Grundstlg_v = 0;
+        Fstr_fe_verschlossen = 0;
+        BL_ZB_OM_1 = 0;
+        BL_ZB_OM_2 = 0;
+        Stw_P10 = 0;
+        Fstr_fe_P2b = 0;
+        Fstr_fe_Zug_eingefahren = 0;
+        BL_OM_LN_RMM_nLN = 0;
+        BL_ZB_OM_vorgebl_v = 0;
+        BL_ZB_OM_belegt_v = 0;
+        Fstr_fe_aufgeloest = 1;
+        Fstr_fe_F_Halt = 1;
+        Stw_FSS_Sperrm_ein = 0;
+        Fstr_fe_Stoerung_F = 0;
+        Fstr_gf_G_Halt = 1;
+        Fstr_gf_aufgeloest = 1;
+        Fstr_gf_G_Fahrt3 = 0;
+        Fstr_fe_P2 = 0;
+        Fstr_gf_Zug_eingefahren = 0;
+        Fstr_gf_verschlossen = 0;
+        Fstr_gf_Stoerung_G = 0;
+        Fstr_gf_geprueft1 = 0;
+        Fstr_fg_geprueft0 = 0;
+        Lampen_1_F_VS_Stoer = 0;
+        Iso_cd_Zug_ausfahren = 0;
+        Lampen_1_F_gruenFB1 = 0;
+        Lampen_1_G_VS_Stoer = 0;
+        Iso_gf_Zug_einfahren = 0;
+        Lampen_1_BL_vZB_weiss = 0;
+        Iso_gf_belegt = 0;
+        Iso_egf_Zug_einfahren = 0;
+        Fstr_fg_Zug_eingefahren = 0;
+        Fstr_fg_F_Fahrt3 = 0;
+        Fstr_fg_verschlossen = 0;
+        Iso_1_Zug_ausfahren = 0;
+        Iso_1_belegt = 0;
+        Fstr_fg_geprueft1 = 0;
+        Fstr_fg_geprueft2 = 0;
+        Fstr_fg_P1 = 0;
+        Fstr_fg_P2 = 0;
+        Fstr_fg_F_Halt = 1;
+        Fstr_gf_P4 = 0;
+        Fstr_fg_Stoerung_F = 0;
+        Iso_1_Zug_einfahren = 0;
+        Iso_1_frei = 1;
+        Iso_gf_Zug_ausfahren = 0;
+        Iso_egf_belegt = 0;
+        Fstr_fg_aufgeloest = 1;
+        Iso_egf_Zug_ausfahren = 0;
+        Iso_egf_frei = 1;
+        Iso_gf_frei = 1;
+        Iso_cd_frei = 1;
+        Iso_cd_belegt = 0;
+        Iso_cd_Zug_einfahren = 0;
+        Lampen_1_Fstr_gf = 0;
+        Lampen_1_BL_nZB_weiss = 1;
+        Lampen_1_BL_vZB_rot = 0;
+        Lampen_1_BL_nLN_weiss = 1;
+        Lampen_1_BL_nZB_rot = 0;
+        Lampen_1_BL_vLN_rot = 0;
+        Lampen_1_BL_vLN_weiss = 0;
+        Lampen_1_BL_nLN_rot = 0;
+        Lampen_1_Fstr_ef = 0;
+        ext_Vb_Ueberw_W1_minus = 1;
+        ext_Vb_G_VS_Lampe_Fahrt_def = 0;
+        EMM_EMM_W10_pA2 = 0;
+        ext_Vb_G_VS_Lampe_Warn_def = 0;
+        ext_Vb_F_VS_Lampe_Warn_def = 0;
+        ext_Vb_Ueberw_W1_plus = 1;
+        ext_Vb_F_VS_Lampe_Fahrt_def = 0;
+        EMM_geprueft1A2 = 0;
+        EMM_EMM_W10_pA1 = 0;
+        EMM_EMM_Grundstlg = 1;
+        EMM_EMM_W7_mA1 = 0;
+        EMM_geprueft2A1 = 0;
+        EMM_OM_E_Fahrt = 0;
+        EMM_geprueft2A2 = 0;
+        EMM_geprueft1A1 = 0;
+        EMM_EMM_W10_mE3 = 0;
+        EMM_EMM_W10_pE2 = 0;
+        EMM_geprueft2A5 = 0;
+        EMM_EMM_W10_mE5 = 0;
+        EMM_C_Halt = 1;
+        EMM_C_FB1 = 0;
+        EMM_EMM_W10_pE1 = 0;
+        EMM_geprueft1E1 = 0;
+        EMM_EMM_W9_mE4 = 0;
+        LN_geprueft1A5 = 0;
+        EMM_geprueft1E5 = 0;
+        EMM_EMM_W8_pE4 = 0;
+        EMM_EMM_W10_mA4 = 0;
+        EMM_EMM_W9_pE3 = 0;
+        EMM_EMM_W8_mE5 = 0;
+        EMM_EMM_W10_mA5 = 0;
+        EMM_EMM_W10_mE4 = 0;
+        EMM_C_FB2 = 0;
+        EMM_D_Halt = 1;
+        EMM_D_FB2 = 0;
+        EMM_geprueft1E4 = 0;
+        EMM_EMM_W8_mA5 = 0;
+        EMM_EMM_W9_mE5 = 0;
+        EMM_geprueft1E2 = 0;
+        EMM_C_Fahrt = 0;
+        EMM_geprueft1A5 = 0;
+        EMM_geprueft1E3 = 0;
+        EMM_D_Fahrt = 0;
+        EMM_EMM_W9_mA5 = 0;
+        EMM_EMM_W7_mE1 = 0;
+        EMM_EMM_W8_pA4 = 0;
+        EMM_EMM_W7_pE2 = 0;
+        EMM_geprueft1A4 = 0;
+        EMM_geprueft2A4 = 0;
+        EMM_geprueft2A3 = 0;
+        EMM_D_FB1 = 0;
+        EMM_EMM_W9_mA4 = 0;
+        EMM_geprueft1A3 = 0;
+        EMM_EMM_W10_mA3 = 0;
+        EMM_EMM_W7_pA2 = 0;
+        EMM_EMM_W9_pA3 = 0;
+        LN_LN_W1_pE4 = 0;
+        LN_LN_W2_pA2 = 0;
+        LN_LN_W1_pA2 = 0;
+        LN_ce_belegt = 0;
+        LN_geprueft1A2 = 0;
+        LN_geprueft1E5 = 0;
+        LN_geprueft1A4 = 0;
+        LN_geprueft1E2 = 0;
+        LN_LN_W2_mA3 = 0;
+        LN_LN_W3_pA3 = 0;
+        LN_geprueft2A3 = 0;
+        LN_geprueft2A4 = 0;
+        LN_LN_W2_mA4 = 0;
+        LN_LN_W3_pA4 = 0;
+        LN_LN_W5_mA4 = 0;
+        LN_geprueft2A1 = 0;
+        LN_LN_W1_pA3 = 0;
+        LN_LN_W1_pA5 = 0;
+        LN_LN_W3_mA5 = 0;
+        LN_LN_W4_pA5 = 0;
+        LN_LN_W1_mA1 = 0;
+        LN_geprueft1A3 = 0;
+        LN_geprueft2A2 = 0;
+        LN_LN_W5_pA3 = 0;
+        LN_geprueft1E3 = 0;
+        LN_LN_W1_pA4 = 0;
+        LN_LN_W2_mA5 = 0;
+        LN_EMM_Grundstlg = 0;
+        LN_geprueft1A1 = 0;
+        LN_geprueft1E4 = 0;
+        LN_geprueft1E1 = 0;
+        LN_geprueft2A5 = 0;
+        LN_geprueft1A6 = 0;
+        LN_LN_W4_pA6 = 0;
+        LN_LN_W6_mA6 = 0;
+        LN_LN_W2_mA6 = 0;
+        LN_LN_W3_mA6 = 0;
+        LN_LN_W6_mA5 = 0;
+        LN_geprueft2A6 = 0;
+        LN_LN_W1_pA6 = 0;
+        LN_LN_W3_mE5 = 0;
+        ZB_C_Fahrt = 0;
+        ZB_geprueft1A1 = 0;
+        LN_C26_Fahrt = 0;
+        LN_LN_W2_mE5 = 0;
+        LN_LN_W2_mE4 = 0;
+        LN_C1_Halt = 1;
+        LN_LN_W1_pE5 = 0;
+        LN_LN_W6_mE6 = 0;
+        LN_LN_W3_mE6 = 0;
+        LN_LN_W6_mE5 = 0;
+        LN_LN_W1_pE3 = 0;
+        LN_LN_W5_mE4 = 0;
+        LN_C26_FB2 = 0;
+        LN_LN_W5_pE3 = 0;
+        LN_C26_Halt = 1;
+        LN_C26_FB1 = 0;
+        LN_E_FB2 = 0;
+        LN_LN_W4_pE6 = 0;
+        LN_LN_W2_mE3 = 0;
+        LN_C1_Fahrt2 = 0;
+        LN_LN_W4_pE5 = 0;
+        LN_geprueft1E6 = 0;
+        LN_e_Halt = 1;
+        LN_LN_W2_mE6 = 0;
+        LN_LN_W1_pE6 = 0;
+        LN_LN_W3_pE4 = 0;
+        LN_LN_W2_pE2 = 0;
+        LN_LN_W3_pE3 = 0;
+        LN_E_Fahrt = 0;
+        LN_E_FB1 = 0;
+        LN_LN_W1_pE2 = 0;
+        LN_LN_W1_mE1 = 0;
+        ZB_ZB_W2_mE1 = 0;
+        ZB_ZB_W2_pE2 = 0;
+        ZB_EMM_Grundstlg = 0;
+        ZB_geprueft1E2 = 0;
+        ZB_D_Fahrt = 0;
+        ZB_ZB_W2_mA1 = 0;
+        ZB_ZB_W2_pA2 = 0;
+        ZB_geprueft1A2 = 0;
+        ZB_cd_belegt = 0;
+        W1_keine_Endlage_plus = 0;
+        W1_Endlage_plus = 1;
+        W1_Endlage_minus = 0;
+        W1_gestoert_p = 0;
+        W1_gestoert_m = 0;
+        Lampen_1_F_rot = 1;
+        Lampen_P16 = 1;
+        Lampen_P17 = 0;
+        Lampen_P49 = 0;
+        Lampen_P23 = 0;
+        Lampen_P32 = 1;
+        Lampen_P33 = 1;
+        Lampen_P4 = 1;
+        Lampen_P48 = 0;
+        Lampen_P112 = 1;
+        Lampen_2_Signal = 0;
+        Lampen_P26 = 1;
+        Lampen_P34 = 1;
+        Lampen_1_FBV_vLN = 0;
+        Lampen_2_Weiche = 0;
+        Lampen_P30 = 1;
+        Lampen_P35 = 1;
+        Lampen_1_WS1_Ueberw = 0;
+        Lampen_P38 = 0;
+        Lampen_1_WS1_Freig = 0;
+        Lampen_2_Block = 0;
+        Lampen_P1 = 0;
+        Lampen_P12 = 0;
+        Lampen_P13 = 0;
+        Lampen_P6 = 1;
+        Lampen_P8 = 1;
+        Lampen_P20 = 1;
+        Lampen_Iso_cd_aus = 1;
+        Lampen_1_Stoer_Wecker = 0;
+        Lampen_P15 = 1;
+        Lampen_P41 = 0;
+        Lampen_1_FBV_vZB = 0;
+        Lampen_P18 = 0;
+        Lampen_P39 = 0;
+        Lampen_Iso_cd_ein = 0;
+        Lampen_P22 = 0;
+        Lampen_P117 = 0;
+        Lampen_P21 = 0;
+        Lampen_P40 = 0;
+        Lampen_P135 = 0;
+        Lampen_P27 = 0;
+        Kontakte_6_NT_W1 = 0;
+        Kontakte_6_ISU_Sign = 0;
+        Kontakte_6_RM_nLN = 0;
+        Kontakte_7_WS1_minus = 0;
+        Kontakte_8_FSS_90EG = 0;
+        Kontakte_8_FSS_10F = 0;
+        Kontakte_8_FSS_30F = 0;
+        Kontakte_6_Gleist_EMM = 0;
+        Kontakte_6_NAL = 0;
+        Kontakte_7_WS1_1 = 0;
+        Kontakte_7_WS1_plus = 0;
+        Kontakte_8_FSS_30EG = 0;
+        Kontakte_8_FSS_45EG = 0;
+        Kontakte_6_Gleist_ZB = 0;
+        Kontakte_8_FSS_45F = 0;
+        Kontakte_8_FSS_90F = 0;
+        Kontakte_6_FBF_nLN = 0;
+        Kontakte_8_FSS_10EG = 0;
+        Kontakte_6_RM_nZB = 0;
+        Kontakte_6_FBA_nLN = 0;
+        Kontakte_6_BLU_EG = 0;
+        Lampen_Iso_egf_aus = 1;
+        Lampen_Iso_egf_ein = 0;
+        Kontakte_6_FBA_nZB = 0;
+        Lampen_Iso_ef_aus = 1;
+        Kontakte_6_FBF_nZB = 0;
+        Lampen_Iso_1_aus = 1;
+        Lampen_Iso_ef_ein = 0;
+        Lampen_Iso_1_ein = 0;
+        ILTIS_EMM_833_3 = 0;
+        ILTIS_EMM_833_5 = 0;
+        ILTIS_ZB_1_138 = 0;
+        ILTIS_ZB_2_138 = 0;
+        ILTIS_ZB_138_1 = 0;
+        ILTIS_ZB_138_2 = 0;
+        ILTIS_LN_834_2 = 0;
+        ILTIS_EMM_3_833 = 0;
+        ZB_ZB_W1_pE2 = 0;
+        ZB_ZB_W1_mE1 = 0;
+        ILTIS_EMM_2_833 = 0;
+        ILTIS_LN_834_1 = 0;
+        ZB_C_FB1 = 0;
+        ILTIS_LN_834_3 = 0;
+        ZB_D_Halt = 1;
+        ZB_geprueft2A1 = 0;
+        ILTIS_LN_834_4 = 0;
+        ZB_ZB_W1_pA2 = 0;
+        ZB_ZB_W1_mA1 = 0;
+        ILTIS_EMM_833_4 = 0;
+        ZB_geprueft2A2 = 0;
+        ZB_C_Halt = 1;
+        ZB_geprueft1E1 = 0;
+        ZB_D_FB2 = 0;
+        ILTIS_EMM_4_833 = 0;
+        ILTIS_EMM_5_833 = 0;
+        ILTIS_EMM_833_1 = 0;
+        ILTIS_EMM_833_2 = 0;
+        ILTIS_EMM_1_833 = 0;
+        ZB_C_FB2 = 0;
+        ZB_D_FB1 = 0;
+        ILTIS_LN_834_6 = 0;
+        ILTIS_freigeben_vLN = 0;
+        ILTIS_festgehalten_v_ZB = 0;
+        ILTIS_RM_LN_OM = 0;
+        ILTIS_anfordern_vLN = 0;
+        ILTIS_RM_ZB_OM = 0;
+        ILTIS_LN_5_834 = 0;
+        ILTIS_LN_6_834 = 0;
+        ILTIS_LN_3_834 = 0;
+        ILTIS_rueckmelden_LN_OM = 0;
+        ILTIS_rueckmelden_ZB_OM = 0;
+        ILTIS_festhalten_vLN = 0;
+        ILTIS_RM_moeglich2 = 0;
+        ILTIS_freigegeben_vZB = 1;
+        ILTIS_freigeben_vZB = 0;
+        ILTIS_freigegeben_vLN = 1;
+        ILTIS_LN_2_834 = 0;
+        ILTIS_festhalten_vZB = 0;
+        ILTIS_P230 = 0;
+        ILTIS_RM_moeglich1 = 0;
+        ILTIS_LN_834_5 = 0;
+        ILTIS_LN_4_834 = 0;
+        ILTIS_LN_1_834 = 0;
+        ILTIS_anfordern_vZB = 0;
+        ILTIS_P130 = 0;
+        ILTIS_festgehalten_vLN = 0;
         Kontakte_6_Anf_Durchf_nEMM = 0;
         Kontakte_6_Wecker_absch = 0;
         Kontakte_6_Wbel_ein = 0;
@@ -587,52 +961,58 @@ public abstract class OMLPetriNetExportBase {
     public boolean fireOneTransition() {
         //check if W1_minus_erreichen can fire
         if ( (W1_Endlage_minus <= 0) &&
-                (W1_keine_Endlage >= 1) &&
-                (Kontakte_7_WS1_minus >= 1))
+                (W1_keine_Endlage_plus >= 1) &&
+                (W1_keine_Endlage_minus >= 1) &&
+                (Kontakte_7_WS1_minus >= 1) &&
+                (Kontakte_7_WS1_1 < 1))
         {
             if (canFire("W1_minus_erreichen"))
             {
                 ++W1_Endlage_minus;
-                --W1_keine_Endlage;
+                --W1_keine_Endlage_plus;
+                --W1_keine_Endlage_minus;
                 fire("W1_minus_erreichen");
                 return true;
             }
         }
         //check if W1_plus_erreichen can fire
         if ( (W1_Endlage_plus <= 0) &&
-                (W1_keine_Endlage >= 1) &&
+                (W1_keine_Endlage_minus >= 1) &&
+                (W1_keine_Endlage_plus >= 1) &&
+                (Kontakte_7_WS1_1 < 1) &&
                 (Kontakte_7_WS1_plus >= 1))
         {
             if (canFire("W1_plus_erreichen"))
             {
                 ++W1_Endlage_plus;
-                --W1_keine_Endlage;
+                --W1_keine_Endlage_minus;
+                --W1_keine_Endlage_plus;
                 fire("W1_plus_erreichen");
                 return true;
             }
         }
         //check if W1_T3 can fire
         if ( (W1_Endlage_plus >= 1) &&
-                (W1_keine_Endlage <= 0) &&
-                (Kontakte_7_WS1_1 >= 1))
+                (Kontakte_7_WS1_1 >= 1) &&
+                (W1_keine_Endlage_plus <= 0))
         {
             if (canFire("W1_T3"))
             {
                 --W1_Endlage_plus;
-                ++W1_keine_Endlage;
+                ++W1_keine_Endlage_plus;
                 fire("W1_T3");
                 return true;
             }
         }
         //check if W1_T4 can fire
         if ( (W1_Endlage_minus >= 1) &&
-                (W1_keine_Endlage <= 0) &&
-                (Kontakte_7_WS1_1 >= 1))
+                (Kontakte_7_WS1_1 >= 1) &&
+                (W1_keine_Endlage_minus <= 0))
         {
             if (canFire("W1_T4"))
             {
                 --W1_Endlage_minus;
-                ++W1_keine_Endlage;
+                ++W1_keine_Endlage_minus;
                 fire("W1_T4");
                 return true;
             }
@@ -665,8 +1045,8 @@ public abstract class OMLPetriNetExportBase {
         }
         //check if W1_T8 can fire
         if ( (W1_Endlage_minus >= 1) &&
-                (W1_gestoert_m <= 0) &&
-                (ext_Vb_Ueberw_W1_minus < 1))
+                (ext_Vb_Ueberw_W1_minus < 1) &&
+                (W1_gestoert_m <= 0))
         {
             if (canFire("W1_T8"))
             {
@@ -677,14 +1057,14 @@ public abstract class OMLPetriNetExportBase {
             }
         }
         //check if W1_T9 can fire
-        if ( (W1_gestoert_m >= 1) &&
-                (W1_Endlage_minus <= 0) &&
-                (ext_Vb_Ueberw_W1_minus >= 1))
+        if ( (W1_Endlage_minus <= 0) &&
+                (ext_Vb_Ueberw_W1_minus >= 1) &&
+                (W1_gestoert_m >= 1))
         {
             if (canFire("W1_T9"))
             {
-                --W1_gestoert_m;
                 ++W1_Endlage_minus;
+                --W1_gestoert_m;
                 fire("W1_T9");
                 return true;
             }

@@ -48,8 +48,7 @@ public class OML extends OMLBase implements
 	 */
 	public void onIncomingEndpointMessage(String message) {
 		LOGGER.log(Level.TRACE, "endpoint (" + getEndpoint().getSerialPortName() + ") received message: " + message);
-		
-		//TODO implementation
+
 		MessageUbw32Base ubw32Message = translator
 				.decodeUbw32EndpointMessage(message,
 						MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU);
@@ -57,8 +56,7 @@ public class OML extends OMLBase implements
 		//processable message
 		if(ubw32Message != null){
 			String messages = processor.convertToMiddlewareMessage(this, ubw32Message);
-			processor.processEndpointMessage(this, messages,
-					MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU);
+			processor.processEndpointMessage(this, messages, MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU);
 		}
 	}
 

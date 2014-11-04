@@ -28,7 +28,7 @@ public class Re420MapFabischValue extends ComponentMapBase {
 	 *	if has more the on mapping: 01#02 then it is a switch and has 2 states
 	 *	if has only one value then it is no switch with a state
 	 */
-	protected void initialize() {
+	protected void init() {
 
 		map.put("5d5c","01#03");//Tiefton (Schnellgang, Signum, Totmann)
 		map.put("5d5c","01#02");//Hochton (Langsamgang)

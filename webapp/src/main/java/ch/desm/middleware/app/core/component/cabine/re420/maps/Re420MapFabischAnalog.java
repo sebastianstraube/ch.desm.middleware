@@ -26,7 +26,7 @@ public class Re420MapFabischAnalog extends ComponentMapBase {
 	/**
 	 * 
 	 */
-	public void initialize(){
+	public void init(){
 		map.put("a74","1ce8");//kV-Anzeige
 		map.put("a79","1edc");//A-Anzeige Motorenstrom
 		map.put("a79.1","1ee6");//A-Anzeige Differenzstrom

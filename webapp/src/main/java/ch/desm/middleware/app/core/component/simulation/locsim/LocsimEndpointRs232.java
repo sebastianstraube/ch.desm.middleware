@@ -40,4 +40,14 @@ public class LocsimEndpointRs232 extends EndpointRs232 {
 			LOGGER.log(Level.ERROR, e);
 		}
 	}
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
 }

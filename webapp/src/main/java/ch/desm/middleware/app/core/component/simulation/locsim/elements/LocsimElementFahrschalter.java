@@ -14,7 +14,7 @@ public class LocsimElementFahrschalter extends ComponentMapBase {
 	}
 
 	@Override
-	protected void initialize() {
+	protected void init() {
 
 		map.put("U08","fahrschalter.bremsen.plus"); //Fahrschalter bremsen
 		map.put("U07","fahrschalter.bremsen.punkt"); //Fahrschalter bremsen

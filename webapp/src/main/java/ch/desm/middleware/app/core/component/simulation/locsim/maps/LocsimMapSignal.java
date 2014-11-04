@@ -13,6 +13,6 @@ public class LocsimMapSignal extends ComponentMapBase{
 	}
 	
 	@Override
-	protected void initialize(){
+	protected void init(){
 	}
 }

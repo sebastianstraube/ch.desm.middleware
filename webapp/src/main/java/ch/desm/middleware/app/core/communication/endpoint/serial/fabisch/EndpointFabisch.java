@@ -34,24 +34,29 @@ public class EndpointFabisch extends EndpointRs232 {
 				.setFlowControl(EndpointRs232Config.FLOWCONTROL_NONE).build());
 	}
 
+    @Override
+    public void init() {
+        //ping
+        this.sendStream("000101");
 
-	/**
-	 * do work to initialze the controller
-	 */
-	public void initialize() {
-		
-		//ping
-		this.sendStream("000101");
-		
-		//reset
-		this.sendStream("F76500");
-		
-		//Systemuhr 
-		this.sendStream("F61900"); // Stunden
-		this.sendStream("F61A00"); // minuten
-		this.sendStream("F61B00"); // sekunden
+        //reset
+        this.sendStream("F76500");
 
-	}
+        //Systemuhr
+        this.sendStream("F61900"); // Stunden
+        this.sendStream("F61A00"); // minuten
+        this.sendStream("F61B00"); // sekunden
+    }
+
+    @Override
+    public void start() {
+       //TODO implementation
+    }
+
+    @Override
+    public void stop() {
+        //TODO implementation
+    }
 	
 	public void testCommand(){
 				

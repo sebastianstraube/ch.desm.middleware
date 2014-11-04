@@ -2,9 +2,10 @@ package ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps;
 
 import java.util.Map;
 
+import ch.desm.middleware.app.core.component.ComponentMap;
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 
-public class OMLMapUbw32Analog extends ComponentMapBase {
+public class OMLMapUbw32Analog extends ComponentMap {
 
 	//B0 = AN0, B1 = AN1
 	//11bin = 3dez 
@@ -14,21 +15,13 @@ public class OMLMapUbw32Analog extends ComponentMapBase {
     public OMLMapUbw32Analog(){
 		super();
 	}
-		
-	public boolean isKeyAvailable(String id){
-		return map.containsKey(id);
-	}
-	
-	public boolean isValueAvailable(String id){
-		return map.containsValue(id);
-	}
 	
 	@Override
 	public Map<String, String> getMap(){
 		return this.map;
 	}
 	
-	public void initialize(){
+	public void init(){
 		
 		map.put("8.91.01", "B0"); //FSS Grundstellung
 		map.put("8.91.03", "B0"); //FSS 10° F 

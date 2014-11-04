@@ -28,10 +28,10 @@ public abstract class BrokerClient {
 	public BrokerClient(Broker broker) {		
 		this.broker = broker;
 		signedTopics = new HashSet<String>();
-		initialize();
+		init();
 	}
 
-	private void initialize() {
+	private void init() {
 		this.intializeSignedTopic();
 		broker.connect(this);
 	}

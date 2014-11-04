@@ -13,7 +13,7 @@ public class LocsimMapMiddlewareParameter extends ComponentMapBase {
 	}
 	
 	@Override
-	protected void initialize(){
+	protected void init(){
 		map.put("0000", "off");
 		map.put("0001", "on");
 	}

@@ -12,7 +12,7 @@ public class ComponentMapMiddleware extends ComponentMapBase {
 	}
 	
 	@Override
-	protected void initialize(){
+	protected void init(){
         map.put("1.90.01", "1.90.01;;0;lampe;signalfstern;gestört;?;stellwerkobermattlangnau;#");	map.put("w1_endlage_plus", "w1_endlage_plus;os;;;;;?;petrinetz-obermattlangnau;#");	map.put("locsim.dll.signal.113", "locsim.dll.signal.113;os;0;signal;blocksignauemmenmattdoppelspur–einspur;p832;?;locsim-dll;#");	map.put("s126.1", "s126.1;;0;schalter;haupthahn;1;?;kabinere420;#");	map.put("mgmt.stellwerk.obermattlangnau", "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;?;management;#");
         map.put("1.90.02", "1.90.02;o;0;lampe;signalf;notrot;?;stellwerkobermattlangnau;#");	map.put("w1_endlage_minus", "w1_endlage_minus;os;;;;;?;petrinetz-obermattlangnau;#");	map.put("locsim.dll.signal.114", "locsim.dll.signal.114;os;0;signal;zwergdoppelspur–einspur;zwerg43;?;locsim-dll;#");	map.put("s126", "s126;i;0;schalter;steuerstrom;0;?;kabinere420;#");	map.put("mgmt.petrinet.obermatlangnau", "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;?;management;#");
         map.put("1.90.03", "1.90.03;o;0;lampe;signalf;grün_fb3;?;stellwerkobermattlangnau;#");	map.put("w1_gestoert_p", "w1_gestoert_p;os;;;;;?;petrinetz-obermattlangnau;#");	map.put("locsim.dll.signal.115", "locsim.dll.signal.115;os;0;signal;einfahrvorsignalemmenmatt;astern833;?;locsim-dll;#");	map.put("s129", "s129;i;0;schalter;stromabnehmer;0;?;kabinere420;#");	map.put("mgmt.cabine.re420.fabisch", "mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;?;management;#");

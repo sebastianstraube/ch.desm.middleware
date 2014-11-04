@@ -23,19 +23,26 @@ public class EndpointTcpClient extends EndpointCommon {
 		this.thread = new EndpointTcpClientThread(this);
 		this.socketAddress = new InetSocketAddress(ip, port);
 		this.socket = new Socket();
-		this.connect();
+		this.init();
 	}
 	
 	public void receiveEvent(String message){
 		super.onIncomingEndpointMessage(message);
 	}
 
-	public void start() {
+    @Override
+    public void init() {
+        this.connect();
+    }
+
+    @Override
+    public void start() {
 		if(!thread.isAlive()){
 			thread.run();
 		}
 	}
 
+    @Override
 	public void stop() {
 		if(thread.isAlive()){
 			thread.interrupt();
@@ -52,8 +59,7 @@ public class EndpointTcpClient extends EndpointCommon {
 			LOGGER.log(Level.ERROR, e);
 		}
 	}
-	
-	
+
 	public void connect(){
 		
 		try {

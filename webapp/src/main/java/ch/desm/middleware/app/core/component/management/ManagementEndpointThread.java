@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class ManagementEndpointThread extends DaemonThreadBase {
 
+    private static final int SLEEP_TIME = 125;
     private ManagementEndpoint endpoint;
 
 
@@ -48,7 +49,7 @@ public class ManagementEndpointThread extends DaemonThreadBase {
         while(!isInterrupted()){
             try {
                 checkMessages();
-                Thread.sleep(250);
+                Thread.sleep(SLEEP_TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

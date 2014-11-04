@@ -2,9 +2,10 @@ package ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps;
 
 import java.util.Map;
 
+import ch.desm.middleware.app.core.component.ComponentMap;
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 
-public class OMLMapUbw32Digital extends ComponentMapBase {
+public class OMLMapUbw32Digital extends ComponentMap {
 
 	public static final String PINBITMASK_CONFIGURATION_DIGITAL = "192,0,8192,16372,0,1,2";
 		
@@ -25,7 +26,7 @@ public class OMLMapUbw32Digital extends ComponentMapBase {
 		return map;
 	}
 
-	protected void initialize() {
+	protected void init() {
         map.put("1.90.02", "G6"); //Einfahrsignal F; Notrot
         map.put("1.90.03", "G7"); //Einfahrsignal F; Grün FB 3
         map.put("1.90.04", "G8"); //Einfahrsignal F; Rot

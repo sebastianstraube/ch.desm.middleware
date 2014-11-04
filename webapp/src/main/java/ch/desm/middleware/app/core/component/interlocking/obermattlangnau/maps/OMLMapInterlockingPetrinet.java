@@ -28,7 +28,7 @@ public class OMLMapInterlockingPetrinet extends ComponentMapBase{
     }
 
 	@Override
-	protected void initialize(){
+	protected void init(){
         map.put("1.90.01","Lampen_1_F_VS_Stoer"); //Störungslampe Einfahrvorsignal F*
 // map.put("1.90.02",""); //Einfahrsignal F; Notrot
         map.put("1.90.03","Fstr_fg_F_Fahrt3"); //Einfahrsignal F; Grün FB 3

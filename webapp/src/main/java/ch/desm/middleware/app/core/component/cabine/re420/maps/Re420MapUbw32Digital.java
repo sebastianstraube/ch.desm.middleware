@@ -25,7 +25,7 @@ public class Re420MapUbw32Digital extends ComponentMapBase {
 		return map;
 	}
 
-	protected void initialize() {
+	protected void init() {
 
 		map.put("s126", "C4"); //Steuerstrom
 		map.put("s129", "G8"); //Stromabnehmer

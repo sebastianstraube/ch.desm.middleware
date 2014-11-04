@@ -4,8 +4,6 @@ import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.util.component.LifeCycle;
-import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
-import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import javax.websocket.ContainerProvider;
 import javax.websocket.DeploymentException;
@@ -13,9 +11,6 @@ import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 import java.io.IOException;
 import java.net.URI;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ManagementEndpoint extends EndpointCommon {
 
@@ -25,33 +20,33 @@ public class ManagementEndpoint extends EndpointCommon {
     private Session webSocketSession;
     private WebSocketContainer container;
     private ManagementEndpointThread thread;
+    private URI serverUri;
 
     public ManagementEndpoint(){
         thread = new ManagementEndpointThread(this);
-        this.startWebsocketClient("ws://Heisenberg:80/gui/management");
+        serverUri = URI.create("ws://Heisenberg:80/gui/management");
+        this.start();
     }
 
-    public void startWebsocketClient(String uri) {
+    @Override
+    public void start() {
         try {
             container = ContainerProvider.getWebSocketContainer();
-            // Attempt Connect
-            webSocketSession = container.connectToServer(ManagementEndpointWebsocketClient.class, URI.create(uri));
-            // Send a message
-            //webSocketSession.getBasicRemote().sendText("{\"payload\":\"websocket client started ...\", \"topic\":\"EndpointWebsocketClient\"}");
-
+            webSocketSession = container.connectToServer(ManagementEndpointWebsocketClient.class, serverUri);
         } catch (DeploymentException e) {
             LOGGER.log(Level.ERROR, e);
-            stopWebsocketClient();
+            stop();
         } catch (IOException e) {
             LOGGER.log(Level.ERROR, e);
-            stopWebsocketClient();
+            stop();
         }
     }
 
     /**
      * close Websocket Session
      */
-    public void stopWebsocketClient(){
+    @Override
+    public void stop(){
         try {
             if(webSocketSession != null){
                 webSocketSession.close();
@@ -76,4 +71,10 @@ public class ManagementEndpoint extends EndpointCommon {
             }
         }
     }
+
+    @Override
+    public void init() {
+
+    }
+
 }
