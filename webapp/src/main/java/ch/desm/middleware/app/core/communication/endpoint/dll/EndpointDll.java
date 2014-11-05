@@ -21,29 +21,22 @@ public class EndpointDll extends EndpointCommon implements EndpointDllListenerIn
 	public EndpointDll(String configPath) {
 		this.configPath = configPath;
 	}
-	
+
+    @Override
 	public void init(){
 		dll = new Dll();
-		dll.onStartProgramm(configPath);
-		this.thread = new EndpointDllThread(
-				"EndpointDesmDllPolling", dll, this);
+        dll.onStartProgramm(configPath);
+		start();
 	}
 
     @Override
-    public void start() {
-
+    public void start(){
+        this.thread = new EndpointDllThread("EndpointDesmDllPolling", dll, this);
+        this.thread.start();
     }
 
     @Override
-    public void stop() {
-
-    }
-
-    public void run(){
-		thread.run();
-		}
-	
-	public void interrupt(){
+	public void stop(){
 		if(thread.isAlive()){
 			thread.interrupt();
 		}

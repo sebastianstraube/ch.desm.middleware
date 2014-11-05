@@ -58,7 +58,7 @@ public class Management extends ManagementBase{
 		//send all messages
 		for(MessageMiddleware element: messageList){
             try {
-                String messageWebsocket = encoder.encode(converter.convertToMessageWebsocket(element));
+                String messageWebsocket = encoder.encode(converter.toCharacterStream(element));
                 ManagementEndpointWebsocketClient.sendMessage(messageWebsocket);
             } catch (EncodeException e) {
                 LOGGER.log(Level.ERROR, e);

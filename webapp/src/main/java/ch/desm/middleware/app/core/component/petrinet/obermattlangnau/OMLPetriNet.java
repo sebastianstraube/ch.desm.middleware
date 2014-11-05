@@ -40,9 +40,7 @@ public class OMLPetriNet extends OMLPetriNetBase {
     	
         ArrayList<MessageMiddleware> messages = translator.toMiddlewareMessageList(message);
 
-        for(MessageMiddleware element : messages){
-            processor.processBrokerMessage(getEndpoint(), element);
-        }
+        processor.processBrokerMessage(getEndpoint(), messages);
     }
 
     @Override

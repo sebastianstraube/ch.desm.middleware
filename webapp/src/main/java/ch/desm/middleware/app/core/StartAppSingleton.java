@@ -3,9 +3,7 @@ package ch.desm.middleware.app.core;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
-import ch.desm.middleware.app.core.communication.endpoint.serial.fabisch.EndpointFabisch;
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
-import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
@@ -198,7 +196,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 //		endpoint.sendCommandInputState();
 		endpoint.sendCommandPinOutput("G", "8", "1");
 		
-		endpoint.run();
+		endpoint.start();
 	}
 
 	/**

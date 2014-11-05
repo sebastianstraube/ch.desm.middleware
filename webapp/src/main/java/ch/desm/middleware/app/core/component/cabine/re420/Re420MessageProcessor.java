@@ -299,7 +299,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
                     "locsim.initialization.ready.ini1")
                     && !util.init1) {
                 impl.getEndpointUbw32().setCacheEnabled(false);
-                impl.getEndpointUbw32().run();
+                impl.getEndpointUbw32().start();
                 util.init1 = true;
             }
 
@@ -354,11 +354,11 @@ public class Re420MessageProcessor extends MessageProcessorBase {
                         break;
                     }
                     case ("start"): {
-                        impl.getEndpointUbw32().run();
+                        impl.getEndpointUbw32().start();
                         break;
                     }
                     case ("stop"): {
-                        impl.getEndpointUbw32().interrupt();
+                        impl.getEndpointUbw32().stop();
                         break;
                     }
                 }

@@ -97,12 +97,17 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 
     @Override
     public void start() {
-        //TODO implementation
+
+        if (!thread.isAlive()) {
+            this.thread.start();
+        }
     }
 
     @Override
     public void stop() {
-        //TODO implementation
+        if (!thread.isInterrupted()) {
+            this.thread.interrupt();
+        }
     }
 
 	public String getPinBitMaskInputAnalog() {
@@ -123,19 +128,6 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 
 		if (isPinBitMaskAnalogAvailable()) {
 			sendCommandInputAnalog(getPinBitMaskInputAnalog());
-		}
-	}
-
-	public void run() {
-		
-		if (!thread.isAlive()) {
-			this.thread.start();
-		}
-	}
-
-	public void interrupt() {
-		if (!thread.isInterrupted()) {
-			this.thread.interrupt();
 		}
 	}
 

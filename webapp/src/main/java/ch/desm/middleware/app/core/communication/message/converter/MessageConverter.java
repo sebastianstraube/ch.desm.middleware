@@ -8,7 +8,7 @@ import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
  */
 public class MessageConverter {
 
-    public MessageWebsocket convertToMessageWebsocket(MessageMiddleware message){
+    public MessageWebsocket toCharacterStream(MessageMiddleware message){
         return new MessageWebsocket(message.getTopic(), message.getPayload());
     }
 }

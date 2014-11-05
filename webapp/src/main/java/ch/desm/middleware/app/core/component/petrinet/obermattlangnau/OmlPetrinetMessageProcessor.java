@@ -2,11 +2,13 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
+import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OMLEndpointUbw32;
 import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.OMLMapPetrinetOml;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
 
 /**
  * Created by Sebastian on 04.11.2014.
@@ -14,21 +16,28 @@ import org.apache.log4j.Logger;
 public class OmlPetrinetMessageProcessor extends ComponentMessageProcessor {
 
     private static Logger LOGGER = Logger.getLogger(OMLPetriNet.class);
-    private OMLMapPetrinetOml petriNetMap;
+    private OMLMapPetrinetOml map;
 
     public OmlPetrinetMessageProcessor(){
-        petriNetMap = new OMLMapPetrinetOml();
+        map = new OMLMapPetrinetOml();
     }
 
-    public void processBrokerMessage(OMLPetriNetEndpoint endpoint, MessageMiddleware element){
+    /**
+     * @param endpoint
+     * @param messages
+     */
+    public void processBrokerMessage(OMLPetriNetEndpoint endpoint, ArrayList<MessageMiddleware> messages) {
+        for(MessageMiddleware message : messages){
+            processBrokerMessage(endpoint, message);
+        }
+    }
 
-        String globalId = element.getGlobalId();
-        String sensorName = null;
-        int sensorValue = element.getParameter().equals("on") ? 1 : 0;
+    private void processBrokerMessage(OMLPetriNetEndpoint endpoint, MessageMiddleware element){
 
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
             try {
-                sensorName = petriNetMap.mapBrokerToEndpointMessage(globalId);
+                String sensorName = map.mapBrokerToEndpointMessage(element.getGlobalId());
+                int sensorValue = Integer.valueOf(util.getParameterValueMiddleware(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
                 delegateToEndpoint(endpoint, sensorName, sensorValue);
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
@@ -38,8 +47,7 @@ public class OmlPetrinetMessageProcessor extends ComponentMessageProcessor {
                 if (isInitProcessMessage(element)) {
                     initEndpoint(endpoint, element);
                 }else{
-                    sensorName = element.getGlobalId();
-                    delegateToEndpoint(endpoint, sensorName, sensorValue);
+                    throw new Exception("unsupported "+MessageBase.MESSAGE_TOPIC_MANAGEMENT+" message: " + element.toString());
                 }
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
@@ -48,10 +56,9 @@ public class OmlPetrinetMessageProcessor extends ComponentMessageProcessor {
             try {
                 throw new Exception("unsupported topic, broker message delegation skipped: " + element.toString());
             } catch (Exception e) {
-                LOGGER.log(Level.WARN, e);
+                LOGGER.log(Level.ERROR, e);
             }
         }
-
     }
 
     private void initEndpoint(OMLPetriNetEndpoint endpoint, MessageMiddleware element){

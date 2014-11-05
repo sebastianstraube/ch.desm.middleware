@@ -21,24 +21,22 @@ public class OML extends OMLBase implements
 
 	private MessageTranslatorMiddleware translator;
 	private OMLMessageProcessor processor;
-	private OMLMapInterlockingPetrinet mapPetrinet;
 
 	public OML(Broker broker, OMLEndpointUbw32 endpoint) {
 		super(broker, endpoint);
 		
 		this.translator = new MessageTranslatorMiddleware();
 		this.processor = new OMLMessageProcessor();
-        mapPetrinet = new OMLMapInterlockingPetrinet();
 	}
 
 	protected void onIncomingBrokerMessage(String message) {
 		
 		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: " + message);
 		
-		ArrayList<MessageMiddleware> messageCommon = translator
+		ArrayList<MessageMiddleware> messageList = translator
 				.toMiddlewareMessageList(message);
 
-		processor.processBrokerMessage(this, messageCommon, mapPetrinet);
+		processor.processBrokerMessage(getEndpoint(), messageList);
 	}
 
 	/**

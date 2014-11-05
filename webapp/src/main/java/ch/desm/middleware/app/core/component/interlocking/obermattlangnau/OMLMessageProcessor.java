@@ -3,12 +3,11 @@ package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
-import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import ch.desm.middleware.app.core.communication.message.*;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapInterlockingPetrinet;
+import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.OMLPetriNetEndpoint;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements.OMLElementFahrstrassenSchalter;
@@ -18,65 +17,80 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
 	private static Logger LOGGER = Logger.getLogger(OMLMessageProcessor.class);
 
 	private OMLElementFahrstrassenSchalter fahrStrassenSchalter;
+    private OMLMapInterlockingPetrinet map;
 
     public OMLMessageProcessor() {
 		fahrStrassenSchalter = new OMLElementFahrstrassenSchalter();
+        map = new OMLMapInterlockingPetrinet();
 	}
 
     /**
-     * @param impl
+     * @param endpoint
      * @param messages
      */
-    public void processBrokerMessage(OML impl, ArrayList<MessageMiddleware> messages, OMLMapInterlockingPetrinet mapPetrinet) {
+    public void processBrokerMessage(OMLEndpointUbw32 endpoint, ArrayList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
-            processBrokerMessage(impl, message, mapPetrinet);
+            processBrokerMessage(endpoint, message);
         }
     }
 
-    public void processBrokerMessage(OML impl, MessageMiddleware message, OMLMapInterlockingPetrinet mapPetrinet) {
-        if (MessageProcessorUtil.isSoftwareMessage(message.getOutputInput())) {
+    private void processBrokerMessage(OMLEndpointUbw32 endpoint, MessageMiddleware element){
 
-            if (message.getGlobalId().equalsIgnoreCase(
-                    "mgmt.stellwerk.obermattlangnau")) {
+        //incoming message with OML topic
+        if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU)){
+            try {
+                String globalId = element.getGlobalId();
+                String parameter = util.getParameterValueMiddleware(element.getParameter());
+                boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
-                switch (message.getParameter()) {
-                    case ("init"): {
-                        //impl.getEndpoint().init();
-                        //impl.getEndpoint().testDigitalMapSetAll("1");
-                        break;
-                    }
-                    case ("start"): {
-                        impl.getEndpoint().run();
-                        //impl.getEndpoint().testDigitalMapSetAll("0");
-                        break;
-                    }
-                    case ("stop"): {
-                        impl.getEndpoint().interrupt();
-                        break;
-                    }
+                String key = map.mapBrokerToEndpointMessage(globalId);
+                delegateToEndpoint(endpoint, endpoint.getMapDigital(), endpoint.getMapAnalog(), key, parameter, isInput);
+            } catch (Exception e) {
+                LOGGER.log(Level.ERROR, e);
+            }
+        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
+            try {
+                if (isInitProcessMessage(element)) {
+                    initEndpoint(endpoint, element);
+                }else{
+                    throw new Exception("unsupported "+MessageBase.MESSAGE_TOPIC_MANAGEMENT+" message: " + element.toString());
                 }
+            } catch (Exception e) {
+                LOGGER.log(Level.ERROR, e);
+            }
+        }else{
+            try {
+                throw new Exception("unsupported topic, broker message delegation skipped: " + element.toString());
+            } catch (Exception e) {
+                LOGGER.log(Level.ERROR, e);
             }
         }
-        //is hardware message
-        else{
-            String parameter = util.getParameterValueMiddleware(message.getParameter());
-            boolean isInput = message.getOutputInput().equals(
-                    MessageUbw32Base.MESSAGE_CHAR_INPUT);
+    }
 
-            //is mapped message from petrinet
-            String omlKey = mapPetrinet.getKey(message.getGlobalId());
-            if(!omlKey.isEmpty()){
-                LOGGER.log(Level.INFO, "OML processing Broker Message: " + message);
-                delegateToEndpoint(impl.getEndpoint(), impl.getEndpoint().getMapDigital(), impl.getEndpoint().getMapAnalog(), omlKey, parameter, isInput);
+    private void initEndpoint(OMLEndpointUbw32 endpoint, MessageMiddleware element){
+
+        switch (element.getParameter()) {
+            case ("init"): {
+                //TODO uncomment
+                //endpoint.init();
+                break;
             }
-            else{
-                try {
-                    throw new Exception("component skipped broker message processing: " + message.toString());
-                } catch (Exception e) {
-                    LOGGER.log(Level.WARN, e);
-                }
+            case ("start"): {
+                endpoint.start();
+                break;
+            }
+            case ("stop"): {
+                endpoint.stop();
+                break;
             }
         }
+    }
+
+    public boolean isInitProcessMessage(MessageMiddleware element){
+        if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) {
+            return true;
+        }
+        return false;
     }
 
 	/**

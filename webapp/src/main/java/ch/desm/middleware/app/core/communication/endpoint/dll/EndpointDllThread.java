@@ -25,8 +25,7 @@ public class EndpointDllThread extends EndpointThreadBase {
 	private Dll dll;
 	private EndpointDll endpoint;
 
-	public EndpointDllThread(String name, Dll dll,
-			EndpointDll endpoint) {
+	public EndpointDllThread(String name, Dll dll, EndpointDll endpoint) {
 		super(name);
 		this.dll = dll;
 		this.endpoint = endpoint;

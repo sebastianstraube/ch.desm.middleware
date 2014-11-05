@@ -38,7 +38,7 @@ public class EndpointTcpClient extends EndpointCommon {
     @Override
     public void start() {
 		if(!thread.isAlive()){
-			thread.run();
+			thread.start();
 		}
 	}
 

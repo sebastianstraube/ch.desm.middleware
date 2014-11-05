@@ -3,7 +3,6 @@ package ch.desm.middleware.app.core.component.simulation.locsim;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.simulation.locsim.elements.LocsimElementFahrschalter;
@@ -93,11 +92,11 @@ public class LocsimMessageProcessor extends ComponentMessageProcessor {
                         break;
                     }
                     case ("start"): {
-                        impl.getEndpointDll().run();
+                        impl.getEndpointDll().start();
                         break;
                     }
                     case ("stop"): {
-                        impl.getEndpointDll().interrupt();
+                        impl.getEndpointDll().stop();
                         break;
                     }
                 }
