@@ -7,12 +7,15 @@ import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointU
 import ch.desm.middleware.app.core.component.cabine.re420.Re420;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OML;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OMLEndpointUbw32;
-import ch.desm.middleware.app.core.component.management.Management;
+import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlBrokerClient;
+import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlEndpointUbw32;
+import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlService;
+import ch.desm.middleware.app.core.component.management.ManagementBrokerClient;
 import ch.desm.middleware.app.core.component.management.ManagementEndpoint;
+import ch.desm.middleware.app.core.component.management.ManagementService;
 import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlBrokerClient;
 import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlEndpoint;
+import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlService;
 import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
@@ -45,68 +48,25 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 
 	public boolean startManagement(){
-		ManagementEndpoint endpoint = new ManagementEndpoint();
-		Management mgmt = new Management(Broker.getInstance(), endpoint);
-		
+        ManagementService management = new ManagementService(Broker.getInstance(), EndpointRs232.EnumSerialPorts.COM1);
+
 		return true;
 	}
 	
 	public boolean startOmlPetrinet(){
-        PetrinetOmlEndpoint endpoint = new PetrinetOmlEndpoint();
-        PetrinetOmlBrokerClient petriNetBase = new PetrinetOmlBrokerClient(Broker.getInstance(), endpoint);
+        PetrinetOmlService petrinet = new PetrinetOmlService(Broker.getInstance());
         
         return true;       
 	}
 	
 	public void startOmlStellwerk(EndpointRs232.EnumSerialPorts port){
-		OMLEndpointUbw32 omlEndpoint = new OMLEndpointUbw32(port);
-		OML OmlImpl = new OML(Broker.getInstance(), omlEndpoint);
+        OmlService oml = new OmlService(Broker.getInstance(), EndpointRs232.EnumSerialPorts.COM1);
 	}
 	
 	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){
 		LocsimEndpointDll endpointDll = new LocsimEndpointDll("dispatcher.json");
 		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(portRs232);
 		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232, endpointDll);
-	}
-	
-	/**
-	 * 
-	 */
-	public void testCaseLocsimEndpointDllRs232() {
-		LOGGER.log(Level.TRACE, System.getProperty("java.library.path"));
-
-		//Test Cabine
-		Re420EndpointUbw32 re420EndpointUbw32 = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM13);
-//		Re420BaseImpl re420Impl = new Re420BaseImpl(broker, re420EndpointUbw32);
-		
-		//Test Interlocking
-		OMLEndpointUbw32 omlEndpoint = new OMLEndpointUbw32(EndpointRs232.EnumSerialPorts.COM12);
-		OML OmlImpl = new OML(Broker.getInstance(), omlEndpoint);
-		
-		//Test Simulation
-		LocsimEndpointDll endpointDll = new LocsimEndpointDll("dispatcher.json");
-		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(EndpointRs232.EnumSerialPorts.COM5);
-		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232, endpointDll);
-	}
-	
-	/**
-	 * 
-	 */
-	public void testCaseOMLEndpointUbw32() {
-		
-		
-		//Test Petrinet
-		PetrinetOmlEndpoint petrinetOmlEndpoint = new PetrinetOmlEndpoint();
-		PetrinetOmlBrokerClient petrinetOmlBrokerClient = new PetrinetOmlBrokerClient(Broker.getInstance(), petrinetOmlEndpoint);
-
-		
-		//Test Interlocking
-//		OMLEndpointUbw32 omlEndpoint = new OMLEndpointUbw32(EnumSerialPorts.COM38);
-//		OML OmlImpl = new OML(broker, omlEndpoint);
-
-		
-		//FSS 10°
-		petrinetOmlBrokerClient.emulateBrokerMessage("10.99.07;i;1;kontakt;isolierung;belegt;on;stellwerkobermattlangnau;#");
 	}
 
 	/**
@@ -123,81 +83,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 		re420Impl.emulateBrokerMessage("a79.1;o;0;analog-instrument;strom;i_delta;FF;kabinere420;#");		
 		re420Impl.emulateBrokerMessage("d94vi;o;0;analog-instrument;geschwindigkeitsanzeige;ist;FF;kabinere420;#");
 	}
-	
-	/**
-	 * 
-	 */
-	public void testCaseLocsimEndpointRs232_to_CabineUbw32(Broker broker) {
-		//Test Cabine
-		Re420EndpointUbw32 re420Endpoint = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM24);
-		Re420EndpointFabisch re420EndpointFabisch = new Re420EndpointFabisch(EndpointRs232.EnumSerialPorts.COM25);
-		Re420 re420Impl = new Re420(broker, re420Endpoint, re420EndpointFabisch);
-		
-		//Test Simulation
-		LocsimEndpointDll locsimEndpointDll = new LocsimEndpointDll("dispatcher.json");
-		LocsimEndpointRs232 locsimEndpointRs232 = new LocsimEndpointRs232(EndpointRs232.EnumSerialPorts.COM23);
-		Locsim locsimImpl = new Locsim(broker, locsimEndpointRs232, locsimEndpointDll);
-		
-		//Start Test sequence
-		
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			LOGGER.log(Level.ERROR, e);
-//		}
-//		
-//		locsimEndpointRs232.emulateEndpointMessage("INI1");
-//		
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			LOGGER.log(Level.ERROR, e);
-//		}
-//		
-//		locsimEndpointRs232.emulateEndpointMessage("INI7");
-	}
-	
-	/**
-	 * 
-	 */
-	public void testEndpointPetriNet(Broker broker){
-        PetrinetOmlEndpoint endpoint = new PetrinetOmlEndpoint();
-        PetrinetOmlBrokerClient petriNetBase = new PetrinetOmlBrokerClient(broker, endpoint);
-        
-		//Test Interlocking
-		OMLEndpointUbw32 omlEndpoint = new OMLEndpointUbw32(EndpointRs232.EnumSerialPorts.COM9);
-		OML OmlImpl = new OML(broker, omlEndpoint);
-        
-		//test case
-//		petriNetBase.emulateBrokerMessage("1.90.04;o;0;lampe;signalf;rot;on;stellwerkobermattlangnau;#");
-		
-	}
-	
-	/**
-	 * 
-	 */
-	public void testCaseDll(Broker broker) {
-//		LOGGER.log(Level.TRACE,"java.library.path");
-		
-		LocsimEndpointDll locsimEndpointDll = new LocsimEndpointDll("dispatcher.json");
-		LocsimEndpointRs232 locsimEndpointRs232 = new LocsimEndpointRs232(EndpointRs232.EnumSerialPorts.COM22);
 
-		Locsim locsim = new Locsim(broker, locsimEndpointRs232, locsimEndpointDll);
-	}
-	
-	/**
-	 * 
-	 */
-	public void testCaseUbw32(){
-		EndpointUbw32 endpoint = new EndpointUbw32(EndpointRs232.EnumSerialPorts.COM33, "192,0,8192,16372,0,1,2", "0");
-
-//		endpoint.sendCommandInputState();
-		endpoint.sendCommandPinOutput("G", "8", "1");
-		
-		endpoint.start();
-	}
 
 	/**
 	 * The "PM" Command : Set hardware PWM output values command Sets a PWM

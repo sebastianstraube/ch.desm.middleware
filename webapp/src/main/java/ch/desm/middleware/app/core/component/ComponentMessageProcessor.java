@@ -8,6 +8,17 @@ import ch.desm.middleware.app.core.communication.message.processor.MessageProces
  */
 public class ComponentMessageProcessor extends MessageProcessorBase {
 
+    /**
+     *
+     * @param component
+     * @param message
+     */
+    public void processEndpointMessage(ComponentBrokerClientBase component, String message, String topic) {
+        if (message != null && !message.isEmpty()) {
+            component.publish(message, topic);
+        }
+    }
+
     public void delegateToEndpoint(EndpointUbw32 endpoint, ComponentMap mapDigital, ComponentMap mapAnalog, String key, String parameter, boolean isInput){
 
         // is ubw digital message

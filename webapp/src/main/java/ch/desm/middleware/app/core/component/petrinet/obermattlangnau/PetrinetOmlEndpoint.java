@@ -9,21 +9,31 @@ import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 
-public class PetrinetOmlEndpoint extends EndpointCommon implements EndpointCommonListenerInterface {
+public class PetrinetOmlEndpoint extends EndpointCommon {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmlEndpoint.class);
 
-    private PetrinetOmlBrokerClient petrinet;
+    private PetrinetOmlService service;
     private PetrinetOmlEndpointExportThread petriNetThread;
 
-    public PetrinetOmlEndpoint(PetrinetOmlBrokerClient petrinet){
-        this.petrinet = petrinet;
-        petriNetThread = new PetrinetOmlEndpointExportThread("OMLPetriNetSimulationThread", petrinet);
+    public PetrinetOmlEndpoint(PetrinetOmlService service){
+        this.service = service;
+        petriNetThread = new PetrinetOmlEndpointExportThread("OMLPetriNetSimulationThread", service);
     }
 
     @Override
     public void init(){
         petriNetThread.init();
+    }
+
+    @Override
+    public void start(){
+        petriNetThread.start();
+    }
+
+    @Override
+    public void stop(){
+        petriNetThread.interrupt();
     }
 
     @Override
@@ -38,27 +48,18 @@ public class PetrinetOmlEndpoint extends EndpointCommon implements EndpointCommo
     @Override
     public void onIncomingEndpointMessage(String jsonMessage){
         try {
-            Pair<String, Integer> pair = petrinet.getDecoder().decode(jsonMessage);
-            String message = petrinet.getComponentMapMiddleware().getValue(pair.getLeft());
+            Pair<String, Integer> pair = service.getDecoder().decode(jsonMessage);
+            String message = service.getComponentMapMiddleware().getValue(pair.getLeft());
             if(!message.isEmpty()){
                 String parameter = pair.getRight() == 0? "off" : "on";
                 message = message.replaceAll("\\?", parameter);
-                petrinet.getProcessor().processEndpointMessage(petrinet,
-                        message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
+                service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
             }
         } catch (ClassCastException e) {
             LOGGER.log(Level.ERROR, "Error on message: " + jsonMessage + "with: " + e);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
-    }
-
-    public void start(){
-        petriNetThread.start();
-    }
-
-    public void stop(){
-    	petriNetThread.interrupt();
     }
 
     public void setSensor(String message, int value) {

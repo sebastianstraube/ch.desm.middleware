@@ -85,7 +85,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 					}
 
 					else {
-						stream = impl.getMapMiddlewareMessages().get(key);
+						//stream = impl.getMapMiddlewareMessages().get(key);
 						
 						if (stream == null) {
 							try {
@@ -160,7 +160,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 						}
 					} else {
 
-						stream = impl.getMapMiddlewareMessages().get(key);
+						//stream = impl.getMapMiddlewareMessages().get(key);
 						
 						if (stream == null) {
 							try {
@@ -195,8 +195,9 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 				String key = entry.getKey();
 
 				if (!key.isEmpty()) {
-					String stream = impl.getMapMiddlewareMessages().get(key);
+					//String stream = impl.getMapMiddlewareMessages().get(key);
 
+                    /*
 					if (stream == null) {
 						try {
 							throw new Exception(
@@ -209,15 +210,16 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 							LOGGER.log(Level.ERROR, e);
 						}
 					}
+					*/
 
 					// convert input to common parameter
 					String parameter = message.getInputValue(entry.getValue(),
 							"");
 
-					stream = stream.replaceAll(
-							MessageCommon.PARAMETER_PLACEHOLDER, parameter);
-					middlewareMessagesInput = middlewareMessagesInput
-							.concat(stream);
+					//stream = stream.replaceAll(
+					//		MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+					//middlewareMessagesInput = middlewareMessagesInput
+					//		.concat(stream);
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
+import ch.desm.middleware.app.core.communication.endpoint.EndpointBase;
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapUbw32Analog;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapUbw32Digital;
@@ -23,8 +24,13 @@ public class Re420EndpointUbw32 extends EndpointUbw32 {
 	public Re420MapUbw32Digital getMapDigital(){
 		return re420MapDigital;
 	}
-	
-	/**
+
+    @Override
+    protected void registerEndpointListener(EndpointBase listener) {
+        //TODO implementation
+    }
+
+    /**
 	 * test endpoint message handling
 	 * @param message
 	 */

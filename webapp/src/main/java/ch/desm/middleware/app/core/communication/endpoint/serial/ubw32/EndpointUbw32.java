@@ -47,7 +47,7 @@ import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232Co
  *         All port names ("A", "B", "C") are case insensitive. You can use "B"
  *         or "b" for port names.
  */
-public class EndpointUbw32 extends EndpointUbw32Base {
+public abstract class EndpointUbw32 extends EndpointUbw32Base {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointUbw32.class);
 

@@ -9,7 +9,7 @@ package ch.desm.middleware.app.core.common;
  */
 public abstract class DaemonThreadBase extends Thread {
 
-    private int sleep = 256;
+    private int sleepTime = 256;
 
 	public DaemonThreadBase(){
 		setDaemon(true);
@@ -20,16 +20,24 @@ public abstract class DaemonThreadBase extends Thread {
 		this.setName(name);
 	}
 
-    public DaemonThreadBase(String name, int sleep) {
+    public DaemonThreadBase(String name, int sleepTime) {
         this(name);
-        this.sleep = sleep;
+        this.sleepTime = sleepTime;
     }
 
     public void doHangout() throws InterruptedException {
-        this.doHangout(sleep);
+        this.doHangout(sleepTime);
     }
 
-    public void doHangout(int sleep) throws InterruptedException {
-        Thread.sleep(sleep);
+    public void doHangout(int sleepTime) throws InterruptedException {
+        Thread.sleep(sleepTime);
+    }
+
+    public int getSleepTime(){
+        return sleepTime;
+    }
+
+    public void setSleeptTime(int sleepTime){
+        this.sleepTime = sleepTime;
     }
 }

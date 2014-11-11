@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
+import ch.desm.middleware.app.core.communication.endpoint.EndpointBase;
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
 
 public class ZusiEndpointTcp extends EndpointTcpClient {
@@ -10,4 +11,8 @@ public class ZusiEndpointTcp extends EndpointTcpClient {
 		// TODO Auto-generated constructor stub
 	}
 
+    @Override
+    protected void registerEndpointListener(EndpointBase listener) {
+
+    }
 }

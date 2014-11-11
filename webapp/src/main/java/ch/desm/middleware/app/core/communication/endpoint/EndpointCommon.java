@@ -3,16 +3,13 @@ package ch.desm.middleware.app.core.communication.endpoint;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public abstract class EndpointCommon extends EndpointBase {
+public abstract class EndpointCommon extends EndpointBase implements EndpointCommonListenerInterface {
 
 	private static final Logger LOGGER = Logger.getLogger(EndpointCommon.class);
 
     public abstract void init();
-
     public abstract void start();
-
     public abstract void stop();
-
     protected abstract void registerEndpointListener(EndpointBase listener);
 
 	public void onIncomingEndpointMessage(String message) {

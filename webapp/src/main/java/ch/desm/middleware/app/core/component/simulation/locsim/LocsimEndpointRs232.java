@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.locsim;
 
+import ch.desm.middleware.app.core.communication.endpoint.EndpointBase;
 import jssc.SerialPortException;
 
 import org.apache.log4j.Level;
@@ -49,5 +50,10 @@ public class LocsimEndpointRs232 extends EndpointRs232 {
     @Override
     public void stop() {
 
+    }
+
+    @Override
+    protected void registerEndpointListener(EndpointBase listener) {
+        //TODO implementation
     }
 }

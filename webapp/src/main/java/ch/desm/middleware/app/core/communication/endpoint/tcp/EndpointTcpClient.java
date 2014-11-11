@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 
-public class EndpointTcpClient extends EndpointCommon {
+public abstract class EndpointTcpClient extends EndpointCommon {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClient.class);
 	public static final int CONNECTION_TIMEOUT = 5096;

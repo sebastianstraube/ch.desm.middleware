@@ -11,8 +11,8 @@ import ch.desm.middleware.app.core.communication.broker.BrokerClient;
  * 
  */
 public abstract class ComponentBrokerClientBase extends BrokerClient {
-	
-	private static Logger LOGGER = Logger.getLogger(ComponentBrokerClientBase.class);
+
+    private static Logger LOGGER = Logger.getLogger(ComponentBrokerClientBase.class);
 
 	public ComponentBrokerClientBase(Broker broker) {
 		super(broker);
@@ -22,5 +22,4 @@ public abstract class ComponentBrokerClientBase extends BrokerClient {
         onIncomingBrokerMessage(message);
     }
 
-	
 }

@@ -1,14 +1,14 @@
 package ch.desm.middleware.app.core.component.management;
 
+import ch.desm.middleware.app.core.communication.endpoint.EndpointBase;
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageDecoder;
+import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.util.component.LifeCycle;
 
-import javax.websocket.ContainerProvider;
-import javax.websocket.DeploymentException;
-import javax.websocket.Session;
-import javax.websocket.WebSocketContainer;
+import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
 
@@ -20,12 +20,40 @@ public class ManagementEndpoint extends EndpointCommon {
     private Session webSocketSession;
     private WebSocketContainer container;
     private ManagementEndpointThread thread;
+    private ManagementService service;
     private URI serverUri;
 
-    public ManagementEndpoint(){
+    public ManagementEndpoint(ManagementService service, String uri){
         thread = new ManagementEndpointThread(this);
-        serverUri = URI.create("ws://Heisenberg:80/gui/management");
+        serverUri = URI.create(uri);
+        this.service = service;
         this.start();
+    }
+
+    @Override
+    public void onIncomingEndpointMessage(String message) {
+        LOGGER.log(Level.TRACE, "receive endpoint message: " + message);
+
+        try {
+            //check message syntax
+            EndpointWebsocketMessageDecoder decoder = new EndpointWebsocketMessageDecoder();
+            MessageWebsocket messageWebsocket = decoder.decode(message);
+            //publish message
+            service.getProcessor().processEndpointMessage(service.getBrokerClient(), messageWebsocket.getPayload(), messageWebsocket.getTopic());
+        } catch (DecodeException e) {
+            LOGGER.log(Level.ERROR, "wrong format of endpoint message: " + message, e);
+        }
+
+    }
+
+    @Override
+    protected void registerEndpointListener(EndpointBase listener) {
+
+    }
+
+    @Override
+    public void init() {
+
     }
 
     @Override
@@ -72,9 +100,6 @@ public class ManagementEndpoint extends EndpointCommon {
         }
     }
 
-    @Override
-    public void init() {
 
-    }
 
 }

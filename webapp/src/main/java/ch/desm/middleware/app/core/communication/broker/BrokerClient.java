@@ -9,7 +9,7 @@ import java.util.Set;
 public abstract class BrokerClient {
 
 	protected ch.desm.middleware.app.core.communication.broker.Broker broker;
-	private Set<String> signedTopics;
+	private LinkedList<String> signedTopics;
 
     abstract protected void intializeSignedTopic();
 
@@ -25,7 +25,7 @@ public abstract class BrokerClient {
 
 	public BrokerClient(Broker broker) {		
 		this.broker = broker;
-		signedTopics = new HashSet<String>();
+		signedTopics = new LinkedList<String>();
 		init();
 	}
 

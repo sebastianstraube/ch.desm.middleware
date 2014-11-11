@@ -16,7 +16,7 @@ import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232Co
  * @author Jürg
  *
  */
-public class EndpointFabisch extends EndpointRs232 {
+public abstract class EndpointFabisch extends EndpointRs232 {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointFabisch.class);
 	

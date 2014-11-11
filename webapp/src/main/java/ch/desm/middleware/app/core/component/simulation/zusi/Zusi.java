@@ -17,12 +17,6 @@ public class Zusi extends ZusiBrokerClientBase implements EndpointTcpClientListe
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void onIncomingEndpointMessage(String message) {
-
-		LOGGER.log(Level.TRACE, "zusi (" + this.getClass() + ") received endpoint message: " + message);
-		
-	}
 
 	@Override
 	protected void onIncomingBrokerMessage(String message) {

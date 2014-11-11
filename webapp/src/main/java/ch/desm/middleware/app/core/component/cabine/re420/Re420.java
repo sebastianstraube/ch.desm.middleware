@@ -6,16 +6,13 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.endpoint.serial.fabisch.EndpointFabischListenerInterface;
-import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32ListenerInterface;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 
-public class Re420 extends Re420BrokerClientBase implements
-		EndpointUbw32ListenerInterface, EndpointFabischListenerInterface {
+public class Re420 extends Re420BrokerClientBase {
 
 	private static Logger LOGGER = Logger.getLogger(Re420.class);
 
@@ -84,9 +81,10 @@ public class Re420 extends Re420BrokerClientBase implements
 		if(ubw32Message != null){
 			
 			String messages = processor.convertToMiddlewareMessage(this, ubw32Message);
-			
-			processor.processEndpointMessage(this, messages,
-					MessageBase.MESSAGE_TOPIC_CABINE_RE420);
+
+            //TODO refactoring
+			//processor.processEndpointMessage(this, messages,
+			//		MessageBase.MESSAGE_TOPIC_CABINE_RE420);
 		}		
 	}
 

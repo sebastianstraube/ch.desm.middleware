@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
+import ch.desm.middleware.app.core.communication.endpoint.EndpointBase;
 import ch.desm.middleware.app.core.communication.endpoint.serial.fabisch.EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapFabischAnalog;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapFabischDigital;
@@ -23,8 +24,13 @@ public class Re420EndpointFabisch extends EndpointFabisch {
 	public Re420MapFabischDigital getMapDigital(){
 		return mapDigital;
 	}
-	
-	/**
+
+    @Override
+    protected void registerEndpointListener(EndpointBase listener) {
+
+    }
+
+    /**
 	 * test endpoint message handling
 	 * @param message
 	 */

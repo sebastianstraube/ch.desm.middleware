@@ -10,7 +10,7 @@ import ch.desm.middleware.app.core.communication.endpoint.dll.objects.EndpointOb
 import ch.desm.middleware.app.core.communication.endpoint.dll.objects.EndpointObjectDllWeiche;
 import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageTranslatorDll;
 
-public class EndpointDll extends EndpointCommon implements EndpointDllListenerInterface {
+public abstract class EndpointDll extends EndpointCommon implements EndpointDllListenerInterface {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointDll.class);
 	

@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
+package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientThreadBase;
@@ -10,13 +10,13 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class PetrinetOmlBrokerClientThread extends ComponentBrokerClientThreadBase {
+public class OmlBrokerClientThread extends ComponentBrokerClientThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClientThread.class);
-    private PetrinetOmlService service;
+    private static Logger LOGGER = Logger.getLogger(OmlBrokerClientThread.class);
+    private OmlService service;
     private Object processMessagesLock;
 
-    public PetrinetOmlBrokerClientThread(PetrinetOmlService service){
+    public OmlBrokerClientThread(OmlService service){
         this.service = service;
         this.processMessagesLock = new Object();
     }
@@ -24,10 +24,9 @@ public class PetrinetOmlBrokerClientThread extends ComponentBrokerClientThreadBa
     @Override
     public void processBrokerMessages() {
         synchronized (processMessagesLock){
-            LinkedList<MessageMiddleware> messages = getMessages();
+            LinkedList<MessageMiddleware> messages = this.getMessages();
             LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
             service.getProcessor().processBrokerMessage(service.getEndpoint(), messages);
         }
-
     }
 }

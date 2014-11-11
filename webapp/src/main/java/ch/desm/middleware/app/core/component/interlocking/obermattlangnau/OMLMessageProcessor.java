@@ -10,29 +10,31 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements.OMLElementFahrstrassenSchalter;
 
-public class OMLMessageProcessor extends ComponentMessageProcessor {
+public class OmlMessageProcessor extends ComponentMessageProcessor {
 
-	private static Logger LOGGER = Logger.getLogger(OMLMessageProcessor.class);
+	private static Logger LOGGER = Logger.getLogger(OmlMessageProcessor.class);
 
 	private OMLElementFahrstrassenSchalter fahrStrassenSchalter;
     private OMLMapInterlockingPetrinet map;
+    private OmlService service;
 
-    public OMLMessageProcessor() {
-		fahrStrassenSchalter = new OMLElementFahrstrassenSchalter();
-        map = new OMLMapInterlockingPetrinet();
+    public OmlMessageProcessor(OmlService service) {
+		this.fahrStrassenSchalter = new OMLElementFahrstrassenSchalter();
+        this.map = new OMLMapInterlockingPetrinet();
+        this.service = service;
 	}
 
     /**
      * @param endpoint
      * @param messages
      */
-    public void processBrokerMessage(OMLEndpointUbw32 endpoint, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(OmlEndpointUbw32 endpoint, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(endpoint, message);
         }
     }
 
-    private void processBrokerMessage(OMLEndpointUbw32 endpoint, MessageMiddleware element){
+    private void processBrokerMessage(OmlEndpointUbw32 endpoint, MessageMiddleware element){
 
         //incoming message with OML topic
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU)){
@@ -77,7 +79,7 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void processInitEndpoint(OMLEndpointUbw32 endpoint, MessageMiddleware element){
+    private void processInitEndpoint(OmlEndpointUbw32 endpoint, MessageMiddleware element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -117,18 +119,18 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
 
 	/**
 	 * 
-	 * @param impl
+	 * @param endpoint
 	 * @param message
 	 * @return
 	 */
-	public String convertToMiddlewareMessage(OML impl,
+	public String convertToMiddlewareMessage(OmlEndpointUbw32 endpoint,
 			MessageUbw32Base message) {
 
 		String middlewareMessagesInput = "";
 
 		if (message instanceof MessageUbw32DigitalRegisterSingle) {
 
-			for (Entry<String, String> entry : impl.getEndpoint().getMapDigital()
+			for (Entry<String, String> entry : endpoint.getMapDigital()
 					.getMap().entrySet()) {
 
 				if (entry.getValue()
@@ -141,7 +143,7 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
 
 					String stream = null;
 
-					stream = impl.getMapMiddlewareMessages().get(key);
+					stream = service.getComponentMapMiddleware().getMap().get(key);
 
 					if (stream == null) {
 						try {
@@ -167,7 +169,7 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
 
 		else if (message instanceof MessageUbw32DigitalRegisterComplete) {
 
-			for (Entry<String, String> entry : impl.getEndpoint().getMapDigital()
+			for (Entry<String, String> entry : endpoint.getMapDigital()
 					.getMap().entrySet()) {
 
 				// convert input to common parameter
@@ -179,7 +181,7 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
 
 				String stream = null;
 
-				stream = impl.getMapMiddlewareMessages().get(key);
+				stream = service.getComponentMapMiddleware().getMap().get(key);
 
 				if (stream == null) {
 					try {
@@ -204,13 +206,13 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
 
 		} else if (message instanceof MessageUbw32Analog) {
 
-			for (Entry<String, String> entry : impl.getEndpoint().getMapAnalog()
+			for (Entry<String, String> entry : endpoint.getMapAnalog()
 					.getMap().entrySet()) {
 
 				String key = entry.getKey();
 
 				if (!key.isEmpty()) {
-					String stream = impl.getMapMiddlewareMessages().get(key);
+					String stream = service.getComponentMapMiddleware().getMap().get(key);
 
 					if (stream == null) {
 						try {

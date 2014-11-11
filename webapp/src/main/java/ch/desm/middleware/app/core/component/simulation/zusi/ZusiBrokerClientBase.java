@@ -10,7 +10,6 @@ abstract class ZusiBrokerClientBase extends ComponentBrokerClientBase {
 	public ZusiBrokerClientBase(Broker broker, ZusiEndpointTcp endpoint) {
 		super(broker);
 		this.endpoint = endpoint;
-		this.registerEndpointListener(endpoint);
 	}
 
 	public ZusiEndpointTcp getEndpoint() {

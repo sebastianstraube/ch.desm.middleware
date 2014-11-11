@@ -18,16 +18,16 @@ public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
 
     private Object pendingSensorEventsLock;
     private List<Pair<String, Integer>> pendingSensorEvents;
-    private PetrinetOmlBrokerClient petrinet;
+    private PetrinetOmlService service;
     private PetrinetOmlEndpointExportAdapter petrinetAdapter;
 
 
-    public PetrinetOmlEndpointExportThread(String threadName, PetrinetOmlBrokerClient petrinet) {
+    public PetrinetOmlEndpointExportThread(String threadName, PetrinetOmlService service) {
         super(threadName);
 
         this.pendingSensorEventsLock = new Object();
         this.pendingSensorEvents = new LinkedList<Pair<String, Integer>>();
-        this.petrinet = petrinet;
+        this.service = service;
         this.petrinetAdapter = new PetrinetOmlEndpointExportAdapter();
 
     }
@@ -82,8 +82,8 @@ public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
     private void applyPlaces() {
         for (Pair<String, Integer> changedPlace : petrinetAdapter.getChangedPlaces()) {
             try {
-                String encodedMessage = petrinet.getEncoder().encode(changedPlace);
-                petrinet.getEndpoint().onIncomingEndpointMessage(encodedMessage);
+                String encodedMessage = service.getEncoder().encode(changedPlace);
+                service.getEndpoint().onIncomingEndpointMessage(encodedMessage);
             } catch (EncodeException e) {
                 LOGGER.log(Level.ERROR, e);
             }

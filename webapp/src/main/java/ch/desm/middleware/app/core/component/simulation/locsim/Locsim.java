@@ -34,7 +34,7 @@ public class Locsim extends LocsimBrokerClientBase implements
 		translator = new MessageTranslatorMiddleware();
 	}
 
-	@Override
+
 	public void onIncomingEndpointMessage(String message) {
 
 		if(!message.isEmpty()){
