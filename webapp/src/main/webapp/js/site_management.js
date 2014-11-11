@@ -194,12 +194,12 @@ $(document).ready(function() {
     //start
     $('#start_interlocking').click(function(){
         $(this).toggleClass('btn-success');
-        sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;start;management;#")
+        sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;start;management;#")
     });
 
     $('#start_petrinet').click(function(){
         $(this).toggleClass('btn-success');
-        sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;start;management;#")
+        sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;start;management;#")
     });
 
     $('#start_cabine-ubw32').click(function(){

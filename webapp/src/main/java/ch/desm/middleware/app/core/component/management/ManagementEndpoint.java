@@ -48,7 +48,11 @@ public class ManagementEndpoint extends EndpointCommon {
 
     @Override
     protected void registerEndpointListener(EndpointBase listener) {
-
+        try {
+            addEndpointListener(this);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
     }
 
     @Override

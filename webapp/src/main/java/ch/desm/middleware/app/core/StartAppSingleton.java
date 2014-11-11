@@ -39,7 +39,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 	public void run(){
 		startManagement();
-		startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM10);
+		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM10);
         startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
 

@@ -20,13 +20,14 @@ public class PetrinetOmlService {
     private PetrinetOmlEndpoint endpoint;
 
     public PetrinetOmlService(Broker broker){
-        this.client = new PetrinetOmlBrokerClient(broker, this);
-        this.endpoint = new PetrinetOmlEndpoint(this);
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new PetrinetOmlMessageProcessor();
         this.encoder = new PetrinetMessageEncoder();
         this.decoder = new PetrinetMessageDecoder();
+
+        this.client = new PetrinetOmlBrokerClient(broker, this);
+        this.endpoint = new PetrinetOmlEndpoint(this);
     }
 
 

@@ -21,14 +21,14 @@ public class ManagementService {
     private ManagementEndpoint endpoint;
 
     public ManagementService(Broker broker, EndpointRs232.EnumSerialPorts port){
-        this.client = new ManagementBrokerClient(broker, this);
-        this.endpoint = new ManagementEndpoint(this, "ws://Heisenberg:80/gui/management");
-
         componentMapMiddleware = new ComponentMapMiddleware();
         translator = new ManagementMessageTranslator();
         processor = new ManagementMessageProcessor();
         encoder = new EndpointWebsocketMessageEncoder();
         converter = new MessageConverter();
+
+        this.client = new ManagementBrokerClient(broker, this);
+        this.endpoint = new ManagementEndpoint(this, "ws://Heisenberg:80/gui/management");
     }
 
 

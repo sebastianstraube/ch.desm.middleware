@@ -20,12 +20,12 @@ public class OmlService {
     private OmlEndpointUbw32 endpoint;
 
     public OmlService(Broker broker, EndpointRs232.EnumSerialPorts port){
-        this.client = new OmlBrokerClient(broker, this);
-        this.endpoint = new OmlEndpointUbw32(port, this);
-
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new OmlMessageProcessor(this);
+
+        this.client = new OmlBrokerClient(broker, this);
+        this.endpoint = new OmlEndpointUbw32(port, this);
     }
 
 

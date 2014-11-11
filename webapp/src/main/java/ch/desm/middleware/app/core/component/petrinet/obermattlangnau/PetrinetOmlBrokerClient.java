@@ -21,6 +21,8 @@ public class PetrinetOmlBrokerClient extends ComponentBrokerClientBase {
 
     public PetrinetOmlBrokerClient(Broker broker, PetrinetOmlService service) {
         super(broker);
+        this.service = service;
+
         this.omlPetriNetThread = new PetrinetOmlBrokerClientThread(service);
         this.omlPetriNetThread.start();
     }
