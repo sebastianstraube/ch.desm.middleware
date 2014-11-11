@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.locsim;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageTranslatorRs232;
 import org.apache.log4j.Level;
@@ -10,12 +10,11 @@ import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.dll.EndpointDllListenerInterface;
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232ListenerInterface;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageDll;
 
-public class Locsim extends LocsimBase implements
+public class Locsim extends LocsimBrokerClientBase implements
 		EndpointDllListenerInterface, EndpointRs232ListenerInterface {
 
 	private static Logger LOGGER = Logger.getLogger(Locsim.class);
@@ -58,7 +57,7 @@ public class Locsim extends LocsimBase implements
 		
 		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: " + message);
 
-		ArrayList<MessageMiddleware> messageList = translator
+		LinkedList<MessageMiddleware> messageList = translator
 				.toMiddlewareMessageList(message);
 
 		processor.processBrokerMessage(this, messageList);

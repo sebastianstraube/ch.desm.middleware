@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.message;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -11,7 +11,7 @@ public class MessageUbw32DigitalRegisterComplete extends MessageUbw32Base {
 
 	private static Logger LOGGER = Logger.getLogger(MessageUbw32DigitalRegisterComplete.class);
 	
-	private ArrayList<EndpointUbw32RegisterDigital> list;
+	private LinkedList<EndpointUbw32RegisterDigital> list;
 
 	public EndpointUbw32RegisterDigital portA;
 	public EndpointUbw32RegisterDigital portB;
@@ -24,7 +24,7 @@ public class MessageUbw32DigitalRegisterComplete extends MessageUbw32Base {
 	public MessageUbw32DigitalRegisterComplete(String payload, String topic) {
 		super(payload, topic);
 
-		this.list = new ArrayList<EndpointUbw32RegisterDigital>();
+		this.list = new LinkedList<EndpointUbw32RegisterDigital>();
 		list.add(portA);
 		list.add(portB);
 		list.add(portC);

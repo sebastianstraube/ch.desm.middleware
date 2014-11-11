@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class EndpointUbw32RegisterAnalog extends EndpointUbw32RegisterBase {
@@ -8,16 +8,16 @@ public class EndpointUbw32RegisterAnalog extends EndpointUbw32RegisterBase {
 	public static final int MAX_DISCRET_VALUE = 1023;
 	
 	private String pinBitMask;
-	private ArrayList<String> valueList;
+	private LinkedList<String> valueList;
 	
 	public EndpointUbw32RegisterAnalog(){
 		pinBitMask = "";
-		valueList = new ArrayList<String>();
+		valueList = new LinkedList<String>();
 	}
 	
 	public EndpointUbw32RegisterAnalog(String pinBitMask){
 		this.pinBitMask = pinBitMask;
-		valueList = new ArrayList<String>();
+		valueList = new LinkedList<String>();
 	}
 		
 	public void addValue(String value){

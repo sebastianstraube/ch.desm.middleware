@@ -1,9 +1,8 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageEncoder;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -12,32 +11,32 @@ import ch.desm.middleware.app.core.utility.Pair;
 
 import javax.websocket.EncodeException;
 
-public class OMLPetriNetExportThread extends DaemonThreadBase {
+public class OMLPetrinetEndpointExportThread extends DaemonThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(OMLPetriNetExportThread.class);
+    private static Logger LOGGER = Logger.getLogger(OMLPetrinetEndpointExportThread.class);
     private static int SLEEP_INTERVAL = 512;
 
     private Object pendingSensorEventsLock;
     private List<Pair<String, Integer>> pendingSensorEvents;
-    private OMLPetriNetExportAdapter petriNet;
-    private OMLPetriNetEndpoint endpoint;
-    private PetrinetMessageEncoder encoder;
+    private OMLPetrinetBrokerClient petrinet;
+    private OMLPetrinetEndpointExportAdapter petrinetAdapter;
 
-    public OMLPetriNetExportThread(String threadName, OMLPetriNetEndpoint endpoint) {
+
+    public OMLPetrinetEndpointExportThread(String threadName, OMLPetrinetBrokerClient petrinet) {
         super(threadName);
 
-        pendingSensorEventsLock = new Object();
-        pendingSensorEvents = new ArrayList<Pair<String, Integer>>();
-        petriNet = new OMLPetriNetExportAdapter();
-        this.endpoint = endpoint;
-        encoder = new PetrinetMessageEncoder();
+        this.pendingSensorEventsLock = new Object();
+        this.pendingSensorEvents = new LinkedList<Pair<String, Integer>>();
+        this.petrinet = petrinet;
+        this.petrinetAdapter = new OMLPetrinetEndpointExportAdapter();
+
     }
 
     /*
      * initialize sequence
      */
-    public void intialize() {
-        petriNet.init();
+    public void init() {
+        petrinetAdapter.init();
     }
 
     public void setSensor(String signalName, int value) {
@@ -63,28 +62,28 @@ public class OMLPetriNetExportThread extends DaemonThreadBase {
     }
 
     private void applySensorEvents() {
-        List<Pair<String, Integer>> pendingSensorEventsCopy = new ArrayList<>();
+        List<Pair<String, Integer>> pendingSensorEventsCopy = new LinkedList<>();
         synchronized (pendingSensorEventsLock) {
             pendingSensorEventsCopy.addAll(pendingSensorEvents);
             pendingSensorEvents.clear();
         }
 
         for (Pair<String, Integer> sensorEvent : pendingSensorEventsCopy) {
-            petriNet.setSensor(sensorEvent.getLeft(), sensorEvent.getRight());
+            petrinetAdapter.setSensor(sensorEvent.getLeft(), sensorEvent.getRight());
         }
     }
 
     private void simulatePetriNet() {
-        while (petriNet.fireOneTransition()) {
-            petriNet.writeActors();
+        while (petrinetAdapter.fireOneTransition()) {
+            petrinetAdapter.writeActors();
         }
     }
 
     private void applyPlaces() {
-        for (Pair<String, Integer> changedPlace : petriNet.getChangedPlaces()) {
+        for (Pair<String, Integer> changedPlace : petrinetAdapter.getChangedPlaces()) {
             try {
-                String encodedMessage = encoder.encode(changedPlace);
-                endpoint.onIncomingEndpointMessage(encodedMessage);
+                String encodedMessage = petrinet.getEncoder().encode(changedPlace);
+                petrinet.getEndpoint().onIncomingEndpointMessage(encodedMessage);
             } catch (EncodeException e) {
                 LOGGER.log(Level.ERROR, e);
             }

@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.dll;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -51,13 +51,13 @@ public class EndpointDllThread extends EndpointThreadBase {
 	}
 
 	private void pollingDllEvents() throws Exception {
-		ArrayList<EndpointDllEvent> events = null;
+		LinkedList<EndpointDllEvent> events = null;
 
 		events = dll.getEvents();
 
 		for (EndpointDllEvent event : events) {
 
-			ArrayList<Integer> params = event.params;
+			LinkedList<Integer> params = event.params;
 
 			switch (event.type) {
 			case EndpointObjectDllBase.ENUM_CMD_ISOLIERSTOSS:

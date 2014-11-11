@@ -1,6 +1,8 @@
 package ch.desm.middleware.app.core.communication.broker;
 
+import java.util.LinkedList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -8,14 +10,10 @@ public abstract class BrokerClient {
 
 	protected ch.desm.middleware.app.core.communication.broker.Broker broker;
 	private Set<String> signedTopics;
-	
-	/**
-	 * must be implemented with message handling functionality
-	 * 
-	 * @param message
-	 */
+
+    abstract protected void intializeSignedTopic();
+
 	abstract protected void onIncomingBrokerMessage(String message);
-	abstract protected void intializeSignedTopic();
 
     protected void signForTopic(String topic) {
         signedTopics.add(topic);

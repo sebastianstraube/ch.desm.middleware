@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.message.translator;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -27,9 +27,9 @@ abstract class MessageTranslatorMiddlewareBase {
 	private static final int PARAMETER = 6;
 	private static final int TOPIC = 7;
 
-	protected ArrayList<MessageMiddleware> decodeMiddlewareMessages(String stream) {
+	protected LinkedList<MessageMiddleware> decodeMiddlewareMessages(String stream) {
 		String[] messageArray = stream.split(MESSAGE_CUT);
-		ArrayList<MessageMiddleware> messageList = new ArrayList<MessageMiddleware>();
+		LinkedList<MessageMiddleware> messageList = new LinkedList<MessageMiddleware>();
 
 		for (int i = 0; i < messageArray.length; i++) {
 			messageList.add(decodeMiddlewareMessage(messageArray[i]));

@@ -1,15 +1,15 @@
 package ch.desm.middleware.app.core.communication.endpoint.dll.objects;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class EndpointObjectDllTrainPosition {
 	public int trainTyp;
 	public int direction;
-	public ArrayList positions;
-	public ArrayList gleisList;
+	public LinkedList positions;
+	public LinkedList gleisList;
 
-	public EndpointObjectDllTrainPosition(int trainTyp, int direction, ArrayList positions,
-			ArrayList gleisList) {
+	public EndpointObjectDllTrainPosition(int trainTyp, int direction, LinkedList positions,
+			LinkedList gleisList) {
 		this.trainTyp = trainTyp;
 		this.direction = direction;
 		this.positions = positions;

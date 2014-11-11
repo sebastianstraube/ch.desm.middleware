@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -14,13 +14,13 @@ public class EndpointUbw32Cache {
 	private static Logger LOGGER = Logger.getLogger(EndpointUbw32Cache.class);
 	
 	private String stateI;
-	private ArrayList<String> statePI;
+	private LinkedList<String> statePI;
 	private HashMap<String, String> stateMapIA;
 	private boolean isCacheEnabled;
 	
 	public EndpointUbw32Cache() {
 		this.stateI = "";
-		this.statePI = new ArrayList<String>();
+		this.statePI = new LinkedList<String>();
 		this.stateMapIA = new HashMap<String, String>();
 		this.isCacheEnabled = EndpointUbw32Config.CACHE_ENABLED;
 	}
@@ -235,7 +235,7 @@ public class EndpointUbw32Cache {
 
 		LOGGER.log(Level.TRACE, "analog sensor values: " + payload);
 		
-		ArrayList<String> list = new ArrayList<String>(Arrays.asList(parts));
+		LinkedList<String> list = new LinkedList<String>(Arrays.asList(parts));
 
 		int nrPorts = Integer.toBinaryString(Integer.valueOf(pinbitmask))
 				.length();

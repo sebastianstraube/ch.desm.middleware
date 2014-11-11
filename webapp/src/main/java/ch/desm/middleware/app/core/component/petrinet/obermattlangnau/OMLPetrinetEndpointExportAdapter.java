@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import ch.desm.middleware.app.core.utility.Pair;
@@ -12,17 +12,18 @@ import org.apache.log4j.Logger;
  * wrapper class around the petri net class provided by the pnlm export that is
  * caring about the event communication between enpoint and petri net.
  */
-public class OMLPetriNetExportAdapter extends OMLPetriNetExportBase {
+public class OMLPetrinetEndpointExportAdapter extends OMLPetrinetEndpointExportBase {
 
-	private static Logger LOGGER = Logger.getLogger(OMLPetriNetExportAdapter.class);
+	private static Logger LOGGER = Logger.getLogger(OMLPetrinetEndpointExportAdapter.class);
+    private static final int SLEEP_TIMER = 2000;
 
 	private List<Pair<String, Integer>> diffPlaces;
     private List<Pair<String, Integer>> changedPlacesList;
     private Object lockChangedPlacesList;
 
-    public OMLPetriNetExportAdapter(){
-        diffPlaces = new ArrayList<Pair<String, Integer>>();
-        changedPlacesList = new ArrayList<Pair<String, Integer>>();
+    public OMLPetrinetEndpointExportAdapter(){
+        diffPlaces = new LinkedList<Pair<String, Integer>>();
+        changedPlacesList = new LinkedList<Pair<String, Integer>>();
         lockChangedPlacesList = new Object();
     }
 
@@ -38,6 +39,14 @@ public class OMLPetriNetExportAdapter extends OMLPetriNetExportBase {
     @Override
 	public void fire(String s) {
         LOGGER.log(Level.INFO, "transitions fired: " + s);
+
+        //TODO refactoring
+        //mapping slow down transition
+        try {
+            Thread.sleep(SLEEP_TIMER);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         refreshChangedPlacesList(getPlaces(), diffPlaces);
     }
 
@@ -53,7 +62,7 @@ public class OMLPetriNetExportAdapter extends OMLPetriNetExportBase {
             Field field = petriNetClass.getField(name);
             field.setInt(this, value);
 
-            LOGGER.log(Level.INFO, "setting sensor: " + name + " to: " + value);
+            LOGGER.log(Level.TRACE, "setting sensor: " + name + " to: " + value);
         } catch (NoSuchFieldException e) {
             LOGGER.log(Level.ERROR,"unknown petrinet sensor " + name);
         } catch (IllegalAccessException e) {
@@ -62,7 +71,7 @@ public class OMLPetriNetExportAdapter extends OMLPetriNetExportBase {
     }
 
     public List<Pair<String, Integer>> getChangedPlaces(){
-        List<Pair<String, Integer>> changeList = new ArrayList<>();
+        List<Pair<String, Integer>> changeList = new LinkedList<>();
         if(!changedPlacesList.isEmpty()){
             synchronized (lockChangedPlacesList){
                 changeList.addAll(changedPlacesList);
@@ -74,7 +83,7 @@ public class OMLPetriNetExportAdapter extends OMLPetriNetExportBase {
     }
 
     private void addAllPlacesToChangedPlaces(List<Pair<String, Integer>> base){
-        refreshChangedPlacesList(base, new ArrayList<Pair<String, Integer>>());
+        refreshChangedPlacesList(base, new LinkedList<Pair<String, Integer>>());
     }
 
     private void refreshChangedPlacesList(List<Pair<String, Integer>> base, List<Pair<String, Integer>> compare){
@@ -89,7 +98,7 @@ public class OMLPetriNetExportAdapter extends OMLPetriNetExportBase {
     }
 
 	private List<Pair<String, Integer>> getPlaces() {
-        List<Pair<String, Integer>> newPlaces = new ArrayList<Pair<String, Integer>>();
+        List<Pair<String, Integer>> newPlaces = new LinkedList<Pair<String, Integer>>();
 		Class<?> superClass = this.getClass().getSuperclass();
 		Field[] fields = superClass.getDeclaredFields();
 

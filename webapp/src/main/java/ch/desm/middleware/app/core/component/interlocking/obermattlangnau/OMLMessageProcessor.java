@@ -1,13 +1,11 @@
 package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.*;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapInterlockingPetrinet;
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.OMLPetriNetEndpoint;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements.OMLElementFahrstrassenSchalter;
@@ -28,7 +26,7 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
      * @param endpoint
      * @param messages
      */
-    public void processBrokerMessage(OMLEndpointUbw32 endpoint, ArrayList<MessageMiddleware> messages) {
+    public void processBrokerMessage(OMLEndpointUbw32 endpoint, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(endpoint, message);
         }
@@ -46,15 +44,27 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
                 String key = map.mapBrokerToEndpointMessage(globalId);
                 delegateToEndpoint(endpoint, endpoint.getMapDigital(), endpoint.getMapAnalog(), key, parameter, isInput);
             } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
+                //LOGGER.log(Level.WARN, e.getMessage());
             }
         }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
             try {
                 if (isInitProcessMessage(element)) {
-                    initEndpoint(endpoint, element);
+                    if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) {
+                        processInitEndpoint(endpoint, element);
+                    }
                 }else{
                     throw new Exception("unsupported "+MessageBase.MESSAGE_TOPIC_MANAGEMENT+" message: " + element.toString());
                 }
+            } catch (Exception e) {
+                LOGGER.log(Level.ERROR, e);
+            }
+        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
+            try {
+                String globalId = element.getGlobalId();
+                String parameter = util.getParameterValueMiddleware(element.getParameter());
+                boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
+
+                delegateToEndpoint(endpoint, endpoint.getMapDigital(), endpoint.getMapAnalog(), globalId, parameter, isInput);
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
             }
@@ -67,12 +77,11 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void initEndpoint(OMLEndpointUbw32 endpoint, MessageMiddleware element){
+    private void processInitEndpoint(OMLEndpointUbw32 endpoint, MessageMiddleware element){
 
         switch (element.getParameter()) {
             case ("init"): {
-                //TODO uncomment
-                //endpoint.init();
+                endpoint.init();
                 break;
             }
             case ("start"): {
@@ -86,10 +95,23 @@ public class OMLMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
+    //TODO refactoring
     public boolean isInitProcessMessage(MessageMiddleware element){
+
         if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) {
             return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) {
+            return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.fabisch")) {
+            return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.ubw32")) {
+            return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.simulation.locsim.rs232")) {
+            return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.simulation.locsim.dll")) {
+            return true;
         }
+
         return false;
     }
 

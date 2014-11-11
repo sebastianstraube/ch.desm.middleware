@@ -11,7 +11,7 @@ import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMe
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessor {
      * @param messages
      */
     public void processBrokerMessage(Locsim impl,
-                                     ArrayList<MessageMiddleware> messages) {
+                                     LinkedList<MessageMiddleware> messages) {
 
         for (MessageMiddleware message : messages) {
             this.processBrokerMessage(impl, message);

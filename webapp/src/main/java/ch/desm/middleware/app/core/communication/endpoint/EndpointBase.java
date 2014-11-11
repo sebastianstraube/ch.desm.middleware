@@ -10,7 +10,7 @@ import ch.desm.middleware.app.core.communication.message.translator.MessageTrans
  * @author Sebastian
  * 
  */
-public abstract class EndpointBase {
+public abstract class EndpointBase{
 
 	protected Set<EndpointCommonListenerInterface> listeners;
 	protected MessageTranslatorMiddleware messageTranslator;

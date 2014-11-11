@@ -1,8 +1,7 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -15,7 +14,7 @@ import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 
-public class Re420 extends Re420Base implements
+public class Re420 extends Re420BrokerClientBase implements
 		EndpointUbw32ListenerInterface, EndpointFabischListenerInterface {
 
 	private static Logger LOGGER = Logger.getLogger(Re420.class);
@@ -41,7 +40,7 @@ public class Re420 extends Re420Base implements
 		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: "
                 + message);
 
-		ArrayList<MessageMiddleware> messageCommon = translator
+		LinkedList<MessageMiddleware> messageCommon = translator
 				.toMiddlewareMessageList(message);
 
 		processor.processBrokerMessage(this, messageCommon);

@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import ch.desm.middleware.app.core.communication.endpoint.dll.EndpointDllEvent;
 import ch.desm.middleware.app.core.communication.endpoint.dll.objects.EndpointObectDllIsolierstoss;
@@ -44,21 +44,21 @@ public class Dll {
 
 
 	// NOTE: not ideal implementation yet. many instantiations of ArrayLists!
-	private native void getEvents0(ArrayList res);
+	private native void getEvents0(LinkedList res);
 
-	public ArrayList<EndpointDllEvent> getEvents() throws Exception {
-		ArrayList<EndpointDllEvent> result = new ArrayList<EndpointDllEvent>();
-		ArrayList<ArrayList> al = new ArrayList();
+	public LinkedList<EndpointDllEvent> getEvents() throws Exception {
+		LinkedList<EndpointDllEvent> result = new LinkedList<EndpointDllEvent>();
+		LinkedList<LinkedList> al = new LinkedList();
 		getEvents0(al);
 		for (int i = 0; i < al.size(); ++i) {
-			ArrayList<Integer> alEvt = (ArrayList) al.get(i);
+			LinkedList<Integer> alEvt = (LinkedList) al.get(i);
 			if (alEvt.size() < 1) {
 				throw new Exception("invalid result returned");
 			}
 			int type;
             type = (int) (alEvt.get(0));
-            ArrayList<Integer> params;
-            params = new ArrayList<Integer>();
+            LinkedList<Integer> params;
+            params = new LinkedList<Integer>();
             for (int j = 1; j < alEvt.size(); ++j) {
 				params.add((int) alEvt.get(j));
 			}
@@ -69,10 +69,10 @@ public class Dll {
 
 	public native void setKilometerDirection(int richtung);
 
-	private native void getKilometerDirection0(ArrayList res);
+	private native void getKilometerDirection0(LinkedList res);
 
 	public int getKilometerDirection() throws Exception {
-		ArrayList<Integer> al = new ArrayList();
+		LinkedList<Integer> al = new LinkedList();
 		getKilometerDirection0(al);
 		if (al.size() != 1) {
 			throw new Exception("invalid result returned");
@@ -82,10 +82,10 @@ public class Dll {
 
 	public native void setWeiche(int weicheId, int gleisId);
 
-	private native void getWeiche0(int weicheId, ArrayList res);
+	private native void getWeiche0(int weicheId, LinkedList res);
 
 	public EndpointObjectDllWeiche getWeiche(int weicheId) throws Exception {
-		ArrayList<Integer> al = new ArrayList();
+		LinkedList<Integer> al = new LinkedList();
 		getWeiche0(weicheId, al);
 		if (al.size() != 1) {
 			throw new Exception("invalid result returned");
@@ -95,10 +95,10 @@ public class Dll {
 
 	public native void setBalise(int baliseId, int stellung, String protokoll);
 
-	private native void getBalise0(int baliseId, ArrayList res);
+	private native void getBalise0(int baliseId, LinkedList res);
 
 	public EndpointObjectDllBalise getBalise(int baliseId) throws Exception {
-		ArrayList<Integer> al = new ArrayList();
+		LinkedList<Integer> al = new LinkedList();
 		getBalise0(baliseId, al);
 		if (al.size() != 2) {
 			throw new Exception("invalid result returned");
@@ -111,11 +111,11 @@ public class Dll {
 	public native void setIsolierstoss(int isolierstossId, int gleisId,
 			double position);
 
-	private native void getIsolierstoss0(int isolierstossId, ArrayList res);
+	private native void getIsolierstoss0(int isolierstossId, LinkedList res);
 
-    //TODO review ArrayList<Integer>
+    //TODO review LinkedList<Integer>
 	public EndpointObectDllIsolierstoss getIsolierstoss(int isolierstossId) throws Exception {
-		ArrayList<Integer> al = new ArrayList();
+		LinkedList<Integer> al = new LinkedList();
 		getIsolierstoss0(isolierstossId, al);
 		if (al.size() != 2) {
 			throw new Exception("invalid result returned");
@@ -126,11 +126,11 @@ public class Dll {
 
 	public native void setLoop(int baliseId, int stellung, String protokoll);
 
-	private native void getLoop0(int baliseId, ArrayList res);
+	private native void getLoop0(int baliseId, LinkedList res);
 
     //TODO review
 	public EndpointObjectDllLoop getLoop(int baliseId) throws Exception {
-		ArrayList<Integer> al = new ArrayList();
+		LinkedList<Integer> al = new LinkedList();
 		getLoop0(baliseId, al);
 		if (al.size() != 2) {
 			throw new Exception("invalid result returned");
@@ -141,10 +141,10 @@ public class Dll {
 
 	// TODO: public native void setSignal(int baliseId, int stellung, String
 	// protokoll);
-	private native void getSignal0(int signalId, ArrayList res);
+	private native void getSignal0(int signalId, LinkedList res);
 
 	public EndpointObjectDllSignal getSignal(int signalId) throws Exception {
-		ArrayList<Integer> al = new ArrayList();
+		LinkedList<Integer> al = new LinkedList();
 		getSignal0(signalId, al);
 		if (al.size() != 2) {
 			throw new Exception("invalid result returned");
@@ -155,11 +155,11 @@ public class Dll {
 
 	// TODO: public native void setTrack(int baliseId, int stellung, String
 	// protokoll);
-	private native void getTrack0(int gleisId, ArrayList res);
+	private native void getTrack0(int gleisId, LinkedList res);
 
     //TODO review
 	public EndpointObjectDllTrack getTrack(int gleisId) throws Exception {
-		ArrayList<Integer> al = new ArrayList();
+		LinkedList<Integer> al = new LinkedList();
 		getTrack0(gleisId, al);
 		if (al.size() != 4) {
 			throw new Exception("invalid result returned");
@@ -173,12 +173,12 @@ public class Dll {
 	// TODO: public native void setTrackConnection(int baliseId, int stellung,
 	// String protokoll);
 	private native void getTrackConnection0(int gleis1Id, int gleis2Id,
-			ArrayList res);
+			LinkedList res);
 
     //TODO review
 	public EndpointObjectDllTrackConnection getTrackConnection(int gleis1Id, int gleis2Id)
 			throws Exception {
-		ArrayList<Integer> al = new ArrayList();
+		LinkedList<Integer> al = new LinkedList();
 		getTrackConnection0(gleis1Id, gleis2Id, al);
 		if (al.size() != 6) {
 			throw new Exception("invalid result returned");
@@ -196,13 +196,13 @@ public class Dll {
 	}
 
 	// TODO: public native void setTrainPosition(int weicheId, int gleisId);
-	private native void getTrainPosition0(int trainTyp, ArrayList res,
-			ArrayList positions, ArrayList gleisList);
+	private native void getTrainPosition0(int trainTyp, LinkedList res,
+			LinkedList positions, LinkedList gleisList);
 
 	public EndpointObjectDllTrainPosition getTrainPosition(int trainTyp) throws Exception {
-		ArrayList<Integer> al = new ArrayList();
-		ArrayList alP = new ArrayList();
-		ArrayList alG = new ArrayList();
+		LinkedList<Integer> al = new LinkedList();
+		LinkedList alP = new LinkedList();
+		LinkedList alG = new LinkedList();
 		getTrainPosition0(trainTyp, al, alP, alG);
 		if (al.size() != 1) {
 			throw new Exception("invalid result returned");

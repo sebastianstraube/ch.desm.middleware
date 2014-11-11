@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.*;
@@ -257,7 +257,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 
 	}
 
-    public void processBrokerMessage(Re420 impl, ArrayList<MessageMiddleware> messages) {
+    public void processBrokerMessage(Re420 impl, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             this.processBrokerMessage(impl, message);
         }

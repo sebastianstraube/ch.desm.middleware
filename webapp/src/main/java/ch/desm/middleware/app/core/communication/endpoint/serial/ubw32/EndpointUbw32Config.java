@@ -6,7 +6,7 @@ public class EndpointUbw32Config {
 	public static final String RETURN_PIN_INPUT = "PI";
 	public static final String RETURN_INPUT_ANALOG = "IA";
 	public static final String MESSAGE_TERMINATOR = "\n";
-	public static int SLEEP_POLLING = 1024;
+	public static int SLEEP_POLLING = 12;
 	public static int SLEEP_SENDING = 64;				//
 	public static boolean CACHE_ENABLED = false; 			// at simulation start false, when ini7 received then true
 	public static final double ANALOG_DRIFT_MAX = 4;		// 3.9

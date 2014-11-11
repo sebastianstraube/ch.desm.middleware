@@ -16,7 +16,7 @@ public class OMLEndpointUbw32 extends EndpointUbw32 {
 	
 	this.mapAnalog = new OMLMapUbw32Analog();
 	this.mapDigital = new OMLMapUbw32Digital();
-	}
+    }
 
     public OMLMapUbw32Digital getMapDigital(){
         return this.mapDigital;

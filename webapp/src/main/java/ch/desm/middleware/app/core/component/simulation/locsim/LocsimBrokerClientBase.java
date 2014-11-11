@@ -1,23 +1,24 @@
 package ch.desm.middleware.app.core.component.simulation.locsim;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.component.ComponentBase;
+import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 
-abstract class LocsimBase extends ComponentBase {
+abstract class LocsimBrokerClientBase extends ComponentBrokerClientBase {
 
 	protected LocsimEndpointRs232 endpointRs232;
 	protected LocsimEndpointDll endpointDll;
 	
-	public LocsimBase(Broker broker,
-			LocsimEndpointRs232 endpointRs232,
-			LocsimEndpointDll endpointDll) {
+	public LocsimBrokerClientBase(Broker broker,
+                                  LocsimEndpointRs232 endpointRs232,
+                                  LocsimEndpointDll endpointDll) {
 		super(broker);
 		
 		this.endpointRs232 = endpointRs232;
 		this.endpointDll = endpointDll;
-		
-		this.registerEndpointListener(endpointRs232);
-		this.registerEndpointListener(endpointDll);
+
+        //TODO refactoring
+		//this.registerEndpointListener(endpointRs232);
+		//this.registerEndpointListener(endpointDll);
 	}	
 	
 	public LocsimEndpointRs232 getEndpointRs232(){

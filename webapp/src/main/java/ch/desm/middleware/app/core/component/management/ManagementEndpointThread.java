@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.management;
 
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -31,7 +31,7 @@ public class ManagementEndpointThread extends DaemonThreadBase {
     }
 
     private void checkMessages(){
-        ArrayList<String> pendingMessageQueueCopy = new ArrayList<String>();
+        LinkedList<String> pendingMessageQueueCopy = new LinkedList<String>();
 
         synchronized (pendingMessageQueueLock){
             pendingMessageQueueCopy.addAll(pendingMessageQueue);

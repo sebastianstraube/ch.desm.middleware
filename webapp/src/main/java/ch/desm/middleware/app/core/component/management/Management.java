@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.management;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageDecoder;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageEncoder;
@@ -15,7 +15,7 @@ import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import javax.websocket.DecodeException;
 import javax.websocket.EncodeException;
 
-public class Management extends ManagementBase{
+public class Management extends ManagementBrokerClientBase {
 
 	private static Logger LOGGER = Logger.getLogger(Management.class);
 	
@@ -53,7 +53,7 @@ public class Management extends ManagementBase{
 		LOGGER.log(Level.TRACE, "receive broker message: " + message);
 		
 		//translation
-		ArrayList<MessageMiddleware> messageList = translator.toMiddlewareMessageList(message);
+		LinkedList<MessageMiddleware> messageList = translator.toMiddlewareMessageList(message);
 		
 		//send all messages
 		for(MessageMiddleware element: messageList){

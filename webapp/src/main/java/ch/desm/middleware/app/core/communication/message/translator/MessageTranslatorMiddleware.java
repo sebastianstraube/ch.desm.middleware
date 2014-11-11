@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.message.translator;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
@@ -21,7 +21,7 @@ public class MessageTranslatorMiddleware extends MessageTranslatorMiddlewareBase
 	 * @param stream
 	 * 
 	 */
-	public ArrayList<MessageMiddleware> toMiddlewareMessageList(String stream){
+	public LinkedList<MessageMiddleware> toMiddlewareMessageList(String stream){
 		return decodeMiddlewareMessages(stream);
 	}
 	

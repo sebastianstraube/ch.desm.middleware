@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.core.communication.endpoint;
 
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.OMLPetriNetExportThread;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -14,6 +13,8 @@ public abstract class EndpointCommon extends EndpointBase {
 
     public abstract void stop();
 
+    protected abstract void registerEndpointListener(EndpointBase listener);
+
 	public void onIncomingEndpointMessage(String message) {
 		
 		try{
@@ -21,20 +22,12 @@ public abstract class EndpointCommon extends EndpointBase {
 				throw new IllegalStateException("no listeners registered");
 			}
 		}catch(IllegalStateException e){
-			LOGGER.log(Level.WARN, e);
+			LOGGER.log(Level.ERROR, e);
 		}
 		
 		for (EndpointCommonListenerInterface listener : this.listeners) {
 			listener.onIncomingEndpointMessage(message);
 		}
-	}
-
-	/**
-	 * test endpoint message handling
-	 * @param message
-	 */
-	public void emulateEndpointMessage(String message) {
-		onIncomingEndpointMessage(message);
 	}
 
 	@Override
@@ -44,4 +37,13 @@ public abstract class EndpointCommon extends EndpointBase {
 		}
         this.listeners.add(listener);
 	}
+
+    /**
+     * test endpoint message handling
+     * @param message
+     */
+    public void emulateEndpointMessage(String message) {
+        onIncomingEndpointMessage(message);
+    }
+
 }

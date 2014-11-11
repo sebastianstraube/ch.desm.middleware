@@ -1,13 +1,13 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.component.ComponentBase;
+import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 
-abstract class ZusiBase extends ComponentBase {
+abstract class ZusiBrokerClientBase extends ComponentBrokerClientBase {
 
 	protected ZusiEndpointTcp endpoint;
 
-	public ZusiBase(Broker broker, ZusiEndpointTcp endpoint) {
+	public ZusiBrokerClientBase(Broker broker, ZusiEndpointTcp endpoint) {
 		super(broker);
 		this.endpoint = endpoint;
 		this.registerEndpointListener(endpoint);

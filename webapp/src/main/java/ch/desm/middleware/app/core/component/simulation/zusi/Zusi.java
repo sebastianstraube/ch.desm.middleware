@@ -8,7 +8,7 @@ import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClientL
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 
 
-public class Zusi extends ZusiBase implements EndpointTcpClientListenerInterface{
+public class Zusi extends ZusiBrokerClientBase implements EndpointTcpClientListenerInterface{
 
 	private static Logger LOGGER = Logger.getLogger(Zusi.class);
 	

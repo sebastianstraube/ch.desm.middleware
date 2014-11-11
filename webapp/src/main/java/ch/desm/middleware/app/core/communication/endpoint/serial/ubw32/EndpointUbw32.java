@@ -201,14 +201,13 @@ public class EndpointUbw32 extends EndpointUbw32Base {
 	@Override
 	protected void sendStream(String command) {
 		try {
-
-			Thread.sleep(EndpointUbw32Config.SLEEP_SENDING);
 			command += EndpointUbw32Config.MESSAGE_TERMINATOR;
 			
 			LOGGER.log(Level.TRACE, "message send to ubw(" + serialPort.getPortName()
                     + "): " + command.replaceAll("\n", ""));
-			
+
 			super.sendStream(command);
+            Thread.sleep(EndpointUbw32Config.SLEEP_SENDING);
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

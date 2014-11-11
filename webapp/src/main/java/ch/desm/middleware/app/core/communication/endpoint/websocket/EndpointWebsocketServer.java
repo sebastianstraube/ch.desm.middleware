@@ -30,7 +30,7 @@ public class EndpointWebsocketServer {
         session.setMaxIdleTimeout(MAX_CLIENT_IDLE_TIME);
         sessions.add(session);
 
-        LOGGER.log(Level.TRACE, "Websocket Connected: " + session);
+        LOGGER.log(Level.INFO, "Client Connected to WebsocketServer with session: " + session);
     }
 
     @OnMessage

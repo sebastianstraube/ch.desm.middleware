@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.message;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Arrays;
 
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32RegisterAnalog;
@@ -45,7 +45,7 @@ public class MessageUbw32Analog extends MessageUbw32Base {
 		payload = payload.substring(payload.lastIndexOf("A,")+2, payload.length());
 		String parts[] = payload.split(",");
 
-		ArrayList<String> list = new ArrayList<String>(Arrays.asList(parts));
+		LinkedList<String> list = new LinkedList<String>(Arrays.asList(parts));
 
 		int nrPorts = Integer.toBinaryString(Integer
 				.valueOf(Re420MapUbw32Analog.PINBITMASK_INPUT_ANALOG)).length();

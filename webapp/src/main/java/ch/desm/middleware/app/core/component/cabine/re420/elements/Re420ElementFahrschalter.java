@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.cabine.re420.elements;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -22,7 +22,7 @@ public class Re420ElementFahrschalter {
 	/**
 	 * TODO refactoring
 	 */
-	public ArrayList<String> keyListFahrschalter;
+	public LinkedList<String> keyListFahrschalter;
 	private Re420MapFahrschalter map;
 	
 	public Re420ElementFahrschalter(){
@@ -185,7 +185,7 @@ public class Re420ElementFahrschalter {
 	}
 	
 	private void initializeFahrschalter(){
-		keyListFahrschalter = new ArrayList<String>();
+		keyListFahrschalter = new LinkedList<String>();
 		keyListFahrschalter.add("s150a");
 		keyListFahrschalter.add("s150b");
 		keyListFahrschalter.add("s150d");

@@ -20,7 +20,7 @@ public class OMLMapInterlockingPetrinet extends ComponentMapBase{
     }
 
     public String mapBrokerToEndpointMessage(String message) throws Exception {
-        String mappedMessage = this.getValue(message);
+        String mappedMessage = this.getKey(message);
         if(mappedMessage.isEmpty()) {
             throw new Exception("unable to map broker message \"" + message + "\"");
         }
