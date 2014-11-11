@@ -15,7 +15,8 @@ abstract class OMLBrokerClientBase extends ComponentBrokerClientBase {
 		super(broker);
 		this.endpoint = endpoint;
 
-		this.registerEndpointListener(endpoint);
+        //TODO refactoring
+		//this.registerEndpointListener(endpoint);
 	}
 
 	public OMLEndpointUbw32 getEndpoint() {

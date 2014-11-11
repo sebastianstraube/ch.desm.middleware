@@ -12,13 +12,13 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 04.11.2014.
  */
-public class OmlPetrinetMessageProcessor extends ComponentMessageProcessor {
+public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
 
-    private static Logger LOGGER = Logger.getLogger(OMLPetrinetBrokerClient.class);
+    private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClient.class);
 
     private OMLMapPetrinetOml map;
 
-    public OmlPetrinetMessageProcessor(){
+    public PetrinetOmlMessageProcessor(){
         map = new OMLMapPetrinetOml();
     }
 
@@ -26,13 +26,13 @@ public class OmlPetrinetMessageProcessor extends ComponentMessageProcessor {
      * @param endpoint
      * @param messages
      */
-    public void processBrokerMessage(OMLPetrinetEndpoint endpoint, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(PetrinetOmlEndpoint endpoint, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(endpoint, message);
         }
     }
 
-    private void processBrokerMessage(OMLPetrinetEndpoint endpoint, MessageMiddleware element){
+    private void processBrokerMessage(PetrinetOmlEndpoint endpoint, MessageMiddleware element){
 
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
             try {
@@ -68,7 +68,7 @@ public class OmlPetrinetMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void processInitEndpoint(OMLPetrinetEndpoint endpoint, MessageMiddleware element){
+    private void processInitEndpoint(PetrinetOmlEndpoint endpoint, MessageMiddleware element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -86,7 +86,7 @@ public class OmlPetrinetMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void delegateToEndpoint(OMLPetrinetEndpoint endpoint, String sensorName, int sensorValue){
+    private void delegateToEndpoint(PetrinetOmlEndpoint endpoint, String sensorName, int sensorValue){
         endpoint.setSensor(sensorName, sensorValue);
     }
 

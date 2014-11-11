@@ -11,24 +11,24 @@ import ch.desm.middleware.app.core.utility.Pair;
 
 import javax.websocket.EncodeException;
 
-public class OMLPetrinetEndpointExportThread extends DaemonThreadBase {
+public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(OMLPetrinetEndpointExportThread.class);
+    private static Logger LOGGER = Logger.getLogger(PetrinetOmlEndpointExportThread.class);
     private static int SLEEP_INTERVAL = 512;
 
     private Object pendingSensorEventsLock;
     private List<Pair<String, Integer>> pendingSensorEvents;
-    private OMLPetrinetBrokerClient petrinet;
-    private OMLPetrinetEndpointExportAdapter petrinetAdapter;
+    private PetrinetOmlBrokerClient petrinet;
+    private PetrinetOmlEndpointExportAdapter petrinetAdapter;
 
 
-    public OMLPetrinetEndpointExportThread(String threadName, OMLPetrinetBrokerClient petrinet) {
+    public PetrinetOmlEndpointExportThread(String threadName, PetrinetOmlBrokerClient petrinet) {
         super(threadName);
 
         this.pendingSensorEventsLock = new Object();
         this.pendingSensorEvents = new LinkedList<Pair<String, Integer>>();
         this.petrinet = petrinet;
-        this.petrinetAdapter = new OMLPetrinetEndpointExportAdapter();
+        this.petrinetAdapter = new PetrinetOmlEndpointExportAdapter();
 
     }
 

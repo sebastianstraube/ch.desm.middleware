@@ -9,16 +9,16 @@ import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 
-public class OMLPetrinetEndpoint extends EndpointCommon implements EndpointCommonListenerInterface {
+public class PetrinetOmlEndpoint extends EndpointCommon implements EndpointCommonListenerInterface {
 
-    private static Logger LOGGER = Logger.getLogger(OMLPetrinetEndpoint.class);
+    private static Logger LOGGER = Logger.getLogger(PetrinetOmlEndpoint.class);
 
-    private OMLPetrinetBrokerClient petrinet;
-    private OMLPetrinetEndpointExportThread petriNetThread;
+    private PetrinetOmlBrokerClient petrinet;
+    private PetrinetOmlEndpointExportThread petriNetThread;
 
-    public OMLPetrinetEndpoint(OMLPetrinetBrokerClient petrinet){
+    public PetrinetOmlEndpoint(PetrinetOmlBrokerClient petrinet){
         this.petrinet = petrinet;
-        petriNetThread = new OMLPetrinetEndpointExportThread("OMLPetriNetSimulationThread", petrinet);
+        petriNetThread = new PetrinetOmlEndpointExportThread("OMLPetriNetSimulationThread", petrinet);
     }
 
     @Override

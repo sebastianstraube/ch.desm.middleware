@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
 import org.apache.log4j.Logger;
 
-abstract class OMLPetrinetEndpointExportBase {
+abstract class PetrinetOmlEndpointExportBase {
     public int W1_keine_Endlage_minus;
     public int Fstr_ef_E_Halt;
     public int Fstr_ef_E_Fahrt1;

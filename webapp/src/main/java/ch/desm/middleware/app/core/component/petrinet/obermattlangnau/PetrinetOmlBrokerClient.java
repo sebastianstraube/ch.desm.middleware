@@ -13,25 +13,25 @@ import ch.desm.middleware.app.core.communication.message.translator.MessageTrans
 /**
  * Created by max on 06/08/14.
  */
-public class OMLPetrinetBrokerClient extends ComponentBrokerClientBase {
-    private static Logger LOGGER = Logger.getLogger(OMLPetrinetBrokerClient.class);
+public class PetrinetOmlBrokerClient extends ComponentBrokerClientBase {
+    private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClient.class);
 
-    private OMLPetrinetBrokerClientThread oMLPetriNetThread;
+    private PetrinetOmlBrokerClientThread oMLPetriNetThread;
     private MessageTranslatorMiddleware translator;
-    private OmlPetrinetMessageProcessor processor;
-    private OMLPetrinetEndpoint endpoint;
+    private PetrinetOmlMessageProcessor processor;
+    private PetrinetOmlEndpoint endpoint;
     private PetrinetMessageEncoder encoder;
     private PetrinetMessageDecoder decoder;
     private ComponentMapMiddleware componentMapMiddleware;
 
-    public OMLPetrinetBrokerClient(Broker broker, OMLPetrinetEndpoint endpoint) {
+    public PetrinetOmlBrokerClient(Broker broker, PetrinetOmlEndpoint endpoint) {
         super(broker);
-        this.oMLPetriNetThread = new OMLPetrinetBrokerClientThread(this);
+        this.oMLPetriNetThread = new PetrinetOmlBrokerClientThread(this);
         this.oMLPetriNetThread.start();
 
         this.translator = new MessageTranslatorMiddleware();
         this.endpoint = endpoint;
-        this.processor = new OmlPetrinetMessageProcessor();
+        this.processor = new PetrinetOmlMessageProcessor();
         this.encoder = new PetrinetMessageEncoder();
         this.decoder = new PetrinetMessageDecoder();
         this.componentMapMiddleware = new ComponentMapMiddleware();
@@ -49,11 +49,11 @@ public class OMLPetrinetBrokerClient extends ComponentBrokerClientBase {
         signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
     }
 
-    public OmlPetrinetMessageProcessor getProcessor(){
+    public PetrinetOmlMessageProcessor getProcessor(){
         return processor;
     }
 
-    public OMLPetrinetEndpoint getEndpoint(){
+    public PetrinetOmlEndpoint getEndpoint(){
         return endpoint;
     }
 

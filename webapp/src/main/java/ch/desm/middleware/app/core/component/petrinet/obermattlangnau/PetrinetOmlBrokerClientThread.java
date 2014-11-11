@@ -10,13 +10,13 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class OMLPetrinetBrokerClientThread extends ComponentBrokerClientThreadBase {
+public class PetrinetOmlBrokerClientThread extends ComponentBrokerClientThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(OMLPetrinetBrokerClientThread.class);
-    private OMLPetrinetBrokerClient petrinet;
+    private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClientThread.class);
+    private PetrinetOmlBrokerClient petrinet;
     private Object processMessagesLock;
 
-    public OMLPetrinetBrokerClientThread(OMLPetrinetBrokerClient petrinet){
+    public PetrinetOmlBrokerClientThread(PetrinetOmlBrokerClient petrinet){
         this.petrinet = petrinet;
         this.processMessagesLock = new Object();
     }

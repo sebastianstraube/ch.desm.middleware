@@ -12,16 +12,16 @@ import org.apache.log4j.Logger;
  * wrapper class around the petri net class provided by the pnlm export that is
  * caring about the event communication between enpoint and petri net.
  */
-public class OMLPetrinetEndpointExportAdapter extends OMLPetrinetEndpointExportBase {
+public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportBase {
 
-	private static Logger LOGGER = Logger.getLogger(OMLPetrinetEndpointExportAdapter.class);
+	private static Logger LOGGER = Logger.getLogger(PetrinetOmlEndpointExportAdapter.class);
     private static final int SLEEP_TIMER = 2000;
 
 	private List<Pair<String, Integer>> diffPlaces;
     private List<Pair<String, Integer>> changedPlacesList;
     private Object lockChangedPlacesList;
 
-    public OMLPetrinetEndpointExportAdapter(){
+    public PetrinetOmlEndpointExportAdapter(){
         diffPlaces = new LinkedList<Pair<String, Integer>>();
         changedPlacesList = new LinkedList<Pair<String, Integer>>();
         lockChangedPlacesList = new Object();

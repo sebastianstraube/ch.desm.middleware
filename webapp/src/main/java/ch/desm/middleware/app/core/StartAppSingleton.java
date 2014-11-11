@@ -11,8 +11,8 @@ import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OML;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OMLEndpointUbw32;
 import ch.desm.middleware.app.core.component.management.Management;
 import ch.desm.middleware.app.core.component.management.ManagementEndpoint;
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.OMLPetrinetBrokerClient;
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.OMLPetrinetEndpoint;
+import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlBrokerClient;
+import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlEndpoint;
 import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
@@ -52,8 +52,8 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 	
 	public boolean startOmlPetrinet(){
-        OMLPetrinetEndpoint endpoint = new OMLPetrinetEndpoint();
-        OMLPetrinetBrokerClient petriNetBase = new OMLPetrinetBrokerClient(Broker.getInstance(), endpoint);
+        PetrinetOmlEndpoint endpoint = new PetrinetOmlEndpoint();
+        PetrinetOmlBrokerClient petriNetBase = new PetrinetOmlBrokerClient(Broker.getInstance(), endpoint);
         
         return true;       
 	}
@@ -96,8 +96,8 @@ public class StartAppSingleton extends DaemonThreadBase {
 		
 		
 		//Test Petrinet
-		OMLPetrinetEndpoint omlPetrinetEndpoint = new OMLPetrinetEndpoint();
-		OMLPetrinetBrokerClient omlPetrinetBrokerClient = new OMLPetrinetBrokerClient(Broker.getInstance(), omlPetrinetEndpoint);
+		PetrinetOmlEndpoint petrinetOmlEndpoint = new PetrinetOmlEndpoint();
+		PetrinetOmlBrokerClient petrinetOmlBrokerClient = new PetrinetOmlBrokerClient(Broker.getInstance(), petrinetOmlEndpoint);
 
 		
 		//Test Interlocking
@@ -106,7 +106,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 		
 		//FSS 10°
-		omlPetrinetBrokerClient.emulateBrokerMessage("10.99.07;i;1;kontakt;isolierung;belegt;on;stellwerkobermattlangnau;#");
+		petrinetOmlBrokerClient.emulateBrokerMessage("10.99.07;i;1;kontakt;isolierung;belegt;on;stellwerkobermattlangnau;#");
 	}
 
 	/**
@@ -163,8 +163,8 @@ public class StartAppSingleton extends DaemonThreadBase {
 	 * 
 	 */
 	public void testEndpointPetriNet(Broker broker){
-        OMLPetrinetEndpoint endpoint = new OMLPetrinetEndpoint();
-        OMLPetrinetBrokerClient petriNetBase = new OMLPetrinetBrokerClient(broker, endpoint);
+        PetrinetOmlEndpoint endpoint = new PetrinetOmlEndpoint();
+        PetrinetOmlBrokerClient petriNetBase = new PetrinetOmlBrokerClient(broker, endpoint);
         
 		//Test Interlocking
 		OMLEndpointUbw32 omlEndpoint = new OMLEndpointUbw32(EndpointRs232.EnumSerialPorts.COM9);
