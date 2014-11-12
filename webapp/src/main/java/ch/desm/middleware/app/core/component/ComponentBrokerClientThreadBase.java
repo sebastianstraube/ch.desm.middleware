@@ -43,9 +43,7 @@ public abstract class ComponentBrokerClientThreadBase extends DaemonThreadBase {
     public void run(){
 
         while(!interrupted()){
-
-                processBrokerMessages();
-
+               processBrokerMessages();
             try {
                 doHangout();
             } catch (InterruptedException e) {

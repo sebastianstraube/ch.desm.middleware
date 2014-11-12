@@ -17,6 +17,7 @@ public class PetrinetOmlEndpoint extends EndpointCommon {
     private PetrinetOmlEndpointExportThread petriNetThread;
 
     public PetrinetOmlEndpoint(PetrinetOmlService service){
+        super();
         this.service = service;
         petriNetThread = new PetrinetOmlEndpointExportThread("OMLPetriNetSimulationThread", service);
     }

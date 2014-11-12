@@ -15,8 +15,7 @@ public class StartApp {
 
         while(!server.isStarted()){
             try {
-                Thread.sleep(500);
-
+                Thread.sleep(125);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

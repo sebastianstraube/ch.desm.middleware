@@ -24,6 +24,8 @@ public class ManagementEndpoint extends EndpointCommon {
     private URI serverUri;
 
     public ManagementEndpoint(ManagementService service, String uri){
+        super();
+
         thread = new ManagementEndpointThread(this);
         serverUri = URI.create(uri);
         this.service = service;

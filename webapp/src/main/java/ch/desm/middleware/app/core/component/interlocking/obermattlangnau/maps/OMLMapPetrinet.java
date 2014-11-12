@@ -4,7 +4,7 @@ import java.util.Map;
 
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 
-public class OMLMapInterlockingPetrinet extends ComponentMapBase{
+public class OMLMapPetrinet extends ComponentMapBase{
 
 	@Override
 	public Map<String, String> getMap() {

@@ -10,13 +10,13 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class PetrinetOmlBrokerClientThread extends ComponentBrokerClientThreadBase {
+public class PetrinetOmlBrokerClientAdapter extends ComponentBrokerClientThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClientThread.class);
+    private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClientAdapter.class);
     private PetrinetOmlService service;
     private Object processMessagesLock;
 
-    public PetrinetOmlBrokerClientThread(PetrinetOmlService service){
+    public PetrinetOmlBrokerClientAdapter(PetrinetOmlService service){
         this.service = service;
         this.processMessagesLock = new Object();
     }
@@ -25,8 +25,11 @@ public class PetrinetOmlBrokerClientThread extends ComponentBrokerClientThreadBa
     public void processBrokerMessages() {
         synchronized (processMessagesLock){
             LinkedList<MessageMiddleware> messages = getMessages();
-            LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
-            service.getProcessor().processBrokerMessage(service.getEndpoint(), messages);
+
+            if(!messages.isEmpty()){
+                LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
+                service.getProcessor().processBrokerMessage(service.getEndpoint(), messages);
+            }
         }
 
     }

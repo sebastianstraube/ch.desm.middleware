@@ -3,7 +3,7 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.OMLMapPetrinetOml;
+import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.PetrinetMapOml;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -16,10 +16,10 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClient.class);
 
-    private OMLMapPetrinetOml map;
+    private PetrinetMapOml map;
 
     public PetrinetOmlMessageProcessor(){
-        map = new OMLMapPetrinetOml();
+        map = new PetrinetMapOml();
     }
 
     /**

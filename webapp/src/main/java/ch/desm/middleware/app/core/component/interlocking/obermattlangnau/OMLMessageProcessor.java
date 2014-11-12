@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapInterlockingPetrinet;
+import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapPetrinet;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements.OMLElementFahrstrassenSchalter;
@@ -15,12 +15,12 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
 	private static Logger LOGGER = Logger.getLogger(OmlMessageProcessor.class);
 
 	private OMLElementFahrstrassenSchalter fahrStrassenSchalter;
-    private OMLMapInterlockingPetrinet map;
+    private OMLMapPetrinet map;
     private OmlService service;
 
     public OmlMessageProcessor(OmlService service) {
 		this.fahrStrassenSchalter = new OMLElementFahrstrassenSchalter();
-        this.map = new OMLMapInterlockingPetrinet();
+        this.map = new OMLMapPetrinet();
         this.service = service;
 	}
 

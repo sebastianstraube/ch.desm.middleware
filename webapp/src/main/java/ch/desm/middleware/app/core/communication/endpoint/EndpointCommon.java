@@ -12,6 +12,10 @@ public abstract class EndpointCommon extends EndpointBase implements EndpointCom
     public abstract void stop();
     protected abstract void registerEndpointListener(EndpointBase listener);
 
+    public EndpointCommon(){
+        this.registerEndpointListener(this);
+    }
+
 	public void onIncomingEndpointMessage(String message) {
 		
 		try{

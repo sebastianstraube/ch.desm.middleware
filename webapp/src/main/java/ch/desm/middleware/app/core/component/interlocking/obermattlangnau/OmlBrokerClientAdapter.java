@@ -10,13 +10,13 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class OmlBrokerClientThread extends ComponentBrokerClientThreadBase {
+public class OmlBrokerClientAdapter extends ComponentBrokerClientThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(OmlBrokerClientThread.class);
+    private static Logger LOGGER = Logger.getLogger(OmlBrokerClientAdapter.class);
     private OmlService service;
     private Object processMessagesLock;
 
-    public OmlBrokerClientThread(OmlService service){
+    public OmlBrokerClientAdapter(OmlService service){
         this.service = service;
         this.processMessagesLock = new Object();
     }
@@ -25,8 +25,11 @@ public class OmlBrokerClientThread extends ComponentBrokerClientThreadBase {
     public void processBrokerMessages() {
         synchronized (processMessagesLock){
             LinkedList<MessageMiddleware> messages = this.getMessages();
-            LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
-            service.getProcessor().processBrokerMessage(service.getEndpoint(), messages);
+
+            if(!messages.isEmpty()){
+                LOGGER.log(Level.INFO, "processing broker message: " + messages.toString());
+                service.getProcessor().processBrokerMessage(service.getEndpoint(), messages);
+            }
         }
     }
 }

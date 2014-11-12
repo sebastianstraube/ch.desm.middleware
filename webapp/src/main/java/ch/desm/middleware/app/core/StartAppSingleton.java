@@ -38,8 +38,8 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 
 	public void run(){
-		startManagement();
-		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM10);
+		startManagement("ws://Heisenberg:80/gui/management");
+		startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM11);
         startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
 
@@ -47,8 +47,8 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 	}
 
-	public boolean startManagement(){
-        ManagementService management = new ManagementService(Broker.getInstance(), EndpointRs232.EnumSerialPorts.COM1);
+	public boolean startManagement(String uri){
+        ManagementService management = new ManagementService(Broker.getInstance(), uri);
 
 		return true;
 	}
@@ -60,7 +60,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 	
 	public void startOmlStellwerk(EndpointRs232.EnumSerialPorts port){
-        OmlService oml = new OmlService(Broker.getInstance(), EndpointRs232.EnumSerialPorts.COM1);
+        OmlService oml = new OmlService(Broker.getInstance(), port);
 	}
 	
 	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){
