@@ -2,9 +2,6 @@ package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
 
 public class EndpointUbw32Config {
 
-	public static final String RETURN_INPUT_STATE = "I";
-	public static final String RETURN_PIN_INPUT = "PI";
-	public static final String RETURN_INPUT_ANALOG = "IA";
 	public static final String MESSAGE_TERMINATOR = "\n";
 	public static int SLEEP_POLLING = 12;
 	public static int SLEEP_SENDING = 64;				//

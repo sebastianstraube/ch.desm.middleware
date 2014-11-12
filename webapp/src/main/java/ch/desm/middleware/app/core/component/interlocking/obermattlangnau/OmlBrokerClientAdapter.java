@@ -27,7 +27,7 @@ public class OmlBrokerClientAdapter extends ComponentBrokerClientThreadBase {
             LinkedList<MessageMiddleware> messages = this.getMessages();
 
             if(!messages.isEmpty()){
-                LOGGER.log(Level.INFO, "processing broker message: " + messages.toString());
+                LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
                 service.getProcessor().processBrokerMessage(service.getEndpoint(), messages);
             }
         }

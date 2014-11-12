@@ -64,7 +64,9 @@ public class EndpointUbw32Cache {
 			portAN14 = new EndpointUbw32RegisterAnalog("20384");
 			portAN15 = new EndpointUbw32RegisterAnalog("40768");
 
-			String pinbitmask = getPinBitMaskIA(message);
+            LOGGER.log(Level.INFO, "analog state message:" + message);
+
+            String pinbitmask = getPinBitMaskIA(message);
 
 			if (!stateMapIA.isEmpty() && stateMapIA.get(pinbitmask) != null) {
 				String inputValue = getInputValue(message);
@@ -146,7 +148,7 @@ public class EndpointUbw32Cache {
 		}
 
 		if (isChanged) {
-			LOGGER.debug("state changed on ubw("
+			LOGGER.log(Level.TRACE, "cache state changed on ubw("
 					+ serialPort.getPortName() + "): " + message);
 		}
 		

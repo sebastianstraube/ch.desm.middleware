@@ -33,7 +33,7 @@ public class OmlBrokerClient extends ComponentBrokerClientBase {
 
     @Override
 	protected void onIncomingBrokerMessage(String message) {
-		LOGGER.log(Level.INFO, "broker (" + this.getClass() + ") received message: " + message);
+		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: " + message);
 		thread.addMessages(service.getTranslator().toMiddlewareMessageList(message));
 	}
 }

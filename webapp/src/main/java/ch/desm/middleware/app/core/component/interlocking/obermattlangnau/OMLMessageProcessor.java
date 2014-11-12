@@ -228,27 +228,18 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
 					}
 
 					// convert input to common parameter
-					String parameter = message.getInputValue(entry.getValue(),
-							"");
-
+					String parameter = message.getInputValue(entry.getValue(),"");
 					// handle Fahrstrassenschalter (FSS)
-					String globalIdFSS = fahrStrassenSchalter
-							.getglobalId(Integer.valueOf(parameter));
+					String globalIdFSS = fahrStrassenSchalter.getglobalId(Integer.valueOf(parameter));
 
 					if (!globalIdFSS.isEmpty()) {
-						stream = fahrStrassenSchalter.getStream(parameter);
-						stream = stream.replaceAll(
-								MessageCommon.PARAMETER_PLACEHOLDER, parameter);
-						middlewareMessagesInput = middlewareMessagesInput
-								.concat(stream);
+                        stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_ON);
 
 					} else {
-						stream = stream.replaceAll(
-								MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+						stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_OFF);
 					}
 
-					middlewareMessagesInput = middlewareMessagesInput
-							.concat(stream);
+					middlewareMessagesInput = middlewareMessagesInput.concat(stream);
 				}
 			}
 		}

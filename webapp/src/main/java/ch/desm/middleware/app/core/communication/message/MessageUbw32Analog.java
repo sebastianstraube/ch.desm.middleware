@@ -42,13 +42,16 @@ public class MessageUbw32Analog extends MessageUbw32Base {
 	 */
 	protected void parsePayload(String payload) {
 
-		payload = payload.substring(payload.lastIndexOf("A,")+2, payload.length());
-		String parts[] = payload.split(",");
+        String payloadArray[] = payload.split("\n");
+        //int nrPorts = Integer.toBinaryString(Integer.valueOf(Re420MapUbw32Analog.PINBITMASK_INPUT_ANALOG)).length();
+        //String valueStream = payload.substring(payload.lastIndexOf("A,")+2, payload.length());
+        String config[] = payloadArray[0].split(",");
+        int nrPorts = Integer.valueOf(config[1]);
+        String valueStream = payloadArray[1].substring(3, payloadArray[1].length());
+        String values[] = valueStream.split(",");
 
-		LinkedList<String> list = new LinkedList<String>(Arrays.asList(parts));
+		LinkedList<String> list = new LinkedList<String>(Arrays.asList(values));
 
-		int nrPorts = Integer.toBinaryString(Integer
-				.valueOf(Re420MapUbw32Analog.PINBITMASK_INPUT_ANALOG)).length();
 
 		int i=0;
 		while (!list.isEmpty()) {

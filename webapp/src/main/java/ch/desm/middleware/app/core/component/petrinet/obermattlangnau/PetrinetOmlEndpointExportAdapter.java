@@ -5,8 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ch.desm.middleware.app.core.utility.Pair;
+import ch.desm.middleware.app.core.utility.Utility;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+
+import javax.rmi.CORBA.Util;
 
 /**
  * wrapper class around the petri net class provided by the pnlm export that is
@@ -15,7 +18,7 @@ import org.apache.log4j.Logger;
 public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportBase {
 
 	private static Logger LOGGER = Logger.getLogger(PetrinetOmlEndpointExportAdapter.class);
-    private static final int SLEEP_TIMER = 2000;
+    private static final int SLEEP_TIMER = 64;
 
 	private List<Pair<String, Integer>> diffPlaces;
     private List<Pair<String, Integer>> changedPlacesList;
@@ -29,7 +32,7 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
 
     @Override
 	public boolean canFire(String s) {
-		LOGGER.log(Level.INFO, "transition can fire: " + s);
+		LOGGER.log(Level.TRACE, "transition can fire: " + s);
 
         diffPlaces.clear();
         diffPlaces.addAll(getPlaces());

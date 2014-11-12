@@ -92,6 +92,7 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
         if (isPinBitMaskAnalogAvailable()) {
             this.sendCommandConfigureAnalogInputs(pinbitMaskInputAnalog);
         }
+
         setCacheEnabled(true);
     }
 

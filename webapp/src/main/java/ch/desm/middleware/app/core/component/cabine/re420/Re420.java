@@ -63,7 +63,7 @@ public class Re420 extends Re420BrokerClientBase {
 				//do nothing
 			}else{
 			
-				LOGGER.debug("endpoint (" + this.getClass()
+				LOGGER.log(Level.DEBUG, "endpoint (" + this.getClass()
 						+ ") received message RS232: " + message);
 				
 				processIncomingUbw32(message);
