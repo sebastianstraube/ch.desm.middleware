@@ -17,7 +17,8 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	
 	protected SerialPort serialPort;
 	protected EndpointRs232Config config;
-	
+	private Object writeLock = new Object();
+
 	public static enum EnumSerialPorts {
 		COM1, COM2, COM3, COM4, COM5, COM6, COM7, COM8, COM9, COM10, COM11, COM12, COM13, COM14, COM15, COM16, COM17, COM18, COM19, COM20, COM21, COM22, COM23, COM24, COM25, COM26, COM27, COM28, COM29, COM30, COM31, COM32, COM33, COM34, COM35, COM36, COM37, COM38
 	}
@@ -31,13 +32,12 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * 
 	 */
 	public void testSeriaPort() {
-		try {
-			serialPort.writeString("Write Test to Serialport ..."
-					+ serialPort.getPortName() + "\r\n");
-		} catch (SerialPortException e) {
-			LOGGER.log(Level.ERROR, e);
-		}
-	}
+        try {
+            sendStream("Write Test to Serialport ..." + serialPort.getPortName() + "\r\n");
+        } catch (SerialPortException e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+    }
 
 	/**
 	 * 
@@ -91,13 +91,14 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * @throws SerialPortException
 	 */
 	protected void sendStream(String stream) throws SerialPortException {
-		
-		if (stream != null && !stream.isEmpty() && serialPort.writeString(stream)) {
-			
-			LOGGER.log(Level.TRACE, serialPort.getPortName() + " send stream: [" + stream + "]");
-		}else{
-			LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream);
-		}
+		synchronized (writeLock){
+            if (stream != null && !stream.isEmpty() && serialPort.writeString(stream)) {
+
+                LOGGER.log(Level.TRACE, serialPort.getPortName() + " send stream: [" + stream + "]");
+            }else{
+                LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream);
+            }
+        }
 	}
 	
 	/**
@@ -107,13 +108,14 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * @throws SerialPortException
 	 */
 	protected void sendStream(byte[] stream) throws SerialPortException {
-		
-		if (stream!=null && serialPort.writeBytes(stream)) {
-			
-			LOGGER.log(Level.TRACE,serialPort.getPortName() + " send stream:" + stream.toString());
-		}else{
-			LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream.toString());
-		}
+        synchronized (writeLock) {
+            if (stream != null && serialPort.writeBytes(stream)) {
+
+                LOGGER.log(Level.TRACE, serialPort.getPortName() + " send stream:" + stream.toString());
+            } else {
+                LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream.toString());
+            }
+        }
 	}
 	
 	/**
@@ -123,13 +125,14 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * @throws SerialPortException
 	 */
 	protected void sendStream(int[] stream) throws SerialPortException {
-		
-		if (stream!=null && serialPort.writeIntArray(stream)) {
-			
-			LOGGER.log(Level.TRACE,serialPort.getPortName() + " send stream:" + stream.toString());
-		}else{
-			LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream.toString());
-		}
+        synchronized (writeLock) {
+            if (stream != null && serialPort.writeIntArray(stream)) {
+
+                LOGGER.log(Level.TRACE, serialPort.getPortName() + " send stream:" + stream.toString());
+            } else {
+                LOGGER.log(Level.ERROR, serialPort.getPortName() + " stream not send: " + stream.toString());
+            }
+        }
 	}
 
 	@Override

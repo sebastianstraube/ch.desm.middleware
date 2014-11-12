@@ -1,6 +1,8 @@
 package ch.desm.middleware.app.core.common;
 
 
+import ch.desm.middleware.app.core.utility.Utility;
+
 /**
  * Abstract Thread Daemon
  * 
@@ -9,7 +11,7 @@ package ch.desm.middleware.app.core.common;
  */
 public abstract class DaemonThreadBase extends Thread {
 
-    private int sleepTime = 256;
+    private int sleepTime = Utility.randInt();
 
 	public DaemonThreadBase(){
 		setDaemon(true);

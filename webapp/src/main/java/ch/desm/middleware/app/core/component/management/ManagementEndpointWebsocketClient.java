@@ -22,6 +22,7 @@ public class ManagementEndpointWebsocketClient {
             .getLogger(ManagementEndpointWebsocketClient.class);
 
     private final static Set<Session> sessionSet = new HashSet<Session>();
+    private static Object sessionLock = new Object();
 
     @OnOpen
     public void onOpen(Session session) {
@@ -52,15 +53,19 @@ public class ManagementEndpointWebsocketClient {
 
     public static void sendMessage(String message){
         LOGGER.log(Level.TRACE, "EndpointWebsocketClient send: " + message);
-        try {
-            for(Session session : sessionSet)
-            if(session != null){
-                session.getBasicRemote().sendText(message);
-            }else{
-                throw new IllegalStateException("session is null");
+
+        synchronized (sessionLock){
+            try {
+                for(Session session : sessionSet)
+                    if(session != null){
+                        session.getBasicRemote().sendText(message);
+                    }else{
+                        throw new IllegalStateException("session is null");
+                    }
+            } catch (IOException e) {
+                LOGGER.log(Level.ERROR, e);
             }
-        } catch (IOException e) {
-            LOGGER.log(Level.ERROR, e);
         }
+
     }
 }
