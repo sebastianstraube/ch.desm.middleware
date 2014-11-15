@@ -10,13 +10,13 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class OmlBrokerClientAdapter extends ComponentBrokerClientThreadBase {
+public class OmlBrokerClientThread extends ComponentBrokerClientThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(OmlBrokerClientAdapter.class);
+    private static Logger LOGGER = Logger.getLogger(OmlBrokerClientThread.class);
     private OmlService service;
     private Object processMessagesLock;
 
-    public OmlBrokerClientAdapter(OmlService service){
+    public OmlBrokerClientThread(OmlService service){
         this.service = service;
         this.processMessagesLock = new Object();
     }

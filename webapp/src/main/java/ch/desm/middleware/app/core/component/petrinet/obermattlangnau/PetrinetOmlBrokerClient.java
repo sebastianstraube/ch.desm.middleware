@@ -12,20 +12,20 @@ import ch.desm.middleware.app.core.communication.message.MessageBase;
 public class PetrinetOmlBrokerClient extends ComponentBrokerClientBase {
     private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClient.class);
 
-    private PetrinetOmlBrokerClientAdapter omlPetriNetThread;
+    private PetrinetOmlBrokerClientThread thread;
     private PetrinetOmlService service;
 
     public PetrinetOmlBrokerClient(Broker broker, PetrinetOmlService service) {
         super(broker);
         this.service = service;
 
-        this.omlPetriNetThread = new PetrinetOmlBrokerClientAdapter(service);
-        this.omlPetriNetThread.start();
+        this.thread = new PetrinetOmlBrokerClientThread(service);
+        this.thread.start();
     }
 
     @Override
     protected void onIncomingBrokerMessage(String message) {
-            omlPetriNetThread.addMessages(service.getTranslator().toMiddlewareMessageList(message));
+            thread.addMessages(service.getTranslator().toMiddlewareMessageList(message));
     }
 
     @Override

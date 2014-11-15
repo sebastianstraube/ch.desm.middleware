@@ -33,8 +33,10 @@ public class ComponentMessageProcessor extends MessageProcessorBase {
                 endpoint.getPinInputDigital(registerName,
                         pin);
             } else {
-                endpoint.setPinOutputDigital(registerName,
-                        pin, parameter);
+                //TODO revert
+                //String value = parameter.equals("on") ? "1" : "0";
+
+                endpoint.setPinOutputDigital(registerName, pin, parameter);
             }
         }
         // is ubw analog message

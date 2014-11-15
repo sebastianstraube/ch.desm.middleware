@@ -23,7 +23,7 @@ public class JettyServer extends DaemonThreadBase {
     private InetSocketAddress inetSocketAddress;
 
     public JettyServer(){
-        this.inetSocketAddress = new InetSocketAddress("Heisenberg", 80);
+        this.inetSocketAddress = new InetSocketAddress("0.0.0.0", 80);
     }
 
     private static Logger LOGGER = Logger.getLogger(JettyServer.class);

@@ -62,11 +62,7 @@ public class OMLMapUbw32Digital extends ComponentMap {
         map.put("1.91.02", "C2"); //Fahrtrichtung verlangt von Langnau
         map.put("1.91.03", "C1"); //Störung, Wecker abschalten
         map.put("1.01.01", "C4"); //WS1 Freigabelampe
-
-        //TODO revert
-        //map.put("1.01.02", "E7"); //WS1 Überwachungslampe
-        map.put("1.01.02", "E2"); //WS1 Überwachungslampe
-
+        map.put("1.01.02", "E7"); //WS1 Überwachungslampe
         map.put("2.92.01", "A9"); //Weichenwecker
         map.put("2.92.02", "A10"); //Blockwecker
         map.put("2.90.01", "D15"); //Signalwecker

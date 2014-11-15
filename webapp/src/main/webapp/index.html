@@ -25,10 +25,9 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="page-header">
         <h1>DESM Middleware - Management Interface</h1>
-
-        <div class="container-fluid signin-wrapper">
+        <div class="container-fluid" id="signin-wrapper">
             <form class="form-signin">
                 <button class="btn btn-large btn-primary" type="submit" id="connect">
                     <span class="glyphicon glyphicon-off"></span>
@@ -76,7 +75,7 @@
                 </button>
 
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_remote">
-                    <span class="glyphicon glyphicon-transfer"></span> REMOTE CONTROL
+                    <span class="glyphicon glyphicon-transfer"></span> RC-PETRINET (OML)
                 </button>
 
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_log">
@@ -84,6 +83,11 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <div class="container-fluid">
+
+
 
         <div class="container-fluid status-wrapper">
             <fieldset>
@@ -196,25 +200,21 @@
             </fieldset>
         </div>
 
-        <div class="container-fluid remote-wrapper">
+        <div class="container-fluid" id="remote-wrapper">
             <fieldset>
-                <legend>REMOTE CONTROL</legend>
+                <legend>Remote Control - Petrinet Obermatt Langnau</legend>
             </fieldset>
-            <div class="remote" id="remote_all">
-                <div class="dropdown btn btn-default">
-                    <div id="label_iltis_emm_1_833" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>ILTIS_EMM_1_833</span>
-                        <img src="img/remote_null.png" alt="img_iltis_emm_1_833" id="img_iltis_emm_1_833"/>
-                        <span class="caret"></span>
-                    </div>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="label_iltis_emm_1_833">
-                        <li><i tabindex="-1" id="on_iltis_emm_1_833">On</i> </li>
-                        <li><i tabindex="-1" id="off_iltis_emm_1_833">Off</i> </li>
-                    </ul>
+
+            <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist" id="remote_button_nav">
+                </ul>
+
+                <!-- Tab panes -->
+               <div class="tab-content" id="remote_button_pan">
                 </div>
+
             </div>
         </div>
-
 
         <div class="container-fluid log-wrapper">
             <fieldset>

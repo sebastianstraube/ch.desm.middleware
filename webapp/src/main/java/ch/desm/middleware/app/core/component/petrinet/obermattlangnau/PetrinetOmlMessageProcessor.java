@@ -28,6 +28,10 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
      */
     public void processBrokerMessage(PetrinetOmlEndpoint endpoint, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
+
+            if(message.getParameter().equals("on")){
+                LOGGER.log(Level.TRACE, "processing broker message: " + message);
+            }
             processBrokerMessage(endpoint, message);
         }
     }
@@ -87,6 +91,11 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
     }
 
     private void delegateToEndpoint(PetrinetOmlEndpoint endpoint, String sensorName, int sensorValue){
+
+        //if(sensorValue != 0){
+            LOGGER.log(Level.INFO, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
+        //}
+
         endpoint.setSensor(sensorName, sensorValue);
     }
 

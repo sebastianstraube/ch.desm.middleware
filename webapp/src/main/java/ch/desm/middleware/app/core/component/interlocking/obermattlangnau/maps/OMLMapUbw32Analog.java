@@ -9,6 +9,7 @@ public class OMLMapUbw32Analog extends ComponentMap {
 
 	//B0 = AN0, B1 = AN1
 	//11bin = 3dez
+    //TODO revert 0 > 1
     public static final String PINBITMASK_INPUT_ANALOG = "1";
 
     public OMLMapUbw32Analog(){

@@ -64,7 +64,7 @@ public class EndpointUbw32Cache {
 			portAN14 = new EndpointUbw32RegisterAnalog("20384");
 			portAN15 = new EndpointUbw32RegisterAnalog("40768");
 
-            LOGGER.log(Level.INFO, "analog state message:" + message);
+            LOGGER.log(Level.TRACE, "analog state message:" + message);
 
             String pinbitmask = getPinBitMaskIA(message);
 

@@ -3,7 +3,9 @@ package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
+import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.message.*;
+import ch.desm.middleware.app.core.component.ComponentMap;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapPetrinet;
 import org.apache.log4j.Level;
@@ -55,7 +57,12 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
                         processInitEndpoint(endpoint, element);
                     }
                 }else{
-                    throw new Exception("unsupported "+MessageBase.MESSAGE_TOPIC_MANAGEMENT+" message: " + element.toString());
+                    element.setTopic(element.getTopic().replace(MessageBase.MESSAGE_TOPIC_MANAGEMENT,MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU));
+
+                    //EndpointUbw32 endpoint, ComponentMap mapDigital, ComponentMap mapAnalog, String key, String parameter, boolean isInput
+//                    delegateToEndpoint(endpoint, service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), element.getGlobalId(), element.getParameter(), Boolean.valueOf(element.getOutputInput()));
+
+                    //throw new Exception("unsupported "+MessageBase.MESSAGE_TOPIC_MANAGEMENT+" message: " + element.toString());
                 }
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
@@ -230,14 +237,13 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
 					// convert input to common parameter
 					String parameter = message.getInputValue(entry.getValue(),"");
 					// handle Fahrstrassenschalter (FSS)
-					String globalIdFSS = fahrStrassenSchalter.getglobalId(Integer.valueOf(parameter));
+					String FSSidEnabled = fahrStrassenSchalter.getglobalId(Integer.valueOf(parameter));
 
-					if (!globalIdFSS.isEmpty()) {
+                    if(key.equals(FSSidEnabled)){
                         stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_ON);
-
-					} else {
-						stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_OFF);
-					}
+                    }else{
+                        stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_OFF);
+                    }
 
 					middlewareMessagesInput = middlewareMessagesInput.concat(stream);
 				}

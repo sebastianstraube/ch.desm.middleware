@@ -1,9 +1,15 @@
-* {
-	margin: 0;
-	padding: 0;
-    cursor: default;
+/*Bootstrap overwrite*/
+.page-header{
+    margin: 20px 0 10px !important;
 }
 
+.nav{
+    margin-bottom: 5px !important;
+}
+
+
+
+/************/
 .gui{
     width: 100%;
     background-color: black;
@@ -31,7 +37,7 @@
 
 legend{
     margin-bottom: 5px !important;
-    padding-top: 25px !important;
+    padding-top: 15px !important;
 }
 
 .btn-desm {
