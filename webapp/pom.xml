@@ -45,13 +45,13 @@
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>javax-websocket-server-impl</artifactId>
-            <version>9.3.0.M0</version>
+            <version>9.3.0.M1</version>
         </dependency>
         <!-- To run javax.websocket client -->
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>javax-websocket-client-impl</artifactId>
-            <version>9.3.0.M0</version>
+            <version>9.3.0.M1</version>
         </dependency>
 
         <!-- Json api -->
@@ -69,7 +69,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.0.M0</version>
+                <version>9.3.0.M1</version>
                 <configuration>
                     <scanIntervalSeconds>1</scanIntervalSeconds>
                     <webApp>
