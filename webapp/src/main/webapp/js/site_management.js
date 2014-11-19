@@ -6,7 +6,24 @@ if (typeof String.prototype.startsWith != 'function') {
     };
 }
 
+if (typeof String.prototype.replaceAll != 'function') {
+    String.prototype.replaceAll = function (finding, replace){
+
+        var escapedRegExp = new RegExp(finding, 'g');
+        var replacedText = this.replace(escapedRegExp, replace);
+
+        return replacedText;
+    };
+}
+
+function escapeRegExp(string) {
+    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+}
+
+
 $(document).ready(function() {
+
+
     var $message;
     var $logWindow;
     var wsocket;
@@ -15,13 +32,11 @@ $(document).ready(function() {
     var hostname;
     var hostport;
     var filter_array;
-    var group_petrinet_buttons;
     var logId;
 
     init();
 
     function init(){
-
 
         $message = $('#message');
         $logWindow = $('#log-window');
@@ -36,37 +51,99 @@ $(document).ready(function() {
         $('.status-wrapper').hide();
         $('#remote-wrapper').hide();
 
-        setInterval(function(){blink()}, 1000);
+
+    }
+
+    var alertId = 0;
+    function createAutoClosingInfo(selector, delay, text) {
+
+        var newAlert =''+
+            '<div class="alert alert-info" id="'+ ++alertId +'">' +
+                '<a href="#" class="close" data-dismiss="alert">&times;</a>' +
+                text +
+            '</div>' +
+            '';
+
+        $(selector).append(newAlert);
+
+        var alert = $("#" + alertId);
+        alert.alert();
+
+        window.setTimeout(function() {
+            alert.fadeTo(500, 0).slideUp(500, function(){
+                alert.alert('close');
+                alert.remove();
+            });
+        }, delay);
+
+
+    }
+
+    var alertId = 0;
+    function createAutoClosingAlert(selector, delay, text) {
+
+        var newAlert =''+
+            '<div class="alert alert-danger" id="'+ ++alertId +'">' +
+            '<a href="#" class="close" data-dismiss="alert">&times;</a>' +
+            text +
+            '</div>' +
+            '';
+
+        $(selector).append(newAlert);
+
+        var alert = $("#" + alertId);
+        alert.alert();
+
+        window.setTimeout(function() {
+            alert.fadeTo(500, 0).slideUp(500, function(){
+                alert.alert('close');
+                alert.remove();
+            });
+        }, delay);
+
     }
 
     function connectWebsocketServer() {
         component = $('#component option:selected').val();
         hostname = $('#hostname option:selected').val();
         hostport = $('#hostport option:selected').val();
-        serviceLocation = "ws://"+hostname+":"+hostport+"/gui";
+        serviceLocation = "ws://"+hostname+":"+hostport+"/gui/";
 
         wsocket = new WebSocket(serviceLocation + component);
 
         wsocket.onopen = function() {
-            alert("Opened!");
-        };
+            //alert("Opened!");
+
+            createAutoClosingInfo(".notification-box", 5000, "Server connection established.");
+
+            setInterval(function(){
+                $("#status_blinking").fadeTo(250, 0.1).fadeTo(250, 0.5);
+            }, 1000);
+};
 
         wsocket.onmessage = function (evt) {
-            alert("Message: " + evt.data);
+            //alert("Message: " + evt.data);
             onMessageReceived(evt);
         };
 
         wsocket.onclose = function(evt) {
-            alert("Closed! with code: " + evt.code + ", reason: " + evt.reason + ", wasClean:" + evt.wasClean);
+            $("#status_blinking").remove();
+            createAutoClosingAlert(".notification-box", 10000, "Websocket Connection Closed from Server with code: " + evt.code + ", reason: " + evt.reason + ", wasClean:" + evt.wasClean);
+
+            window.setTimeout(function() {
+                leaveComponent();
+                }, 5000);
         };
 
         wsocket.onerror = function(evt) {
-            alert("Error with code: " + evt.code + ", reason: " + evt.reason + ", wasClean:" + evt.wasClean);
-            leaveComponent();
+            createAutoClosingAlert(".notification-box", 10000, "Websocket Error happend with code: " + evt.code + ", reason: " + evt.reason + ", wasClean:" + evt.wasClean);
+
+            window.setTimeout(function() {
+                leaveComponent();
+            }, 30000);
         };
 
     }
-
 
     function onMessageReceived(evt) {
         var msg = JSON.parse(evt.data); // native API
@@ -82,9 +159,25 @@ $(document).ready(function() {
         processButtons(msg.payload);
     }
 
+    function getJsId(id){
+        id = id.replace("_$", "-");
+        id = id.replaceAll("\\.","_");
+
+        return id;
+    }
+
+    function getJavaPayload(payload){
+        payload = payload.replace("-", "_$");
+        payload = "OML_" + payload;
+
+        return payload;
+    }
+
     function processButtons(payload){
+
         var parts = payload.split(';');
-        var topic = parts[7];
+
+        var topic = parts[7].replace("#","");
         var id = parts[0];
         var parameter = parts[6];
 
@@ -94,41 +187,47 @@ $(document).ready(function() {
             addRemoteButton(topic, id, parameter, payload);
             addRemoteButtonEvent(id, payload);
         }else{
+            //createAutoClosingInfo(".notification-box", 20000, payload);
             changeRemoteButton(id, parameter);
         }
     }
 
     function addRemoteButtonNav(payload){
 
-        var id = "remote_button_nav";
-        var obj = $("#"+id);
-        var panId = "remote_button_pan_"+getKeyGroup(payload);
+        var jsId = getRemoteButtonPanId(payload);
 
-        if($("#" + panId).length <= 0) {
+        if($("#" + jsId).length <= 0) {
             var tab = '' +
                 '<li role="presentation">' +
-                '<a href="#'+panId+'" aria-controls="' + panId + '" role="tab" data-toggle="tab">' +
-                getKeyGroup(payload) +
-                '</a>' +
+                    '<a href="#' + jsId +
+                        '" aria-controls="' + jsId +
+                        '" role="tab" data-toggle="tab">' +
+                        getKeyGroup(payload) +
+                    '</a>' +
                 '</li>';
 
-
-            obj.append(tab);
-
-            $('#'+panId+' a').click(function (e) {
+            $('#'+jsId+' a').click(function (e) {
                 e.preventDefault()
                 $(this).tab('show')
             })
+
+            $("#remote_button_nav").append(tab);
         }
+    }
+
+    function getRemoteButtonPanId(payload){
+        var id = "remote_button_pan_"+getJsId(getKeyGroup(payload));
+        return id;
     }
 
     function addRemoteButtonPan(payload){
 
-        var id = "remote_button_pan_"+getKeyGroup(payload);
+        var jsId = getRemoteButtonPanId(payload);
+        var panElement = $("#" + jsId);
 
-        if($("#"+id).length <= 0){
+        if(panElement.length <= 0){
             var pan = ''+
-                '<div role="tabpanel" class="tab-pane btn-group" id=\"'+id+'\">' +
+                '<div role="tabpanel" class="tab-pane btn-group fade" id=\"'+ jsId +'\">' +
                 '</div>';
 
             $("#remote_button_pan").append(pan);
@@ -138,23 +237,22 @@ $(document).ready(function() {
     function addRemoteButton(topic, id, parameter, payload){
 
         var parts = payload.split(';');
-        var key = parts[0];
-        var remoteButtonPan = $("#remote_button_pan_"+getKeyGroup(payload));
+        var jsId = getJsId(id);
+        var panElement = $("#" + getRemoteButtonPanId(payload));
 
-        var remoteButtonSwitch =
+        var button =
             $('' +
-                    '<div class=\"btn btn-default '+getIsActiveClass(parameter)+'\" id=\"button_'+ id + '\" aria-pressed=\"'+getIsAriaPressedAttr(parameter)+'\">' +
+                    '<div class=\"btn btn-default '+getIsActiveClass(parameter)+'\" id=\"button_'+ jsId + '\" aria-pressed=\"'+getIsAriaPressedAttr(parameter)+'\">' +
                     '<span style="cursor: pointer;">'+ id +'</span>' +
                     '</div>'
             );
 
-        //remoteButtonPan.find('fieldset').append(remoteButtonSwitch);
-        remoteButtonPan.append(remoteButtonSwitch);
+        panElement.append(button);
     }
 
     function addRemoteButtonEvent(id, payload){
 
-        $( "#button_" + id).on( "click", function( event ) {
+        $("#button_" + getJsId(id)).on( "click", function( event ) {
 
             var changedPayload = "";
 
@@ -171,27 +269,29 @@ $(document).ready(function() {
             }
 
         });
-
     }
 
     function getKeyGroup(payload){
-        var keyGroup = payload.split('_');
 
-        if(keyGroup.length <= 1){
-            keyGroup = payload.split('.');
+        var payloadArray = payload.split(';');
+        var keyGroup = payloadArray[0];
+
+        if(keyGroup.length >= 1){
+            var keyGroupArray = keyGroup.split('_$');
+            keyGroup = keyGroupArray[0].replace("OML_", "");
         }
 
-        return keyGroup[0];
+        return keyGroup;
     }
 
     //check object exists
     function hasRemoteButton(id){
-        return ($("#button_"+id).length > 0);
+        return ($("#button_"+ getJsId(id)).length > 0);
     }
 
     function changeRemoteButton(id, parameter){
 
-        var button = $("#button_"+id);
+        var button = $("#button_"+ getJsId(id));
 
         if(parameter == "on") {
             if (!button.hasClass("active")) {
@@ -207,12 +307,12 @@ $(document).ready(function() {
     }
 
     function activateButton(button){
-        button.addClass("btn-success active");
+        button.addClass("btn-success in active");
         button.attr('aria-pressed', 'true');
     }
 
     function deactivateButton(button){
-        button.removeClass("btn-success active");
+        button.removeClass("btn-success in active");
         button.attr('aria-pressed', 'false');
     }
 
@@ -266,12 +366,9 @@ $(document).ready(function() {
             '}';
 
         //alert("send message with topic:" + topicManagement + ", payload: " +payload);
+
         wsocket.send(msg);
         $message.val('').focus();
-    }
-
-    function blink() {
-        $("#status_blinking").fadeTo(100, 0.1).fadeTo(200, 1.0);
     }
 
     function leaveComponent() {

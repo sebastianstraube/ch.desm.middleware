@@ -38,7 +38,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 
 	public void run(){
-		startManagement("ws://Heisenberg:80/gui/management");
+		startManagement("ws://heisenberg:80/gui/management");
 		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM10);
         startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
