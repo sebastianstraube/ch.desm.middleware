@@ -7,6 +7,16 @@
     margin-bottom: 5px !important;
 }
 
+#notification_box {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+}
+
+.alert-message {
+    margin: 0 auto;
+}
 
 
 /************/

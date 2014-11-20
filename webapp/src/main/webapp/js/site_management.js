@@ -57,10 +57,10 @@ $(document).ready(function() {
     var alertId = 0;
     function createAutoClosingInfo(selector, delay, text) {
 
-        var newAlert =''+
-            '<div class="alert alert-info" id="'+ ++alertId +'">' +
-                '<a href="#" class="close" data-dismiss="alert">&times;</a>' +
-                text +
+        var newAlert = '' +
+            '<div class="alert alert-info alert-message" id="' + ++alertId + '">' +
+            '<a href="#" class="close" data-dismiss="alert">&times;</a>' +
+            text +
             '</div>' +
             '';
 
@@ -69,8 +69,8 @@ $(document).ready(function() {
         var alert = $("#" + alertId);
         alert.alert();
 
-        window.setTimeout(function() {
-            alert.fadeTo(500, 0).slideUp(500, function(){
+        window.setTimeout(function () {
+            alert.fadeTo(500, 0).slideUp(500, function () {
                 alert.alert('close');
                 alert.remove();
             });
@@ -79,11 +79,10 @@ $(document).ready(function() {
 
     }
 
-    var alertId = 0;
     function createAutoClosingAlert(selector, delay, text) {
 
         var newAlert =''+
-            '<div class="alert alert-danger" id="'+ ++alertId +'">' +
+            '<div class="alert alert-danger alert-message" id="'+ ++alertId +'">' +
             '<a href="#" class="close" data-dismiss="alert">&times;</a>' +
             text +
             '</div>' +
@@ -187,7 +186,7 @@ $(document).ready(function() {
             addRemoteButton(topic, id, parameter, payload);
             addRemoteButtonEvent(id, payload);
         }else{
-            //createAutoClosingInfo(".notification-box", 20000, payload);
+            createAutoClosingInfo(".notification-box", 20000, payload);
             changeRemoteButton(id, parameter);
         }
     }
