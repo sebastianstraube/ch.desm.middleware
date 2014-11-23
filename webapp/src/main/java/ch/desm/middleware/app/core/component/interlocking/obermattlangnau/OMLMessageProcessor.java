@@ -17,26 +17,24 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
 	private static Logger LOGGER = Logger.getLogger(OmlMessageProcessor.class);
 
 	private OMLElementFahrstrassenSchalter fahrStrassenSchalter;
-    private OMLMapPetrinet map;
     private OmlService service;
 
     public OmlMessageProcessor(OmlService service) {
 		this.fahrStrassenSchalter = new OMLElementFahrstrassenSchalter();
-        this.map = new OMLMapPetrinet();
+
         this.service = service;
 	}
 
     /**
-     * @param endpoint
      * @param messages
      */
-    public void processBrokerMessage(OmlEndpointUbw32 endpoint, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(OmlService service, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
-            processBrokerMessage(endpoint, message);
+            processBrokerMessage(service, message);
         }
     }
 
-    private void processBrokerMessage(OmlEndpointUbw32 endpoint, MessageMiddleware element){
+    private void processBrokerMessage(OmlService service, MessageMiddleware element){
 
         //incoming message with OML topic
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU)){
@@ -45,8 +43,8 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
                 String parameter = util.getParameterValueMiddleware(element.getParameter());
                 boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
-                String key = map.mapBrokerToEndpointMessage(globalId);
-                delegateToEndpoint(endpoint, endpoint.getMapDigital(), endpoint.getMapAnalog(), key, parameter, isInput);
+                String key = service.getMap().mapBrokerToEndpointMessage(globalId);
+                delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(),  service.getEndpoint().getMapAnalog(), key, parameter, isInput);
             } catch (Exception e) {
                 //LOGGER.log(Level.WARN, e.getMessage());
             }
@@ -54,15 +52,15 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
             try {
                 if (isInitProcessMessage(element)) {
                     if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) {
-                        processInitEndpoint(endpoint, element);
+                        processInitEndpoint(service.getEndpoint(), element);
                     }
                 }else{
-                    element.setTopic(element.getTopic().replace(MessageBase.MESSAGE_TOPIC_MANAGEMENT,MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU));
-
-                    //EndpointUbw32 endpoint, ComponentMap mapDigital, ComponentMap mapAnalog, String key, String parameter, boolean isInput
-//                    delegateToEndpoint(endpoint, service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), element.getGlobalId(), element.getParameter(), Boolean.valueOf(element.getOutputInput()));
-
-                    //throw new Exception("unsupported "+MessageBase.MESSAGE_TOPIC_MANAGEMENT+" message: " + element.toString());
+                    String key = service.getMap().getValue(element.getGlobalId());
+                    if(!key.isEmpty()){
+                        element.setTopic(element.getTopic().replace(MessageBase.MESSAGE_TOPIC_MANAGEMENT,MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU));
+                        processBrokerMessage(service, element);
+                        return;
+                    }
                 }
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
@@ -73,7 +71,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
                 String parameter = util.getParameterValueMiddleware(element.getParameter());
                 boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
-                delegateToEndpoint(endpoint, endpoint.getMapDigital(), endpoint.getMapAnalog(), globalId, parameter, isInput);
+                delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, parameter, isInput);
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
             }
@@ -124,6 +122,141 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
         return false;
     }
 
+    private String getUbwSingleRegisterValues(OmlEndpointUbw32 endpoint, MessageUbw32DigitalRegisterSingle message) {
+
+        String messageInput = "";
+
+        for (Entry<String, String> entry : endpoint.getMapDigital()
+                .getMap().entrySet()) {
+
+            if (entry.getValue()
+                    .equals(((MessageUbw32DigitalRegisterSingle) message)
+                            .getPort())) {
+
+                String key = entry.getKey();
+
+                boolean isEnabled = ((MessageUbw32DigitalRegisterSingle) message).isEnabled();
+                String parameter = isEnabled == true ? "on" : "off";
+
+                if (isEnabled) {
+                    LOGGER.log(Level.INFO, "key: " + key);
+                }
+
+                String stream = null;
+
+                stream = service.getComponentMapMiddleware().getMap().get(key);
+
+                if (stream == null) {
+                    try {
+                        throw new Exception(
+                                "mapping error no global id in middleware message with key: "
+                                        + entry.getKey() + " and value: "
+                                        + entry.getValue()
+                                        + " in message: " + message);
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        LOGGER.log(Level.ERROR, e);
+                    }
+                }
+                stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+                messageInput = messageInput.concat(stream);
+            }
+        }
+
+        return messageInput;
+
+    }
+
+    private String getUbwAllRegisterValues(OmlEndpointUbw32 endpoint, MessageUbw32DigitalRegisterComplete message){
+
+        String messageInput = "";
+
+        for (Entry<String, String> entry : endpoint.getMapDigital()
+                .getMap().entrySet()) {
+
+            // convert input to common parameter
+            boolean isEnabled = message.getInputValue(entry.getValue().substring(0),entry.getValue().substring(1)).contains("1");
+            String parameter = isEnabled == true ? "on" : "off";
+            String key = entry.getKey();
+
+            /*
+            stream = stream.replaceAll(
+                    MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+            messageInput = messageInput
+                    .concat(stream);
+            */
+
+            if(service.getCache().isStateChanged(key, parameter)){
+
+                //find the middleware message of the changed key
+                String stream =  service.getComponentMapMiddleware().getValue(key);
+
+                if (stream == null) {
+                    try {
+                        throw new Exception(
+                                "mapping error no global id in middleware message with key: "
+                                        + entry.getKey() + " and value: "
+                                        + entry.getValue()
+                                        + " in message: " + message);
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        LOGGER.log(Level.ERROR, e);
+                    }
+                }
+
+                stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+                messageInput = messageInput.concat(stream);
+            }
+        }
+        return messageInput;
+    }
+
+    private String getUbwAnalogRegisterValues(OmlEndpointUbw32 endpoint, MessageUbw32Analog message){
+
+        String messageInput = "";
+
+        for (Entry<String, String> entry : endpoint.getMapAnalog()
+                .getMap().entrySet()) {
+
+            String key = entry.getKey();
+
+            if (!key.isEmpty()) {
+                String stream = service.getComponentMapMiddleware().getMap().get(key);
+
+                if (stream == null) {
+                    try {
+                        throw new Exception(
+                                "mapping error found no global id in middleware message with key: "
+                                        + entry.getKey() + " and value: "
+                                        + entry.getValue()
+                                        + " in message: " + message);
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        LOGGER.log(Level.ERROR, e);
+                    }
+                }
+
+                // convert input to common parameter
+                String parameter = message.getInputValue(entry.getValue(),"");
+                // handle Fahrstrassenschalter (FSS)
+                String FSSidEnabled = fahrStrassenSchalter.getglobalId(Integer.valueOf(parameter));
+
+                if(key.equals(FSSidEnabled)){
+                    stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_ON);
+
+                    LOGGER.log(Level.INFO, "FSS enabled contact: " + stream);
+
+                }else{
+                    stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_OFF);
+                }
+                messageInput = messageInput.concat(stream);
+            }
+        }
+
+        return messageInput;
+    }
+
+
 	/**
 	 * 
 	 * @param endpoint
@@ -137,117 +270,18 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
 
 		if (message instanceof MessageUbw32DigitalRegisterSingle) {
 
-			for (Entry<String, String> entry : endpoint.getMapDigital()
-					.getMap().entrySet()) {
+            middlewareMessagesInput = getUbwSingleRegisterValues(endpoint, (MessageUbw32DigitalRegisterSingle)message);
 
-				if (entry.getValue()
-						.equals(((MessageUbw32DigitalRegisterSingle) message)
-								.getPort())) {
-
-					String key = entry.getKey();
-					String parameter = ((MessageUbw32DigitalRegisterSingle) message)
-							.isEnabled() == true ? "on" : "off";
-
-					String stream = null;
-
-					stream = service.getComponentMapMiddleware().getMap().get(key);
-
-					if (stream == null) {
-						try {
-							throw new Exception(
-									"mapping error no global id in middleware message with key: "
-											+ entry.getKey() + " and value: "
-											+ entry.getValue()
-											+ " in message: " + message);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							LOGGER.log(Level.ERROR, e);
-						}
-					}
-
-					stream = stream.replaceAll(
-							MessageCommon.PARAMETER_PLACEHOLDER, parameter);
-					middlewareMessagesInput = middlewareMessagesInput
-							.concat(stream);
-
-				}
-			}
 		}
 
 		else if (message instanceof MessageUbw32DigitalRegisterComplete) {
 
-			for (Entry<String, String> entry : endpoint.getMapDigital()
-					.getMap().entrySet()) {
-
-				// convert input to common parameter
-				boolean isInputEnabled = message.getInputValue(
-						entry.getValue().substring(0),
-						entry.getValue().substring(1)).contains("1");
-				String parameter = isInputEnabled == true ? "on" : "off";
-				String key = entry.getKey();
-
-				String stream = null;
-
-				stream = service.getComponentMapMiddleware().getMap().get(key);
-
-				if (stream == null) {
-					try {
-						throw new Exception(
-								"mapping error found no global id in middleware message with key: "
-										+ entry.getKey() + " and value: "
-										+ entry.getValue() + " in message: "
-										+ message);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						LOGGER.log(Level.ERROR, e);
-					}
-				}else{
-					
-					stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER,
-							parameter);
-
-					middlewareMessagesInput = middlewareMessagesInput
-							.concat(stream);
-				}
-			}
+            middlewareMessagesInput = getUbwAllRegisterValues(endpoint, (MessageUbw32DigitalRegisterComplete)message);
 
 		} else if (message instanceof MessageUbw32Analog) {
 
-			for (Entry<String, String> entry : endpoint.getMapAnalog()
-					.getMap().entrySet()) {
+            middlewareMessagesInput = getUbwAnalogRegisterValues(endpoint, (MessageUbw32Analog)message);
 
-				String key = entry.getKey();
-
-				if (!key.isEmpty()) {
-					String stream = service.getComponentMapMiddleware().getMap().get(key);
-
-					if (stream == null) {
-						try {
-							throw new Exception(
-									"mapping error found no global id in middleware message with key: "
-											+ entry.getKey() + " and value: "
-											+ entry.getValue()
-											+ " in message: " + message);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							LOGGER.log(Level.ERROR, e);
-						}
-					}
-
-					// convert input to common parameter
-					String parameter = message.getInputValue(entry.getValue(),"");
-					// handle Fahrstrassenschalter (FSS)
-					String FSSidEnabled = fahrStrassenSchalter.getglobalId(Integer.valueOf(parameter));
-
-                    if(key.equals(FSSidEnabled)){
-                        stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_ON);
-                    }else{
-                        stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_OFF);
-                    }
-
-					middlewareMessagesInput = middlewareMessagesInput.concat(stream);
-				}
-			}
 		}
 
 		LOGGER.log(Level.TRACE,"processing middleware message: " + middlewareMessagesInput);

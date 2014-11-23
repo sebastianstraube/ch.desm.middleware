@@ -28,7 +28,7 @@ public class PetrinetOmlBrokerClientThread extends ComponentBrokerClientThreadBa
 
             if(!messages.isEmpty()){
                 LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
-                service.getProcessor().processBrokerMessage(service.getEndpoint(), messages);
+                service.getProcessor().processBrokerMessage(service, messages);
             }
         }
 

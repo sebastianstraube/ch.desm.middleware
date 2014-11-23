@@ -5,6 +5,7 @@ import ch.desm.middleware.app.core.communication.message.translator.MessageTrans
 import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageDecoder;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageEncoder;
+import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.PetrinetMapOml;
 
 /**
  * Created by Sebastian on 11.11.2014.
@@ -18,6 +19,7 @@ public class PetrinetOmlService {
     private ComponentMapMiddleware componentMapMiddleware;
     private PetrinetOmlBrokerClient client;
     private PetrinetOmlEndpoint endpoint;
+    private PetrinetMapOml map;
 
     public PetrinetOmlService(Broker broker){
         this.componentMapMiddleware = new ComponentMapMiddleware();
@@ -25,6 +27,7 @@ public class PetrinetOmlService {
         this.processor = new PetrinetOmlMessageProcessor();
         this.encoder = new PetrinetMessageEncoder();
         this.decoder = new PetrinetMessageDecoder();
+        this.map = new PetrinetMapOml();
 
         this.client = new PetrinetOmlBrokerClient(broker, this);
         this.endpoint = new PetrinetOmlEndpoint(this);
@@ -57,5 +60,9 @@ public class PetrinetOmlService {
 
     public PetrinetOmlBrokerClient getBrokerClient(){
         return client;
+    }
+
+    public PetrinetMapOml getMap(){
+        return this.map;
     }
 }

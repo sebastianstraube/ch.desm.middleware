@@ -7,7 +7,7 @@
     margin-bottom: 5px !important;
 }
 
-#notification_box {
+.notification_box {
     position: fixed;
     top: 0;
     right: 0;

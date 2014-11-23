@@ -55,7 +55,7 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 	private String pinbitMaskInputAnalog;
 	private EndpointUbw32Thread thread;
 	private EndpointUbw32Cache cache;
-
+    private Object serialEventBlock;
 	/**
 	 * 
 	 * @param enumSerialPort
@@ -74,6 +74,7 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 		this.configurationDigital = configurationDigital;
 		this.thread = new EndpointUbw32Thread(this);
 		this.cache = new EndpointUbw32Cache();
+        this.serialEventBlock = new Object();
 	}
 
     @Override
@@ -154,46 +155,49 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 	 * 
 	 * @param SerialPortEvent event
 	 */
-	public synchronized void serialEvent(SerialPortEvent event) {
-		String message = super.getSerialPortMessage(event);
-				
-		if (!message.trim().isEmpty()) {
-			if (!message.contains("!")) {
+	public void serialEvent(SerialPortEvent event) {
 
-				String[] messages = message.split("\r\r\n");
-				String singleMessage = "";
-				for(
-					int i=0; i < messages.length; i++){
-					
-					singleMessage = messages[i];
-					singleMessage = singleMessage.replaceAll("\r\r\n", "");
-					
-					if(!singleMessage.isEmpty() && !singleMessage.equals("OK")){
-						
-						if (cache.isStateChanged(singleMessage, this.serialPort)) {
-							
-							LOGGER.log(Level.TRACE, "received message on ubw(" + serialPort.getPortName()
-                                    + "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
-							
-							super.onIncomingEndpointMessage(singleMessage);
-						}
-						else {
-							LOGGER.log(Level.TRACE, "skipped received message on ubw(" + serialPort.getPortName()
-                                    + "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
-						}
-					}
+        synchronized (serialEventBlock){
+            String message = super.getSerialPortMessage(event);
 
-				}
-			} else {
-				LOGGER.log(Level.ERROR, "error message received on ubw("
-						+ serialPort.getPortName() + "): " + message);
+            if (!message.trim().isEmpty()) {
+                if (!message.contains("!")) {
 
-			}
-		} else {
+                    String[] messages = message.split("\r\r\n");
+                    String singleMessage = "";
+                    for(
+                            int i=0; i < messages.length; i++){
 
-			LOGGER.log(Level.TRACE, "empty message received on ubw("
-                    + serialPort.getPortName() + "): " + message);
-		}
+                        singleMessage = messages[i];
+                        singleMessage = singleMessage.replaceAll("\r\r\n", "");
+
+                        if(!singleMessage.isEmpty() && !singleMessage.equals("OK")){
+
+                            if (cache.isStateChanged(singleMessage, this.serialPort)) {
+
+                                LOGGER.log(Level.TRACE, "received message on ubw(" + serialPort.getPortName()
+                                        + "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
+
+                                super.onIncomingEndpointMessage(singleMessage);
+                            }
+                            else {
+                                LOGGER.log(Level.TRACE, "skipped received message on ubw(" + serialPort.getPortName()
+                                        + "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
+                            }
+                        }
+
+                    }
+                } else {
+                    LOGGER.log(Level.ERROR, "error message received on ubw("
+                            + serialPort.getPortName() + "): " + message);
+
+                }
+            } else {
+
+                LOGGER.log(Level.TRACE, "empty message received on ubw("
+                        + serialPort.getPortName() + "): " + message);
+            }
+        }
 	}
 
 	/**

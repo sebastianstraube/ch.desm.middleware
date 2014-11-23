@@ -65,7 +65,7 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
             Field field = petriNetClass.getField(name);
             field.setInt(this, value);
 
-            LOGGER.log(Level.TRACE, "setting sensor: " + name + " to: " + value);
+            LOGGER.log(Level.INFO, "setting sensor: " + name + " to: " + value);
         } catch (NoSuchFieldException e) {
             LOGGER.log(Level.ERROR,"unknown petrinet sensor " + name);
         } catch (IllegalAccessException e) {

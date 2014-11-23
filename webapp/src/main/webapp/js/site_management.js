@@ -131,7 +131,7 @@ $(document).ready(function() {
 
             window.setTimeout(function() {
                 leaveComponent();
-                }, 5000);
+                }, 60000);
         };
 
         wsocket.onerror = function(evt) {
@@ -139,7 +139,7 @@ $(document).ready(function() {
 
             window.setTimeout(function() {
                 leaveComponent();
-            }, 30000);
+            }, 60000);
         };
 
     }
@@ -186,7 +186,7 @@ $(document).ready(function() {
             addRemoteButton(topic, id, parameter, payload);
             addRemoteButtonEvent(id, payload);
         }else{
-            createAutoClosingInfo(".notification-box", 20000, payload);
+            //createAutoClosingInfo(".notification-box", 20000, payload);
             changeRemoteButton(id, parameter);
         }
     }
@@ -290,7 +290,8 @@ $(document).ready(function() {
 
     function changeRemoteButton(id, parameter){
 
-        var button = $("#button_"+ getJsId(id));
+        var buttonId = "#button_"+ getJsId(id);
+        var button = $(buttonId);
 
         if(parameter == "on") {
             if (!button.hasClass("active")) {
@@ -301,7 +302,7 @@ $(document).ready(function() {
                 deactivateButton(button)
             }
         } else{
-            //button.attr('src','img/remote_null.png');
+            alert("illegal state with button: " + "#button_"+ getJsId(id) + " and parameter: " + parameter );
         }
     }
 
@@ -314,6 +315,17 @@ $(document).ready(function() {
         button.removeClass("btn-success in active");
         button.attr('aria-pressed', 'false');
     }
+
+    function unhighlightButton(button){
+        button.removeClass("btn-warning in active");
+        button.attr('aria-pressed', 'false');
+    }
+
+    function highlightButton(button, alertClass){
+        button.removeClass("btn-warning in active");
+        button.attr('aria-pressed', 'false');
+    }
+
 
     function getStateParameter(parameter){
         var state = "";

@@ -65,8 +65,12 @@
                     <span class="glyphicon glyphicon-link"></span> STATUS
                 </button>
 
+                <button class="btn btn-large btn-primary" data-toggle="button" type="button" disabled="disabled" id="switch_configuration">
+                    <span class="glyphicon glyphicon-wrench"></span> CONFIGURATION
+                </button>
+
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_init">
-                    <span class="glyphicon glyphicon-cog"></span> SYSTEM
+                    <span class="glyphicon glyphicon-cog"></span> SYSTEM CONTROL
                 </button>
 
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_communication">
@@ -74,15 +78,15 @@
                 </button>
 
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_gui">
-                    <span class="glyphicon glyphicon-user"></span> GUI
+                    <span class="glyphicon glyphicon-user"></span> ILTIS (GUI)
                 </button>
 
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_remote">
-                    <span class="glyphicon glyphicon-transfer"></span> REMOTE CONTROLE
+                    <span class="glyphicon glyphicon-transfer"></span> DYNAMIC REMOTE CONTROL
                 </button>
 
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_log">
-                    <span class="glyphicon glyphicon-list"></span> LOG
+                    <span class="glyphicon glyphicon-list"></span> SYSTEM MESSAGES
                 </button>
             </div>
         </div>
@@ -107,66 +111,66 @@
                 <legend>Initialize Endpoint</legend>
                 <div class="btn-group controls">
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="init_interlocking">STELLWERK (OML)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="init_petrinet">PETRINET (OML)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="init_cabine-ubw32">CABINE (DIGITAL)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="init_cabine-fabisch">CABINE (ANALOG)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="init_locsim-rs232">LOCSIM (RS232)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="init_locsim-dll">LOCSIM (DLL)</button>
                 </div>
             </fieldset>
             <fieldset>
                 <legend>Start Controller Events</legend>
                 <div class="btn-group controls">
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="start_interlocking">STELLWERK (OML)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="start_petrinet">PETRINET (OML)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="start_cabine-ubw32">CABINE (DIGITAL)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="start_cabine-fabisch">CABINE (ANALOG)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="start_locsim-rs232">LOCSIM (RS232)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="start_locsim-dll">LOCSIM (DLL)</button>
                 </div>
             </fieldset>
             <fieldset>
                 <legend>Stop Controller Events</legend>
                 <div class="btn-group controls">
-                    <button class="btn btn-large btn-default" type="button"data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="stop_interlocking">STELLWERK (OML)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="stop_petrinet">PETRINET (OML)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="stop_cabine-ubw32">CABINE (DIGITAL)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="stop_cabine-fabisch">CABINE (ANALOG)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="stop_locsim-rs232">LOCSIM (RS232)</button>
 
-                    <button class="btn btn-large btn-default" type="button" data-toggle="button"
+                    <button class="btn btn-large btn-default" type="button"
                             id="stop_locsim-dll">LOCSIM (DLL)</button>
                 </div>
             </fieldset>

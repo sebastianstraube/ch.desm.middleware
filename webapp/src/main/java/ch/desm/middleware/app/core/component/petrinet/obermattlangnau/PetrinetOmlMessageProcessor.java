@@ -16,33 +16,26 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClient.class);
 
-    private PetrinetMapOml map;
-
-    public PetrinetOmlMessageProcessor(){
-        map = new PetrinetMapOml();
-    }
-
     /**
-     * @param endpoint
      * @param messages
      */
-    public void processBrokerMessage(PetrinetOmlEndpoint endpoint, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(PetrinetOmlService service, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
 
             if(message.getParameter().equals("on")){
-                LOGGER.log(Level.TRACE, "processing broker message: " + message);
+                LOGGER.log(Level.INFO, "processing broker message: " + message);
             }
-            processBrokerMessage(endpoint, message);
+            processBrokerMessage(service, message);
         }
     }
 
-    private void processBrokerMessage(PetrinetOmlEndpoint endpoint, MessageMiddleware element){
+    private void processBrokerMessage(PetrinetOmlService service, MessageMiddleware element){
 
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
             try {
-                String sensorName = map.mapBrokerToEndpointMessage(element.getGlobalId());
+                String sensorName = service.getMap().mapBrokerToEndpointMessage(element.getGlobalId());
                 int sensorValue = Integer.valueOf(util.getParameterValueMiddleware(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
-                delegateToEndpoint(endpoint, sensorName, sensorValue);
+                delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
             } catch (Exception e) {
                 //LOGGER.log(Level.ERROR, e);
             }
@@ -50,15 +43,13 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
             try {
                 if (isInitProcessMessage(element)) {
                     if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) {
-                        processInitEndpoint(endpoint, element);
+                        processInitEndpoint(service.getEndpoint(), element);
                     }
                 }else{
-                    element.setTopic(element.getTopic().replace(MessageBase.MESSAGE_TOPIC_MANAGEMENT,MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU));
-                    int sensorValue = Integer.valueOf(util.getParameterValueMiddleware(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
-
-                    delegateToEndpoint(endpoint, element.getGlobalId(), sensorValue);
-
-                    //throw new Exception("unsupported "+MessageBase.MESSAGE_TOPIC_MANAGEMENT+" message: " + element.toString());
+                    if(!service.getMap().getValue(element.getGlobalId()).isEmpty()){
+                        element.setTopic(element.getTopic().replace(MessageBase.MESSAGE_TOPIC_MANAGEMENT,MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU));
+                        processBrokerMessage(service, element);
+                    }
                 }
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
@@ -93,7 +84,7 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
     private void delegateToEndpoint(PetrinetOmlEndpoint endpoint, String sensorName, int sensorValue){
 
         //if(sensorValue != 0){
-            LOGGER.log(Level.INFO, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
+            LOGGER.log(Level.TRACE, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
         //}
 
         endpoint.setSensor(sensorName, sensorValue);

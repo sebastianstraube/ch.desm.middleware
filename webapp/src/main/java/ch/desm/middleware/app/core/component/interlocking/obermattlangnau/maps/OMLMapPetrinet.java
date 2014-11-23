@@ -32,14 +32,14 @@ public class OMLMapPetrinet extends ComponentMapBase{
         map.put("1.90.01","OML_Lampen_Stoerung_$1_F_VS_Stoer"); //Störungslampe Einfahrvorsignal F*
 // map.put("1.90.02",""); //Einfahrsignal F; Notrot
         map.put("1.90.03","OML_Fstr_fg_$F_Fahrt3"); //Einfahrsignal F; Grün FB 3
-// map.put("1.90.04",""); //Einfahrsignal F; Rot
+        map.put("1.90.04","OML_Lampen_Signal_E_$1_E_rot"); //Einfahrsignal F; Rot
         map.put("1.90.05","OML_Lampen_Signal_F_$1_F_gruenFB1"); //Einfahrsignal F; Grün FB1
         map.put("1.90.06","OML_Fstr_ef_$E_Fahrt1"); //Einfahrsignal E; Grün FB1
         map.put("1.90.07","OML_Fstr_ef_$E_Halt"); //Einfahrsignal E; Rot
 // map.put("1.90.08",""); //Einfahrsignal E; Notrot
         map.put("1.90.09","OML_Fstr_gf_$G_Fahrt3"); //Einfahrsignal G; Grün FB1
         map.put("1.90.10","OML_Fstr_gf_$G_Halt"); //Einfahrsignal G; Rot
-// map.put("1.90.11",""); //Einfahrsignal G; Grün FB3
+        map.put("1.90.11","OML_Lampen_Signal_G_$1_G_gruenFB3"); //Einfahrsignal G; Grün FB3
         map.put("1.90.12","OML_EMM_$D_Halt"); //Einfahrsignal D EMM; Rot
         map.put("1.90.13","OML_EMM_$D_Fahrt"); //Einfahrsignal D EMM; Grün
         map.put("1.90.14","OML_EMM_$C_Fahrt"); //Ausfahrsignal C EMM; Grün
@@ -50,7 +50,7 @@ public class OMLMapPetrinet extends ComponentMapBase{
         map.put("1.90.31","OML_Lampen_Streckenblock_$1_BL_vLN_rot"); //Block von Langnau, rot
         map.put("1.90.32","OML_Lampen_Streckenblock_$1_BL_vLN_weiss"); //Block von Langnau, weiss
         map.put("1.90.33","OML_Lampen_Streckenblock_$1_BL_nLN_weiss"); //Block nach Langnau, weiss
-// map.put("1.90.34",""); //Block nach Langnau, rot
+        map.put("1.90.34","OML_Lampen_Streckenblock_$1_BL_nLN_rot"); //Block nach Langnau, rot
         map.put("1.90.35","OML_Lampen_Isolierung_$Iso_egf_ein"); //Isolierung egf
         map.put("1.90.36","OML_Lampen_Isolierung_$Iso_1_ein"); //Isolierung 1
         map.put("1.90.37","OML_Lampen_Fahrstrasse_$1_Fstr_ef"); //Fahrstrasse ef
@@ -64,7 +64,6 @@ public class OMLMapPetrinet extends ComponentMapBase{
         map.put("1.91.01","OML_BL_OM_LN_$RMM_nLN"); //Rückmelden möglich nach Langnau
         map.put("1.91.02","OML_Lampen_Streckenblock_$1_FBV_vLN"); //Fahrtrichtung verlangt von Langnau
         map.put("1.91.03","OML_Lampen_Stoerung_$1_Stoer_Wecker"); //Störung, Wecker abschalten
-        map.put("1.01.01","OML_Lampen_WS1_$1_WS1_Freig"); //WS1 Freigabelampe
         map.put("1.01.02","OML_Lampen_WS1_$1_WS1_Ueberw"); //WS1 Überwachungslampe
 // map.put("2.92.01",""); //Weichenwecker
 // map.put("2.92.02",""); //Blockwecker
@@ -86,8 +85,8 @@ public class OMLMapPetrinet extends ComponentMapBase{
         map.put("6.91.02","OML_Kontakte_$6_FBA_nZB"); //Freie Bahn anfordern nach Zollbrück
         map.put("6.91.01","OML_Kontakte_$6_FBF_nZB"); //Freie Bahn festhalten nach Zollbrück
         map.put("6.91.03","OML_Kontakte_$6_RM_nZB"); //Rückmelden nach Zollbrück
-        map.put("6.91.04","OML_Kontakte_$6_FBA_nLN"); //Rückmelden nach Langnau
-// map.put("6.91.05",""); //Freie Bahn anfordern nach Langnau
+// map.put("6.91.04",""); //Rückmelden nach Langnau
+        map.put("6.91.05","OML_Kontakte_$6_FBA_nLN"); //Freie Bahn anfordern nach Langnau
         map.put("6.91.06","OML_Kontakte_$6_FBF_nLN"); //Freie Bahn festhalten nach Langnau
         map.put("6.91.07","OML_Kontakte_$6_BLU_EG"); //Blockumgehung EG
         map.put("6.91.08","OML_Kontakte_$6_Gleist_EMM"); //Richtung Emmenmatt
@@ -95,24 +94,24 @@ public class OMLMapPetrinet extends ComponentMapBase{
         map.put("6.91.10","OML_Kontakte_$6_NT_W1"); //Nottaste W1
 // map.put("6.91.11",""); //Weichenbeleuchtung aus/ein
 // map.put("6.91.12",""); //Zeitschalter-Umgehung Ein/Norm.
-// map.put("6.91.13",""); //Notauflösung
-// map.put("6.91.14",""); //Richtung Zollbrück
-// map.put("6.91.15",""); //Isolierumgehung für Signalfahrtstellung
-// map.put("7.91.01",""); //WS1 Grundstellung +
-// map.put("7.91.02",""); //WS1 gedrückt
-// map.put("7.91.04",""); //WS1 in Grundstellung - (45° Lage)
+        map.put("6.91.13","OML_Kontakte_$6_NAL"); //Notauflösung
+        map.put("6.91.14","OML_Kontakte_$6_Gleist_ZB"); //Richtung Zollbrück
+        map.put("6.91.15","OML_Kontakte_$6_ISU_Sign"); //Isolierumgehung für Signalfahrtstellung
+        map.put("7.91.01","OML_logic_Kontakte_WS1_$ws1_plus"); //WS1 Grundstellung +
+        map.put("7.91.02","OML_Kontakte_$7_WS1_1"); //WS1 gedrückt
+        map.put("7.91.04","OML_logic_Kontakte_WS1_$ws1_minus"); //WS1 in Grundstellung - (45° Lage)
 // map.put("8.91.02",""); //FSS Grundstellung gedrückt
 // map.put("8.91.01",""); //FSS in Endlage
-// map.put("8.91.03",""); //FSS in 10°-Lage von Langnau
-// map.put("8.91.04",""); //FSS in 30°-Lage von Langnau
-// map.put("8.91.05",""); //FSS in 45°-Lage von Langnau
+        map.put("8.91.03","OML_Kontakte_$8_FSS_10F"); //FSS in 10°-Lage von Langnau
+        map.put("8.91.04","OML_Kontakte_$8_FSS_30F"); //FSS in 30°-Lage von Langnau
+        map.put("8.91.05","OML_Kontakte_$8_FSS_45F"); //FSS in 45°-Lage von Langnau
 // map.put("8.91.06",""); //FSS in 80°-Lage von Langnau
-// map.put("8.91.07",""); //FSS in 90°-Lage von Langnau
-// map.put("8.91.19",""); //FSS in 10°-Lage nach Langnau
-// map.put("8.91.20",""); //FSS in 30°-Lage nach Langnau
-// map.put("8.91.21",""); //FSS in 45°-Lage nach Langnau
+        map.put("8.91.07","OML_Kontakte_$8_FSS_90F"); //FSS in 90°-Lage von Langnau
+        map.put("8.91.19","OML_Kontakte_$8_FSS_10EG"); //FSS in 10°-Lage nach Langnau
+        map.put("8.91.20","OML_Kontakte_$8_FSS_30EG"); //FSS in 30°-Lage nach Langnau
+        map.put("8.91.21","OML_Kontakte_$8_FSS_45EG"); //FSS in 45°-Lage nach Langnau
 // map.put("8.91.22",""); //FSS in 80°-Lage nach Langnau
-// map.put("8.91.23",""); //FSS in 90°-Lage nach Langnau
+        map.put("8.91.23","OML_Kontakte_$8_FSS_90EG"); //FSS in 90°-Lage nach Langnau
         map.put("10.99.01","OML_Iso_egf_$belegt"); //Isolierung egf belegt
 // map.put("10.99.02",""); //Isolierung egf direkt nach Isolierung 1 belegt
         map.put("10.99.04","OML_Iso_1_$belegt"); //Isolierung 1 belegt
@@ -148,7 +147,7 @@ public class OMLMapPetrinet extends ComponentMapBase{
 // map.put("90.99.01",""); //Signallampe defekt; F* Warnung
 // map.put("90.99.02",""); //Signallampe defekt; F* Fahrt
 // map.put("90.99.03",""); //Signallampe defekt; F notrot
-        map.put("90.99.04","OML_Fstr_fg_$Stoerung_F"); //Signallampe defekt; F grün FB3
+// map.put("90.99.04",""); //Signallampe defekt; F grün FB3
 // map.put("90.99.05",""); //Signallampe defekt; F rot
 // map.put("90.99.06",""); //Signallampe defekt; F grün FB 1
 // map.put("90.99.07",""); //Signallampe defekt; E grün

@@ -44,45 +44,13 @@ public abstract class ComponentMapBase {
 		return "";
 	}
 
-    /**
-     *
-     * @param value
-     * @return
-     */
-    public boolean containsValue(String value){
-        for(Entry<String, String> entry : map.entrySet()){
-            if(entry.getValue().equalsIgnoreCase(value)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     *
-     * @param key
-     * @return
-     */
-    public boolean containsKey(String key){
-        for(Entry<String, String> entry : map.entrySet()){
-            if(entry.getKey().equalsIgnoreCase(key)){
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     public boolean isKeyAvailable(String id){
         return map.containsKey(id);
     }
 
-    public boolean isValueAvailable(String id){
-        return map.containsValue(id);
-    }
-
 	/**
-	 * 
+	 * TODO should be protected
 	 * @return initialized map
 	 */
 	@SuppressWarnings("rawtypes")
