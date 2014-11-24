@@ -24,13 +24,22 @@ public class MessageTranslatorMiddleware extends MessageTranslatorMiddlewareBase
 	public LinkedList<MessageMiddleware> toMiddlewareMessageList(String stream){
 		return decodeMiddlewareMessages(stream);
 	}
-	
+
+    /**
+     *
+     * @param stream
+     *
+     */
+    public MessageMiddleware toMiddlewareMessage(String stream){
+        return decodeMiddlewareMessage(stream);
+    }
+
 	/**
 	 * 
 	 * @param commonMessage
 	 * 
 	 */
-	public String toMiddlewareMessageStream(MessageMiddleware commonMessage){
+	public String toMiddlewareMessage(MessageMiddleware commonMessage){
 		return encodeMiddlewareMessage(commonMessage);
 	}
 

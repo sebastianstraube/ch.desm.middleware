@@ -1,6 +1,7 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
@@ -25,7 +26,8 @@ public class PetrinetOmlBrokerClient extends ComponentBrokerClientBase {
 
     @Override
     protected void onIncomingBrokerMessage(String message) {
-            thread.addMessages(service.getTranslator().toMiddlewareMessageList(message));
+        LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: " + message);
+        thread.addMessages(service.getTranslator().toMiddlewareMessageList(message));
     }
 
     @Override

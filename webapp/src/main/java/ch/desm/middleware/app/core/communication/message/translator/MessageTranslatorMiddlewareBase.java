@@ -11,9 +11,6 @@ import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 abstract class MessageTranslatorMiddlewareBase {
 
 	private static Logger LOGGER = Logger.getLogger(MessageTranslatorMiddlewareBase.class);
-	
-	private static final String ELEMENT_CUT = ";";
-	private static final String MESSAGE_CUT = "#";
 
 	/**
 	 * positions
@@ -28,7 +25,7 @@ abstract class MessageTranslatorMiddlewareBase {
 	private static final int TOPIC = 7;
 
 	protected LinkedList<MessageMiddleware> decodeMiddlewareMessages(String stream) {
-		String[] messageArray = stream.split(MESSAGE_CUT);
+		String[] messageArray = stream.split(MessageBase.MESSAGE_MESSAGE_CUT);
 		LinkedList<MessageMiddleware> messageList = new LinkedList<MessageMiddleware>();
 
 		for (int i = 0; i < messageArray.length; i++) {
@@ -51,7 +48,7 @@ abstract class MessageTranslatorMiddlewareBase {
 			if (message == null || message.isEmpty()) {
 				throw new Exception("there is no message to translate");
 			} else {
-				String[] parts = message.split(ELEMENT_CUT);
+				String[] parts = message.split(MessageBase.MESSAGE_ELEMENT_CUT);
 				
 				messageCommon = new MessageMiddleware(parts[TOPIC], parts[ID], parts[EXTERN_INTERN],
 						parts[ELEMENT], parts[FUNCTION], parts[INSTANCE],
@@ -76,19 +73,19 @@ abstract class MessageTranslatorMiddlewareBase {
 
 		String endpointMessage = "";
 		endpointMessage += message.getGlobalId();
-		endpointMessage += ELEMENT_CUT;
+		endpointMessage += MessageBase.MESSAGE_ELEMENT_CUT;
 		endpointMessage += message.getGlobalId();
-		endpointMessage += ELEMENT_CUT;
+		endpointMessage += MessageBase.MESSAGE_ELEMENT_CUT;
 		endpointMessage += message.getExternIntern();
-		endpointMessage += ELEMENT_CUT;
+		endpointMessage += MessageBase.MESSAGE_ELEMENT_CUT;
 		endpointMessage += message.getElement();
-		endpointMessage += ELEMENT_CUT;
+		endpointMessage += MessageBase.MESSAGE_ELEMENT_CUT;
 		endpointMessage += message.getFunction();
-		endpointMessage += ELEMENT_CUT;
+		endpointMessage += MessageBase.MESSAGE_ELEMENT_CUT;
 		endpointMessage += message.getInstance();
-		endpointMessage += ELEMENT_CUT;
+		endpointMessage += MessageBase.MESSAGE_ELEMENT_CUT;
 		endpointMessage += message.getParameter();
-		endpointMessage += MESSAGE_CUT;
+		endpointMessage += MessageBase.MESSAGE_MESSAGE_CUT;
 
 		return endpointMessage;
 	}

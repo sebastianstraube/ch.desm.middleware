@@ -75,8 +75,8 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 						if (!fahrschalterKey.isEmpty()) {
 							parameter = "on";
 							stream = fahrschalter.getMap().getValue(fahrschalterKey);
-							stream = stream.replaceAll(
-									MessageCommon.PARAMETER_PLACEHOLDER,
+							stream = stream.replace(
+									MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER,
 									parameter);
 							middlewareMessagesInput = middlewareMessagesInput
 									.concat(stream);
@@ -101,8 +101,8 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 							}
 						}
 
-						stream = stream.replaceAll(
-								MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+						stream = stream.replace(
+								MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
 						middlewareMessagesInput = middlewareMessagesInput
 								.concat(stream);
 					}
@@ -133,8 +133,8 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 					if (!fahrschalterKey.isEmpty()) {
 						parameter = "on";
 						stream = fahrschalter.getMap().getValue(fahrschalterKey);
-						stream = stream.replaceAll(
-								MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+						stream = stream.replace(
+								MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
 						middlewareMessagesInput = middlewareMessagesInput
 								.concat(stream);
 					}
@@ -176,8 +176,8 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 							}
 						}
 
-						stream = stream.replaceAll(
-								MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+						stream = stream.replace(
+								MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
 
 						middlewareMessagesInput = middlewareMessagesInput
 								.concat(stream);

@@ -53,7 +53,7 @@ public class PetrinetOmlEndpoint extends EndpointCommon {
             String message = service.getComponentMapMiddleware().getValue(pair.getLeft());
             if(!message.isEmpty()){
                 String parameter = pair.getRight() == 0? "off" : "on";
-                message = message.replaceAll("\\?", parameter);
+                message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
             }
         } catch (ClassCastException e) {

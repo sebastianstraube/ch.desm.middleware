@@ -14,7 +14,6 @@ import javax.websocket.EncodeException;
 public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmlEndpointExportThread.class);
-    private static int SLEEP_INTERVAL = 512;
 
     private Object pendingSensorEventsLock;
     private List<Pair<String, Integer>> pendingSensorEvents;
@@ -48,13 +47,11 @@ public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
 
     public void run() {
         while (!isInterrupted()) {
-
-            applySensorEvents();
             simulatePetriNet();
+            applySensorEvents();
             applyPlaces();
-
             try {
-                Thread.sleep(SLEEP_INTERVAL);
+                doHangout(64);
             } catch (InterruptedException e) {
                 LOGGER.log(Level.ERROR, e);
             }

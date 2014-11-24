@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.utility;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
@@ -7,12 +8,11 @@ import java.util.Random;
  */
 public class Utility {
 
+    private static final int MIN = 256;
+    private static final int MAX = 512;
 
     public static int randInt(){
-        int min = 64;
-        int max= 256;
-
-        return randInt(min, max);
+        return randInt(MIN, MAX);
     }
 
     /**
@@ -26,14 +26,9 @@ public class Utility {
      * @see java.util.Random#nextInt(int)
      */
     public static int randInt(int min, int max) {
-
-        // NOTE: Usually this should be a field rather than a method
-        // variable so that it is not re-seeded every call.
-        Random rand = new Random();
-
         // nextInt is normally exclusive of the top value,
         // so add 1 to make it inclusive
-        int randomNum = rand.nextInt((max - min) + 1) + min;
+        int randomNum = new Random().nextInt((max - min) + 1) + min;
 
         return randomNum;
     }

@@ -1,6 +1,8 @@
 package ch.desm.middleware.app.core.communication.message;
 
 
+import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
+
 public class MessageMiddleware extends MessageCommon {
 	
 	protected String outputInput;
@@ -8,6 +10,12 @@ public class MessageMiddleware extends MessageCommon {
 	public MessageMiddleware(MessageUbw32DigitalRegisterComplete message) {
 		super(message);
 	}
+
+    public MessageMiddleware(MessageMiddleware message){
+        this(message.getTopic(), message.getGlobalId(), message.getExternIntern(),
+                message.getElement(), message.getFunction(), message.getInstance(), message.getParameter(),
+                message.getPayload(), message.getOutputInput());
+    }
 	
 	public MessageMiddleware(String topic, String globalId, String externIntern,
 			String element, String function, String instance, String parameter,

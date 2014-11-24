@@ -3,11 +3,8 @@ package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
-import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.message.*;
-import ch.desm.middleware.app.core.component.ComponentMap;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapPetrinet;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements.OMLElementFahrstrassenSchalter;
@@ -40,7 +37,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU)){
             try {
                 String globalId = element.getGlobalId();
-                String parameter = util.getParameterValueMiddleware(element.getParameter());
+                String parameter = util.getParameterValueEndpoint(element.getParameter());
                 boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
                 String key = service.getMap().mapBrokerToEndpointMessage(globalId);
@@ -57,8 +54,12 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
                 }else{
                     String key = service.getMap().getValue(element.getGlobalId());
                     if(!key.isEmpty()){
-                        element.setTopic(element.getTopic().replace(MessageBase.MESSAGE_TOPIC_MANAGEMENT,MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU));
-                        processBrokerMessage(service, element);
+
+                        String message = service.getComponentMapMiddleware().getValue(key);
+                        message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, element.getParameter());
+                        MessageMiddleware messageMiddleware = service.getTranslator().toMiddlewareMessage(message);
+
+                        processBrokerMessage(service, messageMiddleware);
                         return;
                     }
                 }
@@ -68,7 +69,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
         }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
             try {
                 String globalId = element.getGlobalId();
-                String parameter = util.getParameterValueMiddleware(element.getParameter());
+                String parameter = util.getParameterValueEndpoint(element.getParameter());
                 boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
                 delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, parameter, isInput);
@@ -158,7 +159,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
                         LOGGER.log(Level.ERROR, e);
                     }
                 }
-                stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -179,13 +180,6 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
             String parameter = isEnabled == true ? "on" : "off";
             String key = entry.getKey();
 
-            /*
-            stream = stream.replaceAll(
-                    MessageCommon.PARAMETER_PLACEHOLDER, parameter);
-            messageInput = messageInput
-                    .concat(stream);
-            */
-
             if(service.getCache().isStateChanged(key, parameter)){
 
                 //find the middleware message of the changed key
@@ -204,7 +198,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
                     }
                 }
 
-                stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -242,12 +236,12 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
                 String FSSidEnabled = fahrStrassenSchalter.getglobalId(Integer.valueOf(parameter));
 
                 if(key.equals(FSSidEnabled)){
-                    stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_ON);
+                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_ON);
 
                     LOGGER.log(Level.INFO, "FSS enabled contact: " + stream);
 
                 }else{
-                    stream = stream.replaceAll(MessageCommon.PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_OFF);
+                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_OFF);
                 }
                 messageInput = messageInput.concat(stream);
             }

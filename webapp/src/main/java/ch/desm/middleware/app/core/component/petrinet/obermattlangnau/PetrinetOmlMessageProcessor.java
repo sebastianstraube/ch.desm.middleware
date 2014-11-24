@@ -3,7 +3,6 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.PetrinetMapOml;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -21,10 +20,6 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
      */
     public void processBrokerMessage(PetrinetOmlService service, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
-
-            if(message.getParameter().equals("on")){
-                LOGGER.log(Level.INFO, "processing broker message: " + message);
-            }
             processBrokerMessage(service, message);
         }
     }
@@ -34,7 +29,7 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
             try {
                 String sensorName = service.getMap().mapBrokerToEndpointMessage(element.getGlobalId());
-                int sensorValue = Integer.valueOf(util.getParameterValueMiddleware(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
+                int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
                 delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
             } catch (Exception e) {
                 //LOGGER.log(Level.ERROR, e);
@@ -46,9 +41,13 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
                         processInitEndpoint(service.getEndpoint(), element);
                     }
                 }else{
-                    if(!service.getMap().getValue(element.getGlobalId()).isEmpty()){
-                        element.setTopic(element.getTopic().replace(MessageBase.MESSAGE_TOPIC_MANAGEMENT,MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU));
-                        processBrokerMessage(service, element);
+                    String key = service.getMap().getValue(element.getGlobalId());
+                    if(!key.isEmpty()){
+                        String message = service.getComponentMapMiddleware().getValue(key);
+                        message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, element.getParameter());
+                        MessageMiddleware messageMiddleware = service.getTranslator().toMiddlewareMessage(message);
+
+                        processBrokerMessage(service, messageMiddleware);
                     }
                 }
             } catch (Exception e) {

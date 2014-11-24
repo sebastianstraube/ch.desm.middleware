@@ -11,10 +11,11 @@ import ch.desm.middleware.app.core.utility.Utility;
  */
 public abstract class DaemonThreadBase extends Thread {
 
-    private int sleepTime = Utility.randInt();
+    private int sleepTime;
 
 	public DaemonThreadBase(){
 		setDaemon(true);
+        sleepTime = 128;
 	}
 	
 	public DaemonThreadBase(String name) {
@@ -33,6 +34,10 @@ public abstract class DaemonThreadBase extends Thread {
 
     public void doHangout(int sleepTime) throws InterruptedException {
         Thread.sleep(sleepTime);
+    }
+
+    public void doRandomHangout() throws InterruptedException{
+        doHangout(Utility.randInt());
     }
 
     public int getSleepTime(){

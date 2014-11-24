@@ -51,7 +51,7 @@ public class MessageProcessorUtil {
      * @param value
      * @return
      */
-    public String getParameterValueMiddleware(String value) {
+    public String getParameterValueEndpoint(String value) {
         String returnValue = "";
 
         try{

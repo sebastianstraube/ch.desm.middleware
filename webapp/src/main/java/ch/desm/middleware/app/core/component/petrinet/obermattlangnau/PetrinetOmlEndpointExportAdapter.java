@@ -5,11 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ch.desm.middleware.app.core.utility.Pair;
-import ch.desm.middleware.app.core.utility.Utility;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import javax.rmi.CORBA.Util;
 
 /**
  * wrapper class around the petri net class provided by the pnlm export that is
@@ -18,14 +15,13 @@ import javax.rmi.CORBA.Util;
 public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportBase {
 
 	private static Logger LOGGER = Logger.getLogger(PetrinetOmlEndpointExportAdapter.class);
-    private static final int SLEEP_TIMER = 64;
 
-	private List<Pair<String, Integer>> diffPlaces;
+	private List<Pair<String, Integer>> canfirePlaces;
     private List<Pair<String, Integer>> changedPlacesList;
     private Object lockChangedPlacesList;
 
     public PetrinetOmlEndpointExportAdapter(){
-        diffPlaces = new LinkedList<Pair<String, Integer>>();
+        canfirePlaces = new LinkedList<Pair<String, Integer>>();
         changedPlacesList = new LinkedList<Pair<String, Integer>>();
         lockChangedPlacesList = new Object();
     }
@@ -34,8 +30,8 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
 	public boolean canFire(String s) {
 		LOGGER.log(Level.TRACE, "transition can fire: " + s);
 
-        diffPlaces.clear();
-        diffPlaces.addAll(getPlaces());
+        canfirePlaces.clear();
+        canfirePlaces.addAll(getPlaces());
 		return super.canFire(s);
 	}
 
@@ -43,14 +39,8 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
 	public void fire(String s) {
         LOGGER.log(Level.INFO, "transitions fired: " + s);
 
-        //TODO refactoring
-        //mapping slow down transition
-        try {
-            Thread.sleep(SLEEP_TIMER);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        refreshChangedPlacesList(getPlaces(), diffPlaces);
+        //TODO mapping slow down transition
+        refreshChangedPlacesList(getPlaces(), canfirePlaces);
     }
 
     @Override
@@ -89,10 +79,10 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
         refreshChangedPlacesList(base, new LinkedList<Pair<String, Integer>>());
     }
 
-    private void refreshChangedPlacesList(List<Pair<String, Integer>> base, List<Pair<String, Integer>> compare){
+    private void refreshChangedPlacesList(List<Pair<String, Integer>> changed, List<Pair<String, Integer>> base){
         synchronized (lockChangedPlacesList){
-            for(Pair<String, Integer> actualElement: base){
-                if(!compare.contains(actualElement)){
+            for(Pair<String, Integer> actualElement: changed){
+                if(!base.contains(actualElement)){
                     changedPlacesList.add(actualElement);
                     LOGGER.log(Level.INFO, "changed place: " + actualElement.toString());
                 }
