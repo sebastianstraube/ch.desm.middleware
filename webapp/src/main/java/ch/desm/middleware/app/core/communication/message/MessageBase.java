@@ -15,7 +15,7 @@ public class MessageBase{
 	public static final String MESSAGE_TOPIC_CABINE_RE420 = "kabinere420";
 	public static final String MESSAGE_TOPIC_CABINE_RE420_FABISCH = "kabinere420-fabisch";
 	public static final String MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU = "stellwerkobermattlangnau";
-	public static final String MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU = "petrinetz-obermattlangnau";
+	public static final String MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU = "petrinet_obermatt";
 	public static final String MESSAGE_TOPIC_MANAGEMENT = "management";
 	
 	private String topic;
