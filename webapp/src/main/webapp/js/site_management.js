@@ -155,7 +155,12 @@ $(document).ready(function() {
             '</tr>'
         ).prependTo($logWindow.find('tbody'));
 
-        processButtons(msg.payload);
+        if(msg.payload.length >= 0){
+            processButtons(msg.payload);
+        } else{
+            createAutoClosingAlert(".notification-box", 5000, "payload is empty: " + msg.payload);
+        }
+
     }
 
     function getJsId(id){
@@ -163,13 +168,6 @@ $(document).ready(function() {
         id = id.replaceAll("\\.","_");
 
         return id;
-    }
-
-    function getJavaPayload(payload){
-        payload = payload.replace("-", "_$");
-        payload = "OML_" + payload;
-
-        return payload;
     }
 
     function processButtons(payload){
@@ -181,9 +179,11 @@ $(document).ready(function() {
         var parameter = parts[6];
 
         if(!hasRemoteButton(id)){
-            addRemoteButtonNav(payload);
-            addRemoteButtonPan(payload);
-            addRemoteButton(topic, id, parameter, payload);
+            addRemoteAccordion(topic, id, payload);
+            addRemoteAccordionHeadingGroup(topic, id, payload);
+
+            addRemoteButtonPanel(topic, id);
+            addRemoteButton(id, parameter);
             addRemoteButtonEvent(id, payload);
         }else{
             //createAutoClosingInfo(".notification-box", 20000, payload);
@@ -191,78 +191,164 @@ $(document).ready(function() {
         }
     }
 
-    function addRemoteButtonNav(payload){
-
-        var jsId = getRemoteButtonPanId(payload);
-
-        if($("#" + jsId).length <= 0) {
-            var tab = '' +
-                '<li role="presentation">' +
-                    '<a href="#' + jsId +
-                        '" aria-controls="' + jsId +
-                        '" role="tab" data-toggle="tab">' +
-                        getKeyGroup(payload) +
-                    '</a>' +
-                '</li>';
-
-            $('#'+jsId+' a').click(function (e) {
-                e.preventDefault()
-                $(this).tab('show')
-            })
-
-            $("#remote_button_nav").append(tab);
-        }
+    function getGroupButtonId(id){
+        return getKeyGroupFromId(getJsId(id));
     }
 
-    function getRemoteButtonPanId(payload){
-        var id = "remote_button_pan_"+getJsId(getKeyGroup(payload));
+    function getButtonName(id){
+        var buttonId = getButton(id);
+        var buttonNameArray = buttonId.split('-');
+        var buttonName = buttonNameArray[0];
+        if(buttonNameArray.length > 1){
+            buttonName = buttonNameArray[1];
+        }
+
+        return buttonName;
+    }
+
+    function getKeyGroup(id){
+        id= getJsId(id);
+        var array = id.split('-');
+        var keyGroup = array[0];
+
+        return keyGroup;
+    }
+
+    function getKeyGroupFromId(id){
+
+        var group = getKeyGroup(id);
+
+        return group;
+    }
+    //check object exists
+    function hasRemoteButton(id){
+        return ($("#"+ getButton(id)).length > 0);
+    }
+
+    function getAccordionPanel(topic){
+        var id = "arc_panel_" + getJsId(topic);
         return id;
     }
 
-    function addRemoteButtonPan(payload){
+    function getAccordion(){
+        var id = "accordion_remote_controle";
+        return id;
+    }
 
-        var jsId = getRemoteButtonPanId(payload);
-        var panElement = $("#" + jsId);
+    function getAccordionHeading(topic){
+        var id = "arc_heading_" + getJsId(topic);
+        return id;
+    }
 
-        if(panElement.length <= 0){
-            var pan = ''+
-                '<div role="tabpanel" class="tab-pane btn-group fade" id=\"'+ jsId +'\">' +
+    function getAccordionButtonPanel(topic){
+        var id = "arc_button_panel" + getJsId(topic);
+        return id;
+    }
+
+    function getAccordionButtonGroupTitel(id){
+        var id = "abg_titel_" + getGroupButtonId(id);
+        return id;
+    }
+
+    function getButton(id){
+        var id = "button_"+ getJsId(id);
+        return id;
+    }
+
+    function getAccordionCollapsePanelId(topic){
+        var id = "collapse_"+ getJsId(topic);
+        return id;
+    }
+
+    function addRemoteAccordion(topic, id, payload){
+
+        var accordionId = getAccordion();
+        var accordionPanelId = getAccordionPanel(topic);
+
+        if($("#"+ accordionPanelId).length <= 0 ){
+
+            var accordion = '' +
+                '<div class="panel panel-default" id=\"'+ accordionPanelId + '\" >' +
                 '</div>';
 
-            $("#remote_button_pan").append(pan);
+            $("#"+accordionId).append(accordion);
         }
     }
 
-    function addRemoteButton(topic, id, parameter, payload){
+    function addRemoteAccordionHeadingGroup(topic, id, payload){
 
-        var parts = payload.split(';');
-        var jsId = getJsId(id);
-        var panElement = $("#" + getRemoteButtonPanId(payload));
+        var accordionPanelId = getAccordionPanel(topic);
 
-        var button =
-            $('' +
-                    '<div class=\"btn btn-default '+getIsActiveClass(parameter)+'\" id=\"button_'+ jsId + '\" aria-pressed=\"'+getIsAriaPressedAttr(parameter)+'\">' +
-                    '<span style="cursor: pointer;">'+ id +'</span>' +
+        var headingId = getAccordionHeading(topic);
+        var buttonPanelId = getAccordionButtonPanel(topic);
+        var collapsePanelId = getAccordionCollapsePanelId(topic);
+
+        if($("#"+ headingId).length <= 0){
+            var heading = '' +
+                '<div class="panel-heading" role="tab" id=\"'+ headingId + '\" >' +
+                    '<h4 class="panel-title">' +
+                        '<a data-toggle="collapse" data-parent=\"#'+ accordionPanelId + '\" href=\"#'+ collapsePanelId + '\" aria-expanded="true" aria-controls=\"'+ collapsePanelId + '\" >' +
+                            topic +
+                        '</a>' +
+                    '</h4>' +
+                '</div>' +
+                '<div id=\"'+ collapsePanelId + '\" class="panel-collapse collapse in" role="tabpanel" aria-labelledby=\"'+ headingId + '\">' +
+                    '<div class="panel-body" id=\"'+ buttonPanelId + '\">' +
+                        //accordion panel context
+                    '</div>' +
+                '</div>';
+            $("#"+accordionPanelId).append(heading);
+
+        }
+    }
+
+    function addRemoteButtonPanel(topic, id){
+
+        var buttonPanelId = getAccordionButtonPanel(topic);
+        var buttonGroupTitel = getAccordionButtonGroupTitel(id);
+
+        if($("#"+ buttonGroupTitel).length <= 0){
+            var pan = ''+
+                '<div class="accordionButtonGroupTitel" id=\"'+ buttonGroupTitel + '\"> ' +
+                    '<h4>' + getKeyGroupFromId(id) + '</h4>' +
+                '</div>';
+
+            $("#"+buttonPanelId).append(pan);
+        }
+    }
+
+
+    function addRemoteButton(id, parameter){
+
+        var buttonId = getButton(id);
+        var buttonName = getButtonName(id);
+
+        var accordionButtonGroupTitelId =  getAccordionButtonGroupTitel(id);
+        if($("#"+ buttonId).length <= 0){
+            var button =
+                $(  '' +
+                    '<div class=\"btn btn-default '+getIsActiveClass(parameter)+'\" id=\"'+ buttonId + '\" aria-pressed=\"'+getIsAriaPressedAttr(parameter)+'\">' +
+                        '<span style="cursor: pointer;">'+ buttonName + " ("+parameter+")"+ '</span>' +
                     '</div>'
-            );
+                );
 
-        panElement.append(button);
+            $("#" + accordionButtonGroupTitelId).append(button);
+        }
+
     }
 
     function addRemoteButtonEvent(id, payload){
 
-        $("#button_" + getJsId(id)).on( "click", function( event ) {
+        $("#"+getButton(id)).on( "click", function( event ) {
 
             var changedPayload = "";
 
             if($(this).hasClass("active")){
                 changedPayload = payload.replace(";on;", ";off;");
-                //alert("change to OFF, payload: " + changedPayload);
                 deactivateButton($(this));
                 sendMessage(changedPayload);
             }else{
                 changedPayload = payload.replace(";off;", ";on;");
-                //alert("change to ON, payload: " + changedPayload);
                 activateButton($(this));
                 sendMessage(changedPayload);
             }
@@ -270,27 +356,11 @@ $(document).ready(function() {
         });
     }
 
-    function getKeyGroup(payload){
 
-        var payloadArray = payload.split(';');
-        var keyGroup = payloadArray[0];
-
-        if(keyGroup.length >= 1){
-            var keyGroupArray = keyGroup.split('_$');
-            keyGroup = keyGroupArray[0].replace("OML_", "");
-        }
-
-        return keyGroup;
-    }
-
-    //check object exists
-    function hasRemoteButton(id){
-        return ($("#button_"+ getJsId(id)).length > 0);
-    }
 
     function changeRemoteButton(id, parameter){
 
-        var buttonId = "#button_"+ getJsId(id);
+        var buttonId = getButton(id);
         var button = $(buttonId);
 
         if(parameter == "on") {
@@ -302,18 +372,20 @@ $(document).ready(function() {
                 deactivateButton(button)
             }
         } else{
-            alert("illegal state with button: " + "#button_"+ getJsId(id) + " and parameter: " + parameter );
+            alert("illegal state with button: " + buttonId + " and parameter: " + parameter );
         }
     }
 
     function activateButton(button){
         button.addClass("btn-success in active");
         button.attr('aria-pressed', 'true');
+        button.text(button.text().replace('off', 'on'));
     }
 
     function deactivateButton(button){
         button.removeClass("btn-success in active");
         button.attr('aria-pressed', 'false');
+        button.text(button.text().replace('on', 'off'));
     }
 
     function unhighlightButton(button){
