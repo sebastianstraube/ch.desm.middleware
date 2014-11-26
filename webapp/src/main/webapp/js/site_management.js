@@ -75,8 +75,16 @@ $(document).ready(function() {
                 alert.remove();
             });
         }, delay);
+    }
 
+    function buttonHighLight(button){
+        button.toggleClass("btn-success");
 
+        var timer = window.setTimeout(function () {
+            button.toggleClass("btn-success");
+        }, 1000);
+
+        timer = null;
     }
 
     function createAutoClosingAlert(selector, delay, text) {
@@ -178,12 +186,17 @@ $(document).ready(function() {
         var id = parts[0];
         var parameter = parts[6];
 
-        if(!hasRemoteButton(id)){
-            addRemoteAccordion(topic, id, payload);
-            addRemoteAccordionHeadingGroup(topic, id, payload);
+        id = checkButtonGroup(topic, id);
 
-            addRemoteButtonPanel(topic, id);
-            addRemoteButton(id, parameter);
+        if(!hasRemoteButton(id)){
+            addRemoteTab(topic);
+            addRemoteTabPanel(topic);
+
+            addRemoteAccordionGroup(topic, id);
+            addRemoteAccordionPanel(topic, id);
+            addRemoteAccordionHeading(topic, id);
+
+            addRemoteButton(topic, id, parameter);
             addRemoteButtonEvent(id, payload);
         }else{
             //createAutoClosingInfo(".notification-box", 20000, payload);
@@ -208,8 +221,21 @@ $(document).ready(function() {
         var array = id.split('-');
         var keyGroup = array[0];
 
+
+
         return keyGroup;
     }
+
+    function checkButtonGroup(topic, id){
+        var array = id.split("_$");
+
+        if(array.length <= 1){
+            id = topic + "_GROUP_$" + id;
+        }
+
+        return id;
+    }
+
     //check object exists
     function hasRemoteButton(id){
         return ($("#"+ getButton(id)).length > 0);
@@ -225,13 +251,23 @@ $(document).ready(function() {
         return id;
     }
 
-    function getAccordionHeading(topic){
-        var id = "arc_heading_" + getJsId(topic);
+    function getTabPanelHome(){
+        var id = "tab_panel_content";
         return id;
     }
 
-    function getAccordionButtonPanel(topic){
-        var id = "arc_button_panel" + getJsId(topic);
+    function getTabHome(){
+        var id = "tab_panel";
+        return id;
+    }
+
+    function getAccordionHeading(id){
+        var id = "arc_heading_" + getKeyGroupFromId(getJsId(id));
+        return id;
+    }
+
+    function getAccordionButtonPanel(id){
+        var id = "arc_button_panel_" + getKeyGroupFromId(getJsId(id));
         return id;
     }
 
@@ -245,14 +281,81 @@ $(document).ready(function() {
         return id;
     }
 
-    function getAccordionCollapsePanelId(topic){
-        var id = "collapse_"+ getJsId(topic);
+    function getAccordionCollapsePanelId(id){
+        var id = "collapse_"+ getKeyGroupFromId(getJsId(id));
         return id;
     }
 
-    function addRemoteAccordion(topic, id, payload){
+    function getTab(topic){
+        var id = "tab_"+ getJsId(topic);
+        return id;
+    }
 
-        var accordionId = getAccordion();
+    function getTabPanel(topic){
+        var id = "tab_panel_" + topic;
+        return id;
+    }
+
+    function addRemoteTab(topic){
+
+        var tabHomeId = getTabHome();
+        var tabId = getTab(topic);
+        var tabPanelId = getTabPanel(topic);
+
+        //add to presentation
+        //class="active"
+        if($("#"+ tabId).length <= 0 ){
+            var tab = '' +
+                '<li role="presentation" id=\"'+ tabId + '\" ><a href=\"#'+ tabPanelId + '\" aria-controls=\"'+ tabPanelId + '\" role="tab" data-toggle="tab">' + topic + '</a></li>';
+
+            $("#"+tabHomeId).append(tab);
+
+            $("#"+tabId+" a").click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+                alert(tabId);
+            })
+        }
+
+
+    }
+
+    function addRemoteTabPanel(topic){
+
+        var tabPanelHomeId = getTabPanelHome();
+        var tabPanelId = getTabPanel(topic);
+
+        if($("#"+ tabPanelId).length <= 0 ){
+            var tabPanel = '' +
+                '<div role="tabpanel" class="tab-pane" id=\"'+ tabPanelId + '\" >' +
+                '</div>';
+
+            $("#"+tabPanelHomeId).append(tabPanel);
+        }
+    }
+
+    function getRemoteAccordionGroup(id){
+        var id = "arc_" + getAccordionButtonGroupTitel(id);
+        return id;
+    }
+
+    function addRemoteAccordionGroup(topic, id){
+
+        var tabPanelId = getTabPanel(topic);
+        var accordionGroupId = getRemoteAccordionGroup(id);
+
+        if($("#"+ accordionGroupId).length <= 0 ){
+            var accordionPanel = '' +
+                '<div class="panel-group" id=\"'+ accordionGroupId + '\" role="tablist" aria-multiselectable="true"></div>';
+
+            $("#"+tabPanelId).append(accordionPanel);
+        }
+    }
+
+
+    function addRemoteAccordionPanel(topic, id){
+
+        var accordionGroupId = getRemoteAccordionGroup(id);
         var accordionPanelId = getAccordionPanel(topic);
 
         if($("#"+ accordionPanelId).length <= 0 ){
@@ -261,68 +364,54 @@ $(document).ready(function() {
                 '<div class="panel panel-default" id=\"'+ accordionPanelId + '\" >' +
                 '</div>';
 
-            $("#"+accordionId).append(accordion);
+            $("#"+accordionGroupId).append(accordion);
         }
     }
 
-    function addRemoteAccordionHeadingGroup(topic, id, payload){
+    function addRemoteAccordionHeading(topic, id){
 
         var accordionPanelId = getAccordionPanel(topic);
+        var accordionGroupId = getRemoteAccordionGroup(id);
 
-        var headingId = getAccordionHeading(topic);
-        var buttonPanelId = getAccordionButtonPanel(topic);
-        var collapsePanelId = getAccordionCollapsePanelId(topic);
+        var headingId = getAccordionHeading(id);
+        var buttonPanelId = getAccordionButtonPanel(id);
+        var collapsePanelId = getAccordionCollapsePanelId(id);
 
         if($("#"+ headingId).length <= 0){
             var heading = '' +
                 '<div class="panel-heading" role="tab" id=\"'+ headingId + '\" >' +
                     '<h4 class="panel-title">' +
-                        '<a data-toggle="collapse" data-parent=\"#'+ accordionPanelId + '\" href=\"#'+ collapsePanelId + '\" aria-expanded="true" aria-controls=\"'+ collapsePanelId + '\" >' +
-                            topic +
+                        '<a data-toggle="collapse" data-parent=\"#'+ accordionGroupId + '\" href=\"#'+ collapsePanelId + '\" aria-expanded="false" class="collapsed" aria-controls=\"'+ collapsePanelId + '\" >' +
+                            getKeyGroupFromId(getJsId(id)) +
                         '</a>' +
                     '</h4>' +
                 '</div>' +
-                '<div id=\"'+ collapsePanelId + '\" class="panel-collapse collapse in" role="tabpanel" aria-labelledby=\"'+ headingId + '\">' +
+                '<div id=\"'+ collapsePanelId + '\" class="panel-collapse collapse" role="tabpanel" aria-labelledby=\"'+ headingId + '\" aria-expanded="false" style="height: 0px;">' +
                     '<div class="panel-body" id=\"'+ buttonPanelId + '\">' +
                         //accordion panel context
                     '</div>' +
                 '</div>';
+
             $("#"+accordionPanelId).append(heading);
 
         }
     }
 
-    function addRemoteButtonPanel(topic, id){
-
-        var buttonPanelId = getAccordionButtonPanel(topic);
-        var buttonGroupTitel = getAccordionButtonGroupTitel(id);
-
-        if($("#"+ buttonGroupTitel).length <= 0){
-            var pan = ''+
-                '<div class="accordionButtonGroupTitel" id=\"'+ buttonGroupTitel + '\"> ' +
-                    '<h4>' + getKeyGroupFromId(id) + '</h4>' +
-                '</div>';
-
-            $("#"+buttonPanelId).append(pan);
-        }
-    }
-
-
-    function addRemoteButton(id, parameter){
+    function addRemoteButton(topic, id, parameter){
 
         var buttonId = getButton(id);
         var buttonName = getButtonName(id);
+        var buttonPanelId = getAccordionButtonPanel(id);
 
-        var accordionButtonGroupTitelId =  getAccordionButtonGroupTitel(id);
+
         if($("#"+ buttonId).length <= 0){
-            var button =
-                $(  '' +
+            var button = '' +
                     '<div class=\"btn btn-default '+getIsActiveClass(parameter)+'\" id=\"'+ buttonId + '\" aria-pressed=\"'+getIsAriaPressedAttr(parameter)+'\">' +
                         '<span style="cursor: pointer;">'+ buttonName + " ("+parameter+")"+ '</span>' +
-                    '</div>'
-                );
+                    '</div>';
 
-            $("#" + accordionButtonGroupTitelId).append(button);
+
+            $("#" + buttonPanelId).append(button);
         }
 
     }
@@ -516,94 +605,94 @@ $(document).ready(function() {
 
     //INIT
     $('#init_interlocking').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;init;management;#")
     });
 
     $('#init_petrinet').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;init;management;#")
     });
 
     $('#init_cabine-ubw32').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;init;management;#")
     });
 
     $('#init_cabine-fabisch').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;init;management;#")
     });
 
     $('#init_locsim-rs232').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.simulation.locsim.rs232;os;0;management;simulation;locsim.rs232;init;management;#")
     });
 
     $('#init_locsim-dll').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.simulation.locsim.dll;os;0;management;simulation;locsim.dll;init;management;#")
     });
     
     //start
     $('#start_interlocking').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;start;management;#")
     });
 
     $('#start_petrinet').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;start;management;#")
     });
 
     $('#start_cabine-ubw32').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;start;management;#")
     });
 
     $('#start_cabine-fabisch').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;start;management;#")
     });
 
     $('#start_locsim-rs232').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.simulation.locsim.rs232;os;0;management;simulation;locsim.rs232;start;management;#")
     });
 
     $('#start_locsim-dll').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.simulation.locsim.dll;os;0;management;simulation;locsim.dll;start;management;#")
     });
 
     //stop
     $('#stop_interlocking').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;stop;management;#")
     });
 
     $('#stop_petrinet').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;stop;management;#")
     });
 
     $('#stop_cabine-ubw32').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;stop;management;#")
     });
 
     $('#stop_cabine-fabisch').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;stop;management;#")
     });
 
     $('#stop_locsim-rs232').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.simulation.locsim.rs232;os;0;management;simulation;locsim.rs232;stop;management;#")
     });
 
     $('#stop_locsim-dll').click(function(){
-        $(this).toggleClass('btn-success');
+        buttonHighLight($(this));
         sendMessage("mgmt.simulation.locsim.dll;os;0;management;simulation;locsim.dll;stop;management;#")
     });
 
