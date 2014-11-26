@@ -191,10 +191,6 @@ $(document).ready(function() {
         }
     }
 
-    function getGroupButtonId(id){
-        return getKeyGroupFromId(getJsId(id));
-    }
-
     function getButtonName(id){
         var buttonId = getButton(id);
         var buttonNameArray = buttonId.split('-');
@@ -206,19 +202,13 @@ $(document).ready(function() {
         return buttonName;
     }
 
-    function getKeyGroup(id){
+    function getKeyGroupFromId(id){
+
         id= getJsId(id);
         var array = id.split('-');
         var keyGroup = array[0];
 
         return keyGroup;
-    }
-
-    function getKeyGroupFromId(id){
-
-        var group = getKeyGroup(id);
-
-        return group;
     }
     //check object exists
     function hasRemoteButton(id){
@@ -246,7 +236,7 @@ $(document).ready(function() {
     }
 
     function getAccordionButtonGroupTitel(id){
-        var id = "abg_titel_" + getGroupButtonId(id);
+        var id = "abg_titel_" + getKeyGroupFromId(getJsId(id));
         return id;
     }
 
