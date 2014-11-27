@@ -52,16 +52,6 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
                         processInitEndpoint(service.getEndpoint(), element);
                     }
                 }else{
-                    String key = service.getMap().getValue(element.getGlobalId());
-                    if(!key.isEmpty()){
-
-                        String message = service.getComponentMapMiddleware().getValue(key);
-                        message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, element.getParameter());
-                        MessageMiddleware messageMiddleware = service.getTranslator().toMiddlewareMessage(message);
-
-                        processBrokerMessage(service, messageMiddleware);
-                        return;
-                    }
                 }
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
