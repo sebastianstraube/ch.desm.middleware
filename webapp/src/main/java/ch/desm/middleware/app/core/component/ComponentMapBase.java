@@ -45,6 +45,7 @@ public abstract class ComponentMapBase {
 	}
 
 
+
     public boolean isKeyAvailable(String id){
         return map.containsKey(id);
     }

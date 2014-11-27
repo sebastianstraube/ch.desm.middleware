@@ -216,12 +216,9 @@ $(document).ready(function() {
     }
 
     function getKeyGroupFromId(id){
-
         id= getJsId(id);
         var array = id.split('-');
         var keyGroup = array[0];
-
-
 
         return keyGroup;
     }
@@ -243,11 +240,6 @@ $(document).ready(function() {
 
     function getAccordionPanel(topic){
         var id = "arc_panel_" + getJsId(topic);
-        return id;
-    }
-
-    function getAccordion(){
-        var id = "accordion_remote_controle";
         return id;
     }
 
@@ -440,7 +432,7 @@ $(document).ready(function() {
     function changeRemoteButton(id, parameter){
 
         var buttonId = getButton(id);
-        var button = $(buttonId);
+        var button = $("#" + buttonId);
 
         if(parameter == "on") {
             if (!button.hasClass("active")) {
@@ -451,7 +443,7 @@ $(document).ready(function() {
                 deactivateButton(button)
             }
         } else{
-            alert("illegal state with button: " + buttonId + " and parameter: " + parameter );
+            createAutoClosingAlert(".notification-box", 5000, "illegal state with button: " + buttonId + " and parameter: " + parameter );
         }
     }
 
