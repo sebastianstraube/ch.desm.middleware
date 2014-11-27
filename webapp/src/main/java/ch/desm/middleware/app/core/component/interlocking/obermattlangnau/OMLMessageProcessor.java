@@ -52,6 +52,9 @@ public class OmlMessageProcessor extends ComponentMessageProcessor {
                         processInitEndpoint(service.getEndpoint(), element);
                     }
                 }else{
+
+                    // Todo implementation
+                    // activate this, when gui taken controle over this endpoint
                 }
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);

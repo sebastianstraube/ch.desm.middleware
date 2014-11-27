@@ -66,13 +66,13 @@ $(document).ready(function() {
 
         $(selector).append(newAlert);
 
-        var alert = $("#" + alertId);
-        alert.alert();
+        var alertObj = $("#" + alertId);
+        alertObj.alert();
 
         window.setTimeout(function () {
-            alert.fadeTo(500, 0).slideUp(500, function () {
-                alert.alert('close');
-                alert.remove();
+            alertObj.fadeTo(500, 0).slideUp(500, function () {
+                alertObj.alert('close');
+                alertObj.remove();
             });
         }, delay);
     }
@@ -98,13 +98,13 @@ $(document).ready(function() {
 
         $(selector).append(newAlert);
 
-        var alert = $("#" + alertId);
-        alert.alert();
+        var alertObj = $("#" + alertId);
+        alertObj.alert();
 
         window.setTimeout(function() {
-            alert.fadeTo(500, 0).slideUp(500, function(){
-                alert.alert('close');
-                alert.remove();
+            alertObj.fadeTo(500, 0).slideUp(500, function(){
+                alertObj.alert('close');
+                alertObj.remove();
             });
         }, delay);
 
@@ -202,6 +202,8 @@ $(document).ready(function() {
             //createAutoClosingInfo(".notification-box", 20000, payload);
             changeRemoteButton(id, parameter);
         }
+
+        checkEndpointControleTakenBy("petrinet_obermatt", topic, id);
     }
 
     function getButtonName(id){
@@ -305,11 +307,8 @@ $(document).ready(function() {
             $("#"+tabId+" a").click(function (e) {
                 e.preventDefault();
                 $(this).tab('show');
-                alert(tabId);
             })
         }
-
-
     }
 
     function addRemoteTabPanel(topic){
@@ -398,7 +397,7 @@ $(document).ready(function() {
 
         if($("#"+ buttonId).length <= 0){
             var button = '' +
-                    '<div class=\"btn btn-default '+getIsActiveClass(parameter)+'\" id=\"'+ buttonId + '\" aria-pressed=\"'+getIsAriaPressedAttr(parameter)+'\">' +
+                    '<div class=\"btn btn-default btn-remote-controle '+getIsActiveClass(parameter)+'\" topic=\"'+ topic + '\" id=\"'+ buttonId + '\" aria-pressed=\"'+getIsAriaPressedAttr(parameter)+'\">' +
                         '<span style="cursor: pointer;">'+ buttonName + " ("+parameter+")"+ '</span>' +
                     '</div>';
 
@@ -427,7 +426,19 @@ $(document).ready(function() {
         });
     }
 
+    function checkEndpointControleTakenBy(controleTopic, topic, id){
 
+            var buttonId = getButton(id);
+
+        $('.btn-remote-controle').each(function(){ //do stuff
+                var buttonTopic = $( this ).attr('topic');
+                if(buttonTopic == controleTopic){
+                    $( this).removeAttr("disabled");
+                }else{
+                    $( this).attr("disabled", "disabled");
+                }
+            });
+    }
 
     function changeRemoteButton(id, parameter){
 

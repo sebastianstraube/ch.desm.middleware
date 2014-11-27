@@ -42,8 +42,8 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
                     }
                 }else{
 
-                    //only one endpoint is allowed to receive messages from endpoint
-                    //BUG1
+                    // Todo implementation
+                    // activate this, when gui taken controle over this endpoint
                     if(service.getMap().isKeyAvailable(element.getGlobalId())){
                         String sensorName =element.getGlobalId();
                         int sensorValue = element.getParameter().equals("on") ? 1 : 0;
