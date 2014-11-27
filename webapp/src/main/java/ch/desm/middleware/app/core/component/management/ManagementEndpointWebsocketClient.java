@@ -52,9 +52,8 @@ public class ManagementEndpointWebsocketClient {
     }
 
     public static void sendMessage(String message){
-        LOGGER.log(Level.TRACE, "EndpointWebsocketClient send: " + message);
-
         synchronized (sessionLock){
+            LOGGER.log(Level.TRACE, "EndpointWebsocketClient send: " + message);
             try {
                 for(Session session : sessionSet)
                     if(session != null){

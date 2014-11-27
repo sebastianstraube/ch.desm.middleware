@@ -29,15 +29,15 @@ public class ManagementEndpointThread extends DaemonThreadBase {
     }
 
     private void checkMessages(){
-        LinkedList<String> pendingMessageQueueCopy = new LinkedList<String>();
-
         synchronized (pendingMessageQueueLock){
+            LinkedList<String> pendingMessageQueueCopy = new LinkedList<String>();
             pendingMessageQueueCopy.addAll(pendingMessageQueue);
             pendingMessageQueue.clear();
-        }
-        if(!pendingMessageQueueCopy.isEmpty()){
-            for(String element : pendingMessageQueueCopy){
-                endpoint.onIncomingEndpointMessage(element);
+
+            if(!pendingMessageQueueCopy.isEmpty()){
+                for(String element : pendingMessageQueueCopy){
+                    endpoint.onIncomingEndpointMessage(element);
+                }
             }
         }
     }

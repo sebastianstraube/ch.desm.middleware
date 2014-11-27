@@ -41,13 +41,13 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
                         processInitEndpoint(service.getEndpoint(), element);
                     }
                 }else{
-                    String key = service.getMap().getValue(element.getGlobalId());
-                    if(!key.isEmpty()){
-                        String message = service.getComponentMapMiddleware().getValue(key);
-                        message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, element.getParameter());
-                        MessageMiddleware messageMiddleware = service.getTranslator().toMiddlewareMessage(message);
 
-                        processBrokerMessage(service, messageMiddleware);
+                    //only one endpoint is allowed to receive messages from endpoint
+                    //BUG1
+                    if(service.getMap().isKeyAvailable(element.getGlobalId())){
+                        String sensorName =element.getGlobalId();
+                        int sensorValue = element.getParameter().equals("on") ? 1 : 0;
+                        delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
                     }
                 }
             } catch (Exception e) {
@@ -83,7 +83,7 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
     private void delegateToEndpoint(PetrinetOmlEndpoint endpoint, String sensorName, int sensorValue){
 
         //if(sensorValue != 0){
-            LOGGER.log(Level.TRACE, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
+            LOGGER.log(Level.INFO, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
         //}
 
         endpoint.setSensor(sensorName, sensorValue);

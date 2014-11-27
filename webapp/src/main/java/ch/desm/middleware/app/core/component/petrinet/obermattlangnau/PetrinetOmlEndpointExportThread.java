@@ -59,14 +59,15 @@ public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
     }
 
     private void applySensorEvents() {
-        List<Pair<String, Integer>> pendingSensorEventsCopy = new LinkedList<>();
+
         synchronized (pendingSensorEventsLock) {
+            List<Pair<String, Integer>> pendingSensorEventsCopy = new LinkedList<>();
             pendingSensorEventsCopy.addAll(pendingSensorEvents);
             pendingSensorEvents.clear();
-        }
 
-        for (Pair<String, Integer> sensorEvent : pendingSensorEventsCopy) {
-            petrinetAdapter.setSensor(sensorEvent.getLeft(), sensorEvent.getRight());
+            for (Pair<String, Integer> sensorEvent : pendingSensorEventsCopy) {
+                petrinetAdapter.setSensor(sensorEvent.getLeft(), sensorEvent.getRight());
+            }
         }
     }
 

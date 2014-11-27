@@ -16,12 +16,12 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
 
 	private static Logger LOGGER = Logger.getLogger(PetrinetOmlEndpointExportAdapter.class);
 
-	private List<Pair<String, Integer>> canfirePlaces;
+	private List<Pair<String, Integer>> basePlaces;
     private List<Pair<String, Integer>> changedPlacesList;
     private Object lockChangedPlacesList;
 
     public PetrinetOmlEndpointExportAdapter(){
-        canfirePlaces = new LinkedList<Pair<String, Integer>>();
+        basePlaces = new LinkedList<Pair<String, Integer>>();
         changedPlacesList = new LinkedList<Pair<String, Integer>>();
         lockChangedPlacesList = new Object();
     }
@@ -29,9 +29,6 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
     @Override
 	public boolean canFire(String s) {
 		LOGGER.log(Level.TRACE, "transition can fire: " + s);
-
-        canfirePlaces.clear();
-        canfirePlaces.addAll(getPlaces());
 		return super.canFire(s);
 	}
 
@@ -40,7 +37,10 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
         LOGGER.log(Level.INFO, "transitions fired: " + s);
 
         //TODO mapping slow down transition
-        refreshChangedPlacesList(getPlaces(), canfirePlaces);
+        refreshChangedPlacesList(getPlaces(), basePlaces);
+
+        basePlaces.clear();
+        basePlaces.addAll(getPlaces());
     }
 
     @Override
@@ -64,19 +64,25 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
     }
 
     public List<Pair<String, Integer>> getChangedPlaces(){
-        List<Pair<String, Integer>> changeList = new LinkedList<>();
-        if(!changedPlacesList.isEmpty()){
-            synchronized (lockChangedPlacesList){
+        synchronized (lockChangedPlacesList){
+            List<Pair<String, Integer>> changeList = new LinkedList<>();
+            if(!changedPlacesList.isEmpty()){
                 changeList.addAll(changedPlacesList);
                 changedPlacesList.clear();
+                LOGGER.log(Level.INFO, "list changed places: " + changeList);
             }
-            LOGGER.log(Level.TRACE, "move changed places: " + changeList);
+            return changeList;
         }
-        return changeList;
     }
 
     private void addAllPlacesToChangedPlaces(List<Pair<String, Integer>> base){
         refreshChangedPlacesList(base, new LinkedList<Pair<String, Integer>>());
+    }
+
+    public void addChangedPlaces(Pair<String, Integer> pair){
+        synchronized (lockChangedPlacesList){
+            changedPlacesList.add(pair);
+        }
     }
 
     private void refreshChangedPlacesList(List<Pair<String, Integer>> changed, List<Pair<String, Integer>> base){

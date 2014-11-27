@@ -25,13 +25,13 @@ public abstract class ComponentBrokerClientThreadBase extends DaemonThreadBase {
     }
 
     public LinkedList<MessageMiddleware> getMessages(){
-        LinkedList<MessageMiddleware> messages = new LinkedList<>();
         synchronized (pendingMessagesLock){
+            LinkedList<MessageMiddleware> messages = new LinkedList<>();
             messages.addAll(pendingMessages);
             pendingMessages.clear();
-        }
 
-        return messages;
+            return messages;
+        }
     }
 
     public void addMessages(LinkedList<MessageMiddleware> messagesList){
