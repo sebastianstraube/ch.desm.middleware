@@ -30,6 +30,10 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 		super.onIncomingEndpointMessage(message);
 	}
 
+    public void sendMessage(String message){
+        thread.sendStream(message);
+    }
+
     @Override
     public void init() {
         this.connect();

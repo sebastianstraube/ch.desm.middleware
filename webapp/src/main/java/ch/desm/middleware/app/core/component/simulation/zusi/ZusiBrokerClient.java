@@ -1,22 +1,26 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
+import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClientListenerInterface;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 
 
-public class Zusi extends ZusiBrokerClientBase implements EndpointTcpClientListenerInterface{
+public class ZusiBrokerClient extends ComponentBrokerClientBase {
+    private static Logger LOGGER = Logger.getLogger(ZusiBrokerClient.class);
 
-	private static Logger LOGGER = Logger.getLogger(Zusi.class);
-	
-	public Zusi(Broker broker, ZusiEndpointTcp endpoint) {
-		super(broker, endpoint);
-		// TODO Auto-generated constructor stub
-	}
+    private ZusiBrokerClientThread thread;
+    private ZusiService service;
 
+    public ZusiBrokerClient(Broker broker, ZusiService service) {
+        super(broker);
+        this.service = service;
+
+        this.thread = new ZusiBrokerClientThread(service);
+        this.thread.start();
+    }
 
 	@Override
 	protected void onIncomingBrokerMessage(String message) {

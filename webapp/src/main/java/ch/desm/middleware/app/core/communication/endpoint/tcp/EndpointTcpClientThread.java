@@ -13,7 +13,7 @@ import ch.desm.middleware.app.core.communication.endpoint.EndpointThreadBase;
 public class EndpointTcpClientThread extends EndpointThreadBase {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClientThread.class);
-	public static final int POLLING_WAIT_TIME = 2048;
+	public static final int SLEEP = 2048;
 
 	private EndpointTcpClient endpoint;
 	String sendBuffer;
@@ -25,7 +25,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 		this.receiveBuffer = new String();
 	}
 
-	public void sendStream(String stream) {
+	public synchronized void sendStream(String stream) {
 
 		try {
 
@@ -78,11 +78,11 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 			try {
 
 				LOGGER.log(Level.TRACE,"Thread active: " + this.getName() + " wait time: "
-						+ POLLING_WAIT_TIME);
+						+ SLEEP);
 
 				receive();
 
-				Thread.sleep(POLLING_WAIT_TIME);
+				Thread.sleep(SLEEP);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
