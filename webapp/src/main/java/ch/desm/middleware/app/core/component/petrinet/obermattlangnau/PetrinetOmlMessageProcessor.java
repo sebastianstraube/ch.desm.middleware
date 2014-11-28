@@ -44,7 +44,7 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
 
                     // Todo implementation
                     // activate this, when gui taken controle over this endpoint
-                    if(service.getMap().isKeyAvailable(element.getGlobalId())){
+                    if(service.getComponentMapMiddleware().isKeyAvailable(element.getGlobalId())){
                         String sensorName =element.getGlobalId();
                         int sensorValue = element.getParameter().equals("on") ? 1 : 0;
                         delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
