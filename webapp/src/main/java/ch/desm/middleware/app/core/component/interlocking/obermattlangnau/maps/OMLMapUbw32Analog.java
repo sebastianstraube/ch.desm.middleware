@@ -7,7 +7,7 @@ import ch.desm.middleware.app.core.component.ComponentMapBase;
 
 public class OMLMapUbw32Analog extends ComponentMap {
 
-    public static final String PINBITMASK_INPUT_ANALOG = "0";
+    public static final String PINBITMASK_INPUT_ANALOG = "1";
 
     public OMLMapUbw32Analog(){
 		super();

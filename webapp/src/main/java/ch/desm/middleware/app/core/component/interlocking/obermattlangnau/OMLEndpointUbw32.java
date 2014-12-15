@@ -23,14 +23,14 @@ public class OmlEndpointUbw32 extends EndpointUbw32 {
 				OMLMapUbw32Digital.PINBITMASK_CONFIGURATION_DIGITAL,
 				OMLMapUbw32Analog.PINBITMASK_INPUT_ANALOG);
 
+        this.registerEndpointListener();
         this.service = service;
 	    this.mapAnalog = new OMLMapUbw32Analog();
 	    this.mapDigital = new OMLMapUbw32Digital();
     }
 
-
     @Override
-    protected void registerEndpointListener(EndpointBase listener) {
+    protected void registerEndpointListener() {
         try {
             addEndpointListener(this);
         } catch (Exception e) {

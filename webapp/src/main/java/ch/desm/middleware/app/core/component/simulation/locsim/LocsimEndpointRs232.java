@@ -27,7 +27,8 @@ public class LocsimEndpointRs232 extends EndpointRs232 {
 			.setEventMask(EndpointRs232Config.MASK_RXCHAR)
 			.setFlowControl(EndpointRs232Config.FLOWCONTROL_XONXOFF_IN | EndpointRs232Config.FLOWCONTROL_XONXOFF_OUT)
 			.build());
-		
+		this.registerEndpointListener();
+
 		this.parser = new LocsimEndpointRs232Parser();
 		this.isLocsimInitialized = false;
 		this.isLocsimReadyToInitialize = false;
@@ -53,7 +54,11 @@ public class LocsimEndpointRs232 extends EndpointRs232 {
     }
 
     @Override
-    protected void registerEndpointListener(EndpointBase listener) {
-        //TODO implementation
+    protected void registerEndpointListener() {
+        try {
+            addEndpointListener(this);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
     }
 }

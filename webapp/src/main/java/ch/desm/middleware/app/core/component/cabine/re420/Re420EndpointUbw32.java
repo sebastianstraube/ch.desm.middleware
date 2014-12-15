@@ -4,15 +4,20 @@ import ch.desm.middleware.app.core.communication.endpoint.EndpointBase;
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapUbw32Analog;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapUbw32Digital;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 public class Re420EndpointUbw32 extends EndpointUbw32 {
+
+    private static Logger LOGGER = Logger.getLogger(Re420EndpointUbw32.class);
 
 	protected Re420MapUbw32Digital re420MapDigital;
 	protected Re420MapUbw32Analog re420MapAnalog;
 	
 	public Re420EndpointUbw32(EnumSerialPorts enumSerialPort) {		
 		super(enumSerialPort, Re420MapUbw32Digital.PINBITMASK_CONFIGURATION_DIGITAL, Re420MapUbw32Analog.PINBITMASK_INPUT_ANALOG);
-		
+		this.registerEndpointListener();
+
 		re420MapDigital = new Re420MapUbw32Digital();
 		re420MapAnalog = new Re420MapUbw32Analog();
 	}
@@ -26,8 +31,12 @@ public class Re420EndpointUbw32 extends EndpointUbw32 {
 	}
 
     @Override
-    protected void registerEndpointListener(EndpointBase listener) {
-        //TODO implementation
+    protected void registerEndpointListener() {
+        try {
+            addEndpointListener(this);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
     }
 
     /**

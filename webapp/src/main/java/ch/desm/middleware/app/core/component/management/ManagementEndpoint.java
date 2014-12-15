@@ -25,6 +25,7 @@ public class ManagementEndpoint extends EndpointCommon {
 
     public ManagementEndpoint(ManagementService service, String uri){
         super();
+        this.registerEndpointListener();
 
         thread = new ManagementEndpointThread(this);
         serverUri = URI.create(uri);
@@ -49,7 +50,7 @@ public class ManagementEndpoint extends EndpointCommon {
     }
 
     @Override
-    protected void registerEndpointListener(EndpointBase listener) {
+    protected void registerEndpointListener() {
         try {
             addEndpointListener(this);
         } catch (Exception e) {

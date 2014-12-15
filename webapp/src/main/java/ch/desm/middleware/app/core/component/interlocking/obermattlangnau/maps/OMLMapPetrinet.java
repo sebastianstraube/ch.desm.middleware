@@ -31,14 +31,14 @@ public class OMLMapPetrinet extends ComponentMapBase{
 	protected void init(){
         map.put("1.90.01","OML_Lampen_Stoerung_$1_F_VS_Stoer"); //Störungslampe Einfahrvorsignal F*
 // map.put("1.90.02",""); //Einfahrsignal F; Notrot
-        map.put("1.90.03","OML_Fstr_fg_$F_Fahrt3"); //Einfahrsignal F; Grün FB 3
-        map.put("1.90.04","OML_Lampen_Signal_E_$1_E_rot"); //Einfahrsignal F; Rot
+        map.put("1.90.03","OML_Lampen_Signal_F_$1_F_gruenFB3"); //Einfahrsignal F; Grün FB 3
+        map.put("1.90.04","OML_Lampen_Signal_F_$1_F_rot"); //Einfahrsignal F; Rot
         map.put("1.90.05","OML_Lampen_Signal_F_$1_F_gruenFB1"); //Einfahrsignal F; Grün FB1
-        map.put("1.90.06","OML_Fstr_ef_$E_Fahrt1"); //Einfahrsignal E; Grün FB1
-        map.put("1.90.07","OML_Fstr_ef_$E_Halt"); //Einfahrsignal E; Rot
+        map.put("1.90.06","OML_Lampen_Signal_E_$1_E_gruenFB1"); //Einfahrsignal E; Grün FB1
+        map.put("1.90.07","OML_Lampen_Signal_E_$1_E_rot"); //Einfahrsignal E; Rot
 // map.put("1.90.08",""); //Einfahrsignal E; Notrot
-        map.put("1.90.09","OML_Fstr_gf_$G_Fahrt3"); //Einfahrsignal G; Grün FB1
-        map.put("1.90.10","OML_Fstr_gf_$G_Halt"); //Einfahrsignal G; Rot
+        map.put("1.90.09","OML_Lampen_Signal_G_$1_G_gruenFB1"); //Einfahrsignal G; Grün FB1
+        map.put("1.90.10","OML_Lampen_Signal_G_$1_G_rot"); //Einfahrsignal G; Rot
         map.put("1.90.11","OML_Lampen_Signal_G_$1_G_gruenFB3"); //Einfahrsignal G; Grün FB3
         map.put("1.90.12","OML_EMM_$D_Halt"); //Einfahrsignal D EMM; Rot
         map.put("1.90.13","OML_EMM_$D_Fahrt"); //Einfahrsignal D EMM; Grün
@@ -65,7 +65,7 @@ public class OMLMapPetrinet extends ComponentMapBase{
         map.put("1.91.02","OML_Lampen_Streckenblock_$1_FBV_vLN"); //Fahrtrichtung verlangt von Langnau
         map.put("1.91.03","OML_Lampen_Stoerung_$1_Stoer_Wecker"); //Störung, Wecker abschalten
         map.put("1.01.02","OML_Lampen_WS1_$1_WS1_Ueberw"); //WS1 Überwachungslampe
-// map.put("2.92.01",""); //Weichenwecker
+        map.put("2.92.01","OML_Wecker_Weichen_$2_Weiche"); //Weichenwecker
 // map.put("2.92.02",""); //Blockwecker
 // map.put("2.90.01",""); //Signalwecker
 // map.put("9.99.04",""); //Abläuten von Emmenmatt
@@ -85,7 +85,7 @@ public class OMLMapPetrinet extends ComponentMapBase{
         map.put("6.91.02","OML_Kontakte_$6_FBA_nZB"); //Freie Bahn anfordern nach Zollbrück
         map.put("6.91.01","OML_Kontakte_$6_FBF_nZB"); //Freie Bahn festhalten nach Zollbrück
         map.put("6.91.03","OML_Kontakte_$6_RM_nZB"); //Rückmelden nach Zollbrück
-// map.put("6.91.04",""); //Rückmelden nach Langnau
+        map.put("6.91.04","OML_Kontakte_$6_RM_nLN"); //Rückmelden nach Langnau
         map.put("6.91.05","OML_Kontakte_$6_FBA_nLN"); //Freie Bahn anfordern nach Langnau
         map.put("6.91.06","OML_Kontakte_$6_FBF_nLN"); //Freie Bahn festhalten nach Langnau
         map.put("6.91.07","OML_Kontakte_$6_BLU_EG"); //Blockumgehung EG

@@ -26,6 +26,6 @@ public abstract class EndpointBase{
 	 * @param listener
 	 * @throws Exception
 	 */
-	abstract public void addEndpointListener(EndpointCommonListenerInterface listener) throws Exception;
+	public abstract void addEndpointListener(EndpointCommonListenerInterface listener) throws Exception;
 
 }

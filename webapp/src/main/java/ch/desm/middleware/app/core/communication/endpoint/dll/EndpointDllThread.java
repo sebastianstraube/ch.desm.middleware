@@ -20,8 +20,7 @@ import ch.desm.middleware.app.core.communication.endpoint.dll.objects.EndpointOb
 public class EndpointDllThread extends EndpointThreadBase {
 	
 	private static Logger LOGGER = Logger.getLogger(EndpointDllThread.class);
-	
-	private static final int POLLING_WAIT_TIME = 2048;
+
 	private Dll dll;
 	private EndpointDll endpoint;
 
@@ -36,9 +35,9 @@ public class EndpointDllThread extends EndpointThreadBase {
 		try {
 
 			while (!isInterrupted()) {
-				LOGGER.log(Level.TRACE, "Polling Thread active: " + this.getName() + " wait time: " + POLLING_WAIT_TIME);
+				LOGGER.log(Level.TRACE, "Polling Thread active: " + this.getName());
 				pollingDllEvents();
-				Thread.sleep(POLLING_WAIT_TIME);
+				doHangout();
 			}
 
 		} catch (InterruptedException e) {

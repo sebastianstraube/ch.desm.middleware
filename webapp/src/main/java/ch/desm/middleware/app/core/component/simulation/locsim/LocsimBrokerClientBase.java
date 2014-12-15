@@ -15,10 +15,6 @@ abstract class LocsimBrokerClientBase extends ComponentBrokerClientBase {
 		
 		this.endpointRs232 = endpointRs232;
 		this.endpointDll = endpointDll;
-
-        //TODO refactoring
-		//this.registerEndpointListener(endpointRs232);
-		//this.registerEndpointListener(endpointDll);
 	}	
 	
 	public LocsimEndpointRs232 getEndpointRs232(){

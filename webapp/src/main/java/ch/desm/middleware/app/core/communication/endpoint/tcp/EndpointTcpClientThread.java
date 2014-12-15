@@ -1,88 +1,43 @@
 package ch.desm.middleware.app.core.communication.endpoint.tcp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointThreadBase;
 
+import java.io.IOException;
+
 public class EndpointTcpClientThread extends EndpointThreadBase {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClientThread.class);
-	public static final int SLEEP = 2048;
 
 	private EndpointTcpClient endpoint;
-	String sendBuffer;
-	String receiveBuffer;
 
 	public EndpointTcpClientThread(EndpointTcpClient endpoint) {
 		super("EndpointTcpClientThread");
 		this.endpoint = endpoint;
-		this.receiveBuffer = new String();
-	}
-
-	public synchronized void sendStream(String stream) {
-
-		try {
-
-			OutputStream out = endpoint.socket.getOutputStream();
-
-			byte[] byteBuffer = stream.getBytes();
-			out.write(byteBuffer); // Send the encoded string to the server
-
-			LOGGER.log(Level.TRACE, "Client (" + this.getClass() + ") send stream: "
-                    + new String(byteBuffer));
-
-		} catch (IOException e) {
-			LOGGER.log(Level.ERROR, e);
-		}
-
-	}
-
-	public synchronized void receive() {
-
-		try {
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					endpoint.socket.getInputStream()));
-			String inputLine;
-			while ((inputLine = in.readLine()) != null) {
-				receiveBuffer += inputLine;
-			}
-
-			
-			if(!receiveBuffer.isEmpty()){
-				endpoint.receiveEvent(receiveBuffer);
-			}
-			
-			receiveBuffer = new String();
-
-			LOGGER.log(Level.TRACE, "Client (" + this.getClass() + ") received stream: "
-                    + in.toString());
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 	@Override
 	public void run() {
 
-		while (!isInterrupted()) {
+        String message = "";
+        while (!isInterrupted()) {
 			try {
 
-				LOGGER.log(Level.TRACE,"Thread active: " + this.getName() + " wait time: "
-						+ SLEEP);
+				LOGGER.log(Level.TRACE,"Thread active: " + this.getName());
 
-				receive();
+                try {
+                    message = endpoint.receiveUTF();
+                    if(message!= null && !message.isEmpty()){
+                        endpoint.receiveEvent(message);
+                        message ="";
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-				Thread.sleep(SLEEP);
+                doHangout();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -91,15 +46,4 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 
 	}
 
-	/**
-	 * Close the socket and its streams
-	 */
-	public void closeConnection() {
-		try {
-			interrupt();
-			endpoint.socket.close();
-		} catch (IOException e) {
-			LOGGER.log(Level.ERROR, e);
-		}
-	}
 }

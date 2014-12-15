@@ -14,10 +14,6 @@ abstract class Re420BrokerClientBase extends ComponentBrokerClientBase {
 		
 		this.endpoint = endpoint;
 		this.endpointFabisch = endpointFabisch;
-
-        //TODO refactoring
-        //this.registerEndpointListener(endpoint);
-        //this.registerEndpointListener(endpointFabisch);
 	}
 	
 	public Re420EndpointUbw32 getEndpointUbw32(){

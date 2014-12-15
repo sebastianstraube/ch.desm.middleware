@@ -1,11 +1,10 @@
 package ch.desm.middleware.app.core.communication.endpoint.tcp;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
@@ -14,12 +13,16 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClient.class);
 	public static final int CONNECTION_TIMEOUT = 5096;
-	
+	public static final int BUFFER_RECEIVE_LENGTH = 512;
+
 	private EndpointTcpClientThread thread;
 	protected Socket socket;
-	private SocketAddress socketAddress;
-	
-	public EndpointTcpClient(String threadName, String ip, int port) {
+	protected SocketAddress socketAddress;
+
+    public abstract void connect();
+    public abstract void disconnect();
+
+    public EndpointTcpClient(String ip, int port) {
 		this.thread = new EndpointTcpClientThread(this);
 		this.socketAddress = new InetSocketAddress(ip, port);
 		this.socket = new Socket();
@@ -29,10 +32,6 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 	public void receiveEvent(String message){
 		super.onIncomingEndpointMessage(message);
 	}
-
-    public void sendMessage(String message){
-        thread.sendStream(message);
-    }
 
     @Override
     public void init() {
@@ -52,27 +51,35 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 			thread.interrupt();
 		}
 	}
-	
-	public void disconnect(){
-		
-		try {
-			stop();
-			socket.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			LOGGER.log(Level.ERROR, e);
-		}
-	}
 
-	public void connect(){
-		
-		try {
-			socket.connect(socketAddress);
-			start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			LOGGER.log(Level.ERROR, e);
-		}
-	}
-	
+    public synchronized void send(byte[] val) throws IOException{
+        DataOutputStream sendBuffer = new DataOutputStream(socket.getOutputStream());
+        sendBuffer.write(val);
+        sendBuffer.flush();
+        sendBuffer.close();
+    }
+
+    public synchronized void send(String val) throws IOException{
+        DataOutputStream sendBuffer = new DataOutputStream(socket.getOutputStream());
+        sendBuffer.writeChars(val);
+        sendBuffer.flush();
+        sendBuffer.close();
+    }
+
+    public synchronized byte[] receive() throws IOException{
+        DataInputStream stream = new DataInputStream(socket.getInputStream());
+        byte[] b = new byte[stream.read()];
+        stream.readFully(b);
+        stream.close();
+
+        return b;
+    }
+
+    public synchronized String receiveUTF() throws IOException{
+        DataInputStream stream = new DataInputStream(socket.getInputStream());
+        String message = stream.readUTF();
+        stream.close();
+
+        return message;
+    }
 }
