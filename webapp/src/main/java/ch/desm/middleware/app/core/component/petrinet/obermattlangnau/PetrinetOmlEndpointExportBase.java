@@ -5,364 +5,366 @@ import org.apache.log4j.Logger;
 abstract class PetrinetOmlEndpointExportBase {
     public int OML_Stw_FSS_SM_$FSS30F_reached_store;
     public int OML_Stw_FSS_SM_$FSS_30EG_reached_store;
-    public int OML_ILTIS_$festhalten_vLN;
-    public int OML_ILTIS_$LN_2_834;
-    public int OML_ILTIS_$LN_4_834;
-    public int OML_ILTIS_$freigegeben_vZB;
-    public int OML_ILTIS_$RM_LN_OM;
-    public int OML_ILTIS_$freigegeben_vLN;
-    public int OML_ILTIS_$festgehalten_vLN;
-    public int OML_LN_$geprueft1A4;
-    public int OML_ILTIS_$EMM_833_2;
-    public int OML_ILTIS_$LN_834_5;
-    public int OML_ILTIS_$EMM_833_3;
-    public int OML_ILTIS_$ZB_138_1;
-    public int OML_ILTIS_$EMM_833_4;
-    public int OML_ILTIS_$LN_834_3;
-    public int OML_ILTIS_$LN_3_834;
-    public int OML_ILTIS_$LN_834_6;
-    public int OML_ILTIS_$EMM_833_5;
-    public int OML_ILTIS_$LN_834_2;
-    public int OML_ILTIS_$LN_834_1;
-    public int OML_ILTIS_$anfordern_vLN;
-    public int OML_ILTIS_$anfordern_vZB;
-    public int OML_ILTIS_$freigeben_vLN;
-    public int OML_ILTIS_$ZB_2_138;
-    public int OML_ILTIS_$freigeben_vZB;
-    public int OML_ILTIS_$ZB_138_2;
-    public int OML_ILTIS_$ZB_1_138;
-    public int OML_ILTIS_$festhalten_vZB;
-    public int OML_ILTIS_$festgehalten_v_ZB;
-    public int OML_ILTIS_$LN_834_4;
-    public int OML_ILTIS_$LN_6_834;
-    public int OML_ILTIS_$LN_1_834;
+    public int OML_logic_Kontakte_WS1_$logic_ws1_plus;
+    public int OML_logic_Kontakte_WS1_$ws1_plus;
+    public int OML_logic_Kontakte_WS1_$ws1_minus;
+    public int OML_Kontakte_$7_WS1_plus;
+    public int OML_Kontakte_$6_FBA_nLN;
+    public int OML_Kontakte_$7_WS1_minus;
+    public int OML_Kontakte_$8_FSS_10EG;
+    public int OML_Kontakte_$8_FSS_30EG;
+    public int OML_Kontakte_$8_FSS_45EG;
+    public int OML_Kontakte_$6_ISU_Sign;
+    public int OML_Kontakte_$8_FSS_45F;
+    public int OML_Kontakte_$8_FSS_10F;
+    public int OML_Kontakte_$8_FSS_30F;
+    public int OML_Kontakte_$6_Gleist_ZB;
+    public int OML_Kontakte_$7_WS1_1;
+    public int OML_Kontakte_$8_FSS_90EG;
+    public int OML_Kontakte_$6_BLU_EG;
+    public int OML_Kontakte_$6_Gleist_EMM;
+    public int OML_Kontakte_$6_RM_nLN;
+    public int OML_Kontakte_$6_NT_W1;
+    public int OML_Kontakte_$6_FBF_nLN;
+    public int OML_Kontakte_$6_NAL;
+    public int OML_Kontakte_$6_FBA_nZB;
+    public int OML_Kontakte_$6_RM_nZB;
+    public int OML_Kontakte_$8_FSS_90F;
+    public int OML_Wecker_Signal_$2_Signal;
+    public int OML_Wecker_Signal_$P13;
+    public int OML_Wecker_Signal_$P117;
+    public int OML_Wecker_Weichen_$2_Weiche;
+    public int OML_Wecker_Signal_$P12;
+    public int OML_Wecker_Block_$P135;
+    public int OML_Wecker_Block_$P27;
+    public int OML_logic_Kontakte_WS1_$logic_ws1_minus;
+    public int OML_Wecker_Signal_$P49;
+    public int OML_Kontakte_$8_FSS_0EGF;
+    public int OML_Wecker_Block_$P39;
+    public int OML_Wecker_Signal_$P22;
+    public int OML_Wecker_Signal_$P18;
+    public int OML_Wecker_Block_$P40;
+    public int OML_Wecker_Block_$P48;
+    public int OML_Wecker_Block_$2_Block;
+    public int OML_Wecker_Signal_$P21;
+    public int OML_EMM_$EMM_W9_mA5;
+    public int OML_EMM_$EMM_W7_mE1;
+    public int OML_EMM_$EMM_W10_pE2;
+    public int OML_EMM_$EMM_W8_pA4;
+    public int OML_EMM_$EMM_W9_mE5;
+    public int OML_EMM_$geprueft2A5;
+    public int OML_EMM_$geprueft1E2;
+    public int OML_EMM_$EMM_W10_mA4;
+    public int OML_EMM_$EMM_W10_mE3;
+    public int OML_EMM_$EMM_W8_mE5;
+    public int OML_EMM_$EMM_W10_mA5;
+    public int OML_EMM_$EMM_W10_mE4;
+    public int OML_EMM_$EMM_W10_mE5;
+    public int OML_EMM_$geprueft1E4;
+    public int OML_EMM_$EMM_W7_pE2;
+    public int OML_EMM_$EMM_W7_pA2;
+    public int OML_EMM_$geprueft1A3;
+    public int OML_EMM_$EMM_W9_mA4;
+    public int OML_EMM_$geprueft1E1;
+    public int OML_EMM_$geprueft1A5;
+    public int OML_EMM_$EMM_W9_pE3;
+    public int OML_EMM_$geprueft2A3;
+    public int OML_EMM_$EMM_W9_mE4;
+    public int OML_EMM_$geprueft1E5;
+    public int OML_EMM_$EMM_W10_mA3;
+    public int OML_EMM_$EMM_W9_pA3;
+    public int OML_EMM_$geprueft2A4;
+    public int OML_EMM_$EMM_W8_mA5;
+    public int OML_EMM_$geprueft1E3;
+    public int OML_EMM_$EMM_W10_pE1;
+    public int OML_EMM_$geprueft1A4;
+    public int OML_EMM_$EMM_W8_pE4;
+    public int OML_EMM_$C_FB2;
+    public int OML_EMM_$C_Halt;
+    public int OML_EMM_$C_Fahrt;
+    public int OML_EMM_$D_Halt;
+    public int OML_EMM_$D_FB1;
+    public int OML_ILTIS_$EMM_1_833;
+    public int OML_EMM_$C_FB1;
+    public int OML_EMM_$D_FB2;
+    public int OML_EMM_$D_Fahrt;
+    public int OML_LN_$LN_W4_pA5;
+    public int OML_LN_$geprueft1A1;
+    public int OML_LN_$geprueft2A2;
+    public int OML_LN_$LN_W2_mA4;
+    public int OML_LN_$LN_W2_mA3;
+    public int OML_LN_$LN_W3_mA5;
+    public int OML_LN_$LN_W3_mA6;
+    public int OML_LN_$geprueft1E1;
+    public int OML_LN_$geprueft1E3;
+    public int OML_LN_$LN_W2_pA2;
+    public int OML_LN_$LN_W3_pA3;
+    public int OML_LN_$LN_W5_pA3;
+    public int OML_LN_$geprueft2A3;
+    public int OML_LN_$LN_W1_pA2;
+    public int OML_LN_$LN_W6_mE6;
+    public int OML_LN_$LN_W1_pA5;
+    public int OML_LN_$geprueft2A4;
+    public int OML_LN_$geprueft1A3;
+    public int OML_LN_$LN_W4_pA6;
     public int OML_LN_$ce_belegt;
     public int OML_LN_$geprueft1E5;
+    public int OML_LN_$LN_W2_mA5;
+    public int OML_LN_$geprueft2A1;
     public int OML_LN_$LN_W1_mA1;
-    public int OML_LN_$geprueft2A3;
-    public int OML_LN_$LN_W1_pA3;
-    public int OML_LN_$geprueft1A5;
-    public int OML_LN_$LN_Grundstlg;
-    public int OML_ILTIS_$RM_ZB_OM;
-    public int OML_LN_$geprueft1A2;
-    public int OML_ext_Vb_$Ueberw_W1_plus;
-    public int OML_Kontakte_$6_FBA_nZB;
-    public int OML_ext_Vb_$Ueberw_W1_minus;
+    public int OML_LN_$LN_W3_pA4;
+    public int OML_LN_$geprueft1E4;
+    public int OML_LN_$LN_W1_pA4;
+    public int OML_LN_$geprueft1E2;
+    public int OML_LN_$LN_W5_mA4;
+    public int OML_LN_$geprueft1A4;
+    public int OML_LN_$geprueft2A5;
+    public int OML_LN_$LN_W6_mA5;
+    public int OML_LN_$geprueft1A6;
+    public int OML_LN_$LN_W1_pE4;
+    public int OML_LN_$LN_W3_mE5;
+    public int OML_LN_$LN_W2_pE2;
+    public int OML_LN_$LN_W6_mA6;
+    public int OML_LN_$LN_W1_pE5;
+    public int OML_LN_$LN_W2_mA6;
+    public int OML_LN_$geprueft2A6;
+    public int OML_LN_$LN_W1_pA6;
     public int OML_ext_Vb_$F_VS_Lampe_Fahrt_def;
+    public int OML_LN_$C26_Halt;
+    public int OML_LN_$LN_W1_mE1;
+    public int OML_ext_Vb_$Ueberw_W1_plus;
     public int OML_ext_Vb_$G_VS_Lampe_Warn_def;
     public int OML_ext_Vb_$G_VS_Lampe_Fahrt_def;
+    public int OML_LN_$C26_FB1;
+    public int OML_LN_$E_FB2;
     public int OML_ext_Vb_$F_VS_Lampe_Warn_def;
+    public int OML_ext_Vb_$Ueberw_W1_minus;
+    public int OML_LN_$E_Fahrt;
+    public int OML_LN_$E_FB1;
+    public int OML_LN_$e_Halt;
     public int OML_ext_Vb_$G_Lampe_gruenFB3_def;
     public int OML_ext_Vb_$F_Lampe_gruenFB3_def;
     public int OML_ext_Vb_$E_Lampe_gruenFB1_def;
-    public int OML_LN_$LN_W1_mE1;
-    public int OML_LN_$E_FB1;
-    public int OML_Stw_FSS_KSM_$FSS_Kuppelm_aus;
-    public int OML_Stw_W1_$Endlage_minus;
-    public int OML_Stw_W1_$gestoert_p;
-    public int OML_Stw_W1_$keine_Endlage_plus;
-    public int OML_Fstr_ef_$geprueft3;
-    public int OML_Fstr_ef_$E_Fahrt1;
-    public int OML_Fstr_ef_$verschlossen;
-    public int OML_Fstr_ef_$Zug_eingefahren;
-    public int OML_Stw_W1_$Endlage_plus;
-    public int OML_Stw_W1_SM_$WS_Sperrm_ein;
-    public int OML_Fstr_ef_$P2;
+    public int OML_Stw_W1_init;
     public int OML_Fstr_ef_$geprueft2;
-    public int OML_Fstr_ef_$P1;
-    public int OML_Stw_W1_SM_$WS_Sperrm_aus;
-    public int OML_Fstr_ef_$P6;
-    public int OML_Fstr_ef_$E_Halt;
-    public int OML_Fstr_ef_$geprueft1;
-    public int OML_Stw_W1_$keine_Endlage_minus;
-    public int OML_Stw_W1_$gestoert_m;
-    public int OML_Iso_ef_$frei;
-    public int OML_Iso_1_$belegen;
-    public int OML_Fstr_fg_$aufgeloest;
-    public int OML_Fstr_fg_$Zug_eingefahren;
-    public int OML_Fstr_fg_$gemerkt_90F;
-    public int OML_Fstr_fg_$F_Halt;
-    public int OML_Fstr_fg_$geprueft3;
-    public int OML_Fstr_fg_$geprueft1;
-    public int OML_Fstr_fg_$prison_signal_steller;
-    public int OML_Fstr_fg_$geprueft2;
-    public int OML_Fstr_fg_$verschlossen;
-    public int OML_Iso_1_$belegt;
-    public int OML_Fstr_fg_$signal_steller;
-    public int OML_Iso_gf_$belegen;
-    public int OML_Iso_egf_$belegt;
-    public int OML_Iso_egf_$belegen;
-    public int OML_Fstr_fg_$F_Fahrt3;
-    public int OML_Iso_egf_$frei;
-    public int OML_Fstr_fg_$P1;
-    public int OML_Iso_ef_$belegen;
-    public int OML_Iso_ef_$belegt;
-    public int OML_Iso_cd_$belegt;
-    public int OML_Fstr_fg_$geprueft0;
-    public int OML_Iso_gf_$belegt;
-    public int OML_Iso_1_$frei;
-    public int OML_Fstr_fg_$P2;
-    public int OML_Iso_gf_$frei;
-    public int OML_Iso_cd_$frei;
-    public int OML_BL_OM_LN_$1;
-    public int OML_Iso_cd_$belegen;
-    public int OML_BL_OM_LN_$Grundstlg_n;
-    public int OML_BL_OM_LN_$3;
-    public int OML_BL_OM_LN_$vorgebl_n;
-    public int OML_BL_OM_LN_$RMM_nLN;
-    public int OML_BL_OM_LN_$belegt_v;
-    public int OML_BL_OM_LN_$2;
-    public int OML_Fstr_fe_$F_Fahrt1;
-    public int OML_Fstr_gf_$geprueft2;
-    public int OML_Fstr_gf_$G_Fahrt3;
-    public int OML_Fstr_ef_$prison_signal_steller;
-    public int OML_Fstr_fe_$geprueft;
-    public int OML_Fstr_fe_$F_Halt;
-    public int OML_Fstr_fe_$P1;
-    public int OML_Fstr_fe_$geprueft3;
-    public int OML_Fstr_ef_$gemerkt_90EB;
-    public int OML_Fstr_fe_$aufgeloest;
+    public int OML_Fstr_ef_$geprueft3;
+    public int OML_Stw_WS1_SM_$Sperrm_ein;
+    public int OML_Stw_WS1_$endlage_minus;
+    public int OML_Stw_W1_$endlage_minus;
+    public int OML_Stw_WS1_$gestoert_p;
+    public int OML_Stw_WS1_$keine_Endlage_plus;
+    public int OML_Stw_WS1_$gestoert_m;
+    public int OML_Stw_FSS_KSM_$FSS_Kuppelm_aus;
+    public int OML_Stw_WS1_$keine_Endlage_minus;
+    public int OML_Stw_W1_$endlage_plus;
+    public int OML_Stw_WS1_SM_$Sperrm_aus;
+    public int OML_Stw_W1_$keine_endlage_minus;
+    public int OML_Stw_W1_$keine_endlage_plus;
+    public int OML_Stw_WS1_$endlage_plus;
+    public int OML_ILTIS_$EMM_5_833;
+    public int OML_ILTIS_$ZB_1_138;
+    public int OML_ILTIS_$LN_2_834;
+    public int OML_ILTIS_$EMM_833_3;
+    public int OML_ILTIS_$ZB_138_1;
+    public int OML_ILTIS_$LN_834_6;
+    public int OML_ILTIS_$EMM_833_5;
+    public int OML_ILTIS_$LN_834_3;
+    public int OML_ILTIS_$EMM_2_833;
+    public int OML_ILTIS_$EMM_4_833;
+    public int OML_ILTIS_$EMM_833_1;
+    public int OML_ILTIS_$LN_834_1;
+    public int OML_ILTIS_$LN_1_834;
+    public int OML_ILTIS_$LN_3_834;
+    public int OML_ILTIS_$LN_4_834;
+    public int OML_ILTIS_$LN_6_834;
+    public int OML_ILTIS_$anfordern_vLN;
+    public int OML_ILTIS_$ZB_138_2;
+    public int OML_ILTIS_$EMM_833_4;
+    public int OML_ILTIS_$ZB_2_138;
+    public int OML_ILTIS_$festgehalten_vLN;
+    public int OML_ILTIS_$freigeben_vLN;
+    public int OML_ILTIS_$anfordern_vZB;
+    public int OML_ILTIS_$festhalten_vLN;
+    public int OML_ILTIS_$LN_834_4;
+    public int OML_ILTIS_$EMM_3_833;
+    public int OML_ILTIS_$LN_834_5;
+    public int OML_ILTIS_$LN_834_2;
+    public int OML_ILTIS_$freigeben_vZB;
+    public int OML_ILTIS_$EMM_833_2;
+    public int OML_ILTIS_$freigegeben_vLN;
+    public int OML_ILTIS_$RM_LN_OM;
+    public int OML_ILTIS_$festhalten_vZB;
+    public int OML_ILTIS_$RM_ZB_OM;
+    public int OML_LN_$geprueft1A5;
+    public int OML_LN_$geprueft1A2;
+    public int OML_LN_$LN_Grundstlg;
+    public int OML_LN_$LN_W1_pA3;
+    public int OML_ILTIS_$freigegeben_vZB;
+    public int OML_ILTIS_$festgehalten_v_ZB;
+    public int OML_Fstr_gf_$gemerkt_90EG;
     public int OML_Fstr_fe_$prison_signal_steller;
-    public int OML_Fstr_ef_$aufgeloest;
-    public int OML_Fstr_gf_$verschlossen;
-    public int OML_Fstr_fe_$P2;
+    public int OML_Fstr_fe_$Zug_eingefahren;
+    public int OML_Fstr_ef_$Pstore_1_ef_belegt;
+    public int OML_Fstr_fe_$geprueft;
+    public int OML_Fstr_ef_$verschlossen;
+    public int OML_Fstr_fe_$signal_steller;
+    public int OML_Fstr_ef_$gemerkt_90EB;
+    public int OML_Fstr_ef_$signal_steller;
+    public int OML_Fstr_fe_$F_Halt;
+    public int OML_Fstr_fe_$store_1_egf_belegt;
+    public int OML_Fstr_ef_$geprueft1;
+    public int OML_Fstr_ef_$Zug_eingefahren;
+    public int OML_Fstr_fe_$aufgeloest;
+    public int OML_Fstr_ef_$E_Fahrt1;
+    public int OML_Fstr_ef_$E_Halt;
+    public int OML_Fstr_ef_$prison_signal_steller;
     public int OML_Fstr_fe_$verschlossen;
+    public int OML_Fstr_fe_$geprueft3;
+    public int OML_Fstr_fe_$F_Fahrt1;
+    public int OML_Fstr_fe_$gemerkt_90F;
+    public int OML_Fstr_ef_$aufgeloest;
+    public int OML_Fstr_fe_$P2;
+    public int OML_Fstr_ef_$P6;
+    public int OML_Fstr_gf_$G_Fahrt3;
+    public int OML_Fstr_gf_$verschlossen;
+    public int OML_Fstr_gf_$geprueft3;
+    public int OML_Fstr_gf_$aufgeloest;
+    public int OML_Fstr_gf_$Zug_eingefahren;
     public int OML_Fstr_gf_$P4;
+    public int OML_Fstr_gf_$geprueft2;
     public int OML_Fstr_gf_$G_Halt;
     public int OML_Fstr_gf_$geprueft1;
-    public int OML_Fstr_ef_$signal_steller;
-    public int OML_Fstr_fe_$P2b;
-    public int OML_Fstr_fe_$signal_steller;
-    public int OML_Fstr_fe_$gemerkt_90F;
-    public int OML_Fstr_fe_$Zug_eingefahren;
-    public int OML_Fstr_gf_$signal_steller;
-    public int OML_Fstr_gf_$aufgeloest;
-    public int OML_Fstr_gf_$gemerkt_90EG;
-    public int OML_Fstr_gf_$prison_signal_steller;
-    public int OML_Fstr_gf_$geprueft3;
-    public int OML_Fstr_gf_$Zug_eingefahren;
-    public int OML_ZB_$D_Fahrt;
+    public int OML_Lampen_Signal_G_$1_G_rot;
+    public int OML_ZB_$geprueft1E2;
     public int OML_ZB_$C_FB1;
-    public int OML_ZB_$D_FB1;
-    public int OML_EMM_$EMM_Grundstlg;
-    public int OML_ZB_$geprueft1A1;
-    public int OML_ZB_$ZB_W2_mA1;
-    public int OML_ZB_$ZB_W1_pA2;
-    public int OML_ZB_$D_FB2;
-    public int OML_EMM_$geprueft1A1;
     public int OML_ZB_$C_FB2;
-    public int OML_EMM_$EMM_W7_mA1;
-    public int OML_EMM_$EMM_W9_pA3;
+    public int OML_EMM_$EMM_W10_pA2;
+    public int OML_ZB_$ZB_W2_mA1;
+    public int OML_ZB_$ZB_W2_pE2;
+    public int OML_ZB_$geprueft2A2;
+    public int OML_Lampen_Signal_E_$1_E_gruenFB1;
+    public int OML_ZB_$ZB_W2_mE1;
+    public int OML_ZB_$ZB_W2_pA2;
+    public int OML_ZB_$D_Halt;
+    public int OML_Lampen_Signal_F_$1_F_gruenFB1;
     public int OML_Lampen_Signal_G_$1_G_gruenFB1;
-    public int OML_ZB_$geprueft1A2;
+    public int OML_ZB_$geprueft1A1;
+    public int OML_ZB_$C_Halt;
+    public int OML_ZB_$ZB_W1_pE2;
+    public int OML_Lampen_Signal_E_$1_E_rot;
+    public int OML_Lampen_Signal_F_$1_F_rot;
+    public int OML_ZB_$geprueft1E1;
     public int OML_ZB_$ZB_W1_mE1;
+    public int OML_ZB_$geprueft2A1;
+    public int OML_ZB_$ZB_W1_pA2;
+    public int OML_Lampen_Isolierung_$Iso_1_ein;
+    public int OML_Lampen_Signal_G_$1_G_gruenFB3;
+    public int OML_ZB_$cd_belegt;
+    public int OML_ZB_$geprueft1A2;
+    public int OML_ZB_$D_Fahrt;
+    public int OML_ZB_$ZB_W1_mA1;
     public int OML_Lampen_Signal_F_$1_F_gruenFB3;
     public int OML_ZB_$C_Fahrt;
-    public int OML_ZB_$ZB_W2_mE1;
-    public int OML_ZB_$cd_belegt;
-    public int OML_ZB_$geprueft2A2;
-    public int OML_Lampen_Signal_G_$1_G_gruenFB3;
-    public int OML_ZB_$ZB_W2_pE2;
-    public int OML_ZB_$ZB_W1_mA1;
-    public int OML_ZB_$geprueft1E1;
     public int OML_ZB_$EMM_Grundstlg;
-    public int OML_ZB_$C_Halt;
-    public int OML_ZB_$ZB_W2_pA2;
-    public int OML_Lampen_Signal_G_$1_G_rot;
-    public int OML_ZB_$geprueft2A1;
-    public int OML_ZB_$D_Halt;
-    public int OML_ZB_$geprueft1E2;
-    public int OML_ZB_$ZB_W1_pE2;
-    public int OML_EMM_$EMM_W10_pA1;
-    public int OML_EMM_$EMM_W10_pA2;
-    public int OML_EMM_$geprueft2A2;
-    public int OML_EMM_$EMM_W7_pA2;
+    public int OML_EMM_$geprueft1A1;
+    public int OML_EMM_$EMM_W7_mA1;
+    public int OML_EMM_$EMM_Grundstlg;
     public int OML_EMM_$geprueft1A2;
-    public int OML_EMM_$geprueft1A3;
+    public int OML_EMM_$geprueft2A2;
     public int OML_EMM_$geprueft2A1;
-    public int OML_EMM_$EMM_W10_mA3;
-    public int OML_EMM_$geprueft2A3;
-    public int OML_LN_$geprueft2A1;
-    public int OML_LN_$geprueft1A1;
-    public int OML_LN_$geprueft1E2;
-    public int OML_LN_$geprueft1E4;
-    public int OML_LN_$LN_W1_pA2;
-    public int OML_LN_$geprueft1E1;
-    public int OML_LN_$LN_W3_pA3;
-    public int OML_LN_$geprueft1E3;
-    public int OML_LN_$LN_W1_pA4;
-    public int OML_LN_$LN_W5_pA3;
-    public int OML_LN_$LN_W5_mA4;
-    public int OML_LN_$LN_W1_pA5;
-    public int OML_LN_$LN_W3_mA5;
-    public int OML_LN_$geprueft2A4;
-    public int OML_LN_$LN_W3_pA4;
-    public int OML_LN_$LN_W2_mA4;
-    public int OML_LN_$LN_W2_mA3;
-    public int OML_LN_$geprueft2A2;
-    public int OML_LN_$geprueft1A3;
-    public int OML_LN_$LN_W2_pA2;
-    public int OML_LN_$geprueft1A6;
-    public int OML_LN_$E_FB2;
-    public int OML_LN_$e_Halt;
-    public int OML_LN_$LN_W2_pE2;
-    public int OML_LN_$LN_W6_mE6;
-    public int OML_LN_$LN_W5_mE4;
-    public int OML_LN_$LN_W2_mE6;
-    public int OML_LN_$LN_W4_pE6;
-    public int OML_LN_$C1_Halt;
-    public int OML_LN_$C26_Halt;
-    public int OML_LN_$LN_W5_pE3;
-    public int OML_LN_$LN_W2_mE4;
-    public int OML_LN_$LN_W2_mA6;
-    public int OML_LN_$LN_W1_pA6;
-    public int OML_LN_$LN_W6_mE5;
-    public int OML_LN_$LN_W1_pE6;
-    public int OML_LN_$LN_W3_pE3;
-    public int OML_LN_$LN_W3_mE5;
-    public int OML_LN_$C26_Fahrt;
-    public int OML_LN_$C26_FB1;
-    public int OML_LN_$LN_W1_pE3;
-    public int OML_LN_$LN_W2_mE3;
-    public int OML_LN_$LN_W1_pE2;
-    public int OML_LN_$LN_W1_pE4;
-    public int OML_LN_$LN_W4_pE5;
-    public int OML_LN_$LN_W1_pE5;
-    public int OML_LN_$LN_W3_pE4;
-    public int OML_LN_$LN_W3_mE6;
-    public int OML_LN_$LN_W2_mE5;
-    public int OML_LN_$geprueft1E6;
-    public int OML_LN_$C1_Fahrt2;
-    public int OML_LN_$C26_FB2;
-    public int OML_LN_$geprueft2A5;
-    public int OML_LN_$LN_W2_mA5;
-    public int OML_LN_$LN_W6_mA6;
-    public int OML_LN_$geprueft2A6;
-    public int OML_LN_$E_Fahrt;
-    public int OML_LN_$LN_W4_pA5;
-    public int OML_LN_$LN_W4_pA6;
-    public int OML_LN_$LN_W6_mA5;
-    public int OML_LN_$LN_W3_mA6;
-    public int OML_BL_ZB_OM_$belegt_n;
-    public int OML_Lampen_Streckenblock_$1_BL_nZB_weiss;
-    public int OML_Lampen_Isolierung_$Iso_egf_ein;
-    public int OML_Lampen_Streckenblock_$1_BL_nLN_weiss;
-    public int OML_Lampen_Streckenblock_$1_FBV_vLN;
-    public int OML_Lampen_Stoerung_$1_G_VS_Stoer;
+    public int OML_EMM_$EMM_W10_pA1;
+    public int OML_ZB_$D_FB2;
+    public int OML_ZB_$D_FB1;
+    public int OML_Fstr_fg_$signal_steller;
+    public int OML_Fstr_gf_$signal_steller;
+    public int OML_Fstr_fg_$prison_signal_steller;
+    public int OML_Fstr_fg_$gemerkt_90F;
+    public int OML_Fstr_gf_$prison_signal_steller;
+    public int OML_Iso_ef_$frei;
+    public int OML_Iso_1_$frei;
+    public int OML_Fstr_fg_$store_egf_1_belegt;
+    public int OML_Fstr_fg_$aufgeloest;
+    public int OML_Iso_1_$belegen;
+    public int OML_Fstr_gf_$store_1_belegt;
+    public int OML_Iso_1_$belegt;
+    public int OML_Iso_gf_$belegt;
+    public int OML_Fstr_fg_$geprueft2;
+    public int OML_BL_OM_LN_$vorgebl_n;
+    public int OML_Fstr_fg_$F_Halt;
+    public int OML_Fstr_fg_$verschlossen;
+    public int OML_Iso_ef_$belegen;
+    public int OML_Fstr_fg_$geprueft0;
+    public int OML_Fstr_fg_$Zug_eingefahren;
+    public int OML_Iso_ef_$belegt;
+    public int OML_Fstr_fg_$F_Fahrt3;
+    public int OML_Iso_gf_$belegen;
+    public int OML_Fstr_fg_$geprueft3;
+    public int OML_Fstr_fg_$geprueft1;
+    public int OML_Iso_egf_$belegen;
+    public int OML_Iso_cd_$belegt;
+    public int OML_Iso_cd_$frei;
+    public int OML_Iso_cd_$belegen;
+    public int OML_Iso_egf_$belegt;
+    public int OML_BL_OM_LN_$Grundstlg_n;
+    public int OML_BL_OM_LN_$3;
+    public int OML_Iso_egf_$frei;
+    public int OML_Iso_gf_$frei;
     public int OML_BL_ZB_OM_$Grundstlg_v;
-    public int OML_Lampen_Streckenblock_$1_BL_nZB_rot;
-    public int OML_Lampen_Streckenblock_$1_BL_nLN_rot;
-    public int OML_BL_ZB_OM_$3;
-    public int OML_Lampen_WS1_$1_WS1_Freig;
-    public int OML_Lampen_Streckenblock_$1_BL_vZB_rot;
-    public int OML_Lampen_Fahrstrasse_$1_Fstr_ef;
-    public int OML_Lampen_Fahrstrasse_$1_Fstr_gf;
-    public int OML_Lampen_Isolierung_$Iso_cd_ein;
-    public int OML_Lampen_Isolierung_$Iso_1_ein;
-    public int OML_Lampen_WS1_$1_WS1_Ueberw;
-    public int OML_BL_ZB_OM_$RMM_nZB;
-    public int OML_Lampen_Signal_E_$1_E_rot;
-    public int OML_Lampen_Streckenblock_$1_BL_vLN_weiss;
-    public int OML_Lampen_Streckenblock_$1_BL_vZB_weiss;
-    public int OML_Lampen_Streckenblock_$1_BL_vLN_rot;
-    public int OML_BL_ZB_OM_$vorgebl_n;
-    public int OML_Lampen_Stoerung_$1_F_VS_Stoer;
-    public int OML_Lampen_Isolierung_$Iso_ef_ein;
-    public int OML_BL_ZB_OM_$1;
-    public int OML_BL_ZB_OM_$Grundstlg_n;
-    public int OML_BL_ZB_OM_$2;
-    public int OML_Lampen_Signal_E_$1_E_gruenFB1;
-    public int OML_Lampen_Streckenblock_$1_FBV_vZB;
-    public int OML_Lampen_Signal_F_$1_F_gruenFB1;
-    public int OML_BL_OM_LN_$belegt_n;
+    public int OML_Lampen_Streckenblock_$1_FBV_vLN;
     public int OML_BL_OM_LN_$vorgebl_v;
     public int OML_BL_ZB_OM_$belegt_v;
     public int OML_BL_OM_LN_$Grundstlg_v;
+    public int OML_BL_OM_LN_$belegt_n;
+    public int OML_BL_OM_LN_$2;
+    public int OML_BL_ZB_OM_$Grundstlg_n;
+    public int OML_BL_ZB_OM_$3;
+    public int OML_BL_OM_LN_$1;
+    public int OML_BL_ZB_OM_$RMM_nZB;
+    public int OML_Lampen_WS1_$1_WS1_Freig;
     public int OML_BL_ZB_OM_$vorgebl_v;
-    public int OML_Lampen_Signal_F_$1_F_rot;
-    public int OML_EMM_$EMM_W10_pE2;
-    public int OML_EMM_$EMM_W8_pA4;
-    public int OML_EMM_$EMM_W7_pE2;
-    public int OML_EMM_$EMM_W8_pE4;
-    public int OML_EMM_$EMM_W10_mA4;
-    public int OML_EMM_$geprueft1E1;
-    public int OML_EMM_$EMM_W10_pE1;
-    public int OML_EMM_$EMM_W10_mE5;
-    public int OML_EMM_$EMM_W10_mE3;
-    public int OML_EMM_$C_FB1;
-    public int OML_EMM_$geprueft2A5;
-    public int OML_EMM_$EMM_W9_mE4;
-    public int OML_EMM_$C_Fahrt;
-    public int OML_EMM_$EMM_W10_mE4;
-    public int OML_ILTIS_$EMM_833_1;
-    public int OML_EMM_$EMM_W9_mE5;
-    public int OML_EMM_$C_FB2;
-    public int OML_EMM_$geprueft1A5;
-    public int OML_EMM_$EMM_W8_mA5;
-    public int OML_EMM_$geprueft1E3;
-    public int OML_EMM_$EMM_W9_mA5;
-    public int OML_EMM_$geprueft1A4;
-    public int OML_EMM_$geprueft1E2;
-    public int OML_EMM_$EMM_W9_pE3;
-    public int OML_EMM_$geprueft1E4;
-    public int OML_EMM_$C_Halt;
-    public int OML_EMM_$EMM_W8_mE5;
-    public int OML_EMM_$geprueft1E5;
-    public int OML_EMM_$EMM_W10_mA5;
-    public int OML_EMM_$EMM_W9_mA4;
-    public int OML_EMM_$geprueft2A4;
-    public int OML_EMM_$EMM_W7_mE1;
-    public int OML_EMM_$D_Halt;
-    public int OML_EMM_$D_Fahrt;
-    public int OML_ILTIS_$EMM_3_833;
-    public int OML_ILTIS_$EMM_4_833;
-    public int OML_ILTIS_$EMM_5_833;
-    public int OML_EMM_$D_FB1;
-    public int OML_EMM_$D_FB2;
-    public int OML_ILTIS_$EMM_1_833;
-    public int OML_ILTIS_$EMM_2_833;
-    public int OML_Kontakte_$7_WS1_1;
-    public int OML_Kontakte_$8_FSS_90F;
-    public int OML_Kontakte_$6_Gleist_ZB;
-    public int OML_Kontakte_$6_ISU_Sign;
-    public int OML_Kontakte_$8_FSS_10EG;
-    public int OML_Kontakte_$6_Gleist_EMM;
-    public int OML_Kontakte_$6_NT_W1;
-    public int OML_Kontakte_$7_WS1_plus;
-    public int OML_Kontakte_$6_NAL;
-    public int OML_Kontakte_$8_FSS_90EG;
-    public int OML_Kontakte_$6_FBA_nLN;
-    public int OML_Kontakte_$6_RM_nZB;
-    public int OML_Kontakte_$6_BLU_EG;
-    public int OML_Kontakte_$6_FBF_nLN;
-    public int OML_Kontakte_$8_FSS_30F;
-    public int OML_Kontakte_$8_FSS_10F;
-    public int OML_Kontakte_$8_FSS_0EGF;
-    public int OML_Wecker_Weichen_$P1;
-    public int OML_Wecker_Weichen_$2_Weiche;
-    public int OML_Kontakte_$8_FSS_45EG;
-    public int OML_Kontakte_$8_FSS_45F;
-    public int OML_Kontakte_$6_RM_nLN;
-    public int OML_Kontakte_$8_FSS_30EG;
-    public int OML_Kontakte_$7_WS1_minus;
-    public int OML_Wecker_Block_$P48;
-    public int OML_Wecker_Signal_$P49;
-    public int OML_Wecker_Signal_$P13;
-    public int OML_Wecker_Signal_$P18;
-    public int OML_Wecker_Block_$P40;
-    public int OML_logic_Kontakte_WS1_$logic_ws1_plus;
-    public int OML_logic_Kontakte_WS1_$ws1_minus;
-    public int OML_Wecker_Block_$P39;
-    public int OML_Wecker_Block_$P135;
-    public int OML_Wecker_Signal_$P21;
-    public int OML_logic_Kontakte_WS1_$ws1_plus;
-    public int OML_Wecker_Signal_$P117;
-    public int OML_Wecker_Signal_$2_Signal;
-    public int OML_logic_Kontakte_WS1_$logic_ws1_minus;
-    public int OML_Wecker_Signal_$P22;
-    public int OML_Wecker_Block_$2_Block;
-    public int OML_Wecker_Block_$P27;
-    public int OML_Wecker_Signal_$P12;
+    public int OML_Lampen_WS1_$1_WS1_Ueberw;
+    public int OML_Lampen_Stoerung_$1_F_VS_Stoer;
+    public int OML_Lampen_Streckenblock_$1_BL_vLN_weiss;
+    public int OML_BL_OM_LN_$belegt_v;
+    public int OML_BL_ZB_OM_$vorgebl_n;
+    public int OML_BL_ZB_OM_$1;
+    public int OML_Lampen_Stoerung_$1_G_VS_Stoer;
+    public int OML_Lampen_Streckenblock_$1_BL_nLN_weiss;
+    public int OML_Lampen_Streckenblock_$1_BL_nZB_weiss;
+    public int OML_Lampen_Streckenblock_$1_BL_vZB_weiss;
+    public int OML_Lampen_Isolierung_$Iso_cd_ein;
+    public int OML_BL_OM_LN_$RMM_nLN;
+    public int OML_BL_ZB_OM_$2;
+    public int OML_BL_ZB_OM_$belegt_n;
+    public int OML_Lampen_Streckenblock_$1_BL_nLN_rot;
+    public int OML_Lampen_Streckenblock_$1_BL_vLN_rot;
+    public int OML_Lampen_Streckenblock_$1_FBV_vZB;
+    public int OML_Lampen_Fahrstrasse_$1_Fstr_ef;
+    public int OML_Lampen_Fahrstrasse_$1_Fstr_gf;
+    public int OML_Lampen_Isolierung_$Iso_egf_ein;
+    public int OML_Lampen_Isolierung_$Iso_ef_ein;
+    public int OML_Lampen_Streckenblock_$1_BL_vZB_rot;
+    public int OML_Lampen_Streckenblock_$1_BL_nZB_rot;
+    public int OML_LN_$LN_W3_pE4;
+    public int OML_LN_$geprueft1E6;
+    public int OML_LN_$C1_Halt;
+    public int OML_LN_$C26_Fahrt;
+    public int OML_LN_$C1_Fahrt2;
+    public int OML_LN_$LN_W1_pE6;
+    public int OML_LN_$LN_W3_pE3;
+    public int OML_LN_$LN_W4_pE6;
+    public int OML_LN_$LN_W5_pE3;
+    public int OML_LN_$LN_W2_mE6;
+    public int OML_LN_$LN_W6_mE5;
+    public int OML_LN_$LN_W3_mE6;
+    public int OML_LN_$LN_W2_mE3;
+    public int OML_LN_$LN_W2_mE5;
+    public int OML_LN_$LN_W1_pE2;
+    public int OML_LN_$LN_W2_mE4;
+    public int OML_LN_$LN_W5_mE4;
+    public int OML_LN_$LN_W4_pE5;
+    public int OML_LN_$C26_FB2;
+    public int OML_LN_$LN_W1_pE3;
     public int OML_Stw_FSS_SM_$NAL_pressed_store;
     public int OML_Stw_FSS_SM_$FSS_Sperrm_ein;
     public int OML_Stw_FSS_SM_$FSS_Sperrm_aus;
@@ -427,466 +429,461 @@ abstract class PetrinetOmlEndpointExportBase {
     }
 
     public void readSensors() {
-        //OML_ILTIS_$festhalten_vLN = ?
-        //OML_ILTIS_$LN_2_834 = ?
-        //OML_ILTIS_$LN_4_834 = ?
-        //OML_ILTIS_$RM_LN_OM = ?
-        //OML_ILTIS_$EMM_833_2 = ?
-        //OML_ILTIS_$LN_834_5 = ?
-        //OML_ILTIS_$EMM_833_3 = ?
-        //OML_ILTIS_$ZB_138_1 = ?
-        //OML_ILTIS_$EMM_833_4 = ?
-        //OML_ILTIS_$LN_834_3 = ?
-        //OML_ILTIS_$LN_3_834 = ?
-        //OML_ILTIS_$LN_834_6 = ?
-        //OML_ILTIS_$EMM_833_5 = ?
-        //OML_ILTIS_$LN_834_2 = ?
-        //OML_ILTIS_$LN_834_1 = ?
-        //OML_ILTIS_$anfordern_vLN = ?
-        //OML_ILTIS_$anfordern_vZB = ?
-        //OML_ILTIS_$freigeben_vLN = ?
-        //OML_ILTIS_$ZB_2_138 = ?
-        //OML_ILTIS_$freigeben_vZB = ?
-        //OML_ILTIS_$ZB_138_2 = ?
-        //OML_ILTIS_$ZB_1_138 = ?
-        //OML_ILTIS_$festhalten_vZB = ?
-        //OML_ILTIS_$LN_834_4 = ?
-        //OML_ILTIS_$LN_6_834 = ?
-        //OML_ILTIS_$LN_1_834 = ?
-        //OML_LN_$ce_belegt = ?
-        //OML_ILTIS_$RM_ZB_OM = ?
-        //OML_ext_Vb_$Ueberw_W1_plus = ?
+        //OML_logic_Kontakte_WS1_$ws1_plus = ?
+        //OML_logic_Kontakte_WS1_$ws1_minus = ?
+        //OML_Kontakte_$6_FBA_nLN = ?
+        //OML_Kontakte_$8_FSS_10EG = ?
+        //OML_Kontakte_$8_FSS_30EG = ?
+        //OML_Kontakte_$8_FSS_45EG = ?
+        //OML_Kontakte_$6_ISU_Sign = ?
+        //OML_Kontakte_$8_FSS_45F = ?
+        //OML_Kontakte_$8_FSS_10F = ?
+        //OML_Kontakte_$8_FSS_30F = ?
+        //OML_Kontakte_$6_Gleist_ZB = ?
+        //OML_Kontakte_$7_WS1_1 = ?
+        //OML_Kontakte_$8_FSS_90EG = ?
+        //OML_Kontakte_$6_BLU_EG = ?
+        //OML_Kontakte_$6_Gleist_EMM = ?
+        //OML_Kontakte_$6_RM_nLN = ?
+        //OML_Kontakte_$6_NT_W1 = ?
+        //OML_Kontakte_$6_FBF_nLN = ?
+        //OML_Kontakte_$6_NAL = ?
         //OML_Kontakte_$6_FBA_nZB = ?
-        //OML_ext_Vb_$Ueberw_W1_minus = ?
+        //OML_Kontakte_$6_RM_nZB = ?
+        //OML_Kontakte_$8_FSS_90F = ?
+        //OML_Kontakte_$8_FSS_0EGF = ?
+        //OML_ILTIS_$EMM_1_833 = ?
+        //OML_LN_$ce_belegt = ?
         //OML_ext_Vb_$F_VS_Lampe_Fahrt_def = ?
+        //OML_ext_Vb_$Ueberw_W1_plus = ?
         //OML_ext_Vb_$G_VS_Lampe_Warn_def = ?
         //OML_ext_Vb_$G_VS_Lampe_Fahrt_def = ?
         //OML_ext_Vb_$F_VS_Lampe_Warn_def = ?
+        //OML_ext_Vb_$Ueberw_W1_minus = ?
         //OML_ext_Vb_$G_Lampe_gruenFB3_def = ?
         //OML_ext_Vb_$F_Lampe_gruenFB3_def = ?
         //OML_ext_Vb_$E_Lampe_gruenFB1_def = ?
+        //OML_Stw_W1_init = ?
+        //OML_ILTIS_$EMM_5_833 = ?
+        //OML_ILTIS_$ZB_1_138 = ?
+        //OML_ILTIS_$LN_2_834 = ?
+        //OML_ILTIS_$EMM_833_3 = ?
+        //OML_ILTIS_$ZB_138_1 = ?
+        //OML_ILTIS_$LN_834_6 = ?
+        //OML_ILTIS_$EMM_833_5 = ?
+        //OML_ILTIS_$LN_834_3 = ?
+        //OML_ILTIS_$EMM_2_833 = ?
+        //OML_ILTIS_$EMM_4_833 = ?
+        //OML_ILTIS_$EMM_833_1 = ?
+        //OML_ILTIS_$LN_834_1 = ?
+        //OML_ILTIS_$LN_1_834 = ?
+        //OML_ILTIS_$LN_3_834 = ?
+        //OML_ILTIS_$LN_4_834 = ?
+        //OML_ILTIS_$LN_6_834 = ?
+        //OML_ILTIS_$anfordern_vLN = ?
+        //OML_ILTIS_$ZB_138_2 = ?
+        //OML_ILTIS_$EMM_833_4 = ?
+        //OML_ILTIS_$ZB_2_138 = ?
+        //OML_ILTIS_$freigeben_vLN = ?
+        //OML_ILTIS_$anfordern_vZB = ?
+        //OML_ILTIS_$festhalten_vLN = ?
+        //OML_ILTIS_$LN_834_4 = ?
+        //OML_ILTIS_$EMM_3_833 = ?
+        //OML_ILTIS_$LN_834_5 = ?
+        //OML_ILTIS_$LN_834_2 = ?
+        //OML_ILTIS_$freigeben_vZB = ?
+        //OML_ILTIS_$EMM_833_2 = ?
+        //OML_ILTIS_$RM_LN_OM = ?
+        //OML_ILTIS_$festhalten_vZB = ?
+        //OML_ILTIS_$RM_ZB_OM = ?
+        //OML_ZB_$cd_belegt = ?
         //OML_Iso_1_$belegen = ?
+        //OML_Iso_ef_$belegen = ?
         //OML_Iso_gf_$belegen = ?
         //OML_Iso_egf_$belegen = ?
-        //OML_Iso_ef_$belegen = ?
         //OML_Iso_cd_$belegen = ?
-        //OML_ZB_$cd_belegt = ?
-        //OML_ILTIS_$EMM_833_1 = ?
-        //OML_ILTIS_$EMM_3_833 = ?
-        //OML_ILTIS_$EMM_4_833 = ?
-        //OML_ILTIS_$EMM_5_833 = ?
-        //OML_ILTIS_$EMM_1_833 = ?
-        //OML_ILTIS_$EMM_2_833 = ?
-        //OML_Kontakte_$7_WS1_1 = ?
-        //OML_Kontakte_$8_FSS_90F = ?
-        //OML_Kontakte_$6_Gleist_ZB = ?
-        //OML_Kontakte_$6_ISU_Sign = ?
-        //OML_Kontakte_$8_FSS_10EG = ?
-        //OML_Kontakte_$6_Gleist_EMM = ?
-        //OML_Kontakte_$6_NT_W1 = ?
-        //OML_Kontakte_$6_NAL = ?
-        //OML_Kontakte_$8_FSS_90EG = ?
-        //OML_Kontakte_$6_FBA_nLN = ?
-        //OML_Kontakte_$6_RM_nZB = ?
-        //OML_Kontakte_$6_BLU_EG = ?
-        //OML_Kontakte_$6_FBF_nLN = ?
-        //OML_Kontakte_$8_FSS_30F = ?
-        //OML_Kontakte_$8_FSS_10F = ?
-        //OML_Kontakte_$8_FSS_0EGF = ?
-        //OML_Kontakte_$8_FSS_45EG = ?
-        //OML_Kontakte_$8_FSS_45F = ?
-        //OML_Kontakte_$6_RM_nLN = ?
-        //OML_Kontakte_$8_FSS_30EG = ?
-        //OML_logic_Kontakte_WS1_$ws1_minus = ?
-        //OML_logic_Kontakte_WS1_$ws1_plus = ?
     }
     public void writeActors() {
-        //myData.OML_LN_$E_FB1 = OML_LN_$E_FB1;
-        OML_LN_$E_FB1 = 0;
-        //myData.OML_ZB_$C_FB1 = OML_ZB_$C_FB1;
-        OML_ZB_$C_FB1 = 0;
-        //myData.OML_ZB_$D_FB1 = OML_ZB_$D_FB1;
-        OML_ZB_$D_FB1 = 0;
-        //myData.OML_ZB_$D_FB2 = OML_ZB_$D_FB2;
-        OML_ZB_$D_FB2 = 0;
-        //myData.OML_ZB_$C_FB2 = OML_ZB_$C_FB2;
-        OML_ZB_$C_FB2 = 0;
-        //myData.OML_LN_$E_FB2 = OML_LN_$E_FB2;
-        OML_LN_$E_FB2 = 0;
-        //myData.OML_LN_$C26_FB1 = OML_LN_$C26_FB1;
-        OML_LN_$C26_FB1 = 0;
-        //myData.OML_LN_$C26_FB2 = OML_LN_$C26_FB2;
-        OML_LN_$C26_FB2 = 0;
-        //myData.OML_EMM_$C_FB1 = OML_EMM_$C_FB1;
-        OML_EMM_$C_FB1 = 0;
         //myData.OML_EMM_$C_FB2 = OML_EMM_$C_FB2;
         OML_EMM_$C_FB2 = 0;
         //myData.OML_EMM_$D_FB1 = OML_EMM_$D_FB1;
         OML_EMM_$D_FB1 = 0;
+        //myData.OML_EMM_$C_FB1 = OML_EMM_$C_FB1;
+        OML_EMM_$C_FB1 = 0;
         //myData.OML_EMM_$D_FB2 = OML_EMM_$D_FB2;
         OML_EMM_$D_FB2 = 0;
+        //myData.OML_ZB_$C_FB1 = OML_ZB_$C_FB1;
+        OML_ZB_$C_FB1 = 0;
+        //myData.OML_ZB_$C_FB2 = OML_ZB_$C_FB2;
+        OML_ZB_$C_FB2 = 0;
+        //myData.OML_ZB_$D_FB2 = OML_ZB_$D_FB2;
+        OML_ZB_$D_FB2 = 0;
+        //myData.OML_ZB_$D_FB1 = OML_ZB_$D_FB1;
+        OML_ZB_$D_FB1 = 0;
     }
     public void init() {
         OML_Stw_FSS_SM_$FSS30F_reached_store = 0;
         OML_Stw_FSS_SM_$FSS_30EG_reached_store = 0;
-        OML_ILTIS_$festhalten_vLN = 0;
-        OML_ILTIS_$LN_2_834 = 0;
-        OML_ILTIS_$LN_4_834 = 0;
-        OML_ILTIS_$freigegeben_vZB = 1;
-        OML_ILTIS_$RM_LN_OM = 0;
-        OML_ILTIS_$freigegeben_vLN = 1;
-        OML_ILTIS_$festgehalten_vLN = 0;
-        OML_LN_$geprueft1A4 = 0;
-        OML_ILTIS_$EMM_833_2 = 0;
-        OML_ILTIS_$LN_834_5 = 0;
-        OML_ILTIS_$EMM_833_3 = 0;
-        OML_ILTIS_$ZB_138_1 = 0;
-        OML_ILTIS_$EMM_833_4 = 0;
-        OML_ILTIS_$LN_834_3 = 0;
-        OML_ILTIS_$LN_3_834 = 0;
-        OML_ILTIS_$LN_834_6 = 0;
-        OML_ILTIS_$EMM_833_5 = 0;
-        OML_ILTIS_$LN_834_2 = 0;
-        OML_ILTIS_$LN_834_1 = 0;
-        OML_ILTIS_$anfordern_vLN = 0;
-        OML_ILTIS_$anfordern_vZB = 0;
-        OML_ILTIS_$freigeben_vLN = 0;
-        OML_ILTIS_$ZB_2_138 = 0;
-        OML_ILTIS_$freigeben_vZB = 0;
-        OML_ILTIS_$ZB_138_2 = 0;
-        OML_ILTIS_$ZB_1_138 = 0;
-        OML_ILTIS_$festhalten_vZB = 0;
-        OML_ILTIS_$festgehalten_v_ZB = 0;
-        OML_ILTIS_$LN_834_4 = 0;
-        OML_ILTIS_$LN_6_834 = 0;
-        OML_ILTIS_$LN_1_834 = 0;
+        OML_logic_Kontakte_WS1_$logic_ws1_plus = 0;
+        OML_logic_Kontakte_WS1_$ws1_plus = 0;
+        OML_logic_Kontakte_WS1_$ws1_minus = 0;
+        OML_Kontakte_$7_WS1_plus = 0;
+        OML_Kontakte_$6_FBA_nLN = 0;
+        OML_Kontakte_$7_WS1_minus = 0;
+        OML_Kontakte_$8_FSS_10EG = 0;
+        OML_Kontakte_$8_FSS_30EG = 0;
+        OML_Kontakte_$8_FSS_45EG = 0;
+        OML_Kontakte_$6_ISU_Sign = 0;
+        OML_Kontakte_$8_FSS_45F = 0;
+        OML_Kontakte_$8_FSS_10F = 0;
+        OML_Kontakte_$8_FSS_30F = 0;
+        OML_Kontakte_$6_Gleist_ZB = 0;
+        OML_Kontakte_$7_WS1_1 = 0;
+        OML_Kontakte_$8_FSS_90EG = 0;
+        OML_Kontakte_$6_BLU_EG = 0;
+        OML_Kontakte_$6_Gleist_EMM = 0;
+        OML_Kontakte_$6_RM_nLN = 0;
+        OML_Kontakte_$6_NT_W1 = 0;
+        OML_Kontakte_$6_FBF_nLN = 0;
+        OML_Kontakte_$6_NAL = 0;
+        OML_Kontakte_$6_FBA_nZB = 0;
+        OML_Kontakte_$6_RM_nZB = 0;
+        OML_Kontakte_$8_FSS_90F = 0;
+        OML_Wecker_Signal_$2_Signal = 0;
+        OML_Wecker_Signal_$P13 = 0;
+        OML_Wecker_Signal_$P117 = 0;
+        OML_Wecker_Weichen_$2_Weiche = 0;
+        OML_Wecker_Signal_$P12 = 0;
+        OML_Wecker_Block_$P135 = 0;
+        OML_Wecker_Block_$P27 = 0;
+        OML_logic_Kontakte_WS1_$logic_ws1_minus = 0;
+        OML_Wecker_Signal_$P49 = 0;
+        OML_Kontakte_$8_FSS_0EGF = 0;
+        OML_Wecker_Block_$P39 = 0;
+        OML_Wecker_Signal_$P22 = 0;
+        OML_Wecker_Signal_$P18 = 0;
+        OML_Wecker_Block_$P40 = 0;
+        OML_Wecker_Block_$P48 = 0;
+        OML_Wecker_Block_$2_Block = 0;
+        OML_Wecker_Signal_$P21 = 0;
+        OML_EMM_$EMM_W9_mA5 = 0;
+        OML_EMM_$EMM_W7_mE1 = 0;
+        OML_EMM_$EMM_W10_pE2 = 0;
+        OML_EMM_$EMM_W8_pA4 = 0;
+        OML_EMM_$EMM_W9_mE5 = 0;
+        OML_EMM_$geprueft2A5 = 0;
+        OML_EMM_$geprueft1E2 = 0;
+        OML_EMM_$EMM_W10_mA4 = 0;
+        OML_EMM_$EMM_W10_mE3 = 0;
+        OML_EMM_$EMM_W8_mE5 = 0;
+        OML_EMM_$EMM_W10_mA5 = 0;
+        OML_EMM_$EMM_W10_mE4 = 0;
+        OML_EMM_$EMM_W10_mE5 = 0;
+        OML_EMM_$geprueft1E4 = 0;
+        OML_EMM_$EMM_W7_pE2 = 0;
+        OML_EMM_$EMM_W7_pA2 = 0;
+        OML_EMM_$geprueft1A3 = 0;
+        OML_EMM_$EMM_W9_mA4 = 0;
+        OML_EMM_$geprueft1E1 = 0;
+        OML_EMM_$geprueft1A5 = 0;
+        OML_EMM_$EMM_W9_pE3 = 0;
+        OML_EMM_$geprueft2A3 = 0;
+        OML_EMM_$EMM_W9_mE4 = 0;
+        OML_EMM_$geprueft1E5 = 0;
+        OML_EMM_$EMM_W10_mA3 = 0;
+        OML_EMM_$EMM_W9_pA3 = 0;
+        OML_EMM_$geprueft2A4 = 0;
+        OML_EMM_$EMM_W8_mA5 = 0;
+        OML_EMM_$geprueft1E3 = 0;
+        OML_EMM_$EMM_W10_pE1 = 0;
+        OML_EMM_$geprueft1A4 = 0;
+        OML_EMM_$EMM_W8_pE4 = 0;
+        OML_EMM_$C_FB2 = 0;
+        OML_EMM_$C_Halt = 1;
+        OML_EMM_$C_Fahrt = 0;
+        OML_EMM_$D_Halt = 1;
+        OML_EMM_$D_FB1 = 0;
+        OML_ILTIS_$EMM_1_833 = 0;
+        OML_EMM_$C_FB1 = 0;
+        OML_EMM_$D_FB2 = 0;
+        OML_EMM_$D_Fahrt = 0;
+        OML_LN_$LN_W4_pA5 = 0;
+        OML_LN_$geprueft1A1 = 0;
+        OML_LN_$geprueft2A2 = 0;
+        OML_LN_$LN_W2_mA4 = 0;
+        OML_LN_$LN_W2_mA3 = 0;
+        OML_LN_$LN_W3_mA5 = 0;
+        OML_LN_$LN_W3_mA6 = 0;
+        OML_LN_$geprueft1E1 = 0;
+        OML_LN_$geprueft1E3 = 0;
+        OML_LN_$LN_W2_pA2 = 0;
+        OML_LN_$LN_W3_pA3 = 0;
+        OML_LN_$LN_W5_pA3 = 0;
+        OML_LN_$geprueft2A3 = 0;
+        OML_LN_$LN_W1_pA2 = 0;
+        OML_LN_$LN_W6_mE6 = 0;
+        OML_LN_$LN_W1_pA5 = 0;
+        OML_LN_$geprueft2A4 = 0;
+        OML_LN_$geprueft1A3 = 0;
+        OML_LN_$LN_W4_pA6 = 0;
         OML_LN_$ce_belegt = 0;
         OML_LN_$geprueft1E5 = 0;
+        OML_LN_$LN_W2_mA5 = 0;
+        OML_LN_$geprueft2A1 = 0;
         OML_LN_$LN_W1_mA1 = 0;
-        OML_LN_$geprueft2A3 = 0;
-        OML_LN_$LN_W1_pA3 = 0;
-        OML_LN_$geprueft1A5 = 0;
-        OML_LN_$LN_Grundstlg = 0;
-        OML_ILTIS_$RM_ZB_OM = 0;
-        OML_LN_$geprueft1A2 = 0;
-        OML_ext_Vb_$Ueberw_W1_plus = 1;
-        OML_Kontakte_$6_FBA_nZB = 0;
-        OML_ext_Vb_$Ueberw_W1_minus = 1;
+        OML_LN_$LN_W3_pA4 = 0;
+        OML_LN_$geprueft1E4 = 0;
+        OML_LN_$LN_W1_pA4 = 0;
+        OML_LN_$geprueft1E2 = 0;
+        OML_LN_$LN_W5_mA4 = 0;
+        OML_LN_$geprueft1A4 = 0;
+        OML_LN_$geprueft2A5 = 0;
+        OML_LN_$LN_W6_mA5 = 0;
+        OML_LN_$geprueft1A6 = 0;
+        OML_LN_$LN_W1_pE4 = 0;
+        OML_LN_$LN_W3_mE5 = 0;
+        OML_LN_$LN_W2_pE2 = 0;
+        OML_LN_$LN_W6_mA6 = 0;
+        OML_LN_$LN_W1_pE5 = 0;
+        OML_LN_$LN_W2_mA6 = 0;
+        OML_LN_$geprueft2A6 = 0;
+        OML_LN_$LN_W1_pA6 = 0;
         OML_ext_Vb_$F_VS_Lampe_Fahrt_def = 0;
+        OML_LN_$C26_Halt = 1;
+        OML_LN_$LN_W1_mE1 = 0;
+        OML_ext_Vb_$Ueberw_W1_plus = 1;
         OML_ext_Vb_$G_VS_Lampe_Warn_def = 0;
         OML_ext_Vb_$G_VS_Lampe_Fahrt_def = 0;
+        OML_LN_$C26_FB1 = 0;
+        OML_LN_$E_FB2 = 0;
         OML_ext_Vb_$F_VS_Lampe_Warn_def = 0;
+        OML_ext_Vb_$Ueberw_W1_minus = 1;
+        OML_LN_$E_Fahrt = 0;
+        OML_LN_$E_FB1 = 0;
+        OML_LN_$e_Halt = 1;
         OML_ext_Vb_$G_Lampe_gruenFB3_def = 0;
         OML_ext_Vb_$F_Lampe_gruenFB3_def = 0;
         OML_ext_Vb_$E_Lampe_gruenFB1_def = 0;
-        OML_LN_$LN_W1_mE1 = 0;
-        OML_LN_$E_FB1 = 0;
-        OML_Stw_FSS_KSM_$FSS_Kuppelm_aus = 1;
-        OML_Stw_W1_$Endlage_minus = 0;
-        OML_Stw_W1_$gestoert_p = 0;
-        OML_Stw_W1_$keine_Endlage_plus = 0;
-        OML_Fstr_ef_$geprueft3 = 0;
-        OML_Fstr_ef_$E_Fahrt1 = 0;
-        OML_Fstr_ef_$verschlossen = 0;
-        OML_Fstr_ef_$Zug_eingefahren = 0;
-        OML_Stw_W1_$Endlage_plus = 1;
-        OML_Stw_W1_SM_$WS_Sperrm_ein = 0;
-        OML_Fstr_ef_$P2 = 0;
+        OML_Stw_W1_init = 1;
         OML_Fstr_ef_$geprueft2 = 0;
-        OML_Fstr_ef_$P1 = 0;
-        OML_Stw_W1_SM_$WS_Sperrm_aus = 1;
-        OML_Fstr_ef_$P6 = 0;
-        OML_Fstr_ef_$E_Halt = 1;
-        OML_Fstr_ef_$geprueft1 = 0;
-        OML_Stw_W1_$keine_Endlage_minus = 0;
-        OML_Stw_W1_$gestoert_m = 0;
-        OML_Iso_ef_$frei = 1;
-        OML_Iso_1_$belegen = 0;
-        OML_Fstr_fg_$aufgeloest = 1;
-        OML_Fstr_fg_$Zug_eingefahren = 0;
-        OML_Fstr_fg_$gemerkt_90F = 0;
-        OML_Fstr_fg_$F_Halt = 1;
-        OML_Fstr_fg_$geprueft3 = 0;
-        OML_Fstr_fg_$geprueft1 = 0;
-        OML_Fstr_fg_$prison_signal_steller = 0;
-        OML_Fstr_fg_$geprueft2 = 0;
-        OML_Fstr_fg_$verschlossen = 0;
-        OML_Iso_1_$belegt = 0;
-        OML_Fstr_fg_$signal_steller = 0;
-        OML_Iso_gf_$belegen = 0;
-        OML_Iso_egf_$belegt = 0;
-        OML_Iso_egf_$belegen = 0;
-        OML_Fstr_fg_$F_Fahrt3 = 0;
-        OML_Iso_egf_$frei = 1;
-        OML_Fstr_fg_$P1 = 0;
-        OML_Iso_ef_$belegen = 0;
-        OML_Iso_ef_$belegt = 0;
-        OML_Iso_cd_$belegt = 0;
-        OML_Fstr_fg_$geprueft0 = 0;
-        OML_Iso_gf_$belegt = 0;
-        OML_Iso_1_$frei = 1;
-        OML_Fstr_fg_$P2 = 0;
-        OML_Iso_gf_$frei = 1;
-        OML_Iso_cd_$frei = 1;
-        OML_BL_OM_LN_$1 = 0;
-        OML_Iso_cd_$belegen = 0;
-        OML_BL_OM_LN_$Grundstlg_n = 1;
-        OML_BL_OM_LN_$3 = 0;
-        OML_BL_OM_LN_$vorgebl_n = 0;
-        OML_BL_OM_LN_$RMM_nLN = 0;
-        OML_BL_OM_LN_$belegt_v = 0;
-        OML_BL_OM_LN_$2 = 0;
-        OML_Fstr_fe_$F_Fahrt1 = 0;
-        OML_Fstr_gf_$geprueft2 = 0;
-        OML_Fstr_gf_$G_Fahrt3 = 0;
-        OML_Fstr_ef_$prison_signal_steller = 0;
-        OML_Fstr_fe_$geprueft = 0;
-        OML_Fstr_fe_$F_Halt = 1;
-        OML_Fstr_fe_$P1 = 0;
-        OML_Fstr_fe_$geprueft3 = 0;
-        OML_Fstr_ef_$gemerkt_90EB = 0;
-        OML_Fstr_fe_$aufgeloest = 1;
+        OML_Fstr_ef_$geprueft3 = 0;
+        OML_Stw_WS1_SM_$Sperrm_ein = 0;
+        OML_Stw_WS1_$endlage_minus = 0;
+        OML_Stw_W1_$endlage_minus = 0;
+        OML_Stw_WS1_$gestoert_p = 0;
+        OML_Stw_WS1_$keine_Endlage_plus = 0;
+        OML_Stw_WS1_$gestoert_m = 0;
+        OML_Stw_FSS_KSM_$FSS_Kuppelm_aus = 1;
+        OML_Stw_WS1_$keine_Endlage_minus = 0;
+        OML_Stw_W1_$endlage_plus = 0;
+        OML_Stw_WS1_SM_$Sperrm_aus = 1;
+        OML_Stw_W1_$keine_endlage_minus = 0;
+        OML_Stw_W1_$keine_endlage_plus = 0;
+        OML_Stw_WS1_$endlage_plus = 1;
+        OML_ILTIS_$EMM_5_833 = 0;
+        OML_ILTIS_$ZB_1_138 = 0;
+        OML_ILTIS_$LN_2_834 = 0;
+        OML_ILTIS_$EMM_833_3 = 0;
+        OML_ILTIS_$ZB_138_1 = 0;
+        OML_ILTIS_$LN_834_6 = 0;
+        OML_ILTIS_$EMM_833_5 = 0;
+        OML_ILTIS_$LN_834_3 = 0;
+        OML_ILTIS_$EMM_2_833 = 0;
+        OML_ILTIS_$EMM_4_833 = 0;
+        OML_ILTIS_$EMM_833_1 = 0;
+        OML_ILTIS_$LN_834_1 = 0;
+        OML_ILTIS_$LN_1_834 = 0;
+        OML_ILTIS_$LN_3_834 = 0;
+        OML_ILTIS_$LN_4_834 = 0;
+        OML_ILTIS_$LN_6_834 = 0;
+        OML_ILTIS_$anfordern_vLN = 0;
+        OML_ILTIS_$ZB_138_2 = 0;
+        OML_ILTIS_$EMM_833_4 = 0;
+        OML_ILTIS_$ZB_2_138 = 0;
+        OML_ILTIS_$festgehalten_vLN = 0;
+        OML_ILTIS_$freigeben_vLN = 0;
+        OML_ILTIS_$anfordern_vZB = 0;
+        OML_ILTIS_$festhalten_vLN = 0;
+        OML_ILTIS_$LN_834_4 = 0;
+        OML_ILTIS_$EMM_3_833 = 0;
+        OML_ILTIS_$LN_834_5 = 0;
+        OML_ILTIS_$LN_834_2 = 0;
+        OML_ILTIS_$freigeben_vZB = 0;
+        OML_ILTIS_$EMM_833_2 = 0;
+        OML_ILTIS_$freigegeben_vLN = 1;
+        OML_ILTIS_$RM_LN_OM = 0;
+        OML_ILTIS_$festhalten_vZB = 0;
+        OML_ILTIS_$RM_ZB_OM = 0;
+        OML_LN_$geprueft1A5 = 0;
+        OML_LN_$geprueft1A2 = 0;
+        OML_LN_$LN_Grundstlg = 1;
+        OML_LN_$LN_W1_pA3 = 0;
+        OML_ILTIS_$freigegeben_vZB = 1;
+        OML_ILTIS_$festgehalten_v_ZB = 0;
+        OML_Fstr_gf_$gemerkt_90EG = 0;
         OML_Fstr_fe_$prison_signal_steller = 0;
-        OML_Fstr_ef_$aufgeloest = 1;
-        OML_Fstr_gf_$verschlossen = 0;
-        OML_Fstr_fe_$P2 = 0;
+        OML_Fstr_fe_$Zug_eingefahren = 0;
+        OML_Fstr_ef_$Pstore_1_ef_belegt = 0;
+        OML_Fstr_fe_$geprueft = 0;
+        OML_Fstr_ef_$verschlossen = 0;
+        OML_Fstr_fe_$signal_steller = 0;
+        OML_Fstr_ef_$gemerkt_90EB = 0;
+        OML_Fstr_ef_$signal_steller = 0;
+        OML_Fstr_fe_$F_Halt = 1;
+        OML_Fstr_fe_$store_1_egf_belegt = 0;
+        OML_Fstr_ef_$geprueft1 = 0;
+        OML_Fstr_ef_$Zug_eingefahren = 0;
+        OML_Fstr_fe_$aufgeloest = 1;
+        OML_Fstr_ef_$E_Fahrt1 = 0;
+        OML_Fstr_ef_$E_Halt = 1;
+        OML_Fstr_ef_$prison_signal_steller = 0;
         OML_Fstr_fe_$verschlossen = 0;
+        OML_Fstr_fe_$geprueft3 = 0;
+        OML_Fstr_fe_$F_Fahrt1 = 0;
+        OML_Fstr_fe_$gemerkt_90F = 0;
+        OML_Fstr_ef_$aufgeloest = 1;
+        OML_Fstr_fe_$P2 = 0;
+        OML_Fstr_ef_$P6 = 0;
+        OML_Fstr_gf_$G_Fahrt3 = 0;
+        OML_Fstr_gf_$verschlossen = 0;
+        OML_Fstr_gf_$geprueft3 = 0;
+        OML_Fstr_gf_$aufgeloest = 1;
+        OML_Fstr_gf_$Zug_eingefahren = 0;
         OML_Fstr_gf_$P4 = 0;
+        OML_Fstr_gf_$geprueft2 = 0;
         OML_Fstr_gf_$G_Halt = 1;
         OML_Fstr_gf_$geprueft1 = 0;
-        OML_Fstr_ef_$signal_steller = 0;
-        OML_Fstr_fe_$P2b = 0;
-        OML_Fstr_fe_$signal_steller = 0;
-        OML_Fstr_fe_$gemerkt_90F = 0;
-        OML_Fstr_fe_$Zug_eingefahren = 0;
-        OML_Fstr_gf_$signal_steller = 0;
-        OML_Fstr_gf_$aufgeloest = 1;
-        OML_Fstr_gf_$gemerkt_90EG = 0;
-        OML_Fstr_gf_$prison_signal_steller = 0;
-        OML_Fstr_gf_$geprueft3 = 0;
-        OML_Fstr_gf_$Zug_eingefahren = 0;
-        OML_ZB_$D_Fahrt = 0;
+        OML_Lampen_Signal_G_$1_G_rot = 0;
+        OML_ZB_$geprueft1E2 = 0;
         OML_ZB_$C_FB1 = 0;
-        OML_ZB_$D_FB1 = 0;
-        OML_EMM_$EMM_Grundstlg = 1;
-        OML_ZB_$geprueft1A1 = 0;
-        OML_ZB_$ZB_W2_mA1 = 0;
-        OML_ZB_$ZB_W1_pA2 = 0;
-        OML_ZB_$D_FB2 = 0;
-        OML_EMM_$geprueft1A1 = 0;
         OML_ZB_$C_FB2 = 0;
-        OML_EMM_$EMM_W7_mA1 = 0;
-        OML_EMM_$EMM_W9_pA3 = 0;
+        OML_EMM_$EMM_W10_pA2 = 0;
+        OML_ZB_$ZB_W2_mA1 = 0;
+        OML_ZB_$ZB_W2_pE2 = 0;
+        OML_ZB_$geprueft2A2 = 0;
+        OML_Lampen_Signal_E_$1_E_gruenFB1 = 0;
+        OML_ZB_$ZB_W2_mE1 = 0;
+        OML_ZB_$ZB_W2_pA2 = 0;
+        OML_ZB_$D_Halt = 1;
+        OML_Lampen_Signal_F_$1_F_gruenFB1 = 0;
         OML_Lampen_Signal_G_$1_G_gruenFB1 = 0;
-        OML_ZB_$geprueft1A2 = 0;
+        OML_ZB_$geprueft1A1 = 0;
+        OML_ZB_$C_Halt = 1;
+        OML_ZB_$ZB_W1_pE2 = 0;
+        OML_Lampen_Signal_E_$1_E_rot = 0;
+        OML_Lampen_Signal_F_$1_F_rot = 0;
+        OML_ZB_$geprueft1E1 = 0;
         OML_ZB_$ZB_W1_mE1 = 0;
+        OML_ZB_$geprueft2A1 = 0;
+        OML_ZB_$ZB_W1_pA2 = 0;
+        OML_Lampen_Isolierung_$Iso_1_ein = 0;
+        OML_Lampen_Signal_G_$1_G_gruenFB3 = 0;
+        OML_ZB_$cd_belegt = 0;
+        OML_ZB_$geprueft1A2 = 0;
+        OML_ZB_$D_Fahrt = 0;
+        OML_ZB_$ZB_W1_mA1 = 0;
         OML_Lampen_Signal_F_$1_F_gruenFB3 = 0;
         OML_ZB_$C_Fahrt = 0;
-        OML_ZB_$ZB_W2_mE1 = 0;
-        OML_ZB_$cd_belegt = 0;
-        OML_ZB_$geprueft2A2 = 0;
-        OML_Lampen_Signal_G_$1_G_gruenFB3 = 0;
-        OML_ZB_$ZB_W2_pE2 = 0;
-        OML_ZB_$ZB_W1_mA1 = 0;
-        OML_ZB_$geprueft1E1 = 0;
         OML_ZB_$EMM_Grundstlg = 0;
-        OML_ZB_$C_Halt = 1;
-        OML_ZB_$ZB_W2_pA2 = 0;
-        OML_Lampen_Signal_G_$1_G_rot = 0;
-        OML_ZB_$geprueft2A1 = 0;
-        OML_ZB_$D_Halt = 1;
-        OML_ZB_$geprueft1E2 = 0;
-        OML_ZB_$ZB_W1_pE2 = 0;
-        OML_EMM_$EMM_W10_pA1 = 0;
-        OML_EMM_$EMM_W10_pA2 = 0;
-        OML_EMM_$geprueft2A2 = 0;
-        OML_EMM_$EMM_W7_pA2 = 0;
+        OML_EMM_$geprueft1A1 = 0;
+        OML_EMM_$EMM_W7_mA1 = 0;
+        OML_EMM_$EMM_Grundstlg = 1;
         OML_EMM_$geprueft1A2 = 0;
-        OML_EMM_$geprueft1A3 = 0;
+        OML_EMM_$geprueft2A2 = 0;
         OML_EMM_$geprueft2A1 = 0;
-        OML_EMM_$EMM_W10_mA3 = 0;
-        OML_EMM_$geprueft2A3 = 0;
-        OML_LN_$geprueft2A1 = 0;
-        OML_LN_$geprueft1A1 = 0;
-        OML_LN_$geprueft1E2 = 0;
-        OML_LN_$geprueft1E4 = 0;
-        OML_LN_$LN_W1_pA2 = 0;
-        OML_LN_$geprueft1E1 = 0;
-        OML_LN_$LN_W3_pA3 = 0;
-        OML_LN_$geprueft1E3 = 0;
-        OML_LN_$LN_W1_pA4 = 0;
-        OML_LN_$LN_W5_pA3 = 0;
-        OML_LN_$LN_W5_mA4 = 0;
-        OML_LN_$LN_W1_pA5 = 0;
-        OML_LN_$LN_W3_mA5 = 0;
-        OML_LN_$geprueft2A4 = 0;
-        OML_LN_$LN_W3_pA4 = 0;
-        OML_LN_$LN_W2_mA4 = 0;
-        OML_LN_$LN_W2_mA3 = 0;
-        OML_LN_$geprueft2A2 = 0;
-        OML_LN_$geprueft1A3 = 0;
-        OML_LN_$LN_W2_pA2 = 0;
-        OML_LN_$geprueft1A6 = 0;
-        OML_LN_$E_FB2 = 0;
-        OML_LN_$e_Halt = 1;
-        OML_LN_$LN_W2_pE2 = 0;
-        OML_LN_$LN_W6_mE6 = 0;
-        OML_LN_$LN_W5_mE4 = 0;
-        OML_LN_$LN_W2_mE6 = 0;
-        OML_LN_$LN_W4_pE6 = 0;
-        OML_LN_$C1_Halt = 1;
-        OML_LN_$C26_Halt = 1;
-        OML_LN_$LN_W5_pE3 = 0;
-        OML_LN_$LN_W2_mE4 = 0;
-        OML_LN_$LN_W2_mA6 = 0;
-        OML_LN_$LN_W1_pA6 = 0;
-        OML_LN_$LN_W6_mE5 = 0;
-        OML_LN_$LN_W1_pE6 = 0;
-        OML_LN_$LN_W3_pE3 = 0;
-        OML_LN_$LN_W3_mE5 = 0;
-        OML_LN_$C26_Fahrt = 0;
-        OML_LN_$C26_FB1 = 0;
-        OML_LN_$LN_W1_pE3 = 0;
-        OML_LN_$LN_W2_mE3 = 0;
-        OML_LN_$LN_W1_pE2 = 0;
-        OML_LN_$LN_W1_pE4 = 0;
-        OML_LN_$LN_W4_pE5 = 0;
-        OML_LN_$LN_W1_pE5 = 0;
-        OML_LN_$LN_W3_pE4 = 0;
-        OML_LN_$LN_W3_mE6 = 0;
-        OML_LN_$LN_W2_mE5 = 0;
-        OML_LN_$geprueft1E6 = 0;
-        OML_LN_$C1_Fahrt2 = 0;
-        OML_LN_$C26_FB2 = 0;
-        OML_LN_$geprueft2A5 = 0;
-        OML_LN_$LN_W2_mA5 = 0;
-        OML_LN_$LN_W6_mA6 = 0;
-        OML_LN_$geprueft2A6 = 0;
-        OML_LN_$E_Fahrt = 0;
-        OML_LN_$LN_W4_pA5 = 0;
-        OML_LN_$LN_W4_pA6 = 0;
-        OML_LN_$LN_W6_mA5 = 0;
-        OML_LN_$LN_W3_mA6 = 0;
-        OML_BL_ZB_OM_$belegt_n = 0;
-        OML_Lampen_Streckenblock_$1_BL_nZB_weiss = 0;
-        OML_Lampen_Isolierung_$Iso_egf_ein = 0;
-        OML_Lampen_Streckenblock_$1_BL_nLN_weiss = 0;
-        OML_Lampen_Streckenblock_$1_FBV_vLN = 0;
-        OML_Lampen_Stoerung_$1_G_VS_Stoer = 0;
+        OML_EMM_$EMM_W10_pA1 = 0;
+        OML_ZB_$D_FB2 = 0;
+        OML_ZB_$D_FB1 = 0;
+        OML_Fstr_fg_$signal_steller = 0;
+        OML_Fstr_gf_$signal_steller = 0;
+        OML_Fstr_fg_$prison_signal_steller = 0;
+        OML_Fstr_fg_$gemerkt_90F = 0;
+        OML_Fstr_gf_$prison_signal_steller = 0;
+        OML_Iso_ef_$frei = 1;
+        OML_Iso_1_$frei = 1;
+        OML_Fstr_fg_$store_egf_1_belegt = 0;
+        OML_Fstr_fg_$aufgeloest = 1;
+        OML_Iso_1_$belegen = 0;
+        OML_Fstr_gf_$store_1_belegt = 0;
+        OML_Iso_1_$belegt = 0;
+        OML_Iso_gf_$belegt = 0;
+        OML_Fstr_fg_$geprueft2 = 0;
+        OML_BL_OM_LN_$vorgebl_n = 0;
+        OML_Fstr_fg_$F_Halt = 1;
+        OML_Fstr_fg_$verschlossen = 0;
+        OML_Iso_ef_$belegen = 0;
+        OML_Fstr_fg_$geprueft0 = 0;
+        OML_Fstr_fg_$Zug_eingefahren = 0;
+        OML_Iso_ef_$belegt = 0;
+        OML_Fstr_fg_$F_Fahrt3 = 0;
+        OML_Iso_gf_$belegen = 0;
+        OML_Fstr_fg_$geprueft3 = 0;
+        OML_Fstr_fg_$geprueft1 = 0;
+        OML_Iso_egf_$belegen = 0;
+        OML_Iso_cd_$belegt = 0;
+        OML_Iso_cd_$frei = 1;
+        OML_Iso_cd_$belegen = 0;
+        OML_Iso_egf_$belegt = 0;
+        OML_BL_OM_LN_$Grundstlg_n = 1;
+        OML_BL_OM_LN_$3 = 0;
+        OML_Iso_egf_$frei = 1;
+        OML_Iso_gf_$frei = 1;
         OML_BL_ZB_OM_$Grundstlg_v = 0;
-        OML_Lampen_Streckenblock_$1_BL_nZB_rot = 0;
-        OML_Lampen_Streckenblock_$1_BL_nLN_rot = 0;
-        OML_BL_ZB_OM_$3 = 0;
-        OML_Lampen_WS1_$1_WS1_Freig = 0;
-        OML_Lampen_Streckenblock_$1_BL_vZB_rot = 0;
-        OML_Lampen_Fahrstrasse_$1_Fstr_ef = 0;
-        OML_Lampen_Fahrstrasse_$1_Fstr_gf = 0;
-        OML_Lampen_Isolierung_$Iso_cd_ein = 0;
-        OML_Lampen_Isolierung_$Iso_1_ein = 0;
-        OML_Lampen_WS1_$1_WS1_Ueberw = 0;
-        OML_BL_ZB_OM_$RMM_nZB = 0;
-        OML_Lampen_Signal_E_$1_E_rot = 0;
-        OML_Lampen_Streckenblock_$1_BL_vLN_weiss = 0;
-        OML_Lampen_Streckenblock_$1_BL_vZB_weiss = 0;
-        OML_Lampen_Streckenblock_$1_BL_vLN_rot = 0;
-        OML_BL_ZB_OM_$vorgebl_n = 0;
-        OML_Lampen_Stoerung_$1_F_VS_Stoer = 0;
-        OML_Lampen_Isolierung_$Iso_ef_ein = 0;
-        OML_BL_ZB_OM_$1 = 0;
-        OML_BL_ZB_OM_$Grundstlg_n = 1;
-        OML_BL_ZB_OM_$2 = 0;
-        OML_Lampen_Signal_E_$1_E_gruenFB1 = 0;
-        OML_Lampen_Streckenblock_$1_FBV_vZB = 0;
-        OML_Lampen_Signal_F_$1_F_gruenFB1 = 0;
-        OML_BL_OM_LN_$belegt_n = 0;
+        OML_Lampen_Streckenblock_$1_FBV_vLN = 0;
         OML_BL_OM_LN_$vorgebl_v = 0;
         OML_BL_ZB_OM_$belegt_v = 0;
         OML_BL_OM_LN_$Grundstlg_v = 0;
+        OML_BL_OM_LN_$belegt_n = 0;
+        OML_BL_OM_LN_$2 = 0;
+        OML_BL_ZB_OM_$Grundstlg_n = 1;
+        OML_BL_ZB_OM_$3 = 0;
+        OML_BL_OM_LN_$1 = 0;
+        OML_BL_ZB_OM_$RMM_nZB = 0;
+        OML_Lampen_WS1_$1_WS1_Freig = 0;
         OML_BL_ZB_OM_$vorgebl_v = 0;
-        OML_Lampen_Signal_F_$1_F_rot = 0;
-        OML_EMM_$EMM_W10_pE2 = 0;
-        OML_EMM_$EMM_W8_pA4 = 0;
-        OML_EMM_$EMM_W7_pE2 = 0;
-        OML_EMM_$EMM_W8_pE4 = 0;
-        OML_EMM_$EMM_W10_mA4 = 0;
-        OML_EMM_$geprueft1E1 = 0;
-        OML_EMM_$EMM_W10_pE1 = 0;
-        OML_EMM_$EMM_W10_mE5 = 0;
-        OML_EMM_$EMM_W10_mE3 = 0;
-        OML_EMM_$C_FB1 = 0;
-        OML_EMM_$geprueft2A5 = 0;
-        OML_EMM_$EMM_W9_mE4 = 0;
-        OML_EMM_$C_Fahrt = 0;
-        OML_EMM_$EMM_W10_mE4 = 0;
-        OML_ILTIS_$EMM_833_1 = 0;
-        OML_EMM_$EMM_W9_mE5 = 0;
-        OML_EMM_$C_FB2 = 0;
-        OML_EMM_$geprueft1A5 = 0;
-        OML_EMM_$EMM_W8_mA5 = 0;
-        OML_EMM_$geprueft1E3 = 0;
-        OML_EMM_$EMM_W9_mA5 = 0;
-        OML_EMM_$geprueft1A4 = 0;
-        OML_EMM_$geprueft1E2 = 0;
-        OML_EMM_$EMM_W9_pE3 = 0;
-        OML_EMM_$geprueft1E4 = 0;
-        OML_EMM_$C_Halt = 1;
-        OML_EMM_$EMM_W8_mE5 = 0;
-        OML_EMM_$geprueft1E5 = 0;
-        OML_EMM_$EMM_W10_mA5 = 0;
-        OML_EMM_$EMM_W9_mA4 = 0;
-        OML_EMM_$geprueft2A4 = 0;
-        OML_EMM_$EMM_W7_mE1 = 0;
-        OML_EMM_$D_Halt = 1;
-        OML_EMM_$D_Fahrt = 0;
-        OML_ILTIS_$EMM_3_833 = 0;
-        OML_ILTIS_$EMM_4_833 = 0;
-        OML_ILTIS_$EMM_5_833 = 0;
-        OML_EMM_$D_FB1 = 0;
-        OML_EMM_$D_FB2 = 0;
-        OML_ILTIS_$EMM_1_833 = 0;
-        OML_ILTIS_$EMM_2_833 = 0;
-        OML_Kontakte_$7_WS1_1 = 0;
-        OML_Kontakte_$8_FSS_90F = 0;
-        OML_Kontakte_$6_Gleist_ZB = 0;
-        OML_Kontakte_$6_ISU_Sign = 0;
-        OML_Kontakte_$8_FSS_10EG = 0;
-        OML_Kontakte_$6_Gleist_EMM = 0;
-        OML_Kontakte_$6_NT_W1 = 0;
-        OML_Kontakte_$7_WS1_plus = 0;
-        OML_Kontakte_$6_NAL = 0;
-        OML_Kontakte_$8_FSS_90EG = 0;
-        OML_Kontakte_$6_FBA_nLN = 0;
-        OML_Kontakte_$6_RM_nZB = 0;
-        OML_Kontakte_$6_BLU_EG = 0;
-        OML_Kontakte_$6_FBF_nLN = 0;
-        OML_Kontakte_$8_FSS_30F = 0;
-        OML_Kontakte_$8_FSS_10F = 0;
-        OML_Kontakte_$8_FSS_0EGF = 0;
-        OML_Wecker_Weichen_$P1 = 0;
-        OML_Wecker_Weichen_$2_Weiche = 0;
-        OML_Kontakte_$8_FSS_45EG = 0;
-        OML_Kontakte_$8_FSS_45F = 0;
-        OML_Kontakte_$6_RM_nLN = 0;
-        OML_Kontakte_$8_FSS_30EG = 0;
-        OML_Kontakte_$7_WS1_minus = 0;
-        OML_Wecker_Block_$P48 = 0;
-        OML_Wecker_Signal_$P49 = 0;
-        OML_Wecker_Signal_$P13 = 0;
-        OML_Wecker_Signal_$P18 = 0;
-        OML_Wecker_Block_$P40 = 0;
-        OML_logic_Kontakte_WS1_$logic_ws1_plus = 0;
-        OML_logic_Kontakte_WS1_$ws1_minus = 0;
-        OML_Wecker_Block_$P39 = 0;
-        OML_Wecker_Block_$P135 = 0;
-        OML_Wecker_Signal_$P21 = 0;
-        OML_logic_Kontakte_WS1_$ws1_plus = 0;
-        OML_Wecker_Signal_$P117 = 0;
-        OML_Wecker_Signal_$2_Signal = 0;
-        OML_logic_Kontakte_WS1_$logic_ws1_minus = 0;
-        OML_Wecker_Signal_$P22 = 0;
-        OML_Wecker_Block_$2_Block = 0;
-        OML_Wecker_Block_$P27 = 0;
-        OML_Wecker_Signal_$P12 = 0;
+        OML_Lampen_WS1_$1_WS1_Ueberw = 0;
+        OML_Lampen_Stoerung_$1_F_VS_Stoer = 0;
+        OML_Lampen_Streckenblock_$1_BL_vLN_weiss = 0;
+        OML_BL_OM_LN_$belegt_v = 0;
+        OML_BL_ZB_OM_$vorgebl_n = 0;
+        OML_BL_ZB_OM_$1 = 0;
+        OML_Lampen_Stoerung_$1_G_VS_Stoer = 0;
+        OML_Lampen_Streckenblock_$1_BL_nLN_weiss = 0;
+        OML_Lampen_Streckenblock_$1_BL_nZB_weiss = 0;
+        OML_Lampen_Streckenblock_$1_BL_vZB_weiss = 0;
+        OML_Lampen_Isolierung_$Iso_cd_ein = 0;
+        OML_BL_OM_LN_$RMM_nLN = 0;
+        OML_BL_ZB_OM_$2 = 0;
+        OML_BL_ZB_OM_$belegt_n = 0;
+        OML_Lampen_Streckenblock_$1_BL_nLN_rot = 0;
+        OML_Lampen_Streckenblock_$1_BL_vLN_rot = 0;
+        OML_Lampen_Streckenblock_$1_FBV_vZB = 0;
+        OML_Lampen_Fahrstrasse_$1_Fstr_ef = 0;
+        OML_Lampen_Fahrstrasse_$1_Fstr_gf = 0;
+        OML_Lampen_Isolierung_$Iso_egf_ein = 0;
+        OML_Lampen_Isolierung_$Iso_ef_ein = 0;
+        OML_Lampen_Streckenblock_$1_BL_vZB_rot = 0;
+        OML_Lampen_Streckenblock_$1_BL_nZB_rot = 0;
+        OML_LN_$LN_W3_pE4 = 0;
+        OML_LN_$geprueft1E6 = 0;
+        OML_LN_$C1_Halt = 1;
+        OML_LN_$C26_Fahrt = 0;
+        OML_LN_$C1_Fahrt2 = 0;
+        OML_LN_$LN_W1_pE6 = 0;
+        OML_LN_$LN_W3_pE3 = 0;
+        OML_LN_$LN_W4_pE6 = 0;
+        OML_LN_$LN_W5_pE3 = 0;
+        OML_LN_$LN_W2_mE6 = 0;
+        OML_LN_$LN_W6_mE5 = 0;
+        OML_LN_$LN_W3_mE6 = 0;
+        OML_LN_$LN_W2_mE3 = 0;
+        OML_LN_$LN_W2_mE5 = 0;
+        OML_LN_$LN_W1_pE2 = 0;
+        OML_LN_$LN_W2_mE4 = 0;
+        OML_LN_$LN_W5_mE4 = 0;
+        OML_LN_$LN_W4_pE5 = 0;
+        OML_LN_$C26_FB2 = 0;
+        OML_LN_$LN_W1_pE3 = 0;
         OML_Stw_FSS_SM_$NAL_pressed_store = 0;
         OML_Stw_FSS_SM_$FSS_Sperrm_ein = 0;
         OML_Stw_FSS_SM_$FSS_Sperrm_aus = 1;
@@ -931,7 +928,8 @@ abstract class PetrinetOmlEndpointExportBase {
                 (OML_Fstr_gf_$verschlossen >= 1) &&
                 (OML_Stw_FSS_SM_$FSS_Sperrm_ein >= 1) &&
                 (OML_Stw_FSS_SM_$FSS_Sperrm_aus <= 0) &&
-                (OML_Fstr_gf_$Zug_eingefahren < 1))
+                (OML_Fstr_gf_$Zug_eingefahren < 1) &&
+                (OML_Kontakte_$6_NAL < 1))
         {
             if (canFire("OML_Stw_FSS_SM_SM_abfallen_gf"))
             {
@@ -1015,7 +1013,8 @@ abstract class PetrinetOmlEndpointExportBase {
                 (OML_Fstr_ef_$verschlossen >= 1) &&
                 (OML_Stw_FSS_SM_$FSS_Sperrm_ein >= 1) &&
                 (OML_Stw_FSS_SM_$FSS_Sperrm_aus <= 0) &&
-                (OML_Fstr_ef_$Zug_eingefahren < 1))
+                (OML_Fstr_ef_$Zug_eingefahren < 1) &&
+                (OML_Kontakte_$6_NAL < 1))
         {
             if (canFire("OML_Stw_FSS_SM_SM_abfallen_ef"))
             {
@@ -1082,7 +1081,8 @@ abstract class PetrinetOmlEndpointExportBase {
         if ( (OML_Stw_FSS_SM_$FSS_30EG_reached_store >= 1) &&
                 (OML_Kontakte_$8_FSS_10EG >= 1) &&
                 (OML_Stw_FSS_SM_$FSS_Sperrm_aus <= 0) &&
-                (OML_Stw_FSS_SM_$FSS_Sperrm_ein >= 1))
+                (OML_Stw_FSS_SM_$FSS_Sperrm_ein >= 1) &&
+                (OML_Kontakte_$6_NAL < 1))
         {
             if (canFire("OML_Stw_FSS_SM_SM_abfallen_EG"))
             {
@@ -1126,7 +1126,8 @@ abstract class PetrinetOmlEndpointExportBase {
         if ( (OML_Stw_FSS_SM_$FSS30F_reached_store >= 1) &&
                 (OML_Kontakte_$8_FSS_10F >= 1) &&
                 (OML_Stw_FSS_SM_$FSS_Sperrm_aus <= 0) &&
-                (OML_Stw_FSS_SM_$FSS_Sperrm_ein >= 1))
+                (OML_Stw_FSS_SM_$FSS_Sperrm_ein >= 1) &&
+                (OML_Kontakte_$6_NAL < 1))
         {
             if (canFire("OML_Stw_FSS_SM_SM_abfallen_F"))
             {
@@ -1142,7 +1143,8 @@ abstract class PetrinetOmlEndpointExportBase {
                 (OML_Fstr_fe_$verschlossen >= 1) &&
                 (OML_Stw_FSS_SM_$FSS_Sperrm_ein >= 1) &&
                 (OML_Fstr_fe_$Zug_eingefahren < 1) &&
-                (OML_Stw_FSS_SM_$FSS_Sperrm_aus <= 0))
+                (OML_Stw_FSS_SM_$FSS_Sperrm_aus <= 0) &&
+                (OML_Kontakte_$6_NAL < 1))
         {
             if (canFire("OML_Stw_FSS_SM_SM_abfallen_fe"))
             {
@@ -1168,7 +1170,8 @@ abstract class PetrinetOmlEndpointExportBase {
                 (OML_Fstr_fg_$verschlossen >= 1) &&
                 (OML_Stw_FSS_SM_$FSS_Sperrm_ein >= 1) &&
                 (OML_Fstr_fg_$Zug_eingefahren < 1) &&
-                (OML_Stw_FSS_SM_$FSS_Sperrm_aus <= 0))
+                (OML_Stw_FSS_SM_$FSS_Sperrm_aus <= 0) &&
+                (OML_Kontakte_$6_NAL < 1))
         {
             if (canFire("OML_Stw_FSS_SM_SM_abfallen_fg"))
             {
@@ -1407,170 +1410,170 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_Stw_W1_T9 can fire
-        if ( (OML_Stw_W1_$Endlage_minus <= 0) &&
-                (OML_Stw_W1_$gestoert_m >= 1) &&
-                (OML_ext_Vb_$Ueberw_W1_minus >= 1))
+        //check if OML_Stw_WS1_T9 can fire
+        if ( (OML_ext_Vb_$Ueberw_W1_minus >= 1) &&
+                (OML_Stw_WS1_$endlage_minus <= 0) &&
+                (OML_Stw_WS1_$gestoert_m >= 1))
         {
-            if (canFire("OML_Stw_W1_T9"))
+            if (canFire("OML_Stw_WS1_T9"))
             {
-                ++OML_Stw_W1_$Endlage_minus;
-                --OML_Stw_W1_$gestoert_m;
-                fire("OML_Stw_W1_T9");
+                ++OML_Stw_WS1_$endlage_minus;
+                --OML_Stw_WS1_$gestoert_m;
+                fire("OML_Stw_WS1_T9");
                 return true;
             }
         }
-        //check if OML_Stw_W1_plus_erreichen can fire
-        if ( (OML_Stw_W1_$Endlage_plus <= 0) &&
-                (OML_Kontakte_$7_WS1_plus >= 1) &&
+        //check if OML_Stw_WS1_plus_erreichen can fire
+        if ( (OML_Kontakte_$7_WS1_plus >= 1) &&
                 (OML_Kontakte_$7_WS1_1 < 1) &&
-                (OML_Stw_W1_$keine_Endlage_minus >= 1))
+                (OML_Stw_WS1_$keine_Endlage_minus >= 1) &&
+                (OML_Stw_WS1_$endlage_plus <= 0))
         {
-            if (canFire("OML_Stw_W1_plus_erreichen"))
+            if (canFire("OML_Stw_WS1_plus_erreichen"))
             {
-                ++OML_Stw_W1_$Endlage_plus;
-                --OML_Stw_W1_$keine_Endlage_minus;
-                fire("OML_Stw_W1_plus_erreichen");
+                --OML_Stw_WS1_$keine_Endlage_minus;
+                ++OML_Stw_WS1_$endlage_plus;
+                fire("OML_Stw_WS1_plus_erreichen");
                 return true;
             }
         }
-        //check if OML_Stw_W1_T6 can fire
-        if ( (OML_Stw_W1_$Endlage_plus >= 1) &&
-                (OML_Stw_W1_$gestoert_p <= 0) &&
+        //check if OML_Stw_WS1_T6 can fire
+        if ( (OML_Stw_WS1_$endlage_plus >= 1) &&
+                (OML_Stw_WS1_$gestoert_p <= 0) &&
                 (OML_ext_Vb_$Ueberw_W1_plus < 1))
         {
-            if (canFire("OML_Stw_W1_T6"))
+            if (canFire("OML_Stw_WS1_T6"))
             {
-                --OML_Stw_W1_$Endlage_plus;
-                ++OML_Stw_W1_$gestoert_p;
-                fire("OML_Stw_W1_T6");
+                --OML_Stw_WS1_$endlage_plus;
+                ++OML_Stw_WS1_$gestoert_p;
+                fire("OML_Stw_WS1_T6");
                 return true;
             }
         }
-        //check if OML_Stw_W1_T7 can fire
-        if ( (OML_Stw_W1_$Endlage_plus <= 0) &&
-                (OML_Stw_W1_$gestoert_p >= 1) &&
+        //check if OML_Stw_WS1_T7 can fire
+        if ( (OML_Stw_WS1_$endlage_plus <= 0) &&
+                (OML_Stw_WS1_$gestoert_p >= 1) &&
                 (OML_ext_Vb_$Ueberw_W1_plus >= 1))
         {
-            if (canFire("OML_Stw_W1_T7"))
+            if (canFire("OML_Stw_WS1_T7"))
             {
-                ++OML_Stw_W1_$Endlage_plus;
-                --OML_Stw_W1_$gestoert_p;
-                fire("OML_Stw_W1_T7");
+                ++OML_Stw_WS1_$endlage_plus;
+                --OML_Stw_WS1_$gestoert_p;
+                fire("OML_Stw_WS1_T7");
                 return true;
             }
         }
-        //check if OML_Stw_W1_T8 can fire
-        if ( (OML_Stw_W1_$Endlage_minus >= 1) &&
-                (OML_Stw_W1_$gestoert_m <= 0) &&
-                (OML_ext_Vb_$Ueberw_W1_minus < 1))
+        //check if OML_Stw_WS1_T8 can fire
+        if ( (OML_Stw_WS1_$endlage_minus >= 1) &&
+                (OML_ext_Vb_$Ueberw_W1_minus < 1) &&
+                (OML_Stw_WS1_$gestoert_m <= 0))
         {
-            if (canFire("OML_Stw_W1_T8"))
+            if (canFire("OML_Stw_WS1_T8"))
             {
-                --OML_Stw_W1_$Endlage_minus;
-                ++OML_Stw_W1_$gestoert_m;
-                fire("OML_Stw_W1_T8");
+                --OML_Stw_WS1_$endlage_minus;
+                ++OML_Stw_WS1_$gestoert_m;
+                fire("OML_Stw_WS1_T8");
                 return true;
             }
         }
-        //check if OML_Stw_W1_T4 can fire
-        if ( (OML_Stw_W1_$Endlage_minus >= 1) &&
+        //check if OML_Stw_WS1_T4 can fire
+        if ( (OML_Stw_WS1_$endlage_minus >= 1) &&
                 (OML_Kontakte_$7_WS1_1 >= 1) &&
-                (OML_Stw_W1_$keine_Endlage_minus <= 0))
+                (OML_Stw_WS1_$keine_Endlage_minus <= 0))
         {
-            if (canFire("OML_Stw_W1_T4"))
+            if (canFire("OML_Stw_WS1_T4"))
             {
-                --OML_Stw_W1_$Endlage_minus;
-                ++OML_Stw_W1_$keine_Endlage_minus;
-                fire("OML_Stw_W1_T4");
+                --OML_Stw_WS1_$endlage_minus;
+                ++OML_Stw_WS1_$keine_Endlage_minus;
+                fire("OML_Stw_WS1_T4");
                 return true;
             }
         }
-        //check if OML_Stw_W1_T3 can fire
-        if ( (OML_Stw_W1_$Endlage_plus >= 1) &&
-                (OML_Stw_W1_$keine_Endlage_plus <= 0) &&
+        //check if OML_Stw_WS1_T3 can fire
+        if ( (OML_Stw_WS1_$endlage_plus >= 1) &&
+                (OML_Stw_WS1_$keine_Endlage_plus <= 0) &&
                 (OML_Kontakte_$7_WS1_1 >= 1))
         {
-            if (canFire("OML_Stw_W1_T3"))
+            if (canFire("OML_Stw_WS1_T3"))
             {
-                --OML_Stw_W1_$Endlage_plus;
-                ++OML_Stw_W1_$keine_Endlage_plus;
-                fire("OML_Stw_W1_T3");
+                --OML_Stw_WS1_$endlage_plus;
+                ++OML_Stw_WS1_$keine_Endlage_plus;
+                fire("OML_Stw_WS1_T3");
                 return true;
             }
         }
-        //check if OML_Stw_W1_minus_erreichen can fire
-        if ( (OML_Stw_W1_$Endlage_minus <= 0) &&
+        //check if OML_Stw_WS1_minus_erreichen can fire
+        if ( (OML_Stw_WS1_$endlage_minus <= 0) &&
                 (OML_Kontakte_$7_WS1_minus >= 1) &&
-                (OML_Kontakte_$7_WS1_1 < 1) &&
-                (OML_Stw_W1_$keine_Endlage_plus >= 1))
-        {
-            if (canFire("OML_Stw_W1_minus_erreichen"))
-            {
-                ++OML_Stw_W1_$Endlage_minus;
-                --OML_Stw_W1_$keine_Endlage_plus;
-                fire("OML_Stw_W1_minus_erreichen");
-                return true;
-            }
-        }
-        //check if OML_Stw_W1_zurueckfallen_plus can fire
-        if ( (OML_Stw_W1_$keine_Endlage_plus >= 1) &&
-                (OML_Kontakte_$7_WS1_1 < 1) &&
-                (OML_Kontakte_$7_WS1_plus >= 1) &&
-                (OML_Stw_W1_$Endlage_plus <= 0))
-        {
-            if (canFire("OML_Stw_W1_zurueckfallen_plus"))
-            {
-                --OML_Stw_W1_$keine_Endlage_plus;
-                ++OML_Stw_W1_$Endlage_plus;
-                fire("OML_Stw_W1_zurueckfallen_plus");
-                return true;
-            }
-        }
-        //check if OML_Stw_W1_zurueckfallen_minus can fire
-        if ( (OML_Stw_W1_$keine_Endlage_minus >= 1) &&
-                (OML_Kontakte_$7_WS1_1 < 1) &&
-                (OML_Kontakte_$7_WS1_minus >= 1) &&
-                (OML_Stw_W1_$Endlage_minus <= 0))
-        {
-            if (canFire("OML_Stw_W1_zurueckfallen_minus"))
-            {
-                --OML_Stw_W1_$keine_Endlage_minus;
-                ++OML_Stw_W1_$Endlage_minus;
-                fire("OML_Stw_W1_zurueckfallen_minus");
-                return true;
-            }
-        }
-        //check if OML_Stw_W1_SM_WSM_abfallen can fire
-        if ( (OML_Stw_W1_SM_$WS_Sperrm_ein >= 1) &&
-                (OML_Stw_W1_SM_$WS_Sperrm_aus <= 0) &&
+                (OML_Stw_WS1_$keine_Endlage_plus >= 1) &&
                 (OML_Kontakte_$7_WS1_1 < 1))
         {
-            if (canFire("OML_Stw_W1_SM_WSM_abfallen"))
+            if (canFire("OML_Stw_WS1_minus_erreichen"))
             {
-                --OML_Stw_W1_SM_$WS_Sperrm_ein;
-                ++OML_Stw_W1_SM_$WS_Sperrm_aus;
-                fire("OML_Stw_W1_SM_WSM_abfallen");
+                ++OML_Stw_WS1_$endlage_minus;
+                --OML_Stw_WS1_$keine_Endlage_plus;
+                fire("OML_Stw_WS1_minus_erreichen");
                 return true;
             }
         }
-        //check if OML_Stw_W1_SM_T22 can fire
-        if ( (OML_Stw_W1_SM_$WS_Sperrm_aus >= 1) &&
-                (OML_Stw_W1_SM_$WS_Sperrm_ein <= 0) &&
+        //check if OML_Stw_WS1_zurueckfallen_plus can fire
+        if ( (OML_Kontakte_$7_WS1_plus >= 1) &&
+                (OML_Stw_WS1_$endlage_plus <= 0) &&
+                (OML_Kontakte_$7_WS1_1 < 1) &&
+                (OML_Stw_WS1_$keine_Endlage_plus >= 1))
+        {
+            if (canFire("OML_Stw_WS1_zurueckfallen_plus"))
+            {
+                ++OML_Stw_WS1_$endlage_plus;
+                --OML_Stw_WS1_$keine_Endlage_plus;
+                fire("OML_Stw_WS1_zurueckfallen_plus");
+                return true;
+            }
+        }
+        //check if OML_Stw_WS1_zurueckfallen_minus can fire
+        if ( (OML_Stw_WS1_$keine_Endlage_minus >= 1) &&
+                (OML_Stw_WS1_$endlage_minus <= 0) &&
+                (OML_Kontakte_$7_WS1_minus >= 1) &&
+                (OML_Kontakte_$7_WS1_1 < 1))
+        {
+            if (canFire("OML_Stw_WS1_zurueckfallen_minus"))
+            {
+                --OML_Stw_WS1_$keine_Endlage_minus;
+                ++OML_Stw_WS1_$endlage_minus;
+                fire("OML_Stw_WS1_zurueckfallen_minus");
+                return true;
+            }
+        }
+        //check if OML_Stw_WS1_SM_abfallen can fire
+        if ( (OML_Stw_WS1_SM_$Sperrm_ein >= 1) &&
+                (OML_Stw_WS1_SM_$Sperrm_aus <= 0) &&
+                (OML_Kontakte_$7_WS1_1 < 1))
+        {
+            if (canFire("OML_Stw_WS1_SM_abfallen"))
+            {
+                --OML_Stw_WS1_SM_$Sperrm_ein;
+                ++OML_Stw_WS1_SM_$Sperrm_aus;
+                fire("OML_Stw_WS1_SM_abfallen");
+                return true;
+            }
+        }
+        //check if OML_Stw_WS1_SM_anziehen2 can fire
+        if ( (OML_Stw_WS1_SM_$Sperrm_aus >= 1) &&
+                (OML_Stw_WS1_SM_$Sperrm_ein <= 0) &&
                 (OML_Kontakte_$7_WS1_1 >= 1) &&
                 (OML_Kontakte_$6_NT_W1 >= 1))
         {
-            if (canFire("OML_Stw_W1_SM_T22"))
+            if (canFire("OML_Stw_WS1_SM_anziehen2"))
             {
-                --OML_Stw_W1_SM_$WS_Sperrm_aus;
-                ++OML_Stw_W1_SM_$WS_Sperrm_ein;
-                fire("OML_Stw_W1_SM_T22");
+                --OML_Stw_WS1_SM_$Sperrm_aus;
+                ++OML_Stw_WS1_SM_$Sperrm_ein;
+                fire("OML_Stw_WS1_SM_anziehen2");
                 return true;
             }
         }
-        //check if OML_Stw_W1_SM_WSM_anziehen can fire
-        if ( (OML_Stw_W1_SM_$WS_Sperrm_aus >= 1) &&
-                (OML_Stw_W1_SM_$WS_Sperrm_ein <= 0) &&
+        //check if OML_Stw_WS1_SM_anziehen can fire
+        if ( (OML_Stw_WS1_SM_$Sperrm_aus >= 1) &&
+                (OML_Stw_WS1_SM_$Sperrm_ein <= 0) &&
                 (OML_Fstr_fg_$aufgeloest >= 1) &&
                 (OML_Fstr_gf_$aufgeloest >= 1) &&
                 (OML_Fstr_fe_$aufgeloest >= 1) &&
@@ -1578,11 +1581,87 @@ abstract class PetrinetOmlEndpointExportBase {
                 (OML_Kontakte_$7_WS1_1 >= 1) &&
                 (OML_Iso_1_$frei >= 1))
         {
-            if (canFire("OML_Stw_W1_SM_WSM_anziehen"))
+            if (canFire("OML_Stw_WS1_SM_anziehen"))
             {
-                --OML_Stw_W1_SM_$WS_Sperrm_aus;
-                ++OML_Stw_W1_SM_$WS_Sperrm_ein;
-                fire("OML_Stw_W1_SM_WSM_anziehen");
+                --OML_Stw_WS1_SM_$Sperrm_aus;
+                ++OML_Stw_WS1_SM_$Sperrm_ein;
+                fire("OML_Stw_WS1_SM_anziehen");
+                return true;
+            }
+        }
+        //check if OML_Stw_W1_endlage_minus_erreichen can fire
+        if ( (OML_Stw_W1_$keine_endlage_minus >= 1) &&
+                (OML_Stw_W1_$endlage_minus <= 0))
+        {
+            if (canFire("OML_Stw_W1_endlage_minus_erreichen"))
+            {
+                --OML_Stw_W1_$keine_endlage_minus;
+                ++OML_Stw_W1_$endlage_minus;
+                fire("OML_Stw_W1_endlage_minus_erreichen");
+                return true;
+            }
+        }
+        //check if OML_Stw_W1_endlage_plus_erreichen can fire
+        if ( (OML_Stw_W1_$keine_endlage_plus >= 1) &&
+                (OML_Stw_W1_$endlage_plus <= 0))
+        {
+            if (canFire("OML_Stw_W1_endlage_plus_erreichen"))
+            {
+                --OML_Stw_W1_$keine_endlage_plus;
+                ++OML_Stw_W1_$endlage_plus;
+                fire("OML_Stw_W1_endlage_plus_erreichen");
+                return true;
+            }
+        }
+        //check if OML_Stw_W1_umstellen_plus can fire
+        if ( (OML_Stw_W1_$keine_endlage_plus <= 0) &&
+                (OML_Stw_W1_$endlage_minus >= 1) &&
+                (OML_Stw_WS1_$endlage_plus >= 1))
+        {
+            if (canFire("OML_Stw_W1_umstellen_plus"))
+            {
+                ++OML_Stw_W1_$keine_endlage_plus;
+                --OML_Stw_W1_$endlage_minus;
+                fire("OML_Stw_W1_umstellen_plus");
+                return true;
+            }
+        }
+        //check if OML_Stw_W1_umstellen_minus can fire
+        if ( (OML_Stw_W1_$keine_endlage_minus <= 0) &&
+                (OML_Stw_W1_$endlage_plus >= 1) &&
+                (OML_Stw_WS1_$endlage_minus >= 1))
+        {
+            if (canFire("OML_Stw_W1_umstellen_minus"))
+            {
+                ++OML_Stw_W1_$keine_endlage_minus;
+                --OML_Stw_W1_$endlage_plus;
+                fire("OML_Stw_W1_umstellen_minus");
+                return true;
+            }
+        }
+        //check if OML_Stw_W1_T1 can fire
+        if ( (OML_Stw_W1_init >= 1) &&
+                (OML_Stw_W1_$keine_endlage_plus <= 0) &&
+                (OML_Stw_WS1_$endlage_plus >= 1))
+        {
+            if (canFire("OML_Stw_W1_T1"))
+            {
+                --OML_Stw_W1_init;
+                ++OML_Stw_W1_$keine_endlage_plus;
+                fire("OML_Stw_W1_T1");
+                return true;
+            }
+        }
+        //check if OML_Stw_W1_T2 can fire
+        if ( (OML_Stw_W1_init >= 1) &&
+                (OML_Stw_W1_$keine_endlage_minus <= 0) &&
+                (OML_Stw_WS1_$endlage_minus >= 1))
+        {
+            if (canFire("OML_Stw_W1_T2"))
+            {
+                --OML_Stw_W1_init;
+                ++OML_Stw_W1_$keine_endlage_minus;
+                fire("OML_Stw_W1_T2");
                 return true;
             }
         }
@@ -1600,12 +1679,12 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Fstr_ef_ef_frei can fire
-        if ( (OML_Fstr_ef_$P2 >= 1) &&
-                (OML_Fstr_ef_$Zug_eingefahren <= 0))
+        if ( (OML_Fstr_ef_$Pstore_1_ef_belegt >= 1) &&
+                (OML_Fstr_ef_$Zug_eingefahren <= 0) &&
+                (OML_Iso_ef_$frei >= 1))
         {
             if (canFire("OML_Fstr_ef_ef_frei"))
             {
-                --OML_Fstr_ef_$P2;
                 ++OML_Fstr_ef_$Zug_eingefahren;
                 fire("OML_Fstr_ef_ef_frei");
                 return true;
@@ -1640,7 +1719,7 @@ abstract class PetrinetOmlEndpointExportBase {
         //check if OML_Fstr_ef_Signal_haltstellen can fire
         if ( (OML_Fstr_ef_$E_Fahrt1 >= 1) &&
                 (OML_Fstr_ef_$E_Halt <= 1) &&
-                (OML_Fstr_ef_$P2 >= 1))
+                (OML_Fstr_ef_$Pstore_1_ef_belegt >= 1))
         {
             if (canFire("OML_Fstr_ef_Signal_haltstellen"))
             {
@@ -1676,14 +1755,14 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Fstr_ef_1_belegt can fire
-        if ( (OML_Fstr_ef_$P1 >= 1) &&
-                (OML_Fstr_ef_$P2 <= 0) &&
-                (OML_Iso_1_$belegt >= 1))
+        if ( (OML_Fstr_ef_$Pstore_1_ef_belegt <= 0) &&
+                (OML_Iso_ef_$belegt >= 1) &&
+                (OML_Iso_1_$belegt >= 1) &&
+                (OML_Fstr_ef_$verschlossen >= 1))
         {
             if (canFire("OML_Fstr_ef_1_belegt"))
             {
-                --OML_Fstr_ef_$P1;
-                ++OML_Fstr_ef_$P2;
+                ++OML_Fstr_ef_$Pstore_1_ef_belegt;
                 fire("OML_Fstr_ef_1_belegt");
                 return true;
             }
@@ -1691,7 +1770,7 @@ abstract class PetrinetOmlEndpointExportBase {
         //check if OML_Fstr_ef_pruefen1 can fire
         if ( (OML_Kontakte_$8_FSS_10EG >= 1) &&
                 (OML_Fstr_ef_$aufgeloest >= 1) &&
-                (OML_Stw_W1_$Endlage_plus >= 1) &&
+                (OML_Stw_WS1_$endlage_plus >= 1) &&
                 (OML_Fstr_ef_$P6 <= 0))
         {
             if (canFire("OML_Fstr_ef_pruefen1"))
@@ -1742,17 +1821,6 @@ abstract class PetrinetOmlEndpointExportBase {
                 ++OML_Fstr_ef_$geprueft1;
                 --OML_Fstr_ef_$P6;
                 fire("OML_Fstr_ef_T6");
-                return true;
-            }
-        }
-        //check if OML_Fstr_ef_ef_belegt can fire
-        if ( (OML_Fstr_ef_$P1 <= 0) &&
-                (OML_Iso_ef_$belegt >= 1))
-        {
-            if (canFire("OML_Fstr_ef_ef_belegt"))
-            {
-                ++OML_Fstr_ef_$P1;
-                fire("OML_Fstr_ef_ef_belegt");
                 return true;
             }
         }
@@ -1845,8 +1913,8 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_Fstr_ef_signal_haltstellen_FSS can fire
         if ( (OML_Fstr_ef_$gemerkt_90EB >= 1) &&
-                (OML_Kontakte_$8_FSS_45EG >= 1) &&
                 (OML_Fstr_ef_$E_Fahrt1 >= 1) &&
+                (OML_Kontakte_$8_FSS_45EG >= 1) &&
                 (OML_Fstr_ef_$E_Halt <= 1))
         {
             if (canFire("OML_Fstr_ef_signal_haltstellen_FSS"))
@@ -1858,8 +1926,20 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
+        //check if OML_Fstr_ef_free_store_ef can fire
+        if ( (OML_Fstr_ef_$Pstore_1_ef_belegt >= 1) &&
+                (OML_Iso_ef_$belegt < 1) &&
+                (OML_Iso_1_$belegt < 1))
+        {
+            if (canFire("OML_Fstr_ef_free_store_ef"))
+            {
+                --OML_Fstr_ef_$Pstore_1_ef_belegt;
+                fire("OML_Fstr_ef_free_store_ef");
+                return true;
+            }
+        }
         //check if OML_Fstr_fe_Signal_haltstellen can fire
-        if ( (OML_Fstr_fe_$P2b >= 1) &&
+        if ( (OML_Fstr_fe_$store_1_egf_belegt >= 1) &&
                 (OML_Fstr_fe_$F_Halt <= 1) &&
                 (OML_Fstr_fe_$F_Fahrt1 >= 1))
         {
@@ -1915,7 +1995,7 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Fstr_fe_aufloesen can fire
-        if ( (OML_Fstr_fe_$aufgeloest <= 1) &&
+        if ( (OML_Fstr_fe_$aufgeloest <= 0) &&
                 (OML_Fstr_fe_$verschlossen >= 1) &&
                 (OML_Fstr_fe_$Zug_eingefahren >= 1) &&
                 (OML_Kontakte_$8_FSS_30F >= 1))
@@ -1955,12 +2035,12 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Fstr_fe_egf_frei can fire
-        if ( (OML_Fstr_fe_$P2b >= 1) &&
-                (OML_Fstr_fe_$Zug_eingefahren <= 0))
+        if ( (OML_Fstr_fe_$store_1_egf_belegt >= 1) &&
+                (OML_Fstr_fe_$Zug_eingefahren <= 0) &&
+                (OML_Iso_egf_$frei >= 1))
         {
             if (canFire("OML_Fstr_fe_egf_frei"))
             {
-                --OML_Fstr_fe_$P2b;
                 ++OML_Fstr_fe_$Zug_eingefahren;
                 fire("OML_Fstr_fe_egf_frei");
                 return true;
@@ -1968,7 +2048,7 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_Fstr_fe_vorzeitig_aufloesen can fire
         if ( (OML_Fstr_fe_$geprueft3 >= 1) &&
-                (OML_Fstr_fe_$aufgeloest <= 1) &&
+                (OML_Fstr_fe_$aufgeloest <= 0) &&
                 (OML_Kontakte_$8_FSS_0EGF >= 1))
         {
             if (canFire("OML_Fstr_fe_vorzeitig_aufloesen"))
@@ -1981,7 +2061,7 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_Fstr_fe_notaufloesen can fire
         if ( (OML_Fstr_fe_$verschlossen >= 1) &&
-                (OML_Fstr_fe_$aufgeloest <= 1) &&
+                (OML_Fstr_fe_$aufgeloest <= 0) &&
                 (OML_Kontakte_$6_NAL >= 1))
         {
             if (canFire("OML_Fstr_fe_notaufloesen"))
@@ -2005,27 +2085,16 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_Fstr_fe_1_belegt can fire
-        if ( (OML_Fstr_fe_$P2b <= 0) &&
-                (OML_Fstr_fe_$P1 >= 1) &&
-                (OML_Iso_1_$belegt >= 1))
+        //check if OML_Fstr_fe_1_egf_belegt can fire
+        if ( (OML_Iso_egf_$belegt >= 1) &&
+                (OML_Fstr_fe_$store_1_egf_belegt <= 0) &&
+                (OML_Iso_1_$belegt >= 1) &&
+                (OML_Fstr_fe_$verschlossen >= 1))
         {
-            if (canFire("OML_Fstr_fe_1_belegt"))
+            if (canFire("OML_Fstr_fe_1_egf_belegt"))
             {
-                ++OML_Fstr_fe_$P2b;
-                --OML_Fstr_fe_$P1;
-                fire("OML_Fstr_fe_1_belegt");
-                return true;
-            }
-        }
-        //check if OML_Fstr_fe_egf_belegt can fire
-        if ( (OML_Fstr_fe_$P1 <= 0) &&
-                (OML_Iso_egf_$belegt >= 1))
-        {
-            if (canFire("OML_Fstr_fe_egf_belegt"))
-            {
-                ++OML_Fstr_fe_$P1;
-                fire("OML_Fstr_fe_egf_belegt");
+                ++OML_Fstr_fe_$store_1_egf_belegt;
+                fire("OML_Fstr_fe_1_egf_belegt");
                 return true;
             }
         }
@@ -2033,7 +2102,7 @@ abstract class PetrinetOmlEndpointExportBase {
         if ( (OML_Fstr_fe_$aufgeloest >= 1) &&
                 (OML_Fstr_fe_$P2 <= 0) &&
                 (OML_Kontakte_$8_FSS_10F >= 1) &&
-                (OML_Stw_W1_$Endlage_plus >= 1))
+                (OML_Stw_WS1_$endlage_plus >= 1))
         {
             if (canFire("OML_Fstr_fe_pruefen"))
             {
@@ -2091,27 +2160,40 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Fstr_fe_signal_haltstellen_FSS can fire
-        if ( (OML_Fstr_fe_$F_Halt <= 1) &&
-                (OML_Fstr_fe_$F_Fahrt1 >= 1) &&
+        if ( (OML_Fstr_fe_$F_Fahrt1 >= 1) &&
                 (OML_Fstr_fe_$gemerkt_90F >= 1) &&
-                (OML_Kontakte_$8_FSS_45F >= 1))
+                (OML_Kontakte_$8_FSS_45F >= 1) &&
+                (OML_Fstr_fe_$F_Halt <= 1))
         {
             if (canFire("OML_Fstr_fe_signal_haltstellen_FSS"))
             {
-                ++OML_Fstr_fe_$F_Halt;
                 --OML_Fstr_fe_$F_Fahrt1;
                 --OML_Fstr_fe_$gemerkt_90F;
+                ++OML_Fstr_fe_$F_Halt;
                 fire("OML_Fstr_fe_signal_haltstellen_FSS");
                 return true;
             }
         }
+        //check if OML_Fstr_fe_free_store_1_egf can fire
+        if ( (OML_Fstr_fe_$store_1_egf_belegt >= 1) &&
+                (OML_Iso_egf_$belegt < 1) &&
+                (OML_Iso_1_$belegt < 1))
+        {
+            if (canFire("OML_Fstr_fe_free_store_1_egf"))
+            {
+                --OML_Fstr_fe_$store_1_egf_belegt;
+                fire("OML_Fstr_fe_free_store_1_egf");
+                return true;
+            }
+        }
         //check if OML_Fstr_gf_1_belegt can fire
-        if ( (OML_Fstr_gf_$Zug_eingefahren <= 0) &&
-                (OML_Iso_1_$belegt >= 1))
+        if ( (OML_Iso_1_$belegt >= 1) &&
+                (OML_Fstr_gf_$store_1_belegt <= 0) &&
+                (OML_Fstr_gf_$verschlossen >= 1))
         {
             if (canFire("OML_Fstr_gf_1_belegt"))
             {
-                ++OML_Fstr_gf_$Zug_eingefahren;
+                ++OML_Fstr_gf_$store_1_belegt;
                 fire("OML_Fstr_gf_1_belegt");
                 return true;
             }
@@ -2133,7 +2215,7 @@ abstract class PetrinetOmlEndpointExportBase {
         //check if OML_Fstr_gf_prüfen1 can fire
         if ( (OML_Kontakte_$8_FSS_10EG >= 1) &&
                 (OML_Fstr_gf_$aufgeloest >= 1) &&
-                (OML_Stw_W1_$Endlage_minus >= 1) &&
+                (OML_Stw_WS1_$endlage_minus >= 1) &&
                 (OML_Fstr_gf_$P4 <= 0))
         {
             if (canFire("OML_Fstr_gf_prüfen1"))
@@ -2187,8 +2269,8 @@ abstract class PetrinetOmlEndpointExportBase {
         //check if OML_Fstr_gf_aufloesen can fire
         if ( (OML_Fstr_gf_$verschlossen >= 1) &&
                 (OML_Fstr_gf_$aufgeloest <= 0) &&
-                (OML_Fstr_gf_$Zug_eingefahren >= 1) &&
-                (OML_Kontakte_$8_FSS_30EG >= 1))
+                (OML_Kontakte_$8_FSS_30EG >= 1) &&
+                (OML_Fstr_gf_$Zug_eingefahren >= 1))
         {
             if (canFire("OML_Fstr_gf_aufloesen"))
             {
@@ -2226,9 +2308,9 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Fstr_gf_Signal_haltstellen can fire
-        if ( (OML_Fstr_gf_$Zug_eingefahren >= 1) &&
-                (OML_Fstr_gf_$G_Halt <= 1) &&
-                (OML_Fstr_gf_$G_Fahrt3 >= 1))
+        if ( (OML_Fstr_gf_$G_Halt <= 1) &&
+                (OML_Fstr_gf_$G_Fahrt3 >= 1) &&
+                (OML_Fstr_gf_$store_1_belegt >= 1))
         {
             if (canFire("OML_Fstr_gf_Signal_haltstellen"))
             {
@@ -2351,6 +2433,29 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
+        //check if OML_Fstr_gf_1_frei can fire
+        if ( (OML_Fstr_gf_$Zug_eingefahren <= 0) &&
+                (OML_Iso_1_$frei >= 1) &&
+                (OML_Fstr_gf_$store_1_belegt >= 1))
+        {
+            if (canFire("OML_Fstr_gf_1_frei"))
+            {
+                ++OML_Fstr_gf_$Zug_eingefahren;
+                fire("OML_Fstr_gf_1_frei");
+                return true;
+            }
+        }
+        //check if OML_Fstr_gf_free_store_1 can fire
+        if ( (OML_Fstr_gf_$store_1_belegt >= 1) &&
+                (OML_Iso_1_$belegt < 1))
+        {
+            if (canFire("OML_Fstr_gf_free_store_1"))
+            {
+                --OML_Fstr_gf_$store_1_belegt;
+                fire("OML_Fstr_gf_free_store_1");
+                return true;
+            }
+        }
         //check if OML_Fstr_fg_Signal_fahrtstellen can fire
         if ( (OML_Fstr_fg_$verschlossen >= 1) &&
                 (OML_Fstr_fg_$F_Fahrt3 <= 0) &&
@@ -2368,7 +2473,7 @@ abstract class PetrinetOmlEndpointExportBase {
         //check if OML_Fstr_fg_pruefen1 can fire
         if ( (OML_Fstr_fg_$aufgeloest >= 1) &&
                 (OML_Fstr_fg_$geprueft0 <= 0) &&
-                (OML_Stw_W1_$Endlage_minus >= 1) &&
+                (OML_Stw_WS1_$endlage_minus >= 1) &&
                 (OML_Kontakte_$8_FSS_10F >= 1))
         {
             if (canFire("OML_Fstr_fg_pruefen1"))
@@ -2376,18 +2481,6 @@ abstract class PetrinetOmlEndpointExportBase {
                 --OML_Fstr_fg_$aufgeloest;
                 ++OML_Fstr_fg_$geprueft0;
                 fire("OML_Fstr_fg_pruefen1");
-                return true;
-            }
-        }
-        //check if OML_Fstr_fg_egf_frei can fire
-        if ( (OML_Fstr_fg_$Zug_eingefahren <= 0) &&
-                (OML_Fstr_fg_$P2 >= 1))
-        {
-            if (canFire("OML_Fstr_fg_egf_frei"))
-            {
-                ++OML_Fstr_fg_$Zug_eingefahren;
-                --OML_Fstr_fg_$P2;
-                fire("OML_Fstr_fg_egf_frei");
                 return true;
             }
         }
@@ -2444,7 +2537,7 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Fstr_fg_Signal_haltstellen can fire
-        if ( (OML_Fstr_fg_$P2 >= 1) &&
+        if ( (OML_Fstr_fg_$store_egf_1_belegt >= 1) &&
                 (OML_Fstr_fg_$F_Halt <= 1) &&
                 (OML_Fstr_fg_$F_Fahrt3 >= 1))
         {
@@ -2483,26 +2576,15 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_Fstr_fg_egf_belegt can fire
-        if ( (OML_Fstr_fg_$P1 <= 0) &&
-                (OML_Iso_egf_$belegt >= 1))
-        {
-            if (canFire("OML_Fstr_fg_egf_belegt"))
-            {
-                ++OML_Fstr_fg_$P1;
-                fire("OML_Fstr_fg_egf_belegt");
-                return true;
-            }
-        }
         //check if OML_Fstr_fg_1_belegt can fire
-        if ( (OML_Fstr_fg_$P2 <= 0) &&
-                (OML_Fstr_fg_$P1 >= 1) &&
-                (OML_Iso_1_$belegt >= 1))
+        if ( (OML_Iso_1_$belegt >= 1) &&
+                (OML_Fstr_fg_$store_egf_1_belegt <= 0) &&
+                (OML_Iso_egf_$belegt >= 1) &&
+                (OML_Fstr_fg_$verschlossen >= 1))
         {
             if (canFire("OML_Fstr_fg_1_belegt"))
             {
-                ++OML_Fstr_fg_$P2;
-                --OML_Fstr_fg_$P1;
+                ++OML_Fstr_fg_$store_egf_1_belegt;
                 fire("OML_Fstr_fg_1_belegt");
                 return true;
             }
@@ -2548,8 +2630,8 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Fstr_fg_merken_90F can fire
-        if ( (OML_Fstr_fg_$gemerkt_90F <= 0) &&
-                (OML_Kontakte_$8_FSS_90F >= 1))
+        if ( (OML_Kontakte_$8_FSS_90F >= 1) &&
+                (OML_Fstr_fg_$gemerkt_90F <= 0))
         {
             if (canFire("OML_Fstr_fg_merken_90F"))
             {
@@ -2594,16 +2676,42 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_Fstr_fg_signal_haltstellen_FSS can fire
-        if ( (OML_Fstr_fg_$F_Halt <= 1) &&
-                (OML_Kontakte_$8_FSS_45F >= 1) &&
-                (OML_Fstr_fg_$gemerkt_90F >= 1))
+        //check if OML_Fstr_fg_free_store_egf_1 can fire
+        if ( (OML_Fstr_fg_$store_egf_1_belegt >= 1) &&
+                (OML_Iso_1_$belegt < 1) &&
+                (OML_Iso_egf_$belegt < 1))
         {
-            if (canFire("OML_Fstr_fg_signal_haltstellen_FSS"))
+            if (canFire("OML_Fstr_fg_free_store_egf_1"))
             {
-                ++OML_Fstr_fg_$F_Halt;
+                --OML_Fstr_fg_$store_egf_1_belegt;
+                fire("OML_Fstr_fg_free_store_egf_1");
+                return true;
+            }
+        }
+        //check if OML_Fstr_fg_egf_frei can fire
+        if ( (OML_Fstr_fg_$store_egf_1_belegt >= 1) &&
+                (OML_Fstr_fg_$Zug_eingefahren <= 0) &&
+                (OML_Iso_egf_$frei >= 1))
+        {
+            if (canFire("OML_Fstr_fg_egf_frei"))
+            {
+                ++OML_Fstr_fg_$Zug_eingefahren;
+                fire("OML_Fstr_fg_egf_frei");
+                return true;
+            }
+        }
+        //check if OML_Fstr_fg_halt_stellen_45 can fire
+        if ( (OML_Fstr_fg_$gemerkt_90F >= 1) &&
+                (OML_Kontakte_$8_FSS_45F >= 1) &&
+                (OML_Fstr_fg_$F_Fahrt3 >= 1) &&
+                (OML_Fstr_fg_$F_Halt <= 1))
+        {
+            if (canFire("OML_Fstr_fg_halt_stellen_45"))
+            {
                 --OML_Fstr_fg_$gemerkt_90F;
-                fire("OML_Fstr_fg_signal_haltstellen_FSS");
+                --OML_Fstr_fg_$F_Fahrt3;
+                ++OML_Fstr_fg_$F_Halt;
+                fire("OML_Fstr_fg_halt_stellen_45");
                 return true;
             }
         }
@@ -3123,7 +3231,7 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_Lampen_WS1_T117 can fire
         if ( (OML_Lampen_WS1_$1_WS1_Freig >= 1) &&
-                (OML_Stw_W1_SM_$WS_Sperrm_ein < 1))
+                (OML_Stw_WS1_SM_$Sperrm_ein < 1))
         {
             if (canFire("OML_Lampen_WS1_T117"))
             {
@@ -3133,7 +3241,7 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_WS1_T16 can fire
-        if ( (OML_Stw_W1_SM_$WS_Sperrm_ein >= 1) &&
+        if ( (OML_Stw_WS1_SM_$Sperrm_ein >= 1) &&
                 (OML_Lampen_WS1_$1_WS1_Freig <= 0))
         {
             if (canFire("OML_Lampen_WS1_T16"))
@@ -3145,10 +3253,8 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_Lampen_WS1_T13 can fire
         if ( (OML_Lampen_WS1_$1_WS1_Ueberw >= 1) &&
-                (OML_Stw_W1_$keine_Endlage_plus < 1) &&
-                (OML_Stw_W1_$Endlage_plus < 1) &&
-                (OML_Stw_W1_$Endlage_minus < 1) &&
-                (OML_Stw_W1_$keine_Endlage_minus < 1))
+                (OML_Stw_W1_$endlage_plus < 1) &&
+                (OML_Stw_W1_$endlage_minus < 1))
         {
             if (canFire("OML_Lampen_WS1_T13"))
             {
@@ -3158,7 +3264,7 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_WS1_T20 can fire
-        if ( (OML_Stw_W1_$Endlage_minus >= 1) &&
+        if ( (OML_Stw_W1_$endlage_plus >= 1) &&
                 (OML_Lampen_WS1_$1_WS1_Ueberw <= 0))
         {
             if (canFire("OML_Lampen_WS1_T20"))
@@ -3169,7 +3275,7 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_WS1_T412 can fire
-        if ( (OML_Stw_W1_$Endlage_plus >= 1) &&
+        if ( (OML_Stw_W1_$endlage_minus >= 1) &&
                 (OML_Lampen_WS1_$1_WS1_Ueberw <= 0))
         {
             if (canFire("OML_Lampen_WS1_T412"))
@@ -3179,42 +3285,10 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_Lampen_WS1_T1 can fire
-        if ( (OML_Stw_W1_$keine_Endlage_plus >= 1) &&
-                (OML_Lampen_WS1_$1_WS1_Ueberw <= 0))
-        {
-            if (canFire("OML_Lampen_WS1_T1"))
-            {
-                ++OML_Lampen_WS1_$1_WS1_Ueberw;
-                fire("OML_Lampen_WS1_T1");
-                return true;
-            }
-        }
-        //check if OML_Lampen_WS1_T2 can fire
-        if ( (OML_Stw_W1_$keine_Endlage_minus >= 1) &&
-                (OML_Lampen_WS1_$1_WS1_Ueberw <= 0))
-        {
-            if (canFire("OML_Lampen_WS1_T2"))
-            {
-                ++OML_Lampen_WS1_$1_WS1_Ueberw;
-                fire("OML_Lampen_WS1_T2");
-                return true;
-            }
-        }
-        //check if OML_Lampen_Stoerung_T15 can fire
-        if ( (OML_ext_Vb_$F_VS_Lampe_Fahrt_def < 1) &&
-                (OML_Lampen_Stoerung_$1_F_VS_Stoer >= 1))
-        {
-            if (canFire("OML_Lampen_Stoerung_T15"))
-            {
-                --OML_Lampen_Stoerung_$1_F_VS_Stoer;
-                fire("OML_Lampen_Stoerung_T15");
-                return true;
-            }
-        }
         //check if OML_Lampen_Stoerung_T17 can fire
         if ( (OML_ext_Vb_$G_VS_Lampe_Warn_def < 1) &&
-                (OML_Lampen_Stoerung_$1_G_VS_Stoer >= 1))
+                (OML_Lampen_Stoerung_$1_G_VS_Stoer >= 1) &&
+                (OML_ext_Vb_$G_VS_Lampe_Fahrt_def < 1))
         {
             if (canFire("OML_Lampen_Stoerung_T17"))
             {
@@ -3225,7 +3299,8 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_Lampen_Stoerung_T14 can fire
         if ( (OML_ext_Vb_$F_VS_Lampe_Warn_def < 1) &&
-                (OML_Lampen_Stoerung_$1_F_VS_Stoer >= 1))
+                (OML_Lampen_Stoerung_$1_F_VS_Stoer >= 1) &&
+                (OML_ext_Vb_$F_VS_Lampe_Fahrt_def < 1))
         {
             if (canFire("OML_Lampen_Stoerung_T14"))
             {
@@ -3278,20 +3353,10 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_Lampen_Stoerung_T6 can fire
-        if ( (OML_ext_Vb_$G_VS_Lampe_Fahrt_def < 1) &&
-                (OML_Lampen_Stoerung_$1_G_VS_Stoer >= 1))
-        {
-            if (canFire("OML_Lampen_Stoerung_T6"))
-            {
-                --OML_Lampen_Stoerung_$1_G_VS_Stoer;
-                fire("OML_Lampen_Stoerung_T6");
-                return true;
-            }
-        }
         //check if OML_Lampen_Streckenblock_T2 can fire
         if ( (OML_Lampen_Streckenblock_$1_FBV_vZB >= 1) &&
-                (OML_BL_ZB_OM_$Grundstlg_v < 1))
+                (OML_BL_ZB_OM_$Grundstlg_v >= 1) &&
+                (OML_ILTIS_$anfordern_vZB < 1))
         {
             if (canFire("OML_Lampen_Streckenblock_T2"))
             {
@@ -3334,9 +3399,9 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Streckenblock_T3 can fire
-        if ( (OML_BL_OM_LN_$Grundstlg_v >= 1) &&
+        if ( (OML_Lampen_Streckenblock_$1_FBV_vLN >= 1) &&
                 (OML_ILTIS_$anfordern_vLN < 1) &&
-                (OML_Lampen_Streckenblock_$1_FBV_vLN >= 1))
+                (OML_BL_OM_LN_$Grundstlg_v >= 1))
         {
             if (canFire("OML_Lampen_Streckenblock_T3"))
             {
@@ -3367,17 +3432,6 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_Lampen_Streckenblock_T46 can fire
-        if ( (OML_Lampen_Streckenblock_$1_BL_vZB_weiss >= 1) &&
-                (OML_BL_ZB_OM_$vorgebl_v < 1))
-        {
-            if (canFire("OML_Lampen_Streckenblock_T46"))
-            {
-                --OML_Lampen_Streckenblock_$1_BL_vZB_weiss;
-                fire("OML_Lampen_Streckenblock_T46");
-                return true;
-            }
-        }
         //check if OML_Lampen_Streckenblock_T25 can fire
         if ( (OML_Lampen_Streckenblock_$1_BL_nLN_rot <= 0) &&
                 (OML_BL_OM_LN_$belegt_n >= 1))
@@ -3390,7 +3444,7 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Streckenblock_T47 can fire
-        if ( (OML_BL_ZB_OM_$belegt_v >= 1) &&
+        if ( (OML_BL_ZB_OM_$Grundstlg_v >= 1) &&
                 (OML_Lampen_Streckenblock_$1_BL_vZB_weiss <= 0))
         {
             if (canFire("OML_Lampen_Streckenblock_T47"))
@@ -3412,8 +3466,9 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Streckenblock_T48 can fire
-        if ( (OML_BL_ZB_OM_$belegt_v >= 1) &&
-                (OML_Lampen_Streckenblock_$1_BL_vZB_weiss >= 1))
+        if ( (OML_Lampen_Streckenblock_$1_BL_vZB_weiss >= 1) &&
+                (OML_BL_ZB_OM_$vorgebl_v < 1) &&
+                (OML_BL_ZB_OM_$Grundstlg_v < 1))
         {
             if (canFire("OML_Lampen_Streckenblock_T48"))
             {
@@ -3423,9 +3478,9 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Streckenblock_T34 can fire
-        if ( (OML_Lampen_Streckenblock_$1_BL_nLN_weiss >= 1) &&
-                (OML_BL_OM_LN_$Grundstlg_n < 1) &&
-                (OML_BL_OM_LN_$vorgebl_n < 1))
+        if ( (OML_BL_OM_LN_$Grundstlg_n < 1) &&
+                (OML_BL_OM_LN_$vorgebl_n < 1) &&
+                (OML_Lampen_Streckenblock_$1_BL_nLN_weiss >= 1))
         {
             if (canFire("OML_Lampen_Streckenblock_T34"))
             {
@@ -3434,14 +3489,14 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_Lampen_Streckenblock_T1 can fire
+        //check if OML_Lampen_Streckenblock_T10 can fire
         if ( (OML_ILTIS_$anfordern_vZB >= 1) &&
                 (OML_Lampen_Streckenblock_$1_FBV_vZB <= 0))
         {
-            if (canFire("OML_Lampen_Streckenblock_T1"))
+            if (canFire("OML_Lampen_Streckenblock_T10"))
             {
                 ++OML_Lampen_Streckenblock_$1_FBV_vZB;
-                fire("OML_Lampen_Streckenblock_T1");
+                fire("OML_Lampen_Streckenblock_T10");
                 return true;
             }
         }
@@ -3501,8 +3556,9 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Streckenblock_T138 can fire
-        if ( (OML_BL_OM_LN_$Grundstlg_v < 1) &&
-                (OML_Lampen_Streckenblock_$1_BL_vLN_weiss >= 1))
+        if ( (OML_Lampen_Streckenblock_$1_BL_vLN_weiss >= 1) &&
+                (OML_BL_OM_LN_$vorgebl_v < 1) &&
+                (OML_BL_OM_LN_$Grundstlg_v < 1))
         {
             if (canFire("OML_Lampen_Streckenblock_T138"))
             {
@@ -3611,14 +3667,25 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Streckenblock_T55 can fire
-        if ( (OML_BL_ZB_OM_$Grundstlg_n < 1) &&
-                (OML_BL_ZB_OM_$vorgebl_n < 1) &&
-                (OML_Lampen_Streckenblock_$1_BL_nZB_weiss >= 1))
+        if ( (OML_BL_ZB_OM_$vorgebl_n < 1) &&
+                (OML_Lampen_Streckenblock_$1_BL_nZB_weiss >= 1) &&
+                (OML_BL_ZB_OM_$Grundstlg_n < 1))
         {
             if (canFire("OML_Lampen_Streckenblock_T55"))
             {
                 --OML_Lampen_Streckenblock_$1_BL_nZB_weiss;
                 fire("OML_Lampen_Streckenblock_T55");
+                return true;
+            }
+        }
+        //check if OML_Lampen_Streckenblock_T1 can fire
+        if ( (OML_Lampen_Streckenblock_$1_BL_vZB_weiss >= 1) &&
+                (OML_BL_ZB_OM_$belegt_v >= 1))
+        {
+            if (canFire("OML_Lampen_Streckenblock_T1"))
+            {
+                --OML_Lampen_Streckenblock_$1_BL_vZB_weiss;
+                fire("OML_Lampen_Streckenblock_T1");
                 return true;
             }
         }
@@ -3635,8 +3702,8 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Fahrstrasse_T6 can fire
-        if ( (OML_Lampen_Fahrstrasse_$1_Fstr_ef <= 0) &&
-                (OML_Fstr_ef_$verschlossen >= 1))
+        if ( (OML_Fstr_ef_$verschlossen >= 1) &&
+                (OML_Lampen_Fahrstrasse_$1_Fstr_ef <= 0))
         {
             if (canFire("OML_Lampen_Fahrstrasse_T6"))
             {
@@ -3647,8 +3714,8 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_Lampen_Fahrstrasse_T9 can fire
         if ( (OML_Lampen_Fahrstrasse_$1_Fstr_gf >= 1) &&
-                (OML_Fstr_gf_$aufgeloest >= 1) &&
-                (OML_Fstr_fg_$aufgeloest >= 1))
+                (OML_Fstr_fg_$aufgeloest >= 1) &&
+                (OML_Fstr_gf_$aufgeloest >= 1))
         {
             if (canFire("OML_Lampen_Fahrstrasse_T9"))
             {
@@ -3658,8 +3725,8 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Fahrstrasse_T18 can fire
-        if ( (OML_Lampen_Fahrstrasse_$1_Fstr_ef <= 0) &&
-                (OML_Fstr_fe_$verschlossen >= 1))
+        if ( (OML_Fstr_fe_$verschlossen >= 1) &&
+                (OML_Lampen_Fahrstrasse_$1_Fstr_ef <= 0))
         {
             if (canFire("OML_Lampen_Fahrstrasse_T18"))
             {
@@ -3857,8 +3924,8 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_Lampen_Signal_F_entry_F_rot_fg can fire
         if ( (OML_Fstr_fg_$F_Halt >= 1) &&
-                (OML_Lampen_Signal_F_$1_F_rot <= 0) &&
-                (OML_Fstr_fe_$F_Halt >= 1))
+                (OML_Fstr_fe_$F_Halt >= 1) &&
+                (OML_Lampen_Signal_F_$1_F_rot <= 0))
         {
             if (canFire("OML_Lampen_Signal_F_entry_F_rot_fg"))
             {
@@ -3868,8 +3935,8 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Signal_F_exit_F_rot_fg can fire
-        if ( (OML_Fstr_fg_$F_Halt < 1) &&
-                (OML_Lampen_Signal_F_$1_F_rot >= 1))
+        if ( (OML_Lampen_Signal_F_$1_F_rot >= 1) &&
+                (OML_Fstr_fg_$F_Halt < 1))
         {
             if (canFire("OML_Lampen_Signal_F_exit_F_rot_fg"))
             {
@@ -3891,8 +3958,8 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_Lampen_Signal_F_exit_F_gruenFB1_fe can fire
         if ( (OML_Lampen_Signal_F_$1_F_gruenFB1 >= 1) &&
-                (OML_Fstr_fe_$F_Fahrt1 < 1) &&
-                (OML_Fstr_fg_$F_Fahrt3 < 1))
+                (OML_Fstr_fg_$F_Fahrt3 < 1) &&
+                (OML_Fstr_fe_$F_Fahrt1 < 1))
         {
             if (canFire("OML_Lampen_Signal_F_exit_F_gruenFB1_fe"))
             {
@@ -3902,8 +3969,8 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Lampen_Signal_F_exit_F_rot_fe can fire
-        if ( (OML_Fstr_fe_$F_Halt < 1) &&
-                (OML_Lampen_Signal_F_$1_F_rot >= 1))
+        if ( (OML_Lampen_Signal_F_$1_F_rot >= 1) &&
+                (OML_Fstr_fe_$F_Halt < 1))
         {
             if (canFire("OML_Lampen_Signal_F_exit_F_rot_fe"))
             {
@@ -5106,41 +5173,6 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_LN_Fstr_aufloesen can fire
-        if ( (OML_LN_$ce_belegt >= 1) &&
-                (OML_LN_$LN_W1_mA1 >= 1) &&
-                (OML_LN_$LN_W2_pA2 >= 1) &&
-                (OML_LN_$LN_W5_pA3 >= 1) &&
-                (OML_LN_$LN_W5_mA4 >= 1) &&
-                (OML_LN_$LN_W6_mA5 >= 1) &&
-                (OML_LN_$LN_W6_mA6 >= 1) &&
-                (OML_LN_$LN_W2_pE2 >= 1) &&
-                (OML_LN_$LN_W6_mE6 >= 1) &&
-                (OML_LN_$LN_W5_pE3 >= 1) &&
-                (OML_LN_$LN_W6_mE5 >= 1) &&
-                (OML_LN_$LN_W5_mE4 >= 1) &&
-                (OML_LN_$LN_W1_mE1 >= 1) &&
-                (OML_LN_$LN_Grundstlg <= 0))
-        {
-            if (canFire("OML_LN_Fstr_aufloesen"))
-            {
-                --OML_LN_$LN_W1_mA1;
-                --OML_LN_$LN_W2_pA2;
-                --OML_LN_$LN_W5_pA3;
-                --OML_LN_$LN_W5_mA4;
-                --OML_LN_$LN_W6_mA5;
-                --OML_LN_$LN_W6_mA6;
-                --OML_LN_$LN_W2_pE2;
-                --OML_LN_$LN_W6_mE6;
-                --OML_LN_$LN_W5_pE3;
-                --OML_LN_$LN_W6_mE5;
-                --OML_LN_$LN_W5_mE4;
-                --OML_LN_$LN_W1_mE1;
-                ++OML_LN_$LN_Grundstlg;
-                fire("OML_LN_Fstr_aufloesen");
-                return true;
-            }
-        }
         //check if OML_LN_T6 can fire
         if ( (OML_ILTIS_$LN_834_1 >= 1) &&
                 (OML_LN_$geprueft1E1 <= 0) &&
@@ -5728,8 +5760,9 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_LN_T125 can fire
         if ( (OML_LN_$C1_Fahrt2 >= 1) &&
-                (OML_LN_$ce_belegt >= 1) &&
-                (OML_LN_$C1_Halt <= 0))
+                (OML_LN_$C1_Halt <= 0) &&
+                (OML_LN_$LN_Grundstlg >= 1) &&
+                (OML_LN_$ce_belegt >= 1))
         {
             if (canFire("OML_LN_T125"))
             {
@@ -5741,21 +5774,22 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_LN_T124 can fire
         if ( (OML_LN_$LN_W1_mA1 >= 1) &&
-                (OML_LN_$C1_Fahrt2 <= 0) &&
-                (OML_LN_$C1_Halt >= 1))
+                (OML_LN_$C1_Halt >= 1) &&
+                (OML_LN_$C1_Fahrt2 <= 0))
         {
             if (canFire("OML_LN_T124"))
             {
-                ++OML_LN_$C1_Fahrt2;
                 --OML_LN_$C1_Halt;
+                ++OML_LN_$C1_Fahrt2;
                 fire("OML_LN_T124");
                 return true;
             }
         }
         //check if OML_LN_T225 can fire
-        if ( (OML_LN_$ce_belegt >= 1) &&
-                (OML_LN_$C26_Halt <= 0) &&
-                (OML_LN_$C26_Fahrt >= 1))
+        if ( (OML_LN_$C26_Halt <= 0) &&
+                (OML_LN_$C26_Fahrt >= 1) &&
+                (OML_LN_$LN_Grundstlg >= 1) &&
+                (OML_LN_$ce_belegt >= 1))
         {
             if (canFire("OML_LN_T225"))
             {
@@ -5766,12 +5800,12 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_LN_TC2 can fire
-        if ( (OML_LN_$C26_FB2 <= 0) &&
-                (OML_LN_$LN_W6_mA5 >= 1) &&
+        if ( (OML_LN_$LN_W6_mA5 >= 1) &&
                 (OML_LN_$LN_W5_mA4 >= 1) &&
                 (OML_LN_$LN_W6_mA6 >= 1) &&
                 (OML_LN_$LN_W5_pA3 >= 1) &&
-                (OML_LN_$C26_Fahrt >= 1))
+                (OML_LN_$C26_Fahrt >= 1) &&
+                (OML_LN_$C26_FB2 <= 0))
         {
             if (canFire("OML_LN_TC2"))
             {
@@ -5811,7 +5845,9 @@ abstract class PetrinetOmlEndpointExportBase {
         }
         //check if OML_LN_T325 can fire
         if ( (OML_LN_$E_Fahrt >= 1) &&
-                (OML_LN_$e_Halt <= 0))
+                (OML_LN_$e_Halt <= 0) &&
+                (OML_LN_$LN_Grundstlg >= 1) &&
+                (OML_LN_$ce_belegt >= 1))
         {
             if (canFire("OML_LN_T325"))
             {
@@ -5855,16 +5891,216 @@ abstract class PetrinetOmlEndpointExportBase {
                 (OML_LN_$LN_W6_mE5 >= 1) &&
                 (OML_LN_$LN_W5_pE3 >= 1) &&
                 (OML_LN_$LN_W6_mE6 >= 1) &&
-                (OML_LN_$LN_W5_mE4 >= 1) &&
                 (OML_LN_$LN_W1_mE1 >= 1) &&
                 (OML_LN_$E_Fahrt <= 0) &&
-                (OML_LN_$e_Halt >= 1))
+                (OML_LN_$e_Halt >= 1) &&
+                (OML_LN_$LN_W5_mE4 >= 1))
         {
             if (canFire("OML_LN_T324"))
             {
                 ++OML_LN_$E_Fahrt;
                 --OML_LN_$e_Halt;
                 fire("OML_LN_T324");
+                return true;
+            }
+        }
+        //check if OML_LN_clear_E_FB1 can fire
+        if ( (OML_LN_$E_FB1 >= 1) &&
+                (OML_LN_$e_Halt >= 1))
+        {
+            if (canFire("OML_LN_clear_E_FB1"))
+            {
+                --OML_LN_$E_FB1;
+                fire("OML_LN_clear_E_FB1");
+                return true;
+            }
+        }
+        //check if OML_LN_clear_E_FB2 can fire
+        if ( (OML_LN_$E_FB2 >= 1) &&
+                (OML_LN_$e_Halt >= 1))
+        {
+            if (canFire("OML_LN_clear_E_FB2"))
+            {
+                --OML_LN_$E_FB2;
+                fire("OML_LN_clear_E_FB2");
+                return true;
+            }
+        }
+        //check if OML_LN_clear_C26_FB1 can fire
+        if ( (OML_LN_$C26_FB1 >= 1) &&
+                (OML_LN_$C1_Halt >= 1))
+        {
+            if (canFire("OML_LN_clear_C26_FB1"))
+            {
+                --OML_LN_$C26_FB1;
+                fire("OML_LN_clear_C26_FB1");
+                return true;
+            }
+        }
+        //check if OML_LN_clear_C26_FB2 can fire
+        if ( (OML_LN_$C26_FB2 >= 1) &&
+                (OML_LN_$C1_Halt >= 1))
+        {
+            if (canFire("OML_LN_clear_C26_FB2"))
+            {
+                --OML_LN_$C26_FB2;
+                fire("OML_LN_clear_C26_FB2");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_A1 can fire
+        if ( (OML_LN_$LN_W1_mA1 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_A1"))
+            {
+                --OML_LN_$LN_W1_mA1;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_A1");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_A2 can fire
+        if ( (OML_LN_$LN_W2_pA2 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_A2"))
+            {
+                --OML_LN_$LN_W2_pA2;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_A2");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_A3 can fire
+        if ( (OML_LN_$LN_W5_pA3 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_A3"))
+            {
+                --OML_LN_$LN_W5_pA3;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_A3");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_A4 can fire
+        if ( (OML_LN_$LN_W5_mA4 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_A4"))
+            {
+                --OML_LN_$LN_W5_mA4;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_A4");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_A5 can fire
+        if ( (OML_LN_$LN_W6_mA5 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_A5"))
+            {
+                --OML_LN_$LN_W6_mA5;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_A5");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_A6 can fire
+        if ( (OML_LN_$LN_W6_mA6 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_A6"))
+            {
+                --OML_LN_$LN_W6_mA6;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_A6");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_E1 can fire
+        if ( (OML_LN_$LN_W1_mE1 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_E1"))
+            {
+                --OML_LN_$LN_W1_mE1;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_E1");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_E2 can fire
+        if ( (OML_LN_$LN_W2_pE2 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_E2"))
+            {
+                --OML_LN_$LN_W2_pE2;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_E2");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_E3 can fire
+        if ( (OML_LN_$LN_W5_pE3 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_E3"))
+            {
+                --OML_LN_$LN_W5_pE3;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_E3");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_E4 can fire
+        if ( (OML_LN_$LN_W5_mE4 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_E4"))
+            {
+                --OML_LN_$LN_W5_mE4;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_E4");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_E5 can fire
+        if ( (OML_LN_$LN_W6_mE5 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_E5"))
+            {
+                --OML_LN_$LN_W6_mE5;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_E5");
+                return true;
+            }
+        }
+        //check if OML_LN_aufloesen_E6 can fire
+        if ( (OML_LN_$LN_W6_mE6 >= 1) &&
+                (OML_LN_$ce_belegt >= 1) &&
+                (OML_LN_$LN_Grundstlg <= 0))
+        {
+            if (canFire("OML_LN_aufloesen_E6"))
+            {
+                --OML_LN_$LN_W6_mE6;
+                ++OML_LN_$LN_Grundstlg;
+                fire("OML_LN_aufloesen_E6");
                 return true;
             }
         }
@@ -5880,7 +6116,7 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_Kontakte_T5 can fire
-        if ( (OML_Kontakte_$7_WS1_plus <= 1) &&
+        if ( (OML_Kontakte_$7_WS1_plus <= 0) &&
                 (OML_logic_Kontakte_WS1_$logic_ws1_plus >= 1))
         {
             if (canFire("OML_Kontakte_T5"))
@@ -5912,43 +6148,47 @@ abstract class PetrinetOmlEndpointExportBase {
                 return true;
             }
         }
-        //check if OML_Wecker_Weichen_T57 can fire
-        if ( (OML_Wecker_Weichen_$2_Weiche <= 0) &&
-                (OML_Wecker_Weichen_$P1 >= 1) &&
-                (OML_Stw_W1_$Endlage_minus < 1) &&
-                (OML_Stw_W1_$Endlage_plus < 1))
+        //check if OML_Wecker_Weichen_T1 can fire
+        if ( (OML_Stw_W1_$keine_endlage_minus >= 1) &&
+                (OML_Wecker_Weichen_$2_Weiche <= 0))
         {
-            if (canFire("OML_Wecker_Weichen_T57"))
+            if (canFire("OML_Wecker_Weichen_T1"))
             {
                 ++OML_Wecker_Weichen_$2_Weiche;
-                --OML_Wecker_Weichen_$P1;
-                fire("OML_Wecker_Weichen_T57");
+                fire("OML_Wecker_Weichen_T1");
                 return true;
             }
         }
-        //check if OML_Wecker_Weichen_T302 can fire
-        if ( (OML_Wecker_Weichen_$2_Weiche >= 1) &&
-                (OML_Wecker_Weichen_$P1 <= 0) &&
-                (OML_Stw_W1_$Endlage_plus >= 1))
+        //check if OML_Wecker_Weichen_T2 can fire
+        if ( (OML_Wecker_Weichen_$2_Weiche <= 0) &&
+                (OML_Stw_W1_$keine_endlage_plus >= 1))
         {
-            if (canFire("OML_Wecker_Weichen_T302"))
+            if (canFire("OML_Wecker_Weichen_T2"))
             {
-                --OML_Wecker_Weichen_$2_Weiche;
-                ++OML_Wecker_Weichen_$P1;
-                fire("OML_Wecker_Weichen_T302");
+                ++OML_Wecker_Weichen_$2_Weiche;
+                fire("OML_Wecker_Weichen_T2");
                 return true;
             }
         }
-        //check if OML_Wecker_Weichen_T301 can fire
-        if ( (OML_Wecker_Weichen_$2_Weiche >= 1) &&
-                (OML_Wecker_Weichen_$P1 <= 0) &&
-                (OML_Stw_W1_$Endlage_minus >= 1))
+        //check if OML_Wecker_Weichen_T3 can fire
+        if ( (OML_Stw_W1_$endlage_minus >= 1) &&
+                (OML_Wecker_Weichen_$2_Weiche >= 1))
         {
-            if (canFire("OML_Wecker_Weichen_T301"))
+            if (canFire("OML_Wecker_Weichen_T3"))
             {
                 --OML_Wecker_Weichen_$2_Weiche;
-                ++OML_Wecker_Weichen_$P1;
-                fire("OML_Wecker_Weichen_T301");
+                fire("OML_Wecker_Weichen_T3");
+                return true;
+            }
+        }
+        //check if OML_Wecker_Weichen_T5 can fire
+        if ( (OML_Stw_W1_$endlage_plus >= 1) &&
+                (OML_Wecker_Weichen_$2_Weiche >= 1))
+        {
+            if (canFire("OML_Wecker_Weichen_T5"))
+            {
+                --OML_Wecker_Weichen_$2_Weiche;
+                fire("OML_Wecker_Weichen_T5");
                 return true;
             }
         }
@@ -6373,7 +6613,7 @@ abstract class PetrinetOmlEndpointExportBase {
             }
         }
         //check if OML_logic_Kontakte_WS1_enter_logic_ws1_plus can fire
-        if ( (OML_logic_Kontakte_WS1_$logic_ws1_plus <= 1) &&
+        if ( (OML_logic_Kontakte_WS1_$logic_ws1_plus <= 0) &&
                 (OML_logic_Kontakte_WS1_$ws1_plus >= 1) &&
                 (OML_logic_Kontakte_WS1_$ws1_minus >= 1))
         {

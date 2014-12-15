@@ -18,6 +18,8 @@ public class PetrinetOmlEndpoint extends EndpointCommon {
 
     public PetrinetOmlEndpoint(PetrinetOmlService service){
         super();
+        this.registerEndpointListener();
+
         this.service = service;
         petriNetThread = new PetrinetOmlEndpointExportThread("OMLPetriNetSimulationThread", service);
     }
@@ -38,9 +40,9 @@ public class PetrinetOmlEndpoint extends EndpointCommon {
     }
 
     @Override
-    protected void registerEndpointListener(EndpointBase listener) {
+    protected void registerEndpointListener() {
         try {
-            listener.addEndpointListener(this);
+            addEndpointListener(this);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }

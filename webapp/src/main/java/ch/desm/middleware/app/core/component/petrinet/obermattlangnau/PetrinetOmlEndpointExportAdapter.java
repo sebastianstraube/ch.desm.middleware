@@ -1,9 +1,9 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
 import java.lang.reflect.Field;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
+import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.PetrinetMapDelay;
 import ch.desm.middleware.app.core.utility.Pair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -19,28 +19,85 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
 	private List<Pair<String, Integer>> basePlaces;
     private List<Pair<String, Integer>> changedPlacesList;
     private Object lockChangedPlacesList;
+    private Object delayLock;
+    private PetrinetMapDelay mapDelay = new PetrinetMapDelay();
+    private Object listDelayLock;
+    private Set<PetrinetOmlEndpointDelayThread> listDelayThreads;
 
     public PetrinetOmlEndpointExportAdapter(){
         basePlaces = new LinkedList<Pair<String, Integer>>();
         changedPlacesList = new LinkedList<Pair<String, Integer>>();
         lockChangedPlacesList = new Object();
+        this.delayLock = new Object();
+        this.listDelayThreads = new HashSet<>();
+        listDelayLock = new Object();
     }
 
     @Override
 	public boolean canFire(String s) {
 		LOGGER.log(Level.TRACE, "transition can fire: " + s);
-		return super.canFire(s);
+        if(isDelayedTransition(s)){
+            return isTransitionNotDelayed(s);
+        }
+
+        return true;
 	}
 
     @Override
 	public void fire(String s) {
         LOGGER.log(Level.INFO, "transitions fired: " + s);
 
-        //TODO mapping slow down transition
+        cleanDelayThread();
         refreshChangedPlacesList(getPlaces(), basePlaces);
-
         basePlaces.clear();
         basePlaces.addAll(getPlaces());
+    }
+
+    private boolean isDelayedTransition(String transition){
+        synchronized (delayLock){
+            String delay = mapDelay.getValue(transition);
+            return !delay.isEmpty();
+        }
+    }
+
+    private boolean isTransitionNotDelayed(String transition) {
+        synchronized (listDelayLock) {
+
+            boolean isThreadExisiting = false;
+            for (PetrinetOmlEndpointDelayThread t : listDelayThreads) {
+                if (t.isAssociated(transition)) {
+                    isThreadExisiting = true;
+                    if (t.isTimeToDelegate()) {
+                        t.setAsDelegated();
+                        return true;
+                    }
+                }
+            }
+
+            if (!isThreadExisiting) {
+                createDelayTransitionThread(transition);
+            }
+            return false;
+        }
+    }
+
+    private void createDelayTransitionThread(String transition){
+        synchronized (listDelayLock){
+            String delay = mapDelay.getValue(transition);
+            PetrinetOmlEndpointDelayThread delayThread = new PetrinetOmlEndpointDelayThread(this, transition, delay);
+            listDelayThreads.add(delayThread);
+        }
+    }
+
+    public void cleanDelayThread(){
+        synchronized (listDelayLock){
+            for(Iterator<PetrinetOmlEndpointDelayThread> iterator = listDelayThreads.iterator(); iterator.hasNext();){
+                PetrinetOmlEndpointDelayThread t = iterator.next();
+                if(t.isDelegated()){
+                    iterator.remove();
+                }
+            }
+        }
     }
 
     @Override
@@ -69,7 +126,7 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
             if(!changedPlacesList.isEmpty()){
                 changeList.addAll(changedPlacesList);
                 changedPlacesList.clear();
-                LOGGER.log(Level.INFO, "list changed places: " + changeList);
+                LOGGER.log(Level.TRACE, "list changed places: " + changeList);
             }
             return changeList;
         }
@@ -79,7 +136,7 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
         refreshChangedPlacesList(base, new LinkedList<Pair<String, Integer>>());
     }
 
-    public void addChangedPlaces(Pair<String, Integer> pair){
+    public void addChangedPlace(Pair<String, Integer> pair){
         synchronized (lockChangedPlacesList){
             changedPlacesList.add(pair);
         }
