@@ -7,6 +7,7 @@ import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOm
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 /**
@@ -92,7 +93,11 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
     private void delegateToEndpoint(ZusiEndpoint endpoint, String message){
         LOGGER.log(Level.INFO, "processing endpoint message: " + message);
 
-        endpoint.sendMessage(message);
+        try {
+            endpoint.send(message);
+        } catch (IOException e) {
+            LOGGER.log(Level.ERROR, e);
+        }
     }
 
     public boolean isInitProcessMessage(MessageMiddleware element){
