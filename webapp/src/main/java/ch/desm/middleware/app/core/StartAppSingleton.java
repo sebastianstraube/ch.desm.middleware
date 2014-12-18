@@ -3,23 +3,18 @@ package ch.desm.middleware.app.core;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
-import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlBrokerClient;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlEndpointUbw32;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlService;
-import ch.desm.middleware.app.core.component.management.ManagementBrokerClient;
-import ch.desm.middleware.app.core.component.management.ManagementEndpoint;
 import ch.desm.middleware.app.core.component.management.ManagementService;
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlBrokerClient;
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlEndpoint;
 import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlService;
 import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiEndpointTcpServer;
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -39,29 +34,40 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 	public void run(){
 		startManagement("ws://heisenberg:80/gui/management");
-		startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM12);
-        startOmlPetrinet();
+		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM5);
+        //startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
 
+
+        startZusi("192.168.1.2", 1436);
         startHangout(Integer.MAX_VALUE);
 
 	}
 
-	public boolean startManagement(String uri){
+	public void startManagement(String uri){
         ManagementService management = new ManagementService(Broker.getInstance(), uri);
-
-		return true;
 	}
 	
-	public boolean startOmlPetrinet(){
+	public void startOmlPetrinet(){
         PetrinetOmlService petrinet = new PetrinetOmlService(Broker.getInstance());
-        
-        return true;       
 	}
 	
 	public void startOmlStellwerk(EndpointRs232.EnumSerialPorts port){
         OmlService oml = new OmlService(Broker.getInstance(), port);
 	}
+
+    public void startZusi(String ip, int port){
+
+        ZusiEndpointTcpServer server = new ZusiEndpointTcpServer(ip, port);
+        server.init();
+        server.start();
+
+        ZusiService zusi = new ZusiService(Broker.getInstance(), ip, port);
+        zusi.getEndpoint().init();
+        zusi.getEndpoint().start();
+
+
+    }
 	
 	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){
 		LocsimEndpointDll endpointDll = new LocsimEndpointDll("dispatcher.json");

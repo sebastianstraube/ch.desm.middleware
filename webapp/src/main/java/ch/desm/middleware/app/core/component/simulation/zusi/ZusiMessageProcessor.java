@@ -72,7 +72,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void processInitEndpoint(ZusiEndpoint endpoint, MessageMiddleware element){
+    private void processInitEndpoint(ZusiEndpointTcpClient endpoint, MessageMiddleware element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -90,7 +90,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void delegateToEndpoint(ZusiEndpoint endpoint, String message){
+    private void delegateToEndpoint(ZusiEndpointTcpClient endpoint, String message){
         LOGGER.log(Level.INFO, "processing endpoint message: " + message);
 
         try {

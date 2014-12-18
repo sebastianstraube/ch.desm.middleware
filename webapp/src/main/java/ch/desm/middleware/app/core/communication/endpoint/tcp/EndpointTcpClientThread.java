@@ -11,9 +11,9 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClientThread.class);
 
-	private EndpointTcpClient endpoint;
+	private EndpointTcpBase endpoint;
 
-	public EndpointTcpClientThread(EndpointTcpClient endpoint) {
+	public EndpointTcpClientThread(EndpointTcpBase endpoint) {
 		super("EndpointTcpClientThread");
 		this.endpoint = endpoint;
 	}
@@ -27,14 +27,16 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 
 				LOGGER.log(Level.TRACE,"Thread active: " + this.getName());
 
-                try {
-                    message = endpoint.receiveUTF();
-                    if(message!= null && !message.isEmpty()){
-                        endpoint.receiveEvent(message);
-                        message ="";
+                if(!message.isEmpty()){
+                    try {
+                        message = endpoint.receive();
+                        if(message!= null && !message.isEmpty()){
+                            endpoint.receiveEvent(message);
+                            message ="";
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
 
                 doHangout();

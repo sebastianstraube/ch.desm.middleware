@@ -8,7 +8,7 @@ public abstract class EndpointCommon extends EndpointBase implements EndpointCom
 	private static final Logger LOGGER = Logger.getLogger(EndpointCommon.class);
 
     public abstract void init();
-    public abstract void start();
+    public abstract void start() throws InterruptedException;
     public abstract void stop();
 
     /**
