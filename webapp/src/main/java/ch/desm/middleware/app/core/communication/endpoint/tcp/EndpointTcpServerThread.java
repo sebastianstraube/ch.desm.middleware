@@ -26,20 +26,16 @@ public class EndpointTcpServerThread extends EndpointThreadBase {
 
         while (!isInterrupted()) {
 			try {
-
 				LOGGER.log(Level.TRACE,"Thread active: " + this.getName());
-
-                try {
-                    handleClientConnection();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                handleClientConnection();
+                endpoint.checkClientAlive();
                 doHangout();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} catch (IOException e) {
+                e.printStackTrace();
+            }
 		}
 	}
 
@@ -49,24 +45,6 @@ public class EndpointTcpServerThread extends EndpointThreadBase {
     }
 
     private synchronized void handleClientMessage(Socket client) throws IOException {
-        PrintWriter out = null;
-
-        System.out.println( "running service, " + Thread.currentThread() );
-        out = new PrintWriter( client.getOutputStream(), true );
-        BufferedReader bufferedReader =
-                new BufferedReader(
-                        new InputStreamReader(
-                                client.getInputStream()));
-        char[] buffer = new char[256];
-        int anzahlZeichen = bufferedReader.read(buffer, 0, 256); // blockiert bis Nachricht empfangen
-
-        String message = new String(buffer, 0, anzahlZeichen);
-
-        if(!message.isEmpty()){
-            if(message!= null && !message.isEmpty()){
-                endpoint.receiveEvent(message);
-                message ="";
-            }
-        }
+        endpoint.receiveEvent(client);
     }
 }

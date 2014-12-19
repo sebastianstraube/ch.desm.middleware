@@ -5,6 +5,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class ZusiEndpointTcpClient extends EndpointTcpClient {
 
@@ -48,6 +49,12 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
             LOGGER.log(Level.ERROR, e);
         }
 
+        sendTestStream();
+
+    }
+
+    public void sendTestStream(){
+
         try {
             String stream = messageService.getConnectMessageStreamTest();
             this.send(stream);
@@ -55,4 +62,5 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
             LOGGER.log(Level.ERROR, e);
         }
     }
+
 }

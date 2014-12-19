@@ -26,4 +26,10 @@ public class ZusiEndpointTcpServer extends EndpointTcpServer {
             LOGGER.log(Level.ERROR, e);
         }
     }
+
+    @Override
+    public void onIncomingEndpointMessage(String message){
+        LOGGER.log(Level.INFO, "received endpont message: " + message);
+
+    }
 }
