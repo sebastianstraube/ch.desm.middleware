@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -54,7 +55,7 @@ public abstract class EndpointTcpServer  extends EndpointCommon {
 
         if(!message.isEmpty()){
             if(message!= null && !message.isEmpty()){
-                super.onIncomingEndpointMessage(message);
+                onIncomingEndpointMessage(message);
                 this.send(message);
             }
         }

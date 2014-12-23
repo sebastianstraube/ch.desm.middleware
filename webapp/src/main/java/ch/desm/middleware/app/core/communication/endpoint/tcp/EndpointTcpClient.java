@@ -5,6 +5,8 @@ java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.nio.charset.Charset;
+import java.util.Arrays;
 
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
@@ -24,6 +26,8 @@ public abstract class EndpointTcpClient extends EndpointCommon {
     public abstract void disconnect();
 
     public EndpointTcpClient(String ip, int port) {
+        LOGGER.log(Level.INFO, "starting client connect to Server with ip:" + ip + " and port: " + port);
+
         this.socketLock = new Object();
 		this.thread = new EndpointTcpClientThread(this);
 		this.socketAddress = new InetSocketAddress(ip, port);
@@ -31,7 +35,8 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 	}
 
     public void receiveEvent(String message) throws IOException {
-        super.onIncomingEndpointMessage(message);
+        LOGGER.log(Level.INFO, "client receive message: " + message);
+        onIncomingEndpointMessage(message);
     }
 
     @Override
@@ -44,6 +49,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 		if(!thread.isAlive()){
 			thread.start();
 		}
+        LOGGER.log(Level.INFO, "client is ready to receive messages...");
 	}
 
     @Override
@@ -53,18 +59,25 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 		}
 	}
 
-    public synchronized void send(String val) throws IOException{
+    public synchronized void send(String message) throws IOException{
         synchronized (socketLock) {
-            PrintWriter printWriter =
-                    new PrintWriter(
-                            new OutputStreamWriter(
-                                    socket.getOutputStream()));
-            val = val.replaceAll("[\u0000-\u001f]", "");
 
-            LOGGER.log(Level.INFO, "sending message: " + val);
-            printWriter.print(val);
-            printWriter.flush();
-            printWriter.close();
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+
+            message = message.replaceAll("[\u0000-\u001f]", "");
+
+            //int[] byteStream = new int[message.length()];
+            byte[] byteStream = new byte[message.length()/2];
+            for(int i=0; i<message.length()/2; i++){
+                Integer val = Integer.valueOf("" + message.charAt(i*2) + message.charAt(i*2+1), 16);
+                byteStream[i] = val.byteValue();
+            }
+
+            LOGGER.log(Level.INFO, "client sending message: " + Arrays.toString(byteStream)); // message);//Arrays.toString(byteStream));
+            out.write(byteStream);
+            LOGGER.log(Level.INFO, "client sended message.");
+            out.flush();
+            LOGGER.log(Level.INFO, "client flushed socket.");
         }
     }
 

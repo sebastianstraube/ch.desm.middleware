@@ -11,9 +11,15 @@ public class ZusiEndpointMessageService {
 
     private static Logger LOGGER = Logger.getLogger(ZusiEndpointTcpClient.class);
 
+    private ZusiService service;
+
+    public ZusiEndpointMessageService(ZusiService service){
+        this.service = service;
+    }
+
     // listNodes contains message structure
     // one message in listNodes is one message for transfer
-    public class NodeBase {
+    protected class NodeBase {
         protected LinkedList<Node> nodes;
 
         public NodeBase(){
@@ -25,19 +31,19 @@ public class ZusiEndpointMessageService {
         }
     }
 
-    public class Node extends NodeBase {
+    protected class Node extends NodeBase {
         private Integer id;
-        private int byteCounter;
+        private int value;
         private String data;
 
-        public Node(int id, int byteCounter){
-            this(id, byteCounter, "");
+        public Node(int id, int value){
+            this(id, value, "");
         }
 
-        public Node(int id, int byteCounter, String data){
+        public Node(int id, int value, String data){
             super();
             this.id = id;
-            this.byteCounter = byteCounter;
+            this.value = value;
             this.data = data;
         }
 
@@ -50,7 +56,7 @@ public class ZusiEndpointMessageService {
         }
     }
 
-    public NodeBase decodeMessage(String message) throws Exception {
+    private NodeBase encodeMessage(String message) throws Exception {
 
         NodeBase root = new NodeBase();
         Node lastGroupNode = null;
@@ -109,7 +115,7 @@ public class ZusiEndpointMessageService {
         return root;
     }
 
-    public String encodeMessage(NodeBase node){
+    public String decodeMessage(NodeBase node){
 
         String messages = "";
         for(Node n : node.nodes){
@@ -124,13 +130,47 @@ public class ZusiEndpointMessageService {
         return messages.toUpperCase();
     }
 
-    protected int lookupGroupNodes(Node node, int count){
+    public LinkedList<String> convertToMiddlewareMessage(String stream) throws Exception {
+        NodeBase root = encodeMessage(stream);
+        return convertObjectToMiddlewareMessage(root);
+    }
 
+    public String convertToZusiStream(String middlewareMessage){
+        NodeBase root = convertMiddlewareMessageToObject(middlewareMessage);
+        return decodeMessage(root);
+    }
+
+    private LinkedList<String> convertObjectToMiddlewareMessage(NodeBase root){
+        LinkedList<String> middlewareMessage = new LinkedList<>();
+        //TODO conversion to Middleware global ID
+        //looking in Map for ID
+        LinkedList<String> id = convertObjectToMiddlewareId(root);
+
+
+
+        return middlewareMessage;
+    }
+
+    private NodeBase convertMiddlewareMessageToObject(String middlewareMessage){
+        NodeBase root = new NodeBase();
+
+        //TODO algorithm to investigate middlewareMessage structure
+
+        return root;
+    }
+
+    private LinkedList<String> convertObjectToMiddlewareId(NodeBase root){
+        LinkedList<String> idList = new LinkedList<>();
+
+        //TODO algithmus to extract middleware ID
+
+        return idList;
+    }
+
+    protected int lookupGroupNodes(Node node, int count){
         if(node == null) {
             return count;
-        }
-
-        if(node.byteCounter == 0){
+        }else if(node.value == 0){
             count++;
         }
 
@@ -148,7 +188,7 @@ public class ZusiEndpointMessageService {
             return message;
         }
 
-        message += getStream(node.byteCounter, 8);
+        message += getStream(node.value, 8);
         message += getStream(node.id, 4);
         message += getDataHexStream(node.data);
 
@@ -252,10 +292,10 @@ public class ZusiEndpointMessageService {
         hello.addNode(text);
         hello.addNode(version);
 
-        return encodeMessage(root);
+        return decodeMessage(root);
     }
 
-    public String getConnectMessageStreamTest() {
+    public String getMessageStreamConnect() {
         String test =
                 "00000000" +
                         "0100" +
@@ -278,11 +318,59 @@ public class ZusiEndpointMessageService {
         return test;
     }
 
+    public String getMessageStreamAckClient() {
+        String test =
+                "00000000" +
+                        "0200" +
+                        "00000000" +
+                        "0300" +
+                        "00000000" +
+                        "0A00" +
+                        "04000000" +
+                        "0100" +
+                        "0100" +
+                        "04000000" +
+                        "0100" +
+                        "1B00" +
+                        "FFFFFFFF" +
+                        "FFFFFFFF" +
+                        "FFFFFFFF";
+        return test;
+    }
+
+    public String getAckMessage(){
+        String encode = "";
+
+        try {
+            NodeBase root = new NodeBase();
+            Node client_fahrpult = new Node(2, 0);
+            Node needed_data = new Node(3, 0);
+            Node fuehrerstandsAnzeigen = new Node(10, 0); //x000A
+            Node fuehrerstandsId = new Node(1, 4, "1"); //
+            Node geschwindigkeit = new Node(1, 4, "1"); //Geschwindigkeit
+            Node schleudern = new Node(1, 4, "1b"); // Schleudern
+
+            root.addNode(client_fahrpult);
+            client_fahrpult.addNode(needed_data);
+            needed_data.addNode(fuehrerstandsAnzeigen);
+            fuehrerstandsAnzeigen.addNode(fuehrerstandsId);
+            fuehrerstandsAnzeigen.addNode(geschwindigkeit);
+            fuehrerstandsAnzeigen.addNode(schleudern);
+
+            encode = decodeMessage(root);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return encode;
+    }
+
     public void testEncodeDecode(){
 
         try {
-            NodeBase root = decodeMessage(getConnectMessageStreamTest());
-            String encodeFromZusi = encodeMessage(root);
+            NodeBase root = encodeMessage(getMessageStreamConnect());
+            String encodeFromZusi = decodeMessage(root);
 
             NodeBase root2 = new NodeBase();
             Node start = new Node(1, 0);
@@ -299,7 +387,7 @@ public class ZusiEndpointMessageService {
             hello.addNode(text);
             hello.addNode(version);
 
-            String encodeFromMiddleware = encodeMessage(root2);
+            String encodeFromMiddleware = decodeMessage(root2);
 
             if(encodeFromZusi.equals(encodeFromMiddleware)){
                 boolean good = true;

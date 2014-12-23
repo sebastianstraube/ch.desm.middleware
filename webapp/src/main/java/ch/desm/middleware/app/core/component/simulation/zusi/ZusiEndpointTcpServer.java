@@ -10,12 +10,9 @@ public class ZusiEndpointTcpServer extends EndpointTcpServer {
 
     private static Logger LOGGER = Logger.getLogger(ZusiEndpointTcpServer.class);
 
-    ZusiEndpointMessageService messageService;
-
 	public ZusiEndpointTcpServer(String ip, int port) {
 		super(ip, port);
         this.registerEndpointListener();
-        messageService = new ZusiEndpointMessageService();
 	}
 
     @Override

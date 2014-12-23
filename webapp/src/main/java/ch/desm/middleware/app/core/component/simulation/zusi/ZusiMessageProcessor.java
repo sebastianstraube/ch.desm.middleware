@@ -3,7 +3,6 @@ package ch.desm.middleware.app.core.component.simulation.zusi;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlBrokerClient;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -15,7 +14,7 @@ import java.util.LinkedList;
  */
 public class ZusiMessageProcessor extends ComponentMessageProcessor {
 
-    private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClient.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiMessageProcessor.class);
 
     /**
      * @param messages
