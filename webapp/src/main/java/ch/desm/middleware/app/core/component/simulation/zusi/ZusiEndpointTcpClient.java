@@ -75,11 +75,11 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
         }
     }
 
-    public void sendMessageAckClient(){
+    public void sendMessageNeededData(){
 
 
         try {
-            String stream = service.getMessageService().getAckMessage();
+            String stream = service.getMessageService().getMessageNeededData();
             this.send(stream);
         } catch (IOException e) {
             LOGGER.log(Level.ERROR, e);
