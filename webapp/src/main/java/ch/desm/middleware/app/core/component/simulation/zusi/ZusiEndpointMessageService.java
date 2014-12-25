@@ -32,8 +32,19 @@ public class ZusiEndpointMessageService {
     }
 
     protected class Node extends NodeBase {
+        /**
+         * id of node
+         */
         private Integer id;
+
+        /**
+         * nr of hex bytes for en- and decoding e.g. (x0001) has 2 bytes
+         */
         private int nrBytes;
+
+        /**
+         * data store, represented as int array
+         */
         private int[] data;
 
         public Node(int id){
@@ -41,42 +52,25 @@ public class ZusiEndpointMessageService {
         }
 
         public Node(int id, String data){
-            super();
             this.id = id;
-            this.nrBytes = initValue(data);
-
             this.data = new int[data.length()];
             for(int i=0; i<data.length();i++){
                 this.data[i] = Integer.valueOf(data.charAt(i));
             }
-
+            this.nrBytes = (this.data.length*2) + (data.isEmpty() ? 0 : 2);
         }
 
         public Node(int id, int data){
-            super();
             this.id = id;
-            this.nrBytes = 2 + 2; //int + id
-
-            this.data = new int[1];
-            this.data[0] = data;
+            this.data = getArray(data);
+            this.nrBytes = (this.data.length*2) + (data==0 ? 0 : 2);
         }
 
-        private int initValue(String data){
-            int anzBytes = -1;
+        private int[] getArray(int data){
+            int[] a = new int[1];
+            a[0] = data;
 
-            if(data == null){
-                anzBytes = 0;
-            } else if(data.isEmpty()){
-                anzBytes = 0;
-            } else if(!data.isEmpty()){
-                anzBytes = getNrBytes(data) + 2; // 2 = anzBytes id
-            }
-
-            return anzBytes;
-        }
-
-        private int getNrBytes(String value){
-            return value.length()*2;
+            return a;
         }
     }
 
@@ -99,8 +93,8 @@ public class ZusiEndpointMessageService {
             }
 
             if(!isNodeEnd(node)){
-                String nodeSwapped = swapEndian(node);
-                String idSwapped = swapEndian(id);
+                String nodeSwapped = getSwappedEndian(node);
+                String idSwapped = getSwappedEndian(id);
                 String data = "";
 
                 int anzBytes = Integer.valueOf(nodeSwapped, 16);
@@ -144,7 +138,7 @@ public class ZusiEndpointMessageService {
         String messages = "";
         for(Node n : node.nodes){
             String message = buildEncodedMessage(n);
-            int countGroups = lookupGroupNodes(n, 0);
+            int countGroups = getGroupNodesCount(n, 0);
             for(int i=0; i<countGroups; i++){
                 message += "FFFFFFFF";
             }
@@ -156,26 +150,34 @@ public class ZusiEndpointMessageService {
 
     public LinkedList<String> convertToMiddlewareMessage(String stream) throws Exception {
         NodeBase root = encodeMessage(stream);
-        return convertObjectToMiddlewareMessage(root);
+        return convertToMiddlewareMessage(root);
     }
 
-    public String convertToZusiStream(String middlewareMessage){
-        NodeBase root = convertMiddlewareMessageToObject(middlewareMessage);
+    public String convertToZusiStream(String middlewareMessage) {
+        NodeBase root = convertToObject(middlewareMessage);
         return decodeMessage(root);
     }
 
-    private LinkedList<String> convertObjectToMiddlewareMessage(NodeBase root){
+    /**
+     *
+     * @param root
+     * @return
+     */
+    private LinkedList<String> convertToMiddlewareMessage(NodeBase root){
         LinkedList<String> middlewareMessage = new LinkedList<>();
         //TODO conversion to Middleware global ID
         //looking in Map for ID
         LinkedList<String> id = convertObjectToMiddlewareId(root);
 
-
-
         return middlewareMessage;
     }
 
-    private NodeBase convertMiddlewareMessageToObject(String middlewareMessage){
+    /**
+     *
+     * @param middlewareMessage
+     * @return
+     */
+    private NodeBase convertToObject(String middlewareMessage){
         NodeBase root = new NodeBase();
 
         //TODO algorithm to investigate middlewareMessage structure
@@ -191,7 +193,7 @@ public class ZusiEndpointMessageService {
         return idList;
     }
 
-    protected int lookupGroupNodes(Node node, int count){
+    protected int getGroupNodesCount(Node node, int count){
         if(node == null) {
             return count;
         }else if(node.nrBytes == 0){
@@ -199,7 +201,7 @@ public class ZusiEndpointMessageService {
         }
 
         for(Node n : node.nodes){
-            count = lookupGroupNodes(n, count);
+            count = getGroupNodesCount(n, count);
         }
 
         return count;
@@ -224,9 +226,7 @@ public class ZusiEndpointMessageService {
     }
 
     protected boolean isNodeEnd(String s){
-        long i = Long.valueOf(s, 16);
-        long v = Long.valueOf("FFFFFFFF", 16);
-        if( i == v){
+        if( Long.valueOf(s, 16) == Long.valueOf("FFFFFFFF", 16)){
             return true;
         }
 
@@ -245,7 +245,7 @@ public class ZusiEndpointMessageService {
             }
         }
 
-        return swapEndian(hex);
+        return getSwappedEndian(hex);
     }
 
 
@@ -253,7 +253,7 @@ public class ZusiEndpointMessageService {
         String s = "";
         if(!hexStream.isEmpty()){
             if(hexStream.length() == 4){
-                hexStream = swapEndian(hexStream);
+                hexStream = getSwappedEndian(hexStream);
                 s = String.valueOf(Integer.valueOf(hexStream, 16));
             }else{
                 String hexCode = "";
@@ -273,7 +273,7 @@ public class ZusiEndpointMessageService {
         hex += Integer.toHexString(i);
         hex = expandHexString(hex, length);
 
-        return swapEndian(hex);
+        return getSwappedEndian(hex);
     }
 
     protected String expandHexString(String hex, int length){
@@ -284,7 +284,7 @@ public class ZusiEndpointMessageService {
         return hex;
     }
 
-    protected String swapEndian(String s){
+    protected String getSwappedEndian(String s){
         String swapped = "";
         String bytes = "";
         int upperBound = s.length()-1;

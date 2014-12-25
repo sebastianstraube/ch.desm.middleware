@@ -28,8 +28,6 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
@@ -62,7 +60,6 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
         }
 
         LOGGER.log(Level.INFO, "connected to Server with address:" + socket.getInetAddress() + ", remote port: " + socket.getPort()+ ", locale port: " + socket.getLocalPort());
-
     }
 
     public void sendMessageRegisterClient(){
