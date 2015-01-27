@@ -19,7 +19,7 @@ public class ComponentMessageProcessor extends MessageProcessorBase {
     public void processEndpointMessage(ComponentBrokerClientBase component, String message, String topic) {
         if (message != null && !message.isEmpty()) {
 
-            LOGGER.log(Level.TRACE, "processing endpoint message: " + message + ", component: " + component + ", topic: " +topic);
+            LOGGER.log(Level.INFO, "processing endpoint message: " + message + ", component: " + component + ", topic: " +topic);
             component.publish(message, topic);
         }
     }

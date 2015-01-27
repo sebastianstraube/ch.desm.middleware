@@ -146,7 +146,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 		
 		LOGGER.log(Level.DEBUG, "received serial port message on port: " + this.serialPort.getPortName() + " with message: " + message);
 		
-		super.onIncomingEndpointMessage(message);
+		onIncomingEndpointMessage(message);
 	}
 
 	protected String getSerialPortMessage(SerialPortEvent event) {

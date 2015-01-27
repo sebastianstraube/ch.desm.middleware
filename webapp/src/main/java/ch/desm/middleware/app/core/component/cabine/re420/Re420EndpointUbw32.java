@@ -46,4 +46,9 @@ public class Re420EndpointUbw32 extends EndpointUbw32 {
 	public void emulateEndpointMessage(String message) {
 		onIncomingEndpointMessage(message);
 	}
+
+	@Override
+	public void onIncomingEndpointMessage(String message) {
+
+	}
 }

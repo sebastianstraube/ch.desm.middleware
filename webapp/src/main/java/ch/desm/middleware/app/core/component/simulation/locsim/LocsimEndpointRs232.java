@@ -61,4 +61,9 @@ public class LocsimEndpointRs232 extends EndpointRs232 {
             LOGGER.log(Level.ERROR, e);
         }
     }
+
+	@Override
+	public void onIncomingEndpointMessage(String message) {
+
+	}
 }

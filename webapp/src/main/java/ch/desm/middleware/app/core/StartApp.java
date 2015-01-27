@@ -10,7 +10,7 @@ public class StartApp {
 
     public static void main(String[] args){
 
-        JettyServer server = new JettyServer();
+        JettyServer server = new JettyServer("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/webapp");
         server.start();
 
         while(!server.isStarted()){

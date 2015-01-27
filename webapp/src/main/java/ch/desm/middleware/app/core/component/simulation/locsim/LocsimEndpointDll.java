@@ -22,4 +22,9 @@ public class LocsimEndpointDll extends EndpointDll {
             LOGGER.log(Level.ERROR, e);
         }
     }
+
+    @Override
+    public void onIncomingEndpointMessage(String message) {
+
+    }
 }

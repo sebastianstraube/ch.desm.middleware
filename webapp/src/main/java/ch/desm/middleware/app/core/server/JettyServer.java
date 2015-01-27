@@ -21,9 +21,10 @@ import java.security.ProtectionDomain;
 public class JettyServer extends DaemonThreadBase {
 
     private InetSocketAddress inetSocketAddress;
-
-    public JettyServer(){
+    private String projectDir;
+    public JettyServer(String projectDir){
         this.inetSocketAddress = new InetSocketAddress("0.0.0.0", 80);
+        this.projectDir = projectDir;
     }
 
     private static Logger LOGGER = Logger.getLogger(JettyServer.class);
@@ -39,15 +40,15 @@ public class JettyServer extends DaemonThreadBase {
 
         WebAppContext context = new WebAppContext();
         context.setContextPath("/");
-        context.setDescriptor("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/ch.desm.middleware/app/webapp/target/webapp-0.1/WEB-INF/web.xml");//location.toExternalForm() + "WEB-INF/web.xml");
+        context.setDescriptor(projectDir + "/target/webapp-0.1/WEB-INF/web.xml");//location.toExternalForm() + "WEB-INF/web.xml");
         context.setServer(server);
-        context.setWar("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/ch.desm.middleware/app/webapp/target/webapp-0.1");//);
+        context.setWar(projectDir + "/target/webapp-0.1");//);
 
         // (Optional) Set the directory the war will extract to.
         // If not set, java.io.tmpdir will be used, which can cause problems
         // if the temp directory gets cleaned periodically.
         // Your build scripts should remove this directory between deployments
-        context.setTempDirectory(new File("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/ch.desm.middleware/app/webapp/target/webapp-0.1/tmp"));
+        context.setTempDirectory(new File(projectDir + "/target/webapp-0.1/tmp"));
 
         server.setHandler(context);
         try {

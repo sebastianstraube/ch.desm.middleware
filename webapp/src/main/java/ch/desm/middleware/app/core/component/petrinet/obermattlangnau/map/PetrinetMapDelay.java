@@ -21,8 +21,8 @@ public class PetrinetMapDelay extends ComponentMapBase{
 
 	@Override
 	protected void init(){
-        map.put("OML_Stw_W1_endlage_minus_erreichen", "5500");
-        map.put("OML_Stw_W1_endlage_plus_erreichen", "5500");
+        map.put("OML_Stw_W1_T4", "5500");
+        map.put("OML_Stw_W1_T6", "5500");
     }
 
 }

@@ -117,7 +117,7 @@ public abstract class EndpointFabisch extends EndpointRs232 {
 		
 		LOGGER.log(Level.TRACE, "endpoint (" + this.getClass() + ") received message : [" + message + "], bytes: [" + s + "]");
 		
-		super.onIncomingEndpointMessage(message);
+		onIncomingEndpointMessage(message);
 	}
 
 	

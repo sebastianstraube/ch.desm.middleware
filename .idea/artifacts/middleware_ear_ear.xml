@@ -2,7 +2,7 @@
   <artifact type="ear" name="middleware-ear:ear">
     <output-path>$PROJECT_DIR$/middleware-ear/target</output-path>
     <root id="archive" name="middleware-ear-0.1.ear">
-      <element id="artifact" artifact-name="webapp:war" />
+      <element id="artifact" artifact-name="middleware-ear:ear exploded" />
     </root>
   </artifact>
 </component>

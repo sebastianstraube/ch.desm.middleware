@@ -34,15 +34,15 @@ public class OMLMapPetrinet extends ComponentMapBase{
         map.put("1.90.03","OML_Lampen_Signal_F_$1_F_gruenFB3"); //Einfahrsignal F; Grün FB 3
         map.put("1.90.04","OML_Lampen_Signal_F_$1_F_rot"); //Einfahrsignal F; Rot
         map.put("1.90.05","OML_Lampen_Signal_F_$1_F_gruenFB1"); //Einfahrsignal F; Grün FB1
-        map.put("1.90.06","OML_Lampen_Signal_E_$1_E_gruenFB1"); //Einfahrsignal E; Grün FB1
-        map.put("1.90.07","OML_Lampen_Signal_E_$1_E_rot"); //Einfahrsignal E; Rot
+        map.put("1.90.06","OML_Fstr_ef_$E_Fahrt1"); //Einfahrsignal E; Grün FB1
+        map.put("1.90.07","OML_Fstr_ef_$E_Halt"); //Einfahrsignal E; Rot
 // map.put("1.90.08",""); //Einfahrsignal E; Notrot
-        map.put("1.90.09","OML_Lampen_Signal_G_$1_G_gruenFB1"); //Einfahrsignal G; Grün FB1
+        map.put("1.90.09","OML_Fstr_gf_$G_Fahrt3"); //Einfahrsignal G; Grün FB1
         map.put("1.90.10","OML_Lampen_Signal_G_$1_G_rot"); //Einfahrsignal G; Rot
         map.put("1.90.11","OML_Lampen_Signal_G_$1_G_gruenFB3"); //Einfahrsignal G; Grün FB3
         map.put("1.90.12","OML_EMM_$D_Halt"); //Einfahrsignal D EMM; Rot
-        map.put("1.90.13","OML_EMM_$D_Fahrt"); //Einfahrsignal D EMM; Grün
-        map.put("1.90.14","OML_EMM_$C_Fahrt"); //Ausfahrsignal C EMM; Grün
+        map.put("1.90.13","OML_EMM_$D_FB1"); //Einfahrsignal D EMM; Grün
+        map.put("1.90.14","OML_EMM_$C_FB1"); //Ausfahrsignal C EMM; Grün
         map.put("1.90.15","OML_EMM_$C_Halt"); //Ausfahrsingal C EMM; Rot
         map.put("1.90.16","OML_Lampen_Stoerung_$1_G_VS_Stoer"); //Störungslampe Einfahrvorsignal G*
         map.put("1.91.21","OML_Lampen_Streckenblock_$1_FBV_vZB"); //Fahrtrichtung verlangt von Zollbrück
@@ -77,7 +77,7 @@ public class OMLMapPetrinet extends ComponentMapBase{
 // map.put("9.99.10",""); //Stellstrom
 // map.put("9.99.11",""); //Überwachungsstrom
 // map.put("9.99.12",""); //Gleisisolierung
-        map.put("3.01.01","OML_Stw_W1_SM_$WS_Sperrm_ein"); //WS1 Freigabemagnet
+        map.put("3.01.01","OML_Stw_WS1_SM_$Sperrm_ein"); //WS1 Freigabemagnet
         map.put("3.04.01","OML_Stw_FSS_SM_$FSS_Sperrm_ein"); //FSS Sperrmagnet
         map.put("3.04.02","OML_Stw_FSS_KSM_$FSS_Kuppelm_ein"); //FSS Kuppelstrommagnet
 // map.put("9.93.01",""); //Weichenbeleuchtung
@@ -163,6 +163,7 @@ public class OMLMapPetrinet extends ComponentMapBase{
 // map.put("90.99.17",""); //Signallampe defekt; G rot
 // map.put("90.99.18",""); //Signallampe defekt; G Reserve-rot
 // map.put("90.99.19",""); //Signallampe defekt; G grün FB3
+        map.put("8.91.01","OML_Kontakte_$8_FSS_0EGF"); //FSS in Endlage
 
     }
 

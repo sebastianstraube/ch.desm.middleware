@@ -16,9 +16,10 @@ public abstract class EndpointCommon extends EndpointBase implements EndpointCom
      */
     protected abstract void registerEndpointListener();
 
+	/*
     @Override
 	public void onIncomingEndpointMessage(String message) {
-		
+
 		try{
 			if(listeners.isEmpty()){
 				throw new IllegalStateException("no listeners registered");
@@ -31,6 +32,8 @@ public abstract class EndpointCommon extends EndpointBase implements EndpointCom
 			listener.onIncomingEndpointMessage(message);
 		}
 	}
+
+*/
 
 	@Override
 	public void addEndpointListener(EndpointCommonListenerInterface listener) throws Exception {

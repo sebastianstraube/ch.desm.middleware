@@ -36,10 +36,11 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
     @Override
 	public boolean canFire(String s) {
 		LOGGER.log(Level.TRACE, "transition can fire: " + s);
+        /*
         if(isDelayedTransition(s)){
             return isTransitionNotDelayed(s);
         }
-
+        */
         return true;
 	}
 
@@ -47,7 +48,7 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
 	public void fire(String s) {
         LOGGER.log(Level.INFO, "transitions fired: " + s);
 
-        cleanDelayThread();
+        //cleanDelayThread();
         refreshChangedPlacesList(getPlaces(), basePlaces);
         basePlaces.clear();
         basePlaces.addAll(getPlaces());

@@ -13,7 +13,6 @@ import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
-import ch.desm.middleware.app.core.component.simulation.zusi.ZusiEndpointTcpServer;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -34,12 +33,10 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 	public void run(){
 		startManagement("ws://heisenberg:80/gui/management");
-		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM5);
-        //startOmlPetrinet();
+		startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM4);
+        startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
-
-
-        startZusi("192.168.1.2", 1436);
+        //startZusi("192.168.1.2", 1436);
         startHangout(Integer.MAX_VALUE);
 
 	}
@@ -58,13 +55,18 @@ public class StartAppSingleton extends DaemonThreadBase {
 
     public void startZusi(String ip, int port){
 
-        ZusiEndpointTcpServer server = new ZusiEndpointTcpServer(ip, port);
-        server.init();
-        server.start();
-
         ZusiService zusi = new ZusiService(Broker.getInstance(), ip, port);
         zusi.getEndpoint().init();
-        zusi.getEndpoint().start();
+		zusi.getEndpoint().sendMessageRegisterClient();
+		zusi.getEndpoint().start();
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		zusi.getEndpoint().sendMessageNeededData();
 
 
     }

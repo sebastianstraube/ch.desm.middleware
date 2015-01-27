@@ -25,7 +25,7 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 
 	@Override
 	protected void onIncomingBrokerMessage(String message) {
-		LOGGER.log(Level.TRACE, "receive broker message: " + message);
+		LOGGER.log(Level.INFO, "receive broker message: " + message);
 		
 		//translation
 		LinkedList<MessageMiddleware> messageList = service.getTranslator().toMiddlewareMessageList(message);

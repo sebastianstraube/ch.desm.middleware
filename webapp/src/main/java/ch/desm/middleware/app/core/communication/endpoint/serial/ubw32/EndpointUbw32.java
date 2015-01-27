@@ -178,7 +178,7 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
                                 LOGGER.log(Level.TRACE, "received message on ubw(" + serialPort.getPortName()
                                         + "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
 
-                                super.onIncomingEndpointMessage(singleMessage);
+                                onIncomingEndpointMessage(singleMessage);
                             }
                             else {
                                 LOGGER.log(Level.TRACE, "skipped received message on ubw(" + serialPort.getPortName()

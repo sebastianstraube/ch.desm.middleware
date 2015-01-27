@@ -46,6 +46,10 @@ public class Re420EndpointFabisch extends EndpointFabisch {
 	public void emulateEndpointMessage(String message) {
 		onIncomingEndpointMessage(message);
 	}
-	
 
+
+	@Override
+	public void onIncomingEndpointMessage(String message) {
+
+	}
 }
