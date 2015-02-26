@@ -74,7 +74,6 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
 
     public void sendMessageNeededData(){
 
-
         try {
             String stream = service.getMessageService().getMessageNeededData();
             this.send(stream);

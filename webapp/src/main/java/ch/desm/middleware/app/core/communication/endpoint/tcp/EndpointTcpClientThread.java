@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.tcp;
 
+import ch.desm.middleware.app.core.utility.UnicodeFormatter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -13,6 +14,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClientThread.class);
 
+    private final int BUFFER = 1024;
 	private EndpointTcpClient endpoint;
 
 	public EndpointTcpClientThread(EndpointTcpClient endpoint) {
@@ -34,14 +36,13 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
                                 new BufferedReader(
                                         new InputStreamReader(
                                                 endpoint.socket.getInputStream()));
-                        char[] buffer = new char[256];
-                        int anzahlZeichen = bufferedReader.read(buffer, 0, 256); // blockiert bis Nachricht empfangen
+                        char[] buffer = new char[BUFFER];
+                        int anzahlZeichen = bufferedReader.read(buffer, 0, BUFFER); // blockiert bis Nachricht empfangen
 
                         String message = "";
                         if(anzahlZeichen > 0){
                             message = new String(buffer, 0, anzahlZeichen);
                         }
-
                         if(!message.isEmpty()){
                             endpoint.receiveEvent(message);
                         }

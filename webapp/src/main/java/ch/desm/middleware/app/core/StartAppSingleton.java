@@ -33,10 +33,10 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 	public void run(){
 		startManagement("ws://heisenberg:80/gui/management");
-		startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM4);
-        startOmlPetrinet();
+		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM4);
+        //startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
-        //startZusi("192.168.1.2", 1436);
+        startZusi("7.94.80.35", 1436);
         startHangout(Integer.MAX_VALUE);
 
 	}
@@ -60,15 +60,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 		zusi.getEndpoint().sendMessageRegisterClient();
 		zusi.getEndpoint().start();
 
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		zusi.getEndpoint().sendMessageNeededData();
-
-
+//		zusi.getEndpoint().sendMessageNeededData();
     }
 	
 	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){

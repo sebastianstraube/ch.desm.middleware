@@ -60,6 +60,16 @@ public class ZusiEndpointMessageService {
             this.nrBytes = (this.data.length*2) + (data.isEmpty() ? 0 : 2);
         }
 
+        public Node(String hexId, String data){
+            String idSwapped = getSwappedEndian(hexId);
+            int id = Integer.valueOf(idSwapped, 16);
+            this.data = new int[data.length()];
+            for(int i=0; i<data.length();i++){
+                this.data[i] = Integer.valueOf(data.charAt(i));
+            }
+            this.nrBytes = (this.data.length*2) + (data.isEmpty() ? 0 : 2);
+        }
+
         public Node(int id, int data){
             this.id = id;
             this.data = getArray(data);
@@ -299,7 +309,7 @@ public class ZusiEndpointMessageService {
         return swapped;
     }
 
-    public String getConnectMessageStream(){
+    public String getMessageConnect(){
         NodeBase root = new NodeBase();
         Node start = new Node(1); //0
         Node hello = new Node(1); // 0

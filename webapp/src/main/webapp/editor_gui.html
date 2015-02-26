@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+	  *{
+		cursor: pointer;
+	  }
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head> 
+  
+  <body>
+
+		<canvas  id="gui" width="800" height="481" style="border:1px solid black; top:10px; left:10px; position:relative; background-color:white; background-image:url('img/detail_iltis_background.png') ; background-size:800px 481px; background-repeat:none;"></canvas>
+
+	<div id="board" style="border:1px solid; clear:both;">
+		<option></option>
+		<ol>
+		</ol>
+	</div>
+	<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script>
+    <script>
+
+	var shapeId = 0;
+	
+function Point(x, y){
+	this.x = x;
+	this.y = y;
+}
+
+function Shape(canvasId){
+	this.id = shapeId++;
+	this.canvasId = canvasId;
+}
+
+function Line(canvasId, startpoint){
+	this.constructor(canvasId);
+	this.startpoint = startpoint;
+	this.endpoint;	
+		
+	this.draw = function(){
+		var canvas = document.getElementById(this.canvasId);
+		var context = canvas.getContext('2d');
+
+		// do cool things with the context
+		context.beginPath();
+		context.moveTo(this.startpoint.x, this.startpoint.y);
+		context.lineWidth = 2;
+		context.fillStyle = 'red';
+		context.strokeStyle = 'red';
+		context.lineTo(this.endpoint.x, this.endpoint.y);
+		context.stroke();
+	}
+	
+	this.setEndpoint = function(endpoint){
+		this.endpoint = endpoint;
+	}
+	
+	this.drawId = function(){
+		var canvas = document.getElementById(this.canvasId);
+		var context = canvas.getContext('2d');
+
+		// do cool things with the context
+		context.beginPath();
+		context.fillText(this.id, this.endpoint.x, this.endpoint.y);
+		context.stroke();
+	}
+}
+
+var lines = new Array();
+
+//Line inheritance from Shape
+Line.prototype = new Shape('gui');
+
+
+
+window.onload = function() {
+                var myCanvas = document.getElementById("gui");
+                if(myCanvas){
+                                var isDown = false;
+                                var canvasX, canvasY;
+                                var line;
+								
+                                $(myCanvas)
+                                .mousedown(function(e){
+                                                isDown = true;
+                                                canvasX = e.pageX - myCanvas.offsetLeft;
+                                                canvasY = e.pageY - myCanvas.offsetTop;
+												line = new Line('gui', new Point(canvasX,canvasY));
+                                })
+								.mousemove(function(e){
+                                                /*if(isDown){
+													canvasX = e.pageX - myCanvas.offsetLeft;
+													canvasY = e.pageY - myCanvas.offsetTop;
+													
+													line.setEndpoint(new Point(canvasX, canvasY));
+													line.draw();
+												}*/
+                                })
+                                .mouseup(function(e){
+                                                isDown = false;
+												canvasX = e.pageX - myCanvas.offsetLeft;
+                                                canvasY = e.pageY - myCanvas.offsetTop;
+												line.setEndpoint(new Point(canvasX, canvasY));
+												line.draw();
+												line.drawId();
+												lines.push(line);
+												$("#board ol").append('<li><span> id:'+ line.id + ', start[x:' +line.startpoint.x+ ', y:'+line.startpoint.y+'], end[x:'+line.endpoint.x+', y:'+line.endpoint.y+']</span></li>');
+                                });
+                }
+        };
+    </script>
+  </body>
+</html>     
