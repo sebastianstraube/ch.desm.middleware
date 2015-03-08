@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.core.communication.endpoint.tcp;
 
-import ch.desm.middleware.app.core.utility.UnicodeFormatter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -9,12 +8,13 @@ import ch.desm.middleware.app.core.communication.endpoint.EndpointThreadBase;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class EndpointTcpClientThread extends EndpointThreadBase {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClientThread.class);
 
-    private final int BUFFER = 1024;
+    private final int BUFFER = 128;
 	private EndpointTcpClient endpoint;
 
 	public EndpointTcpClientThread(EndpointTcpClient endpoint) {
@@ -24,39 +24,22 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 
 	@Override
 	public void run() {
+        byte[] buffer = null;
 
         while (!isInterrupted()) {
-			try {
+            try {
+                LOGGER.log(Level.INFO, "Thread active: " + this.getName());
 
-				LOGGER.log(Level.TRACE,"Thread active: " + this.getName());
-
-                try {
-                    if(endpoint.isConnected()){
-                        BufferedReader bufferedReader =
-                                new BufferedReader(
-                                        new InputStreamReader(
-                                                endpoint.socket.getInputStream()));
-                        char[] buffer = new char[BUFFER];
-                        int anzahlZeichen = bufferedReader.read(buffer, 0, BUFFER); // blockiert bis Nachricht empfangen
-
-                        String message = "";
-                        if(anzahlZeichen > 0){
-                            message = new String(buffer, 0, anzahlZeichen);
-                        }
-                        if(!message.isEmpty()){
-                            endpoint.receiveEvent(message);
-                        }
-                    }
-                } catch (IOException e) {
-                    LOGGER.log(Level.ERROR, e);
+                if (endpoint.isConnected()) {
+                    buffer = new byte[BUFFER];
+                    int j = endpoint.socket.getInputStream().read(buffer);
+                    byte[] inBuffer = new byte[j];
+                    System.arraycopy(buffer, 0, inBuffer, 0, j);
+                    endpoint.receiveEvent(inBuffer);
                 }
-                doHangout();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 	}
-
 }

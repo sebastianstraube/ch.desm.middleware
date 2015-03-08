@@ -5,12 +5,11 @@ java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
-import ch.desm.middleware.app.core.utility.UnicodeFormatter;
+import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -20,9 +19,9 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 
     private Object socketLock;
 	private EndpointTcpClientThread thread;
+    private Object receiveEventLock;
 	protected Socket socket;
 	protected SocketAddress socketAddress;
-    UnicodeFormatter unicodeFormatter;
 
     public abstract void connect();
     public abstract void disconnect();
@@ -34,6 +33,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 		this.thread = new EndpointTcpClientThread(this);
 		this.socketAddress = new InetSocketAddress(ip, port);
 		this.socket = new Socket();
+        this.receiveEventLock = new Object();
 	}
 
     @Override
@@ -56,31 +56,25 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 		}
 	}
 
-    public void receiveEvent(String message) throws IOException {
-        if(message != null && !message.isEmpty()){
+    /**
+     *
+     * @param message
+     * @throws IOException
+     */
+    public void receiveEvent(byte[] message) throws IOException {
+        synchronized(receiveEventLock){
+            String hexMessage = UtilConvertingHex.toHex(message);
 
-            char[] chararray = message.toCharArray();
-            String hexMessage = "";
-
-            for(int i=0; i<chararray.length;i++){
-                int c = (int) chararray[i];
-                String hex = Integer.toHexString(c);
-                hexMessage +=  hex;
-            }
-
-            LOGGER.log(Level.INFO, "client receive message: " + hexMessage);
-            onIncomingEndpointMessage(message);
-        }else{
-            LOGGER.log(Level.WARN, "received event message is empty.");
+            LOGGER.log(Level.INFO, "Thread active: " + hexMessage);
+            onIncomingEndpointMessage(hexMessage);
         }
-
     }
 
     public synchronized void send(String message) throws IOException{
         synchronized (socketLock) {
 
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            message = UnicodeFormatter.removeControleCharacter(message);
+            message = UtilConvertingHex.removeControleCharacter(message);
 
             byte[] byteStream = getByteStream(message);
             LOGGER.log(Level.INFO, "client sending message: " + Arrays.toString(byteStream)); // message);//Arrays.toString(byteStream));
@@ -97,20 +91,9 @@ public abstract class EndpointTcpClient extends EndpointCommon {
         }
     }
 
-    public static String convertBytes(byte[] array, String name) {
-        String output = "";
-        for (int k = 0; k < array.length; k++) {
-            String hex = UnicodeFormatter.byteToHex(array[k]);
-            output += hex;
-            LOGGER.log(Level.INFO, (name + "[" + k + "] = " + "0x" + hex));
-        }
-        return output;
-    }
-
-
     private byte[] getByteStream(String hexMessage){
 
-        hexMessage = UnicodeFormatter.removeControleCharacter(hexMessage);
+        hexMessage = UtilConvertingHex.removeControleCharacter(hexMessage);
 
         byte[] byteStream = new byte[hexMessage.length()/2];
         for(int i=0; i<hexMessage.length()/2; i++){

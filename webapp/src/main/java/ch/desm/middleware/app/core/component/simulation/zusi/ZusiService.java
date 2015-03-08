@@ -4,6 +4,7 @@ import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapOml;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolService;
 
 /**
  * Created by Sebastian on 28.11.2014.
@@ -16,7 +17,7 @@ public class ZusiService {
     private ZusiBrokerClient client;
     private ZusiEndpointTcpClient endpoint;
     private ZusiMapOml map;
-    private ZusiEndpointMessageService messageService;
+    private ZusiProtocolService messageService;
 
     public ZusiService(Broker broker, String ip, int port){
 
@@ -24,7 +25,7 @@ public class ZusiService {
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new ZusiMessageProcessor();
         this.map = new ZusiMapOml();
-        this.messageService = new ZusiEndpointMessageService(this);
+        this.messageService = new ZusiProtocolService();
 
         this.client = new ZusiBrokerClient(broker, this);
         this.endpoint = new ZusiEndpointTcpClient(this, ip, port);
@@ -54,7 +55,8 @@ public class ZusiService {
         return this.map;
     }
 
-    public ZusiEndpointMessageService getMessageService(){
+    public ZusiProtocolService getMessageService(){
         return messageService;
     }
+
 }

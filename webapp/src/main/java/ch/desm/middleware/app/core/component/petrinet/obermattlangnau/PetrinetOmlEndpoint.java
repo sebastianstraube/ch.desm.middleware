@@ -1,9 +1,7 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
-import ch.desm.middleware.app.core.communication.endpoint.EndpointBase;
-import ch.desm.middleware.app.core.communication.endpoint.EndpointCommonListenerInterface;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.utility.Pair;
+import ch.desm.middleware.app.core.common.Pair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

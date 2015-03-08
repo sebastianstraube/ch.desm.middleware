@@ -2,12 +2,11 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
 import java.util.*;
 
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.PetrinetMapDelay;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
-import ch.desm.middleware.app.core.utility.Pair;
+import ch.desm.middleware.app.core.common.Pair;
 
 import javax.websocket.EncodeException;
 

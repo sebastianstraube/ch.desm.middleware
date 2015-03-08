@@ -1,12 +1,11 @@
-package ch.desm.middleware.app.core.utility;
+package ch.desm.middleware.app.core.common.utility;
 
-import java.util.LinkedList;
 import java.util.Random;
 
 /**
  * Created by Sebastian on 12.11.2014.
  */
-public class Utility {
+public class UtilRandomGenerator {
 
     private static final int MIN = 256;
     private static final int MAX = 512;

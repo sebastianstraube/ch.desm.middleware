@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.common;
 
 
-import ch.desm.middleware.app.core.utility.Utility;
+import ch.desm.middleware.app.core.common.utility.UtilRandomGenerator;
 
 /**
  * Abstract Thread Daemon
@@ -37,7 +37,7 @@ public abstract class DaemonThreadBase extends Thread {
     }
 
     public void doRandomHangout() throws InterruptedException{
-        doHangout(Utility.randInt());
+        doHangout(UtilRandomGenerator.randInt());
     }
 
     public int getSleepTime(){

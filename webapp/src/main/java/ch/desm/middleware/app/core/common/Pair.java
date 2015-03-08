@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.utility;
+package ch.desm.middleware.app.core.common;
 
 public class Pair<L,R> {
 

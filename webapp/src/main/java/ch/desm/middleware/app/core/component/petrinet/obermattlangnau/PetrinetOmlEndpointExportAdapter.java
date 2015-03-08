@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.PetrinetMapDelay;
-import ch.desm.middleware.app.core.utility.Pair;
+import ch.desm.middleware.app.core.common.Pair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

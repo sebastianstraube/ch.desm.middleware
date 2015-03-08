@@ -1,9 +1,7 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
-import ch.desm.middleware.app.core.utility.Pair;
-
-import java.security.InvalidParameterException;
+import ch.desm.middleware.app.core.common.Pair;
 
 /**
  * Created by Sebastian on 11.12.2014.

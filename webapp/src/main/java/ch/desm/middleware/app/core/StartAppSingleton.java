@@ -32,11 +32,13 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 
 	public void run(){
-		startManagement("ws://heisenberg:80/gui/management");
+		//startManagement("ws://heisenberg:80/gui/management");
 		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM4);
         //startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
-        startZusi("7.94.80.35", 1436);
+        //startZusi("7.94.80.35", 1436);
+		testZusi("localhost", 1436);
+
         startHangout(Integer.MAX_VALUE);
 
 	}
@@ -56,11 +58,27 @@ public class StartAppSingleton extends DaemonThreadBase {
     public void startZusi(String ip, int port){
 
         ZusiService zusi = new ZusiService(Broker.getInstance(), ip, port);
-        zusi.getEndpoint().init();
-		zusi.getEndpoint().sendMessageRegisterClient();
-		zusi.getEndpoint().start();
+        //zusi.getEndpoint().init();
+		//zusi.getEndpoint().sendMessageRegisterClient();
+		//zusi.getEndpoint().start();
+        //zusi.getEndpoint().sendMessageNeededData();
+    }
 
-//		zusi.getEndpoint().sendMessageNeededData();
+    public void testZusi(String ip, int port){
+        ZusiService zusi = new ZusiService(Broker.getInstance(), ip, port);
+
+        try {
+            LOGGER.log(Level.INFO, "(true)test encode decode is successful: " + zusi.getMessageService().testEncodeDecode());
+            LOGGER.log(Level.INFO, "(false)test encode is successful: " + zusi.getMessageService().testEncode(zusi.getMessageService().testStream1()));
+            LOGGER.log(Level.INFO, "(false)test encode is successful: " + zusi.getMessageService().testEncode(zusi.getMessageService().testStream2()));
+            LOGGER.log(Level.INFO, "(true)test encode is successful: " + zusi.getMessageService().testEncode(zusi.getMessageService().testStream3()));
+            LOGGER.log(Level.INFO, "(true)test globale id encode and decode is successful: " + zusi.getMessageService().testGetGlobalId(zusi.getMessageService().testStream3()));
+            LOGGER.log(Level.INFO, "(true)test get base node from global id is successful: " + zusi.getMessageService().testGetRoot("0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0"));
+            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + zusi.getMessageService().isMessageComplete(zusi.getMessageService().getMessageNeededData()));
+            LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + zusi.getMessageService().isMessageComplete(zusi.getMessageService().testStream1()));
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
     }
 	
 	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){
