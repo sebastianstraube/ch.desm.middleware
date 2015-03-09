@@ -17,6 +17,7 @@ public class MessageBase{
 	public static final String MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU = "stellwerkobermattlangnau";
 	public static final String MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU = "petrinet_obermatt";
 	public static final String MESSAGE_TOPIC_MANAGEMENT = "management";
+    public static final String MESSAGE_TOPIC_SIMULATION_ZUSI = "zusi";
 	
 	private String topic;
     private String messageId;

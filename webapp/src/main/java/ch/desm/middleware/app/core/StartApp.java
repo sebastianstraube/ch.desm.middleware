@@ -8,8 +8,7 @@ public class StartApp {
 
     private static Logger LOGGER = Logger.getLogger(StartApp.class);
 
-    public static void main(String[] args){
-
+    private static void startJettyServer(){
         JettyServer server = new JettyServer("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/webapp");
         server.start();
 
@@ -20,6 +19,11 @@ public class StartApp {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args){
+
+        startJettyServer();
         StartAppSingleton.getSingleton().start();
     }
 }

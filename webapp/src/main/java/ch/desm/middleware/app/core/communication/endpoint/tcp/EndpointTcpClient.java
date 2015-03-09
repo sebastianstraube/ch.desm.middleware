@@ -24,7 +24,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 	protected SocketAddress socketAddress;
 
     public abstract void connect();
-    public abstract void disconnect();
+    public abstract void disconnect(String reason);
 
     public EndpointTcpClient(String ip, int port) {
         LOGGER.log(Level.INFO, "starting client connect to Server with ip:" + ip + " and port: " + port);
@@ -65,7 +65,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
         synchronized(receiveEventLock){
             String hexMessage = UtilConvertingHex.toHex(message);
 
-            LOGGER.log(Level.INFO, "Thread active: " + hexMessage);
+            LOGGER.log(Level.TRACE, "Thread active: " + hexMessage);
             onIncomingEndpointMessage(hexMessage);
         }
     }
@@ -104,4 +104,9 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 
         return byteStream;
     }
+
+    public String toString(){
+        return socket.toString();
+    }
+
 }

@@ -27,5 +27,9 @@ public class ComponentMapMiddleware extends ComponentMapBase {
 
         //management
         map.put("mgmt.stellwerk.obermattlangnau", "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;?;management;#");map.put("mgmt.petrinet.obermatlangnau", "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;?;management;#");map.put("mgmt.cabine.re420.fabisch", "mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;?;management;#");map.put("mgmt.cabine.re420.ubw32", "mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;?;management;#");map.put("mgmt.simulation.locsim.rs232", "mgmt.simulation.locsim.rs232;os;0;management;simulation;locsim.rs232;?;management;#");map.put("mgmt.simulation.locsim.dll", "mgmt.simulation.locsim.dll;os;0;management;simulation;locsim.dll;?;management;#");
+
+        //zusi
+        map.put("0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0", "0003-0113-0001::0001:2b,0002:00,0003:07,0004:1,0005:0;;;stromabnehmer;hoch;tastee;?;zusi;#");map.put("0003-0113-0001::0001:2B,0002:00,0003:07,0004:0,0005:0", "0003-0113-0001::0001:2b,0002:00,0003:07,0004:0,0005:0;;;stromabnehmer;tief;tastec;?;zusi;#");map.put("0003-0113-0001::0001:11,0002:45,0003:01,0004:0,0005:0", "0003-0113-0001::0001:11,0002:45,0003:01,0004:0,0005:0;;;hauptschalter;ein;taste h;?;zusi;#");map.put("0003-0113-0001::0001:11,0002:71,0003:01,0004:0,0005:0", "0003-0113-0001::0001:11,0002:71,0003:01,0004:0,0005:0;;;hauptschalter;aus;taste n;?;zusi;#");
+
     }
 }

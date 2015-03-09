@@ -2,12 +2,10 @@ package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
 import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
 
-import java.util.Iterator;
-
 /**
  * Created by Sebastian on 06.03.2015.
  */
-class Node extends NodeBase {
+class ZusiProtocolNode extends ZusiProtocolNodeBase {
     /**
      * id of node
      */
@@ -27,7 +25,7 @@ class Node extends NodeBase {
      *
      * @param id
      */
-    public Node(int id){
+    public ZusiProtocolNode(int id){
         this(id, "");
     }
 
@@ -35,7 +33,7 @@ class Node extends NodeBase {
      *
      * @param hexId
      */
-    public Node(String hexId){
+    public ZusiProtocolNode(String hexId){
         this(Integer.valueOf(hexId, 16), "");
     }
 
@@ -43,9 +41,50 @@ class Node extends NodeBase {
      *
      * @param hexId
      */
-    public Node(String hexId, String hexData){
-        this(Integer.valueOf(hexId, 16), hexData);
+    public ZusiProtocolNode(String hexId, String data){
+        this(Integer.valueOf(hexId, 16), data);
     }
+
+    /**
+     *
+     * @param id
+     * @param data
+     */
+    public ZusiProtocolNode(int id, String data){
+        this.id = id;
+        this.data = convertData(data);
+        this.nrBytes = data.length() + (data.isEmpty() ? 0 : 2);
+    }
+
+    /**
+     *
+     * @param id
+     * @param data
+     */
+    public ZusiProtocolNode(int id, int data){
+        this.id = id;
+        this.data = getArray(data);
+        this.nrBytes = (this.data.length*2) + (data==0 ? 0 : 2);
+    }
+
+    /**
+     *
+     * @param data
+     * @return
+     */
+    public int[] convertData(String data){
+        int dataArray[]= new int[data.length()];
+        for(int i=0; i<data.length();i++){
+            dataArray[i] = Integer.valueOf(data.charAt(i));
+        }
+
+        return dataArray;
+    }
+
+    public void setData(String data){
+        this.data = convertData(data);
+    }
+
 
     /**
      *
@@ -89,31 +128,6 @@ class Node extends NodeBase {
 
     /**
      *
-     * @param id
-     * @param data
-     */
-    public Node(int id, String data){
-        this.id = id;
-        this.data = new int[data.length()];
-        for(int i=0; i<data.length();i++){
-            this.data[i] = Integer.valueOf(data.charAt(i));
-        }
-        this.nrBytes = (this.data.length*2) + (data.isEmpty() ? 0 : 2);
-    }
-
-    /**
-     *
-     * @param id
-     * @param data
-     */
-    public Node(int id, int data){
-        this.id = id;
-        this.data = getArray(data);
-        this.nrBytes = (this.data.length*2) + (data==0 ? 0 : 2);
-    }
-
-    /**
-     *
      * @param data
      * @return
      */
@@ -123,5 +137,6 @@ class Node extends NodeBase {
 
         return a;
     }
+
 }
 

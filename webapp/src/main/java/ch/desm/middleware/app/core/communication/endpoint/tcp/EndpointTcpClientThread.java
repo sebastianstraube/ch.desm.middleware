@@ -28,7 +28,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 
         while (!isInterrupted()) {
             try {
-                LOGGER.log(Level.INFO, "Thread active: " + this.getName());
+                LOGGER.log(Level.TRACE, "Thread active: " + this.getName());
 
                 if (endpoint.isConnected()) {
                     buffer = new byte[BUFFER];
@@ -38,7 +38,10 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
                     endpoint.receiveEvent(inBuffer);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.ERROR, e);
+            } catch (NegativeArraySizeException e){
+                LOGGER.log(Level.ERROR, e + " at endpoint: " + endpoint.toString());
+                endpoint.disconnect("unexpected read buffer size");
             }
         }
 	}

@@ -5,6 +5,7 @@ import ch.desm.middleware.app.core.communication.message.translator.MessageTrans
 import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapOml;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolService;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolServiceTest;
 
 /**
  * Created by Sebastian on 28.11.2014.
@@ -17,7 +18,9 @@ public class ZusiService {
     private ZusiBrokerClient client;
     private ZusiEndpointTcpClient endpoint;
     private ZusiMapOml map;
-    private ZusiProtocolService messageService;
+    private ZusiProtocolService protocolService;
+    private ZusiProtocolServiceTest protocolServiceTest;
+
 
     public ZusiService(Broker broker, String ip, int port){
 
@@ -25,10 +28,11 @@ public class ZusiService {
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new ZusiMessageProcessor();
         this.map = new ZusiMapOml();
-        this.messageService = new ZusiProtocolService();
+        this.protocolService = new ZusiProtocolService();
 
         this.client = new ZusiBrokerClient(broker, this);
         this.endpoint = new ZusiEndpointTcpClient(this, ip, port);
+        this.protocolServiceTest = new ZusiProtocolServiceTest();
 
     }
     public ComponentMapMiddleware getComponentMapMiddleware(){
@@ -55,8 +59,13 @@ public class ZusiService {
         return this.map;
     }
 
-    public ZusiProtocolService getMessageService(){
-        return messageService;
+    public ZusiProtocolServiceTest getProtocolServiceTest(){
+        return protocolServiceTest;
     }
+
+    public ZusiProtocolService getProtocolService(){
+        return protocolService;
+    }
+
 
 }

@@ -7,17 +7,17 @@ import java.util.LinkedList;
  */
 // listNodes contains message structure
 // one message in listNodes is one message for transfer
- class NodeBase {
+ class ZusiProtocolNodeBase {
 
     /**
      *
      */
-    protected LinkedList<Node> nodes;
+    protected LinkedList<ZusiProtocolNode> nodes;
 
     /**
      *
      */
-    public NodeBase(){
+    public ZusiProtocolNodeBase(){
         nodes = new LinkedList<>();
     }
 
@@ -25,7 +25,7 @@ import java.util.LinkedList;
      *
      * @param n
      */
-    public void addNode(Node n){
+    public void addNode(ZusiProtocolNode n){
         nodes.add(n);
     }
 

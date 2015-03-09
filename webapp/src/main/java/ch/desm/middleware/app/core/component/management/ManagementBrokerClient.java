@@ -51,6 +51,7 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM);
 		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
 		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232);
+        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI);
 	}
 
 }
