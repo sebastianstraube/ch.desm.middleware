@@ -6,9 +6,9 @@ import org.apache.log4j.Logger;
 /**
  * Created by Sebastian on 09.03.2015.
  */
-public class ZusiProtocolServiceTest extends ZusiProtocolService {
+public class ZusiProtocolTest extends ZusiProtocol {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolServiceTest.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolTest.class);
 
     /**
      *

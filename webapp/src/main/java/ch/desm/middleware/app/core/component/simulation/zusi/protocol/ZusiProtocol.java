@@ -1,7 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
 import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
@@ -9,9 +8,9 @@ import java.util.Arrays;
 /**
  * Created by Sebastian on 06.12.2014.
  */
-public class ZusiProtocolService {
+public class ZusiProtocol {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolService.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocol.class);
     protected static final String NODE_END = "FFFFFFFF";
     protected static final String NODE_START = "00000000";
     protected static final String CLIENT_TYPE = "DESM-Middleware";

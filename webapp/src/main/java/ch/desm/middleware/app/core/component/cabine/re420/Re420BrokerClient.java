@@ -12,16 +12,16 @@ import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 
-public class Re420 extends Re420BrokerClientBase {
+public class Re420BrokerClient extends Re420BrokerClientBase {
 
-	private static Logger LOGGER = Logger.getLogger(Re420.class);
+	private static Logger LOGGER = Logger.getLogger(Re420BrokerClient.class);
 
 	private Re420MessageProcessor processor;
 	private MessageTranslatorMiddleware translator;
 
 
-	public Re420(Broker broker, Re420EndpointUbw32 endpoint,
-			Re420EndpointFabisch endpointFabisch) {
+	public Re420BrokerClient(Broker broker, Re420EndpointUbw32 endpoint,
+                             Re420EndpointFabisch endpointFabisch) {
 		super(broker, endpoint, endpointFabisch);
 
 		this.processor = new Re420MessageProcessor();

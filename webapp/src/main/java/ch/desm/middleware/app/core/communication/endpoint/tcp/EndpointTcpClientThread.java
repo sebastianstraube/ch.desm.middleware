@@ -39,6 +39,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
                 }
             } catch (IOException e) {
                 LOGGER.log(Level.ERROR, e);
+                endpoint.disconnect(e.getMessage());
             } catch (NegativeArraySizeException e){
                 LOGGER.log(Level.ERROR, e + " at endpoint: " + endpoint.toString());
                 endpoint.disconnect("unexpected read buffer size");

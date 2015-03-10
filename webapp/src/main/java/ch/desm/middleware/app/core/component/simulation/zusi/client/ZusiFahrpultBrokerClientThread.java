@@ -1,7 +1,8 @@
-package ch.desm.middleware.app.core.component.simulation.zusi;
+package ch.desm.middleware.app.core.component.simulation.zusi.client;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientThreadBase;
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -10,13 +11,13 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class ZusiBrokerClientThread extends ComponentBrokerClientThreadBase {
+public class ZusiFahrpultBrokerClientThread extends ComponentBrokerClientThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiBrokerClientThread.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiFahrpultBrokerClientThread.class);
     private ZusiService service;
     private Object processMessagesLock;
 
-    public ZusiBrokerClientThread(ZusiService service){
+    public ZusiFahrpultBrokerClientThread(ZusiService service){
         this.service = service;
         this.processMessagesLock = new Object();
     }

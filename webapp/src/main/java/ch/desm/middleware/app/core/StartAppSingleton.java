@@ -3,7 +3,7 @@ package ch.desm.middleware.app.core;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420;
+import ch.desm.middleware.app.core.component.cabine.re420.Re420BrokerClient;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlService;
@@ -13,6 +13,7 @@ import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
+import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultBrokerClientTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -36,8 +37,8 @@ public class StartAppSingleton extends DaemonThreadBase {
 		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM4);
         //startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
-        startZusi("7.94.80.35", 1436);
-		//testZusi("localhost", 1436);
+        //startZusi("7.94.80.35", 1436);
+		testZusi("7.94.80.35", 1436);
 
         startHangout(Integer.MAX_VALUE);
 
@@ -56,34 +57,39 @@ public class StartAppSingleton extends DaemonThreadBase {
         OmlService oml = new OmlService(Broker.getInstance(), port);
 	}
 
-    public void startZusi(String ip, int port){
+    public ZusiService startZusi(String ip, int port){
 
-        ZusiService zusi = new ZusiService(Broker.getInstance(), ip, port);
-        zusi.getEndpoint().init();
-        zusi.getEndpoint().start();
+        ZusiService service = new ZusiService(Broker.getInstance(), ip, port);
+        service.getEndpointFahrpult().init();
+        service.getEndpointFahrpult().start();
 
-		zusi.getEndpoint().sendMessageRegisterClientFahrpult();
-        //zusi.getEndpoint().sendMessageRegisterClientAusbildung();
+		service.getEndpointFahrpult().sendMessageRegisterClientFahrpult();
+        service.getEndpointFahrpult().sendMessageFahrpultNeededData();
+        //service.getEndpointFahrpult().sendMessageRegisterClientAusbildung();
 
+        return service;
     }
 
     public void testZusi(String ip, int port){
-        ZusiService zusi = new ZusiService(Broker.getInstance(), ip, port);
+        ZusiService service = startZusi(ip, port);
 
         try {
-            LOGGER.log(Level.INFO, "(true)test encode decode is successful: " + zusi.getProtocolServiceTest().testEncodeDecode());
-            LOGGER.log(Level.INFO, "(false)test encode is successful: " + zusi.getProtocolServiceTest().testEncode(zusi.getProtocolServiceTest().testStream1()));
-            LOGGER.log(Level.INFO, "(false)test encode is successful: " + zusi.getProtocolServiceTest().testEncode(zusi.getProtocolServiceTest().testStream2()));
-            LOGGER.log(Level.INFO, "(true)test encode is successful: " + zusi.getProtocolServiceTest().testEncode(zusi.getProtocolServiceTest().testStream3()));
-            LOGGER.log(Level.INFO, "(true)test globale id encode and decode is successful: " + zusi.getProtocolServiceTest().testGetGlobalId(zusi.getProtocolServiceTest().testStream3()));
-            LOGGER.log(Level.INFO, "(true)test get base node from global id is successful: " + zusi.getProtocolServiceTest().testGetRoot("0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0"));
-            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + zusi.getProtocolServiceTest().isMessageComplete(zusi.getProtocolServiceTest().getMessageNeededDataFahrpult()));
-            LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + zusi.getProtocolServiceTest().isMessageComplete(zusi.getProtocolServiceTest().testStream1()));
-            LOGGER.log(Level.INFO, "(true)test encode decode needed data packet is complete: " + zusi.getProtocolServiceTest().testEncodeDecodeNeededData());
+            LOGGER.log(Level.INFO, "(true)test encode decode is successful: " + service.getProtocolServiceTest().testEncodeDecode());
+            LOGGER.log(Level.INFO, "(false)test encode is successful: " + service.getProtocolServiceTest().testEncode(service.getProtocolServiceTest().testStream1()));
+            LOGGER.log(Level.INFO, "(false)test encode is successful: " + service.getProtocolServiceTest().testEncode(service.getProtocolServiceTest().testStream2()));
+            LOGGER.log(Level.INFO, "(true)test encode is successful: " + service.getProtocolServiceTest().testEncode(service.getProtocolServiceTest().testStream3()));
+            LOGGER.log(Level.INFO, "(true)test globale id encode and decode is successful: " + service.getProtocolServiceTest().testGetGlobalId(service.getProtocolServiceTest().testStream3()));
+            LOGGER.log(Level.INFO, "(true)test get base node from global id is successful: " + service.getProtocolServiceTest().testGetRoot("0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0"));
+            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + service.getProtocolServiceTest().isMessageComplete(service.getProtocolServiceTest().getMessageNeededDataFahrpult()));
+            LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + service.getProtocolServiceTest().isMessageComplete(service.getProtocolServiceTest().testStream1()));
+            LOGGER.log(Level.INFO, "(true)test encode decode needed data packet is complete: " + service.getProtocolServiceTest().testEncodeDecodeNeededData());
 
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
+
+        ZusiFahrpultBrokerClientTest test = new ZusiFahrpultBrokerClientTest(service);
+        test.testPrepareTrain();
     }
 	
 	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){
@@ -98,7 +104,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	public void testCabine(){
 		Re420EndpointUbw32 re420Endpoint = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM30);
 		Re420EndpointFabisch re420EndpointFabisch = new Re420EndpointFabisch(EndpointRs232.EnumSerialPorts.COM31);
-		Re420 re420Impl = new Re420(Broker.getInstance(), re420Endpoint, re420EndpointFabisch);
+		Re420BrokerClient re420Impl = new Re420BrokerClient(Broker.getInstance(), re420Endpoint, re420EndpointFabisch);
 
 		//test analog output
 		re420Impl.emulateBrokerMessage("a74;o;0;analog-instrument;spannung;fahrdraht;FF;kabinere420;#");	

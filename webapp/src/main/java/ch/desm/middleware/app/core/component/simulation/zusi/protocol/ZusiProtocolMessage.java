@@ -26,15 +26,23 @@ public class ZusiProtocolMessage {
 
     /**
      *
-     * @param stream
      */
-    public ZusiProtocolMessage(String stream){
-        this.stream = stream;
-        parseStream(stream);
+    public ZusiProtocolMessage(){
+        this.stream = "";
+        this.groupId ="";
+        this.parameterList = new ArrayList<>();
     }
 
     /**
      *
+     * @param stream
+     */
+    public ZusiProtocolMessage(String stream){
+        setStream(stream);
+    }
+
+    /**
+     * e.g. 0003-0113-0001::0001:07,0002:00,0003:03,0004:2,0005:0
      * @param stream
      */
     private void parseStream(String stream){
@@ -50,10 +58,21 @@ public class ZusiProtocolMessage {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean hasGroupId(String id){
         return id.equalsIgnoreCase(groupId);
     }
 
+    /**
+     *
+     * @param key
+     * @param value
+     * @return
+     */
     public boolean hasParameter(String key, String value){
         boolean hasParameter = false;
         for(Pair el : parameterList){
@@ -63,6 +82,15 @@ public class ZusiProtocolMessage {
         }
 
         return hasParameter;
+    }
+
+    /**
+     *
+     * @param stream
+     */
+    public void setStream(String stream){
+        this.stream = stream;
+        parseStream(stream);
     }
 
 

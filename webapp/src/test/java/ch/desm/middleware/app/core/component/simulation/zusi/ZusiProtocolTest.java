@@ -8,11 +8,11 @@ import java.util.LinkedList;
 import static junit.framework.Assert.assertEquals;
 
 
-public class ZusiProtocolServiceTest {
+public class ZusiProtocolTest {
 
     private ZusiService service;
 
-    public ZusiProtocolServiceTest(){
+    public ZusiProtocolTest(){
         service = new ZusiService(Broker.getInstance(), "127.0.0.1", 4136);
     }
 

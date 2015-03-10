@@ -1,16 +1,14 @@
-package ch.desm.middleware.app.core.component.simulation.zusi;
+package ch.desm.middleware.app.core.component.simulation.zusi.client;
 
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpServer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
+public class ZusiFahrpultEndpointTcpServer extends EndpointTcpServer {
 
-public class ZusiEndpointTcpServer extends EndpointTcpServer {
+    private static Logger LOGGER = Logger.getLogger(ZusiFahrpultEndpointTcpServer.class);
 
-    private static Logger LOGGER = Logger.getLogger(ZusiEndpointTcpServer.class);
-
-	public ZusiEndpointTcpServer(String ip, int port) {
+	public ZusiFahrpultEndpointTcpServer(String ip, int port) {
 		super(ip, port);
         this.registerEndpointListener();
 	}

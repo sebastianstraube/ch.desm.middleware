@@ -42,7 +42,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 	 * @param message
 	 * @return
 	 */
-	public String convertToMiddlewareMessage(Re420 impl,
+	public String convertToMiddlewareMessage(Re420BrokerClient impl,
 			MessageUbw32Base message) {
 
 		String middlewareMessagesInput = "";
@@ -259,7 +259,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 
 	}
 
-    public void processBrokerMessage(Re420 impl, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(Re420BrokerClient impl, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             this.processBrokerMessage(impl, message);
         }
@@ -268,7 +268,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
      * @param impl
      * @param message
      */
-    public void processBrokerMessage(Re420 impl, MessageMiddleware message) {
+    public void processBrokerMessage(Re420BrokerClient impl, MessageMiddleware message) {
 
         // is fabisch endpoint digital message
         if (impl.getEndpointFabisch().getMapDigital()

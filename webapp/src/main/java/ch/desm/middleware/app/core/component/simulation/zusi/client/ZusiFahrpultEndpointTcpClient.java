@@ -1,7 +1,7 @@
-package ch.desm.middleware.app.core.component.simulation.zusi;
+package ch.desm.middleware.app.core.component.simulation.zusi.client;
 
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolMessage;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolStream;
 import org.apache.log4j.Level;
@@ -9,14 +9,14 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class ZusiEndpointTcpClient extends EndpointTcpClient {
+public class ZusiFahrpultEndpointTcpClient extends EndpointTcpClient {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiEndpointTcpClient.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiFahrpultEndpointTcpClient.class);
 
     private ZusiService service;
     private ZusiProtocolStream zusiMessage;
 
-	public ZusiEndpointTcpClient(ZusiService service, String ip, int port) {
+	public ZusiFahrpultEndpointTcpClient(ZusiService service, String ip, int port) {
 		super(ip, port);
         this.registerEndpointListener();
         this.service = service;
@@ -32,29 +32,18 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
         zusiMessage.cutStream(extractedMessage.length());
 
         if(!extractedMessage.isEmpty()){
-            LOGGER.log(Level.INFO, "client receive buffered message: " + extractedMessage);
+            LOGGER.log(Level.TRACE, "client receive buffered message: " + extractedMessage);
 
             try {
 
                 String globalId = service.getProtocolService().getGlobalId(extractedMessage);
                 ZusiProtocolMessage zusiProtocolMessage = new ZusiProtocolMessage(globalId);
 
-                //is ack_needed_data command?
-                if(zusiProtocolMessage.hasGroupId("0001-0002") &&
-                        zusiProtocolMessage.hasParameter("0001", "00200033002e0030002e0036002e00320036") &&
-                        zusiProtocolMessage.hasParameter("0002", "0031003700330033003500320032003600360037") &&
-                        zusiProtocolMessage.hasParameter("0003", "0000")) {
-
-                        sendMessageFahrpultNeededData();
-
-                        //TODO implement parallel control
-                        //sendMessageAusbildungNeededData();
-                }
-
                 //TODO Map lookup !
                 String message = service.getComponentMapMiddleware().getValue(globalId);
 
-                service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI);
+                //TODO send middleware message to broker clients
+                //service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI);
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
             }

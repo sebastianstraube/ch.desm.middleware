@@ -3,6 +3,7 @@ package ch.desm.middleware.app.core.component.simulation.zusi;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
+import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClient;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -52,7 +53,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
             try {
                 if (isInitProcessMessage(element)) {
                     if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) {
-                        processInitEndpoint(service.getEndpoint(), element);
+                        processInitEndpoint(service.getEndpointFahrpult(), element);
                     }
                 }else{
 
@@ -62,6 +63,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
             }
+
         }else{
             try {
                 throw new Exception("unsupported topic, broker message delegation skipped: " + element.toString());
@@ -71,7 +73,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void processInitEndpoint(ZusiEndpointTcpClient endpoint, MessageMiddleware element){
+    private void processInitEndpoint(ZusiFahrpultEndpointTcpClient endpoint, MessageMiddleware element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -89,7 +91,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void delegateToEndpoint(ZusiEndpointTcpClient endpoint, String message){
+    private void delegateToEndpoint(ZusiFahrpultEndpointTcpClient endpoint, String message){
         LOGGER.log(Level.INFO, "processing endpoint message: " + message);
 
         try {
