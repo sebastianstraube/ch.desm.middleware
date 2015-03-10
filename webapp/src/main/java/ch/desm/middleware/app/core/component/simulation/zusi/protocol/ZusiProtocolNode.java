@@ -6,6 +6,8 @@ import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
  * Created by Sebastian on 06.03.2015.
  */
 class ZusiProtocolNode extends ZusiProtocolNodeBase {
+
+    public static final int ID_BYTE_LENGTH = 2;
     /**
      * id of node
      */
@@ -82,8 +84,15 @@ class ZusiProtocolNode extends ZusiProtocolNodeBase {
     }
 
     public void setData(String data){
-        this.data = convertData(data);
+        int nr = Integer.valueOf(data, 16);
+        int[] i = new int[2];
+        i[1] = 0;
+        i[0] = nr;
+        this.data = i;
+        this.nrBytes = i.length + ID_BYTE_LENGTH;
     }
+
+
 
 
     /**

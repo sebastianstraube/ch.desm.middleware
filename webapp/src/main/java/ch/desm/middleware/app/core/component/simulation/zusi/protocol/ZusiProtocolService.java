@@ -368,12 +368,12 @@ public class ZusiProtocolService {
      */
     public String getMessageConnectFahrpult() throws Exception{
         ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
-        ZusiProtocolNode start = new ZusiProtocolNode(1); //0
-        ZusiProtocolNode hello = new ZusiProtocolNode(1); // 0
-        ZusiProtocolNode protocolVersion = new ZusiProtocolNode(1, 2); //4
-        ZusiProtocolNode clientType = new ZusiProtocolNode(2, 2); //4
-        ZusiProtocolNode text = new ZusiProtocolNode(3, CLIENT_TYPE + "(Fahrpult)"); //10
-        ZusiProtocolNode version = new ZusiProtocolNode(4, CLIENT_VERSION); //5
+        ZusiProtocolNode start = new ZusiProtocolNode(1);
+        ZusiProtocolNode hello = new ZusiProtocolNode(1);
+        ZusiProtocolNode protocolVersion = new ZusiProtocolNode(1, 2);
+        ZusiProtocolNode clientType = new ZusiProtocolNode(2, 2);
+        ZusiProtocolNode text = new ZusiProtocolNode(3, CLIENT_TYPE + "(Fahrpult)");
+        ZusiProtocolNode version = new ZusiProtocolNode(4, CLIENT_VERSION);
 
         root.addNode(start);
         start.addNode(hello);
@@ -389,7 +389,8 @@ public class ZusiProtocolService {
      * Needed Data > Zusi
      * @return
      */
-    public String getMessageNeededData() throws Exception{ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
+    public String getMessageNeededDataFahrpult() throws Exception{
+        ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
         ZusiProtocolNode client_fahrpult = new ZusiProtocolNode(2);
         ZusiProtocolNode needed_data = new ZusiProtocolNode(3);
         ZusiProtocolNode fuehrerstandsAnzeigen = new ZusiProtocolNode(10);
@@ -400,10 +401,7 @@ public class ZusiProtocolService {
         needed_data.addNode(fuehrerstandsAnzeigen);
         fuehrerstandsAnzeigen.addNode(geschwindigkeit);
 
-        String message = decode(root);
-        LOGGER.log(Level.INFO, "message decoded: " + message );
-
-        return message;
+        return decode(root);
     }
 
 
@@ -411,16 +409,36 @@ public class ZusiProtocolService {
      *
      * @return
      */
-    public String getMessageConnectAusbildungssteuerung() throws Exception{
+    public String getMessageConnectAusbildung() throws Exception{
         ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
-        ZusiProtocolNode start = new ZusiProtocolNode(3);
-        ZusiProtocolNode application = new ZusiProtocolNode(3);
+        ZusiProtocolNode start = new ZusiProtocolNode(1);
+        ZusiProtocolNode hello = new ZusiProtocolNode(1);
+        ZusiProtocolNode protocolVersion = new ZusiProtocolNode(1, 2);
+        ZusiProtocolNode clientType = new ZusiProtocolNode(2, 3);
+        ZusiProtocolNode text = new ZusiProtocolNode(3, CLIENT_TYPE + "(Ausbildung)");
+        ZusiProtocolNode version = new ZusiProtocolNode(4, CLIENT_VERSION);
+
+        root.addNode(start);
+        start.addNode(hello);
+        hello.addNode(protocolVersion);
+        hello.addNode(clientType);
+        hello.addNode(text);
+        hello.addNode(version);
+
+
+        return decode(root);
+    }
+
+    public String getMessageNeededDataAusbildung() throws Exception{
+        ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
+        ZusiProtocolNode client_ausbilder = new ZusiProtocolNode(3);
+        ZusiProtocolNode needed_data = new ZusiProtocolNode(3);
         ZusiProtocolNode trainpos = new ZusiProtocolNode(1);
         trainpos.setData(ZusiProtocolAusbildungssteuerung.COMMAND_FROM_TRAINPOS);
 
-        root.addNode(start);
-        start.addNode(application);
-        application.addNode(trainpos);
+        root.addNode(client_ausbilder);
+        client_ausbilder.addNode(needed_data);
+        needed_data.addNode(trainpos);
 
         return decode(root);
     }

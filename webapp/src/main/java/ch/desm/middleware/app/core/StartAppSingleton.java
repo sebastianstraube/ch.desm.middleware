@@ -60,8 +60,11 @@ public class StartAppSingleton extends DaemonThreadBase {
 
         ZusiService zusi = new ZusiService(Broker.getInstance(), ip, port);
         zusi.getEndpoint().init();
+        zusi.getEndpoint().start();
+
 		zusi.getEndpoint().sendMessageRegisterClientFahrpult();
-		zusi.getEndpoint().start();
+        //zusi.getEndpoint().sendMessageRegisterClientAusbildung();
+
     }
 
     public void testZusi(String ip, int port){
@@ -74,7 +77,7 @@ public class StartAppSingleton extends DaemonThreadBase {
             LOGGER.log(Level.INFO, "(true)test encode is successful: " + zusi.getProtocolServiceTest().testEncode(zusi.getProtocolServiceTest().testStream3()));
             LOGGER.log(Level.INFO, "(true)test globale id encode and decode is successful: " + zusi.getProtocolServiceTest().testGetGlobalId(zusi.getProtocolServiceTest().testStream3()));
             LOGGER.log(Level.INFO, "(true)test get base node from global id is successful: " + zusi.getProtocolServiceTest().testGetRoot("0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0"));
-            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + zusi.getProtocolServiceTest().isMessageComplete(zusi.getProtocolServiceTest().getMessageNeededData()));
+            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + zusi.getProtocolServiceTest().isMessageComplete(zusi.getProtocolServiceTest().getMessageNeededDataFahrpult()));
             LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + zusi.getProtocolServiceTest().isMessageComplete(zusi.getProtocolServiceTest().testStream1()));
             LOGGER.log(Level.INFO, "(true)test encode decode needed data packet is complete: " + zusi.getProtocolServiceTest().testEncodeDecodeNeededData());
 

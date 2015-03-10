@@ -135,7 +135,7 @@ public class ZusiProtocolServiceTest extends ZusiProtocolService {
         String s = getStreamNeededData();
         String cmp = "";
         try {
-            cmp = getMessageNeededData();
+            cmp = getMessageNeededDataFahrpult();
 
         } catch (Exception e) {
             e.printStackTrace();

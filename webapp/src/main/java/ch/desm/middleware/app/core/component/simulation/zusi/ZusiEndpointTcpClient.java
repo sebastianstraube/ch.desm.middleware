@@ -43,10 +43,12 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
                 if(zusiProtocolMessage.hasGroupId("0001-0002") &&
                         zusiProtocolMessage.hasParameter("0001", "00200033002e0030002e0036002e00320036") &&
                         zusiProtocolMessage.hasParameter("0002", "0031003700330033003500320032003600360037") &&
-                        zusiProtocolMessage.hasParameter("0003", "0000")){
-                    sendMessageNeededData();
+                        zusiProtocolMessage.hasParameter("0003", "0000")) {
 
-                    //sendMessageRegisterClientAusbildung();
+                        sendMessageFahrpultNeededData();
+
+                        //TODO implement parallel control
+                        //sendMessageAusbildungNeededData();
                 }
 
                 //TODO Map lookup !
@@ -109,17 +111,27 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
     public void sendMessageRegisterClientAusbildung(){
 
         try {
-            String stream = service.getProtocolService().getMessageConnectAusbildungssteuerung();
+            String stream = service.getProtocolService().getMessageConnectAusbildung();
             this.send(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
     }
 
-    public void sendMessageNeededData(){
+    public void sendMessageFahrpultNeededData(){
 
         try {
-            String stream = service.getProtocolService().getMessageNeededData();
+            String stream = service.getProtocolService().getMessageNeededDataFahrpult();
+            this.send(stream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+    }
+
+    public void sendMessageAusbildungNeededData(){
+
+        try {
+            String stream = service.getProtocolService().getMessageNeededDataAusbildung();
             this.send(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
