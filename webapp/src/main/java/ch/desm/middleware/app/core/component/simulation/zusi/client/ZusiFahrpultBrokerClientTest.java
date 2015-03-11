@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.client;
 
-import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 
 /**
@@ -16,7 +15,7 @@ public class ZusiFahrpultBrokerClientTest {
 
     public void testPrepareTrain(){
 
-        service.getBrokerClient().emulateBrokerMessage(getStreamInput_HauptschalterAus());
+        service.getBrokerClient().emulateBrokerMessage(testStreamInput_HauptschalterAus());
 /*
         service.getBrokerClient().emulateBrokerMessage(getStreamInput_HauptschalterEin());
         service.getBrokerClient().emulateBrokerMessage(getStreamInput_StromabnehmerHeben());
@@ -24,11 +23,12 @@ public class ZusiFahrpultBrokerClientTest {
 */
     }
 
+
     /**
      *
      * @return
      */
-    private String getStreamInput_HauptschalterEin(){
+    private String testStreamInput_HauptschalterEin(){
         return "0003-0113-0001::0001:11,0002:00,0003:01,0004:2,0005:0";
     }
 
@@ -37,7 +37,7 @@ public class ZusiFahrpultBrokerClientTest {
      *
      * @return
      */
-    private String getStreamInput_HauptschalterAus(){
+    private String testStreamInput_HauptschalterAus(){
         return "0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0;;;hauptschalter;aus;taste n;?;zusi;#";
     }
 
@@ -45,7 +45,7 @@ public class ZusiFahrpultBrokerClientTest {
      *
      * @return
      */
-    private String getStreamInput_StromabnehmerHeben(){
+    private String testStreamInput_StromabnehmerHeben(){
         return "0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0";
     }
 
@@ -53,7 +53,7 @@ public class ZusiFahrpultBrokerClientTest {
      *
      * @return
      */
-    private String getStreamInput_RichtungsschalterVorwärts(){
+    private String testStreamInput_RichtungsschalterVorwärts(){
         return "0003-0113-0001::0001:07,0002:00,0003:03,0004:2,0005:0";
     }
 }

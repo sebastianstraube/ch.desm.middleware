@@ -1,7 +1,9 @@
 package ch.desm.middleware.app.core.communication.message.processor;
 
+import ch.desm.middleware.app.core.common.utility.UtilMessageProcessor;
+
 public abstract class MessageProcessorBase {
 
-    public MessageProcessorUtil util = new MessageProcessorUtil();
+    public UtilMessageProcessor util = new UtilMessageProcessor();
 
 }

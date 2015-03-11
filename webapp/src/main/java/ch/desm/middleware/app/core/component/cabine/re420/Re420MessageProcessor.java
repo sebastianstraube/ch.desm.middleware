@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
+import ch.desm.middleware.app.core.common.utility.UtilMessageProcessor;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.cabine.re420.elements.Re420ElementFahrschalter;
@@ -19,13 +19,13 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 	private Re420ElementFahrschalter fahrschalter;
 	private Re420MapBinding binding;
 	private Re420MapFabischValue mapValues;
-    private MessageProcessorUtil util;
+    private UtilMessageProcessor util;
 
 	public Re420MessageProcessor() {
 		fahrschalter = new Re420ElementFahrschalter();
 		binding = new Re420MapBinding();
 		mapValues = new Re420MapFabischValue();
-        this.util = new MessageProcessorUtil();
+        this.util = new UtilMessageProcessor();
 	}
 
 	public String handleMessageFahrschalter(String key, boolean isEnabled) {
@@ -76,7 +76,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 							parameter = "on";
 							stream = fahrschalter.getMap().getValue(fahrschalterKey);
 							stream = stream.replace(
-									MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER,
+									MessageCommon.MESSAGE_PARAMETER_DELIMITER,
 									parameter);
 							middlewareMessagesInput = middlewareMessagesInput
 									.concat(stream);
@@ -102,7 +102,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 						}
 
 						stream = stream.replace(
-								MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
+								MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
 						middlewareMessagesInput = middlewareMessagesInput
 								.concat(stream);
 					}
@@ -134,7 +134,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 						parameter = "on";
 						stream = fahrschalter.getMap().getValue(fahrschalterKey);
 						stream = stream.replace(
-								MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
+								MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
 						middlewareMessagesInput = middlewareMessagesInput
 								.concat(stream);
 					}
@@ -177,7 +177,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 						}
 
 						stream = stream.replace(
-								MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
+								MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
 
 						middlewareMessagesInput = middlewareMessagesInput
 								.concat(stream);
@@ -217,7 +217,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 							"");
 
 					//stream = stream.replaceAll(
-					//		MessageCommon.PARAMETER_PLACEHOLDER, parameter);
+					//		MessageCommon.PARAMETER_DELIMITER, parameter);
 					//middlewareMessagesInput = middlewareMessagesInput
 					//		.concat(stream);
 				}
@@ -295,7 +295,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
         }
 
         // is software message
-        else if (MessageProcessorUtil.isSoftwareMessage(message.getOutputInput())) {
+        else if (UtilMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
 
             if (message.getGlobalId().equalsIgnoreCase(
                     "locsim.initialization.ready.ini1")

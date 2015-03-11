@@ -3,7 +3,7 @@ package ch.desm.middleware.app.core.component.simulation.locsim;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorUtil;
+import ch.desm.middleware.app.core.common.utility.UtilMessageProcessor;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.simulation.locsim.elements.LocsimElementFahrschalter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
@@ -51,7 +51,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessor {
             // ....
         }
 
-        else if (MessageProcessorUtil.isSoftwareMessage(message.getOutputInput())) {
+        else if (UtilMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
 
             // send locsim interface ready to start simulation
             if (message.getGlobalId().equalsIgnoreCase(

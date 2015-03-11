@@ -13,6 +13,7 @@ import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiServiceTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultBrokerClientTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
@@ -71,25 +72,87 @@ public class StartAppSingleton extends DaemonThreadBase {
     }
 
     public void testZusi(String ip, int port){
-        ZusiService service = startZusi(ip, port);
+        ZusiServiceTest service = new ZusiServiceTest(Broker.getInstance(), ip, port);
+        try {
+            LOGGER.log(Level.INFO, "(true)test encode decode from middleware message: " + service.getZusiProtocolNodeConverterTest().testGetConvertToInputCommand("0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0;;;hauptschalter;aus;taste n;?;zusi;#"));
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
 
         try {
-            LOGGER.log(Level.INFO, "(true)test encode decode is successful: " + service.getProtocolServiceTest().testEncodeDecode());
-            LOGGER.log(Level.INFO, "(false)test encode is successful: " + service.getProtocolServiceTest().testEncode(service.getProtocolServiceTest().testStream1()));
-            LOGGER.log(Level.INFO, "(false)test encode is successful: " + service.getProtocolServiceTest().testEncode(service.getProtocolServiceTest().testStream2()));
-            LOGGER.log(Level.INFO, "(true)test encode is successful: " + service.getProtocolServiceTest().testEncode(service.getProtocolServiceTest().testStream3()));
-            LOGGER.log(Level.INFO, "(true)test globale id encode and decode is successful: " + service.getProtocolServiceTest().testGetGlobalId(service.getProtocolServiceTest().testStream3()));
-            LOGGER.log(Level.INFO, "(true)test get base node from global id is successful: " + service.getProtocolServiceTest().testGetRoot("0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0"));
-            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + service.getProtocolServiceTest().isMessageComplete(service.getProtocolServiceTest().getMessageNeededDataFahrpult()));
-            LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + service.getProtocolServiceTest().isMessageComplete(service.getProtocolServiceTest().testStream1()));
-            LOGGER.log(Level.INFO, "(true)test encode decode needed data packet is complete: " + service.getProtocolServiceTest().testEncodeDecodeNeededData());
+            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + service.getZusiProtocolNodeConverterTest().isMessageComplete(service.getZusiProtocolNodeConverterTest().getMessageNeededDataFahrpult()));
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+        try {
+            LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + service.getZusiProtocolNodeConverterTest().isMessageComplete(service.getZusiProtocolNodeConverterTest().testStream1()));
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+        try {
+            LOGGER.log(Level.INFO, "(true)test globale id encode and decode is successful: " + service.getZusiProtocolNodeConverterTest().testGetGlobalId(service.getZusiProtocolNodeConverterTest().testStream3()));
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+
+        try {
+            LOGGER.log(Level.INFO, "(true)test encode decode is successful: " + service.getZusiProtocolNodeConverterTest().testEncodeDecode());
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+        try {
+            LOGGER.log(Level.INFO, "(true)test no data package: " + service.getZusiProtocolNodeConverterTest().isMessageComplete(service.getZusiProtocolNodeConverterTest().testStreamNoData()));
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+        try {
+            LOGGER.log(Level.INFO, "(true)test encode no data package: " + service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().testStreamNoData()));
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+        try {
+            LOGGER.log(Level.INFO, "(false)test encode is successful: " + service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().testStream1()));
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+        try {
+            LOGGER.log(Level.INFO, "(false)test encode is successful: " + service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().testStream2()));
 
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
 
-        ZusiFahrpultBrokerClientTest test = new ZusiFahrpultBrokerClientTest(service);
-        test.testPrepareTrain();
+        try {
+            LOGGER.log(Level.INFO, "(true)test encode is successful: " + service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().testStream3()));
+
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+        try {
+            LOGGER.log(Level.INFO, "(true)test get base node from global id is successful: " + service.getZusiProtocolNodeConverterTest().testGetRoot("0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0"));
+
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+        try {
+            LOGGER.log(Level.INFO, "(true)test encode decode needed data packet is complete: " + service.getZusiProtocolNodeConverterTest().testEncodeDecodeNeededData());
+
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+
+
+        //ZusiFahrpultBrokerClientTest test = new ZusiFahrpultBrokerClientTest(service);
+        //test.testPrepareTrain();
     }
 	
 	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){

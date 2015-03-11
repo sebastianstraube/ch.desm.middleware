@@ -25,7 +25,7 @@ public class LocsimMessageTranslatorRs232 extends MessageTranslatorRs232Base {
 		String commonMessage = mapMiddlewareMessages.getValue(middlewareKey);
 		
 		String dataValue = locsimMessage.getData();
-		commonMessage = replaceMiddlewareMessageParameter(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, mapParameter.getValue(dataValue), commonMessage);
+		commonMessage = replaceMiddlewareMessageParameter(MessageCommon.MESSAGE_PARAMETER_DELIMITER, mapParameter.getValue(dataValue), commonMessage);
 
 		return commonMessage;
 	}

@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.communication.message.processor;
+package ch.desm.middleware.app.core.common.utility;
 
 import java.util.Map.Entry;
 
@@ -9,14 +9,14 @@ import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapFabischValue;
 
-public class MessageProcessorUtil {
+public class UtilMessageProcessor {
 
-	private static Logger LOGGER = Logger.getLogger(MessageProcessorUtil.class);
+	private static Logger LOGGER = Logger.getLogger(UtilMessageProcessor.class);
 	
 	public boolean init1;
 	private Re420MapFabischValue mapValues;
 	
-	public MessageProcessorUtil() {
+	public UtilMessageProcessor() {
 		mapValues = new Re420MapFabischValue();
 		init1 = false;
 	}

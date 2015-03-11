@@ -32,7 +32,7 @@ public class ZusiFahrpultEndpointTcpClient extends EndpointTcpClient {
         zusiMessage.cutStream(extractedMessage.length());
 
         if(!extractedMessage.isEmpty()){
-            LOGGER.log(Level.TRACE, "client receive buffered message: " + extractedMessage);
+            LOGGER.log(Level.INFO, "client receive buffered message: " + extractedMessage);
 
             try {
 
@@ -97,16 +97,6 @@ public class ZusiFahrpultEndpointTcpClient extends EndpointTcpClient {
         }
     }
 
-    public void sendMessageRegisterClientAusbildung(){
-
-        try {
-            String stream = service.getProtocolService().getMessageConnectAusbildung();
-            this.send(stream);
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-    }
-
     public void sendMessageFahrpultNeededData(){
 
         try {
@@ -117,6 +107,22 @@ public class ZusiFahrpultEndpointTcpClient extends EndpointTcpClient {
         }
     }
 
+    /**
+     * TODO move to own client
+     */
+    public void sendMessageRegisterClientAusbildung(){
+
+        try {
+            String stream = service.getProtocolService().getMessageConnectAusbildung();
+            this.send(stream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+    }
+
+    /**
+     * TODO move to own client
+     */
     public void sendMessageAusbildungNeededData(){
 
         try {

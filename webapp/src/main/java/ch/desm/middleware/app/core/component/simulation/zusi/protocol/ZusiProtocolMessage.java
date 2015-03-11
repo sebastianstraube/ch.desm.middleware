@@ -9,10 +9,15 @@ import java.util.*;
  */
 public class ZusiProtocolMessage {
 
+    public static final String DELIMITER_GROUP = "::";
+    public static final String DELIMITER_GROUP_VALUE = "-";
+    public static final String DELIMITER_PARAMETER = ",";
+    public static final String DELIMITER_PARAMETER_VALUE = ":";
+
     /**
      *
      */
-    String stream;
+    private String stream;
 
     /**
      *
@@ -22,7 +27,7 @@ public class ZusiProtocolMessage {
     /**
      *
      */
-    private List<Pair> parameterList;
+    private List<Pair<String, String>> parameterList;
 
     /**
      *
@@ -35,27 +40,10 @@ public class ZusiProtocolMessage {
 
     /**
      *
-     * @param stream
+     * @param stream e.g. 0003-0113-0001::0001:07,0002:00,0003:03,0004:2,0005:0
      */
     public ZusiProtocolMessage(String stream){
         setStream(stream);
-    }
-
-    /**
-     * e.g. 0003-0113-0001::0001:07,0002:00,0003:03,0004:2,0005:0
-     * @param stream
-     */
-    private void parseStream(String stream){
-        groupId = stream.substring(0, stream.indexOf("::"));
-        parameterList = new ArrayList<Pair>();
-
-        stream = stream.substring(stream.indexOf("::")+2, stream.length());
-        String[] parameter = stream.split(",");
-        for(String el : parameter) {
-            String key = el.substring(0, el.indexOf(":"));
-            String value = el.substring(el.indexOf(":") + 1, el.length());
-            parameterList.add(new Pair(key, value));
-        }
     }
 
     /**
@@ -93,6 +81,50 @@ public class ZusiProtocolMessage {
         parseStream(stream);
     }
 
+    /**
+     *
+     * @return
+     */
+    public String getGroupId(){
+        return this.groupId;
+    }
 
+    /**
+     *
+     * @return
+     */
+    public String[] getGroupIdAsArray(){
+        return this.groupId.split(DELIMITER_GROUP);
+    }
 
+    /**
+     *
+     * @return
+     */
+    public List<Pair<String, String>> getParameterList(){
+        return this.parameterList;
+    }
+
+    /**
+     * e.g. 0003-0113-0001::0001:07,0002:00,0003:03,0004:2,0005:0
+     * @param stream
+     */
+    private void parseStream(String stream){
+        parameterList = new ArrayList<>();
+
+        if(stream.contains(DELIMITER_GROUP) &&
+                stream.contains(DELIMITER_PARAMETER) &&
+                stream.contains(DELIMITER_PARAMETER_VALUE)){
+            groupId = stream.substring(0, stream.indexOf(DELIMITER_GROUP));
+            stream = stream.substring(stream.indexOf(DELIMITER_GROUP)+DELIMITER_GROUP.length(), stream.length());
+            String[] parameter = stream.split(DELIMITER_PARAMETER);
+            for(String el : parameter) {
+                String key = el.substring(0, el.indexOf(DELIMITER_PARAMETER_VALUE));
+                String value = el.substring(el.indexOf(DELIMITER_PARAMETER_VALUE) + 1, el.length());
+                parameterList.add(new Pair(key, value));
+            }
+        }else{
+            groupId = stream;
+        }
+    }
 }

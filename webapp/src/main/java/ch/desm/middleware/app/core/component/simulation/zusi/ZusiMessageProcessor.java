@@ -4,6 +4,7 @@ import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClient;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolMessage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -26,51 +27,33 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void processBrokerMessage(ZusiService service, MessageMiddleware element){
+    private void delegateToEndpoint(ZusiFahrpultEndpointTcpClient endpoint, String message){
+        LOGGER.log(Level.INFO, "processing endpoint message: " + message);
 
-        if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM)){
-            try {
-                //TODO implementation
-
-            } catch (Exception e) {
-                //LOGGER.log(Level.ERROR, e);
-            }
-        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL)){
-            try {
-               //TODO implementation
-
-            } catch (Exception e) {
-                //LOGGER.log(Level.ERROR, e);
-            }
-        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232)){
-            try {
-                //TODO implementation
-
-            } catch (Exception e) {
-                //LOGGER.log(Level.ERROR, e);
-            }
-        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
-            try {
-                if (isInitProcessMessage(element)) {
-                    if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) {
-                        processInitEndpoint(service.getEndpointFahrpult(), element);
-                    }
-                }else{
-
-                    //TODO implementation
-                    // activate this, when gui taken controle over this endpoint
-                }
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
-
-        }else{
-            try {
-                throw new Exception("unsupported topic, broker message delegation skipped: " + element.toString());
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
+        try {
+            endpoint.send(message);
+        } catch (IOException e) {
+            LOGGER.log(Level.ERROR, e);
         }
+    }
+
+    public boolean isInitProcessMessage(MessageMiddleware element){
+        /*
+        if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) {
+            return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) {
+            return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.fabisch")) {
+            return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.ubw32")) {
+            return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.simulation.locsim.rs232")) {
+            return true;
+        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.simulation.locsim.dll")) {
+            return true;
+        }
+        */
+        return false;
     }
 
     private void processInitEndpoint(ZusiFahrpultEndpointTcpClient endpoint, MessageMiddleware element){
@@ -91,32 +74,67 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
         }
     }
 
-    private void delegateToEndpoint(ZusiFahrpultEndpointTcpClient endpoint, String message){
-        LOGGER.log(Level.INFO, "processing endpoint message: " + message);
+    private void processBrokerMessage(ZusiService service, MessageMiddleware message){
 
-        try {
-            endpoint.send(message);
-        } catch (IOException e) {
-            LOGGER.log(Level.ERROR, e);
+        switch(message.getTopic()){
+            case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM):{
+                //TODO implementation
+            };
+            case(MessageBase.MESSAGE_TOPIC_CABINE_RE420):{
+                //TODO implementation
+            };
+            case(MessageBase.MESSAGE_TOPIC_CABINE_RE420_FABISCH):{
+                //TODO implementation
+            };
+            case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU):{
+                //TODO implementation
+            };
+            case(MessageBase.MESSAGE_TOPIC_MANAGEMENT):{
+                processManagament(service, message);
+            };
+            case(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU):{
+                //TODO implementation
+            };
+            case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL):{
+                //TODO implementation
+            };
+            case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232):{
+                //TODO implementation
+            };
+            case(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI):{
+                processZusi(service, message);
+            };
+
+            standard:{
+                try {
+                    throw new Exception("unsupported topic, broker message delegation skipped: " + message.toString());
+                } catch (Exception e) {
+                    LOGGER.log(Level.ERROR, e);
+                }
+            };
+        }
+
+    }
+
+    /**
+     *
+     * @param service
+     * @param message = 0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0;;;hauptschalter;aus;taste n;?;zusi;#
+     */
+    private void processZusi(ZusiService service, MessageMiddleware message){
+        if(message.getParameter().equalsIgnoreCase("on")){
+            ZusiProtocolMessage z = new ZusiProtocolMessage(message.getGlobalId());
+
+            //Input command
+            if(service.getProtocolCommand().isCommandInput(z)){
+
+            }
         }
     }
 
-    public boolean isInitProcessMessage(MessageMiddleware element){
 
-        if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.fabisch")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.ubw32")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.simulation.locsim.rs232")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.simulation.locsim.dll")) {
-            return true;
-        }
 
-        return false;
+    private void processManagament(ZusiService service, MessageMiddleware message){
+        //TODO implementation
     }
 }
