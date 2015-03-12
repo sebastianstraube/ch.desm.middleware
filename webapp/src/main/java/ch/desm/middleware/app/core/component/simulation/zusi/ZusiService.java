@@ -3,11 +3,14 @@ package ch.desm.middleware.app.core.component.simulation.zusi;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
+import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiAusbildungBrokerClient;
+import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiAusbildungEndpointTcpClient;
 import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultBrokerClient;
 import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClient;
-import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapOml;
+import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapAusbildung;
+import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapFahrpult;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolNodeConverter;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolCommand;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolCommandTo;
 
 /**
  * Created by Sebastian on 28.11.2014.
@@ -15,13 +18,19 @@ import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtoc
 public class ZusiService {
 
     private MessageTranslatorMiddleware translator;
-    private ZusiMessageProcessor processor;
     private ComponentMapMiddleware componentMapMiddleware;
+
+    private ZusiMessageProcessor processor;
+    private ZusiProtocolNodeConverter protocolService;
+    private ZusiProtocolCommandTo protocolCommandTo;
+
     private ZusiFahrpultBrokerClient brokerClientFahrpult;
     private ZusiFahrpultEndpointTcpClient endpointFahrpult;
-    private ZusiProtocolNodeConverter protocolService;
-    private ZusiProtocolCommand protocolCommand;
-    private ZusiMapOml map;
+    private ZusiMapFahrpult mapFahrpult;
+
+    private ZusiAusbildungBrokerClient brokerClientAusbildung;
+    private ZusiAusbildungEndpointTcpClient endpointAusbildung;
+    private ZusiMapAusbildung mapAusbildung;
 
     /**
      *
@@ -33,13 +42,16 @@ public class ZusiService {
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new ZusiMessageProcessor();
-        this.map = new ZusiMapOml();
         this.protocolService = new ZusiProtocolNodeConverter();
+        this.protocolCommandTo = new ZusiProtocolCommandTo();
 
         this.brokerClientFahrpult = new ZusiFahrpultBrokerClient(broker, this);
+        this.mapFahrpult = new ZusiMapFahrpult();
         this.endpointFahrpult = new ZusiFahrpultEndpointTcpClient(this, ip, port);
-        this.protocolCommand = new ZusiProtocolCommand();
 
+        this.brokerClientAusbildung = new ZusiAusbildungBrokerClient(broker, this);
+        this.endpointAusbildung = new ZusiAusbildungEndpointTcpClient(this, ip, port);
+        this.mapAusbildung = new ZusiMapAusbildung();
     }
 
     /**
@@ -70,30 +82,6 @@ public class ZusiService {
      *
      * @return
      */
-    public ZusiFahrpultEndpointTcpClient getEndpointFahrpult(){
-        return endpointFahrpult;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public ZusiFahrpultBrokerClient getBrokerClient(){
-        return brokerClientFahrpult;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public ZusiMapOml getMap(){
-        return this.map;
-    }
-
-    /**
-     *
-     * @return
-     */
     public ZusiProtocolNodeConverter getProtocolService(){
         return protocolService;
     }
@@ -102,9 +90,56 @@ public class ZusiService {
      *
      * @return
      */
-    public ZusiProtocolCommand getProtocolCommand(){
-        return protocolCommand;
+    public ZusiProtocolCommandTo getProtocolCommandTo(){
+        return protocolCommandTo;
     }
 
+    /**
+     *
+     * @return
+     */
+    public ZusiFahrpultEndpointTcpClient getEndpointFahrpult(){
+        return endpointFahrpult;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiFahrpultBrokerClient getBrokerClientFahrpult(){
+        return brokerClientFahrpult;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiMapFahrpult getMapFahrpult(){
+        return this.mapFahrpult;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiAusbildungEndpointTcpClient getEndpointAusbildung(){
+        return endpointAusbildung;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiAusbildungBrokerClient getBrokerClientAusbildung(){
+        return brokerClientAusbildung;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiMapAusbildung getMapAusbildung(){
+        return this.mapAusbildung;
+    }
 
 }

@@ -12,7 +12,7 @@ public abstract class ComponentMapBase {
 	 * 
 	 */
 	public ComponentMapBase() {
-        this.map = new HashMap<String, String>();
+        this.map = new HashMap<>();
 		this.init();
 	}
 	
@@ -23,7 +23,7 @@ public abstract class ComponentMapBase {
 	 */
 	public String getKey(String value){
 		for(Entry<String, String> entry : map.entrySet()){
-			if(entry.getValue().equalsIgnoreCase(value)){
+			if(entry.getValue().toLowerCase().equalsIgnoreCase(value.toLowerCase())){
 				return entry.getKey();
 			}
 		}
@@ -37,12 +37,26 @@ public abstract class ComponentMapBase {
 	 */
 	public String getValue(String key){
 		for(Entry<String, String> entry : map.entrySet()){
-			if(entry.getKey().equalsIgnoreCase(key)){
+			if(entry.getKey().toUpperCase().equalsIgnoreCase(key.toUpperCase())){
 				return entry.getValue();
 			}
 		}
 		return "";
 	}
+
+    /**
+     *
+     * @param key
+     * @return
+     */
+    public String getStartValue(String key){
+        for(Entry<String, String> entry : map.entrySet()){
+            if(entry.getKey().toLowerCase().startsWith(key.toLowerCase())){
+                return entry.getValue();
+            }
+        }
+        return "";
+    }
 
 
 

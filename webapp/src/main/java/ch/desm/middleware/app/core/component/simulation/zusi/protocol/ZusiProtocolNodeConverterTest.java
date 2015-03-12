@@ -270,7 +270,7 @@ public class ZusiProtocolNodeConverterTest extends ZusiProtocolNodeConverter {
         ZusiProtocolNode client_fahrpult = new ZusiProtocolNode(2);
         ZusiProtocolNode needed_data = new ZusiProtocolNode(3);
         ZusiProtocolNode fuehrerstandsAnzeigen = new ZusiProtocolNode(10);
-        ZusiProtocolNode geschwindigkeit = new ZusiProtocolNode(1, 1);
+        ZusiProtocolNode geschwindigkeit = new ZusiProtocolNode(1, 1, 4);
 
         root.addNode(client_fahrpult);
         client_fahrpult.addNode(needed_data);

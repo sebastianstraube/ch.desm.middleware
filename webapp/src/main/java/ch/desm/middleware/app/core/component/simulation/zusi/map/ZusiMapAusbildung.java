@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class ZusiMapManagement extends ComponentMapBase {
+public class ZusiMapAusbildung extends ComponentMapBase {
 
     @Override
     public Map<String, String> getMap() {
@@ -24,7 +24,7 @@ public class ZusiMapManagement extends ComponentMapBase {
 
     @Override
     protected void init(){
-        //TODO add map
+
     }
 
 }

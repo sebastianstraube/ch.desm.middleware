@@ -16,25 +16,6 @@ public abstract class EndpointCommon extends EndpointBase implements EndpointCom
      */
     protected abstract void registerEndpointListener();
 
-	/*
-    @Override
-	public void onIncomingEndpointMessage(String message) {
-
-		try{
-			if(listeners.isEmpty()){
-				throw new IllegalStateException("no listeners registered");
-			}
-		}catch(IllegalStateException e){
-			LOGGER.log(Level.ERROR, e);
-		}
-		
-		for (EndpointCommonListenerInterface listener : this.listeners) {
-			listener.onIncomingEndpointMessage(message);
-		}
-	}
-
-*/
-
 	@Override
 	public void addEndpointListener(EndpointCommonListenerInterface listener) throws Exception {
 		if (!(listener instanceof EndpointCommonListenerInterface)) {

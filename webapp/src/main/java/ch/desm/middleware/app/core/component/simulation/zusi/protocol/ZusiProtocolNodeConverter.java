@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
 import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
-import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
@@ -98,7 +98,7 @@ public class ZusiProtocolNodeConverter {
 
         String messages = "";
         for(ZusiProtocolNode n : node.nodes){
-            String message = getStream(n);
+            String message = encode(n);
             int countGroups = countNodes(n, 0);
             for(int i=0; i<countGroups; i++){
                 message += NODE_END;
@@ -134,7 +134,7 @@ public class ZusiProtocolNodeConverter {
      * @param node
      * @return
      */
-    protected String getStream(ZusiProtocolNode node){
+    protected String encode(ZusiProtocolNode node){
         String message = "";
         int idByteLength = 0;
         if(node == null) {
@@ -148,11 +148,15 @@ public class ZusiProtocolNodeConverter {
         message += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getNrBytes() + idByteLength, 8));
         message += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getId(), 4));
 
-        int[] dataArray = node.getDataAsArray();
+        int[] dataArray = node.getDataArray();
         //only character data
         if(dataArray.length > 1){
-            String hexData = UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(dataArray, 2));
+            String hexData = UtilConvertingHex.toHex(dataArray, 2);
+            if(!node.isDataStream()){
+                hexData = UtilConvertingHex.swapEndian(hexData);
+            }
             message += hexData;
+
         //decimal data
         }else{
             String hexData = UtilConvertingHex.toHex(dataArray, 4);
@@ -160,7 +164,7 @@ public class ZusiProtocolNodeConverter {
         }
 
         for(ZusiProtocolNode n : node.nodes){
-            message += getStream(n);
+            message += encode(n);
         }
 
         return message;
@@ -227,7 +231,7 @@ public class ZusiProtocolNodeConverter {
         for(int i=0; i<nrParamerter.length; i++){
             String parameterId = parameter[i].substring(0, parameter[i].lastIndexOf(":"));
             String parameterValue = parameter[i].substring(parameter[i].lastIndexOf(":")+1, parameter[i].length());
-            ZusiProtocolNode n = new ZusiProtocolNode(Integer.valueOf(parameterId, 16).intValue(), Integer.valueOf(parameterValue, 16).intValue());
+            ZusiProtocolNode n = new ZusiProtocolNode(Integer.valueOf(parameterId, 16).intValue(), Integer.valueOf(parameterValue, 16).intValue(), parameterValue.length());
 
             if(lastNode == null){
                 root.addNode(n);
@@ -263,22 +267,22 @@ public class ZusiProtocolNodeConverter {
      */
     protected String getGlobalId(ZusiProtocolNode n, int nrParameter){
         String nodeId ="";
-        nodeId += n.getIdAsHex();
+        nodeId += n.getIdHex();
 
-        if(n.getDataAsArray().length > 0){
+        if(n.getDataArray().length > 0){
             int expandLength = 4;
-            if(n.getDataAsArray().length > 1){
+            if(n.getDataArray().length > 1){
                 expandLength = 2;
             }
-            nodeId += ":" + n.getDataAsHex(expandLength);
+            nodeId += ":" + n.getDataHex(expandLength);
         }
 
         if(!n.nodes.isEmpty()){
             for(ZusiProtocolNode next : n.nodes) {
                 String parChar = "";
-                if(next.getDataAsArray().length <= 0) {
+                if(next.getDataArray().length <= 0) {
                     parChar = "-";
-                }else if(next.getDataAsArray().length >= 0){
+                }else if(next.getDataArray().length >= 0){
 
                     if(nrParameter == 0){
                         parChar="::";
@@ -330,7 +334,8 @@ public class ZusiProtocolNodeConverter {
         int cntStartNode = 0;
         int cntEndNode = 0;
         boolean isValid = false;
-        if(message.length() >= 40){
+
+        if(message.startsWith("00000000") && message.length() >= 40){
 
             while(!isValid){
 
@@ -365,7 +370,15 @@ public class ZusiProtocolNodeConverter {
                 if(cntStartNode == cntEndNode){
                     isValid = true;
                 }else{
-                    message = message.substring(partLength, message.length());
+                    try{
+                        message = message.substring(partLength, message.length());
+                    } catch(StringIndexOutOfBoundsException e){
+                        LOGGER.log(Level.ERROR, e + " with message: " + message + ", partLength: " + partLength + ", messageLength: " + message.length());
+                        length = 0;
+                        partLength = 0;
+                        break;
+                    }
+
                 }
 
                 length+=partLength;
@@ -430,8 +443,8 @@ public class ZusiProtocolNodeConverter {
         ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
         ZusiProtocolNode start = new ZusiProtocolNode(1);
         ZusiProtocolNode hello = new ZusiProtocolNode(1);
-        ZusiProtocolNode protocolVersion = new ZusiProtocolNode(1, 2);
-        ZusiProtocolNode clientType = new ZusiProtocolNode(2, 2);
+        ZusiProtocolNode protocolVersion = new ZusiProtocolNode(1, 2, 2);
+        ZusiProtocolNode clientType = new ZusiProtocolNode(2, 2, 2);
         ZusiProtocolNode text = new ZusiProtocolNode(3, CLIENT_TYPE + "(Fahrpult)");
         ZusiProtocolNode version = new ZusiProtocolNode(4, CLIENT_VERSION);
 
@@ -454,7 +467,7 @@ public class ZusiProtocolNodeConverter {
         ZusiProtocolNode client_fahrpult = new ZusiProtocolNode(2);
         ZusiProtocolNode needed_data = new ZusiProtocolNode(3);
         ZusiProtocolNode fuehrerstandsAnzeigen = new ZusiProtocolNode(10);
-        ZusiProtocolNode geschwindigkeit = new ZusiProtocolNode(1, 1);
+        ZusiProtocolNode geschwindigkeit = new ZusiProtocolNode(1, 1, 4);
 
         root.addNode(client_fahrpult);
         client_fahrpult.addNode(needed_data);
@@ -473,8 +486,8 @@ public class ZusiProtocolNodeConverter {
         ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
         ZusiProtocolNode start = new ZusiProtocolNode(1);
         ZusiProtocolNode hello = new ZusiProtocolNode(1);
-        ZusiProtocolNode protocolVersion = new ZusiProtocolNode(1, 2);
-        ZusiProtocolNode clientType = new ZusiProtocolNode(2, 3);
+        ZusiProtocolNode protocolVersion = new ZusiProtocolNode(1, 2, 2);
+        ZusiProtocolNode clientType = new ZusiProtocolNode(2, 3, 2);
         ZusiProtocolNode text = new ZusiProtocolNode(3, CLIENT_TYPE + "(Ausbildung)");
         ZusiProtocolNode version = new ZusiProtocolNode(4, CLIENT_VERSION);
 

@@ -3,20 +3,20 @@ package ch.desm.middleware.app.core.component.simulation.zusi.client;
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.*;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolStream;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class ZusiFahrpultEndpointTcpClient extends EndpointTcpClient {
+public class ZusiAusbildungEndpointTcpClient extends EndpointTcpClient {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiFahrpultEndpointTcpClient.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiAusbildungEndpointTcpClient.class);
 
     private ZusiService service;
     private ZusiProtocolStream zusiMessage;
 
-	public ZusiFahrpultEndpointTcpClient(ZusiService service, String ip, int port) {
+	public ZusiAusbildungEndpointTcpClient(ZusiService service, String ip, int port) {
 		super(ip, port);
         this.registerEndpointListener();
         this.service = service;
@@ -34,7 +34,7 @@ public class ZusiFahrpultEndpointTcpClient extends EndpointTcpClient {
 
             if(!extractedMessage.isEmpty()){
                 LOGGER.log(Level.INFO, "client receive buffered message: " + extractedMessage);
-                service.getProcessor().processEndpointMessage(service, extractedMessage, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
+                service.getProcessor().processEndpointMessage(service, extractedMessage, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
             }else{
                 LOGGER.log(Level.TRACE, "buffered message is incomplete: " + zusiMessage.getStream());
             }
@@ -74,23 +74,30 @@ public class ZusiFahrpultEndpointTcpClient extends EndpointTcpClient {
         LOGGER.log(Level.INFO, "connected to Server with address:" + socket.getInetAddress() + ", remote port: " + socket.getPort()+ ", locale port: " + socket.getLocalPort());
     }
 
+    /**
+     * TODO move to own client
+     */
     public void sendMessageRegisterClient(){
 
         try {
-            String stream = service.getProtocolService().getMessageConnectFahrpult();
+            String stream = service.getProtocolService().getMessageConnectAusbildung();
             this.send(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
     }
 
+    /**
+     * TODO move to own client
+     */
     public void sendMessageNeededData(){
 
         try {
-            String stream = service.getProtocolService().getMessageNeededDataFahrpult();
+            String stream = service.getProtocolService().getMessageNeededDataAusbildung();
             this.send(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
     }
+
 }

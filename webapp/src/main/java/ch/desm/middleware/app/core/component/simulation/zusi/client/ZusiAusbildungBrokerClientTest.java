@@ -5,17 +5,17 @@ import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 /**
  * Created by Sebastian on 10.03.2015.
  */
-public class ZusiFahrpultBrokerClientTest {
+public class ZusiAusbildungBrokerClientTest {
 
     ZusiService service;
 
-    public ZusiFahrpultBrokerClientTest(ZusiService service){
+    public ZusiAusbildungBrokerClientTest(ZusiService service){
         this.service = service;
     }
 
     public void testStream(){
 
-        service.getBrokerClientFahrpult().emulateBrokerMessage(testStreamInput_HauptschalterEin());
+        service.getBrokerClientAusbildung().emulateBrokerMessage(testStreamInput_HauptschalterEin());
 /*
         service.getBrokerClient().emulateBrokerMessage(getStreamInput_HauptschalterEin());
         service.getBrokerClient().emulateBrokerMessage(getStreamInput_StromabnehmerHeben());

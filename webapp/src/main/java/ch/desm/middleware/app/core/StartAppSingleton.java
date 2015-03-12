@@ -14,8 +14,8 @@ import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiServiceTest;
-import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultBrokerClientTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClientTest;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -38,8 +38,10 @@ public class StartAppSingleton extends DaemonThreadBase {
 		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM4);
         //startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
-        //startZusi("7.94.80.35", 1436);
-		testZusi("7.94.80.35", 1436);
+        startZusi("7.94.80.35", 1436);
+		//testZusiService("7.94.80.35", 1436);
+        //testZusiMessageTransfer("7.94.80.35", 1436);
+
 
         startHangout(Integer.MAX_VALUE);
 
@@ -58,20 +60,23 @@ public class StartAppSingleton extends DaemonThreadBase {
         OmlService oml = new OmlService(Broker.getInstance(), port);
 	}
 
-    public ZusiService startZusi(String ip, int port){
+    public void startZusi(String ip, int port){
 
-        ZusiService service = new ZusiService(Broker.getInstance(), ip, port);
-        service.getEndpointFahrpult().init();
-        service.getEndpointFahrpult().start();
+        ZusiService serviceFahrpult = new ZusiService(Broker.getInstance(), ip, port);
+        serviceFahrpult.getEndpointFahrpult().init();
+        serviceFahrpult.getEndpointFahrpult().start();
+		serviceFahrpult.getEndpointFahrpult().sendMessageRegisterClient();
+        serviceFahrpult.getEndpointFahrpult().sendMessageNeededData();
 
-		service.getEndpointFahrpult().sendMessageRegisterClientFahrpult();
-        service.getEndpointFahrpult().sendMessageFahrpultNeededData();
-        //service.getEndpointFahrpult().sendMessageRegisterClientAusbildung();
 
-        return service;
+        ZusiService serviceAusbildung = new ZusiService(Broker.getInstance(), ip, port);
+        serviceAusbildung.getEndpointAusbildung().init();
+        serviceAusbildung.getEndpointAusbildung().start();
+        serviceAusbildung.getEndpointAusbildung().sendMessageRegisterClient();
+        serviceAusbildung.getEndpointAusbildung().sendMessageNeededData();
     }
 
-    public void testZusi(String ip, int port){
+    public void testZusiService(String ip, int port){
         ZusiServiceTest service = new ZusiServiceTest(Broker.getInstance(), ip, port);
         try {
             LOGGER.log(Level.INFO, "(true)test encode decode from middleware message: " + service.getZusiProtocolNodeConverterTest().testGetConvertToInputCommand("0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0;;;hauptschalter;aus;taste n;?;zusi;#"));
@@ -150,9 +155,22 @@ public class StartAppSingleton extends DaemonThreadBase {
             LOGGER.log(Level.ERROR, e);
         }
 
+    }
 
-        //ZusiFahrpultBrokerClientTest test = new ZusiFahrpultBrokerClientTest(service);
-        //test.testPrepareTrain();
+    public void testZusiMessageTransfer(String ip, int port){
+        ZusiService serviceFahrpult = new ZusiService(Broker.getInstance(), ip, port);
+        serviceFahrpult.getEndpointFahrpult().init();
+        serviceFahrpult.getEndpointFahrpult().start();
+        serviceFahrpult.getEndpointFahrpult().sendMessageRegisterClient();
+        serviceFahrpult.getEndpointFahrpult().sendMessageNeededData();
+
+        ZusiFahrpultEndpointTcpClientTest testTcp = new ZusiFahrpultEndpointTcpClientTest(serviceFahrpult);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        testTcp.testStream();
     }
 	
 	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){

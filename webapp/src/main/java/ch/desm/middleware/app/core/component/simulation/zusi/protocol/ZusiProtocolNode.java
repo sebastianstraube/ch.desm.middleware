@@ -28,7 +28,17 @@ class ZusiProtocolNode extends ZusiProtocolNodeBase {
     /**
      * data store, represented as int array
      */
-    private int[] data;
+    private int[] dataArray;
+
+    /**
+     *
+     */
+    private String data;
+
+    /**
+     *
+     */
+    private boolean isDataStream;
 
     /**
      *
@@ -50,8 +60,8 @@ class ZusiProtocolNode extends ZusiProtocolNodeBase {
      *
      * @param hexId
      */
-    public ZusiProtocolNode(String hexId, String data){
-        this(Integer.valueOf(hexId, 16), data);
+    public ZusiProtocolNode(String hexId, String dataArray){
+        this(Integer.valueOf(hexId, 16), dataArray);
     }
 
     /**
@@ -60,8 +70,10 @@ class ZusiProtocolNode extends ZusiProtocolNodeBase {
      * @param data
      */
     public ZusiProtocolNode(int id, String data){
+        this.isDataStream = true;
         this.id = id;
-        this.data = convertData(data);
+        this.data = data;
+        this.dataArray = convertData(data);
         this.nrBytes = data.length();
     }
 
@@ -70,30 +82,12 @@ class ZusiProtocolNode extends ZusiProtocolNodeBase {
      * @param id
      * @param data
      */
-    public ZusiProtocolNode(int id, String data, int nrBytes){
-        this.id = id;
-        this.data = convertData(data);
-        this.nrBytes = nrBytes;
-    }
-
-    /**
-     *
-     * @param id
-     * @param data
-     */
     public ZusiProtocolNode(int id, int data, int nrBytes){
+        this.isDataStream = false;
         this.id = id;
-        this.data = getArray(data, nrBytes);
+        this.data = String.valueOf(data);
+        this.dataArray = getDataArray(data, nrBytes);
         this.nrBytes = nrBytes;
-    }
-
-    /**
-     *
-     * @param id
-     * @param data
-     */
-    public ZusiProtocolNode(int id, int data){
-        this(id, data, 2);
     }
 
     /**
@@ -123,17 +117,35 @@ class ZusiProtocolNode extends ZusiProtocolNodeBase {
      *
      * @return
      */
-    public int[] getDataAsArray(){
-        return data;
+    public boolean isDataStream(){
+        return isDataStream;
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    public int[] getDataArray(){
+        return dataArray;
     }
 
     /**
      *
      * @return
      */
-    public String getDataAsHex(int length){
-        return UtilConvertingHex.toHex(data, length);
+    public String getDataHex(int length){
+        return UtilConvertingHex.toHex(dataArray, length);
     }
+
+    /**
+     *
+     * @return
+     */
+    public String getData(){
+        return this.data;
+    }
+
 
     /**
      *
@@ -147,7 +159,7 @@ class ZusiProtocolNode extends ZusiProtocolNodeBase {
      *
      * @return
      */
-    public String getIdAsHex(){
+    public String getIdHex(){
         return UtilConvertingHex.toHex(id, 4);
     }
 
@@ -156,7 +168,7 @@ class ZusiProtocolNode extends ZusiProtocolNodeBase {
      * @param data
      * @return
      */
-    private int[] getArray(int data, int length){
+    private int[] getDataArray(int data, int length){
         int[] a = new int[length];
         for(int i=0; i<length;i++){
             if(i<length-1) {

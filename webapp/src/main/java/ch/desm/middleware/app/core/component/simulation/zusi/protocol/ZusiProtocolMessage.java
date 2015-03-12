@@ -31,15 +31,6 @@ public class ZusiProtocolMessage {
 
     /**
      *
-     */
-    public ZusiProtocolMessage(){
-        this.stream = "";
-        this.groupId ="";
-        this.parameterList = new ArrayList<>();
-    }
-
-    /**
-     *
      * @param stream e.g. 0003-0113-0001::0001:07,0002:00,0003:03,0004:2,0005:0
      */
     public ZusiProtocolMessage(String stream){
@@ -52,7 +43,7 @@ public class ZusiProtocolMessage {
      * @return
      */
     public boolean hasGroupId(String id){
-        return id.equalsIgnoreCase(groupId);
+        return groupId.toUpperCase().startsWith(id.toUpperCase());
     }
 
     /**
@@ -113,11 +104,15 @@ public class ZusiProtocolMessage {
         parameterList = new ArrayList<>();
 
         if(stream.contains(DELIMITER_GROUP) &&
-                stream.contains(DELIMITER_PARAMETER) &&
                 stream.contains(DELIMITER_PARAMETER_VALUE)){
             groupId = stream.substring(0, stream.indexOf(DELIMITER_GROUP));
             stream = stream.substring(stream.indexOf(DELIMITER_GROUP)+DELIMITER_GROUP.length(), stream.length());
+
             String[] parameter = stream.split(DELIMITER_PARAMETER);
+            if(parameter.length <= 0){
+                parameter = new String[1];
+                parameter[0] = stream.substring(stream.indexOf(DELIMITER_GROUP)+2, stream.length());
+            }
             for(String el : parameter) {
                 String key = el.substring(0, el.indexOf(DELIMITER_PARAMETER_VALUE));
                 String value = el.substring(el.indexOf(DELIMITER_PARAMETER_VALUE) + 1, el.length());

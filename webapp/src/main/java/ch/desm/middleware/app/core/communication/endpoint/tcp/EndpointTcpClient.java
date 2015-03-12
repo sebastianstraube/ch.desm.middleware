@@ -18,10 +18,12 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClient.class);
 
     private Object socketLock;
-	private EndpointTcpClientThread thread;
     private Object receiveEventLock;
-	protected Socket socket;
-	protected SocketAddress socketAddress;
+    private Object sendEventLock;
+
+    protected Socket socket;
+    private EndpointTcpClientThread thread;
+    protected SocketAddress socketAddress;
 
     public abstract void connect();
     public abstract void disconnect(String reason);
@@ -30,10 +32,11 @@ public abstract class EndpointTcpClient extends EndpointCommon {
         LOGGER.log(Level.INFO, "starting client connect to Server with ip:" + ip + " and port: " + port);
 
         this.socketLock = new Object();
-		this.thread = new EndpointTcpClientThread(this);
-		this.socketAddress = new InetSocketAddress(ip, port);
-		this.socket = new Socket();
         this.receiveEventLock = new Object();
+        this.sendEventLock = new Object();
+        this.thread = new EndpointTcpClientThread(this);
+        this.socketAddress = new InetSocketAddress(ip, port);
+        this.socket = new Socket();
 	}
 
     @Override
@@ -71,17 +74,30 @@ public abstract class EndpointTcpClient extends EndpointCommon {
     }
 
     public synchronized void send(String message) throws IOException{
+        synchronized (sendEventLock) {
+
+            if(message != null && !message.isEmpty()){
+                byte[] byteStream = getByteStream(message);
+                this.send(byteStream);
+            }else{
+                LOGGER.log(Level.WARN, "client tried to send malformed endpoint message: " + message);
+            }
+        }
+    }
+
+    public synchronized void send(byte[] stream) throws IOException{
         synchronized (socketLock) {
 
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            message = UtilConvertingHex.removeControleCharacter(message);
-
-            byte[] byteStream = getByteStream(message);
-            LOGGER.log(Level.INFO, "client sending message: " + Arrays.toString(byteStream)); // message);//Arrays.toString(byteStream));
-            out.write(byteStream);
-            LOGGER.log(Level.INFO, "client sended message.");
-            out.flush();
-            LOGGER.log(Level.INFO, "client flushed socket.");
+            if(stream != null && stream.length > 0){
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                LOGGER.log(Level.INFO, "client sending message: " + Arrays.toString(stream)); // message);//Arrays.toString(byteStream));
+                out.write(stream);
+                LOGGER.log(Level.INFO, "client sended message.");
+                out.flush();
+                LOGGER.log(Level.INFO, "client flushed socket.");
+            }else{
+                LOGGER.log(Level.WARN, "client tried to send malformed endpoint message: " + stream);
+            }
         }
     }
 
