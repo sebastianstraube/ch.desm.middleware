@@ -1,10 +1,13 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
+import org.apache.log4j.Logger;
+
 /**
  * Created by Sebastian on 09.03.2015.
  */
 public class ZusiProtocolAusbildungssteuerung {
 
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolAusbildungssteuerung.class);
     /**
      * Der MODUL-Befehl überträgt ein Streckenmodul (st3-Datei) und weitere zugehörige Dateien (Signale) von Zusi an den Client.
      */

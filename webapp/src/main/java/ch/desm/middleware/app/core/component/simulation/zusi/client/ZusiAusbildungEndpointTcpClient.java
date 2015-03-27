@@ -29,7 +29,7 @@ public class ZusiAusbildungEndpointTcpClient extends EndpointTcpClient {
 
         zusiMessage.addStream(hexMessage);
         String extractedMessage = "";
-        while(!(extractedMessage = service.getProtocolService().extractSingleZusiMessage(zusiMessage.getStream())).isEmpty()){
+        while(!(extractedMessage = service.getProtocolMessageChecker().extractSingleZusiMessage(zusiMessage.getStream())).isEmpty()){
             zusiMessage.cutStream(extractedMessage.length());
 
             if(!extractedMessage.isEmpty()){
@@ -80,7 +80,7 @@ public class ZusiAusbildungEndpointTcpClient extends EndpointTcpClient {
     public void sendMessageRegisterClient(){
 
         try {
-            String stream = service.getProtocolService().getMessageConnectAusbildung();
+            String stream = service.getZusiProtocolClientMessage().getMessageConnectAusbildung();
             this.send(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
@@ -93,7 +93,7 @@ public class ZusiAusbildungEndpointTcpClient extends EndpointTcpClient {
     public void sendMessageNeededData(){
 
         try {
-            String stream = service.getProtocolService().getMessageNeededDataAusbildung();
+            String stream = service.getZusiProtocolClientMessage().getMessageNeededDataAusbildung();
             this.send(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);

@@ -5,7 +5,7 @@ import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClient;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolCommandFrom;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolCommand;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolMessage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -82,9 +82,9 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
 
             String zusiStream = "";
             //Input command
-            if(service.getProtocolCommandTo().isCommandInput(z)){
+            if(service.getProtocolCommand().isCommandInputTo(z)){
                 try {
-                    zusiStream = service.getProtocolCommandTo().getCommandStream(service, message.getGlobalId());
+                    zusiStream = service.getProtocolCommand().getCommandStreamTo(service, message.getGlobalId());
                 } catch (Exception e) {
                     LOGGER.log(Level.ERROR, e);
                 }
@@ -148,11 +148,11 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
 
     public void processEndpointMessage(ZusiService service, String message, String topic){
         try {
-            String globalId = service.getProtocolService().getGlobalId(message);
+            String globalId = service.getProtocolNodeProcessor().getGlobalId(message);
             ZusiProtocolMessage zusiProtocolMessage = new ZusiProtocolMessage(globalId);
 
             //if parameter message
-            if(ZusiProtocolCommandFrom.isCommandInput(zusiProtocolMessage)){
+            if(ZusiProtocolCommand.isCommandInputFrom(zusiProtocolMessage)){
 
                 //send message for every parameter
                 for(Pair<String, String> p: zusiProtocolMessage.getParameterList()){

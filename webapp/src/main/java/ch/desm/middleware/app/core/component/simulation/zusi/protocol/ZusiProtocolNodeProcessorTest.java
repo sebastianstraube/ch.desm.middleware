@@ -8,9 +8,9 @@ import org.apache.log4j.Logger;
 /**
  * Created by Sebastian on 09.03.2015.
  */
-public class ZusiProtocolNodeConverterTest extends ZusiProtocolNodeConverter {
+public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeConverterTest.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeProcessorTest.class);
 
     /**
      *
@@ -20,7 +20,7 @@ public class ZusiProtocolNodeConverterTest extends ZusiProtocolNodeConverter {
     public boolean testEncode(String stream){
         ZusiProtocolNodeBase root = null;
         try {
-            root = encode(stream);
+            root = getEncodeDecoder().encode(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
@@ -36,7 +36,7 @@ public class ZusiProtocolNodeConverterTest extends ZusiProtocolNodeConverter {
     public boolean testGetGlobalId(String hexStream){
         ZusiProtocolNodeBase root = null;
         try {
-            root = encode(hexStream);
+            root = getEncodeDecoder().encode(hexStream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
@@ -76,8 +76,8 @@ public class ZusiProtocolNodeConverterTest extends ZusiProtocolNodeConverter {
 
         boolean isGood = false;
         try {
-            ZusiProtocolNodeBase root = encode(testStreamConnect());
-            String encodeFromZusi = decode(root);
+            ZusiProtocolNodeBase root = getEncodeDecoder().encode(testStreamConnect());
+            String encodeFromZusi = getEncodeDecoder().decode(root);
 
             ZusiProtocolNodeBase root2 = new ZusiProtocolNodeBase();
             ZusiProtocolNode start = new ZusiProtocolNode(1);
@@ -94,7 +94,7 @@ public class ZusiProtocolNodeConverterTest extends ZusiProtocolNodeConverter {
             hello.addNode(text);
             hello.addNode(version);
 
-            String encodeFromMiddleware = decode(root2);
+            String encodeFromMiddleware = getEncodeDecoder().decode(root2);
 
             if (encodeFromZusi.equals(encodeFromMiddleware)) {
                 isGood = true;
@@ -126,7 +126,7 @@ public class ZusiProtocolNodeConverterTest extends ZusiProtocolNodeConverter {
     }
 
     ZusiServiceTest service;
-    public ZusiProtocolNodeConverterTest(ZusiServiceTest service){
+    public ZusiProtocolNodeProcessorTest(ZusiServiceTest service){
         this.service = service;
     }
 
@@ -146,13 +146,13 @@ public class ZusiProtocolNodeConverterTest extends ZusiProtocolNodeConverter {
         //zusi protocol transfer object
         ZusiProtocolMessage zpm = new ZusiProtocolMessage(mm.getGlobalId());
         //zusi data transfer object
-        ZusiProtocolNodeBase root = this.convertToInputCommand(zpm);
+        ZusiProtocolNodeBase root = this.service.getProtocolCommand().convertToInputCommand(zpm);
         //decode to zusi hex stream
-        String zusiHexStream = service.getProtocolService().decode(root);
+        String zusiHexStream = service.getProtocolNodeProcessor().getEncodeDecoder().decode(root);
         //get global id from hex stream
         String globalId = this.getGlobalId(zusiHexStream);
         //build tree from global id
-        ZusiProtocolNodeBase cmpRoot = service.getProtocolService().getRoot(globalId);
+        ZusiProtocolNodeBase cmpRoot = service.getProtocolNodeProcessor().getRoot(globalId);
 
         return cmpRoot.equals(root);
     }
@@ -277,6 +277,6 @@ public class ZusiProtocolNodeConverterTest extends ZusiProtocolNodeConverter {
         needed_data.addNode(fuehrerstandsAnzeigen);
         fuehrerstandsAnzeigen.addNode(geschwindigkeit);
 
-        return decode(root);
+        return getEncodeDecoder().decode(root);
     }
 }

@@ -1,6 +1,9 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
 import ch.desm.middleware.app.core.common.Pair;
+import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -8,6 +11,8 @@ import java.util.*;
  * Created by Sebastian on 09.03.2015.
  */
 public class ZusiProtocolMessage {
+
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolMessage.class);
 
     public static final String DELIMITER_GROUP = "::";
     public static final String DELIMITER_GROUP_VALUE = "-";

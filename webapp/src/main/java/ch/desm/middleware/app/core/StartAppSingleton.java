@@ -35,9 +35,10 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 	public void run(){
 		startManagement("ws://heisenberg:80/gui/management");
-		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM4);
-        //startOmlPetrinet();
+		startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM3);
+        startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
+        //startZusi("192.168.1.19", 1436);
         startZusi("7.94.80.35", 1436);
 		//testZusiService("7.94.80.35", 1436);
         //testZusiMessageTransfer("7.94.80.35", 1436);
@@ -70,6 +71,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 
         ZusiService serviceAusbildung = new ZusiService(Broker.getInstance(), ip, port);
+
         serviceAusbildung.getEndpointAusbildung().init();
         serviceAusbildung.getEndpointAusbildung().start();
         serviceAusbildung.getEndpointAusbildung().sendMessageRegisterClient();
@@ -85,13 +87,13 @@ public class StartAppSingleton extends DaemonThreadBase {
         }
 
         try {
-            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + service.getZusiProtocolNodeConverterTest().isMessageComplete(service.getZusiProtocolNodeConverterTest().getMessageNeededDataFahrpult()));
+            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + service.getProtocolMessageChecker().isMessageComplete(service.getZusiProtocolNodeConverterTest().getMessageNeededDataFahrpult()));
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
 
         try {
-            LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + service.getZusiProtocolNodeConverterTest().isMessageComplete(service.getZusiProtocolNodeConverterTest().testStream1()));
+            LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + service.getProtocolMessageChecker().isMessageComplete(service.getZusiProtocolNodeConverterTest().testStream1()));
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
@@ -110,7 +112,7 @@ public class StartAppSingleton extends DaemonThreadBase {
         }
 
         try {
-            LOGGER.log(Level.INFO, "(true)test no data package: " + service.getZusiProtocolNodeConverterTest().isMessageComplete(service.getZusiProtocolNodeConverterTest().testStreamNoData()));
+            LOGGER.log(Level.INFO, "(true)test no data package: " + service.getProtocolMessageChecker().isMessageComplete(service.getZusiProtocolNodeConverterTest().testStreamNoData()));
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }

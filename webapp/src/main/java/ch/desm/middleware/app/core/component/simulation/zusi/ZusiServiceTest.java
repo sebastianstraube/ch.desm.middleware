@@ -1,14 +1,14 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolNodeConverterTest;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolNodeProcessorTest;
 
 /**
  * Created by Sebastian on 28.11.2014.
  */
 public class ZusiServiceTest extends ZusiService {
 
-    private ZusiProtocolNodeConverterTest zusiProtocolNodeConverterTest;
+    private ZusiProtocolNodeProcessorTest zusiProtocolNodeConverterTest;
     /**
      *
      * @param broker
@@ -17,14 +17,14 @@ public class ZusiServiceTest extends ZusiService {
      */
     public ZusiServiceTest(Broker broker, String ip, int port){
         super(broker, ip, port);
-        this.zusiProtocolNodeConverterTest = new ZusiProtocolNodeConverterTest(this);
+        this.zusiProtocolNodeConverterTest = new ZusiProtocolNodeProcessorTest(this);
     }
 
     /**
      *
      * @return
      */
-    public ZusiProtocolNodeConverterTest getZusiProtocolNodeConverterTest(){
+    public ZusiProtocolNodeProcessorTest getZusiProtocolNodeConverterTest(){
         return zusiProtocolNodeConverterTest;
     }
 
