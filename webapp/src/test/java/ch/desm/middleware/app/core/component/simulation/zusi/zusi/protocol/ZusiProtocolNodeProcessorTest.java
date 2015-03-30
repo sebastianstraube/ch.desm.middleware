@@ -1,7 +1,11 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
+package ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.component.simulation.zusi.ZusiServiceTest;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolMessage;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolNode;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolNodeBase;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolNodeProcessor;
+import ch.desm.middleware.app.core.component.simulation.zusi.zusi.ZusiServiceTest;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

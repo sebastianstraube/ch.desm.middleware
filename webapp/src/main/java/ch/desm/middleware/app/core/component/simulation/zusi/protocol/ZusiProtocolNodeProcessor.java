@@ -44,7 +44,7 @@ public class ZusiProtocolNodeProcessor {
      * @param globalId
      * @return
      */
-    protected ZusiProtocolNodeBase getRoot(String globalId){
+    public ZusiProtocolNodeBase getRoot(String globalId){
         ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
         String tmpId = globalId;
         ZusiProtocolNode lastNode = null;

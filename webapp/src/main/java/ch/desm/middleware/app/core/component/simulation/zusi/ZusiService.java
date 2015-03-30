@@ -9,10 +9,7 @@ import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpult
 import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClient;
 import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapAusbildung;
 import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapFahrpult;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolClientMessage;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolCommand;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolMessageChecker;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolNodeProcessor;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.*;
 
 /**
  * Created by Sebastian on 28.11.2014.
@@ -22,11 +19,12 @@ public class ZusiService {
     private MessageTranslatorMiddleware translator;
     private ComponentMapMiddleware componentMapMiddleware;
 
-    private ZusiMessageProcessor processor;
+    private ZusiMessageProcessor messageProcessor;
     private ZusiProtocolNodeProcessor protocolNodeProcessor;
     private ZusiProtocolMessageChecker protocolMessageChecker;
     private ZusiProtocolCommand protocolCommand;
     private ZusiProtocolClientMessage protocolClientMessage;
+    private ZusiProtocolEncoderDecoder protocolEncoderDecoder;
 
     private ZusiFahrpultBrokerClient brokerClientFahrpult;
     private ZusiFahrpultEndpointTcpClient endpointFahrpult;
@@ -45,11 +43,12 @@ public class ZusiService {
     public ZusiService(Broker broker, String ip, int port){
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
-        this.processor = new ZusiMessageProcessor();
+        this.messageProcessor = new ZusiMessageProcessor();
+
         this.protocolNodeProcessor = new ZusiProtocolNodeProcessor();
         this.protocolMessageChecker = new ZusiProtocolMessageChecker();
         this.protocolCommand = new ZusiProtocolCommand();
-
+        this.protocolEncoderDecoder = new ZusiProtocolEncoderDecoder();
         this.protocolClientMessage = new ZusiProtocolClientMessage();
 
         this.brokerClientFahrpult = new ZusiFahrpultBrokerClient(broker, this);
@@ -57,8 +56,8 @@ public class ZusiService {
         this.endpointFahrpult = new ZusiFahrpultEndpointTcpClient(this, ip, port);
 
         this.brokerClientAusbildung = new ZusiAusbildungBrokerClient(broker, this);
-        this.endpointAusbildung = new ZusiAusbildungEndpointTcpClient(this, ip, port);
         this.mapAusbildung = new ZusiMapAusbildung();
+        this.endpointAusbildung = new ZusiAusbildungEndpointTcpClient(this, ip, port);
     }
 
     /**
@@ -73,8 +72,8 @@ public class ZusiService {
      *
      * @return
      */
-    public ZusiMessageProcessor getProcessor(){
-        return processor;
+    public ZusiMessageProcessor getMessageProcessor(){
+        return messageProcessor;
     }
 
     /**
@@ -163,6 +162,14 @@ public class ZusiService {
      */
     public ZusiProtocolClientMessage getZusiProtocolClientMessage(){
         return this.protocolClientMessage;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiProtocolEncoderDecoder getZusiProtocolEncoderDecoder(){
+        return this.protocolEncoderDecoder;
     }
 
 }

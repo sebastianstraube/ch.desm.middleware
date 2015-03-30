@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.server;
 
-import ch.desm.middleware.app.core.StartApp;
+import ch.desm.middleware.app.core.StartAppMain;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServer;
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
 import org.apache.log4j.Level;
@@ -35,7 +35,7 @@ public class JettyServer extends DaemonThreadBase {
         //int port = Integer.parseInt(System.getProperty("port", port));
         this.server = new Server(inetSocketAddress);
 
-        ProtectionDomain domain = StartApp.class.getProtectionDomain();
+        ProtectionDomain domain = StartAppMain.class.getProtectionDomain();
         URL location = domain.getCodeSource().getLocation();
 
         WebAppContext context = new WebAppContext();

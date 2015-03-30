@@ -16,6 +16,7 @@ import ch.desm.middleware.app.core.common.DaemonThreadBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiServiceTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClientTest;
+import ch.desm.middleware.app.core.server.JettyServer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -34,168 +35,59 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 
 	public void run(){
-		startManagement("ws://heisenberg:80/gui/management");
-		startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM3);
-        startOmlPetrinet();
+        startJettyServer("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/webapp");
+
+        //startManagement("ws://heisenberg:80/gui/management");
+		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM3);
+        //startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
         //startZusi("192.168.1.19", 1436);
         startZusi("7.94.80.35", 1436);
-		//testZusiService("7.94.80.35", 1436);
-        //testZusiMessageTransfer("7.94.80.35", 1436);
 
-
-        startHangout(Integer.MAX_VALUE);
-
+        //startHangout(Integer.MAX_VALUE);
 	}
+
+    private void startJettyServer(String path){
+        JettyServer server = new JettyServer(path);
+        server.start();
+    }
 
 	public void startManagement(String uri){
 
         ManagementService management = new ManagementService(Broker.getInstance(), uri);
 	}
-	
+
 	public void startOmlPetrinet(){
         PetrinetOmlService petrinet = new PetrinetOmlService(Broker.getInstance());
 	}
-	
+
 	public void startOmlStellwerk(EndpointRs232.EnumSerialPorts port){
         OmlService oml = new OmlService(Broker.getInstance(), port);
 	}
 
     public void startZusi(String ip, int port){
 
+        /*
         ZusiService serviceFahrpult = new ZusiService(Broker.getInstance(), ip, port);
         serviceFahrpult.getEndpointFahrpult().init();
         serviceFahrpult.getEndpointFahrpult().start();
 		serviceFahrpult.getEndpointFahrpult().sendMessageRegisterClient();
         serviceFahrpult.getEndpointFahrpult().sendMessageNeededData();
-
+        */
 
         ZusiService serviceAusbildung = new ZusiService(Broker.getInstance(), ip, port);
-
         serviceAusbildung.getEndpointAusbildung().init();
         serviceAusbildung.getEndpointAusbildung().start();
         serviceAusbildung.getEndpointAusbildung().sendMessageRegisterClient();
         serviceAusbildung.getEndpointAusbildung().sendMessageNeededData();
     }
 
-    public void testZusiService(String ip, int port){
-        ZusiServiceTest service = new ZusiServiceTest(Broker.getInstance(), ip, port);
-        try {
-            LOGGER.log(Level.INFO, "(true)test encode decode from middleware message: " + service.getZusiProtocolNodeConverterTest().testGetConvertToInputCommand("0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0;;;hauptschalter;aus;taste n;?;zusi;#"));
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
 
-        try {
-            LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + service.getProtocolMessageChecker().isMessageComplete(service.getZusiProtocolNodeConverterTest().getMessageNeededDataFahrpult()));
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        try {
-            LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + service.getProtocolMessageChecker().isMessageComplete(service.getZusiProtocolNodeConverterTest().testStream1()));
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        try {
-            LOGGER.log(Level.INFO, "(true)test globale id encode and decode is successful: " + service.getZusiProtocolNodeConverterTest().testGetGlobalId(service.getZusiProtocolNodeConverterTest().testStream3()));
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-
-        try {
-            LOGGER.log(Level.INFO, "(true)test encode decode is successful: " + service.getZusiProtocolNodeConverterTest().testEncodeDecode());
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        try {
-            LOGGER.log(Level.INFO, "(true)test no data package: " + service.getProtocolMessageChecker().isMessageComplete(service.getZusiProtocolNodeConverterTest().testStreamNoData()));
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        try {
-            LOGGER.log(Level.INFO, "(true)test encode no data package: " + service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().testStreamNoData()));
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        try {
-            LOGGER.log(Level.INFO, "(false)test encode is successful: " + service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().testStream1()));
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        try {
-            LOGGER.log(Level.INFO, "(false)test encode is successful: " + service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().testStream2()));
-
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        try {
-            LOGGER.log(Level.INFO, "(true)test encode is successful: " + service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().testStream3()));
-
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        try {
-            LOGGER.log(Level.INFO, "(true)test get base node from global id is successful: " + service.getZusiProtocolNodeConverterTest().testGetRoot("0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0"));
-
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        try {
-            LOGGER.log(Level.INFO, "(true)test encode decode needed data packet is complete: " + service.getZusiProtocolNodeConverterTest().testEncodeDecodeNeededData());
-
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-    }
-
-    public void testZusiMessageTransfer(String ip, int port){
-        ZusiService serviceFahrpult = new ZusiService(Broker.getInstance(), ip, port);
-        serviceFahrpult.getEndpointFahrpult().init();
-        serviceFahrpult.getEndpointFahrpult().start();
-        serviceFahrpult.getEndpointFahrpult().sendMessageRegisterClient();
-        serviceFahrpult.getEndpointFahrpult().sendMessageNeededData();
-
-        ZusiFahrpultEndpointTcpClientTest testTcp = new ZusiFahrpultEndpointTcpClientTest(serviceFahrpult);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        testTcp.testStream();
-    }
-	
 	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){
 		LocsimEndpointDll endpointDll = new LocsimEndpointDll("dispatcher.json");
 		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(portRs232);
 		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232, endpointDll);
 	}
-
-	/**
-	 * 
-	 */
-	public void testCabine(){
-		Re420EndpointUbw32 re420Endpoint = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM30);
-		Re420EndpointFabisch re420EndpointFabisch = new Re420EndpointFabisch(EndpointRs232.EnumSerialPorts.COM31);
-		Re420BrokerClient re420Impl = new Re420BrokerClient(Broker.getInstance(), re420Endpoint, re420EndpointFabisch);
-
-		//test analog output
-		re420Impl.emulateBrokerMessage("a74;o;0;analog-instrument;spannung;fahrdraht;FF;kabinere420;#");	
-		re420Impl.emulateBrokerMessage("a79;o;0;analog-instrument;strom;i_max;FF;kabinere420;#");
-		re420Impl.emulateBrokerMessage("a79.1;o;0;analog-instrument;strom;i_delta;FF;kabinere420;#");		
-		re420Impl.emulateBrokerMessage("d94vi;o;0;analog-instrument;geschwindigkeitsanzeige;ist;FF;kabinere420;#");
-	}
-
 
 	/**
 	 * The "PM" Command : Set hardware PWM output values command Sets a PWM
@@ -209,7 +101,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	public void testPWM(String[] args) {
 
 		args = new String[]{"18"};
-		
+
 		String comPort = "18";
 		String channel = "1";
 		int dutyCycle = Integer.parseInt("1");

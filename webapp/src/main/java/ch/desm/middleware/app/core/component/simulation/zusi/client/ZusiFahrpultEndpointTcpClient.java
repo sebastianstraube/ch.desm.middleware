@@ -34,7 +34,7 @@ public class ZusiFahrpultEndpointTcpClient extends EndpointTcpClient {
 
             if(!extractedMessage.isEmpty()){
                 LOGGER.log(Level.INFO, "client receive buffered message: " + extractedMessage);
-                service.getProcessor().processEndpointMessage(service, extractedMessage, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
+                service.getMessageProcessor().processEndpointMessage(service, extractedMessage, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
             }else{
                 LOGGER.log(Level.TRACE, "buffered message is incomplete: " + zusiMessage.getStream());
             }

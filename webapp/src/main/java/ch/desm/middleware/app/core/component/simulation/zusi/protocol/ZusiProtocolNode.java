@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 /**
  * Created by Sebastian on 06.03.2015.
  */
-class ZusiProtocolNode extends ZusiProtocolNodeBase {
+public class ZusiProtocolNode extends ZusiProtocolNodeBase {
 
     private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeBase.class);
 

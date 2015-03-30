@@ -30,7 +30,7 @@ public class ZusiAusbildungBrokerClient extends ComponentBrokerClientBase {
 		LOGGER.log(Level.INFO, "zusi (" + this.getClass() + ") received broker message: " + message);
 
         LinkedList<MessageMiddleware> l = service.getTranslator().toMiddlewareMessageList(message);
-        service.getProcessor().processBrokerMessage(service, l);
+        service.getMessageProcessor().processBrokerMessage(service, l);
     }
 
 	@Override

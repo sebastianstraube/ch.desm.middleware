@@ -103,7 +103,7 @@
                         </descriptorRefs>
                         <archive>
                             <manifest>
-                                <mainClass>ch.desm.middleware.app.core.StartApp</mainClass>
+                                <mainClass>ch.desm.middleware.app.core.StartAppMain</mainClass>
                             </manifest>
                         </archive>
                     </configuration>

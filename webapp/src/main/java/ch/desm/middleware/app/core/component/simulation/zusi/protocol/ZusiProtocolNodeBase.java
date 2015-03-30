@@ -7,7 +7,7 @@ import java.util.LinkedList;
  */
 // listNodes contains message structure
 // one message in listNodes is one message for transfer
- class ZusiProtocolNodeBase {
+public class ZusiProtocolNodeBase {
 
     /**
      *

@@ -29,7 +29,7 @@ public class ZusiFahrpultBrokerClientThread extends ComponentBrokerClientThreadB
 
             if(!messages.isEmpty()){
                 LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
-                service.getProcessor().processBrokerMessage(service, messages);
+                service.getMessageProcessor().processBrokerMessage(service, messages);
             }
         }
 
