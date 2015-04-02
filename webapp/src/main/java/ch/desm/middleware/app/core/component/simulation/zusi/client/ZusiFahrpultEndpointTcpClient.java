@@ -29,7 +29,7 @@ public class ZusiFahrpultEndpointTcpClient extends EndpointTcpClient {
 
         zusiMessage.addStream(hexMessage);
         String extractedMessage = "";
-        while(!(extractedMessage = service.getProtocolMessageChecker().extractSingleZusiMessage(zusiMessage.getStream())).isEmpty()){
+        while(!(extractedMessage = service.getMessageCheck().extractSingleZusiMessage(zusiMessage.getStream())).isEmpty()){
             zusiMessage.cutStream(extractedMessage.length());
 
             if(!extractedMessage.isEmpty()){

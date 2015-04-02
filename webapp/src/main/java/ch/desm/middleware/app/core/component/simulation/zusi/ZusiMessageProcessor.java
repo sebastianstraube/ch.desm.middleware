@@ -5,7 +5,7 @@ import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClient;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolCommand;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolUtilCommand;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolMessage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -82,9 +82,9 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
 
             String zusiStream = "";
             //Input command
-            if(service.getProtocolCommand().isCommandInputTo(z)){
+            if(service.getCommand().isCommandInputTo(z)){
                 try {
-                    zusiStream = service.getProtocolCommand().getCommandStreamTo(service, message.getGlobalId());
+                    zusiStream = service.getCommand().getCommandStreamTo(service, message.getGlobalId());
                 } catch (Exception e) {
                     LOGGER.log(Level.ERROR, e);
                 }
@@ -152,7 +152,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor {
             ZusiProtocolMessage zusiProtocolMessage = new ZusiProtocolMessage(globalId);
 
             //if parameter message
-            if(ZusiProtocolCommand.isCommandInputFrom(zusiProtocolMessage)){
+            if(service.getCommand().isCommandInputFrom(zusiProtocolMessage)){
 
                 //send message for every parameter
                 for(Pair<String, String> p: zusiProtocolMessage.getParameterList()){

@@ -6,11 +6,16 @@ import org.apache.log4j.Logger;
 /**
  * Created by Sebastian on 09.03.2015.
  */
-public class ZusiProtocolCommand {
+public class ZusiProtocolUtilCommand {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolCommand.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolUtilCommand.class);
     private static final String GROUPID_COMMAND_FROM = "0002-000A";
+    private static final String GROUPID_COMMAND_TO = "0002-010A-0001";
 
+    ZusiService service;
+    public ZusiProtocolUtilCommand(ZusiService service){
+        this.service = service;
+    }
     /**
      *
      * @param service
@@ -19,16 +24,13 @@ public class ZusiProtocolCommand {
      */
     public String getCommandStreamFrom(ZusiService service, String globalId) throws Exception {
         ZusiProtocolNodeBase root = service.getProtocolNodeProcessor().getRoot(globalId);
-        String stream = service.getProtocolNodeProcessor().getEncodeDecoder().encode(root);
+        String stream = service.getEncoder().encode(root);
         return stream;
     }
 
-    public static boolean isCommandInputFrom(ZusiProtocolMessage message){
+    public boolean isCommandInputFrom(ZusiProtocolMessage message){
         return message.hasGroupId(GROUPID_COMMAND_FROM);
     }
-
-
-    private static final String GROUPID_COMMAND_TO = "0002-010A-0001";
 
     /**
      *
@@ -38,7 +40,7 @@ public class ZusiProtocolCommand {
      */
     public String getCommandStreamTo(ZusiService service, String globalId) throws Exception {
         ZusiProtocolNodeBase root = service.getProtocolNodeProcessor().getRoot(globalId);
-        String stream = service.getProtocolNodeProcessor().getEncodeDecoder().encode(root);
+        String stream = service.getEncoder().encode(root);
         return stream;
     }
 

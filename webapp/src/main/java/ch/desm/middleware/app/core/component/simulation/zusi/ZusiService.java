@@ -20,11 +20,13 @@ public class ZusiService {
     private ComponentMapMiddleware componentMapMiddleware;
 
     private ZusiMessageProcessor messageProcessor;
+    private ZusiProtocolUtilMessageCheck messageCheck;
+
     private ZusiProtocolNodeProcessor protocolNodeProcessor;
-    private ZusiProtocolMessageChecker protocolMessageChecker;
-    private ZusiProtocolCommand protocolCommand;
+    private ZusiProtocolUtilCommand protocolCommand;
     private ZusiProtocolClientMessage protocolClientMessage;
-    private ZusiProtocolEncoderDecoder protocolEncoderDecoder;
+    private ZusiProtocolUtilEncoder encoder;
+    private ZusiProtocolUtilDecoder decoder;
 
     private ZusiFahrpultBrokerClient brokerClientFahrpult;
     private ZusiFahrpultEndpointTcpClient endpointFahrpult;
@@ -41,15 +43,17 @@ public class ZusiService {
      * @param port
      */
     public ZusiService(Broker broker, String ip, int port){
-        this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
-        this.messageProcessor = new ZusiMessageProcessor();
+        this.componentMapMiddleware = new ComponentMapMiddleware();
 
-        this.protocolNodeProcessor = new ZusiProtocolNodeProcessor();
-        this.protocolMessageChecker = new ZusiProtocolMessageChecker();
-        this.protocolCommand = new ZusiProtocolCommand();
-        this.protocolEncoderDecoder = new ZusiProtocolEncoderDecoder();
+        this.messageProcessor = new ZusiMessageProcessor();
+        this.messageCheck = new ZusiProtocolUtilMessageCheck();
+
+        this.protocolNodeProcessor = new ZusiProtocolNodeProcessor(this);
+        this.protocolCommand = new ZusiProtocolUtilCommand(this);
         this.protocolClientMessage = new ZusiProtocolClientMessage();
+        this.decoder = new ZusiProtocolUtilDecoder();
+        this.encoder= new ZusiProtocolUtilEncoder();
 
         this.brokerClientFahrpult = new ZusiFahrpultBrokerClient(broker, this);
         this.mapFahrpult = new ZusiMapFahrpult();
@@ -80,6 +84,15 @@ public class ZusiService {
      *
      * @return
      */
+    public ZusiProtocolUtilMessageCheck getMessageCheck(){
+        return messageCheck;
+    }
+
+
+    /**
+     *
+     * @return
+     */
     public MessageTranslatorMiddleware getTranslator(){
         return translator;
     }
@@ -96,16 +109,24 @@ public class ZusiService {
      *
      * @return
      */
-    public ZusiProtocolMessageChecker getProtocolMessageChecker(){
-        return protocolMessageChecker;
+    public ZusiProtocolUtilCommand getCommand(){
+        return protocolCommand;
     }
 
     /**
      *
      * @return
      */
-    public ZusiProtocolCommand getProtocolCommand(){
-        return protocolCommand;
+    public ZusiProtocolUtilEncoder getEncoder(){
+        return this.encoder;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiProtocolUtilDecoder getDecoder(){
+        return this.decoder;
     }
 
     /**
@@ -163,13 +184,4 @@ public class ZusiService {
     public ZusiProtocolClientMessage getZusiProtocolClientMessage(){
         return this.protocolClientMessage;
     }
-
-    /**
-     *
-     * @return
-     */
-    public ZusiProtocolEncoderDecoder getZusiProtocolEncoderDecoder(){
-        return this.protocolEncoderDecoder;
-    }
-
 }

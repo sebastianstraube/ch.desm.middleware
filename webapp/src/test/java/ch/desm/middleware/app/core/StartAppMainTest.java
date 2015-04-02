@@ -5,6 +5,7 @@ import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420BrokerClient;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolUtilMessageCheck;
 import ch.desm.middleware.app.core.component.simulation.zusi.zusi.ZusiServiceTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.zusi.client.ZusiFahrpultEndpointTcpClientTest;
 import org.apache.log4j.Level;
@@ -43,7 +44,7 @@ public class StartAppMainTest {
     public void testZusiServiceTransferedMessageComplete() throws Exception {
 
         try {
-            boolean b = service.getProtocolMessageChecker().isMessageComplete(service.getZusiProtocolNodeConverterTest().getMessageNeededDataFahrpult());
+            boolean b = service.getMessageCheck().isMessageComplete(service.getZusiProtocolNodeConverterTest().getMessageNeededDataFahrpult());
             LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + b);
             Assert.assertEquals(true, b);
         } catch (Exception e) {
@@ -55,7 +56,7 @@ public class StartAppMainTest {
     public void testZusiServiceTransferedMessageComplete1() throws Exception {
 
         try {
-            boolean b = service.getProtocolMessageChecker().isMessageComplete(service.getZusiProtocolNodeConverterTest().getStream1());
+            boolean b = service.getMessageCheck().isMessageComplete(service.getZusiProtocolNodeConverterTest().getStream1());
             LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + b);
             Assert.assertEquals(false, b);
         } catch (Exception e) {
@@ -91,7 +92,7 @@ public class StartAppMainTest {
     public void testZusiServiceNoDataPackage() throws Exception {
 
         try {
-            boolean b = service.getProtocolMessageChecker().isMessageComplete(service.getZusiProtocolNodeConverterTest().getStreamNoData());
+            boolean b = service.getMessageCheck().isMessageComplete(service.getZusiProtocolNodeConverterTest().getStreamNoData());
             LOGGER.log(Level.INFO, "(true)test no data package: " + b);
             Assert.assertEquals(true, b);
         } catch (Exception e) {

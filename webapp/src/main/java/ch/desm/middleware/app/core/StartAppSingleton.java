@@ -40,7 +40,7 @@ public class StartAppSingleton extends DaemonThreadBase {
         //startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
         startZusi("7.94.80.35", 1436);
-	}
+    }
 
     private void startJettyServer(String path){
         JettyServer server = new JettyServer(path);
@@ -234,4 +234,15 @@ public class StartAppSingleton extends DaemonThreadBase {
 		}
 
 	}
+
+     public void doHangout(){
+
+         while(!isInterrupted()){
+             try {
+                 doHangout(1000*60);
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+             }
+         }
+     }
 }

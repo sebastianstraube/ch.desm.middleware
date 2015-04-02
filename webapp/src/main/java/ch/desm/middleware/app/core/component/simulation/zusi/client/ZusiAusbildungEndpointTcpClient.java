@@ -3,6 +3,7 @@ package ch.desm.middleware.app.core.component.simulation.zusi.client;
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolUtilMessageCheck;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolStream;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -29,7 +30,7 @@ public class ZusiAusbildungEndpointTcpClient extends EndpointTcpClient {
 
         zusiMessage.addStream(hexMessage);
         String extractedMessage = "";
-        while(!(extractedMessage = service.getProtocolMessageChecker().extractSingleZusiMessage(zusiMessage.getStream())).isEmpty()){
+        while(!(extractedMessage = service.getMessageCheck().extractSingleZusiMessage(zusiMessage.getStream())).isEmpty()){
             zusiMessage.cutStream(extractedMessage.length());
 
             if(!extractedMessage.isEmpty()){

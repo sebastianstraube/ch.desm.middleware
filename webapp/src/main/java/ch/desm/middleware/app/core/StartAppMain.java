@@ -1,19 +1,14 @@
 package ch.desm.middleware.app.core;
 
-import ch.desm.middleware.app.core.common.DaemonThreadBase;
-import ch.desm.middleware.app.core.server.JettyServer;
 import org.apache.log4j.Logger;
 
-public class StartAppMain extends DaemonThreadBase{
+public class StartAppMain {
 
     private static Logger LOGGER = Logger.getLogger(StartAppMain.class);
 
-    public static boolean isHangout = true;
-
     public static void main(String[] args){
-        StartAppSingleton.getSingleton().start();
-
+        StartAppSingleton main = StartAppSingleton.getSingleton();
+        main.start();
+        main.doHangout();
     }
-
-
 }

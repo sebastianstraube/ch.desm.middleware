@@ -6,9 +6,9 @@ import org.apache.log4j.Logger;
 /**
  * Created by Sebastian on 27.03.2015.
  */
-public class ZusiProtocolEncoderDecoder {
+public class ZusiProtocolUtilDecoder {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolEncoderDecoder.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolUtilDecoder.class);
 
     private String getHexData(ZusiProtocolNode node){
         int[] dataArray = node.getDataArray();
@@ -49,34 +49,6 @@ public class ZusiProtocolEncoderDecoder {
         return stream;
     }
 
-    private String getBakedStream(ZusiProtocolNode node, boolean encap, String stream){
-        String part = getNodeStream(encap, node);
-        stream = stream.replace("#", part);
-
-        return stream;
-    }
-
-    /**
-     *
-     * @param node
-     * @return
-     */
-    public String encode(ZusiProtocolNode node)  {
-        String stream = recurEncode(false, "#", node);
-        return stream.replace("#", "");
-    }
-
-    private String recurEncode(boolean encap, String stream, ZusiProtocolNode node){
-        stream = getBakedStream(node, encap, stream);
-
-        for(ZusiProtocolNode n : node.nodes){
-            encap = n.isStartNode() && node.isStartNode() && node.nodes.size() > 1;
-            stream = recurEncode(encap, stream, n);
-        }
-
-        return stream;
-    }
-
     /**
      *
      * @param stream
@@ -87,23 +59,6 @@ public class ZusiProtocolEncoderDecoder {
         ZusiProtocolNodeBase root = decodeStream(stream);
 
         return root;
-    }
-
-    /**
-     *
-     * @param root
-     * @return
-     * @throws Exception
-     */
-    public String encode(ZusiProtocolNodeBase root) throws Exception{
-
-        String messages = "";
-
-        for(ZusiProtocolNode child : root.nodes){
-            messages += encode(child);
-        }
-
-        return messages;
     }
 
     /**

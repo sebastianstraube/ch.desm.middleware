@@ -59,6 +59,10 @@ public class UtilConvertingHex {
      * @return a hex stream with swapped byte order
      */
     static public String swapEndian(String hex){
+        if(hex.isEmpty()){
+            return hex;
+        }
+
         String swapped = "";
         String bytes = "";
         int upperBound = hex.length()-1;

@@ -19,13 +19,14 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 	private Re420ElementFahrschalter fahrschalter;
 	private Re420MapBinding binding;
 	private Re420MapFabischValue mapValues;
-    private UtilMessageProcessor util;
+    private boolean locsimIni1;
 
 	public Re420MessageProcessor() {
-		fahrschalter = new Re420ElementFahrschalter();
-		binding = new Re420MapBinding();
-		mapValues = new Re420MapFabischValue();
+		this.fahrschalter = new Re420ElementFahrschalter();
+		this.binding = new Re420MapBinding();
+		this.mapValues = new Re420MapFabischValue();
         this.util = new UtilMessageProcessor();
+        this.locsimIni1 = false;
 	}
 
 	public String handleMessageFahrschalter(String key, boolean isEnabled) {
@@ -299,10 +300,10 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 
             if (message.getGlobalId().equalsIgnoreCase(
                     "locsim.initialization.ready.ini1")
-                    && !util.init1) {
+                    && !locsimIni1) {
                 impl.getEndpointUbw32().setCacheEnabled(false);
                 impl.getEndpointUbw32().start();
-                util.init1 = true;
+                locsimIni1 = true;
             }
 
             else if (message.getGlobalId().equalsIgnoreCase(

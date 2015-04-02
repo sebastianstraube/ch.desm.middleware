@@ -9,10 +9,10 @@ public class ZusiProtocolClientMessage {
 
     private static Logger LOGGER = Logger.getLogger(ZusiProtocolClientMessage.class);
 
-    private ZusiProtocolEncoderDecoder encodeDecode;
+    private ZusiProtocolUtilEncoder encodeDecode;
 
     public ZusiProtocolClientMessage(){
-        this.encodeDecode = new ZusiProtocolEncoderDecoder();
+        this.encodeDecode = new ZusiProtocolUtilEncoder();
     }
 
     /**

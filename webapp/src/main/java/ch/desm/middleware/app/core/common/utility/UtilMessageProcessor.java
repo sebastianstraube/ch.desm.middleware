@@ -13,20 +13,12 @@ public class UtilMessageProcessor {
 
 	private static Logger LOGGER = Logger.getLogger(UtilMessageProcessor.class);
 	
-	public boolean init1;
-	private Re420MapFabischValue mapValues;
-	
-	public UtilMessageProcessor() {
-		mapValues = new Re420MapFabischValue();
-		init1 = false;
-	}
-	
 	/**
 	 * 
 	 * @param value
 	 * @return
 	 */
-	public String getParameterValueLocsim(String value) {
+	public static String getParameterValueLocsim(String value) {
 		String returnValue = "";
 
 		if (value
@@ -51,7 +43,7 @@ public class UtilMessageProcessor {
      * @param value
      * @return
      */
-    public String getParameterValueEndpoint(String value) {
+    public static String getParameterValueEndpoint(String value) {
         String returnValue = "";
 
         try{
@@ -74,7 +66,7 @@ public class UtilMessageProcessor {
 	 * @param value
 	 * @return
 	 */
-	public String getParameterValueRe420(String value) {
+	public static String getParameterValueRe420(String value) {
 		String returnValue = String.valueOf(Integer.parseInt(value, 16));
 
 		return returnValue.toUpperCase();
@@ -87,7 +79,8 @@ public class UtilMessageProcessor {
 	 * @param parameter
 	 * @return
 	 */
-	public String convertParameter(String channelKey, String parameter) {
+	public static String convertParameter(String channelKey, String parameter) {
+        Re420MapFabischValue mapValues = new Re420MapFabischValue();
 
 		if (mapValues.getMap().containsKey(channelKey)) {
 
@@ -118,7 +111,7 @@ public class UtilMessageProcessor {
 	}
 	
 
-	public String conversionFahrschalter(String parameter) {
+	public static String conversionFahrschalter(String parameter) {
 		double x = Double.valueOf(parameter);
 		x = (x - 180) / 100;
 		// (x^2)/8

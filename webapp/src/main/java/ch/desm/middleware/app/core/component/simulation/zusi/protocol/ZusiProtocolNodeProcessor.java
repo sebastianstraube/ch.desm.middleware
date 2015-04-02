@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
@@ -10,14 +11,10 @@ import java.util.Arrays;
 public class ZusiProtocolNodeProcessor {
 
     private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeProcessor.class);
-    private ZusiProtocolEncoderDecoder encodeDecode;
 
-    public ZusiProtocolNodeProcessor(){
-        this.encodeDecode = new ZusiProtocolEncoderDecoder();
-    }
-
-    public ZusiProtocolEncoderDecoder getEncodeDecoder(){
-        return encodeDecode;
+    protected ZusiService service;
+    public ZusiProtocolNodeProcessor(ZusiService service){
+        this.service = service;
     }
 
     /**
@@ -26,7 +23,7 @@ public class ZusiProtocolNodeProcessor {
      * @return
      */
     protected ZusiProtocolNodeBase toNode(String message) throws Exception {
-        return encodeDecode.decode(message);
+        return service.getDecoder().decode(message);
     }
 
     /**
@@ -36,7 +33,7 @@ public class ZusiProtocolNodeProcessor {
      * @throws Exception
      */
     public String getGlobalId(String hexMessage) throws Exception{
-        return getGlobalId(encodeDecode.decode(hexMessage));
+        return getGlobalId(service.getDecoder().decode(hexMessage));
     }
 
     /**
@@ -109,6 +106,7 @@ public class ZusiProtocolNodeProcessor {
 
     /**
      *
+     *
      * e.g. 2-4::1:DATA
      *
      * @param n
@@ -119,31 +117,26 @@ public class ZusiProtocolNodeProcessor {
         String nodeId ="";
         nodeId += n.getIdHex();
 
-        if(n.getDataArray().length <= 0){
-            int expandLength = 4;
-            if(n.getDataArray().length >= 1){
-                expandLength = 2;
-            }
+        if(!n.isStartNode()){
+            int expandLength = n.getDataArray().length >= 1 ? 4 : 2;
             nodeId += ":" + n.getDataHex(expandLength);
         }
 
-        if(!n.nodes.isEmpty()){
-            for(ZusiProtocolNode next : n.nodes) {
-                String parChar = "";
-                if(next.getDataArray().length <= 0) {
-                    parChar = "-";
-                }else if(next.getDataArray().length >= 0){
-
-                    if(nrParameter == 0){
-                        parChar="::";
-                    }else{
-                        parChar = ",";
-                    }
-                    nrParameter++;
+        for(ZusiProtocolNode next : n.nodes) {
+            String parChar = "";
+            if(next.isStartNode()) {
+                parChar = "-";
+            }else{
+                if(nrParameter == 0){
+                    parChar="::";
+                }else{
+                    parChar = ",";
                 }
-                nodeId += parChar + getGlobalId(next, nrParameter);
+                nrParameter++;
             }
+            nodeId += parChar + getGlobalId(next, nrParameter);
         }
+
 
         return nodeId;
     }
