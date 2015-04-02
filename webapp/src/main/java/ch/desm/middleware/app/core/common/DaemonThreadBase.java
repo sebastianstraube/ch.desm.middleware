@@ -14,8 +14,8 @@ public abstract class DaemonThreadBase extends Thread {
     private int sleepTime;
 
 	public DaemonThreadBase(){
-		setDaemon(true);
-        sleepTime = 15;
+		this.setDaemon(true);
+        this.sleepTime = 15;
 	}
 	
 	public DaemonThreadBase(String name) {

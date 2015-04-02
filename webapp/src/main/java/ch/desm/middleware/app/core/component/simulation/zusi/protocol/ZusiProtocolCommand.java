@@ -19,7 +19,7 @@ public class ZusiProtocolCommand {
      */
     public String getCommandStreamFrom(ZusiService service, String globalId) throws Exception {
         ZusiProtocolNodeBase root = service.getProtocolNodeProcessor().getRoot(globalId);
-        String stream = service.getProtocolNodeProcessor().getEncodeDecoder().decode(root);
+        String stream = service.getProtocolNodeProcessor().getEncodeDecoder().encode(root);
         return stream;
     }
 
@@ -38,7 +38,7 @@ public class ZusiProtocolCommand {
      */
     public String getCommandStreamTo(ZusiService service, String globalId) throws Exception {
         ZusiProtocolNodeBase root = service.getProtocolNodeProcessor().getRoot(globalId);
-        String stream = service.getProtocolNodeProcessor().getEncodeDecoder().decode(root);
+        String stream = service.getProtocolNodeProcessor().getEncodeDecoder().encode(root);
         return stream;
     }
 

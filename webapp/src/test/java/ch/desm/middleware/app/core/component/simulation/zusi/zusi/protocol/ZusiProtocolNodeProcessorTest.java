@@ -15,21 +15,10 @@ import org.apache.log4j.Logger;
 public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
 
     private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeProcessorTest.class);
+    private ZusiServiceTest service;
 
-    /**
-     *
-     * @param stream
-     * @return
-     */
-    public boolean testEncode(String stream){
-        ZusiProtocolNodeBase root = null;
-        try {
-            root = getEncodeDecoder().encode(stream);
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
-        return root != null;
+    public ZusiProtocolNodeProcessorTest(ZusiServiceTest service){
+        this.service = service;
     }
 
     /**
@@ -40,7 +29,7 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
     public boolean testGetGlobalId(String hexStream){
         ZusiProtocolNodeBase root = null;
         try {
-            root = getEncodeDecoder().encode(hexStream);
+            root = getEncodeDecoder().decode(hexStream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
@@ -80,8 +69,8 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
 
         boolean isGood = false;
         try {
-            ZusiProtocolNodeBase root = getEncodeDecoder().encode(getStreamConnect());
-            String encodeFromZusi = getEncodeDecoder().decode(root);
+            ZusiProtocolNodeBase root = getEncodeDecoder().decode(getStreamConnect());
+            String encodeFromZusi = getEncodeDecoder().encode(root);
 
             ZusiProtocolNodeBase root2 = new ZusiProtocolNodeBase();
             ZusiProtocolNode start = new ZusiProtocolNode(1);
@@ -98,7 +87,7 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
             hello.addNode(text);
             hello.addNode(version);
 
-            String encodeFromMiddleware = getEncodeDecoder().decode(root2);
+            String encodeFromMiddleware = getEncodeDecoder().encode(root2);
 
             if (encodeFromZusi.equals(encodeFromMiddleware)) {
                 isGood = true;
@@ -129,11 +118,6 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
         return s.equalsIgnoreCase(cmp);
     }
 
-    ZusiServiceTest service;
-    public ZusiProtocolNodeProcessorTest(ZusiServiceTest service){
-        this.service = service;
-    }
-
     /**
      *  from MW Message > ZusiProtocolMessage > ZusiProtocolNodeBase > Zusi hex stream > ZusiNodeBase
      * @param middlewareMessage
@@ -152,7 +136,7 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
         //zusi data transfer object
         ZusiProtocolNodeBase root = this.service.getProtocolCommand().convertToInputCommand(zpm);
         //decode to zusi hex stream
-        String zusiHexStream = service.getProtocolNodeProcessor().getEncodeDecoder().decode(root);
+        String zusiHexStream = service.getProtocolNodeProcessor().getEncodeDecoder().encode(root);
         //get global id from hex stream
         String globalId = this.getGlobalId(zusiHexStream);
         //build tree from global id
@@ -166,17 +150,16 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
      *
      * @return true
      */
-    public boolean testEncode(){
-        String m = "000000000300000000001400000000000100060000000100313233340600000002000000000006000000030000000000060000000400000000000600000005000000000006000000060000000000060000000700000000000600000008000000000006000000090000000000060000000a0000000000ffffffff000000000100060000000100746573740600000002006b5ba0440600000003002d15d7c4060000000400fe3f28440600000005006b1a1840060000000600469bc5400600000007001bb1a1440600000008001b5dd8c4060000000900fe3f2844060000000a00331b1840ffffffffffffffffffffffff";
-        String encode = "";
+    public boolean testEncode(String stream){
+        String streamCmp = "";
         try {
-            ZusiProtocolNodeBase root = service.getZusiProtocolEncoderDecoder().encode(m);
-            encode = service.getZusiProtocolEncoderDecoder().decode(root);
+            ZusiProtocolNodeBase root = service.getZusiProtocolEncoderDecoder().decode(stream);
+            streamCmp = service.getZusiProtocolEncoderDecoder().encode(root);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return m.equalsIgnoreCase(encode);
+        return streamCmp.equalsIgnoreCase(stream);
     }
 
     /**
@@ -219,21 +202,6 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
     public String getStreamConnect() {
         String message =
                 "00000000"+"0100"+"00000000"+"0100"+"04000000"+"0100"+"0200"+"04000000"+"0200"+"0200"+"0A000000"+"0300"+"4661687270756C74"+"05000000"+"0400"+"322E30"+"FFFFFFFF" + "FFFFFFFF";
-        return message;
-    }
-
-    /**
-     *
-     * 00 02 <Knoten> Client-Anwendung 02
-     * 00 03 <Knoten> Befehl NEEDED_DATA
-     * 00 0A <Knoten> Untergruppe Führerstandsanzeigen
-     * 00 01 Word Führerstands-ID gemäß nachfolgender Tabellen
-     * 00 01 Word Beliebig viele weitere Führerstands-IDs
-     *
-     * @return stream with needed parameter: Geschwindigkeit (x0001)
-     */
-    public String getStreamNeededDataFahrpult() {
-        String message = "00000000"+"0200"+"00000000"+"0300"+"00000000"+"0A00"+"04000000"+"0100"+"0100"+"FFFFFFFF"+"FFFFFFFF"+"FFFFFFFF";
         return message;
     }
 
@@ -284,6 +252,21 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
     }
 
     /**
+     *
+     * 00 02 <Knoten> Client-Anwendung 02
+     * 00 03 <Knoten> Befehl NEEDED_DATA
+     * 00 0A <Knoten> Untergruppe Führerstandsanzeigen
+     * 00 01 Word Führerstands-ID gemäß nachfolgender Tabellen
+     * 00 01 Word Beliebig viele weitere Führerstands-IDs
+     *
+     * @return stream with needed parameter: Geschwindigkeit (x0001)
+     */
+    public String getStreamNeededDataFahrpult() {
+        String message = "000000000200"+"000000000300"+"000000000A00"+"0400000001000100"+"FFFFFFFF"+"FFFFFFFF"+"FFFFFFFF";
+        return message;
+    }
+
+    /**
      * Needed Data > Zusi
      * @return
      */
@@ -292,13 +275,14 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
         ZusiProtocolNode client_fahrpult = new ZusiProtocolNode(2);
         ZusiProtocolNode needed_data = new ZusiProtocolNode(3);
         ZusiProtocolNode fuehrerstandsAnzeigen = new ZusiProtocolNode(10);
-        ZusiProtocolNode geschwindigkeit = new ZusiProtocolNode(1, 1, 4);
+        ZusiProtocolNode geschwindigkeit = new ZusiProtocolNode(1, 1, 2);
 
         root.addNode(client_fahrpult);
         client_fahrpult.addNode(needed_data);
         needed_data.addNode(fuehrerstandsAnzeigen);
         fuehrerstandsAnzeigen.addNode(geschwindigkeit);
 
-        return getEncodeDecoder().decode(root);
+        return getEncodeDecoder().encode(root);
     }
+
 }

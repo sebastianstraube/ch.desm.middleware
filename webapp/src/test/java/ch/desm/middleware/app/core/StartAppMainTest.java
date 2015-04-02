@@ -5,8 +5,8 @@ import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420BrokerClient;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
-import ch.desm.middleware.app.core.component.simulation.zusi.ZusiServiceTest;
-import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClientTest;
+import ch.desm.middleware.app.core.component.simulation.zusi.zusi.ZusiServiceTest;
+import ch.desm.middleware.app.core.component.simulation.zusi.zusi.client.ZusiFahrpultEndpointTcpClientTest;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -180,7 +180,8 @@ public class StartAppMainTest {
     public void testZusiServiceEncodeDecodeEncapsulatedZusiStream() throws Exception {
 
         try {
-            boolean b = service.getZusiProtocolNodeConverterTest().testEncodeDecodeNeededData();
+            String testStream = "000000000300000000001400000000000100060000000100313233340600000002000000000006000000030000000000060000000400000000000600000005000000000006000000060000000000060000000700000000000600000008000000000006000000090000000000060000000a0000000000ffffffff000000000100060000000100746573740600000002006b5ba0440600000003002d15d7c4060000000400fe3f28440600000005006b1a1840060000000600469bc5400600000007001bb1a1440600000008001b5dd8c4060000000900fe3f2844060000000a00331b1840ffffffffffffffffffffffff";
+            boolean b = service.getZusiProtocolNodeConverterTest().testEncode(testStream);
             LOGGER.log(Level.INFO, "(true)test encode decode encapsulated zusi stream: " + b);
             Assert.assertEquals(true, b);
 

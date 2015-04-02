@@ -10,45 +10,71 @@ public class ZusiProtocolEncoderDecoder {
 
     private static Logger LOGGER = Logger.getLogger(ZusiProtocolEncoderDecoder.class);
 
+    private String getHexData(ZusiProtocolNode node){
+        int[] dataArray = node.getDataArray();
+        String hexData = "";
+        //only character data
+        if (dataArray.length > 1) {
+            hexData = UtilConvertingHex.toHex(dataArray, 2);
+            if (!node.isDataStream()) {
+                hexData = UtilConvertingHex.swapEndian(hexData);
+            }
+        }
+        //decimal data
+        else {
+            int nrBytes = dataArray.length <= 1 ? 2 : 4;
+            hexData = UtilConvertingHex.toHex(dataArray, nrBytes);
+        }
+
+        return hexData;
+    }
+
+    private String getNodeStream(boolean encap, ZusiProtocolNode node){
+        String stream ="";
+        int idByteLength = node.isStartNode() ? 0 : 2;
+
+        if(node.isStartNode() && encap){
+            stream += "FFFFFFFF";
+        }
+
+        stream += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getNrBytes() + idByteLength, 8));
+        stream += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getId(), 4));
+        stream += getHexData(node);
+        stream += "#";
+
+        if(node.isStartNode() && !encap){
+            stream += "FFFFFFFF";
+        }
+
+        return stream;
+    }
+
+    private String getBakedStream(ZusiProtocolNode node, boolean encap, String stream){
+        String part = getNodeStream(encap, node);
+        stream = stream.replace("#", part);
+
+        return stream;
+    }
+
     /**
      *
      * @param node
      * @return
      */
-    public String encode(ZusiProtocolNode node){
-        String message = "";
-        int idByteLength = 0;
-        if(node == null) {
-            return message;
-        }
+    public String encode(ZusiProtocolNode node)  {
+        String stream = recurEncode(false, "#", node);
+        return stream.replace("#", "");
+    }
 
-
-        if(node.getNrBytes() > 0){
-            idByteLength = 2;
-        }
-        message += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getNrBytes() + idByteLength, 8));
-        message += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getId(), 4));
-
-        int[] dataArray = node.getDataArray();
-        //only character data
-        if(dataArray.length > 1){
-            String hexData = UtilConvertingHex.toHex(dataArray, 2);
-            if(!node.isDataStream()){
-                hexData = UtilConvertingHex.swapEndian(hexData);
-            }
-            message += hexData;
-
-            //decimal data
-        }else{
-            String hexData = UtilConvertingHex.toHex(dataArray, 4);
-            message += hexData;
-        }
+    private String recurEncode(boolean encap, String stream, ZusiProtocolNode node){
+        stream = getBakedStream(node, encap, stream);
 
         for(ZusiProtocolNode n : node.nodes){
-            message += encode(n);
+            encap = n.isStartNode() && node.isStartNode() && node.nodes.size() > 1;
+            stream = recurEncode(encap, stream, n);
         }
 
-        return message;
+        return stream;
     }
 
     /**
@@ -57,31 +83,27 @@ public class ZusiProtocolEncoderDecoder {
      * @return
      * @throws Exception
      */
-    public ZusiProtocolNodeBase encode(String stream) throws Exception {
-        ZusiProtocolNodeBase root = processNodeStartEnd(stream);
+    public ZusiProtocolNodeBase decode(String stream) throws Exception {
+        ZusiProtocolNodeBase root = decodeStream(stream);
 
         return root;
     }
 
     /**
      *
-     * @param node
+     * @param root
      * @return
      * @throws Exception
      */
-    public String decode(ZusiProtocolNodeBase node) throws Exception{
+    public String encode(ZusiProtocolNodeBase root) throws Exception{
 
         String messages = "";
-        for(ZusiProtocolNode n : node.nodes){
-            String message = encode(n);
-            int countGroups = countNodes(n, 0);
-            for(int i=0; i<countGroups; i++){
-                message += ZusiProtocolConstants.NODE_END;
-            }
-            messages += message.toUpperCase();
+
+        for(ZusiProtocolNode child : root.nodes){
+            messages += encode(child);
         }
 
-        return messages.toUpperCase();
+        return messages;
     }
 
     /**
@@ -90,7 +112,7 @@ public class ZusiProtocolEncoderDecoder {
      * @return a node object of the representing stream
      * @throws Exception
      */
-    private ZusiProtocolNodeBase processNodeStartEnd(String stream) throws Exception {
+    private ZusiProtocolNodeBase decodeStream(String stream) throws Exception {
 
         ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
         try {
@@ -197,23 +219,4 @@ public class ZusiProtocolEncoderDecoder {
         return idValue;
     }
 
-    /**
-     *
-     * @param node
-     * @param count
-     * @return
-     */
-    private int countNodes(ZusiProtocolNode node, int count){
-        if(node == null) {
-            return count;
-        }else if(node.getNrBytes() == 0){
-            count++;
-        }
-
-        for(ZusiProtocolNode n : node.nodes){
-            count = countNodes(n, count);
-        }
-
-        return count;
-    }
 }

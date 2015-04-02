@@ -26,7 +26,7 @@ public class ZusiProtocolNodeProcessor {
      * @return
      */
     protected ZusiProtocolNodeBase toNode(String message) throws Exception {
-        return encodeDecode.encode(message);
+        return encodeDecode.decode(message);
     }
 
     /**
@@ -36,7 +36,7 @@ public class ZusiProtocolNodeProcessor {
      * @throws Exception
      */
     public String getGlobalId(String hexMessage) throws Exception{
-        return getGlobalId(encodeDecode.encode(hexMessage));
+        return getGlobalId(encodeDecode.decode(hexMessage));
     }
 
     /**
@@ -51,7 +51,7 @@ public class ZusiProtocolNodeProcessor {
         String[] id = globalId.substring(0, globalId.lastIndexOf("::")).split("-");
         String[] parameter = globalId.substring(globalId.lastIndexOf("::")+2, globalId.length()).split(",");
 
-        root = buildTree(root, lastNode, id, parameter);
+        root = buildRootNode(root, lastNode, id, parameter);
 
         return root;
     }
@@ -64,7 +64,7 @@ public class ZusiProtocolNodeProcessor {
      * @param parameter
      * @return
      */
-    protected ZusiProtocolNodeBase buildTree(ZusiProtocolNodeBase root, ZusiProtocolNode lastNode, String[] id, String[] parameter){
+    protected ZusiProtocolNodeBase buildRootNode(ZusiProtocolNodeBase root, ZusiProtocolNode lastNode, String[] id, String[] parameter){
         for(int i=0; i<id.length; i++){
             ZusiProtocolNode n = new ZusiProtocolNode(id[i]);
 
@@ -119,9 +119,9 @@ public class ZusiProtocolNodeProcessor {
         String nodeId ="";
         nodeId += n.getIdHex();
 
-        if(n.getDataArray().length > 0){
+        if(n.getDataArray().length <= 0){
             int expandLength = 4;
-            if(n.getDataArray().length > 1){
+            if(n.getDataArray().length >= 1){
                 expandLength = 2;
             }
             nodeId += ":" + n.getDataHex(expandLength);

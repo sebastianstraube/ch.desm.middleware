@@ -13,9 +13,7 @@ import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
-import ch.desm.middleware.app.core.component.simulation.zusi.ZusiServiceTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
-import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClientTest;
 import ch.desm.middleware.app.core.server.JettyServer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -41,10 +39,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM3);
         //startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
-        //startZusi("192.168.1.19", 1436);
         startZusi("7.94.80.35", 1436);
-
-        //startHangout(Integer.MAX_VALUE);
 	}
 
     private void startJettyServer(String path){
@@ -239,22 +234,4 @@ public class StartAppSingleton extends DaemonThreadBase {
 		}
 
 	}
-
-    //TODO refactoring
-    public boolean isHangout = true;
-    public void startHangout(long val){
-
-        while(isHangout){
-            try {
-                Thread.sleep(val);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void stopHangout(){
-        isHangout = false;
-    }
 }

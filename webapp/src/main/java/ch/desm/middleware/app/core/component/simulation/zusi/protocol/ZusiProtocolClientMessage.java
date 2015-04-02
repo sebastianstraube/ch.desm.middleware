@@ -36,7 +36,7 @@ public class ZusiProtocolClientMessage {
         hello.addNode(version);
 
 
-        return encodeDecode.decode(root);
+        return encodeDecode.encode(root);
     }
 
     /**
@@ -71,7 +71,7 @@ public class ZusiProtocolClientMessage {
         client_ausbilder.addNode(needed_data);
         needed_data.addNode(trainpos);
 
-        return encodeDecode.decode(root);
+        return encodeDecode.encode(root);
     }
 
     /**
@@ -94,7 +94,7 @@ public class ZusiProtocolClientMessage {
         hello.addNode(text);
         hello.addNode(version);
 
-        return encodeDecode.decode(root);
+        return encodeDecode.encode(root);
     }
 
     /**
@@ -113,7 +113,7 @@ public class ZusiProtocolClientMessage {
         needed_data.addNode(fuehrerstandsAnzeigen);
         fuehrerstandsAnzeigen.addNode(geschwindigkeit);
 
-        return encodeDecode.decode(root);
+        return encodeDecode.encode(root);
     }
 
 

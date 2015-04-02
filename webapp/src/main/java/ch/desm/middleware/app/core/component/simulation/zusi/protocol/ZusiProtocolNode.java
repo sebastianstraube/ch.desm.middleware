@@ -73,7 +73,7 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
      * @param data
      */
     public ZusiProtocolNode(int id, String data){
-        this.isDataStream = true;
+        this.isDataStream = data.length() > 0 ? true : false;
         this.id = id;
         this.data = data;
         this.dataArray = convertData(data);
@@ -164,6 +164,10 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
      */
     public String getIdHex(){
         return UtilConvertingHex.toHex(id, 4);
+    }
+
+    public boolean isStartNode(){
+        return this.nrBytes <= 0;
     }
 
     /**
