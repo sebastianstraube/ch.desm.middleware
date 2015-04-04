@@ -1,6 +1,6 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
+package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
-import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
+import ch.desm.middleware.app.core.common.utility.UtilityConvertingHex;
 import org.apache.log4j.Logger;
 
 /**
@@ -138,7 +138,7 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
      * @return
      */
     public String getDataHex(int length){
-        return UtilConvertingHex.toHex(dataArray, length);
+        return UtilityConvertingHex.toHex(dataArray, length);
     }
 
     /**
@@ -163,7 +163,7 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
      * @return
      */
     public String getIdHex(){
-        return UtilConvertingHex.toHex(id, 4);
+        return UtilityConvertingHex.toHex(id, 4);
     }
 
     public boolean isStartNode(){

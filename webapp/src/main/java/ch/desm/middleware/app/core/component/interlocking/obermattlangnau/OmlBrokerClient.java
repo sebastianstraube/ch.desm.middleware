@@ -11,13 +11,13 @@ public class OmlBrokerClient extends ComponentBrokerClientBase {
 
 	private static Logger LOGGER = Logger.getLogger(OmlBrokerClient.class);
 
-    private OmlBrokerClientThread thread;
+    private OmlGenericClientThread thread;
     private OmlService service;
 
 	public OmlBrokerClient(Broker broker, OmlService service) {
 		super(broker);
         this.service = service;
-        this.thread = new OmlBrokerClientThread(service);
+        this.thread = new OmlGenericClientThread(service);
         this.thread.start();
 	}
 

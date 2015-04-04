@@ -9,9 +9,9 @@ import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapFabischValue;
 
-public class UtilMessageProcessor {
+public class UtilityMessageProcessor {
 
-	private static Logger LOGGER = Logger.getLogger(UtilMessageProcessor.class);
+	private static Logger LOGGER = Logger.getLogger(UtilityMessageProcessor.class);
 	
 	/**
 	 * 

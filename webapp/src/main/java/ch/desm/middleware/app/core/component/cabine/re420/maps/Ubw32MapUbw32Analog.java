@@ -4,13 +4,13 @@ import java.util.Map;
 
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 
-public class Re420MapUbw32Analog extends ComponentMapBase {
+public class Ubw32MapUbw32Analog extends ComponentMapBase {
 
 	//B0 = AN0, B1 = AN1
 	//11bin = 3dez 
 	public static final String PINBITMASK_INPUT_ANALOG = "3";
 	
-	public Re420MapUbw32Analog(){
+	public Ubw32MapUbw32Analog(){
 		super();
 	}
 		

@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
-import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
+import ch.desm.middleware.app.core.common.utility.UtilityConvertingHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -66,7 +66,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
      */
     public void receiveEvent(byte[] message) throws IOException {
         synchronized(receiveEventLock){
-            String hexMessage = UtilConvertingHex.toHex(message);
+            String hexMessage = UtilityConvertingHex.toHex(message);
 
             LOGGER.log(Level.TRACE, "Thread active: " + hexMessage);
             onIncomingEndpointMessage(hexMessage);
@@ -109,7 +109,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 
     private byte[] getByteStream(String hexMessage){
 
-        hexMessage = UtilConvertingHex.removeControleCharacter(hexMessage);
+        hexMessage = UtilityConvertingHex.removeControleCharacter(hexMessage);
 
         byte[] byteStream = new byte[hexMessage.length()/2];
         for(int i=0; i<hexMessage.length()/2; i++){

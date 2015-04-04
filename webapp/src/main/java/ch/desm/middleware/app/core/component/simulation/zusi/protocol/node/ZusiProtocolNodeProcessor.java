@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
+package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Logger;

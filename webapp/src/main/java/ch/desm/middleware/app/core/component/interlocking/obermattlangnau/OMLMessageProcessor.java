@@ -9,7 +9,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements.OMLElementFahrstrassenSchalter;
 
-public class OmlMessageProcessor extends ComponentMessageProcessor {
+public class OmlMessageProcessor extends ComponentMessageProcessor<OmlService> {
 
 	private static Logger LOGGER = Logger.getLogger(OmlMessageProcessor.class);
 

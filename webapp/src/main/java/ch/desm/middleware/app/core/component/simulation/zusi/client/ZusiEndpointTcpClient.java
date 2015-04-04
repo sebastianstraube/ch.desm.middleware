@@ -1,46 +1,36 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.client;
 
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiCommonEndpointThread;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolUtilMessageCheck;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolStream;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class ZusiAusbildungEndpointTcpClient extends EndpointTcpClient {
+public class ZusiEndpointTcpClient extends EndpointTcpClient {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiAusbildungEndpointTcpClient.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiEndpointTcpClient.class);
 
     private ZusiService service;
-    private ZusiProtocolStream zusiMessage;
+    private ZusiCommonEndpointThread tcpThread;
 
-	public ZusiAusbildungEndpointTcpClient(ZusiService service, String ip, int port) {
+	public ZusiEndpointTcpClient(ZusiService service, String ip, int port) {
 		super(ip, port);
         this.registerEndpointListener();
         this.service = service;
-        this.zusiMessage = new ZusiProtocolStream();
+
+        this.tcpThread = new ZusiCommonEndpointThread(service);
+        tcpThread.start();
     }
 
     @Override
-    public void onIncomingEndpointMessage(String hexMessage){
-        LOGGER.log(Level.TRACE, "client receive message: " + hexMessage);
-
-        zusiMessage.addStream(hexMessage);
-        String extractedMessage = "";
-        while(!(extractedMessage = service.getMessageCheck().extractSingleZusiMessage(zusiMessage.getStream())).isEmpty()){
-            zusiMessage.cutStream(extractedMessage.length());
-
-            if(!extractedMessage.isEmpty()){
-                LOGGER.log(Level.INFO, "client receive buffered message: " + extractedMessage);
-                service.getMessageProcessor().processEndpointMessage(service, extractedMessage, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
-            }else{
-                LOGGER.log(Level.TRACE, "buffered message is incomplete: " + zusiMessage.getStream());
-            }
-        }
+    public void onIncomingEndpointMessage(String stream){
+        LOGGER.log(Level.TRACE, "client receive message: " + stream);
+        tcpThread.addZusiStream(stream);
     }
+
+
 
     @Override
     protected void registerEndpointListener() {
@@ -78,7 +68,7 @@ public class ZusiAusbildungEndpointTcpClient extends EndpointTcpClient {
     /**
      * TODO move to own client
      */
-    public void sendMessageRegisterClient(){
+    public void sendMessageRegisterClientAusbildung(){
 
         try {
             String stream = service.getZusiProtocolClientMessage().getMessageConnectAusbildung();
@@ -91,7 +81,7 @@ public class ZusiAusbildungEndpointTcpClient extends EndpointTcpClient {
     /**
      * TODO move to own client
      */
-    public void sendMessageNeededData(){
+    public void sendMessageNeededDataAusbildung(){
 
         try {
             String stream = service.getZusiProtocolClientMessage().getMessageNeededDataAusbildung();
@@ -100,5 +90,33 @@ public class ZusiAusbildungEndpointTcpClient extends EndpointTcpClient {
             LOGGER.log(Level.ERROR, e);
         }
     }
+
+    /**
+     * TODO move to own client
+     */
+    public void sendMessageRegisterClient(){
+
+        try {
+            String stream = service.getZusiProtocolClientMessage().getMessageConnectFahrpult();
+            this.send(stream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+    }
+
+    /**
+     * TODO move to own client
+     */
+    public void sendMessageNeededData(){
+
+        try {
+            String stream = service.getZusiProtocolClientMessage().getMessageNeededDataFahrpult();
+            this.send(stream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+    }
+
+
 
 }

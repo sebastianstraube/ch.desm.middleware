@@ -3,8 +3,6 @@ package ch.desm.middleware.app.core;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420BrokerClient;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlService;
 import ch.desm.middleware.app.core.component.management.ManagementService;
@@ -33,21 +31,30 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 
 	public void run(){
-        startJettyServer("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/webapp");
-
-        //startManagement("ws://heisenberg:80/gui/management");
+        JettyServer server = startJettyServer("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/webapp");
+        startManagement(server, "ws://heisenberg:80/gui/management");
 		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM3);
         //startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
         startZusi("7.94.80.35", 1436);
     }
 
-    private void startJettyServer(String path){
+    private JettyServer startJettyServer(String path){
         JettyServer server = new JettyServer(path);
         server.start();
+
+        return server;
     }
 
-	public void startManagement(String uri){
+	public void startManagement(JettyServer server, String uri){
+
+        while(!server.isStarted()){
+            try {
+                doHangout(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         ManagementService management = new ManagementService(Broker.getInstance(), uri);
 	}
@@ -73,8 +80,8 @@ public class StartAppSingleton extends DaemonThreadBase {
         ZusiService serviceAusbildung = new ZusiService(Broker.getInstance(), ip, port);
         serviceAusbildung.getEndpointAusbildung().init();
         serviceAusbildung.getEndpointAusbildung().start();
-        serviceAusbildung.getEndpointAusbildung().sendMessageRegisterClient();
-        serviceAusbildung.getEndpointAusbildung().sendMessageNeededData();
+        serviceAusbildung.getEndpointAusbildung().sendMessageRegisterClientAusbildung();
+        serviceAusbildung.getEndpointAusbildung().sendMessageNeededDataAusbildung();
     }
 
 
@@ -93,7 +100,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	 * is 0, then the hardware PWM is shut off. The PWM frequency is 1220Hz
 	 * (80MHz/0x10000) Example: "PM,3,512" Return Packet: "OK"
 	 */
-	public void testPWM(String[] args) {
+	public void startUbw32Pwm(String[] args) {
 
 		args = new String[]{"18"};
 

@@ -1,16 +1,27 @@
 package ch.desm.middleware.app.core.component;
 
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
+import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.util.LinkedList;
+
 /**
  * Created by Sebastian on 04.11.2014.
  */
-public class ComponentMessageProcessor extends MessageProcessorBase {
+public abstract class ComponentMessageProcessor<T1> extends MessageProcessorBase {
 
     private static Logger LOGGER = Logger.getLogger(ComponentMessageProcessor.class);
+
+    /**
+     *
+     * @param service
+     * @param messages
+     */
+    public abstract void processBrokerMessage(T1 service, LinkedList<MessageMiddleware> messages);
+
     /**
      *
      * @param component

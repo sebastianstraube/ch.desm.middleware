@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by Sebastian on 12.11.2014.
  */
-public class UtilRandomGenerator {
+public class UtilityRandomGenerator {
 
     private static final int MIN = 256;
     private static final int MAX = 512;

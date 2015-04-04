@@ -1,35 +1,28 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiProtocolMessage;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeBase;
 import org.apache.log4j.Logger;
 
 /**
  * Created by Sebastian on 09.03.2015.
  */
-public class ZusiProtocolUtilCommand {
+public class ZusiProtocolCommand {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolUtilCommand.class);
-    private static final String GROUPID_COMMAND_FROM = "0002-000A";
-    private static final String GROUPID_COMMAND_TO = "0002-010A-0001";
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolCommand.class);
 
-    ZusiService service;
-    public ZusiProtocolUtilCommand(ZusiService service){
-        this.service = service;
-    }
     /**
      *
      * @param service
      * @param globalId
      * @return
      */
-    public String getCommandStreamFrom(ZusiService service, String globalId) throws Exception {
+    public String getStreamFromZusi(ZusiService service, String globalId) throws Exception {
         ZusiProtocolNodeBase root = service.getProtocolNodeProcessor().getRoot(globalId);
         String stream = service.getEncoder().encode(root);
         return stream;
-    }
-
-    public boolean isCommandInputFrom(ZusiProtocolMessage message){
-        return message.hasGroupId(GROUPID_COMMAND_FROM);
     }
 
     /**
@@ -38,14 +31,10 @@ public class ZusiProtocolUtilCommand {
      * @param globalId
      * @return
      */
-    public String getCommandStreamTo(ZusiService service, String globalId) throws Exception {
+    public String getStreamToZusi(ZusiService service, String globalId) throws Exception {
         ZusiProtocolNodeBase root = service.getProtocolNodeProcessor().getRoot(globalId);
         String stream = service.getEncoder().encode(root);
         return stream;
-    }
-
-    public boolean isCommandInputTo(ZusiProtocolMessage message){
-        return message.hasGroupId(GROUPID_COMMAND_TO);
     }
 
     /**
@@ -53,7 +42,7 @@ public class ZusiProtocolUtilCommand {
      * @param message
      * @return
      */
-    public ZusiProtocolNodeBase convertToInputCommand(ZusiProtocolMessage message){
+    public ZusiProtocolNodeBase getInput(ZusiProtocolMessage message){
         ZusiProtocolNodeBase root = new ZusiProtocolNodeBase();
         ZusiProtocolNode lastNode = null;
 

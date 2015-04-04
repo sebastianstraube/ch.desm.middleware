@@ -1,5 +1,11 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
+package ch.desm.middleware.app.core.component.simulation.zusi.message;
 
+import ch.desm.middleware.app.core.communication.broker.Broker;
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolUtilEncoder;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeBase;
 import org.apache.log4j.Logger;
 
 /**
@@ -9,10 +15,10 @@ public class ZusiProtocolClientMessage {
 
     private static Logger LOGGER = Logger.getLogger(ZusiProtocolClientMessage.class);
 
-    private ZusiProtocolUtilEncoder encodeDecode;
+    private ZusiService service;
 
-    public ZusiProtocolClientMessage(){
-        this.encodeDecode = new ZusiProtocolUtilEncoder();
+    public ZusiProtocolClientMessage(ZusiService service){
+        this.service = service;
     }
 
     /**
@@ -36,7 +42,7 @@ public class ZusiProtocolClientMessage {
         hello.addNode(version);
 
 
-        return encodeDecode.encode(root);
+        return service.getEncoder().encode(root);
     }
 
     /**
@@ -65,13 +71,12 @@ public class ZusiProtocolClientMessage {
         ZusiProtocolNode client_ausbilder = new ZusiProtocolNode(3);
         ZusiProtocolNode needed_data = new ZusiProtocolNode(3);
         ZusiProtocolNode trainpos = new ZusiProtocolNode(1, 20, 2);
-        // trainpos.setData(ZusiProtocolAusbildungssteuerung.COMMAND_FROM_TRAINPOS); //TODO implementation if byte length!
 
         root.addNode(client_ausbilder);
         client_ausbilder.addNode(needed_data);
         needed_data.addNode(trainpos);
 
-        return encodeDecode.encode(root);
+        return service.getEncoder().encode(root);
     }
 
     /**
@@ -94,7 +99,7 @@ public class ZusiProtocolClientMessage {
         hello.addNode(text);
         hello.addNode(version);
 
-        return encodeDecode.encode(root);
+        return service.getEncoder().encode(root);
     }
 
     /**
@@ -113,7 +118,7 @@ public class ZusiProtocolClientMessage {
         needed_data.addNode(fuehrerstandsAnzeigen);
         fuehrerstandsAnzeigen.addNode(geschwindigkeit);
 
-        return encodeDecode.encode(root);
+        return service.getEncoder().encode(root);
     }
 
 

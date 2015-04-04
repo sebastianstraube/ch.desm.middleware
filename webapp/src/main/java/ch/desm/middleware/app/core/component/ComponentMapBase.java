@@ -49,7 +49,7 @@ public abstract class ComponentMapBase {
      * @param key
      * @return
      */
-    public String getStartValue(String key){
+    public String getStartWithValue(String key){
         for(Entry<String, String> entry : map.entrySet()){
             if(entry.getKey().toLowerCase().startsWith(key.toLowerCase())){
                 return entry.getValue();

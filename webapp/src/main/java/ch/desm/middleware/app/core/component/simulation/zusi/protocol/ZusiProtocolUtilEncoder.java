@@ -1,6 +1,8 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
-import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
+import ch.desm.middleware.app.core.common.utility.UtilityConvertingHex;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeBase;
 import org.apache.log4j.Logger;
 
 /**
@@ -15,15 +17,15 @@ public class ZusiProtocolUtilEncoder {
         String hexData = "";
         //only character data
         if (dataArray.length > 1) {
-            hexData = UtilConvertingHex.toHex(dataArray, 2);
+            hexData = UtilityConvertingHex.toHex(dataArray, 2);
             if (!node.isDataStream()) {
-                hexData = UtilConvertingHex.swapEndian(hexData);
+                hexData = UtilityConvertingHex.swapEndian(hexData);
             }
         }
         //decimal data
         else {
             int nrBytes = dataArray.length <= 1 ? 2 : 4;
-            hexData = UtilConvertingHex.toHex(dataArray, nrBytes);
+            hexData = UtilityConvertingHex.toHex(dataArray, nrBytes);
         }
 
         return hexData;
@@ -37,8 +39,8 @@ public class ZusiProtocolUtilEncoder {
             stream += "FFFFFFFF";
         }
 
-        stream += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getNrBytes() + idByteLength, 8));
-        stream += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getId(), 4));
+        stream += UtilityConvertingHex.swapEndian(UtilityConvertingHex.toHex(node.getNrBytes() + idByteLength, 8));
+        stream += UtilityConvertingHex.swapEndian(UtilityConvertingHex.toHex(node.getId(), 4));
         stream += getHexData(node);
         stream += "#";
 
@@ -59,8 +61,8 @@ public class ZusiProtocolUtilEncoder {
     private String recurEncode(boolean encap, String stream, ZusiProtocolNode node){
         stream = getBakedStream(node, encap, stream);
 
-        for(ZusiProtocolNode n : node.nodes){
-            encap = n.isStartNode() && node.isStartNode() && node.nodes.size() > 1;
+        for(ZusiProtocolNode n : node.getNodes()){
+            encap = n.isStartNode() && node.isStartNode() && node.getNodes().size() > 1;
             stream = recurEncode(encap, stream, n);
         }
 
@@ -87,7 +89,7 @@ public class ZusiProtocolUtilEncoder {
 
         String messages = "";
 
-        for(ZusiProtocolNode child : root.nodes){
+        for(ZusiProtocolNode child : root.getNodes()){
             messages += encode(child);
         }
 

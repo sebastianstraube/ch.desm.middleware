@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.Arrays;
 
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32RegisterAnalog;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapUbw32Analog;
 
 public class MessageUbw32Analog extends MessageUbw32Base {
 

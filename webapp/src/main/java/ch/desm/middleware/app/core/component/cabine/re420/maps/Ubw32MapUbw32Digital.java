@@ -4,11 +4,11 @@ import java.util.Map;
 
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 
-public class Re420MapUbw32Digital extends ComponentMapBase {
+public class Ubw32MapUbw32Digital extends ComponentMapBase {
 
 	public static final String PINBITMASK_CONFIGURATION_DIGITAL = "17943,65339,16,49152,768,12596,960";
 	
-	public Re420MapUbw32Digital() {
+	public Ubw32MapUbw32Digital() {
 		super();
 	}
 

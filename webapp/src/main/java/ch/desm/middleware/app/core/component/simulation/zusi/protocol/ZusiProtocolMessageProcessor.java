@@ -1,15 +1,15 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
-import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
+import ch.desm.middleware.app.core.common.utility.UtilityConvertingHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
  * Created by Sebastian on 27.03.2015.
  */
-public class ZusiProtocolUtilMessageCheck {
+public class ZusiProtocolMessageProcessor {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolUtilMessageCheck.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolMessageProcessor.class);
 
     /**
      *
@@ -38,30 +38,28 @@ public class ZusiProtocolUtilMessageCheck {
      * @return
      */
     private int getSingleZusiMessageIndex(String message){
-
+        int cntStartNode = 0;
+        int cntEndNode = 0;
+        int cntValidMessageLength = 0;
+        int nodeLength = 0;
+        String id = "";
         boolean isValid = true;
+
         if(!hasValidCharacteristic(message)){
             isValid = false;
         }
 
-        int cntStartNode = 0;
-        int cntEndNode = 0;
-        int cntValidMessageLength = 0;
-        String id = "";
         try{
             while(isValid && !message.isEmpty()){
+                if(cntStartNode != 0 && cntStartNode == cntEndNode){
+                    break;
+                }
                 if(message.length() < 8){
                     isValid = false;
                     break;
                 }
-                if(cntStartNode != 0 && cntStartNode == cntEndNode){
-                    isValid = true;
-                    break;
-                }
 
                 String start = message.substring(0, 8);
-                //String id = "";
-
                 if(start.equals("00000000")){
                     cntStartNode++;
                     id = message.substring(8, 12);
@@ -71,13 +69,13 @@ public class ZusiProtocolUtilMessageCheck {
                     id = message.substring(8, 12);
                 }
 
-                int nodeLength = getNodeLength(start, id);
+                nodeLength = getNodeLength(start, id);
                 message = message.substring(nodeLength);
                 cntValidMessageLength += nodeLength;
             }
 
-        }catch(Exception e){
-            LOGGER.log(Level.ERROR, e);
+        }catch(StringIndexOutOfBoundsException e){
+            LOGGER.log(Level.ERROR, "wrong stream node length: " + nodeLength + " in message: " + message);
         }
 
 
@@ -106,7 +104,7 @@ public class ZusiProtocolUtilMessageCheck {
      * @return
      */
     private int getNodeLength(String node, String id){
-        node = UtilConvertingHex.swapEndian(node);
+        node = UtilityConvertingHex.swapEndian(node);
         int length = 0;
 
         if(node.equalsIgnoreCase("FFFFFFFF")){

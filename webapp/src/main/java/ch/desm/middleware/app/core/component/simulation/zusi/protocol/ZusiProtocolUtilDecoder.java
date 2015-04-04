@@ -1,6 +1,8 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
-import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
+import ch.desm.middleware.app.core.common.utility.UtilityConvertingHex;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeBase;
 import org.apache.log4j.Logger;
 
 /**
@@ -15,15 +17,15 @@ public class ZusiProtocolUtilDecoder {
         String hexData = "";
         //only character data
         if (dataArray.length > 1) {
-            hexData = UtilConvertingHex.toHex(dataArray, 2);
+            hexData = UtilityConvertingHex.toHex(dataArray, 2);
             if (!node.isDataStream()) {
-                hexData = UtilConvertingHex.swapEndian(hexData);
+                hexData = UtilityConvertingHex.swapEndian(hexData);
             }
         }
         //decimal data
         else {
             int nrBytes = dataArray.length <= 1 ? 2 : 4;
-            hexData = UtilConvertingHex.toHex(dataArray, nrBytes);
+            hexData = UtilityConvertingHex.toHex(dataArray, nrBytes);
         }
 
         return hexData;
@@ -37,8 +39,8 @@ public class ZusiProtocolUtilDecoder {
             stream += "FFFFFFFF";
         }
 
-        stream += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getNrBytes() + idByteLength, 8));
-        stream += UtilConvertingHex.swapEndian(UtilConvertingHex.toHex(node.getId(), 4));
+        stream += UtilityConvertingHex.swapEndian(UtilityConvertingHex.toHex(node.getNrBytes() + idByteLength, 8));
+        stream += UtilityConvertingHex.swapEndian(UtilityConvertingHex.toHex(node.getId(), 4));
         stream += getHexData(node);
         stream += "#";
 
@@ -79,7 +81,7 @@ public class ZusiProtocolUtilDecoder {
                 if (stream.startsWith("00000000")) {
 
                     String id = stream.substring(8, 12);
-                    String idSwapped = UtilConvertingHex.swapEndian(id);
+                    String idSwapped = UtilityConvertingHex.swapEndian(id);
                     int idValue = Integer.valueOf(idSwapped, 16);
                     ZusiProtocolNode nodeNext = new ZusiProtocolNode(idValue);
                     //if there is no existing node
@@ -124,7 +126,7 @@ public class ZusiProtocolUtilDecoder {
      * @return
      */
     private String getDataValue(String stream){
-        String dataValue = UtilConvertingHex.getCharStream(getData(stream));
+        String dataValue = UtilityConvertingHex.getCharStream(getData(stream));
         return dataValue;
     }
 
@@ -155,7 +157,7 @@ public class ZusiProtocolUtilDecoder {
      */
     private int getNrBytes(String stream){
         String node = stream.substring(0, 8);
-        String nodeSwap = UtilConvertingHex.swapEndian(node);
+        String nodeSwap = UtilityConvertingHex.swapEndian(node);
         int nrBytes = Integer.valueOf(nodeSwap, 16);
 
         return nrBytes;
@@ -168,7 +170,7 @@ public class ZusiProtocolUtilDecoder {
      */
     private int getIdValue(String stream){
         String id = stream.substring(8, 12);
-        String idSwapped = UtilConvertingHex.swapEndian(id);
+        String idSwapped = UtilityConvertingHex.swapEndian(id);
         int idValue = Integer.valueOf(idSwapped, 16);
 
         return idValue;

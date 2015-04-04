@@ -1,8 +1,6 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
+package ch.desm.middleware.app.core.component.simulation.zusi.message;
 
 import ch.desm.middleware.app.core.common.Pair;
-import ch.desm.middleware.app.core.common.utility.UtilConvertingHex;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.*;

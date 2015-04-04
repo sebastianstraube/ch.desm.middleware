@@ -11,7 +11,7 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 04.11.2014.
  */
-public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor {
+public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor<PetrinetOmlService> {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClient.class);
 

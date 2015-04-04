@@ -1,7 +1,6 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.client;
+package ch.desm.middleware.app.core.component;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.component.ComponentBrokerClientThreadBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -11,19 +10,19 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class ZusiFahrpultBrokerClientThread extends ComponentBrokerClientThreadBase {
+public class ComponentClientThreadBase extends ComponentClientThreadBaseGeneric {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiFahrpultBrokerClientThread.class);
-    private ZusiService service;
+    private static Logger LOGGER = Logger.getLogger(ComponentClientThreadBase.class);
+    private ComponentServiceBase service;
     private Object processMessagesLock;
 
-    public ZusiFahrpultBrokerClientThread(ZusiService service){
+    public ComponentClientThreadBase(ComponentServiceBase service){
         this.service = service;
         this.processMessagesLock = new Object();
     }
 
     @Override
-    public void processBrokerMessages() {
+    public void processPendingMessages() {
         synchronized (processMessagesLock){
             LinkedList<MessageMiddleware> messages = getMessages();
 
@@ -32,6 +31,5 @@ public class ZusiFahrpultBrokerClientThread extends ComponentBrokerClientThreadB
                 service.getMessageProcessor().processBrokerMessage(service, messages);
             }
         }
-
     }
 }

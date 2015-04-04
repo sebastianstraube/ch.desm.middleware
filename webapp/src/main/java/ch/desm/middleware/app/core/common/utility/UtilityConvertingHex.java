@@ -5,9 +5,9 @@ import org.apache.log4j.Logger;
 /**
  * Created by Sebastian on 24.02.2015.
  */
-public class UtilConvertingHex {
+public class UtilityConvertingHex {
 
-    private static Logger LOGGER = Logger.getLogger(UtilConvertingHex.class);
+    private static Logger LOGGER = Logger.getLogger(UtilityConvertingHex.class);
 
     /**
      *
@@ -32,7 +32,7 @@ public class UtilConvertingHex {
      */
     static public String toHex(int i, int length){
         String hex = Integer.toHexString(i);
-        hex = UtilConvertingHex.expandHexString(hex, length);
+        hex = UtilityConvertingHex.expandHexString(hex, length);
 
         return hex;
     }
@@ -86,7 +86,7 @@ public class UtilConvertingHex {
         String s = "";
         if(!hexStream.isEmpty()){
             if(hexStream.length() == 4){
-                hexStream = UtilConvertingHex.swapEndian(hexStream);
+                hexStream = UtilityConvertingHex.swapEndian(hexStream);
                 s = String.valueOf(Integer.valueOf(hexStream, 16));
             }else{
                 String hexCode = "";

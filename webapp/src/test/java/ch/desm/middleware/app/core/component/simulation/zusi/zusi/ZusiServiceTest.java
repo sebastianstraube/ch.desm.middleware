@@ -2,6 +2,7 @@ package ch.desm.middleware.app.core.component.simulation.zusi.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import ch.desm.middleware.app.core.component.simulation.zusi.zusi.message.ZusiProtocolMessageProcessorTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol.ZusiProtocolNodeProcessorTest;
 
 /**
@@ -10,6 +11,8 @@ import ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol.ZusiP
 public class ZusiServiceTest extends ZusiService {
 
     private ZusiProtocolNodeProcessorTest zusiProtocolNodeConverterTest;
+    private ZusiProtocolMessageProcessorTest zusiProtocolMessageProcessorTest;
+
     /**
      *
      * @param broker
@@ -19,6 +22,7 @@ public class ZusiServiceTest extends ZusiService {
     public ZusiServiceTest(Broker broker, String ip, int port){
         super(broker, ip, port);
         this.zusiProtocolNodeConverterTest = new ZusiProtocolNodeProcessorTest(this);
+        this.zusiProtocolMessageProcessorTest = new ZusiProtocolMessageProcessorTest();
     }
 
     /**
@@ -29,4 +33,7 @@ public class ZusiServiceTest extends ZusiService {
         return zusiProtocolNodeConverterTest;
     }
 
+    public ZusiProtocolMessageProcessorTest getZusiProtocolMessageProcessorTest(){
+        return zusiProtocolMessageProcessorTest;
+    }
 }

@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
+package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
 import java.util.LinkedList;
 
@@ -27,6 +27,14 @@ public class ZusiProtocolNodeBase {
      */
     public void addNode(ZusiProtocolNode n){
         nodes.add(n);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public LinkedList<ZusiProtocolNode> getNodes(){
+        return nodes;
     }
 
 }

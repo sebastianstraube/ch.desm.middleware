@@ -1,7 +1,6 @@
 package ch.desm.middleware.app.core.component;
 
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -10,23 +9,23 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public abstract class ComponentBrokerClientThreadBase extends DaemonThreadBase {
+public abstract class ComponentClientThreadBaseGeneric<T> extends DaemonThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(ComponentBrokerClientThreadBase.class);
+    private static Logger LOGGER = Logger.getLogger(ComponentClientThreadBaseGeneric.class);
 
     private Object pendingMessagesLock;
-    private LinkedList<MessageMiddleware> pendingMessages;
+    private LinkedList<T> pendingMessages;
 
-    public abstract void processBrokerMessages();
+    public abstract void processPendingMessages();
 
-    public ComponentBrokerClientThreadBase() {
+    public ComponentClientThreadBaseGeneric() {
         pendingMessages = new LinkedList<>();
         pendingMessagesLock = new Object();
     }
 
-    public LinkedList<MessageMiddleware> getMessages(){
+    public LinkedList<T> getMessages(){
         synchronized (pendingMessagesLock){
-            LinkedList<MessageMiddleware> messages = new LinkedList<>();
+            LinkedList<T> messages = new LinkedList<>();
             messages.addAll(pendingMessages);
             pendingMessages.clear();
 
@@ -34,16 +33,22 @@ public abstract class ComponentBrokerClientThreadBase extends DaemonThreadBase {
         }
     }
 
-    public void addMessages(LinkedList<MessageMiddleware> messagesList){
+    public void addMessages(LinkedList<T> messagesList){
         synchronized (pendingMessagesLock){
             pendingMessages.addAll(messagesList);
+        }
+    }
+
+    public void addMessage(T message){
+        synchronized (pendingMessagesLock){
+            pendingMessages.add(message);
         }
     }
 
     public void run(){
 
         while(!interrupted()){
-               processBrokerMessages();
+               processPendingMessages();
             try {
                 doHangout();
             } catch (InterruptedException e) {

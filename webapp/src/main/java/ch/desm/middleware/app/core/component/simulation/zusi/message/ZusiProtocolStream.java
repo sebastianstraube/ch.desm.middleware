@@ -1,6 +1,6 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
+package ch.desm.middleware.app.core.component.simulation.zusi.message;
 
-import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiFahrpultEndpointTcpClient;
+import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiEndpointTcpClient;
 import org.apache.log4j.Logger;
 
 /**
@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
  */
 public class ZusiProtocolStream {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiFahrpultEndpointTcpClient.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiEndpointTcpClient.class);
 
     private String stream;
 

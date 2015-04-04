@@ -2,8 +2,10 @@ package ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.*;
-import ch.desm.middleware.app.core.component.simulation.zusi.zusi.ZusiServiceTest;
+import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiProtocolMessage;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeBase;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeProcessor;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -131,7 +133,7 @@ public class ZusiProtocolNodeProcessorTest extends ZusiProtocolNodeProcessor {
         //zusi protocol transfer object
         ZusiProtocolMessage zpm = new ZusiProtocolMessage(mm.getGlobalId());
         //zusi data transfer object
-        ZusiProtocolNodeBase root = service.getCommand().convertToInputCommand(zpm);
+        ZusiProtocolNodeBase root = service.getCommand().getInput(zpm);
         //decode to zusi hex stream
         String zusiHexStream = service.getEncoder().encode(root);
         //get global id from hex stream

@@ -3,7 +3,7 @@ package ch.desm.middleware.app.core.component.simulation.locsim;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.common.utility.UtilMessageProcessor;
+import ch.desm.middleware.app.core.common.utility.UtilityMessageProcessor;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
 import ch.desm.middleware.app.core.component.simulation.locsim.elements.LocsimElementFahrschalter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Created by Sebastian on 29.10.2014.
  */
-public class LocsimMessageProcessor extends ComponentMessageProcessor {
+public class LocsimMessageProcessor extends ComponentMessageProcessor<Locsim> {
 
     private static Logger LOGGER = Logger.getLogger(LocsimMessageProcessor.class);
     private LocsimElementFahrschalter fahrschalter;
@@ -31,8 +31,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessor {
      * @param impl
      * @param messages
      */
-    public void processBrokerMessage(Locsim impl,
-                                     LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(Locsim impl, LinkedList<MessageMiddleware> messages) {
 
         for (MessageMiddleware message : messages) {
             this.processBrokerMessage(impl, message);
@@ -51,7 +50,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessor {
             // ....
         }
 
-        else if (UtilMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
+        else if (UtilityMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
 
             // send locsim interface ready to start simulation
             if (message.getGlobalId().equalsIgnoreCase(

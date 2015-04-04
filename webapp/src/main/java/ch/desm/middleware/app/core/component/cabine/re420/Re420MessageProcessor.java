@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
-import ch.desm.middleware.app.core.common.utility.UtilMessageProcessor;
+import ch.desm.middleware.app.core.common.utility.UtilityMessageProcessor;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.cabine.re420.elements.Re420ElementFahrschalter;
@@ -25,7 +25,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
 		this.fahrschalter = new Re420ElementFahrschalter();
 		this.binding = new Re420MapBinding();
 		this.mapValues = new Re420MapFabischValue();
-        this.util = new UtilMessageProcessor();
+        this.util = new UtilityMessageProcessor();
         this.locsimIni1 = false;
 	}
 
@@ -296,7 +296,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
         }
 
         // is software message
-        else if (UtilMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
+        else if (UtilityMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
 
             if (message.getGlobalId().equalsIgnoreCase(
                     "locsim.initialization.ready.ini1")
