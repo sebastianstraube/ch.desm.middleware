@@ -1,39 +1,26 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
+import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
-import ch.desm.middleware.app.core.component.ComponentServiceBase;
-import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiBrokerClient;
-import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiEndpointTcpClient;
+import ch.desm.middleware.app.core.component.common.ComponentMapMiddleware;
+import ch.desm.middleware.app.core.component.common.ComponentServiceBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapFahrpultAusbildung;
-import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiProtocolClientMessage;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.*;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeProcessor;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeDecoder;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeEncoder;
 
 /**
  * Created by Sebastian on 28.11.2014.
  */
 public class ZusiService extends ComponentServiceBase {
 
-    private MessageTranslatorMiddleware translator;
-    private ComponentMapMiddleware componentMapMiddleware;
-
-    private ZusiMessageProcessor messageProcessor;
-    private ZusiProtocolMessageProcessor messageCheck;
-
-    private ZusiProtocolNodeProcessor protocolNodeProcessor;
-    private ZusiProtocolCommand protocolCommand;
-    private ZusiProtocolClientMessage protocolClientMessage;
-    private ZusiProtocolUtilEncoder encoder;
-    private ZusiProtocolUtilDecoder decoder;
-
-    private ZusiBrokerClient brokerClientFahrpult;
+    private ZusiBrokerClient broker;
+    private String ip;
+    private int port;
+    private ZusiEndpointTcpClient endpointAusbildung;
     private ZusiEndpointTcpClient endpointFahrpult;
 
-    private ZusiBrokerClient brokerClientAusbildung;
-    private ZusiEndpointTcpClient endpointAusbildung;
-    private ZusiMapFahrpultAusbildung map;
 
     /**
      *
@@ -42,23 +29,11 @@ public class ZusiService extends ComponentServiceBase {
      * @param port
      */
     public ZusiService(Broker broker, String ip, int port){
-        this.translator = new MessageTranslatorMiddleware();
-        this.componentMapMiddleware = new ComponentMapMiddleware();
-        this.map = new ZusiMapFahrpultAusbildung();
-
-        this.messageProcessor = new ZusiMessageProcessor();
-        this.messageCheck = new ZusiProtocolMessageProcessor();
-
-        this.protocolNodeProcessor = new ZusiProtocolNodeProcessor(this);
-        this.protocolCommand = new ZusiProtocolCommand();
-        this.protocolClientMessage = new ZusiProtocolClientMessage(this);
-        this.decoder = new ZusiProtocolUtilDecoder();
-        this.encoder= new ZusiProtocolUtilEncoder();
-
-        this.brokerClientFahrpult = new ZusiBrokerClient(broker, this);
-        this.brokerClientAusbildung = new ZusiBrokerClient(broker, this);
-        this.endpointFahrpult = new ZusiEndpointTcpClient(this, ip, port);
-        this.endpointAusbildung = new ZusiEndpointTcpClient(this, ip, port);
+        this.ip = ip;
+        this.port = port;
+        this.broker = new ZusiBrokerClient(broker, this);
+        this.endpointAusbildung = new ZusiEndpointTcpClient(this, ip, port, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
+        this.endpointFahrpult = new ZusiEndpointTcpClient(this, ip, port, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
     }
 
     /**
@@ -66,7 +41,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ComponentMapMiddleware getComponentMapMiddleware(){
-        return componentMapMiddleware;
+        return new ComponentMapMiddleware();
     }
 
     /**
@@ -74,15 +49,15 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiMessageProcessor getMessageProcessor(){
-        return messageProcessor;
+        return new ZusiMessageProcessor();
     }
 
     /**
      *
      * @return
      */
-    public ZusiProtocolMessageProcessor getMessageCheck(){
-        return messageCheck;
+    public ZusiProtocolMessageHelper getMessageCheck(){
+        return new ZusiProtocolMessageHelper();
     }
 
 
@@ -91,15 +66,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public MessageTranslatorMiddleware getTranslator(){
-        return translator;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public ZusiProtocolNodeProcessor getProtocolNodeProcessor(){
-        return protocolNodeProcessor;
+        return new MessageTranslatorMiddleware();
     }
 
     /**
@@ -107,23 +74,23 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiProtocolCommand getCommand(){
-        return protocolCommand;
+        return new ZusiProtocolCommand();
     }
 
     /**
      *
      * @return
      */
-    public ZusiProtocolUtilEncoder getEncoder(){
-        return this.encoder;
+    public ZusiProtocolNodeEncoder getEncoder(){
+        return new ZusiProtocolNodeEncoder();
     }
 
     /**
      *
      * @return
      */
-    public ZusiProtocolUtilDecoder getDecoder(){
-        return this.decoder;
+    public ZusiProtocolNodeDecoder getDecoder(){
+        return new ZusiProtocolNodeDecoder();
     }
 
     /**
@@ -138,14 +105,6 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public ZusiBrokerClient getBrokerClientFahrpult(){
-        return brokerClientFahrpult;
-    }
-
-    /**
-     *
-     * @return
-     */
     public ZusiEndpointTcpClient getEndpointAusbildung(){
         return endpointAusbildung;
     }
@@ -154,8 +113,8 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public ZusiBrokerClient getBrokerClientAusbildung(){
-        return brokerClientAusbildung;
+    public ZusiBrokerClient getBrokerClient(){
+        return broker;
     }
 
     /**
@@ -163,14 +122,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiMapFahrpultAusbildung getMap(){
-        return this.map;
+        return new ZusiMapFahrpultAusbildung();
     }
 
-    /**
-     *
-     * @return
-     */
-    public ZusiProtocolClientMessage getZusiProtocolClientMessage(){
-        return this.protocolClientMessage;
-    }
 }

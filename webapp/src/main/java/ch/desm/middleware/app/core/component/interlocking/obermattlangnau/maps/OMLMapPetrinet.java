@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps;
 
 import java.util.Map;
 
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 
 public class OMLMapPetrinet extends ComponentMapBase{
 

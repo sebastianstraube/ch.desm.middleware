@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
+import ch.desm.middleware.app.core.component.common.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -11,7 +11,7 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 04.11.2014.
  */
-public class PetrinetOmlMessageProcessor extends ComponentMessageProcessor<PetrinetOmlService> {
+public class PetrinetOmlMessageProcessor extends ComponentMessageProcessorBase<PetrinetOmlService> {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClient.class);
 

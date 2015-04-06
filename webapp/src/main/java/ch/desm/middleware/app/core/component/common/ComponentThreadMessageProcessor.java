@@ -1,22 +1,21 @@
-package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
+package ch.desm.middleware.app.core.component.common;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.component.ComponentClientThreadBaseGeneric;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
 
 /**
- * Created by Sebastian on 08.11.2014.
+ * Created by Sebastian on 28.11.2014.
  */
-public class PetrinetOmlBrokerClientThread extends ComponentClientThreadBaseGeneric<MessageMiddleware> {
+public class ComponentThreadMessageProcessor extends ComponentThreadMessageProcessorBase {
 
-    private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClientThread.class);
-    private PetrinetOmlService service;
+    private static Logger LOGGER = Logger.getLogger(ComponentThreadMessageProcessor.class);
+    private ComponentServiceBase service;
     private Object processMessagesLock;
 
-    public PetrinetOmlBrokerClientThread(PetrinetOmlService service){
+    public ComponentThreadMessageProcessor(ComponentServiceBase service){
         this.service = service;
         this.processMessagesLock = new Object();
     }
@@ -28,9 +27,8 @@ public class PetrinetOmlBrokerClientThread extends ComponentClientThreadBaseGene
 
             if(!messages.isEmpty()){
                 LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
-                service.getProcessor().processBrokerMessage(service, messages);
+                service.getMessageProcessor().processBrokerMessage(service, messages);
             }
         }
-
     }
 }

@@ -73,8 +73,8 @@ public class StartAppSingleton extends DaemonThreadBase {
         ZusiService serviceFahrpult = new ZusiService(Broker.getInstance(), ip, port);
         serviceFahrpult.getEndpointFahrpult().init();
         serviceFahrpult.getEndpointFahrpult().start();
-		serviceFahrpult.getEndpointFahrpult().sendMessageRegisterClient();
-        serviceFahrpult.getEndpointFahrpult().sendMessageNeededData();
+        serviceFahrpult.getEndpointFahrpult().sendMessageRegisterClientFahrpult();
+        serviceFahrpult.getEndpointFahrpult().sendMessageNeededDataFahrpult();
         */
 
         ZusiService serviceAusbildung = new ZusiService(Broker.getInstance(), ip, port);
@@ -82,6 +82,8 @@ public class StartAppSingleton extends DaemonThreadBase {
         serviceAusbildung.getEndpointAusbildung().start();
         serviceAusbildung.getEndpointAusbildung().sendMessageRegisterClientAusbildung();
         serviceAusbildung.getEndpointAusbildung().sendMessageNeededDataAusbildung();
+
+
     }
 
 

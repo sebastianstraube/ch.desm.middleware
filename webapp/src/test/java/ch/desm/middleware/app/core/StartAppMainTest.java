@@ -1,12 +1,8 @@
 package ch.desm.middleware.app.core;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420BrokerClient;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
 import ch.desm.middleware.app.core.component.simulation.zusi.zusi.ZusiServiceTest;
-import ch.desm.middleware.app.core.component.simulation.zusi.zusi.client.ZusiFahrpultEndpointTcpClientTest;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -16,6 +12,7 @@ import org.junit.Test;
 public class StartAppMainTest {
 
 	private static Logger LOGGER = Logger.getLogger(StartAppMainTest.class);
+
     private ZusiServiceTest service;
 
     public static void main(String args[]){
@@ -28,142 +25,94 @@ public class StartAppMainTest {
     }
 
     @Test
-    public void testZusiService() throws Exception {
-        boolean b = service.getZusiProtocolNodeConverterTest().testGetConvertToInputCommand("0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0;;;hauptschalter;aus;taste n;?;zusi;#");
-        LOGGER.log(Level.INFO, "(true)test encode decode from middleware message: " + b);
+    public void testDecodeGetNodeStream() throws Exception{
+        String stream = "06000000010031323334";
+        boolean encapsulation = false;
+        ZusiProtocolNode node = new ZusiProtocolNode(stream);
+        boolean b = service.getZusiProtocolNodeDecoderTest().testGetNodeStream(stream, encapsulation, node);
+        LOGGER.log(Level.INFO, "(true) test decode get node stream: " + b);
         Assert.assertEquals(true, b);
     }
 
     @Test
-    public void testZusiServiceTransferedMessageComplete() throws Exception {
-        boolean b = service.getMessageCheck().isMessageComplete(service.getZusiProtocolNodeConverterTest().getMessageNeededDataFahrpult());
-        LOGGER.log(Level.INFO, "(true)test transferred message is complete: " + b);
+    public void testEncodeGetNodeStream() throws Exception{
+        String stream = "06000000010031323334";
+        boolean encapsulation = false;
+        ZusiProtocolNode node = new ZusiProtocolNode(stream);
+        boolean b = service.getZusiProtocolNodeEncoderTest().testGetNodeStream(stream, encapsulation, node);
+        LOGGER.log(Level.INFO, "(true) test encode get node stream: " + b);
         Assert.assertEquals(true, b);
     }
 
     @Test
-    public void testZusiServiceTransferedMessageComplete1() throws Exception {
-        boolean b = service.getMessageCheck().isMessageComplete(service.getZusiProtocolNodeConverterTest().getStream1());
-        LOGGER.log(Level.INFO, "(false)test transferred message is complete: " + b);
+    public void testGetGlobalId() throws Exception{
+        String stream = "0000000001000000000002000b000000010020332e302e362e32360c00000002003137333335323236363703000000030000ffffffffffffffff";
+        boolean b = service.getZusiProtocolNodeHelperTest().testGetGlobalId(stream, service);
+        LOGGER.log(Level.INFO, "(true)test get global id: " + b);
+        Assert.assertEquals(true, b);
+    }
+
+    @Test
+    public void testGetGetRoot() throws Exception{
+        String stream = "0100-0200::0100:20332e302e362e3236,0200:31373333353232363637,0300:00";
+        boolean b = service.getZusiProtocolNodeHelperTest().testGetRoot(stream);
+        LOGGER.log(Level.INFO, "(true)test get root: " + b);
+        Assert.assertEquals(true, b);
+    }
+
+    @Test
+    public void testGetRootIntegrated() throws Exception{
+        String stream = "0100-0200::0100:20332e302e362e3236,0200:31373333353232363637,0300:00";
+        boolean b = service.getZusiProtocolNodeHelperTest().testGetRootIntegrated(stream);
+        LOGGER.log(Level.INFO, "(true)test get root with integegrated en- and decoding: " + b);
+        Assert.assertEquals(true, b);
+    }
+
+    @Test
+         public void testEncodeDecode() throws Exception{
+        String streamConnect = "000000000100"+"000000000100"+"0400000001000200"+"0400000002000200"+"0A00000003004661687270756C74"+"050000000400322E30"+"FFFFFFFF"+"FFFFFFFF";
+        boolean b = service.getZusiProtocolNodeHelperTest().testEncodeDecode(service, streamConnect);
+        LOGGER.log(Level.INFO, "(true)test encode decode: " + b);
+        Assert.assertEquals(true, b);
+    }
+
+    @Test
+    public void testIntegratedStream() throws Exception{
+        String stream = "000000000300000000000d0006000000010074657374060000000200de22a044060000000300e4ded6c4060000000400fe3f28440600000005006b1a1840060000000600ba58a640060000000700e1ef1442060000000900002a2447060000000a00d817003f060000000b008078a144060000000c00c526d8c4060000000d00fe3f2844060000000e00331b1840ffffffffffffffff";
+        boolean b = service.getZusiProtocolNodeHelperTest().testIntegratedStream(service, stream);
+        LOGGER.log(Level.INFO, "(true)test integrated stream: " + b);
+        Assert.assertEquals(true, b);
+    }
+
+
+    @Test
+    public void testEncodeDecodeNeededData() throws Exception{
+        String streamConnect = "000000000200"+"000000000300"+"000000000A00"+"0400000001000100"+"FFFFFFFF"+"FFFFFFFF"+"FFFFFFFF";
+        boolean b = service.getZusiProtocolNodeHelperTest().testEncodeDecodeNeededData(service, streamConnect);
+        LOGGER.log(Level.INFO, "(true)test encode decode: " + b);
+        Assert.assertEquals(true, b);
+    }
+
+    @Test
+    public void testGetConvertToInputCommand() throws Exception{
+        String middlewareMessage = "0200-0A01-0100::0100:11,0200:00,0300:01,0400:00,0500:00;;;hauptschalter;aus;taste n;?;zusi;#";
+        boolean b = service.getZusiProtocolNodeHelperTest().testIntegratedMiddlewareMessage(service, middlewareMessage);
+        LOGGER.log(Level.INFO, "(true)test encode decode: " + b);
+        Assert.assertEquals(true, b);
+    }
+
+    @Test
+    public void testCmpZusiProtocolNodeBase() throws Exception{
+        boolean b = service.getZusiProtocolNodeHelperTest().testCmpZusiProtocolNodeBase();
+        LOGGER.log(Level.INFO, "(true)test compare identical ZusiProtocolNodes: " + b);
+        Assert.assertEquals(true, b);
+    }
+
+    @Test
+    public void testCmpZusiProtocolNode() throws Exception{
+        boolean b = service.getZusiProtocolNodeHelperTest().testCmpZusiProtocolNode();
+        LOGGER.log(Level.INFO, "(false)test compare different ZusiProtocolNodes: " + b);
         Assert.assertEquals(false, b);
     }
 
-    @Test
-    public void testZusiServiceEncodeDecodeGlobalId() throws Exception {
-        boolean b = service.getZusiProtocolNodeConverterTest().testGetGlobalId(service.getZusiProtocolNodeConverterTest().getStream3());
-        LOGGER.log(Level.INFO, "(true)test globale id encode and decode is successful: " + b);
-        Assert.assertEquals(true, b);
-    }
-
-    @Test
-    public void testZusiServiceEncodeDecode() throws Exception {
-        boolean b = service.getZusiProtocolNodeConverterTest().testEncodeDecode();
-        LOGGER.log(Level.INFO, "(true)test encode decode is successful: " + b);
-        Assert.assertEquals(true, b);
-    }
-
-    @Test
-    public void testZusiServiceNoDataPackage() throws Exception {
-        boolean b = service.getMessageCheck().isMessageComplete(service.getZusiProtocolNodeConverterTest().getStreamNoData());
-        LOGGER.log(Level.INFO, "(true)test no data package: " + b);
-        Assert.assertEquals(true, b);
-    }
-
-    @Test
-    public void testZusiServiceEncodeNoDataPackage() throws Exception {
-        boolean b = service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().getStreamNoData());
-        LOGGER.log(Level.INFO, "(true)test encode no data package: " + b);
-        Assert.assertEquals(true, b);
-    }
-
-    @Test
-    public void testZusiServiceEncodeNoDataPackage1() throws Exception {
-        boolean b = service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().getStream1());
-        LOGGER.log(Level.INFO, "(false)test encode is successful: " + b);
-        Assert.assertEquals(false, b);
-    }
-
-    @Test
-    public void testZusiServiceEncode() throws Exception {
-        boolean b = service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().getStream2());
-        LOGGER.log(Level.INFO, "(false)test encode is successful: " + b);
-        Assert.assertEquals(false, b);
-    }
-
-    @Test
-    public void testZusiServiceEncode1() throws Exception {
-        boolean b = service.getZusiProtocolNodeConverterTest().testEncode(service.getZusiProtocolNodeConverterTest().getStream3());
-        LOGGER.log(Level.INFO, "(true)test encode is successful: " + b);
-        Assert.assertEquals(true, b);
-    }
-
-
-    @Test
-    public void testZusiServiceBaseNodeFromGlobalId() throws Exception {
-        boolean b = service.getZusiProtocolNodeConverterTest().testGetRoot("0003-0113-0001::0001:2B,0002:00,0003:07,0004:1,0005:0");
-        LOGGER.log(Level.INFO, "(true)test get base node from global id is successful: " + b);
-        Assert.assertEquals(true, b);
-    }
-
-    @Test
-    public void testZusiServiceEncodeDecodedNeededDataPackage() throws Exception {
-        boolean b = service.getZusiProtocolNodeConverterTest().testEncodeDecodeNeededData();
-        LOGGER.log(Level.INFO, "(true)test encode decode needed data packet is complete: " + b);
-        Assert.assertEquals(true, b);
-    }
-
-    @Test
-    public void testZusiServiceEncodeDecodeEncapsulatedZusiStream() throws Exception {
-        String testStream = "000000000300000000001400000000000100060000000100313233340600000002000000000006000000030000000000060000000400000000000600000005000000000006000000060000000000060000000700000000000600000008000000000006000000090000000000060000000a0000000000ffffffff000000000100060000000100746573740600000002006b5ba0440600000003002d15d7c4060000000400fe3f28440600000005006b1a1840060000000600469bc5400600000007001bb1a1440600000008001b5dd8c4060000000900fe3f2844060000000a00331b1840ffffffffffffffffffffffff";
-        boolean b = service.getZusiProtocolNodeConverterTest().testEncode(testStream);
-        LOGGER.log(Level.INFO, "(true)test encode decode encapsulated zusi stream: " + b);
-        Assert.assertEquals(true, b);
-    }
-
-    /**
-     *
-     * @throws Exception
-     *
-     @Test
-    public void testZusiMessageTransfer() throws Exception {
-
-        service.getEndpointFahrpult().init();
-        service.getEndpointFahrpult().start();
-        service.getEndpointFahrpult().sendMessageRegisterClient();
-        service.getEndpointFahrpult().sendMessageNeededData();
-        ZusiFahrpultEndpointTcpClientTest testTcp = new ZusiFahrpultEndpointTcpClientTest(service);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        testTcp.testStream();
-    }
-    */
-
-	/**
-	 * 
-	 *
-    @Test
-	public void testCabine() throws Exception {
-		Re420EndpointUbw32 re420Endpoint = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM30);
-		Re420EndpointFabisch re420EndpointFabisch = new Re420EndpointFabisch(EndpointRs232.EnumSerialPorts.COM31);
-		Re420BrokerClient re420Impl = new Re420BrokerClient(Broker.getInstance(), re420Endpoint, re420EndpointFabisch);
-
-		//test analog output
-		re420Impl.emulateBrokerMessage("a74;o;0;analog-instrument;spannung;fahrdraht;FF;kabinere420;#");	
-		re420Impl.emulateBrokerMessage("a79;o;0;analog-instrument;strom;i_max;FF;kabinere420;#");
-		re420Impl.emulateBrokerMessage("a79.1;o;0;analog-instrument;strom;i_delta;FF;kabinere420;#");		
-		re420Impl.emulateBrokerMessage("d94vi;o;0;analog-instrument;geschwindigkeitsanzeige;ist;FF;kabinere420;#");
-	}
-    */
-
-    @Test
-    public void testExtractSingleZusiMessage() throws Exception {
-        String org = "00000000030000000000140000000000010006000000010031323334060000000200b47874c4060000000300fa4d0401000000000002000b000000010020332e302e362e32360c00000002003137333335323236363703000000030000ffffffffffffffff00000000030000000000040003000000010000ffffffffffffffff00000000030000000000140000000000010006000000010031323334060000000200b47874c4060000000300fa4d0401000000000002000b000000010020332e302e362e32360c00000002003137333335323236363703000000030000ffffffffffffffff00000000030000000000040003000000010000ffffffffffffffff00000000030000000000140000000000010006000000010031323334060000000200b47874c4060000000300fa4d04";
-        String solution = "";
-        boolean b = service.getZusiProtocolMessageProcessorTest().testGetSingleZusiMessageIndex(org, solution);
-        LOGGER.log(Level.INFO, "(true)test encode decode encapsulated zusi stream: " + b);
-        Assert.assertEquals(true, b);
-    }
 }

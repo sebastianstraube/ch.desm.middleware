@@ -9,7 +9,8 @@ import java.util.Arrays;
 
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
-import ch.desm.middleware.app.core.common.utility.UtilityConvertingHex;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelperHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -66,7 +67,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
      */
     public void receiveEvent(byte[] message) throws IOException {
         synchronized(receiveEventLock){
-            String hexMessage = UtilityConvertingHex.toHex(message);
+            String hexMessage = ZusiProtocolNodeHelperHex.toHex(message);
 
             LOGGER.log(Level.TRACE, "Thread active: " + hexMessage);
             onIncomingEndpointMessage(hexMessage);
@@ -87,16 +88,23 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 
     public synchronized void send(byte[] stream) throws IOException{
         synchronized (socketLock) {
+            try{
 
-            if(stream != null && stream.length > 0){
+                if(socket.isClosed() || !socket.isConnected()){
+                    throw new IOException("socket is not ready: " + socket.toString());
+                }else if(stream == null || stream.length <= 0){
+                    throw new Exception("client tried to send malformed stream: " + stream);
+                }
+
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 LOGGER.log(Level.INFO, "client sending message: " + Arrays.toString(stream)); // message);//Arrays.toString(byteStream));
                 out.write(stream);
                 LOGGER.log(Level.INFO, "client sended message.");
                 out.flush();
                 LOGGER.log(Level.INFO, "client flushed socket.");
-            }else{
-                LOGGER.log(Level.WARN, "client tried to send malformed endpoint message: " + stream);
+
+            }catch(Exception e){
+                LOGGER.log(Level.ERROR, "send socket message failed, error: " + e);
             }
         }
     }
@@ -109,7 +117,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 
     private byte[] getByteStream(String hexMessage){
 
-        hexMessage = UtilityConvertingHex.removeControleCharacter(hexMessage);
+        hexMessage = ZusiProtocolNodeHelperHex.removeControleCharacter(hexMessage);
 
         byte[] byteStream = new byte[hexMessage.length()/2];
         for(int i=0; i<hexMessage.length()/2; i++){

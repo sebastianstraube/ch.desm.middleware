@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.component.simulation.locsim;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
+import ch.desm.middleware.app.core.component.common.ComponentBrokerClientBase;
 
 abstract class LocsimBrokerClientBase extends ComponentBrokerClientBase {
 

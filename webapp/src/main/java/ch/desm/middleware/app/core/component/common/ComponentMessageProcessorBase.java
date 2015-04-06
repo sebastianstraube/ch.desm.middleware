@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component;
+package ch.desm.middleware.app.core.component.common;
 
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
@@ -11,9 +11,9 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 04.11.2014.
  */
-public abstract class ComponentMessageProcessor<T1> extends MessageProcessorBase {
+public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessorBase {
 
-    private static Logger LOGGER = Logger.getLogger(ComponentMessageProcessor.class);
+    private static Logger LOGGER = Logger.getLogger(ComponentMessageProcessorBase.class);
 
     /**
      *
@@ -35,7 +35,7 @@ public abstract class ComponentMessageProcessor<T1> extends MessageProcessorBase
         }
     }
 
-    public void delegateToEndpoint(EndpointUbw32 endpoint, ComponentMap mapDigital, ComponentMap mapAnalog, String key, String parameter, boolean isInput){
+    public void delegateToEndpoint(EndpointUbw32 endpoint, ComponentMapBase mapDigital, ComponentMapBase mapAnalog, String key, String parameter, boolean isInput){
 
         // is ubw digital message
         if (mapDigital.isKeyAvailable(key)) {

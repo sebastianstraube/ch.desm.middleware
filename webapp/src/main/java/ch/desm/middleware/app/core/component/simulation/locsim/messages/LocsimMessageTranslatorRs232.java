@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.simulation.locsim.messages;
 
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorRs232Base;
-import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
+import ch.desm.middleware.app.core.component.common.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapMiddlewareParameter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
 

@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map;
 
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 
 import java.util.Map;
 

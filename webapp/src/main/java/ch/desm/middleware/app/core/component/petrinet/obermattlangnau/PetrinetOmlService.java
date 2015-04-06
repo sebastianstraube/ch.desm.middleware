@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
+import ch.desm.middleware.app.core.component.common.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageDecoder;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageEncoder;
 import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.PetrinetMapOml;

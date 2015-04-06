@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component;
+package ch.desm.middleware.app.core.component.common;
 
 import ch.desm.middleware.app.core.common.DaemonThreadBase;
 import org.apache.log4j.Level;
@@ -9,16 +9,16 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public abstract class ComponentClientThreadBaseGeneric<T> extends DaemonThreadBase {
+public abstract class ComponentThreadMessageProcessorBase<T> extends DaemonThreadBase {
 
-    private static Logger LOGGER = Logger.getLogger(ComponentClientThreadBaseGeneric.class);
+    private static Logger LOGGER = Logger.getLogger(ComponentThreadMessageProcessorBase.class);
 
     private Object pendingMessagesLock;
     private LinkedList<T> pendingMessages;
 
     public abstract void processPendingMessages();
 
-    public ComponentClientThreadBaseGeneric() {
+    public ComponentThreadMessageProcessorBase() {
         pendingMessages = new LinkedList<>();
         pendingMessagesLock = new Object();
     }

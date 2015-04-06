@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component;
+package ch.desm.middleware.app.core.component.common;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,18 @@ import java.util.Map.Entry;
 public abstract class ComponentMapBase {
 
 	protected Map<String, String> map;
-	
+
+    /**
+     *
+     * @return initialized map
+     */
+    public abstract Map<String, String> getMap();
+
+    /**
+     * map initializing
+     */
+    protected abstract void init();
+
 	/**
 	 * 
 	 */
@@ -58,22 +69,8 @@ public abstract class ComponentMapBase {
         return "";
     }
 
-
-
     public boolean isKeyAvailable(String id){
         return map.containsKey(id);
     }
-
-	/**
-	 * TODO should be protected
-	 * @return initialized map
-	 */
-	@SuppressWarnings("rawtypes")
-	public abstract Map getMap();
-	
-	/**
-	 * map initializing
-	 */
-	protected abstract void init();
 	
 }

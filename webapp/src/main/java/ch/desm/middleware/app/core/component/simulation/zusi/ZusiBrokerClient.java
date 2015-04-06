@@ -1,11 +1,10 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.client;
+package ch.desm.middleware.app.core.component.simulation.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
-import ch.desm.middleware.app.core.component.ComponentClientThreadBase;
-import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import ch.desm.middleware.app.core.component.common.ComponentBrokerClientBase;
+import ch.desm.middleware.app.core.component.common.ComponentThreadMessageProcessor;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -15,14 +14,14 @@ import java.util.LinkedList;
 public class ZusiBrokerClient extends ComponentBrokerClientBase {
     private static Logger LOGGER = Logger.getLogger(ZusiBrokerClient.class);
 
-    private ComponentClientThreadBase thread;
+    private ComponentThreadMessageProcessor thread;
     private ZusiService service;
 
     public ZusiBrokerClient(Broker broker, ZusiService service) {
         super(broker);
         this.service = service;
 
-        this.thread = new ComponentClientThreadBase(service);
+        this.thread = new ComponentThreadMessageProcessor(service);
         this.thread.start();
     }
 

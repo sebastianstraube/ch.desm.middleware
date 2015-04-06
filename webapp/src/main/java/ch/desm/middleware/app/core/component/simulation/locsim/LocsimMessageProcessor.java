@@ -4,7 +4,7 @@ import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.common.utility.UtilityMessageProcessor;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
+import ch.desm.middleware.app.core.component.common.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.component.simulation.locsim.elements.LocsimElementFahrschalter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
 import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageDll;
@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Created by Sebastian on 29.10.2014.
  */
-public class LocsimMessageProcessor extends ComponentMessageProcessor<Locsim> {
+public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim> {
 
     private static Logger LOGGER = Logger.getLogger(LocsimMessageProcessor.class);
     private LocsimElementFahrschalter fahrschalter;

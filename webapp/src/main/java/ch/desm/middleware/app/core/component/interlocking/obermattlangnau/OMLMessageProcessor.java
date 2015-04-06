@@ -4,12 +4,12 @@ import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.*;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessor;
+import ch.desm.middleware.app.core.component.common.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements.OMLElementFahrstrassenSchalter;
 
-public class OmlMessageProcessor extends ComponentMessageProcessor<OmlService> {
+public class OmlMessageProcessor extends ComponentMessageProcessorBase<OmlService> {
 
 	private static Logger LOGGER = Logger.getLogger(OmlMessageProcessor.class);
 

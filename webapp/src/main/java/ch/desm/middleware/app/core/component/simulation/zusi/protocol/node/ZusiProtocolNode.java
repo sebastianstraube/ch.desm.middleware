@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
-import ch.desm.middleware.app.core.common.utility.UtilityConvertingHex;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import org.apache.log4j.Logger;
 
 /**
@@ -8,63 +8,20 @@ import org.apache.log4j.Logger;
  */
 public class ZusiProtocolNode extends ZusiProtocolNodeBase {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeBase.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeRoot.class);
 
-    public static final int BYTE_LENGTH_BYTE = 1;
-    public static final int BYTE_LENGTH_SHORTINT = 1;
-    public static final int BYTE_LENGTH_WORD = 2;
-    public static final int BYTE_LENGTH_SMALLINT = 2;
-    public static final int BYTE_LENGTH_INTEGER = 4;
-    public static final int BYTE_LENGTH_SINGLE = 4;
-    public static final int BYTE_LENGTH_DOUBLE = 8;
-    public static final int BYTE_LENGTH_NODEID = 2;
-    /**
-     * id of node
-     */
-    private Integer id;
-
-    /**
-     * nr of hex bytes for en- and decoding e.g. (x0001) has 2 bytes
-     */
-    private int nrBytes;
-
-    /**
-     * data store, represented as int array
-     */
-    private int[] dataArray;
-
-    /**
-     *
-     */
+    private String node;
+    private String id;
     private String data;
 
     /**
      *
+     * @param stream
      */
-    private boolean isDataStream;
-
-    /**
-     *
-     * @param id
-     */
-    public ZusiProtocolNode(int id){
-        this(id, "");
-    }
-
-    /**
-     *
-     * @param hexId
-     */
-    public ZusiProtocolNode(String hexId){
-        this(Integer.valueOf(hexId, 16), "");
-    }
-
-    /**
-     *
-     * @param hexId
-     */
-    public ZusiProtocolNode(String hexId, String dataArray){
-        this(Integer.valueOf(hexId, 16), dataArray);
+    public ZusiProtocolNode(String stream){
+        this.node = ZusiProtocolNodeHelper.getNode(stream);
+        this.id = ZusiProtocolNodeHelper.getId(stream);
+        this.data = ZusiProtocolNodeHelper.getData(stream);
     }
 
     /**
@@ -72,121 +29,43 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
      * @param id
      * @param data
      */
-    public ZusiProtocolNode(int id, String data){
-        this.isDataStream = data.length() > 0 ? true : false;
+    public ZusiProtocolNode(String id, String data){
+        this.node = ZusiProtocolNodeHelper.getNodeHex(data);
         this.id = id;
         this.data = data;
-        this.dataArray = convertData(data);
-        this.nrBytes = data.length();
     }
 
-    /**
-     *
-     * @param id
-     * @param data
-     */
-    public ZusiProtocolNode(int id, int data, int nrBytes){
-        this.isDataStream = false;
-        this.id = id;
-        this.data = String.valueOf(data);
-        this.dataArray = getDataArray(data, nrBytes);
-        this.nrBytes = nrBytes;
+    public String getNode(){
+        return node;
     }
 
-    /**
-     *
-     * @param data
-     * @return
-     */
-    private int[] convertData(String data){
-        int dataArray[]= new int[data.length()];
-
-        for(int i=0; i<data.length();i++){
-            dataArray[i] = Integer.valueOf(data.charAt(i));
-        }
-
-        return dataArray;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getNrBytes(){
-        return nrBytes;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public boolean isDataStream(){
-        return isDataStream;
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    public int[] getDataArray(){
-        return dataArray;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getDataHex(int length){
-        return UtilityConvertingHex.toHex(dataArray, length);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getData(){
-        return this.data;
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    public Integer getId(){
+    public String getId(){
         return id;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getIdHex(){
-        return UtilityConvertingHex.toHex(id, 4);
+    public String getData(){
+        return data;
     }
 
     public boolean isStartNode(){
-        return this.nrBytes <= 0;
+        return node.equals(ZusiProtocolConstants.NODE_START);
     }
 
-    /**
-     *
-     * @param data
-     * @return
-     */
-    private int[] getDataArray(int data, int length){
-        int[] a = new int[length];
-        for(int i=0; i<length;i++){
-            if(i<length-1) {
-                a[i] = 0;
-            }else{
-                a[i] = data;
-            }
+    public String getStream(){
+        return node+id+data;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(!(o instanceof ZusiProtocolNode)){
+            return false;
         }
 
-        return a;
+        ZusiProtocolNode n = (ZusiProtocolNode) o;
+        boolean val = this.node.equalsIgnoreCase(n.getNode());
+        val = val && this.id.equalsIgnoreCase(n.getId());
+        val = val && this.data.equalsIgnoreCase(n.getData());
+        return val;
     }
-
 }
 

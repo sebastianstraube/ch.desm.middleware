@@ -3,9 +3,10 @@ package ch.desm.middleware.app.core.component.simulation.zusi;
 import ch.desm.middleware.app.core.common.Pair;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessor;;
-import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiEndpointTcpClient;
-import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiProtocolMessage;
+import ch.desm.middleware.app.core.component.common.ComponentMessageProcessorBase;;
+import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiEndpointMessage;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelper;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -15,7 +16,7 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class ZusiMessageProcessor extends ComponentMessageProcessor<ZusiService> {
+public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiService> {
 
     private static Logger LOGGER = Logger.getLogger(ZusiMessageProcessor.class);
 
@@ -85,7 +86,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor<ZusiService>
      */
     private void processBrokerMessageZusiFahrpult(ZusiService service, MessageMiddleware message){
         if(message.getParameter().equalsIgnoreCase("on")){
-            ZusiProtocolMessage z = new ZusiProtocolMessage(message.getGlobalId());
+            ZusiEndpointMessage z = new ZusiEndpointMessage(message.getGlobalId());
 
             try {
                 String zusiStream = service.getCommand().getStreamToZusi(service, message.getGlobalId());
@@ -103,7 +104,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor<ZusiService>
      */
     private void processBrokerMessageZusiAusbildung(ZusiService service, MessageMiddleware message){
         if(message.getParameter().equalsIgnoreCase("on")){
-            ZusiProtocolMessage z = new ZusiProtocolMessage(message.getGlobalId());
+            ZusiEndpointMessage z = new ZusiEndpointMessage(message.getGlobalId());
 
             try {
                 String zusiStream = service.getCommand().getStreamToZusi(service, message.getGlobalId());
@@ -181,8 +182,9 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor<ZusiService>
      */
     public void processEndpointMessage(ZusiService service, String message, String topic){
         try {
-            String globalId = service.getProtocolNodeProcessor().getGlobalId(message);
-            ZusiProtocolMessage zusiMessage = new ZusiProtocolMessage(globalId);
+            LOGGER.log(Level.INFO, "process endpoint message: " + message + ", topic: " + topic);
+            String globalId = ZusiProtocolNodeHelper.getGlobalId(message, service);
+            ZusiEndpointMessage zusiMessage = new ZusiEndpointMessage(globalId);
             processEndpointParameterMessage(service, zusiMessage, topic);
 
         } catch (Exception e) {
@@ -196,16 +198,20 @@ public class ZusiMessageProcessor extends ComponentMessageProcessor<ZusiService>
      * @param zusiMessage
      * @param topic
      */
-    private void processEndpointParameterMessage(ZusiService service, ZusiProtocolMessage zusiMessage, String topic){
+    private void processEndpointParameterMessage(ZusiService service, ZusiEndpointMessage zusiMessage, String topic){
 
         //send message for every parameter
         for(Pair<String, String> p: zusiMessage.getParameterList()){
-            String parameterId = zusiMessage.getGroupId()+"::"+p.getLeft();
+            String parameterId = zusiMessage.getGroupId()+ZusiProtocolConstants.DELIMITER_GROUP+p.getLeft();
             String middlewareMessage = service.getMap().getStartWithValue(parameterId);
             middlewareMessage = middlewareMessage.replace("?", p.getRight());
+            if(!middlewareMessage.isEmpty()){
+                //send middleware message to broker clients
+                super.processEndpointMessage(service.getBrokerClient(), middlewareMessage, topic);
+            }else{
+                LOGGER.log(Level.WARN, "processing endpoint parameter message, global id not found with parameter: " + parameterId + ", topic: " + topic + "  ("+zusiMessage+")");
+            }
 
-            //send middleware message to broker clients
-            super.processEndpointMessage(service.getBrokerClientFahrpult(), middlewareMessage, topic);
-        }
+            }
     }
 }

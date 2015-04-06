@@ -1,13 +1,30 @@
-package ch.desm.middleware.app.core.common.utility;
+package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import org.apache.log4j.Logger;
 
 /**
  * Created by Sebastian on 24.02.2015.
  */
-public class UtilityConvertingHex {
+public class ZusiProtocolNodeHelperHex {
 
-    private static Logger LOGGER = Logger.getLogger(UtilityConvertingHex.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeHelperHex.class);
+
+    /**
+     *
+     * @param data
+     * @return
+     */
+    public static String toHex(String data){
+        String message = "";
+
+        for(int i=0; i<data.length(); i++){
+            int x = ((int) data.charAt(i) & 0xFF);
+            message += toHex(x ,2);
+        }
+
+        return message;
+    }
 
     /**
      *
@@ -32,9 +49,8 @@ public class UtilityConvertingHex {
      */
     static public String toHex(int i, int length){
         String hex = Integer.toHexString(i);
-        hex = UtilityConvertingHex.expandHexString(hex, length);
-
-        return hex;
+        hex = ZusiProtocolNodeHelperHex.expandHexString(hex, length);
+        return swapEndian(hex);
     }
 
     /**
@@ -86,7 +102,7 @@ public class UtilityConvertingHex {
         String s = "";
         if(!hexStream.isEmpty()){
             if(hexStream.length() == 4){
-                hexStream = UtilityConvertingHex.swapEndian(hexStream);
+                hexStream = ZusiProtocolNodeHelperHex.swapEndian(hexStream);
                 s = String.valueOf(Integer.valueOf(hexStream, 16));
             }else{
                 String hexCode = "";

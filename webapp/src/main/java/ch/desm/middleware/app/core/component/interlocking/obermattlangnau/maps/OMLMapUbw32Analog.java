@@ -2,10 +2,9 @@ package ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps;
 
 import java.util.Map;
 
-import ch.desm.middleware.app.core.component.ComponentMap;
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 
-public class OMLMapUbw32Analog extends ComponentMap {
+public class OMLMapUbw32Analog extends ComponentMapBase {
 
     public static final String PINBITMASK_INPUT_ANALOG = "1";
 

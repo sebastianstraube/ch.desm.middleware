@@ -1,6 +1,7 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.message;
 
-import ch.desm.middleware.app.core.component.simulation.zusi.client.ZusiEndpointTcpClient;
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiEndpointTcpClient;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
 import org.apache.log4j.Logger;
 
 /**

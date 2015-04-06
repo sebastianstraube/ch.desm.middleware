@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.petrinet.obermattlangnau;
 
-import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
+import ch.desm.middleware.app.core.component.common.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -13,14 +13,14 @@ import ch.desm.middleware.app.core.communication.message.MessageBase;
 public class PetrinetOmlBrokerClient extends ComponentBrokerClientBase {
     private static Logger LOGGER = Logger.getLogger(PetrinetOmlBrokerClient.class);
 
-    private PetrinetOmlBrokerClientThread thread;
+    private PetrinetOmlBrokerClientThreadMessage thread;
     private PetrinetOmlService service;
 
     public PetrinetOmlBrokerClient(Broker broker, PetrinetOmlService service) {
         super(broker);
         this.service = service;
 
-        this.thread = new PetrinetOmlBrokerClientThread(service);
+        this.thread = new PetrinetOmlBrokerClientThreadMessage(service);
         this.thread.start();
     }
 

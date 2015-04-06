@@ -1,11 +1,10 @@
 package ch.desm.middleware.app.core.component.management;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageEncoder;
 import ch.desm.middleware.app.core.communication.message.converter.MessageConverter;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
+import ch.desm.middleware.app.core.component.common.ComponentMapMiddleware;
 
 /**
  * Created by Sebastian on 11.11.2014.

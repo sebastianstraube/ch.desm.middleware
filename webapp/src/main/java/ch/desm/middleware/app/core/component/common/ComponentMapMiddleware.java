@@ -1,6 +1,4 @@
-package ch.desm.middleware.app.core.component;
-
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+package ch.desm.middleware.app.core.component.common;
 
 import java.util.Map;
 
