@@ -28,45 +28,54 @@ public class ZusiProtocolMessageHelper {
      * @param message
      * @return
      */
-    private int getSingleZusiMessageIndex(String message){
+    protected int getSingleZusiMessageIndex(String message){
         int cntStartNode = 0;
         int cntEndNode = 0;
         int cntValidMessageLength = 0;
         boolean isValid = true;
         int nodeLength = 0;
-        String partMessage = message;
+        String subMessage = message;
 
-        if(!hasValidCharacteristic(partMessage)){
-            isValid = false;
-        }
+        String id = "";
+        String start = "";
+
+        if(!isMessageValid(subMessage)) isValid = false;
 
         try{
-            while(isValid && !partMessage.isEmpty()){
+            while(isValid && !subMessage.isEmpty()){
                 if(cntStartNode != 0 && cntStartNode == cntEndNode){
                     break;
                 }
-                if(partMessage.length() < 8){
+                if(subMessage.length() < 8){
                     isValid = false;
                     break;
                 }
-                String id = "";
-                String start = partMessage.substring(0, 8);
+                id = "";
+                start = subMessage.substring(0, 8);
                 if(start.equals(ZusiProtocolConstants.NODE_START)){
+                    if(!isNodeValid(subMessage)) {
+                        isValid = false;
+                        break;
+                    }
                     cntStartNode++;
-                    id = partMessage.substring(8, 12);
+                    id = subMessage.substring(8, 12);
                 }else if (start.equalsIgnoreCase(ZusiProtocolConstants.NODE_END)){
                     cntEndNode++;
                 }else{
-                    id = partMessage.substring(8, 12);
+                    if(!isNodeValid(subMessage)) {
+                        isValid = false;
+                        break;
+                    }
+                    id = subMessage.substring(8, 12);
                 }
 
                 nodeLength = getNodeLength(start, id);
-                partMessage = partMessage.substring(nodeLength);
+                subMessage = subMessage.substring(nodeLength);
                 cntValidMessageLength += nodeLength;
             }
 
         }catch(StringIndexOutOfBoundsException e){
-            LOGGER.log(Level.ERROR, "wrong stream node length: " + nodeLength + " in message: " + partMessage + ", origin message: " + message);
+            LOGGER.log(Level.ERROR, "wrong stream node length: " + nodeLength + " in message: " + subMessage + ", origin message: " + message);
         }
 
         if(cntStartNode != cntEndNode) isValid = false;
@@ -78,13 +87,28 @@ public class ZusiProtocolMessageHelper {
      * @param message
      * @return
      */
-    private boolean hasValidCharacteristic(String message){
+    private boolean isMessageValid(String message){
         boolean isValid = true;
         if(message.length() < 40) isValid = isValid && false;
         if(!message.startsWith(ZusiProtocolConstants.NODE_START)) isValid = isValid && false;
         if(!message.toUpperCase().contains(ZusiProtocolConstants.NODE_END))isValid = isValid && false;
 
         if(!isValid) LOGGER.log(Level.TRACE, "hasValidCharacteristic skip message: " + message);
+
+        return isValid;
+    }
+
+    /**
+     *
+     * @param subMessage
+     * @return
+     */
+    private boolean isNodeValid(String subMessage){
+        boolean isValid = true;
+        if(subMessage.length() < 8) isValid = isValid && false;
+        if(subMessage.startsWith(ZusiProtocolConstants.NODE_START) && subMessage.length() < 12) isValid = isValid && false;
+
+        if(!isValid) LOGGER.log(Level.TRACE, "node is invalid: " + subMessage);
 
         return isValid;
     }

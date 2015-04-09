@@ -95,19 +95,19 @@ public class ZusiProtocolNodeHelperHex {
 
     /**
      *
-     * @param hexStream is a hexadecimal stream
+     * @param hex is a hexadecimal stream
      * @return the character stream of the hexadecimal stream
      */
-    static public String getCharStream(String hexStream){
+    static public String getCharStream(String hex){
         String s = "";
-        if(!hexStream.isEmpty()){
-            if(hexStream.length() == 4){
-                hexStream = ZusiProtocolNodeHelperHex.swapEndian(hexStream);
-                s = String.valueOf(Integer.valueOf(hexStream, 16));
+        if(!hex.isEmpty()){
+            if(hex.length() == 4){
+                hex = ZusiProtocolNodeHelperHex.swapEndian(hex);
+                s = String.valueOf(Integer.valueOf(hex, 16));
             }else{
                 String hexCode = "";
-                for(int i=0; i<hexStream.length(); i+=2){
-                    hexCode = "" + hexStream.charAt(i) + hexStream.charAt(i+1);
+                for(int i=0; i<hex.length(); i+=2){
+                    hexCode = "" + hex.charAt(i) + hex.charAt(i+1);
                     int code = Integer.valueOf(hexCode, 16);
                     s += (char)code;
                 }
@@ -138,5 +138,15 @@ public class ZusiProtocolNodeHelperHex {
      */
     static public String removeControleCharacter(String message){
         return message.replaceAll("[\u0000-\u001f]", "");
+    }
+
+    public static float getFloat(String hexNumber){
+        int unsigned = Integer.parseUnsignedInt(hexNumber, 16);
+        return Float.intBitsToFloat(unsigned);
+    }
+
+    public static String getHex(float number){
+        String hex = Float.toHexString(number);
+        return hex;
     }
 }

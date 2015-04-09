@@ -12,17 +12,6 @@ public class ZusiProtocolNodeEncoder {
 
     /**
      *
-     * @param node
-     * @return
-     */
-    public String encode(ZusiProtocolNode node)  {
-        String stream = recurEncode(false, ZusiProtocolConstants.DELIMITER_SUBMESSAGE, node);
-        String replace = stream.replace(ZusiProtocolConstants.DELIMITER_SUBMESSAGE, "");
-        return replace;
-    }
-
-    /**
-     *
      * @param root
      * @return
      * @throws Exception
@@ -31,11 +20,43 @@ public class ZusiProtocolNodeEncoder {
 
         String messages = "";
 
-        for(ZusiProtocolNode child : root.getNodes()){
-            messages += encode(child);
+        for(ZusiProtocolNode next : root.getNodes()){
+            messages += encode(next);
         }
 
         return messages;
+    }
+
+    /**
+     *
+     * @param node
+     * @return
+     */
+    public String encode(ZusiProtocolNode node)  {
+        String stream = doEncode(false, ZusiProtocolConstants.DELIMITER_SUBMESSAGE, node, null);
+        String replace = stream.replace(ZusiProtocolConstants.DELIMITER_SUBMESSAGE, "");
+        return replace;
+    }
+
+    /**
+     *
+     * @param encap
+     * @param stream
+     * @param node
+     * @return
+     */
+    private String doEncode(boolean encap, String stream, ZusiProtocolNode node, ZusiProtocolNode parentNode){
+        stream = getBakedStream(node, encap, stream);
+
+        for(ZusiProtocolNode next : node.getNodes()){
+            if(parentNode != null && parentNode.getNodes() != null && parentNode.getNodes().size() > 1 && node.getPrevNode().getNodes().getLast().equals(node)){
+                encap = node.isStartNode() && next.isStartNode();
+            }
+            if(next.isStartNode()) parentNode = node;
+            stream = doEncode(encap, stream, next, parentNode);
+        }
+
+        return stream;
     }
 
     /**
@@ -48,24 +69,6 @@ public class ZusiProtocolNodeEncoder {
     private String getBakedStream(ZusiProtocolNode node, boolean encap, String stream){
         String part = ZusiProtocolNodeHelper.getNodeStream(encap, node);
         return stream.replace(ZusiProtocolConstants.DELIMITER_SUBMESSAGE, part);
-    }
-
-    /**
-     *
-     * @param encap
-     * @param stream
-     * @param node
-     * @return
-     */
-    private String recurEncode(boolean encap, String stream, ZusiProtocolNode node){
-        stream = getBakedStream(node, encap, stream);
-
-        for(ZusiProtocolNode n : node.getNodes()){
-            encap = n.isStartNode() && node.isStartNode() && node.getNodes().size() > 1;
-            stream = recurEncode(encap, stream, n);
-        }
-
-        return stream;
     }
 
 

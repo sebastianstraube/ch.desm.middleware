@@ -34,7 +34,7 @@ public abstract class ComponentMapBase {
 	 */
 	public String getKey(String value){
 		for(Entry<String, String> entry : map.entrySet()){
-			if(entry.getValue().toLowerCase().equalsIgnoreCase(value.toLowerCase())){
+			if(entry.getValue().toUpperCase().equalsIgnoreCase(value.toUpperCase())){
 				return entry.getKey();
 			}
 		}
@@ -62,7 +62,7 @@ public abstract class ComponentMapBase {
      */
     public String getStartWithValue(String key){
         for(Entry<String, String> entry : map.entrySet()){
-            if(entry.getKey().toLowerCase().startsWith(key.toLowerCase())){
+            if(entry.getKey().toUpperCase().startsWith(key.toUpperCase())){
                 return entry.getValue();
             }
         }

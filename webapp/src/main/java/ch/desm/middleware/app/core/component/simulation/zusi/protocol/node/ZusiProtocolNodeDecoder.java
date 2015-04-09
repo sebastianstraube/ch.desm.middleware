@@ -20,8 +20,9 @@ public class ZusiProtocolNodeDecoder {
 
         ZusiProtocolNodeRoot root = new ZusiProtocolNodeRoot();
         try {
-            ZusiProtocolNode nodeLast = null;
-
+            ZusiProtocolNode lastNode = null;
+            ZusiProtocolNode lastStartNode = null;
+            boolean nodeEncapsulated = false;
             //stream is empty when the whole stream is decoded
             while (!stream.isEmpty()) {
 
@@ -29,27 +30,36 @@ public class ZusiProtocolNodeDecoder {
 
                 // is there is an end node, remove and go further
                 if (stream.toUpperCase().startsWith(ZusiProtocolConstants.NODE_END)) {
+                    nodeEncapsulated = true;
                     messageLength = 8;
                 } else
                 // has start node
                 if (stream.startsWith(ZusiProtocolConstants.NODE_START)) {
                     messageLength = 8 + 4 + ZusiProtocolNodeHelper.getData(stream).length();
-                    String nodePart = stream.substring(0, messageLength);
-                    ZusiProtocolNode nodeNext = new ZusiProtocolNode(nodePart);
+                    String subStream = stream.substring(0, messageLength);
+                    ZusiProtocolNode newNode = new ZusiProtocolNode(lastNode, subStream);
 
                     //if there is no existing node
-                    if (nodeLast == null) {
-                        nodeLast = nodeNext;
-                        root.addNode(nodeLast);
-                    } else {
-                        nodeLast.addNode(nodeNext);
-                        nodeLast = nodeNext;
+                    if (lastNode == null) {
+                        lastNode = newNode;
+                        root.addNode(lastNode);
+                    }
+                    else if(nodeEncapsulated){
+                        lastStartNode.getPrevNode().addNode(newNode);
+                        lastNode = newNode;
+                    }
+                    // add root node to last processed node
+                    else{
+                        lastNode.addNode(newNode);
+                        lastNode = newNode;
+                        lastStartNode = newNode;
                     }
                 }
-
                 // has id node
                 else {
-                    nodeLast.addNode(processParameter(stream));
+                    ZusiProtocolNode newNode = processParameter(stream);
+                    newNode.setPrevNode(lastNode);
+                    lastNode.addNode(newNode);
                     messageLength = 8 + 4 + ZusiProtocolNodeHelper.getData(stream).length();
                     //process parameter and come back when start or end nodes not found
                 }

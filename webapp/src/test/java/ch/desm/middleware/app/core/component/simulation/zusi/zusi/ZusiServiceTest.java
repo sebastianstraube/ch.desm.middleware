@@ -2,8 +2,10 @@ package ch.desm.middleware.app.core.component.simulation.zusi.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolMessageHelper;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelper;
 import ch.desm.middleware.app.core.component.simulation.zusi.zusi.message.ZusiProtocolStreamTest;
+import ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol.ZusiProtocolMessageHelperTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol.node.ZusiProtocolNodeDecoderTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol.node.ZusiProtocolNodeEncoderTest;
 import ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol.node.ZusiProtocolNodeHelperTest;
@@ -17,7 +19,7 @@ public class ZusiServiceTest extends ZusiService {
     private ZusiProtocolNodeDecoderTest zusiProtocolNodeDecoderTest;
     private ZusiProtocolNodeEncoderTest zusiProtocolNodeEncoderTest;
     private ZusiProtocolNodeHelperTest zusiProtocolNodeHelperTest;
-
+    private ZusiProtocolMessageHelperTest zusiProtocolMessageHelperTest;
     /**
      *
      * @param broker
@@ -29,7 +31,8 @@ public class ZusiServiceTest extends ZusiService {
         this.zusiProtocolStreamTest = new ZusiProtocolStreamTest();
         this.zusiProtocolNodeDecoderTest = new ZusiProtocolNodeDecoderTest();
         this.zusiProtocolNodeEncoderTest = new ZusiProtocolNodeEncoderTest();
-        this.zusiProtocolNodeHelperTest = new ZusiProtocolNodeHelperTest();
+        this.zusiProtocolNodeHelperTest = new ZusiProtocolNodeHelperTest(this);
+        this.zusiProtocolMessageHelperTest = new ZusiProtocolMessageHelperTest();
     }
 
     public ZusiProtocolStreamTest getZusiProtocolStreamTest(){
@@ -46,5 +49,9 @@ public class ZusiServiceTest extends ZusiService {
 
     public ZusiProtocolNodeHelperTest getZusiProtocolNodeHelperTest(){
         return this.zusiProtocolNodeHelperTest;
+    }
+
+    public ZusiProtocolMessageHelperTest getZusiProtocolMessageHelperTest(){
+        return this.zusiProtocolMessageHelperTest;
     }
 }

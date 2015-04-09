@@ -13,6 +13,10 @@ public class ZusiProtocolNodeHelper {
 
     private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeRoot.class);
 
+    protected ZusiService service;
+    public ZusiProtocolNodeHelper(ZusiService service){
+        this.service = service;
+    }
     /**
      *
      * @param stream
@@ -85,18 +89,12 @@ public class ZusiProtocolNodeHelper {
     public static String getNodeStream(boolean encap, ZusiProtocolNode node){
         String stream ="";
 
-        if(node.isStartNode() && encap){
-            stream += ZusiProtocolConstants.NODE_END;
-        }
-
+        if(node.isStartNode() && encap) stream += ZusiProtocolConstants.NODE_END;
         stream += node.getNode();
         stream += node.getId();
         stream += node.getData();
         stream += ZusiProtocolConstants.DELIMITER_SUBMESSAGE;
-
-        if(node.isStartNode() && !encap){
-            stream += ZusiProtocolConstants.NODE_END;
-        }
+        if(node.isStartNode() && !encap) stream += ZusiProtocolConstants.NODE_END;
 
         return stream;
     }
@@ -158,7 +156,7 @@ public class ZusiProtocolNodeHelper {
      * @return
      * @throws Exception
      */
-    public static String getGlobalId(String hexMessage, ZusiService service) throws Exception{
+    public String getGlobalId(String hexMessage, ZusiService service) throws Exception{
         ZusiProtocolNodeRoot root = service.getDecoder().decode(hexMessage);
         return getGlobalId(root);
     }
@@ -168,10 +166,10 @@ public class ZusiProtocolNodeHelper {
      * @param root
      * @return
      */
-    public static String getGlobalId(ZusiProtocolNodeRoot root){
+    public String getGlobalId(ZusiProtocolNodeRoot root){
         String id ="";
         for(ZusiProtocolNode n : root.nodes){
-            id += getGlobalId(n, 0);
+            id += getGlobalId(n, 0, "");
         }
 
         return id;
@@ -180,22 +178,30 @@ public class ZusiProtocolNodeHelper {
     /**
      * e.g. 2-4::1:DATA
      *
-     * @param n
+     * @param node
      * @param nrParameter
      * @return
      */
-    private static String getGlobalId(ZusiProtocolNode n, int nrParameter){
+    public String getGlobalId(ZusiProtocolNode node, int nrParameter, String groupId){
         String nodeId ="";
-        nodeId += n.getId();
 
-        if(!n.isStartNode()){
-            nodeId += ZusiProtocolConstants.DELIMITER_PARAMETER_VALUE + n.getData();
+        if(nrParameter > 0 && node.isStartNode()){
+            nodeId += ZusiProtocolConstants.DELIMITER_SUBMESSAGE;
+            nodeId += groupId;
         }
 
-        for(ZusiProtocolNode next : n.nodes) {
+        nodeId += node.getId();
+
+        if(!node.isStartNode()){
+            nodeId += ZusiProtocolConstants.DELIMITER_PARAMETER_VALUE + node.getData();
+        }
+
+        for(ZusiProtocolNode next : node.nodes) {
             String parChar = "";
+
             if(next.isStartNode()) {
                 parChar = ZusiProtocolConstants.DELIMITER_GROUP_VALUE;
+                groupId += node.getId();
             }else{
                 if(nrParameter == 0){
                     parChar= ZusiProtocolConstants.DELIMITER_GROUP;
@@ -204,7 +210,7 @@ public class ZusiProtocolNodeHelper {
                 }
                 nrParameter++;
             }
-            nodeId += parChar + getGlobalId(next, nrParameter);
+            nodeId += parChar + getGlobalId(next, nrParameter, groupId);
         }
         return nodeId;
     }

@@ -1,7 +1,10 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
+import com.sun.istack.internal.Nullable;
 import org.apache.log4j.Logger;
+
+import java.util.LinkedList;
 
 /**
  * Created by Sebastian on 06.03.2015.
@@ -9,6 +12,9 @@ import org.apache.log4j.Logger;
 public class ZusiProtocolNode extends ZusiProtocolNodeBase {
 
     private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeRoot.class);
+
+    @Nullable
+    ZusiProtocolNode prevNode;
 
     private String node;
     private String id;
@@ -26,6 +32,17 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
 
     /**
      *
+     * @param stream
+     */
+    public ZusiProtocolNode(ZusiProtocolNode prevNode, String stream){
+        this.prevNode = prevNode;
+        this.node = ZusiProtocolNodeHelper.getNode(stream);
+        this.id = ZusiProtocolNodeHelper.getId(stream);
+        this.data = ZusiProtocolNodeHelper.getData(stream);
+    }
+
+    /**
+     *
      * @param id
      * @param data
      */
@@ -33,6 +50,24 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
         this.node = ZusiProtocolNodeHelper.getNodeHex(data);
         this.id = id;
         this.data = data;
+    }
+
+    /**
+     *
+     * @param id
+     * @param data
+     */
+    public ZusiProtocolNode(ZusiProtocolNode prevNode, String id, String data){
+        this(id, data);
+        this.prevNode = prevNode;
+    }
+
+    public void setPrevNode(ZusiProtocolNode prevNode){
+        this.prevNode = prevNode;
+    }
+
+    public ZusiProtocolNode getPrevNode(){
+        return this.prevNode;
     }
 
     public String getNode(){
@@ -51,16 +86,17 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
         return node.equals(ZusiProtocolConstants.NODE_START);
     }
 
+    public boolean isParameterNode(){
+        return !data.isEmpty();
+    }
+
     public String getStream(){
         return node+id+data;
     }
 
     @Override
     public boolean equals(Object o){
-        if(!(o instanceof ZusiProtocolNode)){
-            return false;
-        }
-
+        if(!(o instanceof ZusiProtocolNode)) return false;
         ZusiProtocolNode n = (ZusiProtocolNode) o;
         boolean val = this.node.equalsIgnoreCase(n.getNode());
         val = val && this.id.equalsIgnoreCase(n.getId());

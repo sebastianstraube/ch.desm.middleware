@@ -29,13 +29,13 @@ public abstract class EndpointTcpClient extends EndpointCommon {
     public abstract void connect();
     public abstract void disconnect(String reason);
 
-    public EndpointTcpClient(String ip, int port) {
+    public EndpointTcpClient(String ip, int port, String name) {
         LOGGER.log(Level.INFO, "starting client connect to Server with ip:" + ip + " and port: " + port);
 
         this.socketLock = new Object();
         this.receiveEventLock = new Object();
         this.sendEventLock = new Object();
-        this.thread = new EndpointTcpClientThread(this);
+        this.thread = new EndpointTcpClientThread(this, name);
         this.socketAddress = new InetSocketAddress(ip, port);
         this.socket = new Socket();
 	}
@@ -50,7 +50,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 		if(!thread.isAlive()){
 			thread.start();
 		}
-        LOGGER.log(Level.INFO, "client is ready to receive messages...");
+        LOGGER.log(Level.INFO, "client thread started");
 	}
 
     @Override

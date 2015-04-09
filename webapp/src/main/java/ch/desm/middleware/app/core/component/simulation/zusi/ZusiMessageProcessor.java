@@ -168,7 +168,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param messages
      * @param topic
      */
-    public void processEndpointMessage(ZusiService service, LinkedList<String> messages, String topic){
+    public synchronized void processEndpointMessage(ZusiService service, LinkedList<String> messages, String topic){
         for(String s : messages){
             processEndpointMessage(service, s, topic);
         }
@@ -183,7 +183,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
     public void processEndpointMessage(ZusiService service, String message, String topic){
         try {
             LOGGER.log(Level.INFO, "process endpoint message: " + message + ", topic: " + topic);
-            String globalId = ZusiProtocolNodeHelper.getGlobalId(message, service);
+            String globalId = service.getZusiProtocolNodeHelper().getGlobalId(message, service);
             ZusiEndpointMessage zusiMessage = new ZusiEndpointMessage(globalId);
             processEndpointParameterMessage(service, zusiMessage, topic);
 
@@ -202,16 +202,18 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
 
         //send message for every parameter
         for(Pair<String, String> p: zusiMessage.getParameterList()){
-            String parameterId = zusiMessage.getGroupId()+ZusiProtocolConstants.DELIMITER_GROUP+p.getLeft();
-            String middlewareMessage = service.getMap().getStartWithValue(parameterId);
-            middlewareMessage = middlewareMessage.replace("?", p.getRight());
+            String globalId = zusiMessage.getGroupId()+ZusiProtocolConstants.DELIMITER_GROUP+p.getLeft();
+            String middlewareMessage = service.getMap(topic).getStartWithValue(globalId);
+            String parameterValue = service.getZusiParameterConverter().getNumber(globalId, p.getRight());
+            parameterValue = parameterValue.isEmpty() ? p.getRight() : parameterValue;
+            middlewareMessage = middlewareMessage.replace("?", parameterValue);
             if(!middlewareMessage.isEmpty()){
                 //send middleware message to broker clients
                 super.processEndpointMessage(service.getBrokerClient(), middlewareMessage, topic);
             }else{
-                LOGGER.log(Level.WARN, "processing endpoint parameter message, global id not found with parameter: " + parameterId + ", topic: " + topic + "  ("+zusiMessage+")");
+                LOGGER.log(Level.WARN, "global id not found: "+globalId+", parameter: " + p.getRight() + ", topic: " + topic + "  ("+zusiMessage+")");
             }
 
-            }
+        }
     }
 }

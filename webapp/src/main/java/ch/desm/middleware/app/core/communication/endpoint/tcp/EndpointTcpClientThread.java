@@ -14,14 +14,17 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClientThread.class);
 
-    private final int BUFFER = 128;
+    private final int BUFFER = 512;
 	private EndpointTcpClient endpoint;
 
-	public EndpointTcpClientThread(EndpointTcpClient endpoint) {
-		super("EndpointTcpClientThread");
+	public EndpointTcpClientThread(EndpointTcpClient endpoint, String name) {
+		super(name);
 		this.endpoint = endpoint;
 	}
 
+    /**
+     * TODO socket keep Alive
+     */
 	@Override
 	public void run() {
         byte[] buffer = null;
@@ -36,13 +39,18 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
                     byte[] inBuffer = new byte[j];
                     System.arraycopy(buffer, 0, inBuffer, 0, j);
                     endpoint.receiveEvent(inBuffer);
+                }else{
+                    LOGGER.log(Level.INFO, "try to receive event in "+this.toString()+", but endpoint is disconnected: " + endpoint.toString());
+                    doHangout(1000*10);
                 }
             } catch (IOException e) {
                 LOGGER.log(Level.ERROR, e);
-                endpoint.disconnect(e.getMessage());
+                if(endpoint.isConnected()) endpoint.disconnect(e.getMessage());
             } catch (NegativeArraySizeException e){
                 LOGGER.log(Level.ERROR, e + " at endpoint: " + endpoint.toString());
-                endpoint.disconnect("unexpected read buffer size");
+                if(endpoint.isConnected()) endpoint.disconnect("unexpected read buffer size");
+            } catch (InterruptedException e) {
+                LOGGER.log(Level.ERROR, e + " at endpoint: " + endpoint.toString());
             }
         }
 	}

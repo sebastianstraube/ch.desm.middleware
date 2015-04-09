@@ -17,8 +17,8 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
     private ZusiService service;
     private ZusiEndpointTcpClientThread messageHandler;
 
-	public ZusiEndpointTcpClient(ZusiService service, String ip, int port, String topic) {
-		super(ip, port);
+	public ZusiEndpointTcpClient(ZusiService service, String ip, int port, String topic, String name) {
+		super(ip, port, name);
         this.registerEndpointListener();
         this.service = service;
         this.messageHandler = new ZusiEndpointTcpClientThread(service, topic);
