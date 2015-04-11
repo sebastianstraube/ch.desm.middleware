@@ -96,6 +96,7 @@ public class Re420BrokerClient extends Re420BrokerClientBase {
 		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM);
 		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232);
 		signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420_FABISCH);
+        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
 		signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
 	}
 

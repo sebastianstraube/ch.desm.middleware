@@ -165,11 +165,18 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
             ZusiProtocolNode needed_data = new ZusiProtocolNode("0300", "");
             ZusiProtocolNode fuehrerstandsAnzeigen = new ZusiProtocolNode("0A00", "");
             ZusiProtocolNode geschwindigkeit = new ZusiProtocolNode("0100", "0100");
+            ZusiProtocolNode stromabnehmer = new ZusiProtocolNode("0100", "5500");
+            ZusiProtocolNode gesamtWeg= new ZusiProtocolNode("0100", "1900");
+            ZusiProtocolNode hauptschalter= new ZusiProtocolNode("0100", "1300");
+
 
             root.addNode(client_fahrpult);
             client_fahrpult.addNode(needed_data);
             needed_data.addNode(fuehrerstandsAnzeigen);
             fuehrerstandsAnzeigen.addNode(geschwindigkeit);
+            fuehrerstandsAnzeigen.addNode(stromabnehmer);
+            fuehrerstandsAnzeigen.addNode(gesamtWeg);
+            fuehrerstandsAnzeigen.addNode(hauptschalter);
 
             String stream = service.getEncoder().encode(root);
             this.send(stream);

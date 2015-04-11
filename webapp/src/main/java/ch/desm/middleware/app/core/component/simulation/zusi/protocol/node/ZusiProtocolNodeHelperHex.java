@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import org.apache.log4j.Logger;
 
@@ -131,6 +132,43 @@ public class ZusiProtocolNodeHelperHex {
         return hex;
     }
 
+    static int toInt(String hex){
+        byte[] b = getByteStream(hex);
+        int val = byteArrayToInt(0,b, b.length, 0);
+
+        return val;
+    }
+
+    /*
+    b[3] & 0xFF |
+    (b[2] & 0xFF) << 8 |
+    (b[1] & 0xFF) << 16 |
+    (b[0] & 0xFF) << 24;
+     */
+    public static int byteArrayToInt(int val, byte[] b, int length, int shift){
+        if(length > 0){
+            length--;
+            val = b[length] & 0xFF << shift;
+            val |= byteArrayToInt(val, b, length, shift + 8);
+        }
+
+        return val;
+    }
+
+    private static byte[] getByteStream(String hexMessage){
+
+        hexMessage = ZusiProtocolNodeHelperHex.removeControleCharacter(hexMessage);
+
+        byte[] byteStream = new byte[hexMessage.length()/2];
+        for(int i=0; i<hexMessage.length()/2; i++){
+            String value = "" + hexMessage.charAt(i*2) + hexMessage.charAt(i*2+1);
+            Integer val = Integer.valueOf(value, 16);
+            byteStream[i] = val.byteValue();
+        }
+
+        return byteStream;
+    }
+
     /**
      *
      * @param message
@@ -141,8 +179,10 @@ public class ZusiProtocolNodeHelperHex {
     }
 
     public static float getFloat(String hexNumber){
-        int unsigned = Integer.parseUnsignedInt(hexNumber, 16);
-        return Float.intBitsToFloat(unsigned);
+        hexNumber = swapEndian(hexNumber);
+        int val = Integer.parseInt(hexNumber, 16);
+        float f = Float.intBitsToFloat(val);
+        return f;
     }
 
     public static String getHex(float number){

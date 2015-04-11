@@ -5,6 +5,7 @@ import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtoc
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 /**
  * Created by Sebastian on 06.03.2015.
@@ -82,13 +83,26 @@ public class ZusiProtocolNodeHelper {
 
     /**
      *
+     * @param root
+     * @return
+     */
+    public String getNodeStream(ZusiProtocolNodeRoot root){
+        String stream = "";
+        for(ZusiProtocolNode node : root.nodes){
+            stream += getNodeStream(false, node);
+        }
+
+        return stream;
+    }
+
+    /**
+     * TODO - check static immuatable object
      * @param encap
      * @param node
      * @return
      */
     public static String getNodeStream(boolean encap, ZusiProtocolNode node){
         String stream ="";
-
         if(node.isStartNode() && encap) stream += ZusiProtocolConstants.NODE_END;
         stream += node.getNode();
         stream += node.getId();
@@ -104,12 +118,11 @@ public class ZusiProtocolNodeHelper {
      * @param globalId
      * @return
      */
-    public static ZusiProtocolNodeRoot getRoot(String globalId){
+    public ZusiProtocolNodeRoot getRoot(String globalId){
         ZusiProtocolNodeRoot root = new ZusiProtocolNodeRoot();
-        String tmpId = globalId;
         String[] id = globalId.substring(0, globalId.lastIndexOf(ZusiProtocolConstants.DELIMITER_GROUP)).split(ZusiProtocolConstants.DELIMITER_GROUP_VALUE);
         String[] parameter = globalId.substring(globalId.lastIndexOf(ZusiProtocolConstants.DELIMITER_GROUP)+2, globalId.length()).split(ZusiProtocolConstants.DELIMITER_PARAMETER);
-        root = buildRootNode(root, null, id, parameter);
+        root = getRootNode(root, null, id, parameter);
         return root;
     }
 
@@ -121,7 +134,7 @@ public class ZusiProtocolNodeHelper {
      * @param parameter
      * @return
      */
-    static ZusiProtocolNodeRoot buildRootNode(ZusiProtocolNodeRoot root, ZusiProtocolNode lastNode, String[] id, String[] parameter){
+    protected ZusiProtocolNodeRoot getRootNode(ZusiProtocolNodeRoot root, ZusiProtocolNode lastNode, String[] id, String[] parameter){
         // groups
         for(int i=0; i<id.length; i++){
             ZusiProtocolNode n = new ZusiProtocolNode(id[i], "");
@@ -156,7 +169,7 @@ public class ZusiProtocolNodeHelper {
      * @return
      * @throws Exception
      */
-    public String getGlobalId(String hexMessage, ZusiService service) throws Exception{
+    public LinkedList<String> getGlobalId(String hexMessage) throws Exception{
         ZusiProtocolNodeRoot root = service.getDecoder().decode(hexMessage);
         return getGlobalId(root);
     }
@@ -166,13 +179,29 @@ public class ZusiProtocolNodeHelper {
      * @param root
      * @return
      */
-    public String getGlobalId(ZusiProtocolNodeRoot root){
-        String id ="";
+    public LinkedList<String> getGlobalId(ZusiProtocolNodeRoot root){
+        String globalIdMessage ="";
         for(ZusiProtocolNode n : root.nodes){
-            id += getGlobalId(n, 0, "");
+            globalIdMessage += getGlobalId(n, 0);
+        }
+        LinkedList<String> globalIds = decodeGlobalId(globalIdMessage);
+
+        return globalIds;
+    }
+
+    public LinkedList<String> decodeGlobalId(String globalIdMessage){
+        String groupId = globalIdMessage.substring(0, globalIdMessage.indexOf(ZusiProtocolConstants.DELIMITER_GROUP));
+        String[] subMessages = globalIdMessage.split(ZusiProtocolConstants.DELIMITER_SUBMESSAGE);
+        LinkedList<String> messages = new LinkedList<>();
+
+        for(int i=0; i<subMessages.length; i++){
+            int idxStart = subMessages[i].indexOf(ZusiProtocolConstants.DELIMITER_GROUP);
+            int idxEnd = subMessages[i].length();
+            String m = groupId + subMessages[i].substring(idxStart, idxEnd);
+            messages.add(m);
         }
 
-        return id;
+        return messages;
     }
 
     /**
@@ -182,37 +211,38 @@ public class ZusiProtocolNodeHelper {
      * @param nrParameter
      * @return
      */
-    public String getGlobalId(ZusiProtocolNode node, int nrParameter, String groupId){
-        String nodeId ="";
+    public String getGlobalId(ZusiProtocolNode node, int nrParameter){
+        String nodeId = node.getId();
+        if(!node.isStartNode()) nodeId += ZusiProtocolConstants.DELIMITER_PARAMETER_VALUE + node.getData();
 
-        if(nrParameter > 0 && node.isStartNode()){
-            nodeId += ZusiProtocolConstants.DELIMITER_SUBMESSAGE;
-            nodeId += groupId;
-        }
+        for(ZusiProtocolNode next : node.nodes){
+            String parChar = getParameterChar(next, nrParameter);
+            if(!next.isStartNode())nrParameter++;
 
-        nodeId += node.getId();
-
-        if(!node.isStartNode()){
-            nodeId += ZusiProtocolConstants.DELIMITER_PARAMETER_VALUE + node.getData();
-        }
-
-        for(ZusiProtocolNode next : node.nodes) {
-            String parChar = "";
-
-            if(next.isStartNode()) {
-                parChar = ZusiProtocolConstants.DELIMITER_GROUP_VALUE;
-                groupId += node.getId();
-            }else{
-                if(nrParameter == 0){
-                    parChar= ZusiProtocolConstants.DELIMITER_GROUP;
-                }else{
-                    parChar = ZusiProtocolConstants.DELIMITER_PARAMETER;
-                }
-                nrParameter++;
+            nodeId += parChar;
+            nodeId += getGlobalId(next, nrParameter);
+            if(nrParameter > 0 && next.equals(node.nodes.getLast())) {
+                nrParameter = 0;
+                nodeId += ZusiProtocolConstants.DELIMITER_SUBMESSAGE;
             }
-            nodeId += parChar + getGlobalId(next, nrParameter, groupId);
         }
+
         return nodeId;
+    }
+
+    private String getParameterChar(ZusiProtocolNode node, int nrParameter){
+        String parChar;
+
+        if(node.isStartNode()) {
+            parChar = ZusiProtocolConstants.DELIMITER_GROUP_VALUE;
+        }else{
+            if(nrParameter == 0){
+                parChar= ZusiProtocolConstants.DELIMITER_GROUP;
+            }else{
+                parChar = ZusiProtocolConstants.DELIMITER_PARAMETER;
+            }
+        }
+        return parChar;
     }
 }
 

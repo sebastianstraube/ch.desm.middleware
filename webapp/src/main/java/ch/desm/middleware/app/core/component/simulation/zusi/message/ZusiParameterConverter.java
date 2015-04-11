@@ -1,12 +1,12 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.message;
 
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelperHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.text.NumberFormat;
-import java.util.LinkedList;
 
 /**
  * Created by Sebastian on 09.04.2015.
@@ -29,11 +29,12 @@ public class ZusiParameterConverter {
     }
 
     public String getNumber(String globalId, String parameter){
-        String format = service.getZusiMapParameter().getValue(globalId);
+        String format = service.getZusiMapParameterDataType().getValue(globalId);
 
         switch(format){
             case ZUSINUMBERFORMAT_SINGLE: {
                 float val = ZusiProtocolNodeHelperHex.getFloat(parameter);
+                val = getVal(globalId, val);
                 return numberFormat.format(val);
             }
             case ZUSINUMBERFORMAT_STRING: {
@@ -43,5 +44,17 @@ public class ZusiParameterConverter {
             default: LOGGER.log(Level.TRACE, "unsupported numberformat with globalId: " + globalId + ", parameter: " + parameter);
         }
         return "";
+    }
+
+    private float getVal(String globalId, float val){
+        String type = service.getZusiMapParameter().getValue(globalId);
+        switch(type){
+            case(ZusiProtocolConstants.MAP_PARAMETER_VALUE_GESCHWINDIGKEIT):{
+                val = val * 3.6f;
+                break;
+            }
+        }
+
+        return val;
     }
 }

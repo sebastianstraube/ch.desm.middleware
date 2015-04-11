@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
+import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import org.apache.log4j.Logger;
 
@@ -53,7 +54,7 @@ public class ZusiProtocolNodeEncoder {
                 encap = node.isStartNode() && next.isStartNode();
             }
             if(next.isStartNode()) parentNode = node;
-            stream = doEncode(encap, stream, next, parentNode);
+            stream = doEncode( encap, stream, next, parentNode);
         }
 
         return stream;

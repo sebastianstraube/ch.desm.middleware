@@ -20,6 +20,9 @@ public class ZusiProtocolConstants {
     public static final String DELIMITER_PARAMETER = ",";
     public static final String DELIMITER_PARAMETER_VALUE = ":";
 
+    public static final String MAP_PARAMETER_VALUE_GESCHWINDIGKEIT = "MAP_PARAMETER_VALUE_GESCHWINDIGKEIT";
+    public static final String MAP_PARAMETER_VALUE_GESAMTWEG = "MAP_PARAMETER_VALUE_GESAMTWEG";
+
     /**
      * 12.3.3.3.2. Status Zugsicherung Um auch komplexere Systeme darstellen zu können, wird der Status des Zugsicherungssystems in einer Struktur übertragen. Wenn es eine Änderung bei der Zugsicherung gab, wird immer das komplette Paket übertragen, auch wenn sich z.B. nur ein Wert verändert hat.
      * 12.3.3.3.2.1. Grundblock Für jedes Zugsicherungssystem wird zunächst der folgende Grundblock verschickt, gefolgt von systemspezifischen Werten, die in den folgenden Kapiteln aufgeführt werden.

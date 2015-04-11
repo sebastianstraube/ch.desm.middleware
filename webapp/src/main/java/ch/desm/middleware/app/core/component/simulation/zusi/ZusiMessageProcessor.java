@@ -6,7 +6,9 @@ import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.common.ComponentMessageProcessorBase;;
 import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiEndpointMessage;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelper;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeRoot;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -39,36 +41,43 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
         switch(message.getTopic()){
             case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM):{
                 //TODO implementation
-            };
+                break;
+            }
             case(MessageBase.MESSAGE_TOPIC_CABINE_RE420):{
                 //TODO implementation
-            };
+                break;
+            }
             case(MessageBase.MESSAGE_TOPIC_CABINE_RE420_FABISCH):{
                 //TODO implementation
-            };
+            }
             case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU):{
                 //TODO implementation
-            };
+                break;
+            }
             case(MessageBase.MESSAGE_TOPIC_MANAGEMENT):{
                 processBrokerMessageManagament(service, message);
-            };
+            }
             case(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU):{
                 //TODO implementation
-            };
+                break;
+            }
             case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL):{
                 //TODO implementation
-            };
+                break;
+            }
             case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232):{
                 //TODO implementation
-            };
+                break;
+            }
             case(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT):{
                 processBrokerMessageZusiFahrpult(service, message);
-            };
+                break;
+            }
             case(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG):{
                 processBrokerMessageZusiAusbildung(service, message);
-            };
-
-            standard:{
+                break;
+            }
+            default:{
                 try {
                     throw new Exception("unsupported topic, broker message delegation skipped: " + message.toString());
                 } catch (Exception e) {
@@ -86,10 +95,10 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      */
     private void processBrokerMessageZusiFahrpult(ZusiService service, MessageMiddleware message){
         if(message.getParameter().equalsIgnoreCase("on")){
-            ZusiEndpointMessage z = new ZusiEndpointMessage(message.getGlobalId());
+            ZusiProtocolNodeRoot root = service.getZusiProtocolNodeHelper().getRoot(message.getGlobalId());
 
             try {
-                String zusiStream = service.getCommand().getStreamToZusi(service, message.getGlobalId());
+                String zusiStream = service.getZusiProtocolNodeHelper().getNodeStream(root);
                 delegateToEndpoint(service.getEndpointFahrpult(), zusiStream);
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
@@ -104,10 +113,10 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      */
     private void processBrokerMessageZusiAusbildung(ZusiService service, MessageMiddleware message){
         if(message.getParameter().equalsIgnoreCase("on")){
-            ZusiEndpointMessage z = new ZusiEndpointMessage(message.getGlobalId());
+            ZusiProtocolNodeRoot root = service.getZusiProtocolNodeHelper().getRoot(message.getGlobalId());
 
             try {
-                String zusiStream = service.getCommand().getStreamToZusi(service, message.getGlobalId());
+                String zusiStream = service.getZusiProtocolNodeHelper().getNodeStream(root);
                 delegateToEndpoint(service.getEndpointAusbildung(), zusiStream);
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
@@ -183,10 +192,11 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
     public void processEndpointMessage(ZusiService service, String message, String topic){
         try {
             LOGGER.log(Level.INFO, "process endpoint message: " + message + ", topic: " + topic);
-            String globalId = service.getZusiProtocolNodeHelper().getGlobalId(message, service);
-            ZusiEndpointMessage zusiMessage = new ZusiEndpointMessage(globalId);
-            processEndpointParameterMessage(service, zusiMessage, topic);
-
+            LinkedList<String> globalIds = service.getZusiProtocolNodeHelper().getGlobalId(message);
+            for(String globalId : globalIds){
+                ZusiEndpointMessage zusiMessage = new ZusiEndpointMessage(globalId);
+                processEndpointParameterMessage(service, zusiMessage, topic);
+            }
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
@@ -206,6 +216,13 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             String middlewareMessage = service.getMap(topic).getStartWithValue(globalId);
             String parameterValue = service.getZusiParameterConverter().getNumber(globalId, p.getRight());
             parameterValue = parameterValue.isEmpty() ? p.getRight() : parameterValue;
+
+            Pair<String, String> parameter = service.getZusiMapParameterMiddleware().getValue(globalId);
+            if(parameter!=null){
+                if(parameter.getLeft().equals(parameterValue)) parameterValue = "on";
+                else if(parameter.getRight().equals(parameterValue)) parameterValue = "off";
+            }
+
             middlewareMessage = middlewareMessage.replace("?", parameterValue);
             if(!middlewareMessage.isEmpty()){
                 //send middleware message to broker clients

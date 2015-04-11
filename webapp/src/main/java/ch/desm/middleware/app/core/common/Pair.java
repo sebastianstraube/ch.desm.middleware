@@ -5,7 +5,7 @@ package ch.desm.middleware.app.core.common;
  * @param <L>
  * @param <R>
  */
-public class Pair<L,R> {
+public class Pair<L, R> {
 
     private final L left;
     private final R right;

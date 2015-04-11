@@ -3,12 +3,10 @@ package ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol.node
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiEndpointMessage;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelper;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelperHex;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeRoot;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -29,16 +27,15 @@ public class ZusiProtocolNodeHelperTest extends ZusiProtocolNodeHelper {
     public boolean testEncodeDecodeNodeGlobalId(String stream, ZusiService service) throws Exception {
         ZusiProtocolNodeRoot root = null;
         String encoded = null;
-
         root = service.getDecoder().decode(stream);
         encoded = service.getEncoder().encode(root);
         root = service.getDecoder().decode(encoded);
 
-        String globalID = service.getZusiProtocolNodeHelper().getGlobalId(root);
-        ZusiProtocolNodeRoot rootCmp = getRoot(globalID);
-        String globalIdTest = getGlobalId(rootCmp);
+        String globalId = service.getZusiProtocolNodeHelper().getGlobalId(root).get(0);
+        ZusiProtocolNodeRoot rootCmp = getRoot(globalId);
+        String globalIdTest = getGlobalId(rootCmp).get(0);
 
-        return globalID.equals(globalIdTest);
+        return globalId.equalsIgnoreCase(globalIdTest);
     }
 
     /**
@@ -65,7 +62,7 @@ public class ZusiProtocolNodeHelperTest extends ZusiProtocolNodeHelper {
         boolean test = false;
 
         ZusiProtocolNodeRoot root1 = getRoot(globalId);
-        String globalId1 = getGlobalId(root1);
+        String globalId1 = getGlobalId(root1).get(0);
         test = globalId.equalsIgnoreCase(globalId1);
 
         return test;
@@ -80,11 +77,11 @@ public class ZusiProtocolNodeHelperTest extends ZusiProtocolNodeHelper {
         boolean test = false;
 
         ZusiProtocolNodeRoot root1 = getRoot(globalId);
-        String globalId1 = getGlobalId(root1);
+        String globalId1 = getGlobalId(root1).get(0);
         boolean test1 = globalId.equalsIgnoreCase(globalId1);
 
         ZusiProtocolNodeRoot root2 = getRoot(globalId1);
-        String globalId2 = getGlobalId(root2);
+        String globalId2 = getGlobalId(root2).get(0);
         boolean test2 = globalId.equalsIgnoreCase(globalId2);
 
         test = test1 && test2;
@@ -199,18 +196,15 @@ public class ZusiProtocolNodeHelperTest extends ZusiProtocolNodeHelper {
         //middleware message object
         MessageMiddleware mm = service.getTranslator().toMiddlewareMessage(middlewareMessage);
         //0300-1301-0100::0100:11,0200:00,0300:01,0400:00,0500:00;;;hauptschalter;aus;taste n;?;zusi;#
-        //zusi protocol transfer object
-        ZusiEndpointMessage zpm = new ZusiEndpointMessage(mm.getGlobalId());
-        //0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0
         //zusi data transfer object
-        ZusiProtocolNodeRoot root = service.getCommand().getInput(zpm);
+        ZusiProtocolNodeRoot root = service.getZusiProtocolNodeHelper().getRoot(mm.getGlobalId());
         //decode to zusi hex stream
         String zusiHexStream = service.getEncoder().encode(root);
         //000000000200000000000a010000000001000400000001000b0004000000020000000400000003000100040000000400000006000000050000000000FFFFFFFFFFFFFFFFFFFFFFFF
         //get global id from hex stream
-        String globalId = service.getZusiProtocolNodeHelper().getGlobalId(zusiHexStream, service);
+        String globalId = service.getZusiProtocolNodeHelper().getGlobalId(zusiHexStream).get(0);
         //build tree from global id
-        ZusiProtocolNodeRoot cmpRoot =  ZusiProtocolNodeHelper.getRoot(globalId);
+        ZusiProtocolNodeRoot cmpRoot =  service.getZusiProtocolNodeHelper().getRoot(globalId);
 
         return cmpRoot.equals(root);
     }
@@ -223,19 +217,16 @@ public class ZusiProtocolNodeHelperTest extends ZusiProtocolNodeHelper {
      * @throws Exception
      */
     public boolean testIntegratedInputStream(ZusiService service, String stream) throws Exception {
-        String globalId = service.getZusiProtocolNodeHelper().getGlobalId(stream, service);
-        //zusi protocol transfer object
-        ZusiEndpointMessage zpm = new ZusiEndpointMessage(globalId);
-        //0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0
+        String globalId = service.getZusiProtocolNodeHelper().getGlobalId(stream).get(0);
         //zusi data transfer object
-        ZusiProtocolNodeRoot root = service.getCommand().getInput(zpm);
+        ZusiProtocolNodeRoot root = service.getZusiProtocolNodeHelper().getRoot(globalId);
         //decode to zusi hex stream
         String zusiHexStream = service.getEncoder().encode(root);
         //000000000200000000000a010000000001000400000001000b0004000000020000000400000003000100040000000400000006000000050000000000FFFFFFFFFFFFFFFFFFFFFFFF
         //get global id from hex stream
-        String globalId2 = service.getZusiProtocolNodeHelper().getGlobalId(zusiHexStream, service);
+        String globalId2 = service.getZusiProtocolNodeHelper().getGlobalId(zusiHexStream).get(0);
         //build tree from global id
-        ZusiProtocolNodeRoot cmpRoot =  ZusiProtocolNodeHelper.getRoot(globalId2);
+        ZusiProtocolNodeRoot cmpRoot =  service.getZusiProtocolNodeHelper().getRoot(globalId2);
 
         return cmpRoot.equals(root);
     }
@@ -254,7 +245,7 @@ public class ZusiProtocolNodeHelperTest extends ZusiProtocolNodeHelper {
     }
 
     public boolean testGetGlobalId(String stream, String globalId) throws Exception {
-        String testGlobalId = getGlobalId(stream, service);
+        String testGlobalId = getGlobalId(stream).get(0);
         return globalId.equalsIgnoreCase(testGlobalId);
     }
 

@@ -6,16 +6,12 @@ import ch.desm.middleware.app.core.communication.message.translator.MessageTrans
 import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 import ch.desm.middleware.app.core.component.common.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.common.ComponentServiceBase;
-import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapAusbildung;
-import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapFahrpult;
-import ch.desm.middleware.app.core.component.simulation.zusi.map.ZusiMapParameter;
+import ch.desm.middleware.app.core.component.simulation.zusi.map.*;
 import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiParameterConverter;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.*;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeDecoder;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeEncoder;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelper;
-
-import javax.ejb.MessageDrivenBean;
 
 /**
  * Created by Sebastian on 28.11.2014.
@@ -80,14 +76,6 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public ZusiProtocolCommand getCommand(){
-        return new ZusiProtocolCommand();
-    }
-
-    /**
-     *
-     * @return
-     */
     public ZusiProtocolNodeEncoder getEncoder(){
         return new ZusiProtocolNodeEncoder();
     }
@@ -142,9 +130,18 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
+    public ZusiMapParameterDataType getZusiMapParameterDataType(){
+        return new ZusiMapParameterDataType();
+    }
+
+    /**
+     *
+     * @return
+     */
     public ZusiMapParameter getZusiMapParameter(){
         return new ZusiMapParameter();
     }
+
 
     /**
      *
@@ -161,5 +158,14 @@ public class ZusiService extends ComponentServiceBase {
     public ZusiProtocolNodeHelper getZusiProtocolNodeHelper(){
         return new ZusiProtocolNodeHelper(this);
     }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiMapParameterMiddleware getZusiMapParameterMiddleware(){
+        return new ZusiMapParameterMiddleware();
+    }
+
 
 }
