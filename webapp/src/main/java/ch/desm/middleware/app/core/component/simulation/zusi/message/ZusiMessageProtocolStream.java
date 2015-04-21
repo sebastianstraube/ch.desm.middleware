@@ -7,13 +7,13 @@ import org.apache.log4j.Logger;
 /**
  * Created by Sebastian on 06.12.2014.
  */
-public class ZusiProtocolStream {
+public class ZusiMessageProtocolStream {
 
     private static Logger LOGGER = Logger.getLogger(ZusiEndpointTcpClient.class);
 
     private String stream;
 
-    public ZusiProtocolStream() {
+    public ZusiMessageProtocolStream() {
         this.stream = "";
     }
 

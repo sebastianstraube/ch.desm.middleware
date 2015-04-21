@@ -4,14 +4,16 @@ import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtoc
 import com.sun.istack.internal.Nullable;
 import org.apache.log4j.Logger;
 
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sebastian on 06.03.2015.
  */
 public class ZusiProtocolNode extends ZusiProtocolNodeBase {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeRoot.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiProtocolNode.class);
 
     @Nullable
     ZusiProtocolNode prevNode;
@@ -19,6 +21,13 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
     private String node;
     private String id;
     private String data;
+
+    /**
+     * only root node
+     */
+    public ZusiProtocolNode(){
+
+    }
 
     /**
      *
@@ -46,20 +55,11 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
      * @param id
      * @param data
      */
-    public ZusiProtocolNode(String id, String data){
+    public ZusiProtocolNode(ZusiProtocolNode prevNode, String id, String data){
+        this.prevNode = prevNode;
         this.node = ZusiProtocolNodeHelper.getNodeHex(data);
         this.id = id;
         this.data = data;
-    }
-
-    /**
-     *
-     * @param id
-     * @param data
-     */
-    public ZusiProtocolNode(ZusiProtocolNode prevNode, String id, String data){
-        this(id, data);
-        this.prevNode = prevNode;
     }
 
     public void setPrevNode(ZusiProtocolNode prevNode){
@@ -83,7 +83,7 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
     }
 
     public boolean isStartNode(){
-        return node.equals(ZusiProtocolConstants.NODE_START);
+        return node!= null && node.equals(ZusiProtocolConstants.NODE_START);
     }
 
     public boolean isParameterNode(){
@@ -94,14 +94,56 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
         return node+id+data;
     }
 
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o){
-        if(!(o instanceof ZusiProtocolNode)) return false;
-        ZusiProtocolNode n = (ZusiProtocolNode) o;
-        boolean val = this.node.equalsIgnoreCase(n.getNode());
-        val = val && this.id.equalsIgnoreCase(n.getId());
-        val = val && this.data.equalsIgnoreCase(n.getData());
+        if(!(o instanceof ZusiProtocolNode)){
+            return false;
+        }
+        ZusiProtocolNode cmp = (ZusiProtocolNode) o;
+        boolean b = this.equals(cmp);
+        if(b) b = b && (this.getNodes().equals(cmp.getNodes()));
+        if(b) b = b && traverse(b, nodes, cmp.getNodes());
+
+        return b;
+    }
+
+    /**
+     *
+     * @param n
+     * @return
+     */
+    private boolean equals(ZusiProtocolNode n){
+        boolean val = (this.getNode()== null && n.getNode()== null) || this.getNode().equalsIgnoreCase(n.getNode());
+        val = val && ((this.getId() == null && n.getId() == null) || this.getId().equalsIgnoreCase(n.getId()));
+        val = val && ((this.getData() == null && n.getData() == null) || this.getData().equalsIgnoreCase(n.getData()));
         return val;
+    }
+
+    /**
+     *
+     * @param b
+     * @param nodes
+     * @param nodesCmp
+     * @return
+     */
+    private boolean traverse(boolean b, List<ZusiProtocolNode> nodes, List<ZusiProtocolNode> nodesCmp){
+        Iterator<ZusiProtocolNode> iter = nodes.iterator();
+        Iterator<ZusiProtocolNode> iterCmp = nodesCmp.iterator();
+        b = b && (iter.hasNext() == iterCmp.hasNext());
+        while(b && iter.hasNext() && iterCmp.hasNext()){
+            ZusiProtocolNode node = iter.next();
+            ZusiProtocolNode nodeCmp = iterCmp.next();
+            b = b && node.equals(nodeCmp);
+            if(!b) break;
+            b = b && traverse(b, node.getNodes(), nodeCmp.getNodes());
+        }
+
+        return b;
     }
 }
 

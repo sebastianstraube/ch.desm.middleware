@@ -16,14 +16,15 @@ public class Re420BrokerClient extends Re420BrokerClientBase {
 
 	private static Logger LOGGER = Logger.getLogger(Re420BrokerClient.class);
 
+    Re420Service service;
 	private Re420MessageProcessor processor;
 	private MessageTranslatorMiddleware translator;
 
 
-	public Re420BrokerClient(Broker broker, Re420EndpointUbw32 endpoint,
-                             Re420EndpointFabisch endpointFabisch) {
-		super(broker, endpoint, endpointFabisch);
+	public Re420BrokerClient(Broker broker, Re420Service service) {
+		super(broker, service.getendpointUbw(), service.getendpointFabisch());
 
+        this.service = service;
 		this.processor = new Re420MessageProcessor();
 		this.translator = new MessageTranslatorMiddleware();
 

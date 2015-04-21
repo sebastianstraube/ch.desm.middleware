@@ -11,6 +11,8 @@ public class ZusiProtocolConstants {
 
     public static final String CLIENT_TYPE = "DESM-Middleware";
     public static final String CLIENT_VERSION = "1.0";
+    public static final int CLIENT_TYPE_AUSBILDUNG = 3;
+    public static final int CLIENT_TYPE_FAHRPULT = 2;
 
     public static final String NODE_START = "00000000";
     public static final String NODE_END = "FFFFFFFF";

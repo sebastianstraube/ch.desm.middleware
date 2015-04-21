@@ -7,10 +7,10 @@ import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 import ch.desm.middleware.app.core.component.common.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.common.ComponentServiceBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.map.*;
-import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiParameterConverter;
+import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiMessageParameterHelper;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.*;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeDecoder;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeEncoder;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeCommand;
+import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeCodec;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelper;
 
 /**
@@ -76,16 +76,8 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public ZusiProtocolNodeEncoder getEncoder(){
-        return new ZusiProtocolNodeEncoder();
-    }
-
-    /**
-     *
-     * @return
-     */
-    public ZusiProtocolNodeDecoder getDecoder(){
-        return new ZusiProtocolNodeDecoder();
+    public ZusiProtocolNodeCodec getCodec(){
+        return new ZusiProtocolNodeCodec();
     }
 
     /**
@@ -147,8 +139,8 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public ZusiParameterConverter getZusiParameterConverter(){
-        return new ZusiParameterConverter(this);
+    public ZusiMessageParameterHelper getZusiParameterConverter(){
+        return new ZusiMessageParameterHelper(this);
     }
 
     /**
@@ -167,5 +159,20 @@ public class ZusiService extends ComponentServiceBase {
         return new ZusiMapParameterMiddleware();
     }
 
+    /**
+     *
+     * @return
+     */
+    public ZusiProtocolNodeCommand getZusiProtocolCommand(){
+        return new ZusiProtocolNodeCommand();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiMapPetrinet getZusiMapPetrinet(){
+        return new ZusiMapPetrinet();
+    }
 
 }

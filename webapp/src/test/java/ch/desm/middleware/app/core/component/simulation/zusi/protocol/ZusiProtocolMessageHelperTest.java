@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.zusi.protocol;
+package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolMessageHelper;

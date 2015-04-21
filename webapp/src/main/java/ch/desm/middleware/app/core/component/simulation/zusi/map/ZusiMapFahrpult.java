@@ -14,14 +14,6 @@ public class ZusiMapFahrpult extends ComponentMapBase {
         return map;
     }
 
-    public String mapBrokerToEndpointMessage(String globalId) throws Exception {
-        String message = this.getKey(globalId);
-        if(message.isEmpty()) {
-            throw new Exception("unable to map broker message with globalId\"" + globalId + "\"");
-        }
-        return message;
-    }
-
     @Override
     protected void init(){
         map.put("0100-0200::0100", "0100-0200::0100;;;command;ack_hello;zusi_version;?;zusi_fahrpult;#");

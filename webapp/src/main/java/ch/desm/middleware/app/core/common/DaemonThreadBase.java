@@ -11,11 +11,10 @@ import ch.desm.middleware.app.core.common.utility.UtilityRandomGenerator;
  */
 public abstract class DaemonThreadBase extends Thread {
 
-    private int sleepTime;
+    private int sleepTime = 10;
 
 	public DaemonThreadBase(){
 		this.setDaemon(true);
-        this.sleepTime = 15;
 	}
 	
 	public DaemonThreadBase(String name) {

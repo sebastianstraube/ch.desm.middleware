@@ -60,7 +60,7 @@ public abstract class ComponentMapBase {
      * @param key
      * @return
      */
-    public String getStartWithValue(String key){
+    public String getStartWithKey(String key){
         for(Entry<String, String> entry : map.entrySet()){
             if(entry.getKey().toUpperCase().startsWith(key.toUpperCase())){
                 return entry.getValue();
@@ -71,6 +71,10 @@ public abstract class ComponentMapBase {
 
     public boolean isKeyAvailable(String id){
         return map.containsKey(id);
+    }
+
+    public boolean isKeyAvailableIgnoreCase(String id){
+        return !getStartWithKey(id).isEmpty();
     }
 	
 }

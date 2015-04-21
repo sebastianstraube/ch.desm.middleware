@@ -370,7 +370,7 @@ public class Re420MessageProcessor extends MessageProcessorBase {
             // is hardware message
         } else {
 
-            String value = util.getParameterValueRe420(message.getParameter());
+            String value = message.getParameter();
             boolean isInput = message.getOutputInput().equals(
                     MessageUbw32Base.MESSAGE_CHAR_INPUT);
 

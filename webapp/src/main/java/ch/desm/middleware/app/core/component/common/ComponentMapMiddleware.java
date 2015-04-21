@@ -27,24 +27,25 @@ public class ComponentMapMiddleware extends ComponentMapBase {
         map.put("mgmt.stellwerk.obermattlangnau", "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;?;management;#");map.put("mgmt.petrinet.obermatlangnau", "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;?;management;#");map.put("mgmt.cabine.re420.fabisch", "mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;?;management;#");map.put("mgmt.cabine.re420.ubw32", "mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;?;management;#");map.put("mgmt.simulation.locsim.rs232", "mgmt.simulation.locsim.rs232;os;0;management;simulation;locsim.rs232;?;management;#");map.put("mgmt.simulation.locsim.dll", "mgmt.simulation.locsim.dll;os;0;management;simulation;locsim.dll;?;management;#");
 
         //zusi
-        map.put("0300-1400-0100::0100", "0300-1400-0100::0100;;;command;alltrainpos;parameter_0001;?;zusi_ausbildung;#");
-        map.put("0300-1400-0100::0200", "0300-1400-0100::0200;;;command;alltrainpos;parameter_0002;?;zusi_ausbildung;#");
-        map.put("0300-1400-0100::0300", "0300-1400-0100::0300;;;command;alltrainpos;parameter_0003;?;zusi_ausbildung;#");
-        map.put("0300-1400-0100::0400", "0300-1400-0100::0400;;;command;alltrainpos;parameter_0004;?;zusi_ausbildung;#");
-        map.put("0300-1400-0100::0500", "0300-1400-0100::0500;;;command;alltrainpos;parameter_0005;?;zusi_ausbildung;#");
-        map.put("0300-1400-0100::0600", "0300-1400-0100::0600;;;command;alltrainpos;parameter_0006;?;zusi_ausbildung;#");
-        map.put("0300-1400-0100::0700", "0300-1400-0100::0700;;;command;alltrainpos;parameter_0007;?;zusi_ausbildung;#");
-        map.put("0300-1400-0100::0800", "0300-1400-0100::0800;;;command;alltrainpos;parameter_0008;?;zusi_ausbildung;#");
-        map.put("0300-1400-0100::0900", "0300-1400-0100::0900;;;command;alltrainpos;parameter_0009;?;zusi_ausbildung;#");
-        map.put("0300-1400-0100::0a00", "0300-1400-0100::0a00;;;command;alltrainpos;parameter_000a;?;zusi_ausbildung;#");
-        map.put("0200-0A01-0100::0100:2B,0200:00,0300:07,0400:01,0500:00", "0200-0a01-0100::0100:2b,0200:00,0300:07,0400:01,0500:00;;;stromabnehmer;hoch;tastee;?;zusi_fahrpult;#");
-        map.put("0200-0A01-0100::0100:2B,0200:00,0300:07,0400:00,0500:00", "0200-0a01-0100::0100:2b,0200:00,0300:07,0400:00,0500:00;;;stromabnehmer;tief;tastec;?;zusi_fahrpult;#");
-        map.put("0200-0A01-0100::0100:11,0200:00,0300:01,0400:02,0500:00", "0200-0a01-0100::0100:11,0200:00,0300:01,0400:02,0500:00;;;hauptschalter;ein;taste h;?;zusi_fahrpult;#");
-        map.put("0200-0A01-0100::0100:11,0200:00,0300:01,0400:00,0500:00", "0200-0a01-0100::0100:11,0200:00,0300:01,0400:00,0500:00;;;hauptschalter;aus;taste n;?;zusi_fahrpult;#");
-        map.put("0200-0A01-0100::0100:07,0200:00,0300:03,0400:00,0500:00", "0200-0a01-0100::0100:07,0200:00,0300:03,0400:00,0500:00;;;richtungsschalter;vorwärts;bild-nach-oben;?;zusi_fahrpult;#");
-        map.put("0200-0A01-0100::0100:07,0200:00,0300:03,0400:02,0500:00", "0200-0a01-0100::0100:07,0200:00,0300:03,0400:02,0500:00;;;richtungsschalter;rückwärts;bild-nach-unten;?;zusi_fahrpult;#");
-        map.put("0200-0A01-0100::0100:07,0200:00,0300:03,0400:02,0500:00", "0200-0a01-0100::0100:07,0200:00,0300:03,0400:02,0500:00;;;totmannpedal;;leer;?;zusi_fahrpult;#");
-        map.put("0200-0A00::0100", "0200-0a00::0100;;;geschwindigkeit;;;?;zusi_fahrpult;#");
+        map.put("0100-0200::0100", "0100-0200::0100;;;command;ack_hello;zusi_version;?;zusi_ausbildung;#");
+        map.put("0100-0200::0200", "0100-0200::0200;;;command;ack_hello;zusi_verbindungsinfo;?;zusi_ausbildung;#");
+        map.put("0100-0200::0300", "0100-0200::0300;;;command;ack_hello;client_akzeptiert;?;zusi_ausbildung;#");
+        map.put("0300-0400::0100", "0300-0400::0100;;;command;ack_needed_data;client_data_ack;?;zusi_ausbildung;#");
+        map.put("0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:00", "0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:00;;;signal;ausfahr;;?;zusi_ausbildung;#");
+        map.put("0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:01", "0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:01;;;signal;ausfahr;;?;zusi_ausbildung;#");
+        map.put("0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:02", "0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:02;;;signal;ausfahr;;?;zusi_ausbildung;#");
+
+        map.put("0100-0200::0100", "0100-0200::0100;;;command;ack_hello;zusi_version;?;zusi_fahrpult;#");
+        map.put("0100-0200::0200", "0100-0200::0200;;;command;ack_hello;zusi_verbindungsinfo;?;zusi_fahrpult;#");
+        map.put("0100-0200::0300", "0100-0200::0300;;;command;ack_hello;client_akzeptiert;?;zusi_fahrpult;#");
+        map.put("0200-0400::0100", "0200-0400::0100;;;command;ack_needed_data;client_data_ack;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:2b,0200:00,0300:07,0400:01,0500:00", "0200-0a01-0100::0100:2b,0200:00,0300:07,0400:01,0500:00;;;stromabnehmer;hoch;tastee;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:2b,0200:00,0300:07,0400:00,0500:00", "0200-0a01-0100::0100:2b,0200:00,0300:07,0400:00,0500:00;;;stromabnehmer;tief;tastec;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:11,0200:00,0300:01,0400:02,0500:00", "0200-0a01-0100::0100:11,0200:00,0300:01,0400:02,0500:00;;;hauptschalter;ein;taste h;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:11,0200:00,0300:01,0400:00,0500:00", "0200-0a01-0100::0100:11,0200:00,0300:01,0400:00,0500:00;;;hauptschalter;aus;taste n;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:07,0200:00,0300:03,0400:00,0500:00", "0200-0a01-0100::0100:07,0200:00,0300:03,0400:00,0500:00;;;richtungsschalter;vorwärts;bild-nach-oben;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:07,0200:00,0300:03,0400:02,0500:00", "0200-0a01-0100::0100:07,0200:00,0300:03,0400:02,0500:00;;;richtungsschalter;rückwärts;bild-nach-unten;?;zusi_fahrpult;#");
+        map.put("0200-0a00::0100", "0200-0a00::0100;;;geschwindigkeit;;;?;zusi_fahrpult;#");
         map.put("0200-0a00::1300", "0200-0a00::1300;;;status;hauptschalter;;?;zusi_fahrpult;#");
         map.put("0200-0a00::1900", "0200-0a00::1900;;;status;zurückgelegter gesamtweg;;?;zusi_fahrpult;#");
         map.put("0200-0a00::5500", "0200-0a00::5500;;;status;stromabnehmer;;?;zusi_fahrpult;#");

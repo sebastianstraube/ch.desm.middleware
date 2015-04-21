@@ -1,0 +1,22 @@
+package ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map;
+
+import ch.desm.middleware.app.core.component.common.ComponentMapBase;
+
+import java.util.Map;
+
+public class PetrinetMapZusi extends ComponentMapBase{
+
+	@Override
+	public Map<String, String> getMap() {
+		return map;
+	}
+
+	@Override
+	protected void init(){
+        map.put("OML_LN_$C26_FB2","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:02"); //
+        map.put("OML_LN_$C26_Halt","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:01"); //
+        map.put("OML_LN_$C26_FB1","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:00"); //
+
+    }
+
+}

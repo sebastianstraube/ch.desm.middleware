@@ -42,6 +42,17 @@ public class ZusiProtocolNodeHelperHex {
         return hexMessage;
     }
 
+
+    /**
+     *
+     * @param i
+     * @return
+     */
+    static public String toHex(int i){
+        String hex = Integer.toHexString(i);
+        return swapEndian(hex);
+    }
+
     /**
      *
      * @param i
@@ -78,6 +89,9 @@ public class ZusiProtocolNodeHelperHex {
     static public String swapEndian(String hex){
         if(hex.isEmpty()){
             return hex;
+        }
+        if(hex.length() <= 1){
+            return "0" + hex;
         }
 
         String swapped = "";

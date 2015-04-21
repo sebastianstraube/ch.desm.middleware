@@ -11,9 +11,9 @@ import java.text.NumberFormat;
 /**
  * Created by Sebastian on 09.04.2015.
  */
-public class ZusiParameterConverter {
+public class ZusiMessageParameterHelper {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiEndpointMessage.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiMessageEndpoint.class);
 
     public static final String ZUSINUMBERFORMAT_SINGLE = "ZUSI_NUMBERFORMAT_SINGLE";
     public static final String ZUSINUMBERFORMAT_STRING = "ZUSI_NUMBERFORMAT_STRING";
@@ -21,7 +21,7 @@ public class ZusiParameterConverter {
     private NumberFormat numberFormat;
     private ZusiService service;
 
-    public ZusiParameterConverter(ZusiService service){
+    public ZusiMessageParameterHelper(ZusiService service){
         this.service = service;
         numberFormat = NumberFormat.getInstance();
         numberFormat.setGroupingUsed(false);
@@ -35,7 +35,7 @@ public class ZusiParameterConverter {
             case ZUSINUMBERFORMAT_SINGLE: {
                 float val = ZusiProtocolNodeHelperHex.getFloat(parameter);
                 val = getVal(globalId, val);
-                return numberFormat.format(val);
+                return String.valueOf(val);
             }
             case ZUSINUMBERFORMAT_STRING: {
                 String val = ZusiProtocolNodeHelperHex.getCharStream(parameter);
@@ -51,6 +51,7 @@ public class ZusiParameterConverter {
         switch(type){
             case(ZusiProtocolConstants.MAP_PARAMETER_VALUE_GESCHWINDIGKEIT):{
                 val = val * 3.6f;
+                Float.valueOf(numberFormat.format(val));
                 break;
             }
         }

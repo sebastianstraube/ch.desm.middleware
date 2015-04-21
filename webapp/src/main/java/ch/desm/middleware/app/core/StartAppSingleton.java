@@ -3,6 +3,7 @@ package ch.desm.middleware.app.core;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
+import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
 import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlService;
 import ch.desm.middleware.app.core.component.management.ManagementService;
@@ -33,8 +34,9 @@ public class StartAppSingleton extends DaemonThreadBase {
 	public void run(){
         JettyServer server = startJettyServer("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/webapp");
         startManagement(server, "ws://heisenberg:80/gui/management");
-		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM3);
-        //startOmlPetrinet();
+		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM7);
+        //startCabineRe420(EndpointRs232.EnumSerialPorts.COM4, EndpointRs232.EnumSerialPorts.COM8);
+        startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
         startZusi("7.94.80.35", 1436);
     }
@@ -68,18 +70,28 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 
     public void startZusi(String ip, int port){
+
         ZusiService serviceFahrpult = new ZusiService(Broker.getInstance(), ip, port);
         serviceFahrpult.getEndpointFahrpult().init();
         serviceFahrpult.getEndpointFahrpult().start();
-        serviceFahrpult.getEndpointFahrpult().sendMessageRegisterClientFahrpult();
-        serviceFahrpult.getEndpointFahrpult().sendMessageNeededDataFahrpult();
+        serviceFahrpult.getEndpointFahrpult().sendCommandRegisterClientFahrpult();
+        serviceFahrpult.getEndpointFahrpult().sendCommandNeededDataFahrpult();
 
-        /*
+
         ZusiService serviceAusbildung = new ZusiService(Broker.getInstance(), ip, port);
         serviceAusbildung.getEndpointAusbildung().init();
         serviceAusbildung.getEndpointAusbildung().start();
-        serviceAusbildung.getEndpointAusbildung().sendMessageRegisterClientAusbildung();
-        serviceAusbildung.getEndpointAusbildung().sendMessageNeededDataAusbildung();
+        serviceAusbildung.getEndpointAusbildung().sendCommandRegisterClientAusbildung();
+        serviceAusbildung.getEndpointAusbildung().sendCommandNeededDataAusbildung();
+
+        /*
+        try {
+            doHangout(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        serviceAusbildung.getEndpointAusbildung().sendCommandSignalAspect();
         */
     }
 
@@ -89,6 +101,12 @@ public class StartAppSingleton extends DaemonThreadBase {
 		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(portRs232);
 		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232, endpointDll);
 	}
+
+    public void startCabineRe420(EndpointRs232.EnumSerialPorts comFabisch, EndpointRs232.EnumSerialPorts comUbw){
+        Re420EndpointFabisch endpointFabisch = new Re420EndpointFabisch(comFabisch);
+        Re420EndpointUbw32 endpointUbw32 = new Re420EndpointUbw32(comUbw);
+        //Re420BrokerClient re420 = new Re420BrokerClient(Broker.getInstance(), endpointUbw32, endpointFabisch);
+    }
 
 	/**
 	 * The "PM" Command : Set hardware PWM output values command Sets a PWM

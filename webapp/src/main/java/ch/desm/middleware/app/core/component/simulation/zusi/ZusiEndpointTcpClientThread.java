@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
 import ch.desm.middleware.app.core.component.common.ComponentThreadMessageProcessorBase;
-import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiProtocolStream;
+import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiMessageProtocolStream;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -16,14 +16,14 @@ public class ZusiEndpointTcpClientThread extends ComponentThreadMessageProcessor
     private ZusiService service;
     private Object processMessagesLock;
     private Object addZusiStreamLock;
-    private ZusiProtocolStream stream;
+    private ZusiMessageProtocolStream stream;
     private String topic;
 
     public ZusiEndpointTcpClientThread(ZusiService service, String topic){
         this.service = service;
         this.processMessagesLock = new Object();
         this.addZusiStreamLock = new Object();
-        this.stream = new ZusiProtocolStream();
+        this.stream = new ZusiMessageProtocolStream();
         this.topic = topic;
     }
 

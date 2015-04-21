@@ -14,14 +14,6 @@ public class ZusiMapOml extends ComponentMapBase {
         return map;
     }
 
-    public String mapBrokerToEndpointMessage(String globalId) throws Exception {
-        String message = this.getKey(globalId);
-        if(message.isEmpty()) {
-            throw new Exception("unable to map broker message with globalId\"" + globalId + "\"");
-        }
-        return message;
-    }
-
     @Override
     protected void init(){
         //TODO add map

@@ -3,12 +3,11 @@ package ch.desm.middleware.app.core.component.simulation.zusi;
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelperHex;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeRoot;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class ZusiEndpointTcpClient extends EndpointTcpClient {
 
@@ -65,58 +64,15 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
     }
 
     /**
-     * TODO move to own client
+     *
      */
-    public void sendMessageRegisterClientAusbildung(){
-
+    public void sendCommandRegisterClientAusbildung(){
         try {
-
-            ZusiProtocolNodeRoot root = new ZusiProtocolNodeRoot();
-            ZusiProtocolNode start = new ZusiProtocolNode("0100", "");
-            ZusiProtocolNode hello = new ZusiProtocolNode("0100", "");
-            ZusiProtocolNode protocolVersion = new ZusiProtocolNode("0100", "0200");
-            ZusiProtocolNode clientType = new ZusiProtocolNode("0200", "0300");
-
-            String dataClientAusbildung = ZusiProtocolNodeHelperHex.toHex(ZusiProtocolConstants.CLIENT_TYPE + "(Ausbildung)");
-            String dataClientVersion = ZusiProtocolNodeHelperHex.toHex(ZusiProtocolConstants.CLIENT_VERSION);
-
-            ZusiProtocolNode text = new ZusiProtocolNode("0300", dataClientAusbildung);
-            ZusiProtocolNode version = new ZusiProtocolNode("0400", dataClientVersion);
-
-            root.addNode(start);
-            start.addNode(hello);
-            hello.addNode(protocolVersion);
-            hello.addNode(clientType);
-            hello.addNode(text);
-            hello.addNode(version);
-
-            String stream = service.getEncoder().encode(root);
-            this.send(stream);
-
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-    }
-
-    /**
-     * TODO move to own client
-     */
-    public void sendMessageNeededDataAusbildung(){
-        try {
-            ZusiProtocolNodeRoot root = new ZusiProtocolNodeRoot();
-            ZusiProtocolNode client_ausbilder = new ZusiProtocolNode("0300", "");
-            ZusiProtocolNode needed_data = new ZusiProtocolNode("0300", "");
-
-            /*
-            12.3.4.6. Befehl 00 0D – TRAINPOS (Zusi  Client) → Der TRAINPOS-Befehl überträgt die aktuelle Zugpositionen von Zusi an den Client.
-             */
-            ZusiProtocolNode trainpos = new ZusiProtocolNode("0100", "1400");
-
-            root.addNode(client_ausbilder);
-            client_ausbilder.addNode(needed_data);
-            needed_data.addNode(trainpos);
-
-            String stream = service.getEncoder().encode(root);
+            ZusiProtocolNode registerClient = service.getZusiProtocolCommand().getRegisterClient(
+                   ZusiProtocolConstants.CLIENT_TYPE + "(Ausbildung)"
+                    , ZusiProtocolConstants.CLIENT_VERSION,
+                    ZusiProtocolConstants.CLIENT_TYPE_AUSBILDUNG);
+            String stream = service.getCodec().encode(registerClient);
             this.send(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
@@ -124,30 +80,15 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
     }
 
     /**
-     * TODO move to own client
+     *
      */
-    public void sendMessageRegisterClientFahrpult(){
-
+    public void sendCommandRegisterClientFahrpult(){
         try {
-            ZusiProtocolNodeRoot root = new ZusiProtocolNodeRoot();
-            ZusiProtocolNode start = new ZusiProtocolNode("0100", "");
-            ZusiProtocolNode hello = new ZusiProtocolNode("0100", "");
-            ZusiProtocolNode protocolVersion = new ZusiProtocolNode("0100", "0200");
-            ZusiProtocolNode clientType = new ZusiProtocolNode("0200", "0200");
-
-            String dataType = ZusiProtocolNodeHelperHex.toHex(ZusiProtocolConstants.CLIENT_TYPE + "(Fahrpult)");
-            String dataClient = ZusiProtocolNodeHelperHex.toHex(ZusiProtocolConstants.CLIENT_VERSION);
-            ZusiProtocolNode text = new ZusiProtocolNode("0300", dataType);
-            ZusiProtocolNode version = new ZusiProtocolNode("0400", dataClient);
-
-            root.addNode(start);
-            start.addNode(hello);
-            hello.addNode(protocolVersion);
-            hello.addNode(clientType);
-            hello.addNode(text);
-            hello.addNode(version);
-
-            String stream = service.getEncoder().encode(root);
+            ZusiProtocolNode registerClient = service.getZusiProtocolCommand().getRegisterClient(
+                    ZusiProtocolConstants.CLIENT_TYPE + "(Fahrpult)"
+                    , ZusiProtocolConstants.CLIENT_VERSION,
+                    ZusiProtocolConstants.CLIENT_TYPE_FAHRPULT);
+            String stream = service.getCodec().encode(registerClient);
             this.send(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
@@ -155,37 +96,69 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
     }
 
     /**
-     * TODO move to own client
+     *
      */
-    public void sendMessageNeededDataFahrpult(){
-
+    public void sendCommandNeededDataAusbildung(){
         try {
-            ZusiProtocolNodeRoot root = new ZusiProtocolNodeRoot();
-            ZusiProtocolNode client_fahrpult = new ZusiProtocolNode("0200", "");
-            ZusiProtocolNode needed_data = new ZusiProtocolNode("0300", "");
-            ZusiProtocolNode fuehrerstandsAnzeigen = new ZusiProtocolNode("0A00", "");
-            ZusiProtocolNode geschwindigkeit = new ZusiProtocolNode("0100", "0100");
-            ZusiProtocolNode stromabnehmer = new ZusiProtocolNode("0100", "5500");
-            ZusiProtocolNode gesamtWeg= new ZusiProtocolNode("0100", "1900");
-            ZusiProtocolNode hauptschalter= new ZusiProtocolNode("0100", "1300");
-
-
-            root.addNode(client_fahrpult);
-            client_fahrpult.addNode(needed_data);
-            needed_data.addNode(fuehrerstandsAnzeigen);
-            fuehrerstandsAnzeigen.addNode(geschwindigkeit);
-            fuehrerstandsAnzeigen.addNode(stromabnehmer);
-            fuehrerstandsAnzeigen.addNode(gesamtWeg);
-            fuehrerstandsAnzeigen.addNode(hauptschalter);
-
-            String stream = service.getEncoder().encode(root);
+            String stream = service.getCodec().encode(service.getZusiProtocolCommand().getAusbildungNeededData());
             this.send(stream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+    }
 
+    /**
+     *
+     */
+    public void sendCommandNeededDataFahrpult(){
+        try {
+            String stream = service.getCodec().encode(service.getZusiProtocolCommand().getFahrpultNeededData());
+            this.send(stream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+    }
+
+    /**
+     * TODO bugfixing - node hierharchie
+     */
+    public void sendCommandSignalDirect(){
+        try {
+            //String streckenModul, float referenzNrSignal, double signalBegriff, int zulGeschwSignal, float ereignisWert
+            ZusiProtocolNode signalCommand = service.getZusiProtocolCommand().getSignalDirect(
+                    //"\\Daten\\Routes\\Schweiz\\32T_0004_0052\\000406_005201_Obermatt\\130918-EMM-OM-LN.st3",
+                    "\\Routes\\Schweiz\\32T_0004_0052\\000406_005201_Obermatt\\130918-EMM-OM-LN.st3",
+                    73,
+                    9703,
+                    0,
+                    0);
+            String stream = service.getCodec().encode(signalCommand);
+
+            this.send(stream);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
     }
 
 
+    /**
+     *
+     */
+    public void sendCommandSignalAspect(){
+        try {
+            //String streckenModul, int referenzNrSignal, int signalModus, String signalMatrixSpalte, String signalMatrixZeile
+            ZusiProtocolNode signalCommand = service.getZusiProtocolCommand().getSignalAspect(
+                    //"\\Daten\\Routes\\Schweiz\\32T_0004_0052\\000406_005201_Obermatt\\130918-EMM-OM-LN.st3",
+                    "Routes\\Schweiz\\32T_0004_0052\\000406_005201_Obermatt\\130918-EMM-OM-LN.st3",
+                    73, //int 73
+                    0,
+                    2,
+                    0);
+            String stream = service.getCodec().encode(signalCommand);
 
+            this.send(stream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+    }
 }

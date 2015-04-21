@@ -9,9 +9,9 @@ import java.util.*;
 /**
  * Created by Sebastian on 09.03.2015.
  */
-public class ZusiEndpointMessage {
+public class ZusiMessageEndpoint {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiEndpointMessage.class);
+    private static Logger LOGGER = Logger.getLogger(ZusiMessageEndpoint.class);
 
     /**
      *
@@ -32,7 +32,7 @@ public class ZusiEndpointMessage {
      *
      * @param stream e.g. 0003-0113-0001::0001:07,0002:00,0003:03,0004:2,0005:0
      */
-    public ZusiEndpointMessage(String stream){
+    public ZusiMessageEndpoint(String stream){
         setStream(stream);
     }
 

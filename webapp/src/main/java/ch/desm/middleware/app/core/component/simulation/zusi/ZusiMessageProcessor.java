@@ -4,11 +4,9 @@ import ch.desm.middleware.app.core.common.Pair;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.common.ComponentMessageProcessorBase;;
-import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiEndpointMessage;
+import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiMessageEndpoint;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelper;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeRoot;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -49,6 +47,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             }
             case(MessageBase.MESSAGE_TOPIC_CABINE_RE420_FABISCH):{
                 //TODO implementation
+                break;
             }
             case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU):{
                 //TODO implementation
@@ -56,9 +55,10 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             }
             case(MessageBase.MESSAGE_TOPIC_MANAGEMENT):{
                 processBrokerMessageManagament(service, message);
+                break;
             }
             case(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU):{
-                //TODO implementation
+                processBrokerMessagePetrinet(service, message);
                 break;
             }
             case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL):{
@@ -95,10 +95,10 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      */
     private void processBrokerMessageZusiFahrpult(ZusiService service, MessageMiddleware message){
         if(message.getParameter().equalsIgnoreCase("on")){
-            ZusiProtocolNodeRoot root = service.getZusiProtocolNodeHelper().getRoot(message.getGlobalId());
+            ZusiProtocolNode root = service.getZusiProtocolNodeHelper().getRoot(message.getGlobalId());
 
             try {
-                String zusiStream = service.getZusiProtocolNodeHelper().getNodeStream(root);
+                String zusiStream = service.getCodec().encode(root);
                 delegateToEndpoint(service.getEndpointFahrpult(), zusiStream);
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
@@ -113,10 +113,10 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      */
     private void processBrokerMessageZusiAusbildung(ZusiService service, MessageMiddleware message){
         if(message.getParameter().equalsIgnoreCase("on")){
-            ZusiProtocolNodeRoot root = service.getZusiProtocolNodeHelper().getRoot(message.getGlobalId());
+            ZusiProtocolNode root = service.getZusiProtocolNodeHelper().getRoot(message.getGlobalId());
 
             try {
-                String zusiStream = service.getZusiProtocolNodeHelper().getNodeStream(root);
+                String zusiStream = service.getCodec().encode(root);
                 delegateToEndpoint(service.getEndpointAusbildung(), zusiStream);
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
@@ -130,7 +130,32 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param message
      */
     private void processBrokerMessageManagament(ZusiService service, MessageMiddleware message){
-        //TODO implementation
+        if(service.getMap(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG).isKeyAvailable(message.getGlobalId())){
+            processBrokerMessageZusiAusbildung(service, message);
+        }else if(service.getMap(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT).isKeyAvailable(message.getGlobalId())){
+            processBrokerMessageZusiFahrpult(service, message);
+        }
+    }
+
+    /**
+     *
+     * @param service
+     * @param message
+     */
+    protected void processBrokerMessagePetrinet(ZusiService service, MessageMiddleware message){
+        String key = service.getZusiMapPetrinet().getKey(message.getGlobalId());
+        if(!key.isEmpty()){
+            String mwmStream = service.getComponentMapMiddleware().getValue(key);
+            MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
+            mwm.setParameter(message.getParameter());
+
+            if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
+                processBrokerMessageZusiAusbildung(service, mwm);
+            }
+            else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
+                processBrokerMessageZusiFahrpult(service, mwm);
+            }
+        }else LOGGER.log(Level.WARN, "petrinet mapping non-existent with message: " + message);
     }
 
     /**
@@ -190,11 +215,13 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param topic
      */
     public void processEndpointMessage(ZusiService service, String message, String topic){
+        LinkedList<String> globalIds;
+        ZusiMessageEndpoint zusiMessage;
         try {
             LOGGER.log(Level.INFO, "process endpoint message: " + message + ", topic: " + topic);
-            LinkedList<String> globalIds = service.getZusiProtocolNodeHelper().getGlobalId(message);
+            globalIds = service.getZusiProtocolNodeHelper().getGlobalId(message);
             for(String globalId : globalIds){
-                ZusiEndpointMessage zusiMessage = new ZusiEndpointMessage(globalId);
+                zusiMessage = new ZusiMessageEndpoint(globalId);
                 processEndpointParameterMessage(service, zusiMessage, topic);
             }
         } catch (Exception e) {
@@ -208,12 +235,12 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param zusiMessage
      * @param topic
      */
-    private void processEndpointParameterMessage(ZusiService service, ZusiEndpointMessage zusiMessage, String topic){
+    private void processEndpointParameterMessage(ZusiService service, ZusiMessageEndpoint zusiMessage, String topic){
 
         //send message for every parameter
         for(Pair<String, String> p: zusiMessage.getParameterList()){
             String globalId = zusiMessage.getGroupId()+ZusiProtocolConstants.DELIMITER_GROUP+p.getLeft();
-            String middlewareMessage = service.getMap(topic).getStartWithValue(globalId);
+            String middlewareMessage = service.getMap(topic).getStartWithKey(globalId);
             String parameterValue = service.getZusiParameterConverter().getNumber(globalId, p.getRight());
             parameterValue = parameterValue.isEmpty() ? p.getRight() : parameterValue;
 
