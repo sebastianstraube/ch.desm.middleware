@@ -1,9 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
 
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapUbw32Analog;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapUbw32Digital;
 import jssc.SerialPortEvent;
-import jssc.SerialPortException;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;

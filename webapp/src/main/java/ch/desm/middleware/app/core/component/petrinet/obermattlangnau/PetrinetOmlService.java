@@ -6,6 +6,7 @@ import ch.desm.middleware.app.core.component.common.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageDecoder;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageEncoder;
 import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.PetrinetMapOml;
+import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.map.PetrinetMapZusi;
 
 /**
  * Created by Sebastian on 11.11.2014.
@@ -65,4 +66,9 @@ public class PetrinetOmlService {
     public PetrinetMapOml getMap(){
         return this.map;
     }
+
+    public PetrinetMapZusi getMapZusi(){
+        return new PetrinetMapZusi();
+    }
+
 }

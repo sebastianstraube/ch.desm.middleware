@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.simulation.locsim.elements;
+package ch.desm.middleware.app.core.component.simulation.locsim.logic;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 
-public class LocsimElementFahrschalter extends ComponentMapBase {
+public class LocsimLogicFahrschalter extends ComponentMapBase {
 
 	@Override
 	public Map<String, String> getMap() {

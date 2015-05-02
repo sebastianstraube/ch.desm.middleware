@@ -5,7 +5,7 @@ import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.OmlService;
+import ch.desm.middleware.app.core.component.interlocking.obermatt.OmService;
 import ch.desm.middleware.app.core.component.management.ManagementService;
 import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlService;
 import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
@@ -34,7 +34,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	public void run(){
         JettyServer server = startJettyServer("C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/webapp");
         startManagement(server, "ws://heisenberg:80/gui/management");
-		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM7);
+		//startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM3);
         //startCabineRe420(EndpointRs232.EnumSerialPorts.COM4, EndpointRs232.EnumSerialPorts.COM8);
         startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
@@ -66,7 +66,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 
 	public void startOmlStellwerk(EndpointRs232.EnumSerialPorts port){
-        OmlService oml = new OmlService(Broker.getInstance(), port);
+        OmService oml = new OmService(Broker.getInstance(), port);
 	}
 
     public void startZusi(String ip, int port){

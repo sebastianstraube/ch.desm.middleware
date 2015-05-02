@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
+package ch.desm.middleware.app.core.component.interlocking.obermatt;
 
 import ch.desm.middleware.app.core.component.common.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
@@ -7,17 +7,17 @@ import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 
-public class OmlBrokerClient extends ComponentBrokerClientBase {
+public class OmBrokerClient extends ComponentBrokerClientBase {
 
-	private static Logger LOGGER = Logger.getLogger(OmlBrokerClient.class);
+	private static Logger LOGGER = Logger.getLogger(OmBrokerClient.class);
 
-    private OmlGenericClientThreadMessage thread;
-    private OmlService service;
+    private OmGenericClientThreadMessage thread;
+    private OmService service;
 
-	public OmlBrokerClient(Broker broker, OmlService service) {
+	public OmBrokerClient(Broker broker, OmService service) {
 		super(broker);
         this.service = service;
-        this.thread = new OmlGenericClientThreadMessage(service);
+        this.thread = new OmGenericClientThreadMessage(service);
         this.thread.start();
 	}
 

@@ -2,6 +2,7 @@ package ch.desm.middleware.app.core;
 
 import ch.desm.middleware.app.core.common.Pair;
 import ch.desm.middleware.app.core.communication.broker.Broker;
+import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiServiceTest;
 import org.apache.log4j.Level;
@@ -181,8 +182,22 @@ public class StartAppMainTest {
         //Assert.assertEquals(true, b);
     }
 
+    /**
+     *
+     */
     @Test
     public void testBrokerClient(){
         service.getBrokerClient().emulateBrokerMessage("OML_LN_$C26_FB1;OS;;;;;on;petrinet_obermatt;#");
     }
+
+    /**
+     *
+     */
+    @Test
+    public void testProcessEndpointMessage(){
+        String message = "000000000200000000000a00060000000100000000000600000013000000803f060000001900c664e44306000000550000000000ffffffffffffffff";
+        String topic = MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT;
+        service.getZusiMessageProcessorTest().testProcessEndpointMessage(service, message, topic);
+    }
+
 }

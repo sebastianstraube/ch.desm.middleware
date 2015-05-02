@@ -1,14 +1,14 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps;
+package ch.desm.middleware.app.core.component.interlocking.obermatt.maps;
 
 import java.util.Map;
 
 import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 
-public class OMLMapUbw32Analog extends ComponentMapBase {
+public class OmMapUbw32Analog extends ComponentMapBase {
 
     public static final String PINBITMASK_INPUT_ANALOG = "1";
 
-    public OMLMapUbw32Analog(){
+    public OmMapUbw32Analog(){
 		super();
 	}
 	

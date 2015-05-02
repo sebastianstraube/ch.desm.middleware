@@ -52,7 +52,7 @@ public class UtilityMessageProcessor {
             } else if (value.equals(MessageUbw32DigitalRegisterComplete.MESSAGE_PARAMETER_ON)) {
                 returnValue = "1";
             } else{
-                throw new IllegalStateException("wrong parameter value: " + value);
+                throw new IllegalStateException("unexpected (0,1) parameter value: " + value);
             }
         } catch(IllegalStateException e){
             LOGGER.log(Level.ERROR, e);

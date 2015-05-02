@@ -48,8 +48,8 @@ public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
     public void run() {
         while (!isInterrupted()) {
             simulatePetriNet();
-            applyPendingSensorEvents();
-            applyChangedPlaces();
+            delegatePendingSensorEvents();
+            delegateChangedPlaces();
             try {
                 doHangout();
             } catch (InterruptedException e) {
@@ -64,8 +64,7 @@ public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
         }
     }
 
-    private void applyPendingSensorEvents() {
-
+    private void delegatePendingSensorEvents() {
         synchronized (pendingSensorEventsLock) {
             List<Pair<String, Integer>> pendingSensorEventsCopy = new LinkedList<>();
             pendingSensorEventsCopy.addAll(pendingSensorEvents);
@@ -77,7 +76,7 @@ public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
         }
     }
 
-    private void applyChangedPlaces() {
+    private void delegateChangedPlaces() {
         for (Pair<String, Integer> changedPlace : petrinetAdapter.getChangedPlaces()) {
             delegateToBroker(changedPlace, false);
         }
@@ -96,7 +95,7 @@ public class PetrinetOmlEndpointExportThread extends DaemonThreadBase {
 
     public void delegateToEndpoint(Pair<String, Integer> sensorEvent,  boolean isAccessedFromDelayThread){
         synchronized (delegateLockEndpoint){
-             petrinetAdapter.setSensor(sensorEvent.getLeft(), sensorEvent.getRight());
+            petrinetAdapter.setSensor(sensorEvent.getLeft(), sensorEvent.getRight());
         }
     }
 }

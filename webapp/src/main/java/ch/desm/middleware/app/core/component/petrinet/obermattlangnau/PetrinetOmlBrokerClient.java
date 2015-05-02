@@ -34,6 +34,7 @@ public class PetrinetOmlBrokerClient extends ComponentBrokerClientBase {
     protected void intializeSignedTopic() {
         signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
         signForTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU);
+        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
         signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
     }
 }

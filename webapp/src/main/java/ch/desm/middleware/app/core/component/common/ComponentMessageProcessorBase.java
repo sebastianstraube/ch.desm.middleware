@@ -32,6 +32,8 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
 
             LOGGER.log(Level.INFO, "processing endpoint message: " + message + ", component: " + component + ", topic: " +topic);
             component.publish(message, topic);
+        }else{
+            LOGGER.log(Level.TRACE, "skipped processing endpoint message.");
         }
     }
 

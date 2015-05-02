@@ -49,6 +49,11 @@ public class ComponentMapMiddleware extends ComponentMapBase {
         map.put("0200-0a00::1300", "0200-0a00::1300;;;status;hauptschalter;;?;zusi_fahrpult;#");
         map.put("0200-0a00::1900", "0200-0a00::1900;;;status;zurückgelegter gesamtweg;;?;zusi_fahrpult;#");
         map.put("0200-0a00::5500", "0200-0a00::5500;;;status;stromabnehmer;;?;zusi_fahrpult;#");
+        map.put("logic_iso_ce_belegt", "logic_iso_ce_belegt;;;isolierung;ce;belegt;?;zusi_ausbildung;#");
+        map.put("logic_iso_egf_belegt", "logic_iso_egf_belegt;;;isolierung;egf;belegt;?;zusi_ausbildung;#");
+        map.put("logic_iso_1_belegt", "logic_iso_1_belegt;;;isolierung;1;belegt;?;zusi_ausbildung;#");
+        map.put("logic_iso_ef_belegt", "logic_iso_ef_belegt;;;isolierung;ef;belegt;?;zusi_ausbildung;#");
+        map.put("logic_iso_cd_belegt", "logic_iso_cd_belegt;;;isolierung;cd;belegt;?;zusi_ausbildung;#");
 
 
     }

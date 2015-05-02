@@ -26,7 +26,7 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessorBase<P
 
     private void processBrokerMessage(PetrinetOmlService service, MessageMiddleware element){
 
-        if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
+        if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
             try {
                 String sensorName = service.getMap().mapBrokerToEndpointMessage(element.getGlobalId());
                 int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
@@ -34,7 +34,15 @@ public class PetrinetOmlMessageProcessor extends ComponentMessageProcessorBase<P
             } catch (Exception e) {
                 //LOGGER.log(Level.ERROR, e);
             }
-        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
+        } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
+            try {
+                String sensorName = service.getMapZusi().getKey(element.getGlobalId());
+                int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
+                delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
+            } catch (Exception e) {
+                //LOGGER.log(Level.ERROR, e);
+            }
+        } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
             try {
                 if (isInitProcessMessage(element)) {
                     if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) {

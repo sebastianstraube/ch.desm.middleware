@@ -1,15 +1,15 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
+package ch.desm.middleware.app.core.component.interlocking.obermatt;
 
 import java.util.HashMap;
 
 /**
  * Created by Sebastian on 22.11.2014.
  */
-public class OmlEndpointUbw32Cache {
+public class OmEndpointUbw32Cache {
 
     HashMap<String ,String>  state;
 
-    public OmlEndpointUbw32Cache(){
+    public OmEndpointUbw32Cache(){
         state = new HashMap<String, String>();
     }
 

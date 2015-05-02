@@ -1,13 +1,13 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps;
+package ch.desm.middleware.app.core.component.interlocking.obermatt.maps;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class OMLMapSignalStellung {
+public class OmMapSignalStellung {
 
 	private Map<String, String> mapSignalStellung;
 	
-	public OMLMapSignalStellung() {
+	public OmMapSignalStellung() {
 		this.mapSignalStellung = new HashMap<String, String>();
 		
 		this.initializeSignalStellung();

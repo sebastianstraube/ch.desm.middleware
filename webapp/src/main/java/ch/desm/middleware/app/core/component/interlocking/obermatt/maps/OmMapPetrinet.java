@@ -1,10 +1,10 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps;
+package ch.desm.middleware.app.core.component.interlocking.obermatt.maps;
 
 import java.util.Map;
 
 import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 
-public class OMLMapPetrinet extends ComponentMapBase{
+public class OmMapPetrinet extends ComponentMapBase{
 
 	@Override
 	public Map<String, String> getMap() {

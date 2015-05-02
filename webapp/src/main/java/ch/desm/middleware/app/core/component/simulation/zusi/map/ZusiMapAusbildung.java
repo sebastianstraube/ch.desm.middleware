@@ -20,6 +20,14 @@ public class ZusiMapAusbildung extends ComponentMapBase {
         map.put("0100-0200::0200", "0100-0200::0200;;;command;ack_hello;zusi_verbindungsinfo;?;zusi_ausbildung;#");
         map.put("0100-0200::0300", "0100-0200::0300;;;command;ack_hello;client_akzeptiert;?;zusi_ausbildung;#");
         map.put("0300-0400::0100", "0300-0400::0100;;;command;ack_needed_data;client_data_ack;?;zusi_ausbildung;#");
+
+        map.put("logic_iso_ce_belegt", "logic_iso_ce_belegt;;;isolierung;ce;belegt;?;zusi_ausbildung;#");
+        map.put("logic_iso_egf_belegt", "logic_iso_egf_belegt;;;isolierung;egf;belegt;?;zusi_ausbildung;#");
+        map.put("logic_iso_1_belegt", "logic_iso_1_belegt;;;isolierung;1;belegt;?;zusi_ausbildung;#");
+        map.put("logic_iso_ef_belegt", "logic_iso_ef_belegt;;;isolierung;ef;belegt;?;zusi_ausbildung;#");
+        map.put("logic_iso_cd_belegt", "logic_iso_cd_belegt;;;isolierung;cd;belegt;?;zusi_ausbildung;#");
+
+
     }
 
 }

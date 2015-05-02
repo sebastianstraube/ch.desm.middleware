@@ -34,6 +34,12 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
     }
 
     @Override
+    public void init(){
+        super.init();
+        addAllPlacesToChangedPlaces(getAllPlaces());
+    }
+
+    @Override
 	public boolean canFire(String s) {
 		LOGGER.log(Level.TRACE, "transition can fire: " + s);
         /*
@@ -49,9 +55,9 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
         LOGGER.log(Level.INFO, "transitions fired: " + s);
 
         //cleanDelayThread();
-        refreshChangedPlacesList(getPlaces(), basePlaces);
+        refreshChangedPlacesList(getAllPlaces(), basePlaces);
         basePlaces.clear();
-        basePlaces.addAll(getPlaces());
+        basePlaces.addAll(getAllPlaces());
     }
 
     private boolean isDelayedTransition(String transition){
@@ -101,17 +107,12 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
         }
     }
 
-    @Override
-    public void init(){
-        super.init();
-        addAllPlacesToChangedPlaces(getPlaces());
-    }
-
     public void setSensor(String name, int value) {
         try {
             Class<?> petriNetClass = super.getClass();
             Field field = petriNetClass.getField(name);
             field.setInt(this, value);
+            addChangedPlace(new Pair<String, Integer>(name, value) );
 
             LOGGER.log(Level.INFO, "setting sensor: " + name + " to: " + value);
         } catch (NoSuchFieldException e) {
@@ -140,21 +141,27 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
     public void addChangedPlace(Pair<String, Integer> pair){
         synchronized (lockChangedPlacesList){
             changedPlacesList.add(pair);
+            LOGGER.log(Level.INFO, "changed place: " + pair.toString());
+        }
+    }
+
+    public boolean hasChangedPlace(Pair<String, Integer> pair){
+        synchronized (lockChangedPlacesList){
+            boolean contains = changedPlacesList.contains(pair);
+            if(contains) LOGGER.log(Level.TRACE, "changed place:" + pair.toString() + "already contained in list: " + lockChangedPlacesList.toString());
+            return contains;
         }
     }
 
     private void refreshChangedPlacesList(List<Pair<String, Integer>> changed, List<Pair<String, Integer>> base){
-        synchronized (lockChangedPlacesList){
-            for(Pair<String, Integer> actualElement: changed){
-                if(!base.contains(actualElement)){
-                    changedPlacesList.add(actualElement);
-                    LOGGER.log(Level.INFO, "changed place: " + actualElement.toString());
-                }
+        for(Pair<String, Integer> actualElement: changed){
+            if(!base.contains(actualElement)){
+                if(!hasChangedPlace(actualElement)) addChangedPlace(actualElement);
             }
         }
     }
 
-	private List<Pair<String, Integer>> getPlaces() {
+	private List<Pair<String, Integer>> getAllPlaces() {
         List<Pair<String, Integer>> newPlaces = new LinkedList<Pair<String, Integer>>();
 		Class<?> superClass = this.getClass().getSuperclass();
 		Field[] fields = superClass.getDeclaredFields();
@@ -167,11 +174,9 @@ public class PetrinetOmlEndpointExportAdapter extends PetrinetOmlEndpointExportB
                     String name = classField.getName();
                     newPlaces.add(new Pair<String, Integer>(name, value));
                 } catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+                    LOGGER.log(Level.ERROR, e);
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+                    LOGGER.log(Level.ERROR, e);
 				}
 			}
 		}

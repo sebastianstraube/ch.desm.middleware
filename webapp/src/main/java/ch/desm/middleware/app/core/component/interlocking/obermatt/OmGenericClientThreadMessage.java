@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
+package ch.desm.middleware.app.core.component.interlocking.obermatt;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.common.ComponentThreadMessageProcessorBase;
@@ -10,13 +10,13 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class OmlGenericClientThreadMessage extends ComponentThreadMessageProcessorBase {
+public class OmGenericClientThreadMessage extends ComponentThreadMessageProcessorBase {
 
-    private static Logger LOGGER = Logger.getLogger(OmlGenericClientThreadMessage.class);
-    private OmlService service;
+    private static Logger LOGGER = Logger.getLogger(OmGenericClientThreadMessage.class);
+    private OmService service;
     private Object processMessagesLock;
 
-    public OmlGenericClientThreadMessage(OmlService service){
+    public OmGenericClientThreadMessage(OmService service){
         this.service = service;
         this.processMessagesLock = new Object();
     }

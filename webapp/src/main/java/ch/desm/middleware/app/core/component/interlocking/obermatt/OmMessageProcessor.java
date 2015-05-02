@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
+package ch.desm.middleware.app.core.component.interlocking.obermatt;
 
 import java.util.LinkedList;
 import java.util.Map.Entry;
@@ -7,17 +7,17 @@ import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.core.component.common.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements.OMLElementFahrstrassenSchalter;
+import ch.desm.middleware.app.core.component.interlocking.obermatt.logic.OmLogicFahrstrassenSchalter;
 
-public class OmlMessageProcessor extends ComponentMessageProcessorBase<OmlService> {
+public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService> {
 
-	private static Logger LOGGER = Logger.getLogger(OmlMessageProcessor.class);
+	private static Logger LOGGER = Logger.getLogger(OmMessageProcessor.class);
 
-	private OMLElementFahrstrassenSchalter fahrStrassenSchalter;
-    private OmlService service;
+	private OmLogicFahrstrassenSchalter fahrStrassenSchalter;
+    private OmService service;
 
-    public OmlMessageProcessor(OmlService service) {
-		this.fahrStrassenSchalter = new OMLElementFahrstrassenSchalter();
+    public OmMessageProcessor(OmService service) {
+		this.fahrStrassenSchalter = new OmLogicFahrstrassenSchalter();
 
         this.service = service;
 	}
@@ -25,13 +25,13 @@ public class OmlMessageProcessor extends ComponentMessageProcessorBase<OmlServic
     /**
      * @param messages
      */
-    public void processBrokerMessage(OmlService service, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(OmService service, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(service, message);
         }
     }
 
-    private void processBrokerMessage(OmlService service, MessageMiddleware element){
+    private void processBrokerMessage(OmService service, MessageMiddleware element){
 
         //incoming message with OML topic
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU)){
@@ -78,7 +78,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessorBase<OmlServic
         }
     }
 
-    private void processInitEndpoint(OmlEndpointUbw32 endpoint, MessageMiddleware element){
+    private void processInitEndpoint(OmEndpointUbw32 endpoint, MessageMiddleware element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -116,7 +116,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessorBase<OmlServic
         return false;
     }
 
-    private String getUbwSingleRegisterValues(OmlEndpointUbw32 endpoint, MessageUbw32DigitalRegisterSingle message) {
+    private String getUbwSingleRegisterValues(OmEndpointUbw32 endpoint, MessageUbw32DigitalRegisterSingle message) {
 
         String messageInput = "";
 
@@ -161,7 +161,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessorBase<OmlServic
 
     }
 
-    private String getUbwAllRegisterValues(OmlEndpointUbw32 endpoint, MessageUbw32DigitalRegisterComplete message){
+    private String getUbwAllRegisterValues(OmEndpointUbw32 endpoint, MessageUbw32DigitalRegisterComplete message){
 
         String messageInput = "";
 
@@ -198,7 +198,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessorBase<OmlServic
         return messageInput;
     }
 
-    private String getUbwAnalogRegisterValues(OmlEndpointUbw32 endpoint, MessageUbw32Analog message){
+    private String getUbwAnalogRegisterValues(OmEndpointUbw32 endpoint, MessageUbw32Analog message){
 
         String messageInput = "";
 
@@ -250,7 +250,7 @@ public class OmlMessageProcessor extends ComponentMessageProcessorBase<OmlServic
 	 * @param message
 	 * @return
 	 */
-	public String convertToMiddlewareMessage(OmlEndpointUbw32 endpoint,
+	public String convertToMiddlewareMessage(OmEndpointUbw32 endpoint,
 			MessageUbw32Base message) {
 
 		String middlewareMessagesInput = "";

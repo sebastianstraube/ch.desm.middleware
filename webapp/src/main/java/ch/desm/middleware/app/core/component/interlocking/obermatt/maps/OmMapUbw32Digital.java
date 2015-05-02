@@ -1,13 +1,13 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps;
+package ch.desm.middleware.app.core.component.interlocking.obermatt.maps;
 
 import java.util.Map;
 import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 
-public class OMLMapUbw32Digital extends ComponentMapBase {
+public class OmMapUbw32Digital extends ComponentMapBase {
 
 	public static final String PINBITMASK_CONFIGURATION_DIGITAL = "192,0,8194,16372,0,1,2";
 
-    public OMLMapUbw32Digital() {
+    public OmMapUbw32Digital() {
 		super();
 	}
 

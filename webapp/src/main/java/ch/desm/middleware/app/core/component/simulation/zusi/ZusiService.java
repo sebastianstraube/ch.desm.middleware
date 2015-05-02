@@ -6,6 +6,7 @@ import ch.desm.middleware.app.core.communication.message.translator.MessageTrans
 import ch.desm.middleware.app.core.component.common.ComponentMapBase;
 import ch.desm.middleware.app.core.component.common.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.common.ComponentServiceBase;
+import ch.desm.middleware.app.core.component.simulation.zusi.logic.ZusiLogicIsolierung;
 import ch.desm.middleware.app.core.component.simulation.zusi.map.*;
 import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiMessageParameterHelper;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.*;
@@ -175,4 +176,19 @@ public class ZusiService extends ComponentServiceBase {
         return new ZusiMapPetrinet();
     }
 
+    /**
+     *
+     * @return
+     */
+    public ZusiLogicIsolierung getZusiLogicIsolierung(){
+        return new ZusiLogicIsolierung();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiEndpointLogic getZusiEndpointLogic(){
+        return new ZusiEndpointLogic();
+    }
 }

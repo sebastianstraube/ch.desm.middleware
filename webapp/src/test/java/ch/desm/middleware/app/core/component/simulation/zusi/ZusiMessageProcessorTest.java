@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
+import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -19,8 +20,8 @@ public class ZusiMessageProcessorTest extends ZusiMessageProcessor {
      * @param message
      * @param topic
      */
-    public boolean testProcessEndpointMessage(ZusiService service, String message, String topic){
-        processEndpointMessage(service, message, topic);
-        return true;
+    public void testProcessEndpointMessage(ZusiService service, String message, String topic){
+        //processEndpointMessage(service, message, topic);
+        processLogicParameter(service, "0200-0a00::1900", "655.8182");
     }
 }

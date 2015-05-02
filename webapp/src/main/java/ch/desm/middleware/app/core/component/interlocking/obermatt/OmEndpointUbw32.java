@@ -1,32 +1,31 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
+package ch.desm.middleware.app.core.component.interlocking.obermatt;
 
-import ch.desm.middleware.app.core.communication.endpoint.EndpointBase;
 import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapUbw32Analog;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapUbw32Digital;
+import ch.desm.middleware.app.core.component.interlocking.obermatt.maps.OmMapUbw32Analog;
+import ch.desm.middleware.app.core.component.interlocking.obermatt.maps.OmMapUbw32Digital;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public class OmlEndpointUbw32 extends EndpointUbw32 {
+public class OmEndpointUbw32 extends EndpointUbw32 {
 
-    private static Logger LOGGER = Logger.getLogger(OmlBrokerClient.class);
+    private static Logger LOGGER = Logger.getLogger(OmBrokerClient.class);
 
-	private OMLMapUbw32Digital mapDigital;
-	private OMLMapUbw32Analog mapAnalog;
-    private OmlService service;
+	private OmMapUbw32Digital mapDigital;
+	private OmMapUbw32Analog mapAnalog;
+    private OmService service;
 
-	public OmlEndpointUbw32(EnumSerialPorts enumSerialPort, OmlService service) {
+	public OmEndpointUbw32(EnumSerialPorts enumSerialPort, OmService service) {
 		super(enumSerialPort,
-				OMLMapUbw32Digital.PINBITMASK_CONFIGURATION_DIGITAL,
-				OMLMapUbw32Analog.PINBITMASK_INPUT_ANALOG);
+				OmMapUbw32Digital.PINBITMASK_CONFIGURATION_DIGITAL,
+				OmMapUbw32Analog.PINBITMASK_INPUT_ANALOG);
 
         this.registerEndpointListener();
         this.service = service;
-	    this.mapAnalog = new OMLMapUbw32Analog();
-	    this.mapDigital = new OMLMapUbw32Digital();
+	    this.mapAnalog = new OmMapUbw32Analog();
+	    this.mapDigital = new OmMapUbw32Digital();
     }
 
     @Override
@@ -58,11 +57,11 @@ public class OmlEndpointUbw32 extends EndpointUbw32 {
     }
 
 
-    public OMLMapUbw32Digital getMapDigital(){
+    public OmMapUbw32Digital getMapDigital(){
         return this.mapDigital;
     }
 
-    public OMLMapUbw32Analog getMapAnalog(){
+    public OmMapUbw32Analog getMapAnalog(){
         return this.mapAnalog;
     }
 

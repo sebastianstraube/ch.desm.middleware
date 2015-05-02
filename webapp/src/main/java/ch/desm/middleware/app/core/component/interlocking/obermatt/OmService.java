@@ -1,35 +1,35 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau;
+package ch.desm.middleware.app.core.component.interlocking.obermatt;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.common.ComponentMapMiddleware;
-import ch.desm.middleware.app.core.component.interlocking.obermattlangnau.maps.OMLMapPetrinet;
+import ch.desm.middleware.app.core.component.interlocking.obermatt.maps.OmMapPetrinet;
 
 /**
  * Created by Sebastian on 11.11.2014.
  */
-public class OmlService {
+public class OmService {
 
     private MessageTranslatorMiddleware translator;
-    private OmlMessageProcessor processor;
+    private OmMessageProcessor processor;
     private ComponentMapMiddleware componentMapMiddleware;
-    private OmlBrokerClient client;
-    private OmlEndpointUbw32 endpoint;
-    private OmlEndpointUbw32Cache cache;
-    private OMLMapPetrinet map;
+    private OmBrokerClient client;
+    private OmEndpointUbw32 endpoint;
+    private OmEndpointUbw32Cache cache;
+    private OmMapPetrinet map;
 
 
 
-    public OmlService(Broker broker, EndpointRs232.EnumSerialPorts port){
+    public OmService(Broker broker, EndpointRs232.EnumSerialPorts port){
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
-        this.processor = new OmlMessageProcessor(this);
-        this.cache = new OmlEndpointUbw32Cache();
-        this.map = new OMLMapPetrinet();
+        this.processor = new OmMessageProcessor(this);
+        this.cache = new OmEndpointUbw32Cache();
+        this.map = new OmMapPetrinet();
 
-        this.client = new OmlBrokerClient(broker, this);
-        this.endpoint = new OmlEndpointUbw32(port, this);
+        this.client = new OmBrokerClient(broker, this);
+        this.endpoint = new OmEndpointUbw32(port, this);
     }
 
 
@@ -37,7 +37,7 @@ public class OmlService {
         return componentMapMiddleware;
     }
 
-    public OmlMessageProcessor getProcessor(){
+    public OmMessageProcessor getProcessor(){
         return processor;
     }
 
@@ -45,19 +45,19 @@ public class OmlService {
         return translator;
     }
 
-    public OmlBrokerClient getBrokerClient(){
+    public OmBrokerClient getBrokerClient(){
         return client;
     }
 
-    public OmlEndpointUbw32 getEndpoint(){
+    public OmEndpointUbw32 getEndpoint(){
         return endpoint;
     }
 
-    public OmlEndpointUbw32Cache getCache(){
+    public OmEndpointUbw32Cache getCache(){
         return cache;
     }
 
-    public OMLMapPetrinet getMap(){
+    public OmMapPetrinet getMap(){
         return this.map;
     }
 }

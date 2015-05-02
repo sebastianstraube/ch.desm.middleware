@@ -1,17 +1,17 @@
-package ch.desm.middleware.app.core.component.interlocking.obermattlangnau.elements;
+package ch.desm.middleware.app.core.component.interlocking.obermatt.logic;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 //Register = AN, Pin = 0
-public class OMLElementFahrstrassenSchalter {
+public class OmLogicFahrstrassenSchalter {
 
-	private static Logger LOGGER = Logger.getLogger(OMLElementFahrstrassenSchalter.class);
+	private static Logger LOGGER = Logger.getLogger(OmLogicFahrstrassenSchalter.class);
 	
 	public String getglobalId(int value){
 		String globalId = "";
 
-        LOGGER.log(Level.TRACE, "OMLElementFahrstrassenSchalter processing value: " + value);
+        LOGGER.log(Level.TRACE, this.getClass().getName() + "processing value: " + value);
 
 		if(value >= 270 && value < 330){globalId = "8.91.07"; } else //FSS 90� F
 		if(value >= 330 && value < 390){globalId = "8.91.06";} else //FSS 80� F
@@ -26,7 +26,7 @@ public class OMLElementFahrstrassenSchalter {
 		if(value >= 745 && value < 770){globalId = "8.91.23";} else //FSS 90� EG
 		{
 			try {
-				throw new Exception("Fahrstrassenschalter mapping with value: " + value);
+				throw new Exception(this.getClass().getName() + "mapping with value: " + value);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				LOGGER.log(Level.ERROR, e);
