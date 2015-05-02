@@ -148,13 +148,34 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
         try {
             //String streckenModul, int referenzNrSignal, int signalModus, String signalMatrixSpalte, String signalMatrixZeile
             ZusiProtocolNode signalCommand = service.getZusiProtocolCommand().getSignalAspect(
-                    //"\\Daten\\Routes\\Schweiz\\32T_0004_0052\\000406_005201_Obermatt\\130918-EMM-OM-LN.st3",
                     "Routes\\Schweiz\\32T_0004_0052\\000406_005201_Obermatt\\130918-EMM-OM-LN.st3",
                     73, //int 73
                     0,
                     2,
                     0);
             String stream = service.getCodec().encode(signalCommand);
+
+            this.send(stream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+        }
+    }
+
+    /**
+     *
+     */
+    public void sendCommandSwitch(){
+        try {
+            //String streckenModul, int referenzNrSignal, int signalModus, String signalMatrixSpalte, String signalMatrixZeile
+            ZusiProtocolNode signalCommand = service.getZusiProtocolCommand().getSwitch(
+                    "Routes\\Schweiz\\32T_0004_0052\\000406_005201_Obermatt\\130918-EMM-OM-LN.st3",
+                    82,
+                    2);
+            String stream = service.getCodec().encode(signalCommand);
+
+
+
+            LOGGER.log(Level.INFO, "send switch id:" + service.getZusiProtocolNodeHelper().getGlobalId(signalCommand));
 
             this.send(stream);
         } catch (Exception e) {

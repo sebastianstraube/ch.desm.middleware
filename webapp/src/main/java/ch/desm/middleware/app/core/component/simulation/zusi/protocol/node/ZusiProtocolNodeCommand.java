@@ -55,18 +55,18 @@ public class ZusiProtocolNodeCommand {
      * 00 05 Word Zeile der Signalmatrix (-1: Grundstellung)
      *
      * @param streckenModul
-     * @param referenzNrSignal
+     * @param referenzNr
      * @param signalModus
      * @param signalMatrixSpalte
      * @param signalMatrixZeile
      * @return
      */
-    public ZusiProtocolNode getSignalAspect(String streckenModul, int referenzNrSignal, int signalModus, int signalMatrixZeile, int signalMatrixSpalte){
+    public ZusiProtocolNode getSignalAspect(String streckenModul, int referenzNr, int signalModus, int signalMatrixZeile, int signalMatrixSpalte){
         ZusiProtocolNode nodeRoot = new ZusiProtocolNode();
         ZusiProtocolNode nodeAusbilderAnwendung = new ZusiProtocolNode(nodeRoot, "0300", "");
         ZusiProtocolNode nodeBefehl = new ZusiProtocolNode(nodeAusbilderAnwendung, "0D01", "");
         ZusiProtocolNode nodeStreckenmodul = new ZusiProtocolNode(nodeBefehl, "0100", ZusiProtocolNodeHelperHex.toHex(streckenModul));
-        ZusiProtocolNode nodeReferenzSignal = new ZusiProtocolNode(nodeStreckenmodul, "0200", ZusiProtocolNodeHelperHex.toHex(referenzNrSignal));
+        ZusiProtocolNode nodeReferenzSignal = new ZusiProtocolNode(nodeStreckenmodul, "0200", ZusiProtocolNodeHelperHex.toHex(referenzNr));
         ZusiProtocolNode nodeSignalModus = new ZusiProtocolNode(nodeReferenzSignal, "0300", ZusiProtocolNodeHelperHex.toHex(signalModus));
         ZusiProtocolNode nodeSignalMatrixSpalte = new ZusiProtocolNode(nodeSignalModus, "0400", ZusiProtocolNodeHelperHex.toHex(signalMatrixSpalte));
         ZusiProtocolNode nodeSignalMatrixZeile = new ZusiProtocolNode(nodeSignalMatrixSpalte, "0500", ZusiProtocolNodeHelperHex.toHex(signalMatrixZeile));
@@ -78,6 +78,37 @@ public class ZusiProtocolNodeCommand {
         nodeBefehl.addNode(nodeSignalModus);
         nodeBefehl.addNode(nodeSignalMatrixSpalte);
         nodeBefehl.addNode(nodeSignalMatrixZeile);
+
+        return nodeRoot;
+    }
+
+
+    /**
+     * 12.3.4.17. Befehl 01 0C – SWITCH (Client  Zusi) → Der SWITCH-Befehl überträgt das Kommando zum Stellen einer Weiche vom Client an Zusi.
+     * 00 03 <Knoten> Ausbilder-Anwendung 03
+     * 01 0C <Knoten> Befehl SWITCH
+     * 00 01 String Streckenmodul der Weiche relativ zum Zusi-Verzeichnis
+     * 00 02 Cardinal Referenz-Nummer der Weiche im gewählten Streckenmodul
+     * 00 03 ShortInt Position der Weiche: 1: Vorrangstrang 2: Abzweig
+     *
+     * @param streckenModul
+     * @param referenzNr
+     * @param position
+     * @return
+     */
+    public ZusiProtocolNode getSwitch(String streckenModul, int referenzNr, int position){
+        ZusiProtocolNode nodeRoot = new ZusiProtocolNode();
+        ZusiProtocolNode nodeAusbilderAnwendung = new ZusiProtocolNode(nodeRoot, "0300", "");
+        ZusiProtocolNode nodeBefehl = new ZusiProtocolNode(nodeAusbilderAnwendung, "0C01", "");
+        ZusiProtocolNode nodeStreckenmodul = new ZusiProtocolNode(nodeBefehl, "0100", ZusiProtocolNodeHelperHex.toHex(streckenModul));
+        ZusiProtocolNode nodeReferenzNummer = new ZusiProtocolNode(nodeStreckenmodul, "0200", ZusiProtocolNodeHelperHex.toHex(referenzNr));
+        ZusiProtocolNode nodePosition = new ZusiProtocolNode(nodeReferenzNummer, "0300", ZusiProtocolNodeHelperHex.toHex(position));
+
+        nodeRoot.addNode(nodeAusbilderAnwendung);
+        nodeAusbilderAnwendung.addNode(nodeBefehl);
+        nodeBefehl.addNode(nodeStreckenmodul);
+        nodeBefehl.addNode(nodeReferenzNummer);
+        nodeBefehl.addNode(nodePosition);
 
         return nodeRoot;
     }
@@ -116,6 +147,13 @@ public class ZusiProtocolNodeCommand {
         12.3.4.6. Befehl 00 0D – TRAINPOS (Zusi  Client) → Der TRAINPOS-Befehl überträgt die aktuelle Zugpositionen von Zusi an den Client.
          */
         //ZusiProtocolNode trainpos = new ZusiProtocolNode("0100", "1400");
+
+        /*
+        12.3.4.8. Befehl 00 0F – SWITCHPOS (Zusi  Client) → Der SWITCHPOS-Befehl überträgt eine geänderte Weichenstellung von Zusi an den Client.
+         */
+        //ZusiProtocolNode switchpos = new ZusiProtocolNode("0100", "0F00");
+
+
         nodeRoot.addNode(nodeClientAusbilder);
         nodeClientAusbilder.addNode(nodeNeededData);
         //needed_data.addNode(trainpos);

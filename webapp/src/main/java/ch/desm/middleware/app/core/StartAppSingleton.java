@@ -49,16 +49,7 @@ public class StartAppSingleton extends DaemonThreadBase {
     }
 
 	public void startManagement(JettyServer server, String uri){
-
-        while(!server.isStarted()){
-            try {
-                doHangout(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        ManagementService management = new ManagementService(Broker.getInstance(), uri);
+        ManagementService management = isServerStarted(server) ? new ManagementService(Broker.getInstance(), uri) : null;
 	}
 
 	public void startOmlPetrinet(){
@@ -84,15 +75,20 @@ public class StartAppSingleton extends DaemonThreadBase {
         serviceAusbildung.getEndpointAusbildung().sendCommandRegisterClientAusbildung();
         serviceAusbildung.getEndpointAusbildung().sendCommandNeededDataAusbildung();
 
-        /*
+
         try {
             doHangout(2000);
+            serviceAusbildung.getEndpointAusbildung().sendCommandSignalAspect();
+            doHangout(2000);
+            serviceAusbildung.getEndpointAusbildung().sendCommandSwitch();
+
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        serviceAusbildung.getEndpointAusbildung().sendCommandSignalAspect();
-        */
+
+
     }
 
 
@@ -269,4 +265,16 @@ public class StartAppSingleton extends DaemonThreadBase {
              }
          }
      }
+
+    private boolean isServerStarted(JettyServer server){
+        while(!server.isStarted()){
+            try {
+                doHangout(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return true;
+    }
 }
