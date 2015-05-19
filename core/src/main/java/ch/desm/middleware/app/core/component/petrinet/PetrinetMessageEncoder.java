@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.petrinet;
 
-import ch.desm.middleware.app.core.common.Pair;
+import ch.desm.middleware.app.common.Pair;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;

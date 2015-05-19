@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import ch.desm.middleware.app.core.component.common.ComponentMapBase;
+import ch.desm.middleware.app.common.ComponentMapBase;
 
 public class LocsimLogicFahrschalter extends ComponentMapBase {
 

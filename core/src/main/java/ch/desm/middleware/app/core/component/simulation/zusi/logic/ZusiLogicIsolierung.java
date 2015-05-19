@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.logic;
 
-import ch.desm.middleware.app.core.common.utility.UtilityMessageProcessor;
+import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;

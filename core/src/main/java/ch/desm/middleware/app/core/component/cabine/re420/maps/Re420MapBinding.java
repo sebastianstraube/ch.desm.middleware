@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.core.component.common.ComponentMapBase;
+import ch.desm.middleware.app.common.ComponentMapBase;
 import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 
 public class Re420MapBinding extends ComponentMapBase  {

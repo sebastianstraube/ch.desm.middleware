@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.message;
 
-import ch.desm.middleware.app.core.common.Pair;
+import ch.desm.middleware.app.common.Pair;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import org.apache.log4j.Logger;
 

@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
-import ch.desm.middleware.app.core.common.Pair;
+import ch.desm.middleware.app.common.Pair;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;

@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.cabine.re420.maps;
 
 import java.util.Map;
 
-import ch.desm.middleware.app.core.component.common.ComponentMapBase;
+import ch.desm.middleware.app.common.ComponentMapBase;
 
 public class Ubw32MapUbw32Digital extends ComponentMapBase {
 

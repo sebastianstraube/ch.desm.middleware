@@ -3,8 +3,8 @@ package ch.desm.middleware.app.core.component.simulation.zusi;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.component.common.ComponentBrokerClientBase;
-import ch.desm.middleware.app.core.component.common.ComponentThreadMessageProcessor;
+import ch.desm.middleware.app.common.ComponentBrokerClientBase;
+import ch.desm.middleware.app.common.ComponentThreadMessageProcessor;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

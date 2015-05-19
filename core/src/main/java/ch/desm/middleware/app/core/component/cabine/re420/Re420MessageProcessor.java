@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
-import ch.desm.middleware.app.core.common.utility.UtilityMessageProcessor;
+import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.cabine.re420.elements.Re420ElementFahrschalter;

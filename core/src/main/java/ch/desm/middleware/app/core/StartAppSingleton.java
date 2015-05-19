@@ -6,12 +6,12 @@ import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
 import ch.desm.middleware.app.core.component.interlocking.obermatt.OmService;
-import ch.desm.middleware.app.core.component.management.ManagementService;
-import ch.desm.middleware.app.core.component.petrinet.obermattlangnau.PetrinetOmlService;
+import ch.desm.middleware.app.core.component.gui.management.ManagementService;
+import ch.desm.middleware.app.core.component.petrinet.obermatt.PetrinetOmService;
 import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
-import ch.desm.middleware.app.core.common.DaemonThreadBase;
+import ch.desm.middleware.app.common.DaemonThreadBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.server.JettyServer;
 import ch.desm.middleware.app.core.server.TyrusServer;
@@ -22,7 +22,14 @@ public class StartAppSingleton extends DaemonThreadBase {
 
 	private static Logger LOGGER = Logger.getLogger(StartAppSingleton.class);
 	private static final StartAppSingleton singleton = new StartAppSingleton();
-		
+
+    private String host;
+    private int port;
+    private String tyrusWebsocketContextPath;
+    private String serverEndpointContextPath;
+    private String serverJettyPath;
+    private boolean isConfigured = false;
+
 	private StartAppSingleton(){
 		if (singleton != null)
 	        throw new IllegalStateException("Already instantiated, only use of singleton allowed!");
@@ -32,29 +39,39 @@ public class StartAppSingleton extends DaemonThreadBase {
 		return StartAppSingleton.singleton;
 	}
 
+    public void setConfiguration(String host, String port, String websocketContextPath, String serverEndpointContextPath, String jettyPath){
+        this.host = host;
+        this.port = Integer.valueOf(port);
+        this.tyrusWebsocketContextPath = websocketContextPath;
+        this.serverEndpointContextPath = serverEndpointContextPath;
+        this.serverJettyPath = jettyPath;
+        isConfigured = true;
+
+        LOGGER.log(Level.INFO, "set configuration:"+
+                "\nhost: "+this.host +
+                "\nport: "+this.port +
+                "\ntyrusWebsocketContextPath: " + this.tyrusWebsocketContextPath +
+                "\nserverEndpointContextPath: " + this.serverEndpointContextPath +
+                "\nserverJettyPath: " + this.serverJettyPath +
+                "\nisConfigured: " + isConfigured);
+    }
+
+    public boolean isConfigured(){
+        return isConfigured;
+    }
+
 	public void run(){
 
         /************************** Start Server ************************************/
-        String jettyPathWin = "C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/core";
-        String jettyPathPi = "/opt/desm/middleware/code/ch.desm.middleware.app/webapp";
-        String hostWin = "heisenberg";
-        String hostPi = "raspberrypi";
-        JettyServer server = startJettyServer(jettyPathWin);
-        TyrusServer tyrusServer = startTyrusServer(hostWin, 8025, "/websocket");
-
-        try {
-            doHangout(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        startManagement(server, "ws://"+hostWin+":8025/websocket/gui");
+        TyrusServer tyrusServer = startServerTyrus(host, port, tyrusWebsocketContextPath);
+        JettyServer jettyServer = startJettyServer(serverJettyPath);
+        startManagement(jettyServer, "ws://"+host+":"+ port + tyrusWebsocketContextPath +serverEndpointContextPath);
         /***************************************************************************/
 
         //startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM10);
         //startCabineRe420(EndpointRs232.EnumSerialPorts.COM4, EndpointRs232.EnumSerialPorts.COM8);
-        startOmlPetrinet();
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
+        startOmlPetrinet();
         //startZusi("7.94.80.35", 1436);
     }
 
@@ -65,7 +82,7 @@ public class StartAppSingleton extends DaemonThreadBase {
         return server;
     }
 
-    private TyrusServer startTyrusServer(String ip, int port, String path){
+    private TyrusServer startServerTyrus(String ip, int port, String path){
         TyrusServer server = new TyrusServer(ip, port, path);
         server.start();
 
@@ -79,7 +96,7 @@ public class StartAppSingleton extends DaemonThreadBase {
 	}
 
 	public void startOmlPetrinet(){
-        PetrinetOmlService petrinet = new PetrinetOmlService(Broker.getInstance());
+        PetrinetOmService petrinet = new PetrinetOmService(Broker.getInstance());
 	}
 
 	public void startOmlStellwerk(EndpointRs232.EnumSerialPorts port){
@@ -93,7 +110,6 @@ public class StartAppSingleton extends DaemonThreadBase {
         serviceFahrpult.getEndpointFahrpult().start();
         serviceFahrpult.getEndpointFahrpult().sendCommandRegisterClientFahrpult();
         serviceFahrpult.getEndpointFahrpult().sendCommandNeededDataFahrpult();
-
 
         ZusiService serviceAusbildung = new ZusiService(Broker.getInstance(), ip, port);
         serviceAusbildung.getEndpointAusbildung().init();

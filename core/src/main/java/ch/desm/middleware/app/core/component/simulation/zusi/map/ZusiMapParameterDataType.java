@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.map;
 
-import ch.desm.middleware.app.core.component.common.ComponentMapBase;
+import ch.desm.middleware.app.common.ComponentMapBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiMessageParameterHelper;
 
 import java.util.Map;

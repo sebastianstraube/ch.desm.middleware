@@ -1,7 +1,8 @@
 package ch.desm.middleware.app.core.server;
 
-import ch.desm.middleware.app.core.common.DaemonThreadBase;
-import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServer;
+import ch.desm.middleware.app.common.DaemonThreadBase;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServerEcho;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServerGui;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.glassfish.tyrus.server.Server;
@@ -15,24 +16,24 @@ public class TyrusServer extends DaemonThreadBase {
     private boolean isRunning = false;
     private String ip;
     private int port;
-    private String path;
+    private String contextPath;
 
-    public TyrusServer(String ip, int port, String path){
+    public TyrusServer(String ip, int port, String contextPath){
         this.ip = ip;
         this.port = port;
-        this.path = path;
+        this.contextPath = contextPath;
     }
 
     public void run(){
-        LOGGER.log(Level.TRACE, "Jetty Websocket Server is starting ...");
-        Server server = new Server(ip, port, path, null, EndpointWebsocketServer.class);
+        LOGGER.log(Level.INFO, "Tyrus Websocket Server is starting ...");
+        Server server = new Server(ip, port, contextPath, null, EndpointWebsocketServerGui.class);
 
         try {
             server.start();
             doHangout(2000);
             isRunning = true;
         } catch (Exception e) {
-            LOGGER.log(Level.ERROR, "Jetty Websocket Server start failed:" + e.getMessage());
+            LOGGER.log(Level.ERROR, "Tyrus Websocket Server start failed:" + e);
             isRunning = false;
         }
     }

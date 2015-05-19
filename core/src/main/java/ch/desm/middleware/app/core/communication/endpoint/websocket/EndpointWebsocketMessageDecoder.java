@@ -1,6 +1,7 @@
 package ch.desm.middleware.app.core.communication.endpoint.websocket;
 
 import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
+import org.apache.log4j.Logger;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -9,8 +10,10 @@ import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 import java.io.StringReader;
 
-public class EndpointWebsocketMessageDecoder implements
-		Decoder.Text<MessageWebsocket> {
+public class EndpointWebsocketMessageDecoder implements	Decoder.Text<MessageWebsocket> {
+
+	private static final Logger LOGGER = Logger.getLogger(EndpointWebsocketMessageDecoder.class);
+
 	@Override
 	public void init(final EndpointConfig config) {
 	}

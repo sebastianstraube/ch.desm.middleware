@@ -1,8 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.map;
 
-import ch.desm.middleware.app.core.common.Pair;
-import ch.desm.middleware.app.core.component.common.ComponentMapBase;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
+import ch.desm.middleware.app.common.Pair;
 
 import java.util.HashMap;
 import java.util.Map;

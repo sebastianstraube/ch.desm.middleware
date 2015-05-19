@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint;
 
-import ch.desm.middleware.app.core.common.DaemonThreadBase;
+import ch.desm.middleware.app.common.DaemonThreadBase;
 
 /**
  * 
