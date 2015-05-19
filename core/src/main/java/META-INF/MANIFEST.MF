@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: ch.desm.middleware.app.core
+Main-Class: ch.desm.middleware.app.core.StartAppMain
+
