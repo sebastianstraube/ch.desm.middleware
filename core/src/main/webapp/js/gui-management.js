@@ -127,7 +127,7 @@ $(document).ready(function() {
 };
 
         wsocket.onmessage = function (evt) {
-            createAutoClosingAlert(".notification-box", 10000, "Message: " + evt.data);
+            //createAutoClosingAlert(".notification-box", 10000, "Message: " + evt.data);
 
             onMessageReceived(evt);
         };

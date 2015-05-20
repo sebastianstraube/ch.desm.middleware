@@ -18,10 +18,10 @@ import ch.desm.middleware.app.core.server.TyrusServer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public class StartAppSingleton extends DaemonThreadBase {
+public class RunAppSingleton extends DaemonThreadBase {
 
-	private static Logger LOGGER = Logger.getLogger(StartAppSingleton.class);
-	private static final StartAppSingleton singleton = new StartAppSingleton();
+	private static Logger LOGGER = Logger.getLogger(RunAppSingleton.class);
+	private static final RunAppSingleton singleton = new RunAppSingleton();
 
     private String host;
     private int port;
@@ -30,13 +30,13 @@ public class StartAppSingleton extends DaemonThreadBase {
     private String serverJettyPath;
     private boolean isConfigured = false;
 
-	private StartAppSingleton(){
+	private RunAppSingleton(){
 		if (singleton != null)
 	        throw new IllegalStateException("Already instantiated, only use of singleton allowed!");
 	}
 	
-	public static StartAppSingleton getSingleton(){
-		return StartAppSingleton.singleton;
+	public static RunAppSingleton getSingleton(){
+		return RunAppSingleton.singleton;
 	}
 
     public void setConfiguration(String host, String port, String websocketContextPath, String serverEndpointContextPath, String jettyPath){
@@ -72,7 +72,8 @@ public class StartAppSingleton extends DaemonThreadBase {
         //startCabineRe420(EndpointRs232.EnumSerialPorts.COM4, EndpointRs232.EnumSerialPorts.COM8);
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
         startOmlPetrinet();
-        //startZusi("7.94.80.35", 1436);
+        //startZusiFahrpult("7.94.80.35", 1436);
+        //startZusiAusbildung("7.94.80.35", 1436);
     }
 
     private JettyServer startJettyServer(String path){
@@ -89,8 +90,6 @@ public class StartAppSingleton extends DaemonThreadBase {
         return server;
     }
 
-
-
 	public void startManagement(JettyServer server, String uri){
         ManagementService management = isServerStarted(server) ? new ManagementService(Broker.getInstance(), uri) : null;
 	}
@@ -103,14 +102,15 @@ public class StartAppSingleton extends DaemonThreadBase {
         OmService oml = new OmService(Broker.getInstance(), port);
 	}
 
-    public void startZusi(String ip, int port){
-
+    public void startZusiFahrpult(String ip, int port){
         ZusiService serviceFahrpult = new ZusiService(Broker.getInstance(), ip, port);
         serviceFahrpult.getEndpointFahrpult().init();
         serviceFahrpult.getEndpointFahrpult().start();
         serviceFahrpult.getEndpointFahrpult().sendCommandRegisterClientFahrpult();
         serviceFahrpult.getEndpointFahrpult().sendCommandNeededDataFahrpult();
+    }
 
+    public void startZusiAusbildung(String ip, int port){
         ZusiService serviceAusbildung = new ZusiService(Broker.getInstance(), ip, port);
         serviceAusbildung.getEndpointAusbildung().init();
         serviceAusbildung.getEndpointAusbildung().start();
@@ -120,17 +120,18 @@ public class StartAppSingleton extends DaemonThreadBase {
 
         /*
         try {
-            doHangout(2000);
+            doHangout(3000);
             serviceAusbildung.getEndpointAusbildung().sendCommandSignalAspect();
-            doHangout(2000);
+            doHangout(3000);
             serviceAusbildung.getEndpointAusbildung().sendCommandSwitch();
-
-
+            doHangout(3000);
+            serviceAusbildung.getEndpointAusbildung().sendCommand("0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:01");
+            doHangout(3000);
+            serviceAusbildung.getEndpointAusbildung().sendCommand("0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:00");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         */
-
 
     }
 

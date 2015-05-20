@@ -89,11 +89,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     }
 
     private void delegateToEndpoint(PetrinetOmEndpoint endpoint, String sensorName, int sensorValue){
-
-        //if(sensorValue != 0){
-            LOGGER.log(Level.INFO, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
-        //}
-
+        LOGGER.log(Level.INFO, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
         endpoint.setSensor(sensorName, sensorValue);
     }
 

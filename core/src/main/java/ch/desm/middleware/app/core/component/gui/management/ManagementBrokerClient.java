@@ -34,7 +34,7 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 		for(MessageMiddleware element: messageList){
             try {
                 String messageWebsocket = service.getEncoder().encode(service.getConverter().toCharacterStream(element));
-                //TODO ManagementEndpointWebsocketClient.sendMessage(messageWebsocket);
+				ManagementEndpointClientWebsocket.sendMessage(messageWebsocket);
             } catch (EncodeException e) {
                 LOGGER.log(Level.ERROR, e);
             }

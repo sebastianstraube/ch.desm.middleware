@@ -8,10 +8,9 @@
 }
 
 .notification_box {
-    position: fixed;
+    position: absolute;
     top: 0;
-    right: 0;
-    width: 50%;
+    z-index: 1;
 }
 
 .alert-message {

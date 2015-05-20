@@ -13,7 +13,7 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
 
 	@Override
 	protected void init(){
-        // map.put("OML_BL_OM_LN_$1",""); //
+// map.put("OML_BL_OM_LN_$1",""); //
 // map.put("OML_BL_OM_LN_$2",""); //
 // map.put("OML_BL_OM_LN_$3",""); //
 // map.put("OML_BL_OM_LN_$belegt_n",""); //
@@ -37,7 +37,7 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
         map.put("OML_EMM_$C_FB1","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:04,0300:00,0400:00,0500:00"); //
         map.put("OML_EMM_$C_FB2","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:04,0300:00,0400:00,0500:00"); //
         map.put("OML_EMM_$C_Halt","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:04,0300:00,0400:00,0500:01"); //
-        map.put("OML_EMM_$D_FB1","OML_EMM_$D_FB1"); //
+        map.put("OML_EMM_$D_FB1","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:1d,0300:00,0400:00,0500:00"); //
         map.put("OML_EMM_$D_FB2","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:1d,0300:00,0400:00,0500:01"); //
         map.put("OML_EMM_$D_Halt","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:1d,0300:00,0400:00,0500:01"); //
 // map.put("OML_EMM_$EMM_Grundstlg",""); //
@@ -71,7 +71,7 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
 // map.put("OML_EMM_$geprueft1A4",""); //
 // map.put("OML_EMM_$geprueft1A5",""); //
 // map.put("OML_EMM_$geprueft1E1",""); //
-        map.put("OML_EMM_$geprueft1E2","Fahrstrasse EM 833-2"); //
+// map.put("OML_EMM_$geprueft1E2",""); //
 // map.put("OML_EMM_$geprueft1E3",""); //
 // map.put("OML_EMM_$geprueft1E4",""); //
 // map.put("OML_EMM_$geprueft1E5",""); //
@@ -121,7 +121,7 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
 // map.put("OML_Fstr_ef_$prison_signal_steller",""); //
 // map.put("OML_Fstr_ef_$Pstore_1_ef_belegt",""); //
 // map.put("OML_Fstr_ef_$signal_steller",""); //
-        map.put("OML_Fstr_ef_$verschlossen","Fahrstrasse OM ef"); //
+// map.put("OML_Fstr_ef_$verschlossen",""); //
 // map.put("OML_Fstr_ef_$Zug_eingefahren",""); //
 // map.put("OML_Fstr_fe_$aufgeloest",""); //
 // map.put("OML_Fstr_fe_$F_Fahrt1",""); //
@@ -133,7 +133,7 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
 // map.put("OML_Fstr_fe_$prison_signal_steller",""); //
 // map.put("OML_Fstr_fe_$signal_steller",""); //
 // map.put("OML_Fstr_fe_$store_1_egf_belegt",""); //
-        map.put("OML_Fstr_fe_$verschlossen","Fahrstrasse OM fe"); //
+// map.put("OML_Fstr_fe_$verschlossen",""); //
 // map.put("OML_Fstr_fe_$Zug_eingefahren",""); //
 // map.put("OML_Fstr_fg_$aufgeloest",""); //
 // map.put("OML_Fstr_fg_$F_Fahrt3",""); //
@@ -146,7 +146,7 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
 // map.put("OML_Fstr_fg_$prison_signal_steller",""); //
 // map.put("OML_Fstr_fg_$signal_steller",""); //
 // map.put("OML_Fstr_fg_$store_egf_1_belegt",""); //
-        map.put("OML_Fstr_fg_$verschlossen","Fahrstrasse OM fg"); //
+// map.put("OML_Fstr_fg_$verschlossen",""); //
 // map.put("OML_Fstr_fg_$Zug_eingefahren",""); //
 // map.put("OML_Fstr_gf_$aufgeloest",""); //
 // map.put("OML_Fstr_gf_$G_Fahrt3",""); //
@@ -159,7 +159,7 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
 // map.put("OML_Fstr_gf_$prison_signal_steller",""); //
 // map.put("OML_Fstr_gf_$signal_steller",""); //
 // map.put("OML_Fstr_gf_$store_1_belegt",""); //
-        map.put("OML_Fstr_gf_$verschlossen","Fahrstrasse OM gf"); //
+// map.put("OML_Fstr_gf_$verschlossen",""); //
 // map.put("OML_Fstr_gf_$Zug_eingefahren",""); //
 // map.put("OML_ILTIS_$anfordern_vLN",""); //
 // map.put("OML_ILTIS_$anfordern_vZB",""); //
@@ -200,16 +200,16 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
 // map.put("OML_ILTIS_$ZB_138_2",""); //
 // map.put("OML_ILTIS_$ZB_2_138",""); //
 // map.put("OML_Iso_1_$belegt",""); //
-        map.put("OML_Iso_1_$belegen","logic_iso_1_belegt"); //
+        map.put("OML_Iso_1_$belegen","logic_iso_1_belegen"); //
 // map.put("OML_Iso_1_$frei",""); //
 // map.put("OML_Iso_cd_$belegt",""); //
-        map.put("OML_Iso_cd_$belegen","logic_iso_cd_belegt"); //
+        map.put("OML_Iso_cd_$belegen","logic_iso_cd_belegen"); //
 // map.put("OML_Iso_cd_$frei",""); //
 // map.put("OML_Iso_ef_$belegt",""); //
-        map.put("OML_Iso_ef_$belegen","logic_iso_ef_belegt"); //
+        map.put("OML_Iso_ef_$belegen","logic_iso_ef_belegen"); //
 // map.put("OML_Iso_ef_$frei",""); //
 // map.put("OML_Iso_egf_$belegt",""); //
-        map.put("OML_Iso_egf_$belegen","logic_iso_egf_belegt"); //
+        map.put("OML_Iso_egf_$belegen","logic_iso_egf_belegen"); //
 // map.put("OML_Iso_egf_$frei",""); //
 // map.put("OML_Iso_gf_$belegt",""); //
 // map.put("OML_Iso_gf_$belegen",""); //
@@ -279,7 +279,7 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
         map.put("OML_LN_$C26_FB1","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:00"); //
         map.put("OML_LN_$C26_FB2","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:02"); //
         map.put("OML_LN_$C26_Halt","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:01"); //
-        map.put("OML_LN_$ce_belegt","logic_iso_ce_belegt"); //
+        map.put("OML_LN_$ce_belegt","logic_iso_ce_belegen"); //
         map.put("OML_LN_$E_FB1","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:99,0300:00,0400:00,0500:00"); //
         map.put("OML_LN_$E_FB2","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:99,0300:00,0400:00,0500:02"); //
         map.put("OML_LN_$e_Halt","0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:99,0300:00,0400:00,0500:01"); //
@@ -296,7 +296,7 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
 // map.put("OML_LN_$geprueft1E5",""); //
 // map.put("OML_LN_$geprueft1E6",""); //
 // map.put("OML_LN_$geprueft2A1",""); //
-        map.put("OML_LN_$geprueft2A2","Fahrstrasse LN 2-834"); //
+// map.put("OML_LN_$geprueft2A2",""); //
 // map.put("OML_LN_$geprueft2A3",""); //
 // map.put("OML_LN_$geprueft2A4",""); //
 // map.put("OML_LN_$geprueft2A5",""); //
@@ -408,9 +408,6 @@ public class PetrinetOmMapZusi extends ComponentMapBase{
 // map.put("OML_ZB_$ZB_W2_mE1",""); //
 // map.put("OML_ZB_$ZB_W2_pA2",""); //
 // map.put("OML_ZB_$ZB_W2_pE2",""); //
-// map.put("",""); //
-// map.put("",""); //
-// map.put("",""); //
 
     }
 

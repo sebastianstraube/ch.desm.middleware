@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 //Register = AN, Pin = 0
 public class ZusiLogicIsolierungTest extends ZusiLogicIsolierung {
@@ -69,10 +70,9 @@ public class ZusiLogicIsolierungTest extends ZusiLogicIsolierung {
          if(value >= 3092 && value < 3182){globalId = isolierungen[3];} else //OML_Iso_ef_$belegen
         */
         int gesamtweg = 3180;
-
-        String[] listCmp = getAllIsoOcc(gesamtweg);
-        String[] listOccIso= {ZusiLogicIsolierungTest.LOGIC_ISOLIERUNG_BELEGEN_TMP, ZusiLogicIsolierungTest.LOGIC_ISOLIERUNG_BELEGEN_EGF, ZusiLogicIsolierung.LOGIC_ISOLIERUNG_BELEGEN_1, ZusiLogicIsolierung.LOGIC_ISOLIERUNG_BELEGEN_EF};
-        boolean b = UtilityMessageProcessor.listEquals(listCmp, listOccIso);
+        ArrayList<String> listOccIso= new ArrayList<>(Arrays.asList(ZusiLogicIsolierung.LOGIC_ISOLIERUNG_BELEGEN_EF));
+        ArrayList<String> listCmp = getAllIsoOcc(gesamtweg);
+        boolean b = listOccIso.equals(listCmp);
 
         LOGGER.log(Level.INFO, "(true) test all occupied isolierung with gesamtweg: " + gesamtweg + " is: " + b);
         Assert.assertEquals(true, b);
@@ -88,12 +88,11 @@ public class ZusiLogicIsolierungTest extends ZusiLogicIsolierung {
 
         ArrayList cmp = new ArrayList();
         cmp.add("logic_iso_ce_belegen;;;isolierung;ce;belegen;off;zusi_ausbildung;#");
-        cmp.add("");
-        cmp.add("logic_iso_egf_belegen;;;isolierung;egf;belegen;on;zusi_ausbildung;#");
-        cmp.add("logic_iso_1_belegen;;;isolierung;1;belegen;on;zusi_ausbildung;#");
+        cmp.add("logic_iso_egf_belegen;;;isolierung;egf;belegen;off;zusi_ausbildung;#");
+        cmp.add("logic_iso_1_belegen;;;isolierung;1;belegen;off;zusi_ausbildung;#");
         cmp.add("logic_iso_ef_belegen;;;isolierung;ef;belegen;on;zusi_ausbildung;#");
         cmp.add("logic_iso_cd_belegen;;;isolierung;cd;belegen;off;zusi_ausbildung;#");
-        ArrayList l = getAllIsoMiddlewareMessage(service, gesamtweg);
+        ArrayList l = getAllIsoMwm(service, gesamtweg);
         boolean b = cmp.equals(l);
         LOGGER.log(Level.INFO, "(true) test occupied isolierung middleware messages: " + b);
         Assert.assertEquals(true, b);

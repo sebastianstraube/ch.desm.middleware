@@ -46,17 +46,13 @@ public class UtilityMessageProcessor {
     public static String getParameterValueEndpoint(String value) {
         String returnValue = "";
 
-        try{
-            if (value.equals(MessageUbw32DigitalRegisterComplete.MESSAGE_PARAMETER_OFF)) {
-                returnValue = "0";
-            } else if (value.equals(MessageUbw32DigitalRegisterComplete.MESSAGE_PARAMETER_ON)) {
-                returnValue = "1";
-            } else{
-                throw new IllegalStateException("unexpected (0,1) parameter value: " + value);
-            }
-        } catch(IllegalStateException e){
-            LOGGER.log(Level.ERROR, e);
-        }
+		if (value.equals(MessageUbw32DigitalRegisterComplete.MESSAGE_PARAMETER_OFF)) {
+			returnValue = "0";
+		} else if (value.equals(MessageUbw32DigitalRegisterComplete.MESSAGE_PARAMETER_ON)) {
+			returnValue = "1";
+		} else{
+			LOGGER.log(Level.TRACE, "unexpected (0,1) parameter value: " + value);
+		}
 
         return returnValue;
     }
@@ -133,7 +129,7 @@ public class UtilityMessageProcessor {
 	public static String[] trimList(String[] list){
 		String tmp[] = new String[0];
 		for(int i=0; i<list.length; i++){
-			if(!list[i].isEmpty()){
+			if(list[i] != null && !list[i].isEmpty()){
 				tmp = addElement(tmp, list[i]);
 			}
 		}

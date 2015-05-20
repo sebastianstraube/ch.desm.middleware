@@ -1,8 +1,9 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
-import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.logic.ZusiLogicIsolierung;
+
+import java.util.ArrayList;
 
 /**
  * Created by Sebastian on 22.04.2015.
@@ -12,18 +13,14 @@ public class ZusiEndpointLogic {
     /**
      *
      */
-    public String getIsolierungFromParameter(ZusiService service, String globalId, String parameterValue){
-        String middlewareMessage = "";
+    public ArrayList<String> getIsoMwmFromParameter(ZusiService service, String globalId, String parameterValue){
+        ArrayList<String> l = new ArrayList<>();
 
         if(globalId.equalsIgnoreCase(ZusiLogicIsolierung.LOGIC_GLOBALID_GESAMTWEG)){
             int parameter = Float.valueOf(parameterValue).intValue();
-            String key = service.getZusiLogicIsolierung().getGlobalId(parameter);
-            middlewareMessage = service.getComponentMapMiddleware().getValue(key);
-            //TODO OFF PARAMETER
-            if(!middlewareMessage.isEmpty()) middlewareMessage = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(middlewareMessage, MessageBase.MESSAGE_PARAMETER_ON);
+            l = service.getZusiLogicIsolierung().getAllIsoMwm(service, parameter);
         }
-
-        return middlewareMessage;
+        return l;
     }
 
     public String getIsolierungTopic(){

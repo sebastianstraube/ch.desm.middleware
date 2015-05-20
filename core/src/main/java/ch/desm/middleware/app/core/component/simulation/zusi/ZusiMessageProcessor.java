@@ -12,6 +12,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -148,12 +149,12 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             mwm.setParameter(message.getParameter());
 
             if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
-                //TODO implementation
+                processBrokerMessageZusiAusbildung(service, mwm);
             }
             else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
                 processBrokerMessageZusiFahrpult(service, mwm);
             }
-        }else LOGGER.log(Level.WARN, "petrinet mapping non-existent with message: " + message);
+        }else LOGGER.log(Level.TRACE, "petrinet mapping non-existent with message: " + message);
     }
 
     /**
@@ -239,7 +240,8 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
         //send message for every parameter
         for(Pair<String, String> p: zusiMessage.getParameterList()){
             String globalId = getGlobalId(zusiMessage, p);
-            String middlewareMessage = service.getMap(topic).getStartWithKey(globalId);
+            String mwm = service.getMap(topic).getStartWithKey(globalId);
+            if(mwm.isEmpty()) mwm = service.getComponentMapMiddleware().getValue(globalId);
             String parameterValue = service.getZusiParameterConverter().getNumber(globalId, p.getRight());
             parameterValue = parameterValue.isEmpty() ? p.getRight() : parameterValue;
 
@@ -248,11 +250,11 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 if(parameter.getLeft().equals(parameterValue)) parameterValue = "on";
                 else if(parameter.getRight().equals(parameterValue)) parameterValue = "off";
             }
-            middlewareMessage = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(middlewareMessage, parameterValue);
+            mwm = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwm, parameterValue);
 
-            if(!middlewareMessage.isEmpty()){
+            if(!mwm.isEmpty()){
                 processLogicParameter(service, globalId, parameterValue);
-                super.processEndpointMessage(service.getBrokerClient(), middlewareMessage, topic);
+                super.processEndpointMessage(service.getBrokerClient(), mwm, topic);
             }else{
                 LOGGER.log(Level.WARN, "global id not found: "+globalId+", parameter: " + p.getRight() + ", topic: " + topic + "  ("+zusiMessage+")");
             }
@@ -266,9 +268,9 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param parameterValue
      */
     protected void processLogicParameter(ZusiService service, String globalId, String parameterValue){
-        String middlewareMessage = service.getZusiEndpointLogic().getIsolierungFromParameter(service, globalId, parameterValue);
-        if(!middlewareMessage.isEmpty()){
-            super.processEndpointMessage(service.getBrokerClient(), middlewareMessage, service.getZusiEndpointLogic().getIsolierungTopic());
+        ArrayList<String> l = service.getZusiEndpointLogic().getIsoMwmFromParameter(service, globalId, parameterValue);
+        for(String mwm : l){
+            super.processEndpointMessage(service.getBrokerClient(), mwm, service.getZusiEndpointLogic().getIsolierungTopic());
         }
     }
 
