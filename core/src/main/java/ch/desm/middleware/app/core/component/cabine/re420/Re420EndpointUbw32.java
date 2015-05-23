@@ -1,8 +1,11 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
-import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Ubw32MapUbw32Analog;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Ubw32MapUbw32Digital;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32;
+import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
+import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
+import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapUbw32Analog;
+import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapUbw32Digital;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -10,22 +13,24 @@ public class Re420EndpointUbw32 extends EndpointUbw32 {
 
     private static Logger LOGGER = Logger.getLogger(Re420EndpointUbw32.class);
 
-	protected Ubw32MapUbw32Digital re420MapDigital;
-	protected Ubw32MapUbw32Analog re420MapAnalog;
+	protected Re420MapUbw32Digital re420MapDigital;
+	protected Re420MapUbw32Analog re420MapAnalog;
+	protected Re420Service service;
 	
-	public Re420EndpointUbw32(EnumSerialPorts enumSerialPort) {		
-		super(enumSerialPort, Ubw32MapUbw32Digital.PINBITMASK_CONFIGURATION_DIGITAL, Ubw32MapUbw32Analog.PINBITMASK_INPUT_ANALOG);
+	public Re420EndpointUbw32(Re420Service service, EnumSerialPorts enumSerialPort) {
+		super(enumSerialPort, Re420MapUbw32Digital.PINBITMASK_CONFIGURATION_DIGITAL, Re420MapUbw32Analog.PINBITMASK_INPUT_ANALOG);
 		this.registerEndpointListener();
 
-		re420MapDigital = new Ubw32MapUbw32Digital();
-		re420MapAnalog = new Ubw32MapUbw32Analog();
+		this.service = service;
+		re420MapDigital = new Re420MapUbw32Digital();
+		re420MapAnalog = new Re420MapUbw32Analog();
 	}
-	
-	public Ubw32MapUbw32Analog getMapAnalog(){
+
+	public Re420MapUbw32Analog getMapAnalog(){
 		return re420MapAnalog;
 	}
-	
-	public Ubw32MapUbw32Digital getMapDigital(){
+
+	public Re420MapUbw32Digital getMapDigital(){
 		return re420MapDigital;
 	}
 
@@ -38,16 +43,14 @@ public class Re420EndpointUbw32 extends EndpointUbw32 {
         }
     }
 
-    /**
-	 * test endpoint message handling
+	/**
+	 *
 	 * @param message
 	 */
-	public void emulateEndpointMessage(String message) {
-		onIncomingEndpointMessage(message);
-	}
-
 	@Override
 	public void onIncomingEndpointMessage(String message) {
+		LOGGER.log(Level.TRACE, "endpoint (" + getSerialPortName() + ") received message: " + message);
 
+		service.getMessageProcessor().processEndpointMessage(service, message);
 	}
 }

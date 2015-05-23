@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.communication.endpoint.serial;
+package ch.desm.middleware.app.core.communication.endpoint.rs232;
 
 import jssc.SerialPort;
 

@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
+package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;

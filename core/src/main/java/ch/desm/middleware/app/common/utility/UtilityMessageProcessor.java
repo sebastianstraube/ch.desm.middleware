@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapFabischValue;
 
 public class UtilityMessageProcessor {
 
@@ -56,40 +55,6 @@ public class UtilityMessageProcessor {
 
         return returnValue;
     }
-
-	/**
-	 * converts the parameter by fabisch channel map and given parameter
-	 * 
-	 * @param channelKey
-	 * @param parameter
-	 * @return
-	 */
-	public static String convertParameter(String channelKey, String parameter) {
-        Re420MapFabischValue mapValues = new Re420MapFabischValue();
-
-		if (mapValues.getMap().containsKey(channelKey)) {
-
-			for (Entry<String, String> element : mapValues.getMap().entrySet()) {
-				if (element.getKey().equals(channelKey)) {
-					// has values
-					if (!element.getValue().isEmpty()) {
-
-						// has switch elements
-						if (element.getValue().contains("#")) {
-							if (parameter.equals("on")) {
-								// set off value as new parameter
-								parameter = element.getValue().split("#")[0];
-							} else if (parameter.equals("off")) {
-								// set on value as new parameter
-								parameter = element.getValue().split("#")[1];
-							}
-						}
-					}
-				}
-			}
-		}
-		return parameter;
-	}
 	
 	public static boolean isSoftwareMessage(String value) {
 		return value.equalsIgnoreCase(MessageUbw32Base.MESSAGE_CHAR_ONLYSOFTWARE) == true? true: false;

@@ -1,412 +1,146 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Map.Entry;
+import java.util.Map;
 
+import ch.desm.middleware.app.common.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.*;
-import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
 import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import ch.desm.middleware.app.core.component.cabine.re420.elements.Re420ElementFahrschalter;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapBinding;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapFabischValue;
+import ch.desm.middleware.app.core.component.cabine.re420.state.Re420StateFahrschalter;
 
-public class Re420MessageProcessor extends MessageProcessorBase {
+public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Service> {
 
 	private static Logger LOGGER = Logger.getLogger(Re420MessageProcessor.class);
+	private Re420StateFahrschalter fahrschalter;
 
-	private Re420ElementFahrschalter fahrschalter;
-	private Re420MapBinding binding;
-	private Re420MapFabischValue mapValues;
-    private boolean locsimIni1;
+	public static final String INIT_MESSAGE = "mgmt.stellwerk.obermattlangnau";
 
 	public Re420MessageProcessor() {
-		this.fahrschalter = new Re420ElementFahrschalter();
-		this.binding = new Re420MapBinding();
-		this.mapValues = new Re420MapFabischValue();
+		this.fahrschalter = new Re420StateFahrschalter();
         this.util = new UtilityMessageProcessor();
-        this.locsimIni1 = false;
-	}
-
-	public String handleMessageFahrschalter(String key, boolean isEnabled) {
-
-		String fahrschalterKey = fahrschalter.getMessagePositionFahrschalter(
-				key, isEnabled);
-
-		return fahrschalterKey;
 	}
 
 	/**
-	 * 
-	 * @param impl
+	 * @param messages
+	 */
+	@Override
+	public void processBrokerMessage(Re420Service service, LinkedList<MessageMiddleware> messages) {
+		for(MessageMiddleware message : messages){
+			processBrokerMessage(service, message);
+		}
+	}
+
+	public void processEndpointMessage(Re420Service service, String message){
+		MessageUbw32Base ubw32Message = service.getTranslator()
+				.decodeUbw32EndpointMessage(message,
+						MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
+
+		//processable message
+		if(ubw32Message != null){
+			String messages = service.getMessageProcessor().convertToMiddlewareMessage(service, ubw32Message);
+			processEndpointMessage(service.getBrokerClient(), messages, ubw32Message.getTopic());
+		}
+	}
+
+	private void processBrokerMessage(Re420Service service, MessageMiddleware element){
+		switch(element.getTopic()){
+			case (MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT):{
+				processBrokerMessageZusiFahrpult(service, element);
+				break;
+			}
+			case (MessageBase.MESSAGE_TOPIC_MANAGEMENT):{
+                processBrokerMessageManagement(service, element);
+				break;
+			}
+		}
+	}
+
+	private void processInitEndpoint(Re420EndpointUbw32 endpoint, MessageMiddleware element){
+		switch (element.getParameter()) {
+			case ("init"): {
+				endpoint.init();
+				break;
+			}
+			case ("start"): {
+				endpoint.start();
+				break;
+			}
+			case ("stop"): {
+				endpoint.stop();
+				break;
+			}
+		}
+	}
+
+	private void processBrokerMessageZusiFahrpult(Re420Service service, MessageMiddleware message) {
+        String globalId = message.getGlobalId();
+        String key = service.getMapZusi().getKey(globalId);
+        delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message.getParameter(), true);
+	}
+
+	private void processBrokerMessageManagement(Re420Service service, MessageMiddleware message) {
+		try {
+			if (isInitProcessMessage(message)) {
+				if (message.getGlobalId().equalsIgnoreCase(INIT_MESSAGE)) {
+					processInitEndpoint(service.getEndpoint(), message);
+				}
+			} else {
+
+				// Todo implementation
+				// activate this, when gui taken controle over this endpoint
+			}
+		} catch (Exception e) {
+			LOGGER.log(Level.ERROR, e);
+		}
+	}
+
+	public boolean isInitProcessMessage(MessageMiddleware element){
+		return element.getGlobalId().equalsIgnoreCase(INIT_MESSAGE);
+	}
+
+	/**
+	 *
 	 * @param message
 	 * @return
 	 */
-	public String convertToMiddlewareMessage(Re420BrokerClient impl,
-			MessageUbw32Base message) {
+	public String convertToMiddlewareMessage(Re420Service service, MessageUbw32Base message) {
 
 		String middlewareMessagesInput = "";
-
 		if (message instanceof MessageUbw32DigitalRegisterSingle) {
+            middlewareMessagesInput = service.getEndpointMessageProcessor().getUbwSingleRegisterValues(service, service.getEndpoint(), (MessageUbw32DigitalRegisterSingle) message);
+        }
+		else if (message instanceof MessageUbw32DigitalRegisterComplete){
+            middlewareMessagesInput = service.getEndpointMessageProcessor().getUbwAllRegisterValues(service, service.getEndpoint(), (MessageUbw32DigitalRegisterComplete) message);
+        }
+		else if (message instanceof MessageUbw32Analog){
+            middlewareMessagesInput = service.getEndpointMessageProcessor().getUbwAnalogRegisterValues(service, service.getEndpoint(), (MessageUbw32Analog) message);
+        }
 
-			for (Entry<String, String> entry : impl.getEndpointUbw32().re420MapDigital
-					.getMap().entrySet()) {
-
-				if (entry.getValue()
-						.equals(((MessageUbw32DigitalRegisterSingle) message)
-								.getPort())) {
-
-					String key = entry.getKey();
-					boolean isInputEnabled = message.getInputValue(
-							entry.getValue().substring(0),
-							entry.getValue().substring(1)).contains("1");
-					String parameter = ((MessageUbw32DigitalRegisterSingle) message)
-							.isEnabled() == true ? "on" : "off";
-					
-					String stream = null;
-
-					// handle Fahrschalter
-					if (fahrschalter.keyListFahrschalter.contains(key)) {
-
-						String fahrschalterKey = fahrschalter
-								.getMessagePositionFahrschalter(key,
-										isInputEnabled);
-
-						if (!fahrschalterKey.isEmpty()) {
-							parameter = "on";
-							stream = fahrschalter.getMap().getValue(fahrschalterKey);
-							stream = stream.replace(
-									MessageCommon.MESSAGE_PARAMETER_DELIMITER,
-									parameter);
-							middlewareMessagesInput = middlewareMessagesInput
-									.concat(stream);
-						}
-
-					}
-
-					else {
-						//stream = impl.getMapMiddlewareMessages().get(key);
-						
-						if (stream == null) {
-							try {
-								throw new Exception(
-										"mapping error found no global id in middleware message with key: "
-												+ entry.getKey()
-												+ " and value: "
-												+ entry.getValue()
-												+ " in message: " + message);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								LOGGER.log(Level.ERROR, e);
-							}
-						}
-
-						stream = stream.replace(
-								MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
-						middlewareMessagesInput = middlewareMessagesInput
-								.concat(stream);
-					}
-				}
-			}
-		}
-
-		else if (message instanceof MessageUbw32DigitalRegisterComplete) {
-
-			for (Entry<String, String> entry : impl.getEndpointUbw32().re420MapDigital
-					.getMap().entrySet()) {
-
-				// convert input to common parameter
-				boolean isInputEnabled = message.getInputValue(
-						entry.getValue().substring(0),
-						entry.getValue().substring(1)).contains("1");
-				String parameter = isInputEnabled == true ? "on" : "off";
-				String key = entry.getKey();
-
-				String stream = null;
-
-				// handle Fahrschalter
-				if (fahrschalter.keyListFahrschalter.contains(key)) {
-
-					String fahrschalterKey = fahrschalter
-							.getMessagePositionFahrschalter(key, isInputEnabled);
-
-					if (!fahrschalterKey.isEmpty()) {
-						parameter = "on";
-						stream = fahrschalter.getMap().getValue(fahrschalterKey);
-						stream = stream.replace(
-								MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
-						middlewareMessagesInput = middlewareMessagesInput
-								.concat(stream);
-					}
-
-				} else {
-
-					// lookup for binding key to send directly
-					if (binding.isKeyAvailable(entry.getKey())) {
-						key = binding.getValue(entry.getKey());
-
-						
-						parameter = message.getInputValue(entry.getValue()
-								.substring(0), entry.getValue().substring(1));
-						
-						String value = impl.getEndpointFabisch().mapDigital.getValue(key);
-
-						if (!value.isEmpty()) {
-							
-							parameter = convertParameter(value, parameter);
-							
-							impl.getEndpointFabisch().sendStream(
-									value + parameter);
-						}
-					} else {
-
-						//stream = impl.getMapMiddlewareMessages().get(key);
-						
-						if (stream == null) {
-							try {
-								throw new Exception(
-										"mapping error found no global id in middleware message with key: "
-												+ entry.getKey()
-												+ " and value: "
-												+ entry.getValue()
-												+ " in message: " + message);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								LOGGER.log(Level.ERROR, e);
-							}
-						}
-
-						stream = stream.replace(
-								MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
-
-						middlewareMessagesInput = middlewareMessagesInput
-								.concat(stream);
-
-					}
-
-				}
-			}
-
-		} else if (message instanceof MessageUbw32Analog) {
-
-			for (Entry<String, String> entry : impl.getEndpointUbw32().re420MapAnalog
-					.getMap().entrySet()) {
-
-				String key = entry.getKey();
-
-				if (!key.isEmpty()) {
-					//String stream = impl.getMapMiddlewareMessages().get(key);
-
-                    /*
-					if (stream == null) {
-						try {
-							throw new Exception(
-									"mapping error found no global id in middleware message with key: "
-											+ entry.getKey() + " and value: "
-											+ entry.getValue()
-											+ " in message: " + message);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							LOGGER.log(Level.ERROR, e);
-						}
-					}
-					*/
-
-					// convert input to common parameter
-					String parameter = message.getInputValue(entry.getValue(),
-							"");
-
-					//stream = stream.replaceAll(
-					//		MessageCommon.PARAMETER_DELIMITER, parameter);
-					//middlewareMessagesInput = middlewareMessagesInput
-					//		.concat(stream);
-				}
-			}
-		}
+		if(!middlewareMessagesInput.isEmpty() && ((message instanceof MessageUbw32DigitalRegisterSingle) ||
+				(message instanceof MessageUbw32DigitalRegisterComplete))) middlewareMessagesInput += getFahrschalterMwms(service, middlewareMessagesInput);
 
 		LOGGER.log(Level.TRACE,"processing middleware message: " + middlewareMessagesInput);
-
 		return middlewareMessagesInput;
 	}
-	
-	private String convertParameter(String channelKey, String parameter) {
 
-		if (mapValues.getMap().containsKey(channelKey)) {
+    public String getFahrschalterMwms(Re420Service service, String message) {
+		ArrayList<String> l = new ArrayList<>(Arrays.asList(message.split(MessageBase.MESSAGE_MESSAGE_CUT)));
+		String mwMessages= "";
 
-			for (Entry<String, String> element : mapValues.getMap().entrySet()) {
-				if (element.getKey().equals(channelKey)) {
-					// has values
-					if (!element.getValue().isEmpty()) {
-
-						// has switch elements
-						if (element.getValue().contains("#")) {
-							if (parameter.equals("0")) {
-								// set off value as new parameter
-								parameter = element.getValue().split("#")[0];
-								break;
-							} else if (parameter.equals("1")) {
-								// set on value as new parameter
-								parameter = element.getValue().split("#")[1];
-								break;
-							}
-						}
-					}
-				}
+		for (String el : l){
+            if(Re420StateFahrschalter.UBW_KEYS.contains(el.split(MessageBase.MESSAGE_ELEMENT_CUT)[0])){
+                MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(el);
+                boolean isEnabled = mwm.getParameter().equalsIgnoreCase("on");
+                String key = fahrschalter.getFahrschalterKey(service, mwm.getGlobalId(), isEnabled);
+                mwMessages = service.getMapFahrschalterLogic().getValue(key);
+                mwMessages = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwMessages, MessageBase.MESSAGE_PARAMETER_ON);
+                break;
 			}
 		}
-
-		return parameter;
-
-	}
-
-    public void processBrokerMessage(Re420BrokerClient impl, LinkedList<MessageMiddleware> messages) {
-        for(MessageMiddleware message : messages){
-            this.processBrokerMessage(impl, message);
-        }
-    }
-    /**
-     * @param impl
-     * @param message
-     */
-    public void processBrokerMessage(Re420BrokerClient impl, MessageMiddleware message) {
-
-        // is fabisch endpoint digital message
-        if (impl.getEndpointFabisch().getMapDigital()
-                .isKeyAvailable(message.getGlobalId())) {
-
-            String channel = impl.getEndpointFabisch().getMapDigital()
-                    .getValue(message.getGlobalId());
-            String data = message.getParameter();
-
-            data = util.convertParameter(channel, data);
-
-            impl.getEndpointFabisch().sendStream(channel + data);
-
-            // is fabisch endpoint analog message
-        } else if (impl.getEndpointFabisch().getMapAnalog()
-                .isKeyAvailable(message.getGlobalId())) {
-            String channel = impl.getEndpointFabisch().getMapAnalog()
-                    .getValue(message.getGlobalId());
-            String data = message.getParameter();
-
-            // TODO convert from locsim values to fabisch values
-
-            impl.getEndpointFabisch().sendStream(channel + data);
-        }
-
-        // is software message
-        else if (UtilityMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
-
-            if (message.getGlobalId().equalsIgnoreCase(
-                    "locsim.initialization.ready.ini1")
-                    && !locsimIni1) {
-                impl.getEndpointUbw32().setCacheEnabled(false);
-                impl.getEndpointUbw32().start();
-                locsimIni1 = true;
-            }
-
-            else if (message.getGlobalId().equalsIgnoreCase(
-                    "locsim.initialization.ready.ini2")) {
-                // nothing to do
-            }
-
-            else if (message.getGlobalId().equalsIgnoreCase(
-                    "locsim.initialization.ready.ini7")) {
-                impl.getEndpointUbw32().pollingCommand();
-                impl.getEndpointUbw32().setCacheEnabled(false);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    LOGGER.log(Level.ERROR, e);
-                }
-                impl.getEndpointUbw32().setCacheEnabled(true);
-            }
-
-            else if (message.getGlobalId().equalsIgnoreCase(
-                    "locsim.initialization.ready.ini8")) {
-                // nothing to do
-            }
-
-            else if (message.getGlobalId().equalsIgnoreCase(
-                    "mgmt.cabine.re420.fabisch")) {
-
-                switch (message.getParameter()) {
-                    case ("init"): {
-                        impl.getEndpointFabisch().init();
-                        break;
-                    }
-                    case ("start"): {
-                        //nothing to do
-                        break;
-                    }
-                    case ("stop"): {
-                        //nothing to do
-                        break;
-                    }
-                }
-            }
-
-            else if (message.getGlobalId().equalsIgnoreCase(
-                    "mgmt.cabine.re420.ubw32")) {
-
-                switch (message.getParameter()) {
-                    case ("init"): {
-                        impl.getEndpointUbw32().init();
-                        break;
-                    }
-                    case ("start"): {
-                        impl.getEndpointUbw32().start();
-                        break;
-                    }
-                    case ("stop"): {
-                        impl.getEndpointUbw32().stop();
-                        break;
-                    }
-                }
-            }
-
-            // is hardware message
-        } else {
-
-            String value = message.getParameter();
-            boolean isInput = message.getOutputInput().equals(
-                    MessageUbw32Base.MESSAGE_CHAR_INPUT);
-
-            // is ubw message
-            if (impl.getEndpointUbw32().getMapDigital()
-                    .isKeyAvailable(message.getGlobalId())) {
-
-                String endpointRegister = impl.getEndpointUbw32()
-                        .getMapDigital().getMap().get(message.getGlobalId());
-                String registerName = String
-                        .valueOf(endpointRegister.charAt(0));
-                String pin = String.valueOf(endpointRegister.substring(1));
-
-                if (isInput) {
-                    impl.getEndpointUbw32().getPinInputDigital(registerName,
-                            pin);
-                } else {
-                    impl.getEndpointUbw32().setPinOutputDigital(registerName,
-                            pin, value);
-                }
-
-                // is analog message
-            } else if (impl.getEndpointUbw32().getMapAnalog()
-                    .isKeyAvailable(message.getGlobalId())) {
-
-                String endpointRegister = impl.getEndpointUbw32()
-                        .getMapAnalog().getMap().get(message.getGlobalId());
-
-                if (isInput) {
-                    impl.getEndpointUbw32().getPinInputAnalog(endpointRegister);
-                }
-
-            } else {
-                LOGGER.log(Level.WARN, impl.getClass() + "> processBrokerMessage skipped:"
-                        + message);
-            }
-        }
+        return mwMessages;
     }
 }

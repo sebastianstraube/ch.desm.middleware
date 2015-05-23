@@ -1,7 +1,7 @@
-package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
+package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
 
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232Config;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232Config;
 import jssc.SerialPortException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;

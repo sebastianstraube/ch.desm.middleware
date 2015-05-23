@@ -10,6 +10,7 @@ import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtoc
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import sun.plugin2.message.Message;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,11 +45,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 break;
             }
             case(MessageBase.MESSAGE_TOPIC_CABINE_RE420):{
-                //TODO implementation
-                break;
-            }
-            case(MessageBase.MESSAGE_TOPIC_CABINE_RE420_FABISCH):{
-                //TODO implementation
+                processBrokerMessageCabineRe420(service, message);
                 break;
             }
             case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU):{
@@ -71,14 +68,6 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 //TODO implementation
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT):{
-                processBrokerMessageZusiFahrpult(service, message);
-                break;
-            }
-            case(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG):{
-                processBrokerMessageZusiAusbildung(service, message);
-                break;
-            }
             default:{
                 try {
                     throw new Exception("unsupported topic, broker message delegation skipped: " + message.toString());
@@ -93,36 +82,33 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
     /**
      *
      * @param service
-     * @param message = 0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0;;;hauptschalter;aus;taste n;?;zusi;#
+     * @param globalId
      */
-    private void processBrokerMessageZusiFahrpult(ZusiService service, MessageMiddleware message){
-        if(message.getParameter().equalsIgnoreCase("on")){
-            ZusiProtocolNode root = service.getZusiProtocolNodeHelper().getRoot(message.getGlobalId());
+    private void processBrokerMessageZusiFahrpult(ZusiService service, String globalId){
+        ZusiProtocolNode root = service.getZusiProtocolNodeHelper().getRoot(globalId);
 
-            try {
-                String zusiStream = service.getCodec().encode(root);
-                delegateToEndpoint(service.getEndpointFahrpult(), zusiStream);
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
+        try {
+            String zusiStream = service.getCodec().encode(root);
+            delegateToEndpoint(service.getEndpointFahrpult(), zusiStream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
         }
     }
 
     /**
      *
      * @param service
-     * @param message = 0003-0113-0001::0001:11,0002:00,0003:01,0004:0,0005:0;;;hauptschalter;aus;taste n;?;zusi;#
+     * @param globalId
      */
-    private void processBrokerMessageZusiAusbildung(ZusiService service, MessageMiddleware message){
-        if(message.getParameter().equalsIgnoreCase("on")){
-            ZusiProtocolNode root = service.getZusiProtocolNodeHelper().getRoot(message.getGlobalId());
+    private void processBrokerMessageZusiAusbildung(ZusiService service, String globalId){
+        ZusiProtocolNode root = service.getZusiProtocolNodeHelper().getRoot(globalId);
 
-            try {
-                String zusiStream = service.getCodec().encode(root);
-                delegateToEndpoint(service.getEndpointAusbildung(), zusiStream);
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
+        try {
+            String zusiStream = service.getCodec().encode(root);
+            LOGGER.log(Level.INFO, "delegating message with globalId: " + globalId + "\n stream: " + zusiStream + "\n node:" +root+ "\n\n");
+            delegateToEndpoint(service.getEndpointAusbildung(), zusiStream);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
         }
     }
 
@@ -140,19 +126,45 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param service
      * @param message
      */
+    private void processBrokerMessageCabineRe420(ZusiService service, MessageMiddleware message){
+        String zusiGlobalId = service.getZusiMapRe420().getKey(message.getGlobalId());
+
+        //key found ?
+        if(!zusiGlobalId.isEmpty()){
+            String mwmStream = service.getComponentMapMiddleware().getValue(zusiGlobalId);
+
+            if(mwmStream.isEmpty()) {
+                LOGGER.log(Level.WARN, "error mapping between: " + message);
+            }else{
+                MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
+                Pair<String, String> p = service.getZusiMapParameterMiddleware().getValue(message.getGlobalId());
+                if(p != null) {
+                    processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
+                }else{
+                    LOGGER.log(Level.ERROR, "prcoessing broker message from cabine re420 has no parameter value mapping: " + message);
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     * @param service
+     * @param message
+     */
     protected void processBrokerMessagePetrinet(ZusiService service, MessageMiddleware message){
         String key = service.getZusiMapPetrinet().getKey(message.getGlobalId());
         if(!key.isEmpty()){
             String mwmStream = service.getComponentMapMiddleware().getValue(key);
             mwmStream = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
             MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
-            mwm.setParameter(message.getParameter());
+            mwm.setParameter(mwm.getParameter());
 
             if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
-                processBrokerMessageZusiAusbildung(service, mwm);
+                processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
             }
             else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
-                processBrokerMessageZusiFahrpult(service, mwm);
+                processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
             }
         }else LOGGER.log(Level.TRACE, "petrinet mapping non-existent with message: " + message);
     }

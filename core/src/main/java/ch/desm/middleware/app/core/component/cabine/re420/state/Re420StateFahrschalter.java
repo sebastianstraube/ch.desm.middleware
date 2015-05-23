@@ -1,16 +1,17 @@
-package ch.desm.middleware.app.core.component.cabine.re420.elements;
+package ch.desm.middleware.app.core.component.cabine.re420.state;
 
-import java.util.LinkedList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
+import ch.desm.middleware.app.common.ComponentServiceBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapFahrschalter;
+public class Re420StateFahrschalter {
 
-public class Re420ElementFahrschalter {
+	private static Logger LOGGER = Logger.getLogger(Re420StateFahrschalter.class);
 
-	private static Logger LOGGER = Logger.getLogger(Re420ElementFahrschalter.class);
-	
 	private Boolean s150a;
 	private Boolean s150b;
 	private Boolean s150d;
@@ -19,23 +20,17 @@ public class Re420ElementFahrschalter {
 	private Boolean s150g;
 	private Boolean s150l;
 
-	/**
-	 * TODO refactoring
-	 */
-	public LinkedList<String> keyListFahrschalter;
-	private Re420MapFahrschalter map;
-	
-	public Re420ElementFahrschalter(){
+	public static Set<String> UBW_KEYS = new HashSet<>(Arrays.asList("s150a", "s150b", "s150d", "s150e", "s150f", "s150g", "s150l"));
+
+	public Re420StateFahrschalter(){
 		super();
-		map = new Re420MapFahrschalter();
-		initializeFahrschalter();
 	}
-	
-	public Re420MapFahrschalter getMap(){
-		return map;
-	}
-	
-	private boolean isInitialized(){
+
+	/**
+	 *
+	 * @return
+	 */
+	private boolean isInitialized(ComponentServiceBase service){
 		
 		if (s150a != null
 				&& s150b != null
@@ -44,19 +39,27 @@ public class Re420ElementFahrschalter {
 				&& s150f != null
 				&& s150g != null
 				&& s150l != null){
-			
 			return true;
+		}else{
+			LOGGER.log(Level.WARN, "Fahrschalter not yet properly initalized:+" +
+					"s150a :" + s150a +
+					", s150b :" + s150b +
+					", s150d :" + s150d +
+					", s150e :" + s150e +
+					", s150f :" + s150f +
+					", s150g :" + s150g +
+					", s150l :" + s150l);
 		}
-		
+
 		return false;
 	}
 	/**
 	 * 
-	 * @return the global id (key) from the buffered contacts
+	 * @return the global id (key) from the stored contacts
 	 */
-	public String getMessagePositionFahrschalter(String key, boolean isEnabled) {		
+	public String getFahrschalterKey(ComponentServiceBase service, String key, boolean isEnabled) {
 		boolean isChanged = isChanged(key, isEnabled);
-		boolean isFarschalterInitialized = isInitialized();
+		boolean isFarschalterInitialized = isInitialized(service);
 		
 		if(isChanged && isFarschalterInitialized){
 			
@@ -113,7 +116,7 @@ public class Re420ElementFahrschalter {
 			}
 			
 			else{
-				if(keyListFahrschalter.contains(key)){
+				if(UBW_KEYS.contains(key)){
 					LOGGER.log(Level.TRACE, "fahrschalter position unknown with key " + key);
 					key = "";
 				}
@@ -127,54 +130,54 @@ public class Re420ElementFahrschalter {
 		return key;
 	}
 
-	private boolean isChanged(String key, boolean value) {
+	private boolean isChanged(String key, boolean b) {
 		boolean isChanged = false;
 
         if (key.equals("s150a")) {
-            if (s150a == null || !s150a.equals(value)) {
-                s150a = value;
+            if (s150a == null || !s150a.equals(b)) {
+                s150a = b;
                 isChanged = true;
             } else {
                 isChanged = false;
             }
         } else if (key.equals("s150b")) {
-            if (s150b == null || !s150b.equals(value)) {
-                s150b = value;
+            if (s150b == null || !s150b.equals(b)) {
+                s150b = b;
                 isChanged = true;
             } else {
                 isChanged = false;
             }
         } else if (key.equals("s150d")) {
-            if (s150d == null || !s150d.equals(value)) {
-                s150d = value;
+            if (s150d == null || !s150d.equals(b)) {
+                s150d = b;
                 isChanged = true;
             } else {
                 isChanged = false;
             }
         } else if (key.equals("s150e")) {
-            if (s150e == null || !s150e.equals(value)) {
-                s150e = value;
+            if (s150e == null || !s150e.equals(b)) {
+                s150e = b;
                 isChanged = true;
             } else {
                 isChanged = false;
             }
         } else if (key.equals("s150f")) {
-            if (s150f == null || !s150f.equals(value)) {
-                s150f = value;
+            if (s150f == null || !s150f.equals(b)) {
+                s150f = b;
                 isChanged = true;
             } else {
                 isChanged = false;
             }
         } else if (key.equals("s150g")) {
-            if (s150g == null || !s150g.equals(value)) {
-                s150g = value;
+            if (s150g == null || !s150g.equals(b)) {
+                s150g = b;
                 isChanged = true;
             } else {
                 isChanged = false;
             }
         } else if (key.equals("s150l")) {
-            if (s150l == null || !s150l.equals(value)) {
-                s150l = value;
+            if (s150l == null || !s150l.equals(b)) {
+                s150l = b;
                 isChanged = true;
             } else {
                 isChanged = false;
@@ -183,16 +186,4 @@ public class Re420ElementFahrschalter {
 		
 		return isChanged;
 	}
-	
-	private void initializeFahrschalter(){
-		keyListFahrschalter = new LinkedList<String>();
-		keyListFahrschalter.add("s150a");
-		keyListFahrschalter.add("s150b");
-		keyListFahrschalter.add("s150d");
-		keyListFahrschalter.add("s150e");
-		keyListFahrschalter.add("s150f");
-		keyListFahrschalter.add("s150g");
-		keyListFahrschalter.add("s150l");
-	}
-
 }

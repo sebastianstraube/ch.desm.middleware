@@ -10,6 +10,7 @@ public abstract class EndpointCommon extends EndpointBase implements EndpointCom
     public abstract void init();
     public abstract void start() throws InterruptedException;
     public abstract void stop();
+    public abstract void reset();
 
     /**
      * make sure to call addEndpointListener in implementation class

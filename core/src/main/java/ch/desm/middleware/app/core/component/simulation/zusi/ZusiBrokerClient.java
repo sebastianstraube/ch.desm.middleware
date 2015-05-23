@@ -36,7 +36,6 @@ public class ZusiBrokerClient extends ComponentBrokerClientBase {
 	@Override
 	protected void intializeSignedTopic() {
         signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-        signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420_FABISCH);
         signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
         signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
 	}

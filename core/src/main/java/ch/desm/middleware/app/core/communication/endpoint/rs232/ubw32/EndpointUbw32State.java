@@ -1,15 +1,15 @@
-package ch.desm.middleware.app.core.component.interlocking.obermatt;
+package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
 
 import java.util.HashMap;
 
 /**
  * Created by Sebastian on 22.11.2014.
  */
-public class OmEndpointUbw32Cache {
+public class EndpointUbw32State {
 
-    HashMap<String ,String>  state;
+    HashMap<String ,String> state;
 
-    public OmEndpointUbw32Cache(){
+    public EndpointUbw32State(){
         state = new HashMap<String, String>();
     }
 
@@ -17,7 +17,7 @@ public class OmEndpointUbw32Cache {
         return state.get(key) != null;
     }
 
-    public boolean isStateChanged(String key, String value){
+    public boolean hasChanged(String key, String value){
 
         boolean isChanged = false;
         if(isStateAvailable(key)){

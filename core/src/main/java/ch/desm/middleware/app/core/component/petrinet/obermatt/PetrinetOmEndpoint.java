@@ -37,6 +37,14 @@ public class PetrinetOmEndpoint extends EndpointCommon {
         petriNetThread.interrupt();
     }
 
+    /**
+     *
+     */
+    @Override
+    public void reset(){
+
+    }
+
     @Override
     protected void registerEndpointListener() {
         try {

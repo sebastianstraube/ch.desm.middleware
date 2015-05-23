@@ -1,6 +1,7 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
+import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.common.ComponentMapBase;
@@ -60,6 +61,11 @@ public class ZusiService extends ComponentServiceBase {
      */
     public ZusiMessageProcessor getMessageProcessor(){
         return new ZusiMessageProcessor();
+    }
+
+    @Override
+    public EndpointCommon getEndpoint() {
+        return null;
     }
 
     /**
@@ -162,8 +168,8 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public ZusiMapParameterMiddleware getZusiMapParameterMiddleware(){
-        return new ZusiMapParameterMiddleware();
+    public ZusiMapParameterRe420 getZusiMapParameterMiddleware(){
+        return new ZusiMapParameterRe420();
     }
 
     /**
@@ -198,4 +204,11 @@ public class ZusiService extends ComponentServiceBase {
         return new ZusiEndpointLogic();
     }
 
+    /**
+     *
+     * @return
+     */
+    public ZusiMapRe420 getZusiMapRe420(){
+        return new ZusiMapRe420();
+    }
 }

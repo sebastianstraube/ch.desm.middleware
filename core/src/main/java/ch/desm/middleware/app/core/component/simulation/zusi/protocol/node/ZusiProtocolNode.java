@@ -140,5 +140,27 @@ public class ZusiProtocolNode extends ZusiProtocolNodeBase {
 
         return b;
     }
+
+
+    /**
+     *
+     * @param nodes
+     * @return
+     */
+    private String traverse(List<ZusiProtocolNode> nodes){
+        Iterator<ZusiProtocolNode> iter = nodes.iterator();
+        String s="";
+        while(iter.hasNext()){
+            ZusiProtocolNode node = iter.next();
+            s += "\n" + node.toString();
+            traverse(node.getNodes());
+        }
+
+        return s;
+    }
+
+    public String toString(){
+        return "node: " + node + ", id: " + id + ", data: " + data + traverse(nodes);
+    }
 }
 

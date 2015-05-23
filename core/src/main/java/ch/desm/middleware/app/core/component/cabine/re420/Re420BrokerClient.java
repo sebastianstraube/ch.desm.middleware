@@ -2,6 +2,7 @@ package ch.desm.middleware.app.core.component.cabine.re420;
 
 import java.util.LinkedList;
 
+import ch.desm.middleware.app.common.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -12,7 +13,7 @@ import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 
-public class Re420BrokerClient extends Re420BrokerClientBase {
+public class Re420BrokerClient extends ComponentBrokerClientBase {
 
 	private static Logger LOGGER = Logger.getLogger(Re420BrokerClient.class);
 
@@ -22,8 +23,7 @@ public class Re420BrokerClient extends Re420BrokerClientBase {
 
 
 	public Re420BrokerClient(Broker broker, Re420Service service) {
-		super(broker, service.getendpointUbw(), service.getendpointFabisch());
-
+		super(broker);
         this.service = service;
 		this.processor = new Re420MessageProcessor();
 		this.translator = new MessageTranslatorMiddleware();
@@ -41,52 +41,7 @@ public class Re420BrokerClient extends Re420BrokerClientBase {
 		LinkedList<MessageMiddleware> messageCommon = translator
 				.toMiddlewareMessageList(message);
 
-		processor.processBrokerMessage(this, messageCommon);
-	}
-
-	/**
-	 * TODO implementation
-	 * 
-	 * @param message
-	 */
-	public void onIncomingEndpointMessage(String message) {
-
-		LOGGER.log(Level.TRACE, "endpoint (" + this.getClass() + ") received message: "
-                + message.replaceAll("\n", ""));
-
-		if (!message.isEmpty()) {
-			
-			if(message.startsWith("#fabisch#")){
-				
-				LOGGER.log(Level.TRACE, "endpoint (" + this.getClass()
-                        + ") received message fabisch: " + message);
-				
-				//do nothing
-			}else{
-			
-				LOGGER.log(Level.DEBUG, "endpoint (" + this.getClass()
-						+ ") received message RS232: " + message);
-				
-				processIncomingUbw32(message);
-			}
-			
-		}
-	}
-	
-	private void processIncomingUbw32(String message){
-
-		MessageUbw32Base ubw32Message = translator
-				.decodeUbw32EndpointMessage(message,
-						MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
-
-		if(ubw32Message != null){
-			
-			String messages = processor.convertToMiddlewareMessage(this, ubw32Message);
-
-            //TODO refactoring
-			//processor.processEndpointMessage(this, messages,
-			//		MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-		}		
+		processor.processBrokerMessage(service, messageCommon);
 	}
 
 	/**
@@ -94,9 +49,6 @@ public class Re420BrokerClient extends Re420BrokerClientBase {
 	 */
 	@Override
 	protected void intializeSignedTopic() {
-		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM);
-		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232);
-		signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420_FABISCH);
         signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
 		signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
 	}

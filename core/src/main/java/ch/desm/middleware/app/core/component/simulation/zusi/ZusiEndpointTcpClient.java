@@ -63,6 +63,14 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
         LOGGER.log(Level.INFO, "connected to Server with address:" + socket.getInetAddress() + ", remote port: " + socket.getPort()+ ", locale port: " + socket.getLocalPort());
     }
 
+    /**
+     *
+     */
+    @Override
+    public void reset(){
+
+    }
+
     public void sendCommand(String globalId){
         try {
             ZusiProtocolNode n = service.getZusiProtocolNodeHelper().getRoot(globalId);

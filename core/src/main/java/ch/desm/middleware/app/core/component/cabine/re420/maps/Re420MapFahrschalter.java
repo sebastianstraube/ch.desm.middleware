@@ -1,10 +1,9 @@
 package ch.desm.middleware.app.core.component.cabine.re420.maps;
 
-import java.util.Map;
-
+import ch.desm.middleware.app.common.ComponentMapBase;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.common.ComponentMapBase;
+import java.util.Map;
 
 public class Re420MapFahrschalter extends ComponentMapBase {
 

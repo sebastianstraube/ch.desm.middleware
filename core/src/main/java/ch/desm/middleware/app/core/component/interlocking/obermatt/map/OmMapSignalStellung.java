@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.interlocking.obermatt.maps;
+package ch.desm.middleware.app.core.component.interlocking.obermatt.map;
 
 import java.util.HashMap;
 import java.util.Map;

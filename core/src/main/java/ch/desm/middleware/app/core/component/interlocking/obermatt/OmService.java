@@ -1,10 +1,11 @@
 package ch.desm.middleware.app.core.component.interlocking.obermatt;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32State;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.common.ComponentMapMiddleware;
-import ch.desm.middleware.app.core.component.interlocking.obermatt.maps.OmMapPetrinet;
+import ch.desm.middleware.app.core.component.interlocking.obermatt.map.OmMapPetrinet;
 
 /**
  * Created by Sebastian on 11.11.2014.
@@ -16,8 +17,11 @@ public class OmService {
     private ComponentMapMiddleware componentMapMiddleware;
     private OmBrokerClient client;
     private OmEndpointUbw32 endpoint;
-    private OmEndpointUbw32Cache cache;
     private OmMapPetrinet map;
+
+    //TODO refactor move to common ubw
+    private EndpointUbw32State state;
+
 
 
 
@@ -25,7 +29,7 @@ public class OmService {
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new OmMessageProcessor(this);
-        this.cache = new OmEndpointUbw32Cache();
+        this.state = new EndpointUbw32State();
         this.map = new OmMapPetrinet();
 
         this.client = new OmBrokerClient(broker, this);
@@ -53,11 +57,11 @@ public class OmService {
         return endpoint;
     }
 
-    public OmEndpointUbw32Cache getCache(){
-        return cache;
+    public EndpointUbw32State getState(){
+        return state;
     }
 
-    public OmMapPetrinet getMap(){
+    public OmMapPetrinet getMapPetrinet(){
         return this.map;
     }
 }

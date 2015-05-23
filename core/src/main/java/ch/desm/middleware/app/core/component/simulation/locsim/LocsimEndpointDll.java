@@ -27,4 +27,13 @@ public class LocsimEndpointDll extends EndpointDll {
     public void onIncomingEndpointMessage(String message) {
 
     }
+
+    /**
+     *
+     */
+    @Override
+    public void reset(){
+
+    }
+
 }

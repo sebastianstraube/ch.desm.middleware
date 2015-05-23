@@ -4,13 +4,13 @@ import java.util.Map;
 
 import ch.desm.middleware.app.common.ComponentMapBase;
 
-public class Ubw32MapUbw32Analog extends ComponentMapBase {
+public class Re420MapUbw32Analog extends ComponentMapBase {
 
 	//B0 = AN0, B1 = AN1
 	//11bin = 3dez 
 	public static final String PINBITMASK_INPUT_ANALOG = "3";
 	
-	public Ubw32MapUbw32Analog(){
+	public Re420MapUbw32Analog(){
 		super();
 	}
 		
@@ -28,8 +28,9 @@ public class Ubw32MapUbw32Analog extends ComponentMapBase {
 	}
 	
 	public void init(){
-		map.put("ao269", "B1"); //Drucksensor Hauptleitung
-		map.put("ao173", "B0"); //Drucksensor Bremszylinder
-
+		map.put("a74", "D0"); //kV-Anzeige
+		map.put("a79", "D1"); //A-Anzeige Motorenstrom
+		map.put("a79.1", "D3"); //A-Anzeige Differenzstrom
+		map.put("a94", "D2"); //Anzeige Vist
 	}
 }

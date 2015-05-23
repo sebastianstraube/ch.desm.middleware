@@ -1,10 +1,11 @@
 package ch.desm.middleware.app.core;
 
 
+import ch.desm.middleware.app.common.ComponentServiceBase;
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointFabisch;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
+import ch.desm.middleware.app.core.component.cabine.re420.Re420Service;
 import ch.desm.middleware.app.core.component.interlocking.obermatt.OmService;
 import ch.desm.middleware.app.core.component.gui.management.ManagementService;
 import ch.desm.middleware.app.core.component.petrinet.obermatt.PetrinetOmService;
@@ -68,12 +69,14 @@ public class RunAppSingleton extends DaemonThreadBase {
         startManagement(jettyServer, "ws://"+host+":"+ port + tyrusWebsocketContextPath +serverEndpointContextPath);
         /***************************************************************************/
 
-        //startOmlStellwerk(EndpointRs232.EnumSerialPorts.COM10);
+        //startOmStellwerk(EndpointRs232.EnumSerialPorts.COM3);
         //startCabineRe420(EndpointRs232.EnumSerialPorts.COM4, EndpointRs232.EnumSerialPorts.COM8);
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
-        startOmlPetrinet();
-        //startZusiFahrpult("7.94.80.35", 1436);
+        //startOmPetrinet();
+        startZusiFahrpult("7.94.80.35", 1436);
         //startZusiAusbildung("7.94.80.35", 1436);
+
+        startCabineRe420(EndpointRs232.EnumSerialPorts.COM12);
     }
 
     private JettyServer startJettyServer(String path){
@@ -94,13 +97,19 @@ public class RunAppSingleton extends DaemonThreadBase {
         ManagementService management = isServerStarted(server) ? new ManagementService(Broker.getInstance(), uri) : null;
 	}
 
-	public void startOmlPetrinet(){
+	public void startOmPetrinet(){
         PetrinetOmService petrinet = new PetrinetOmService(Broker.getInstance());
 	}
 
-	public void startOmlStellwerk(EndpointRs232.EnumSerialPorts port){
+	public void startOmStellwerk(EndpointRs232.EnumSerialPorts port){
         OmService oml = new OmService(Broker.getInstance(), port);
 	}
+
+    public void startCabineRe420(EndpointRs232.EnumSerialPorts port){
+        Re420Service service = new Re420Service(Broker.getInstance(), port);
+        service.getEndpoint().init();
+        service.getEndpoint().start();
+    }
 
     public void startZusiFahrpult(String ip, int port){
         ZusiService serviceFahrpult = new ZusiService(Broker.getInstance(), ip, port);
@@ -141,12 +150,6 @@ public class RunAppSingleton extends DaemonThreadBase {
 		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(portRs232);
 		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232, endpointDll);
 	}
-
-    public void startCabineRe420(EndpointRs232.EnumSerialPorts comFabisch, EndpointRs232.EnumSerialPorts comUbw){
-        Re420EndpointFabisch endpointFabisch = new Re420EndpointFabisch(comFabisch);
-        Re420EndpointUbw32 endpointUbw32 = new Re420EndpointUbw32(comUbw);
-        //Re420BrokerClient re420 = new Re420BrokerClient(Broker.getInstance(), endpointUbw32, endpointFabisch);
-    }
 
 	/**
 	 * The "PM" Command : Set hardware PWM output values command Sets a PWM
@@ -190,11 +193,12 @@ public class RunAppSingleton extends DaemonThreadBase {
 			LOGGER.log(Level.ERROR, e);
 		}
 
-
+        /*
+        Re420Service service = new Re420Service()
 		Re420EndpointUbw32 re420EndpointUbw32;
 
         if (comPort.equals("1")) {
-            re420EndpointUbw32 = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM1);
+            re420EndpointUbw32 = new Re420EndpointUbw32(new ComponentServiceBase(), EndpointRs232.EnumSerialPorts.COM1);
 
         } else if (comPort.equals("2")) {
             re420EndpointUbw32 = new Re420EndpointUbw32(EndpointRs232.EnumSerialPorts.COM2);
@@ -280,6 +284,7 @@ public class RunAppSingleton extends DaemonThreadBase {
                 dutyCycle = String.valueOf(Integer.valueOf(dutyCycle) - Integer.valueOf(step));
             }
 		}
+		*/
 	}
 
      public void doHangout(){

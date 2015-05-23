@@ -73,30 +73,13 @@ public class ManagementEndpoint extends EndpointCommon {
         }
     }
 
-    /*
-    new Endpoint() {
-
-                @Override
-                public void onOpen(Session session, EndpointConfig config) {
-                    try {
-                        session.addMessageHandler(new MessageHandler.Whole<String>() {
-
-                            @Override
-                            public void onMessage(String message) {
-                                System.out.println("Received message: "+message);
-                                messageLatch.countDown();
-                            }
-                        });
-
-                        session.getBasicRemote().sendText(SENT_MESSAGE);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+    /**
+     *
      */
+    @Override
+    public void reset(){
 
-
+    }
 
     /**
      * close Websocket Session

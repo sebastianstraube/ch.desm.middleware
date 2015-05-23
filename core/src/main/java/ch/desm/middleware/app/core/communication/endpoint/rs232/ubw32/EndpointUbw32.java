@@ -1,12 +1,12 @@
-package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
+package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
 
 import jssc.SerialPortEvent;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232Config;
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232ConfigBuilder;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232Config;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232ConfigBuilder;
 
 /**
  * 
@@ -53,6 +53,8 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 	private EndpointUbw32Thread thread;
 	private EndpointUbw32Cache cache;
     private Object serialEventBlock;
+	private EndpointUbw32State state;
+
 	/**
 	 * 
 	 * @param enumSerialPort
@@ -72,26 +74,13 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 		this.thread = new EndpointUbw32Thread(this);
 		this.cache = new EndpointUbw32Cache();
         this.serialEventBlock = new Object();
+		this.state = new EndpointUbw32State();
 	}
 
     @Override
     public void init() {
         super.init();
-        this.sendCommandReset();
-
-//		this.sendCommandConfigureUbw32(); //OK Packet OFF
-
-        this.sendCommandVersion();
-
-        if (isConfigurationDigitalAvailable()) {
-            this.sendCommandConfigure(configurationDigital);
-        }
-
-        if (isPinBitMaskAnalogAvailable()) {
-            this.sendCommandConfigureAnalogInputs(pinbitMaskInputAnalog);
-        }
-
-        setCacheEnabled(true);
+		reset();
     }
 
     @Override
@@ -108,6 +97,21 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
             this.thread.interrupt();
         }
     }
+
+	public void reset() {
+		this.sendCommandReset();
+		//		this.sendCommandConfigureUbw32(); //OK Packet OFF
+		this.sendCommandVersion();
+		if (isConfigurationDigitalAvailable()) this.sendCommandConfigure(configurationDigital);
+		if (isPinBitMaskAnalogAvailable()) this.sendCommandConfigureAnalogInputs(pinbitMaskInputAnalog);
+		this.cache = new EndpointUbw32Cache();
+		this.serialEventBlock = new Object();
+		this.state = new EndpointUbw32State();
+	}
+
+	public EndpointUbw32State getState(){
+		return state;
+	}
 
 	public String getPinBitMaskInputAnalog() {
 		return this.pinbitMaskInputAnalog;

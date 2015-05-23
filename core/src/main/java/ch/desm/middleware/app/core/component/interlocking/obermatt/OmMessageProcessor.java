@@ -18,7 +18,6 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
     public OmMessageProcessor(OmService service) {
 		this.fahrStrassenSchalter = new OmLogicFahrstrassenSchalter();
-
         this.service = service;
 	}
 
@@ -40,7 +39,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
                 String parameter = util.getParameterValueEndpoint(element.getParameter());
                 boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
-                String key = service.getMap().mapBrokerToEndpointMessage(globalId);
+                String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
                 delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(),  service.getEndpoint().getMapAnalog(), key, parameter, isInput);
             } catch (Exception e) {
                 //LOGGER.log(Level.WARN, e.getMessage());
@@ -173,7 +172,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
             String parameter = isEnabled == true ? "on" : "off";
             String key = entry.getKey();
 
-            if(service.getCache().isStateChanged(key, parameter)){
+            if(service.getState().hasChanged(key, parameter)){
 
                 //find the middleware message of the changed key
                 String stream =  service.getComponentMapMiddleware().getValue(key);

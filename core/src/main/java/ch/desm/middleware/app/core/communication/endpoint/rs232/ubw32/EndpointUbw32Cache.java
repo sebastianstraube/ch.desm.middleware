@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.communication.endpoint.serial.ubw32;
+package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
 
 import java.util.LinkedList;
 import java.util.Arrays;
@@ -19,6 +19,13 @@ public class EndpointUbw32Cache {
 	private boolean isCacheEnabled;
 	
 	public EndpointUbw32Cache() {
+		this.stateI = "";
+		this.statePI = new LinkedList<String>();
+		this.stateMapIA = new HashMap<String, String>();
+		this.isCacheEnabled = EndpointUbw32Config.CACHE_ENABLED;
+	}
+
+	public void reset(){
 		this.stateI = "";
 		this.statePI = new LinkedList<String>();
 		this.stateMapIA = new HashMap<String, String>();

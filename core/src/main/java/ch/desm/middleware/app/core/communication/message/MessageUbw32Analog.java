@@ -3,7 +3,7 @@ package ch.desm.middleware.app.core.communication.message;
 import java.util.LinkedList;
 import java.util.Arrays;
 
-import ch.desm.middleware.app.core.communication.endpoint.serial.ubw32.EndpointUbw32RegisterAnalog;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32RegisterAnalog;
 
 public class MessageUbw32Analog extends MessageUbw32Base {
 

@@ -14,6 +14,11 @@ public class TcpIpServer extends EndpointTcpServer {
 	}
 
     @Override
+    public void reset() {
+
+    }
+
+    @Override
     protected void registerEndpointListener() {
         try {
             addEndpointListener(this);

@@ -1,14 +1,13 @@
 package ch.desm.middleware.app.core.component.simulation.locsim;
 
-import ch.desm.middleware.app.core.communication.endpoint.EndpointBase;
 import jssc.SerialPortException;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232;
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232Config;
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232ConfigBuilder;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232Config;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232ConfigBuilder;
 
 public class LocsimEndpointRs232 extends EndpointRs232 {
 	
@@ -64,6 +63,14 @@ public class LocsimEndpointRs232 extends EndpointRs232 {
 
 	@Override
 	public void onIncomingEndpointMessage(String message) {
+
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public void reset(){
 
 	}
 }

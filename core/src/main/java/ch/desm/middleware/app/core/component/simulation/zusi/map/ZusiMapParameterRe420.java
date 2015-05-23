@@ -8,11 +8,11 @@ import java.util.Map;
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class ZusiMapParameterMiddleware  {
+public class ZusiMapParameterRe420 {
 
     HashMap<String, Pair<String, String>> map;
 
-    public ZusiMapParameterMiddleware(){
+    public ZusiMapParameterRe420(){
         this.map = new HashMap();
         this.init();
     }
@@ -23,8 +23,12 @@ public class ZusiMapParameterMiddleware  {
 
     //Pair{on, off}
     protected void init(){
-        map.put("0200-0a00::5500", new Pair<String, String>("1","0"));
-        map.put("0200-0a00::1300", new Pair<String, String>("1","0"));
+        map.put("S129", new Pair<String, String>("02","00")); // Stromabnehmer
+        map.put("S132", new Pair<String, String>("02","00")); // Hauptschalter
+        map.put("S140a", new Pair<String, String>("02","01")); // Steuerstrom
+        map.put("S140b", new Pair<String, String>("00","01")); // Steuerstrom
+        map.put("S235", new Pair<String, String>("01","02")); // Steuerstrom
+
     }
 
     /**

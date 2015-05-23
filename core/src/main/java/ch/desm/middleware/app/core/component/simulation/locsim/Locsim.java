@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.dll.EndpointDllListenerInterface;
-import ch.desm.middleware.app.core.communication.endpoint.serial.EndpointRs232ListenerInterface;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232ListenerInterface;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
@@ -81,7 +81,6 @@ public class Locsim extends LocsimBrokerClientBase implements
 	@Override
 	protected void intializeSignedTopic() {
         signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-        signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420_FABISCH);
         signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
 	}
 
