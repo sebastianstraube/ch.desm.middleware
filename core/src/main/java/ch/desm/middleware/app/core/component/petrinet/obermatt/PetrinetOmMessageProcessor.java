@@ -26,7 +26,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
 
     private void processBrokerMessage(PetrinetOmService service, MessageMiddleware element){
 
-        if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
+        if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT)){
             try {
                 String sensorName = service.getMap().mapBrokerToEndpointMessage(element.getGlobalId());
                 int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
@@ -93,6 +93,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         endpoint.setSensor(sensorName, sensorValue);
     }
 
+    //TODO refactoring
     public boolean isInitProcessMessage(MessageMiddleware element){
 
         if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) {

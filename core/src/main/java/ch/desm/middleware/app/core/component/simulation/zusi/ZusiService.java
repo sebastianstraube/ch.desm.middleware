@@ -184,8 +184,8 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public ZusiMapComponentPetrinet getZusiMapPetrinet(){
-        return new ZusiMapComponentPetrinet();
+    public ZusiMapPetrinet getZusiMapPetrinet(){
+        return new ZusiMapPetrinet();
     }
 
     /**

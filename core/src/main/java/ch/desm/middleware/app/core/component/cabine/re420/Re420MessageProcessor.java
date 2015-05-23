@@ -3,24 +3,23 @@ package ch.desm.middleware.app.core.component.cabine.re420;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Map;
 
 import ch.desm.middleware.app.common.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import ch.desm.middleware.app.core.component.cabine.re420.state.Re420StateFahrschalter;
+import ch.desm.middleware.app.core.component.cabine.re420.logic.Re420LogicFahrschalter;
 
 public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Service> {
 
 	private static Logger LOGGER = Logger.getLogger(Re420MessageProcessor.class);
-	private Re420StateFahrschalter fahrschalter;
+	private Re420LogicFahrschalter fahrschalter;
 
 	public static final String INIT_MESSAGE = "mgmt.stellwerk.obermattlangnau";
 
 	public Re420MessageProcessor() {
-		this.fahrschalter = new Re420StateFahrschalter();
+		this.fahrschalter = new Re420LogicFahrschalter();
         this.util = new UtilityMessageProcessor();
 	}
 
@@ -132,7 +131,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 		String mwMessages= "";
 
 		for (String el : l){
-            if(Re420StateFahrschalter.UBW_KEYS.contains(el.split(MessageBase.MESSAGE_ELEMENT_CUT)[0])){
+            if(Re420LogicFahrschalter.UBW_KEYS.contains(el.split(MessageBase.MESSAGE_ELEMENT_CUT)[0])){
                 MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(el);
                 boolean isEnabled = mwm.getParameter().equalsIgnoreCase("on");
                 String key = fahrschalter.getFahrschalterKey(service, mwm.getGlobalId(), isEnabled);

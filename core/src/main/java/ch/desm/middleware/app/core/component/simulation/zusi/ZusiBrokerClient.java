@@ -27,7 +27,7 @@ public class ZusiBrokerClient extends ComponentBrokerClientBase {
 
 	@Override
 	protected void onIncomingBrokerMessage(String message) {
-		LOGGER.log(Level.INFO, "zusi (" + this.getClass() + ") received broker message: " + message);
+		LOGGER.log(Level.INFO, this.getClass().getSimpleName()+" received broker message: " + message);
 
         LinkedList<MessageMiddleware> l = service.getTranslator().toMiddlewareMessageList(message);
         service.getMessageProcessor().processBrokerMessage(service, l);
@@ -36,7 +36,7 @@ public class ZusiBrokerClient extends ComponentBrokerClientBase {
 	@Override
 	protected void intializeSignedTopic() {
         signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-        signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
+        signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
         signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
 	}
 

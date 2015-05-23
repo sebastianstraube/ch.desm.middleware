@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class ZusiLogicIsolierung {
 
-    public static final int TRAIN_LENGTH = 50;
+    public static final int TRAIN_LENGTH = 80; //in m
     public static String LOGIC_ISOLIERUNG_BELEGEN_CE = "logic_iso_ce_belegen";
     public static String LOGIC_ISOLIERUNG_BELEGEN_EGF = "logic_iso_egf_belegen";
     public static String LOGIC_ISOLIERUNG_BELEGEN_1 = "logic_iso_1_belegen";

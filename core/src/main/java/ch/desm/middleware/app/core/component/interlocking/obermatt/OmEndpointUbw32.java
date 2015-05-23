@@ -47,12 +47,12 @@ public class OmEndpointUbw32 extends EndpointUbw32 {
 
         MessageUbw32Base ubw32Message = service.getTranslator()
                 .decodeUbw32EndpointMessage(message,
-                        MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU);
+                        MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
 
         //processable message
         if(ubw32Message != null){
             String messages = service.getProcessor().convertToMiddlewareMessage(this, ubw32Message);
-            service.getProcessor().processEndpointMessage(service.getBrokerClient(), messages, MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU);
+            service.getProcessor().processEndpointMessage(service.getBrokerClient(), messages, MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
         }
     }
 

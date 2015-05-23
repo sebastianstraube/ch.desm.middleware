@@ -10,7 +10,6 @@ import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtoc
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import sun.plugin2.message.Message;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 processBrokerMessageCabineRe420(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU):{
+            case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT):{
                 //TODO implementation
                 break;
             }
@@ -56,7 +55,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 processBrokerMessageManagament(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU):{
+            case(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT):{
                 processBrokerMessagePetrinet(service, message);
                 break;
             }
@@ -153,20 +152,22 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param message
      */
     protected void processBrokerMessagePetrinet(ZusiService service, MessageMiddleware message){
-        String key = service.getZusiMapPetrinet().getKey(message.getGlobalId());
-        if(!key.isEmpty()){
-            String mwmStream = service.getComponentMapMiddleware().getValue(key);
-            mwmStream = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
-            MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
-            mwm.setParameter(mwm.getParameter());
+        if(message.getParameter().equalsIgnoreCase(MessageBase.MESSAGE_PARAMETER_ON)){
+            String key = service.getZusiMapPetrinet().getKey(message.getGlobalId());
+            if(!key.isEmpty()){
+                String mwmStream = service.getComponentMapMiddleware().getValue(key);
+                mwmStream = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
+                MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
+                mwm.setParameter(mwm.getParameter());
 
-            if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
-                processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
-            }
-            else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
-                processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
-            }
-        }else LOGGER.log(Level.TRACE, "petrinet mapping non-existent with message: " + message);
+                if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
+                    processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
+                }
+                else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
+                    processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
+                }
+            }else LOGGER.log(Level.INFO, "petrinet broker message processing skipped: " + message);
+        } LOGGER.log(Level.INFO, "petrinet broker message processing skipped cause parameter off: " + message);
     }
 
     /**
@@ -282,7 +283,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
     protected void processLogicParameter(ZusiService service, String globalId, String parameterValue){
         ArrayList<String> l = service.getZusiEndpointLogic().getIsoMwmFromParameter(service, globalId, parameterValue);
         for(String mwm : l){
-            super.processEndpointMessage(service.getBrokerClient(), mwm, service.getZusiEndpointLogic().getIsolierungTopic());
+            super.processEndpointMessage(service.getBrokerClient(), mwm, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
         }
     }
 

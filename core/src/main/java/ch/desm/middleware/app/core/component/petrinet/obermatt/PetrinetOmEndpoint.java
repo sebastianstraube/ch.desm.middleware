@@ -62,7 +62,7 @@ public class PetrinetOmEndpoint extends EndpointCommon {
             if(!message.isEmpty()){
                 String parameter = pair.getRight() == 0? "off" : "on";
                 message = message.replace(MessageBase.MESSAGE_PARAMETER_DELIMITER, parameter);
-                service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU);
+                service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
             }
         } catch (ClassCastException e) {
             LOGGER.log(Level.ERROR, "Error on message: " + jsonMessage + "with: " + e);

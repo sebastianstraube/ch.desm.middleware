@@ -33,7 +33,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
     private void processBrokerMessage(OmService service, MessageMiddleware element){
 
         //incoming message with OML topic
-        if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU)){
+        if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT)){
             try {
                 String globalId = element.getGlobalId();
                 String parameter = util.getParameterValueEndpoint(element.getParameter());
@@ -58,7 +58,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
             }
-        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU)){
+        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT)){
             try {
                 String globalId = element.getGlobalId();
                 String parameter = util.getParameterValueEndpoint(element.getParameter());

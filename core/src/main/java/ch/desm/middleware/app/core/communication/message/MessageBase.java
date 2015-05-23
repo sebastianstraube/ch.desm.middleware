@@ -13,8 +13,8 @@ public class MessageBase{
 	public static final String MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL = "locsim-dll";
 	public static final String MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232 = "locsim-rs232";
 	public static final String MESSAGE_TOPIC_CABINE_RE420 = "kabinere420";
-	public static final String MESSAGE_TOPIC_INTERLOCKING_OBERMATT_LANGNAU = "stellwerkobermatt";
-	public static final String MESSAGE_TOPIC_PETRINET_OBERMATT_LANGNAU = "petrinet_obermatt";
+	public static final String MESSAGE_TOPIC_INTERLOCKING_OBERMATT = "stellwerkobermatt";
+	public static final String MESSAGE_TOPIC_PETRINET_OBERMATT = "petrinet_obermatt";
 	public static final String MESSAGE_TOPIC_MANAGEMENT = "management";
     public static final String MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT = "zusi_fahrpult";
     public static final String MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG = "zusi_ausbildung";

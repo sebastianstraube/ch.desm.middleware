@@ -101,7 +101,7 @@ public class OmMapPetrinet extends ComponentMapBase{
         map.put("7.91.02","OML_Kontakte_$7_WS1_1"); //WS1 gedrückt
         map.put("7.91.04","OML_logic_Kontakte_WS1_$ws1_minus"); //WS1 in Grundstellung - (45° Lage)
 // map.put("8.91.02",""); //FSS Grundstellung gedrückt
-// map.put("8.91.01",""); //FSS in Endlage
+        map.put("8.91.01","OML_Kontakte_$8_FSS_0EGF"); //FSS in Endlage
         map.put("8.91.03","OML_Kontakte_$8_FSS_10F"); //FSS in 10°-Lage von Langnau
         map.put("8.91.04","OML_Kontakte_$8_FSS_30F"); //FSS in 30°-Lage von Langnau
         map.put("8.91.05","OML_Kontakte_$8_FSS_45F"); //FSS in 45°-Lage von Langnau
@@ -112,13 +112,13 @@ public class OmMapPetrinet extends ComponentMapBase{
         map.put("8.91.21","OML_Kontakte_$8_FSS_45EG"); //FSS in 45°-Lage nach Langnau
 // map.put("8.91.22",""); //FSS in 80°-Lage nach Langnau
         map.put("8.91.23","OML_Kontakte_$8_FSS_90EG"); //FSS in 90°-Lage nach Langnau
-        map.put("10.99.01","OML_Iso_egf_$belegt"); //Isolierung egf belegt
+        map.put("10.99.01","OML_Iso_egf_$belegen"); //Isolierung egf belegt
 // map.put("10.99.02",""); //Isolierung egf direkt nach Isolierung 1 belegt
-        map.put("10.99.04","OML_Iso_1_$belegt"); //Isolierung 1 belegt
+        map.put("10.99.04","OML_Iso_1_$belegen"); //Isolierung 1 belegt
 // map.put("10.99.05",""); //Isolierung 1 direkt nach Isolierung ef belegt
 // map.put("10.99.06",""); //Isolierung 1 direkt nach Isolierung egf belegt
-        map.put("10.99.07","OML_Iso_ef_$belegt"); //Isolierung ef belegt
-        map.put("10.99.08","OML_Iso_cd_$belegt"); //Isolierung cd belegt
+        map.put("10.99.07","OML_Iso_ef_$belegen"); //Isolierung ef belegt
+        map.put("10.99.08","OML_Iso_cd_$belegen"); //Isolierung cd belegt
         map.put("10.99.09","OML_Iso_1_$frei"); //Freigabe Isolierung 1
         map.put("10.99.10","OML_Iso_egf_$frei"); //Freigabe Isolierung egf
 // map.put("11.99.01",""); //Freie Bahn verlangen von Langnau
@@ -163,7 +163,6 @@ public class OmMapPetrinet extends ComponentMapBase{
 // map.put("90.99.17",""); //Signallampe defekt; G rot
 // map.put("90.99.18",""); //Signallampe defekt; G Reserve-rot
 // map.put("90.99.19",""); //Signallampe defekt; G grün FB3
-        map.put("8.91.01","OML_Kontakte_$8_FSS_0EGF"); //FSS in Endlage
 
     }
 

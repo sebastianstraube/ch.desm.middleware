@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.cabine.re420.state;
+package ch.desm.middleware.app.core.component.cabine.re420.logic;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -8,9 +8,9 @@ import ch.desm.middleware.app.common.ComponentServiceBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public class Re420StateFahrschalter {
+public class Re420LogicFahrschalter {
 
-	private static Logger LOGGER = Logger.getLogger(Re420StateFahrschalter.class);
+	private static Logger LOGGER = Logger.getLogger(Re420LogicFahrschalter.class);
 
 	private Boolean s150a;
 	private Boolean s150b;
@@ -22,7 +22,7 @@ public class Re420StateFahrschalter {
 
 	public static Set<String> UBW_KEYS = new HashSet<>(Arrays.asList("s150a", "s150b", "s150d", "s150e", "s150f", "s150g", "s150l"));
 
-	public Re420StateFahrschalter(){
+	public Re420LogicFahrschalter(){
 		super();
 	}
 
@@ -64,54 +64,92 @@ public class Re420StateFahrschalter {
 		if(isChanged && isFarschalterInitialized){
 			
 			if (!s150a
-					&& !s150b
-					&& !s150d
-					&& !s150e
-					&& !s150f
-					&& !s150g
-					&& !s150l) {
+				&& !s150b
+				&& !s150d
+				&& !s150e
+				&& !s150f
+				&& !s150g
+				&& !s150l) {
 				key = "fahrschalter.neutral";
 			}
-			else if (s150b
+			else if (
+					!s150a
+					&& s150b
 					&& s150d
 					&& s150e
+					&& !s150f
 					&& s150g
 					&& s150l) {
 				key = "fahrschalter.fahren.m";
 			}
-			else if (s150b
-					&& s150e
-					&& s150f
-					&& s150g
-					&& s150l) {
+			else if (
+                    !s150a
+                    && s150b
+                    && !s150d
+                    && s150e
+                    && s150f
+                    && s150g
+                    && s150l) {
 				key = "fahrschalter.fahren.plusplus";
 			}
-			else if (s150a && s150e
-					&& s150g
-					&& s150l) {
+			else if (
+                    s150a
+                    && !s150b
+                    && !s150d
+                    && s150e
+                    && !s150f
+                    && s150g
+                    && s150l) {
 				key = "fahrschalter.bremsen.plus";
 			} 
 			else if (s150a
-					&& s150g) {
+                    && !s150b
+                    && !s150d
+                    && !s150e
+                    && !s150f
+                    && s150g
+                    && !s150l) {
 				key = "fahrschalter.bremsen.punkt";
 			} 
-			else if (s150a
-					&& s150l) {
+			else if (
+                    s150a
+                    && !s150b
+                    && !s150d
+                    && !s150e
+                    && !s150f
+                    && !s150g
+                    && s150l) {
 				key = "fahrschalter.bremsen.minus";
 			}
 			
-			else if (s150b
-					&& s150l) {
+			else if (
+                    !s150a
+                    && s150b
+                    && !s150d
+                    && !s150e
+                    && !s150f
+                    && !s150g
+                    && s150l) {
 				key = "fahrschalter.fahren.minus";
 			} 
-			else if (s150b
-					&& s150g) {
+			else if (!s150a
+                    && s150b
+                    && !s150d
+                    && !s150e
+                    && !s150f
+                    && s150g
+                    && !s150l) {
 				key = "fahrschalter.fahren.punkt";
 			} 
 			
-			else if (s150b
-					&& s150e
-					&& s150g) {
+			else if (
+                    !s150a
+                    && s150b
+                    && !s150d
+                    && s150e
+                    && !s150f
+                    && s150g
+                    && !s150l) {
 				key = "fahrschalter.fahren.plus";
 			}
 			

@@ -72,11 +72,11 @@ public class RunAppSingleton extends DaemonThreadBase {
         //startOmStellwerk(EndpointRs232.EnumSerialPorts.COM3);
         //startCabineRe420(EndpointRs232.EnumSerialPorts.COM4, EndpointRs232.EnumSerialPorts.COM8);
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
-        //startOmPetrinet();
+        startOmPetrinet();
         startZusiFahrpult("7.94.80.35", 1436);
-        //startZusiAusbildung("7.94.80.35", 1436);
+        startZusiAusbildung("7.94.80.35", 1436);
 
-        startCabineRe420(EndpointRs232.EnumSerialPorts.COM12);
+        //startCabineRe420(EndpointRs232.EnumSerialPorts.COM12);
     }
 
     private JettyServer startJettyServer(String path){

@@ -23,8 +23,4 @@ public class ZusiEndpointLogic {
         return l;
     }
 
-    public String getIsolierungTopic(){
-        return MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG;
-    }
-
 }

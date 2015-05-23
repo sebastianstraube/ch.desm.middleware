@@ -34,8 +34,8 @@ public abstract class ComponentMapBase {
 	 */
 	public String getKey(String value){
 		for(Entry<String, String> entry : map.entrySet()){
-			if(entry.getValue().toUpperCase().equalsIgnoreCase(value.toUpperCase())){
-				return entry.getKey().toLowerCase();
+			if(entry.getValue().equalsIgnoreCase(value)){
+				return entry.getKey();
 			}
 		}
 		return "";
@@ -48,33 +48,36 @@ public abstract class ComponentMapBase {
 	 */
 	public String getValue(String key){
 		for(Entry<String, String> entry : map.entrySet()){
-			if(entry.getKey().toUpperCase().equalsIgnoreCase(key.toUpperCase())){
-				return entry.getValue().toLowerCase();
+			if(entry.getKey().equalsIgnoreCase(key)){
+				return entry.getValue();
 			}
 		}
 		return "";
 	}
 
-    /**
-     *
-     * @param key
-     * @return
-     */
-    public String getStartWithKey(String key){
-        for(Entry<String, String> entry : map.entrySet()){
-            if(entry.getKey().toUpperCase().startsWith(key.toUpperCase())){
-                return entry.getValue().toLowerCase();
-            }
-        }
-        return "";
+	/**
+	 *
+	 * @param key
+	 * @return
+	 */
+    public boolean isKeyAvailable(String key){
+		for(Entry<String, String> entry : map.entrySet()){
+			if(entry.getKey().equalsIgnoreCase(key)) return true;
+		}
+		return false;
     }
 
-    public boolean isKeyAvailable(String id){
-        return map.containsKey(id);
-    }
-
-    public boolean isKeyAvailableIgnoreCase(String id){
-        return !getStartWithKey(id).isEmpty();
-    }
-	
+	/**
+	 *
+	 * @param key
+	 * @return
+	 */
+	public String getStartWithKey(String key){
+		for(Entry<String, String> entry : map.entrySet()){
+			if(entry.getKey().toLowerCase().startsWith(key.toLowerCase())){
+				return entry.getValue();
+			}
+		}
+		return "";
+	}
 }
