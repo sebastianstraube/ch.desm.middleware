@@ -16,6 +16,7 @@ import ch.desm.middleware.app.common.DaemonThreadBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.server.JettyServer;
 import ch.desm.middleware.app.core.server.TyrusServer;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -73,10 +74,9 @@ public class RunAppSingleton extends DaemonThreadBase {
         //startCabineRe420(EndpointRs232.EnumSerialPorts.COM4, EndpointRs232.EnumSerialPorts.COM8);
         //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
         startOmPetrinet();
-        startZusiFahrpult("7.94.80.35", 1436);
-        startZusiAusbildung("7.94.80.35", 1436);
-
-        //startCabineRe420(EndpointRs232.EnumSerialPorts.COM12);
+        //startZusiFahrpult("7.94.80.35", 1436);
+        //startZusiAusbildung("7.94.80.35", 1436);
+        //startCabineRe420("/dev/ttyACM0");
     }
 
     private JettyServer startJettyServer(String path){
@@ -101,11 +101,11 @@ public class RunAppSingleton extends DaemonThreadBase {
         PetrinetOmService petrinet = new PetrinetOmService(Broker.getInstance());
 	}
 
-	public void startOmStellwerk(EndpointRs232.EnumSerialPorts port){
+	public void startOmStellwerk(String port){
         OmService oml = new OmService(Broker.getInstance(), port);
 	}
 
-    public void startCabineRe420(EndpointRs232.EnumSerialPorts port){
+    public void startCabineRe420(String port){
         Re420Service service = new Re420Service(Broker.getInstance(), port);
         service.getEndpoint().init();
         service.getEndpoint().start();
@@ -145,9 +145,9 @@ public class RunAppSingleton extends DaemonThreadBase {
     }
 
 
-	public void startLocsim(EndpointRs232.EnumSerialPorts portRs232){
+	public void startLocsim(String port){
 		LocsimEndpointDll endpointDll = new LocsimEndpointDll("dispatcher.json");
-		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(portRs232);
+		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(port);
 		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232, endpointDll);
 	}
 

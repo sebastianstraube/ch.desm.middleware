@@ -17,8 +17,8 @@ public class Re420EndpointUbw32 extends EndpointUbw32 {
 	protected Re420MapUbw32Analog re420MapAnalog;
 	protected Re420Service service;
 	
-	public Re420EndpointUbw32(Re420Service service, EnumSerialPorts enumSerialPort) {
-		super(enumSerialPort, Re420MapUbw32Digital.PINBITMASK_CONFIGURATION_DIGITAL, Re420MapUbw32Analog.PINBITMASK_INPUT_ANALOG);
+	public Re420EndpointUbw32(Re420Service service, String port) {
+		super(port, Re420MapUbw32Digital.PINBITMASK_CONFIGURATION_DIGITAL, Re420MapUbw32Analog.PINBITMASK_INPUT_ANALOG);
 		this.registerEndpointListener();
 
 		this.service = service;

@@ -15,12 +15,19 @@ import java.net.InetSocketAddress;
 public class JettyServer extends DaemonThreadBase {
 
     private InetSocketAddress inetSocketAddress;
-    private String projectDir;
-    private String targetDir = "artifacts/core_war_exploded";
+    private String targetDir;
+    private String tempDir;
+    private String warDir;
+    private String descriptorDir;
+    private String contextPath;
 
     public JettyServer(String projectDir){
         this.inetSocketAddress = new InetSocketAddress("0.0.0.0", 80);
-        this.projectDir = projectDir;
+        targetDir = "/target/artifacts/core_war_exploded";
+        tempDir = targetDir+ "/tmp";
+        warDir = projectDir + targetDir;
+        descriptorDir = projectDir + targetDir+"/WEB-INF/web.xml";
+        contextPath = "/";
     }
 
     private static Logger LOGGER = Logger.getLogger(JettyServer.class);
@@ -34,16 +41,16 @@ public class JettyServer extends DaemonThreadBase {
         this.server = new Server(inetSocketAddress);
 
         WebAppContext context = new WebAppContext();
-        context.setContextPath("/");
-        context.setDescriptor(projectDir + "/target/" + targetDir+"/WEB-INF/web.xml");//location.toExternalForm() + "WEB-INF/web.xml");
+        context.setContextPath(contextPath);
+        context.setDescriptor(descriptorDir);//location.toExternalForm() + "WEB-INF/web.xml");
         context.setServer(server);
-        context.setWar(projectDir + "/target/"+targetDir);//);
+        context.setWar(warDir);//);
 
         // (Optional) Set the directory the war will extract to.
         // If not set, java.io.tmpdir will be used, which can cause problems
         // if the temp directory gets cleaned periodically.
         // Your build scripts should remove this directory between deployments
-        context.setTempDirectory(new File(projectDir + "/target/"+targetDir+"/tmp"));
+        context.setTempDirectory(new File(tempDir));
         server.setHandler(context);
         try {
             // Initialize javax.websocket layer

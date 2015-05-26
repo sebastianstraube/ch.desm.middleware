@@ -27,9 +27,9 @@ public class Re420Service extends ComponentServiceBase {
      *
      * @param broker
      */
-    public Re420Service(Broker broker, EndpointRs232.EnumSerialPorts ubw){
+    public Re420Service(Broker broker, String port){
         this.client = new Re420BrokerClient(broker, this);
-        this.endpointUbw = new Re420EndpointUbw32(this, ubw);
+        this.endpointUbw = new Re420EndpointUbw32(this, port);
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new Re420MessageProcessor();
         this.mapZusi = new Re420MapZusi();

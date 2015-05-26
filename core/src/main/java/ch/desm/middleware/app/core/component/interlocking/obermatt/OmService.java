@@ -25,7 +25,7 @@ public class OmService {
 
 
 
-    public OmService(Broker broker, EndpointRs232.EnumSerialPorts port){
+    public OmService(Broker broker, String port){
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new OmMessageProcessor(this);

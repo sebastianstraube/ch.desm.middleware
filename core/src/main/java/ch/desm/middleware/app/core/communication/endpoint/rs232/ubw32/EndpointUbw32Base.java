@@ -8,9 +8,9 @@ import org.apache.log4j.Logger;
 
 public abstract class EndpointUbw32Base extends EndpointRs232 {
 
-	public EndpointUbw32Base(EnumSerialPorts enumSerialPort,
+	public EndpointUbw32Base(String port,
 			EndpointRs232Config config) {
-		super(enumSerialPort, config);
+		super(port, config);
 	}
 
     private static Logger LOGGER = Logger.getLogger(EndpointUbw32Base.class);

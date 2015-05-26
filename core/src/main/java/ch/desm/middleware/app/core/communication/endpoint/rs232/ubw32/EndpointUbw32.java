@@ -57,11 +57,11 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 
 	/**
 	 * 
-	 * @param enumSerialPort
+	 * @param port
 	 */
-	public EndpointUbw32(EnumSerialPorts enumSerialPort,
+	public EndpointUbw32(String port,
 			String configurationDigital, String pinbitMaskInputAnalog) {
-		super(enumSerialPort, new EndpointRs232ConfigBuilder()
+		super(port, new EndpointRs232ConfigBuilder()
 				.setBaudRate(EndpointRs232Config.BAUDRATE_9600)
 				.setDataBits(EndpointRs232Config.DATABITS_8)
 				.setStopBits(EndpointRs232Config.STOPBITS_1)

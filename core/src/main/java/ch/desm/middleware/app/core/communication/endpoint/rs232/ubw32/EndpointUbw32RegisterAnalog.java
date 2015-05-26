@@ -5,8 +5,6 @@ import java.util.LinkedList;
 
 public class EndpointUbw32RegisterAnalog extends EndpointUbw32RegisterBase {
 
-	public static final int MAX_DISCRET_VALUE = 1023;
-	
 	private String pinBitMask;
 	private LinkedList<String> valueList;
 	
@@ -19,7 +17,7 @@ public class EndpointUbw32RegisterAnalog extends EndpointUbw32RegisterBase {
 		this.pinBitMask = pinBitMask;
 		valueList = new LinkedList<String>();
 	}
-		
+
 	public void addValue(String value){
 		this.valueList.add(value);
 	}

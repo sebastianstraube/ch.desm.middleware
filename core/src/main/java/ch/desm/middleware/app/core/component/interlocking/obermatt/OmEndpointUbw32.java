@@ -17,8 +17,8 @@ public class OmEndpointUbw32 extends EndpointUbw32 {
 	private OmMapUbw32Analog mapAnalog;
     private OmService service;
 
-	public OmEndpointUbw32(EnumSerialPorts enumSerialPort, OmService service) {
-		super(enumSerialPort,
+	public OmEndpointUbw32(String port, OmService service) {
+		super(port,
 				OmMapUbw32Digital.PINBITMASK_CONFIGURATION_DIGITAL,
 				OmMapUbw32Analog.PINBITMASK_INPUT_ANALOG);
 

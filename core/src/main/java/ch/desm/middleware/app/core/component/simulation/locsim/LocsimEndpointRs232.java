@@ -17,8 +17,8 @@ public class LocsimEndpointRs232 extends EndpointRs232 {
 	public boolean isLocsimInitialized;
 	public boolean isLocsimReadyToInitialize;
 	
-	public LocsimEndpointRs232(EnumSerialPorts enumSerialPort) {		
-		super(enumSerialPort, new EndpointRs232ConfigBuilder()
+	public LocsimEndpointRs232(String port) {
+		super(port, new EndpointRs232ConfigBuilder()
 			.setBaudRate(EndpointRs232Config.BAUDRATE_38400)
 			.setDataBits(EndpointRs232Config.DATABITS_8)
 			.setStopBits(EndpointRs232Config.STOPBITS_1)
