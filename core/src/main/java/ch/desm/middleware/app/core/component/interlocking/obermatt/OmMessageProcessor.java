@@ -47,9 +47,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
         }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
             try {
                 if (isInitProcessMessage(element)) {
-                    if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) {
-                        processInitEndpoint(service.getEndpoint(), element);
-                    }
+                    processInitEndpoint(service.getEndpoint(), element);
                 }else{
 
                     // Todo implementation
@@ -97,21 +95,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
     //TODO refactoring
     public boolean isInitProcessMessage(MessageMiddleware element){
-
-        if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.fabisch")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.ubw32")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.simulation.locsim.rs232")) {
-            return true;
-        }else if (element.getGlobalId().equalsIgnoreCase("mgmt.simulation.locsim.dll")) {
-            return true;
-        }
-
+        if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) return true;
         return false;
     }
 

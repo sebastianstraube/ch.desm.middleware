@@ -1,14 +1,12 @@
 package ch.desm.middleware.app.core;
 
 
-import ch.desm.middleware.app.common.ComponentServiceBase;
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420Service;
 import ch.desm.middleware.app.core.component.interlocking.obermatt.OmService;
 import ch.desm.middleware.app.core.component.gui.management.ManagementService;
 import ch.desm.middleware.app.core.component.petrinet.obermatt.PetrinetOmService;
+import ch.desm.middleware.app.core.component.petrinet.re420.PetrinetRe420Service;
 import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
@@ -16,7 +14,6 @@ import ch.desm.middleware.app.common.DaemonThreadBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.server.JettyServer;
 import ch.desm.middleware.app.core.server.TyrusServer;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -69,14 +66,12 @@ public class RunAppSingleton extends DaemonThreadBase {
         JettyServer jettyServer = startJettyServer(serverJettyPath);
         startManagement(jettyServer, "ws://"+host+":"+ port + tyrusWebsocketContextPath +serverEndpointContextPath);
         /***************************************************************************/
-
-        //startOmStellwerk(EndpointRs232.EnumSerialPorts.COM3);
-        //startCabineRe420(EndpointRs232.EnumSerialPorts.COM4, EndpointRs232.EnumSerialPorts.COM8);
-        //startLocsim(EndpointRs232.EnumSerialPorts.COM9);
-        startOmPetrinet();
-        //startZusiFahrpult("7.94.80.35", 1436);
-        //startZusiAusbildung("7.94.80.35", 1436);
-        //startCabineRe420("/dev/ttyACM0");
+        //startOmStellwerk("COM11");
+        //startPetrinetOm();
+        startZusiFahrpult("192.168.1.19", 1436); // vpn : 7.94.80.35
+        //startZusiAusbildung("192.168.1.19", 1436);
+        //startCabineRe420("COM13"); //linux: dev/ttyACM0
+        //startPetrinetRe420();
     }
 
     private JettyServer startJettyServer(String path){
@@ -97,11 +92,16 @@ public class RunAppSingleton extends DaemonThreadBase {
         ManagementService management = isServerStarted(server) ? new ManagementService(Broker.getInstance(), uri) : null;
 	}
 
-	public void startOmPetrinet(){
+	public void startPetrinetOm(){
         PetrinetOmService petrinet = new PetrinetOmService(Broker.getInstance());
 	}
 
-	public void startOmStellwerk(String port){
+    public void startPetrinetRe420(){
+        PetrinetRe420Service petrinet = new PetrinetRe420Service(Broker.getInstance());
+    }
+
+
+    public void startOmStellwerk(String port){
         OmService oml = new OmService(Broker.getInstance(), port);
 	}
 
@@ -117,6 +117,8 @@ public class RunAppSingleton extends DaemonThreadBase {
         serviceFahrpult.getEndpointFahrpult().start();
         serviceFahrpult.getEndpointFahrpult().sendCommandRegisterClientFahrpult();
         serviceFahrpult.getEndpointFahrpult().sendCommandNeededDataFahrpult();
+
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_hauptschalter_$hauptschalter_ein;i;0;schalter;haupt;0;on;petrinet_cabine_re420;#");
     }
 
     public void startZusiAusbildung(String ip, int port){

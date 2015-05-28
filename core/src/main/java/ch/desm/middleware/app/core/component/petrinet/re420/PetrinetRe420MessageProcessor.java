@@ -1,8 +1,8 @@
-package ch.desm.middleware.app.core.component.petrinet.obermatt;
+package ch.desm.middleware.app.core.component.petrinet.re420;
 
+import ch.desm.middleware.app.common.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.common.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -11,36 +11,36 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 04.11.2014.
  */
-public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<PetrinetOmService> {
+public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase<PetrinetRe420Service> {
 
-    private static Logger LOGGER = Logger.getLogger(PetrinetOmBrokerClient.class);
+    private static Logger LOGGER = Logger.getLogger(PetrinetRe420BrokerClient.class);
 
     /**
      * @param messages
      */
-    public void processBrokerMessage(PetrinetOmService service, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(PetrinetRe420Service service, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(service, message);
         }
     }
 
-    private void processBrokerMessage(PetrinetOmService service, MessageMiddleware element){
+    private void processBrokerMessage(PetrinetRe420Service service, MessageMiddleware element){
+        String sensorName = "";
+        int sensorValue = 0;
 
-        if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT)){
+        if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_CABINE_RE420)){
             try {
-                String sensorName = service.getMap().mapBrokerToEndpointMessage(element.getGlobalId());
-                int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
-                delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
+                sensorName = service.getMapCabineRe420().getKey(element.getGlobalId());
+                sensorValue = element.getParameter().equalsIgnoreCase(MessageBase.MESSAGE_PARAMETER_ON) ? 1 : 0;//element.getParameter().equals("on") ? 1 : 0;
             } catch (Exception e) {
-                //LOGGER.log(Level.ERROR, e);
+                LOGGER.log(Level.ERROR, e);
             }
-        } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
+        } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
             try {
-                String sensorName = service.getMapZusi().getKey(element.getGlobalId());
-                int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
-                delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
+                sensorName = service.getMapZusi().getKey(element.getGlobalId());
+                sensorValue = element.getParameter().equalsIgnoreCase(MessageBase.MESSAGE_PARAMETER_ON) ? 1 : 0;//element.getParameter().equals("on") ? 1 : 0;
             } catch (Exception e) {
-                //LOGGER.log(Level.ERROR, e);
+                LOGGER.log(Level.ERROR, e);
             }
         } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
             try {
@@ -51,9 +51,8 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
                     // Todo implementation
                     // activate this, when gui taken controle over this endpoint
                     if(service.getComponentMapMiddleware().isKeyAvailable(element.getGlobalId())){
-                        String sensorName =element.getGlobalId();
-                        int sensorValue = element.getParameter().equals("on") ? 1 : 0;
-                        delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
+                        sensorName =element.getGlobalId();
+                        sensorValue = element.getParameter().equals("on") ? 1 : 0;
                     }
                 }
             } catch (Exception e) {
@@ -66,9 +65,13 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
                 LOGGER.log(Level.ERROR, e);
             }
         }
+
+        if(!sensorName.isEmpty()){
+            delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
+        }
     }
 
-    private void processInitEndpoint(PetrinetOmEndpoint endpoint, MessageMiddleware element){
+    private void processInitEndpoint(PetrinetRe420Endpoint endpoint, MessageMiddleware element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -86,14 +89,14 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         }
     }
 
-    private void delegateToEndpoint(PetrinetOmEndpoint endpoint, String sensorName, int sensorValue){
+    private void delegateToEndpoint(PetrinetRe420Endpoint endpoint, String sensorName, int sensorValue){
         LOGGER.log(Level.INFO, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
         endpoint.setSensor(sensorName, sensorValue);
     }
 
     //TODO refactoring
     public boolean isInitProcessMessage(MessageMiddleware element){
-        if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) return true;
+        if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.re420")) return true;
         return false;
     }
 }

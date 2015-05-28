@@ -1,7 +1,5 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 import ch.desm.middleware.app.common.ComponentMessageProcessorBase;
@@ -9,17 +7,12 @@ import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import ch.desm.middleware.app.core.component.cabine.re420.logic.Re420LogicFahrschalter;
 
 public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Service> {
 
 	private static Logger LOGGER = Logger.getLogger(Re420MessageProcessor.class);
-	private Re420LogicFahrschalter fahrschalter;
-
-	public static final String INIT_MESSAGE = "mgmt.stellwerk.obermattlangnau";
 
 	public Re420MessageProcessor() {
-		this.fahrschalter = new Re420LogicFahrschalter();
         this.util = new UtilityMessageProcessor();
 	}
 
@@ -49,6 +42,10 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 		switch(element.getTopic()){
 			case (MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT):{
 				processBrokerMessageZusiFahrpult(service, element);
+				break;
+			}
+			case (MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
+				processBrokerMessagePetrinetRe420(service, element);
 				break;
 			}
 			case (MessageBase.MESSAGE_TOPIC_MANAGEMENT):{
@@ -81,12 +78,16 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
         delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message.getParameter(), true);
 	}
 
+	private void processBrokerMessagePetrinetRe420(Re420Service service, MessageMiddleware message) {
+		String globalId = message.getGlobalId();
+		String key = service.getMapPetrinetRe420().getKey(globalId);
+		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message.getParameter(), true);
+	}
+
 	private void processBrokerMessageManagement(Re420Service service, MessageMiddleware message) {
 		try {
 			if (isInitProcessMessage(message)) {
-				if (message.getGlobalId().equalsIgnoreCase(INIT_MESSAGE)) {
-					processInitEndpoint(service.getEndpoint(), message);
-				}
+				processInitEndpoint(service.getEndpoint(), message);
 			} else {
 
 				// Todo implementation
@@ -97,8 +98,10 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 		}
 	}
 
+	//TODO refactoring
 	public boolean isInitProcessMessage(MessageMiddleware element){
-		return element.getGlobalId().equalsIgnoreCase(INIT_MESSAGE);
+		if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.ubw32")) return true;
+		return false;
 	}
 
 	/**
@@ -119,27 +122,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
             middlewareMessagesInput = service.getEndpointMessageProcessor().getUbwAnalogRegisterValues(service, service.getEndpoint(), (MessageUbw32Analog) message);
         }
 
-		if(!middlewareMessagesInput.isEmpty() && ((message instanceof MessageUbw32DigitalRegisterSingle) ||
-				(message instanceof MessageUbw32DigitalRegisterComplete))) middlewareMessagesInput += getFahrschalterMwms(service, middlewareMessagesInput);
-
 		LOGGER.log(Level.TRACE,"processing middleware message: " + middlewareMessagesInput);
 		return middlewareMessagesInput;
 	}
-
-    public String getFahrschalterMwms(Re420Service service, String message) {
-		ArrayList<String> l = new ArrayList<>(Arrays.asList(message.split(MessageBase.MESSAGE_MESSAGE_CUT)));
-		String mwMessages= "";
-
-		for (String el : l){
-            if(Re420LogicFahrschalter.UBW_KEYS.contains(el.split(MessageBase.MESSAGE_ELEMENT_CUT)[0])){
-                MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(el);
-                boolean isEnabled = mwm.getParameter().equalsIgnoreCase("on");
-                String key = fahrschalter.getFahrschalterKey(service, mwm.getGlobalId(), isEnabled);
-                mwMessages = service.getMapFahrschalterLogic().getValue(key);
-                mwMessages = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwMessages, MessageBase.MESSAGE_PARAMETER_ON);
-                break;
-			}
-		}
-        return mwMessages;
-    }
 }

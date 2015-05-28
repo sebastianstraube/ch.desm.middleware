@@ -46,10 +46,8 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 	protected void intializeSignedTopic() {
 		signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
 		signForTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+		signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
 		signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
-		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM);
-		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
-		signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232);
         signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
         signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
 	}

@@ -4,11 +4,11 @@ import ch.desm.middleware.app.common.ComponentMapBase;
 
 import java.util.Map;
 
-public class Re420MapZusi extends ComponentMapBase {
+public class Re420MapZusiFahrpult extends ComponentMapBase {
 
 	public static final String PINBITMASK_CONFIGURATION_DIGITAL = "17943,65336,16,49152,768,12596,960";
 
-	public Re420MapZusi() {
+	public Re420MapZusiFahrpult() {
 		super();
 	}
 
@@ -26,19 +26,18 @@ public class Re420MapZusi extends ComponentMapBase {
 	}
 
 	protected void init() {
-
-		// map.put("S126.1",""); //Haupthahn
-		map.put("S126","0200-0A01-0100::0100:11,0200:00,0300:07,0400:02,0500:00"); //Steuerstrom
-		map.put("S129","0200-0A01-0100::0100:2B,0200:00,0300:07,0400:02,0500:00"); //Stromabnehmer
-		map.put("S132","0200-0A01-0100::0100:11,0200:00,0300:01,0400:02,0500:00"); //Hauptschalter
+// map.put("S126.1",""); //Haupthahn
+// map.put("S126",""); //Steuerstrom
+// map.put("S129",""); //Stromabnehmer
+// map.put("S132",""); //Hauptschalter
 // map.put("S172.1",""); //Kompressor Automat
 // map.put("S172.2",""); //Kompressor direkt
 // map.put("S169",""); //Zugsammelschiene
 // map.put("S311",""); //Beleuchtung Zug
 // map.put("S316_1",""); //Dienstbeleuchtung 1
 // map.put("S316_2",""); //Dienstbeleuchtung 2
-		map.put("S140a","0200-0A01-0100::0100:07,0200:00,0300:03,0400:02,0500:00"); //Wendeschalter 140a vorwärts
-		map.put("S140b","0200-0A01-0100::0100:07,0200:00,0300:07,0400:00,0500:00"); //Wendeschalter 140b rückwärts
+// map.put("S140a",""); //Wendeschalter 140a vorwärts
+// map.put("S140b",""); //Wendeschalter 140b rückwärts
 // map.put("S150a",""); //Fahrschalter 150a
 // map.put("S150b",""); //Fahrschalter 150b
 // map.put("S150d",""); //Fahrschalter 150d
@@ -46,15 +45,15 @@ public class Re420MapZusi extends ComponentMapBase {
 // map.put("S150f",""); //Fahrschalter 150f
 // map.put("S150g",""); //Fahrschalter 150g
 // map.put("S150l",""); //Fahrschalter 150l
-		map.put("fahrschalter.bremsen.plus","0200-0A01-0100::0100:02,0200:00,0300:07,0400:08,0500:00"); //Fahrschalter.bremsen.plus
-		map.put("fahrschalter.bremsen.punkt","0200-0A01-0100::0100:02,0200:00,0300:07,0400:07,0500:00"); //Fahrschalter.bremsen.punkt
-		map.put("fahrschalter.bremsen.minus","0200-0A01-0100::0100:02,0200:00,0300:07,0400:06,0500:00"); //Fahrschalter.bremsen.minus
-		map.put("fahrschalter.neutral","0200-0A01-0100::0100:01,0200:00,0300:07,0400:05,0500:00"); //Fahrschalter.neutral
-		map.put("fahrschalter.fahren.minus","0200-0A01-0100::0100:01,0200:00,0300:07,0400:04,0500:00"); //Fahrschalter.fahren.minus
-		map.put("fahrschalter.fahren.punkt","0200-0A01-0100::0100:01,0200:00,0300:07,0400:03,0500:00"); //Fahrschalter.fahren.punkt
-		map.put("fahrschalter.fahren.m","0200-0A01-0100::0100:01,0200:00,0300:07,0400:02,0500:00"); //Fahrschalter.fahren.m
-		map.put("fahrschalter.fahren.plus","0200-0A01-0100::0100:01,0200:00,0300:07,0400:01,0500:00"); //Fahrschalter.fahren.plus
-		map.put("fahrschalter.fahren.plusplus","0200-0A01-0100::0100:01,0200:00,0300:07,0400:00,0500:00"); //Fahrschalter.fahren.plusplus
+// map.put("fahrschalter.bremsen.plus",""); //Fahrschalter.bremsen.plus
+// map.put("fahrschalter.bremsen.punkt",""); //Fahrschalter.bremsen.punkt
+// map.put("fahrschalter.bremsen.minus",""); //Fahrschalter.bremsen.minus
+// map.put("fahrschalter.neutral",""); //Fahrschalter.neutral
+// map.put("fahrschalter.fahren.minus",""); //Fahrschalter.fahren.minus
+// map.put("fahrschalter.fahren.punkt",""); //Fahrschalter.fahren.punkt
+// map.put("fahrschalter.fahren.m",""); //Fahrschalter.fahren.m
+// map.put("fahrschalter.fahren.plus",""); //Fahrschalter.fahren.plus
+// map.put("fahrschalter.fahren.plusplus",""); //Fahrschalter.fahren.plusplus
 // map.put("S189.1",""); //Pfeife Stufe 1
 // map.put("S189.2",""); //Pfeife Stufe 2
 // map.put("S242.01",""); //Rückstelltaste Zugsicherung
@@ -118,6 +117,33 @@ public class Re420MapZusi extends ComponentMapBase {
 // map.put("L318a",""); //Dienstbeleuchtung 3 Lampen weiss
 // map.put("L318b",""); //Dienstbeleuchtung 3 Lampen rot
 // map.put("L325.2",""); //Lampe Fahrplanbeleuchtung
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
+// map.put("",""); //
 
 	}
 

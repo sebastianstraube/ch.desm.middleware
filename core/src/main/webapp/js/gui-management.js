@@ -616,24 +616,14 @@ $(document).ready(function() {
         sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;init;management;#")
     });
 
+    $('#init_petrinet_re420').click(function(){
+        buttonHighLight($(this));
+        sendMessage("mgmt.petrinet.re420;os;0;management;petrinet;re420;init;management;#")
+    });
+
     $('#init_cabine-ubw32').click(function(){
         buttonHighLight($(this));
         sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;init;management;#")
-    });
-
-    $('#init_cabine-fabisch').click(function(){
-        buttonHighLight($(this));
-        sendMessage("mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;init;management;#")
-    });
-
-    $('#init_locsim-rs232').click(function(){
-        buttonHighLight($(this));
-        sendMessage("mgmt.simulation.locsim.rs232;os;0;management;simulation;locsim.rs232;init;management;#")
-    });
-
-    $('#init_locsim-dll').click(function(){
-        buttonHighLight($(this));
-        sendMessage("mgmt.simulation.locsim.dll;os;0;management;simulation;locsim.dll;init;management;#")
     });
     
     //start
@@ -647,24 +637,14 @@ $(document).ready(function() {
         sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;start;management;#")
     });
 
+    $('#start_petrinet_re420').click(function(){
+        buttonHighLight($(this));
+        sendMessage("mgmt.petrinet.re420;os;0;management;petrinet;re420;start;management;#")
+    });
+
     $('#start_cabine-ubw32').click(function(){
         buttonHighLight($(this));
         sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;start;management;#")
-    });
-
-    $('#start_cabine-fabisch').click(function(){
-        buttonHighLight($(this));
-        sendMessage("mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;start;management;#")
-    });
-
-    $('#start_locsim-rs232').click(function(){
-        buttonHighLight($(this));
-        sendMessage("mgmt.simulation.locsim.rs232;os;0;management;simulation;locsim.rs232;start;management;#")
-    });
-
-    $('#start_locsim-dll').click(function(){
-        buttonHighLight($(this));
-        sendMessage("mgmt.simulation.locsim.dll;os;0;management;simulation;locsim.dll;start;management;#")
     });
 
     //stop
@@ -678,24 +658,14 @@ $(document).ready(function() {
         sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;stop;management;#")
     });
 
+    $('#stop_petrinet_re420').click(function(){
+        buttonHighLight($(this));
+        sendMessage("mgmt.petrinet.re420;os;0;management;petrinet;re420;stop;management;#")
+    });
+
     $('#stop_cabine-ubw32').click(function(){
         buttonHighLight($(this));
         sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;stop;management;#")
-    });
-
-    $('#stop_cabine-fabisch').click(function(){
-        buttonHighLight($(this));
-        sendMessage("mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;stop;management;#")
-    });
-
-    $('#stop_locsim-rs232').click(function(){
-        buttonHighLight($(this));
-        sendMessage("mgmt.simulation.locsim.rs232;os;0;management;simulation;locsim.rs232;stop;management;#")
-    });
-
-    $('#stop_locsim-dll').click(function(){
-        buttonHighLight($(this));
-        sendMessage("mgmt.simulation.locsim.dll;os;0;management;simulation;locsim.dll;stop;management;#")
     });
 
     //GUI

@@ -6,7 +6,7 @@ import java.util.Set;
 public class Broker {
 	
 	private static Broker singleton = new Broker();
-	
+	private Object lockClients = new Object();
 	/**
 	 * 
 	 */
@@ -18,19 +18,22 @@ public class Broker {
      * @param client
      */
     public void connect(BrokerClient client) {
-    	clients.add(client);
+        synchronized (lockClients){
+            clients.add(client);
+        }
     }
 
     /**
-     * 
-     * @param sendingClient
+     *
      * @param message
      */
-    protected void publish(BrokerClient sendingClient, String message, String topic) {
-        for(BrokerClient client : clients) {
-            
-        	if(client.hasTopicSigned(topic)) {
-            	client.receive(message);
+    protected void publish(String message, String topic) {
+        synchronized (lockClients){
+            for(BrokerClient client : clients) {
+
+                if(client.hasTopicSigned(topic)) {
+                    client.receive(message);
+                }
             }
         }
     }

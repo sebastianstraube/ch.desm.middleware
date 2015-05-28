@@ -41,7 +41,7 @@ public abstract class BrokerClient {
 	 */
 	public synchronized void publish(String message, String topic) {
 		if (message != null && !message.isEmpty()) {
-			broker.publish(this, message, topic);
+			broker.publish(message, topic);
 		}
 	}
 

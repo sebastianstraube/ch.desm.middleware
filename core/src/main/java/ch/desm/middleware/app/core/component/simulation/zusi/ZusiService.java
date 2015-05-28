@@ -184,8 +184,8 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public ZusiMapPetrinet getZusiMapPetrinet(){
-        return new ZusiMapPetrinet();
+    public ZusiMapPetrinetOm getZusiMapPetrinet(){
+        return new ZusiMapPetrinetOm();
     }
 
     /**
@@ -208,7 +208,11 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public ZusiMapRe420 getZusiMapRe420(){
-        return new ZusiMapRe420();
+    public ZusiMapCabineRe420 getZusiMapRe420(){
+        return new ZusiMapCabineRe420();
+    }
+
+    public ZusiMapPetrinetRe420 getZusiMapPetrinetRe420(){
+        return new ZusiMapPetrinetRe420();
     }
 }

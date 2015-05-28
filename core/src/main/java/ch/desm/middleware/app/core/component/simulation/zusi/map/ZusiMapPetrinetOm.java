@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class ZusiMapPetrinet extends ComponentMapBase {
+public class ZusiMapPetrinetOm extends ComponentMapBase {
 
     @Override
     public Map<String, String> getMap() {

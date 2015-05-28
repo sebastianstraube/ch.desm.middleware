@@ -1,23 +1,15 @@
-package ch.desm.middleware.app.core.component.petrinet.obermatt.map;
+package ch.desm.middleware.app.core.component.petrinet.re420.map;
 
 import ch.desm.middleware.app.common.ComponentMapBase;
 
 import java.util.Map;
 
-public class PetrinetOmMapInterlockingOml extends ComponentMapBase{
+public class PetrinetRe420MapInterlockingOm extends ComponentMapBase{
 
 	@Override
 	public Map<String, String> getMap() {
 		return map;
 	}
-
-    public String mapBrokerToEndpointMessage(String globalId) throws Exception {
-        String message = this.getKey(globalId);
-        if(message.isEmpty()) {
-            throw new Exception("unable to map broker message with globalId\"" + globalId + "\"");
-        }
-        return message;
-    }
 
 	@Override
 	protected void init(){// map.put("OML_BL_OM_LN_$1",""); //

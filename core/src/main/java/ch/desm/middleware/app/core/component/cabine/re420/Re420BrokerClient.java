@@ -8,9 +8,7 @@ import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 
 public class Re420BrokerClient extends ComponentBrokerClientBase {
@@ -50,6 +48,7 @@ public class Re420BrokerClient extends ComponentBrokerClientBase {
 	@Override
 	protected void intializeSignedTopic() {
         signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
+		signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
 		signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
 	}
 

@@ -56,7 +56,11 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 break;
             }
             case(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT):{
-                processBrokerMessagePetrinet(service, message);
+                processBrokerMessagePetrinetOm(service, message);
+                break;
+            }
+            case(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
+                processBrokerMessagePetrinetRe420(service, message);
                 break;
             }
             case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL):{
@@ -151,7 +155,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param service
      * @param message
      */
-    protected void processBrokerMessagePetrinet(ZusiService service, MessageMiddleware message){
+    protected void processBrokerMessagePetrinetOm(ZusiService service, MessageMiddleware message){
         if(message.getParameter().equalsIgnoreCase(MessageBase.MESSAGE_PARAMETER_ON)){
             String key = service.getZusiMapPetrinet().getKey(message.getGlobalId());
             if(!key.isEmpty()){
@@ -164,6 +168,28 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                     processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
                 }
                 else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
+                    processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
+                }
+            }else LOGGER.log(Level.INFO, "petrinet broker message processing skipped: " + message);
+        } LOGGER.log(Level.INFO, "petrinet broker message processing skipped cause parameter off: " + message);
+    }
+
+    /**
+     *
+     * @param service
+     * @param message
+     */
+    protected void processBrokerMessagePetrinetRe420(ZusiService service, MessageMiddleware message){
+        if(message.getParameter().equalsIgnoreCase(MessageBase.MESSAGE_PARAMETER_ON)){
+            String key = service.getZusiMapPetrinetRe420().getKey(message.getGlobalId());
+            if(!key.isEmpty()){
+                String mwmStream = service.getComponentMapMiddleware().getValue(key);
+                mwmStream = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
+                MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
+
+                if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
+                    processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
+                } else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
                     processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
                 }
             }else LOGGER.log(Level.INFO, "petrinet broker message processing skipped: " + message);

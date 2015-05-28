@@ -5,7 +5,7 @@ import ch.desm.middleware.app.core.communication.message.translator.MessageTrans
 import ch.desm.middleware.app.common.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageDecoder;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageEncoder;
-import ch.desm.middleware.app.core.component.petrinet.obermatt.map.PetrinetOmMapInterlockingOml;
+import ch.desm.middleware.app.core.component.petrinet.obermatt.map.PetrinetOmMapInterlockingOm;
 import ch.desm.middleware.app.core.component.petrinet.obermatt.map.PetrinetOmMapZusi;
 
 /**
@@ -20,7 +20,7 @@ public class PetrinetOmService {
     private ComponentMapMiddleware componentMapMiddleware;
     private PetrinetOmBrokerClient client;
     private PetrinetOmEndpoint endpoint;
-    private PetrinetOmMapInterlockingOml map;
+    private PetrinetOmMapInterlockingOm map;
 
     public PetrinetOmService(Broker broker){
         this.componentMapMiddleware = new ComponentMapMiddleware();
@@ -28,7 +28,7 @@ public class PetrinetOmService {
         this.processor = new PetrinetOmMessageProcessor();
         this.encoder = new PetrinetMessageEncoder();
         this.decoder = new PetrinetMessageDecoder();
-        this.map = new PetrinetOmMapInterlockingOml();
+        this.map = new PetrinetOmMapInterlockingOm();
 
         this.client = new PetrinetOmBrokerClient(broker, this);
         this.endpoint = new PetrinetOmEndpoint(this);
@@ -63,7 +63,7 @@ public class PetrinetOmService {
         return client;
     }
 
-    public PetrinetOmMapInterlockingOml getMap(){
+    public PetrinetOmMapInterlockingOm getMap(){
         return this.map;
     }
 

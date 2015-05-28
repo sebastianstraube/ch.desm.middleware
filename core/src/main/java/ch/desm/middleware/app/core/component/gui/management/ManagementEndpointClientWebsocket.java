@@ -30,20 +30,18 @@ public class ManagementEndpointClientWebsocket {
         LOGGER.log(Level.TRACE, "Websocket client is Connected with session: " + session.getId());
     }
 
-    /*
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
-
         //delete session
         HashSet<Session> SessionSetCopy = new HashSet<Session>(sessionSet);
         for(Session element : sessionSet){
             if(element.equals(session)){
                 sessionSet.remove(element);
-                LOGGER.log(Level.TRACE, String.format("Session %s closed because of %s.", session.getId(), closeReason));
+                LOGGER.log(Level.INFO, String.format("Session %s closed because of %s.", session.getId(), closeReason));
             }
         }
     }
-    */
+
 
     public static void sendMessage(String message){
         synchronized (sessionLock){

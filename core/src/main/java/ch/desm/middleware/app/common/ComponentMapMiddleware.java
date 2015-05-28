@@ -659,37 +659,82 @@ public class ComponentMapMiddleware extends ComponentMapBase {
         map.put("0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:70000000,0300:00,0400:0000,0500:0100", "0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:70000000,0300:00,0400:0000,0500:0100;;;weiche;gerade;01;?;zusi_ausbildung;#");
 
 
-
+//zusi fahrpult
         map.put("0100-0200::0100", "0100-0200::0100;;;command;ack_hello;zusi_version;?;zusi_fahrpult;#");
         map.put("0100-0200::0100", "0100-0200::0100;;;command;ack_hello;zusi_verbindungsinfo;?;zusi_fahrpult;#");
         map.put("0100-0200::0100", "0100-0200::0100;;;command;ack_hello;client_akzeptiert;?;zusi_fahrpult;#");
         map.put("0200-0400::0100", "0200-0400::0100;;;command;ack_needed_data;client_data_ack;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:2b,0200:00,0300:07,0400:01,0500:00", "0200-0a01-0100::0100:2b,0200:00,0300:07,0400:01,0500:00;;;stromabnehmer;heben;tastee;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:22,0200:00,0300:07,0400:22,0500:00", "0200-0a01-0100::0100:22,0200:00,0300:07,0400:22,0500:00;;;stromabnehmer;mittelstellung;;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:2b,0200:00,0300:07,0400:00,0500:00", "0200-0a01-0100::0100:2b,0200:00,0300:07,0400:00,0500:00;;;stromabnehmer;senken;tastec;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:11,0200:00,0300:07,0400:02,0500:00", "0200-0a01-0100::0100:11,0200:00,0300:07,0400:02,0500:00;;;hauptschalter;ein;taste h;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:11,0200:00,0300:07,0400:00,0500:00", "0200-0a01-0100::0100:11,0200:00,0300:07,0400:00,0500:00;;;hauptschalter;aus;taste n;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:2d,0200:00,0300:07,0400:,0500:00", "0200-0a01-0100::0100:2d,0200:00,0300:07,0400:,0500:00;;;kompressor;ein;taste q;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:2d,0200:00,0300:07,0400:,0500:00", "0200-0a01-0100::0100:2d,0200:00,0300:07,0400:,0500:00;;;kompressor;aus;taste q;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:07,0200:00,0300:07,0400:00,0500:00", "0200-0a01-0100::0100:07,0200:00,0300:07,0400:00,0500:00;;;richtungsschalter;vorwärts;bild-nach-oben;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:07,0200:00,0300:07,0400:01,0500:00", "0200-0a01-0100::0100:07,0200:00,0300:07,0400:01,0500:00;;;richtungsschalter;null;;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:07,0200:00,0300:07,0400:02,0500:00", "0200-0a01-0100::0100:07,0200:00,0300:07,0400:02,0500:00;;;richtungsschalter;rückwärts;bild-nach-unten;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:02,0200:00,0300:07,0400:08,0500:00", "0200-0a01-0100::0100:02,0200:00,0300:07,0400:08,0500:00;;;fahrschalter;bremsen.plus;taste 3;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:02,0200:00,0300:07,0400:07,0500:00", "0200-0a01-0100::0100:02,0200:00,0300:07,0400:07,0500:00;;;fahrschalter;bremsen.punkt;taste 6;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:02,0200:00,0300:07,0400:06,0500:00", "0200-0a01-0100::0100:02,0200:00,0300:07,0400:06,0500:00;;;fahrschalter;bremsen.minus;taste 9;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:01,0200:00,0300:07,0400:05,0500:00", "0200-0a01-0100::0100:01,0200:00,0300:07,0400:05,0500:00;;;fahrschalter;neutral;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:01,0200:00,0300:07,0400:04,0500:00", "0200-0a01-0100::0100:01,0200:00,0300:07,0400:04,0500:00;;;fahrschalter;fahren.minus;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:01,0200:00,0300:07,0400:03,0500:00", "0200-0a01-0100::0100:01,0200:00,0300:07,0400:03,0500:00;;;fahrschalter;fahren.punkt;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:01,0200:00,0300:07,0400:02,0500:00", "0200-0a01-0100::0100:01,0200:00,0300:07,0400:02,0500:00;;;fahrschalter;fahren.m;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:01,0200:00,0300:07,0400:01,0500:00", "0200-0a01-0100::0100:01,0200:00,0300:07,0400:01,0500:00;;;fahrschalter;fahren.plus;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:01,0200:00,0300:07,0400:00,0500:00", "0200-0a01-0100::0100:01,0200:00,0300:07,0400:00,0500:00;;;fahrschalter;fahren.plusplus;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:0c,0200:00,0300:07,0400:02,0500:00", "0200-0a01-0100::0100:0c,0200:00,0300:07,0400:02,0500:00;;;pfeife ein / aus;;taste p;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:13,0200:00,0300:07,0400:,0500:00", "0200-0a01-0100::0100:13,0200:00,0300:07,0400:,0500:00;;;schleuderschutz;;;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:10,0200:00,0300:07,0400:01,0500:00", "0200-0a01-0100::0100:10,0200:00,0300:07,0400:01,0500:00;;;totmannpedal;an;taste leer;?;zusi_fahrpult;#");
-        map.put("0200-0a01-0100::0100:10,0200:00,0300:07,0400:02,0500:00", "0200-0a01-0100::0100:10,0200:00,0300:07,0400:02,0500:00;;;totmannpedal;aus;taste leer;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:2b00,0200:0000,0300:0700,0400:0200,0500:00000000", "0200-0a01-0100::0100:2b00,0200:0000,0300:0700,0400:0200,0500:00000000;;;stromabnehmer;heben;tastee;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:2200,0200:0000,0300:0700,0400:2200,0500:00000000", "0200-0a01-0100::0100:2200,0200:0000,0300:0700,0400:2200,0500:00000000;;;stromabnehmer;mittelstellung;;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:2b00,0200:0000,0300:0700,0400:0000,0500:00000000", "0200-0a01-0100::0100:2b00,0200:0000,0300:0700,0400:0000,0500:00000000;;;stromabnehmer;senken;tastec;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:1100,0200:0000,0300:0700,0400:0200,0500:00000000", "0200-0a01-0100::0100:1100,0200:0000,0300:0700,0400:0200,0500:00000000;;;hauptschalter;ein;taste h;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:1100,0200:0000,0300:0700,0400:0000,0500:00000000", "0200-0a01-0100::0100:1100,0200:0000,0300:0700,0400:0000,0500:00000000;;;hauptschalter;aus;taste n;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:2d00,0200:0000,0300:0700,0400:0000,0500:00000000", "0200-0a01-0100::0100:2d00,0200:0000,0300:0700,0400:0000,0500:00000000;;;kompressor;ein;taste q;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:2d00,0200:0000,0300:0700,0400:0000,0500:00000000", "0200-0a01-0100::0100:2d00,0200:0000,0300:0700,0400:0000,0500:00000000;;;kompressor;aus;taste q;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0700,0200:0000,0300:0700,0400:0000,0500:00000000", "0200-0a01-0100::0100:0700,0200:0000,0300:0700,0400:0000,0500:00000000;;;richtungsschalter;vorwärts;bild-nach-oben;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0700,0200:0000,0300:0700,0400:0100,0500:00000000", "0200-0a01-0100::0100:0700,0200:0000,0300:0700,0400:0100,0500:00000000;;;richtungsschalter;null;;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0700,0200:0000,0300:0700,0400:0200,0500:00000000", "0200-0a01-0100::0100:0700,0200:0000,0300:0700,0400:0200,0500:00000000;;;richtungsschalter;rückwärts;bild-nach-unten;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0200,0200:0000,0300:0700,0400:0800,0500:00000000", "0200-0a01-0100::0100:0200,0200:0000,0300:0700,0400:0800,0500:00000000;;;fahrschalter;bremsen.plus;taste 3;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0200,0200:0000,0300:0700,0400:0700,0500:00000000", "0200-0a01-0100::0100:0200,0200:0000,0300:0700,0400:0700,0500:00000000;;;fahrschalter;bremsen.punkt;taste 6;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0200,0200:0000,0300:0700,0400:0600,0500:00000000", "0200-0a01-0100::0100:0200,0200:0000,0300:0700,0400:0600,0500:00000000;;;fahrschalter;bremsen.minus;taste 9;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0500,0500:00000000", "0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0500,0500:00000000;;;fahrschalter;neutral;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0400,0500:00000000", "0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0400,0500:00000000;;;fahrschalter;fahren.minus;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0300,0500:00000000", "0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0300,0500:00000000;;;fahrschalter;fahren.punkt;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0200,0500:00000000", "0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0200,0500:00000000;;;fahrschalter;fahren.m;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0100,0500:00000000", "0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0100,0500:00000000;;;fahrschalter;fahren.plus;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0000,0500:00000000", "0200-0a01-0100::0100:0100,0200:0000,0300:0700,0400:0000,0500:00000000;;;fahrschalter;fahren.plusplus;aufschalten: 8, abschalten 2;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:0c00,0200:0000,0300:0700,0400:0200,0500:00000000", "0200-0a01-0100::0100:0c00,0200:0000,0300:0700,0400:0200,0500:00000000;;;pfeife ein / aus;;taste p;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:1300,0200:0000,0300:0700,0400:,0500:00000000", "0200-0a01-0100::0100:1300,0200:0000,0300:0700,0400:,0500:00000000;;;schleuderschutz;;;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:1000,0200:0000,0300:0700,0400:0100,0500:00000000", "0200-0a01-0100::0100:1000,0200:0000,0300:0700,0400:0100,0500:00000000;;;totmannpedal;an;taste leer;?;zusi_fahrpult;#");
+        map.put("0200-0a01-0100::0100:1000,0200:0000,0300:0700,0400:0200,0500:00000000", "0200-0a01-0100::0100:1000,0200:0000,0300:0700,0400:0200,0500:00000000;;;totmannpedal;aus;taste leer;?;zusi_fahrpult;#");
         map.put("0200-0a00::0100", "0200-0a00::0100;;;geschwindigkeit;;;?;zusi_fahrpult;#");
         map.put("0200-0a00::1300", "0200-0a00::1300;;;status;hauptschalter;;?;zusi_fahrpult;#");
         map.put("0200-0a00::1900", "0200-0a00::1900;;;status;zurückgelegter_gesamtweg;;?;zusi_fahrpult;#");
         map.put("0200-0a00::5500", "0200-0a00::5500;;;status;stromabnehmer;;?;zusi_fahrpult;#");
+
+
+        //petrinet re420
+        map.put("cabine_re420_stromabnehmer_controller_$s129", "cabine_re420_stromabnehmer_controller_$s129;i;0;schalter;stromabnehmer;0;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_stromabnehmer_$stromabnehmer_hoch", "cabine_re420_stromabnehmer_$stromabnehmer_hoch;i;0;schalter;stromabnehmer;0;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_stromabnehmer_$stromabnehmer_tief", "cabine_re420_stromabnehmer_$stromabnehmer_tief;i;0;schalter;stromabnehmer;0;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_hauptschalter_controller_$s132", "cabine_re420_hauptschalter_controller_$s132;i;0;schalter;haupt;0;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_hauptschalter_$hauptschalter_ein", "cabine_re420_hauptschalter_$hauptschalter_ein;i;0;schalter;haupt;0;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_hauptschalter_$hauptschalter_aus", "cabine_re420_hauptschalter_$hauptschalter_aus;i;0;schalter;haupt;0;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_zugsammelschiene_$s169", "cabine_re420_zugsammelschiene_$s169;i;0;schalter;zugsammelschiene;0;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_zugsammelschiene_$zusammelschiene_ein", "cabine_re420_zugsammelschiene_$zusammelschiene_ein;i;0;schalter;zugsammelschiene;0;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_zugsammelschiene_$zusammelschiene_aus", "cabine_re420_zugsammelschiene_$zusammelschiene_aus;i;0;schalter;zugsammelschiene;0;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_wendeschalter_controller_$140a", "cabine_re420_wendeschalter_controller_$140a;i;0;schalter;wende;vorwärts;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_wendeschalter_controller_$140b", "cabine_re420_wendeschalter_controller_$140b;i;0;schalter;wende;rückwärts;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_wendeschalter_$wendeschalter_v", "cabine_re420_wendeschalter_$wendeschalter_v;i;0;schalter;wende;vorwärts;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_wendeschalter_$wendeschalter_0", "cabine_re420_wendeschalter_$wendeschalter_0;i;0;schalter;wende;vorwärts;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_wendeschalter_$wendeschalter_r", "cabine_re420_wendeschalter_$wendeschalter_r;i;0;schalter;wende;rückwärts;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$s150a", "cabine_re420_fahrschalter_controller_$s150a;i;;;;;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$s150b", "cabine_re420_fahrschalter_controller_$s150b;i;;;;;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$s150d", "cabine_re420_fahrschalter_controller_$s150d;i;;;;;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$s150e", "cabine_re420_fahrschalter_controller_$s150e;i;;;;;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$s150f", "cabine_re420_fahrschalter_controller_$s150f;i;;;;;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$s150g", "cabine_re420_fahrschalter_controller_$s150g;i;;;;;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$s150l", "cabine_re420_fahrschalter_controller_$s150l;i;;;;;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_logik_$bremsen_plus", "cabine_re420_fahrschalter_logik_$bremsen_plus;i;0;fahrschalter;bremse;plus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_logik_$bremsen_punkt", "cabine_re420_fahrschalter_logik_$bremsen_punkt;i;0;fahrschalter;bremse;punkt;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_logik_$bremsen_minus", "cabine_re420_fahrschalter_logik_$bremsen_minus;i;0;fahrschalter;bremse;minus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_logik_$neutral", "cabine_re420_fahrschalter_logik_$neutral;i;0;fahrschalter;neutral;;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_logik_$fahren_minus", "cabine_re420_fahrschalter_logik_$fahren_minus;i;0;fahrschalter;fahren;minus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_logik_$fahren_punkt", "cabine_re420_fahrschalter_logik_$fahren_punkt;i;0;fahrschalter;fahren;punkt;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_logik_$fahren_m", "cabine_re420_fahrschalter_logik_$fahren_m;i;0;fahrschalter;fahren;m;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_logik_$fahren_plus", "cabine_re420_fahrschalter_logik_$fahren_plus;i;0;fahrschalter;fahren;plus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_logik_$fahren_plusplus", "cabine_re420_fahrschalter_logik_$fahren_plusplus;i;0;fahrschalter;fahren;plusplus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$bremsen_plus", "cabine_re420_fahrschalter_controller_$bremsen_plus;i;0;fahrschalter;bremse;plus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$bremsen_punkt", "cabine_re420_fahrschalter_controller_$bremsen_punkt;i;0;fahrschalter;bremse;punkt;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$bremsen_minus", "cabine_re420_fahrschalter_controller_$bremsen_minus;i;0;fahrschalter;bremse;minus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$neutral", "cabine_re420_fahrschalter_controller_$neutral;i;0;fahrschalter;neutral;;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$fahren_minus", "cabine_re420_fahrschalter_controller_$fahren_minus;i;0;fahrschalter;fahren;minus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$fahren_punkt", "cabine_re420_fahrschalter_controller_$fahren_punkt;i;0;fahrschalter;fahren;punkt;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$fahren_m", "cabine_re420_fahrschalter_controller_$fahren_m;i;0;fahrschalter;fahren;m;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$fahren_plus", "cabine_re420_fahrschalter_controller_$fahren_plus;i;0;fahrschalter;fahren;plus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$fahren_plusplus", "cabine_re420_fahrschalter_controller_$fahren_plusplus;i;0;fahrschalter;fahren;plusplus;?;petrinet_cabine_re420;#");
+        map.put("cabine_re420_fahrschalter_controller_$hasstate", "cabine_re420_fahrschalter_controller_$hasstate;i;0;controller;state;settled;?;petrinet_cabine_re420;#");
+
+
     }
 }
