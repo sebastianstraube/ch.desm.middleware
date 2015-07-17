@@ -28,7 +28,7 @@ public class StartAppMain {
                 main.setConfiguration("localhost", "8080", "/websocket", "/gui", "/opt/desm/middleware/core");
             }
             else{
-                main.setConfiguration("localhost", "8080", "/websocket", "/gui", "C:/svn.it-hotspot.de/share/Dropbox/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/core");
+                main.setConfiguration("localhost", "8080", "/websocket", "/gui", "C:/svn.it-hotspot.de/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/core");
             }
         }
 
