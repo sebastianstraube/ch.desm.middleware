@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
+import ch.desm.middleware.app.common.HexTranslator;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import org.apache.log4j.Logger;
@@ -35,7 +36,7 @@ public class ZusiProtocolNodeHelper {
      */
     static String getNodeHex(String data){
         int length = data.length() == 0 ? 0 : (data.length() + 4) / 2;
-        String dataHex = ZusiProtocolNodeHelperHex.toHex(length, 8);
+        String dataHex = HexTranslator.toHex(length, 8);
         return dataHex;
     }
 
@@ -66,7 +67,7 @@ public class ZusiProtocolNodeHelper {
      */
     static int getNrDataBytes(String stream){
         String node = stream.substring(0, 8);
-        node = ZusiProtocolNodeHelperHex.swapEndian(node);
+        node = HexTranslator.swapEndian(node);
         int val =  Integer.valueOf(node, 16).intValue();
         return val == 0 ? val : val * 2 - 4;
     }

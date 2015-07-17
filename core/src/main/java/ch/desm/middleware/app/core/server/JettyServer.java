@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.server;
 
-import ch.desm.middleware.app.common.DaemonThreadBase;
+import ch.desm.middleware.app.common.ThreadBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
@@ -12,7 +12,7 @@ import java.net.InetSocketAddress;
 /**
  * Created by Sebastian on 21.10.2014.
  */
-public class JettyServer extends DaemonThreadBase {
+public class JettyServer extends ThreadBase {
 
     private InetSocketAddress inetSocketAddress;
     private String targetDir;

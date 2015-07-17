@@ -10,14 +10,14 @@ import ch.desm.middleware.app.core.component.petrinet.re420.PetrinetRe420Service
 import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
-import ch.desm.middleware.app.common.DaemonThreadBase;
+import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.server.JettyServer;
 import ch.desm.middleware.app.core.server.TyrusServer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public class RunAppSingleton extends DaemonThreadBase {
+public class RunAppSingleton extends ThreadBase {
 
 	private static Logger LOGGER = Logger.getLogger(RunAppSingleton.class);
 	private static final RunAppSingleton singleton = new RunAppSingleton();

@@ -1,9 +1,5 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolMessageHelper;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelperHex;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**

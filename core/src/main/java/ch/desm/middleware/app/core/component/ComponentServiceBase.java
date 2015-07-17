@@ -1,11 +1,12 @@
-package ch.desm.middleware.app.common;
+package ch.desm.middleware.app.core.component;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
+import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
 
 /**
  * Created by Sebastian on 03.04.2015.
  */
-public abstract class ComponentServiceBase {
+public abstract class ComponentServiceBase<TYPE_ENDPOINT> {
 
     ComponentMapMiddleware componentMapMiddleware;
 
@@ -15,7 +16,7 @@ public abstract class ComponentServiceBase {
 
     public abstract ComponentMessageProcessorBase getMessageProcessor();
 
-    public abstract EndpointCommon getEndpoint();
+    public abstract TYPE_ENDPOINT getEndpoint();
 
     public ComponentMapMiddleware getComponentMapMiddleware(){
         return componentMapMiddleware;

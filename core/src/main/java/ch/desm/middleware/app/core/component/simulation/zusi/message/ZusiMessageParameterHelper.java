@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.simulation.zusi.message;
 
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelperHex;
+import ch.desm.middleware.app.common.HexTranslator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -33,12 +33,12 @@ public class ZusiMessageParameterHelper {
 
         switch(format){
             case ZUSINUMBERFORMAT_SINGLE: {
-                float val = ZusiProtocolNodeHelperHex.getFloat(parameter);
+                float val = HexTranslator.getFloat(parameter);
                 val = getVal(globalId, val);
                 return String.valueOf(val);
             }
             case ZUSINUMBERFORMAT_STRING: {
-                String val = ZusiProtocolNodeHelperHex.getCharStream(parameter);
+                String val = HexTranslator.getCharStream(parameter);
                 return val;
             }
             default: LOGGER.log(Level.TRACE, "unsupported numberformat with globalId: " + globalId + ", parameter: " + parameter);

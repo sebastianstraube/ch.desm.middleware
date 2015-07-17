@@ -9,8 +9,7 @@ import java.util.Arrays;
 
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeHelperHex;
+import ch.desm.middleware.app.common.HexTranslator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -35,9 +34,10 @@ public abstract class EndpointTcpClient extends EndpointCommon {
         this.socketLock = new Object();
         this.receiveEventLock = new Object();
         this.sendEventLock = new Object();
-        this.thread = new EndpointTcpClientThread(this, name);
         this.socketAddress = new InetSocketAddress(ip, port);
         this.socket = new Socket();
+        this.thread = new EndpointTcpClientThread(this, this.getClass().getName());
+
 	}
 
     @Override
@@ -67,7 +67,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
      */
     public void receiveEvent(byte[] message) throws IOException {
         synchronized(receiveEventLock){
-            String hexMessage = ZusiProtocolNodeHelperHex.toHex(message);
+            String hexMessage = HexTranslator.toHex(message);
 
             LOGGER.log(Level.TRACE, "Thread active: " + hexMessage);
             onIncomingEndpointMessage(hexMessage);
@@ -117,7 +117,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
 
     private byte[] getByteStream(String hexMessage){
 
-        hexMessage = ZusiProtocolNodeHelperHex.removeControleCharacter(hexMessage);
+        hexMessage = HexTranslator.removeControleCharacter(hexMessage);
 
         byte[] byteStream = new byte[hexMessage.length()/2];
         for(int i=0; i<hexMessage.length()/2; i++){

@@ -1,12 +1,12 @@
 package ch.desm.middleware.app.core.component.petrinet.re420;
 
-import ch.desm.middleware.app.common.DaemonThreadBase;
+import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.common.Pair;
 
 /**
  * Created by Sebastian on 11.12.2014.
  */
-public class PetrinetRe420EndpointDelayThread extends DaemonThreadBase {
+public class PetrinetRe420EndpointDelayThread extends ThreadBase {
 
     private PetrinetRe420EndpointExportThread t;
     private Pair<String, Integer> place;

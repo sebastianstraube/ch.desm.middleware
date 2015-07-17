@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.cabine.re420.maps;
 
-import ch.desm.middleware.app.common.ComponentMapBase;
+import ch.desm.middleware.app.core.component.ComponentMapBase;
 
 import java.util.Map;
 

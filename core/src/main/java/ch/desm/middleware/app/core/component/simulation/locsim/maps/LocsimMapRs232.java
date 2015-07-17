@@ -3,7 +3,7 @@ package ch.desm.middleware.app.core.component.simulation.locsim.maps;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import ch.desm.middleware.app.common.ComponentMapBase;
+import ch.desm.middleware.app.core.component.ComponentMapBase;
 
 
 public class LocsimMapRs232 extends ComponentMapBase {

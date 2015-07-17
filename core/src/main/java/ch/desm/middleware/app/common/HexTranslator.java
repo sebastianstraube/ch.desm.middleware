@@ -1,15 +1,13 @@
-package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
+package ch.desm.middleware.app.common;
 
-import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
-import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import org.apache.log4j.Logger;
 
 /**
  * Created by Sebastian on 24.02.2015.
  */
-public class ZusiProtocolNodeHelperHex {
+public class HexTranslator {
 
-    private static Logger LOGGER = Logger.getLogger(ZusiProtocolNodeHelperHex.class);
+    private static Logger LOGGER = Logger.getLogger(HexTranslator.class);
 
     /**
      *
@@ -61,7 +59,7 @@ public class ZusiProtocolNodeHelperHex {
      */
     static public String toHex(int i, int length){
         String hex = Integer.toHexString(i);
-        hex = ZusiProtocolNodeHelperHex.expandHexString(hex, length);
+        hex = HexTranslator.expandHexString(hex, length);
         return swapEndian(hex);
     }
 
@@ -117,7 +115,7 @@ public class ZusiProtocolNodeHelperHex {
         String s = "";
         if(!hex.isEmpty()){
             if(hex.length() == 4){
-                hex = ZusiProtocolNodeHelperHex.swapEndian(hex);
+                hex = HexTranslator.swapEndian(hex);
                 s = String.valueOf(Integer.valueOf(hex, 16));
             }else{
                 String hexCode = "";
@@ -171,7 +169,7 @@ public class ZusiProtocolNodeHelperHex {
 
     private static byte[] getByteStream(String hexMessage){
 
-        hexMessage = ZusiProtocolNodeHelperHex.removeControleCharacter(hexMessage);
+        hexMessage = HexTranslator.removeControleCharacter(hexMessage);
 
         byte[] byteStream = new byte[hexMessage.length()/2];
         for(int i=0; i<hexMessage.length()/2; i++){

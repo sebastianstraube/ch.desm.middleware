@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.common;
+package ch.desm.middleware.app.core.component;
 
 import org.apache.log4j.Logger;
 

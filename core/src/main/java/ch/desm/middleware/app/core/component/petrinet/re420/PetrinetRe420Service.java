@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.petrinet.re420;
 
-import ch.desm.middleware.app.common.ComponentMapMiddleware;
+import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageDecoder;

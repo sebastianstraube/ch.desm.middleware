@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.component.interlocking.obermatt;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.common.ComponentThreadMessageProcessorBase;
+import ch.desm.middleware.app.core.component.ComponentThreadMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

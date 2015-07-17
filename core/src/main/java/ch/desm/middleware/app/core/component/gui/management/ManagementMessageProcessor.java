@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.gui.management;
 
-import ch.desm.middleware.app.common.ComponentMessageProcessorBase;
+import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 
 import java.util.LinkedList;
 

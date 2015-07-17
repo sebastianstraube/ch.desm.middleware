@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
-import ch.desm.middleware.app.common.ComponentServiceBase;
+import ch.desm.middleware.app.core.component.ComponentServiceBase;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32MessageProcessing;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;

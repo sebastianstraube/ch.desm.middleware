@@ -4,7 +4,7 @@ import ch.desm.middleware.app.common.Pair;
 import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.common.ComponentMessageProcessorBase;;
+import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;;
 import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiMessageEndpoint;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.ZusiProtocolConstants;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNode;

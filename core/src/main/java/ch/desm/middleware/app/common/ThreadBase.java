@@ -9,20 +9,20 @@ import ch.desm.middleware.app.common.utility.UtilityRandomGenerator;
  * @author Sebastian
  *
  */
-public abstract class DaemonThreadBase extends Thread {
+public abstract class ThreadBase extends Thread {
 
     private int sleepTime = 10;
 
-	public DaemonThreadBase(){
+	public ThreadBase(){
 		this.setDaemon(true);
 	}
 	
-	public DaemonThreadBase(String name) {
+	public ThreadBase(String name) {
 		this();
 		this.setName(name);
 	}
 
-    public DaemonThreadBase(String name, int sleepTime) {
+    public ThreadBase(String name, int sleepTime) {
         this(name);
         this.sleepTime = sleepTime;
     }

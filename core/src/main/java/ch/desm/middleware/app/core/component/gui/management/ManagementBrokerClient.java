@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.gui.management;
 
 import java.util.LinkedList;
 
-import ch.desm.middleware.app.common.ComponentBrokerClientBase;
+import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
+import ch.desm.middleware.app.common.HexTranslator;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
 import org.apache.log4j.Logger;
@@ -101,8 +102,8 @@ public class ZusiProtocolNodeHelperTest extends ZusiProtocolNodeHelper {
         ZusiProtocolNode protocolVersion = new ZusiProtocolNode(hello, "0100", "0200");
         ZusiProtocolNode clientType = new ZusiProtocolNode(protocolVersion, "0200", "0200");
 
-        String datafahrpult = ZusiProtocolNodeHelperHex.toHex("Fahrpult");
-        String dataVersion = ZusiProtocolNodeHelperHex.toHex("2.0");
+        String datafahrpult = HexTranslator.toHex("Fahrpult");
+        String dataVersion = HexTranslator.toHex("2.0");
         ZusiProtocolNode text = new ZusiProtocolNode(clientType, "0300", datafahrpult);
         ZusiProtocolNode version = new ZusiProtocolNode(text, "0400", dataVersion);
 

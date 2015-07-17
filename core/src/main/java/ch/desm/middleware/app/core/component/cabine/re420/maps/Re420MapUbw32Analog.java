@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.cabine.re420.maps;
 
 import java.util.Map;
 
-import ch.desm.middleware.app.common.ComponentMapBase;
+import ch.desm.middleware.app.core.component.ComponentMapBase;
 
 public class Re420MapUbw32Analog extends ComponentMapBase {
 

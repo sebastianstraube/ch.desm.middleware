@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi;
 
-import ch.desm.middleware.app.common.ComponentThreadMessageProcessorBase;
+import ch.desm.middleware.app.core.component.ComponentThreadMessageProcessorBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiMessageProtocolStream;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;

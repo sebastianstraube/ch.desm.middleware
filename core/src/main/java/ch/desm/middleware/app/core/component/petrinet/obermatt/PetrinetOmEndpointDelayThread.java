@@ -1,12 +1,12 @@
 package ch.desm.middleware.app.core.component.petrinet.obermatt;
 
-import ch.desm.middleware.app.common.DaemonThreadBase;
+import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.common.Pair;
 
 /**
  * Created by Sebastian on 11.12.2014.
  */
-public class PetrinetOmEndpointDelayThread extends DaemonThreadBase {
+public class PetrinetOmEndpointDelayThread extends ThreadBase {
 
     private PetrinetOmEndpointExportThread t;
     private Pair<String, Integer> place;

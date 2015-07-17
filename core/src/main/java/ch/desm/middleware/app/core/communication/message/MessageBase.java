@@ -19,6 +19,7 @@ public class MessageBase{
 	public static final String MESSAGE_TOPIC_MANAGEMENT = "management";
     public static final String MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT = "zusi_fahrpult";
     public static final String MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG = "zusi_ausbildung";
+    public static final String MESSAGE_TOPIC_ETCS_TIU = "etcstiu";
 	
 	private String topic;
     private String messageId;

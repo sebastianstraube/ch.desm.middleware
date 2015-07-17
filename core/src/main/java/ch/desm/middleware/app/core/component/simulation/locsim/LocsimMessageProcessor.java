@@ -4,7 +4,7 @@ import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
-import ch.desm.middleware.app.common.ComponentMessageProcessorBase;
+import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.component.simulation.locsim.logic.LocsimLogicFahrschalter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
 import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageDll;

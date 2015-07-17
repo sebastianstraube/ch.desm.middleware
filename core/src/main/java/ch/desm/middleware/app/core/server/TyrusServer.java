@@ -1,7 +1,6 @@
 package ch.desm.middleware.app.core.server;
 
-import ch.desm.middleware.app.common.DaemonThreadBase;
-import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServerEcho;
+import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServerGui;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -10,7 +9,7 @@ import org.glassfish.tyrus.server.Server;
 /**
  * Created by Sebastian on 21.10.2014.
  */
-public class TyrusServer extends DaemonThreadBase {
+public class TyrusServer extends ThreadBase {
 
     private static Logger LOGGER = Logger.getLogger(TyrusServer.class);
     private boolean isRunning = false;

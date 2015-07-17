@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.petrinet.re420;
 
-import ch.desm.middleware.app.common.DaemonThreadBase;
+import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.common.Pair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -9,7 +9,7 @@ import javax.websocket.EncodeException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PetrinetRe420EndpointExportThread extends DaemonThreadBase {
+public class PetrinetRe420EndpointExportThread extends ThreadBase {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetRe420EndpointExportThread.class);
 
