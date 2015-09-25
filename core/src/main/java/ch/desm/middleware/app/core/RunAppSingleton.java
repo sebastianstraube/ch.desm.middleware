@@ -7,6 +7,7 @@ import ch.desm.middleware.app.core.component.interlocking.obermatt.OmService;
 import ch.desm.middleware.app.core.component.gui.management.ManagementService;
 import ch.desm.middleware.app.core.component.petrinet.obermatt.PetrinetOmService;
 import ch.desm.middleware.app.core.component.petrinet.re420.PetrinetRe420Service;
+import ch.desm.middleware.app.core.component.simulation.etcs.EtcsService;
 import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
@@ -16,6 +17,8 @@ import ch.desm.middleware.app.core.server.JettyServer;
 import ch.desm.middleware.app.core.server.TyrusServer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
 
 public class RunAppSingleton extends ThreadBase {
 
@@ -62,18 +65,121 @@ public class RunAppSingleton extends ThreadBase {
 	public void run(){
 
         /************************** Start Server ************************************/
-        TyrusServer tyrusServer = startServerTyrus(host, port, tyrusWebsocketContextPath);
-        JettyServer jettyServer = startJettyServer(serverJettyPath);
-        startManagement(jettyServer, "ws://" + host + ":" + port + tyrusWebsocketContextPath + serverEndpointContextPath);
+        //TyrusServer tyrusServer = startServerTyrus(host, port, tyrusWebsocketContextPath);
+        //JettyServer jettyServer = startJettyServer(serverJettyPath);
+        //startManagement(jettyServer, "ws://" + host + ":" + port + tyrusWebsocketContextPath + serverEndpointContextPath);
         /***************************************************************************/
-        startOmStellwerk("COM5");
-        startPetrinetOm();
+        //startOmStellwerk("COM12");
+        //startPetrinetOm();
 
-        startZusiFahrpult("7.94.80.35", 1436); // lokal: 192.168.1.19, vpn : 7.94.80.35
-        startZusiAusbildung("192.168.1.19", 1436);
+        //startZusiFahrpult("192.168.1.19", 1436); // lokal: 192.168.1.19, vpn : 7.94.80.35
+        //startZusiAusbildung("192.168.1.19", 1436); //192.168.1.19
 
-        startCabineRe420("COM13"); //linux: dev/ttyACM0
-        startPetrinetRe420();
+        //startCabineRe420("COM10"); //linux: dev/ttyACM0
+        //startPetrinetRe420();
+
+        //startEtcsTiu("192.168.200.21", 50000);
+        startEtcsOdo("192.168.200.21", 50002);
+    }
+
+    private void startEtcsTiu(String ip, int port){
+
+        EtcsService tiu = new EtcsService(Broker.getInstance(), ip, port);
+
+        testEtcsTiu(tiu);
+    }
+
+    private void startEtcsOdo(String ip, int port){
+
+        EtcsService tiu = new EtcsService(Broker.getInstance(), ip, port);
+
+        testEtcsOdo(tiu);
+    }
+
+    private void testEtcsTiu(EtcsService tiu){
+        tiu.getEndpoint().init();
+        tiu.getEndpoint().start();
+
+        /*
+        84,
+        48, //Sleeping
+        49, //Pantograph
+        48, //MainCircuitBrake
+        48,49, //CabStatus
+        48,49, //DirectionController
+        48, //TrainIntegrity
+        48, //PassengerBrake
+        49,48, //DoorControl
+        49, //ETCSMainSwitch
+        48, //Isolation
+        48, //SystemFailure
+        48, //ServiceBrake
+        48, //EmergencyBrake
+        36};
+         */
+        try {
+            /*
+            byte[] ba = {
+                    84,
+                    49, //Sleeping
+                    49, //Pantograph
+                    49, //MainCircuitBrake
+                    49,49, //CabStatus
+                    49,49, //DirectionController
+                    49, //TrainIntegrity
+                    49, //PassengerBrake
+                    49,49, //DoorControl
+                    49, //ETCSMainSwitch
+                    49, //Isolation
+                    49, //SystemFailure
+                    49, //ServiceBrake
+                    49, //EmergencyBrake
+                    36};
+*/
+
+            byte[] ba = {
+                    84,
+                    48, //Sleeping
+                    48, //Pantograph
+                    48, //MainCircuitBrake
+                    48,48, //CabStatus
+                    48,48, //DirectionController
+                    48, //TrainIntegrity
+                    48, //PassengerBrake
+                    48,48, //DoorControl
+                    49, //ETCSMainSwitch
+                    48, //Isolation
+                    48, //SystemFailure
+                    48, //ServiceBrake
+                    48, //EmergencyBrake
+                    36};
+
+
+            tiu.getEndpoint().send(ba);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void testEtcsOdo(EtcsService odo){
+        odo.getEndpoint().init();
+        odo.getEndpoint().start();
+
+            //ODO
+            byte[] ba = {
+                    79,
+                    49,48,48, //Geschwindigkeit 100; 1, 0, 0 km/h
+                    36};
+
+
+        try {
+            odo.getEndpoint().send(ba);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private JettyServer startJettyServer(String path){
@@ -100,18 +206,18 @@ public class RunAppSingleton extends ThreadBase {
 
     public void startPetrinetRe420(){
         PetrinetRe420Service petrinet = new PetrinetRe420Service(Broker.getInstance());
-        //petrinet.getEndpoint().init();
-        //petrinet.getEndpoint().start();
+    }
 
-        //petrinet.getBrokerClient().emulateBrokerMessage("s150a;i;;;;;?;kabinere420;#");
-        //petrinet.getBrokerClient().emulateBrokerMessage("s150b;i;;;;;?;kabinere420;#");
-        //petrinet.getBrokerClient().emulateBrokerMessage("s150d;i;;;;;?;kabinere420;#");
-        //petrinet.getBrokerClient().emulateBrokerMessage("s150e;i;;;;;on;kabinere420;#");
-        //petrinet.getBrokerClient().emulateBrokerMessage("s150f;i;;;;;on;kabinere420;#");
-        //petrinet.getBrokerClient().emulateBrokerMessage("s150g;i;;;;;on;kabinere420;#");
-        //petrinet.getBrokerClient().emulateBrokerMessage("s150l;i;;;;;on;kabinere420;#");
-
-
+    public void testPetrinetRe420(PetrinetRe420Service petrinet){
+        petrinet.getEndpoint().init();
+        petrinet.getEndpoint().start();
+        petrinet.getBrokerClient().emulateBrokerMessage("s150a;i;;;;;?;kabinere420;#");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150b;i;;;;;on;kabinere420;#");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150d;i;;;;;?;kabinere420;#");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150e;i;;;;;on;kabinere420;#");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150f;i;;;;;on;kabinere420;#");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150g;i;;;;;on;kabinere420;#");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150l;i;;;;;on;kabinere420;#");
     }
 
 
@@ -121,8 +227,6 @@ public class RunAppSingleton extends ThreadBase {
 
     public void startCabineRe420(String port){
         Re420Service service = new Re420Service(Broker.getInstance(), port);
-        service.getEndpoint().init();
-        service.getEndpoint().start();
     }
 
     public void startZusiFahrpult(String ip, int port){
@@ -131,10 +235,9 @@ public class RunAppSingleton extends ThreadBase {
         serviceFahrpult.getEndpointFahrpult().start();
         serviceFahrpult.getEndpointFahrpult().sendCommandRegisterClientFahrpult();
         serviceFahrpult.getEndpointFahrpult().sendCommandNeededDataFahrpult();
+    }
 
-
-        //Test
-        /*
+    public void testZusiFahrpult(ZusiService serviceFahrpult){
         serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_stromabnehmer_$stromabnehmer_tief;i;0;schalter;stromabnehmer;0;on;petrinet_cabine_re420;#");
         serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_stromabnehmer_$stromabnehmer_hoch;i;0;schalter;stromabnehmer;0;on;petrinet_cabine_re420;#");
 
@@ -161,7 +264,7 @@ public class RunAppSingleton extends ThreadBase {
         serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_plus;i;0;fahrschalter;fahren;plus;on;petrinet_cabine_re420;#");
         serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_plusplus;i;0;fahrschalter;fahren;plusplus;on;petrinet_cabine_re420;#");
         serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$hasstate;i;0;controller;state;settled;on;petrinet_cabine_re420;#");
-        */
+
     }
 
     public void startZusiAusbildung(String ip, int port){
@@ -189,6 +292,20 @@ public class RunAppSingleton extends ThreadBase {
 
     }
 
+    public void testZusiAusbildung(ZusiService serviceAusbildung){
+        try {
+            doHangout(3000);
+            serviceAusbildung.getEndpointAusbildung().sendCommandSignalAspect();
+            doHangout(3000);
+            serviceAusbildung.getEndpointAusbildung().sendCommandSwitch();
+            doHangout(3000);
+            serviceAusbildung.getEndpointAusbildung().sendCommand("0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:01");
+            doHangout(3000);
+            serviceAusbildung.getEndpointAusbildung().sendCommand("0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:00");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 	public void startLocsim(String port){
 		LocsimEndpointDll endpointDll = new LocsimEndpointDll("dispatcher.json");

@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.etcs.tiu;
+package ch.desm.middleware.app.core.component.simulation.etcs;
 
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
@@ -11,14 +11,14 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuService> {
+public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsService> {
 
-    private static Logger LOGGER = Logger.getLogger(TiuMessageProcessor.class);
+    private static Logger LOGGER = Logger.getLogger(EtcsMessageProcessor.class);
 
     /**
      * @param messages
      */
-    public void processBrokerMessage(TiuService service, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(EtcsService service, LinkedList<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(service, message);
         }
@@ -29,7 +29,7 @@ public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuServic
      * @param service
      * @param message
      */
-    public void processBrokerMessage(TiuService service, MessageMiddleware message){
+    public void processBrokerMessage(EtcsService service, MessageMiddleware message){
 
         switch(message.getTopic()){
             case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM):{
@@ -80,7 +80,7 @@ public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuServic
      * @param service
      * @param message
      */
-    private void processBrokerMessageManagament(TiuService service, MessageMiddleware message){
+    private void processBrokerMessageManagament(EtcsService service, MessageMiddleware message){
         //TODO implementation, but only messages with zusi topic (take control in gui)
     }
 
@@ -89,7 +89,7 @@ public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuServic
      * @param service
      * @param message
      */
-    private void processBrokerMessageCabineRe420(TiuService service, MessageMiddleware message){
+    private void processBrokerMessageCabineRe420(EtcsService service, MessageMiddleware message){
 
     }
 
@@ -98,7 +98,7 @@ public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuServic
      * @param service
      * @param message
      */
-    protected void processBrokerMessagePetrinetOm(TiuService service, MessageMiddleware message){
+    protected void processBrokerMessagePetrinetOm(EtcsService service, MessageMiddleware message){
 
     }
 
@@ -107,7 +107,7 @@ public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuServic
      * @param service
      * @param message
      */
-    protected void processBrokerMessagePetrinetRe420(TiuService service, MessageMiddleware message){
+    protected void processBrokerMessagePetrinetRe420(EtcsService service, MessageMiddleware message){
 
     }
 
@@ -116,7 +116,7 @@ public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuServic
      * @param endpoint
      * @param message
      */
-    private void delegateToEndpoint(TiuEndpointTcpClient endpoint, String message){
+    private void delegateToEndpoint(EtcsEndpointTcpClient endpoint, String message){
 
     }
 
@@ -125,7 +125,7 @@ public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuServic
      * @param endpoint
      * @param element
      */
-    private void processInitEndpoint(TiuEndpointTcpClient endpoint, MessageMiddleware element){
+    private void processInitEndpoint(EtcsEndpointTcpClient endpoint, MessageMiddleware element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -149,7 +149,7 @@ public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuServic
      * @param messages
      * @param topic
      */
-    public synchronized void processEndpointMessage(TiuService service, LinkedList<String> messages, String topic){
+    public synchronized void processEndpointMessage(EtcsService service, LinkedList<String> messages, String topic){
         for(String s : messages){
             processEndpointMessage(service, s, topic);
         }
@@ -161,8 +161,8 @@ public class TiuMessageProcessor extends ComponentMessageProcessorBase<TiuServic
      * @param message
      * @param topic
      */
-    public void processEndpointMessage(TiuService service, String message, String topic){
-
+    public void processEndpointMessage(EtcsService service, String message, String topic){
+        LOGGER.log(Level.DEBUG, "received endpoint ETCS "+ service.getEndpoint().toString() +" received message: " + message + " with topic: " + topic);
     }
 
 }

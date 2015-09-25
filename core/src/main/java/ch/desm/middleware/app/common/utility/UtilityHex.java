@@ -1,13 +1,13 @@
-package ch.desm.middleware.app.common;
+package ch.desm.middleware.app.common.utility;
 
 import org.apache.log4j.Logger;
 
 /**
  * Created by Sebastian on 24.02.2015.
  */
-public class HexTranslator {
+public class UtilityHex {
 
-    private static Logger LOGGER = Logger.getLogger(HexTranslator.class);
+    private static Logger LOGGER = Logger.getLogger(UtilityHex.class);
 
     /**
      *
@@ -59,7 +59,7 @@ public class HexTranslator {
      */
     static public String toHex(int i, int length){
         String hex = Integer.toHexString(i);
-        hex = HexTranslator.expandHexString(hex, length);
+        hex = UtilityHex.expandHexString(hex, length);
         return swapEndian(hex);
     }
 
@@ -115,7 +115,7 @@ public class HexTranslator {
         String s = "";
         if(!hex.isEmpty()){
             if(hex.length() == 4){
-                hex = HexTranslator.swapEndian(hex);
+                hex = UtilityHex.swapEndian(hex);
                 s = String.valueOf(Integer.valueOf(hex, 16));
             }else{
                 String hexCode = "";
@@ -167,9 +167,9 @@ public class HexTranslator {
         return val;
     }
 
-    private static byte[] getByteStream(String hexMessage){
+    public static byte[] getByteStream(String hexMessage){
 
-        hexMessage = HexTranslator.removeControleCharacter(hexMessage);
+        hexMessage = UtilityHex.removeControleCharacter(hexMessage);
 
         byte[] byteStream = new byte[hexMessage.length()/2];
         for(int i=0; i<hexMessage.length()/2; i++){

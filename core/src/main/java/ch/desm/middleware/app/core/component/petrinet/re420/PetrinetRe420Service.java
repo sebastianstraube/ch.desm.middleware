@@ -7,7 +7,7 @@ import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageDecoder;
 import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageEncoder;
 import ch.desm.middleware.app.core.component.petrinet.re420.map.PetrinetRe420MapInterlockingOm;
 import ch.desm.middleware.app.core.component.petrinet.re420.map.PetrinetRe420MapCabineRe420;
-import ch.desm.middleware.app.core.component.petrinet.re420.map.PetrinetRe420MapSimZusi;
+import ch.desm.middleware.app.core.component.petrinet.re420.map.PetrinetRe420MapSimZusiFahrpult;
 
 /**
  * Created by Sebastian on 11.11.2014.
@@ -73,8 +73,8 @@ public class PetrinetRe420Service {
         return new PetrinetRe420MapCabineRe420();
     }
 
-    public PetrinetRe420MapSimZusi getMapZusi(){
-        return new PetrinetRe420MapSimZusi();
+    public PetrinetRe420MapSimZusiFahrpult getMapZusi(){
+        return new PetrinetRe420MapSimZusiFahrpult();
     }
 
 }

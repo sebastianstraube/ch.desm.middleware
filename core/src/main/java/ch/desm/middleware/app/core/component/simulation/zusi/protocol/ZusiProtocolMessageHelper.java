@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol;
 
-import ch.desm.middleware.app.common.HexTranslator;
+import ch.desm.middleware.app.common.utility.UtilityHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -120,7 +120,7 @@ public class ZusiProtocolMessageHelper {
      * @return
      */
     private int getNodeLength(String node, String id){
-        node = HexTranslator.swapEndian(node);
+        node = UtilityHex.swapEndian(node);
         int length = 0;
 
         //when id empty then it's an start node "00000000"

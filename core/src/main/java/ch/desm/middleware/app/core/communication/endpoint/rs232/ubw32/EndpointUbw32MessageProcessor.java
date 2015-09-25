@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
 
+import ch.desm.middleware.app.core.component.ComponentMapBase;
 import ch.desm.middleware.app.core.component.ComponentServiceBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
@@ -12,13 +13,13 @@ import org.apache.log4j.Logger;
 import java.util.Map;
 
 /**
- * Created by Sebastian on 22.11.2014.
+ * Created by Sebastian on 24.09.2015.
  */
-public class EndpointUbw32MessageProcessing {
+public class EndpointUbw32MessageProcessor {
 
-    private static Logger LOGGER = Logger.getLogger(EndpointUbw32MessageProcessing.class);
+    private static Logger LOGGER = Logger.getLogger(EndpointUbw32.class);
 
-    public String getUbwSingleRegisterValues(ComponentServiceBase service, Re420EndpointUbw32 endpoint, MessageUbw32DigitalRegisterSingle message) {
+    public static String getUbwSingleRegisterValues(ComponentServiceBase service, Re420EndpointUbw32 endpoint, MessageUbw32DigitalRegisterSingle message) {
         String messageInput = "";
         for (Map.Entry<String, String> entry : endpoint.getMapDigital()
                 .getMap().entrySet()) {
@@ -54,7 +55,7 @@ public class EndpointUbw32MessageProcessing {
     }
 
 
-    public String getUbwAllRegisterValues(ComponentServiceBase service, Re420EndpointUbw32 endpoint, MessageUbw32DigitalRegisterComplete message){
+    public static String getUbwAllRegisterValues(ComponentServiceBase service, Re420EndpointUbw32 endpoint, MessageUbw32DigitalRegisterComplete message){
 
         String messageInput = "";
 
@@ -91,7 +92,7 @@ public class EndpointUbw32MessageProcessing {
         return messageInput;
     }
 
-    public String getUbwAnalogRegisterValues(ComponentServiceBase service, Re420EndpointUbw32 endpoint, MessageUbw32Analog message){
+    public static String getUbwAnalogRegisterValues(ComponentServiceBase service, Re420EndpointUbw32 endpoint, MessageUbw32Analog message){
 
         String messageInput = "";
 
@@ -117,7 +118,7 @@ public class EndpointUbw32MessageProcessing {
                 }
 
                 // convert input to common parameter
-                String parameter = message.getInputValue(entry.getValue(),"");
+                String parameter = message.getInputValue(entry.getValue(), "");
                 stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
                 messageInput = messageInput.concat(stream);
             }
@@ -125,8 +126,4 @@ public class EndpointUbw32MessageProcessing {
 
         return messageInput;
     }
-
-
-
-
 }

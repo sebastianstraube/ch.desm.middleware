@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.zusi.protocol.node;
 
-import ch.desm.middleware.app.common.HexTranslator;
+import ch.desm.middleware.app.common.utility.UtilityHex;
 
 /**
  * Created by Sebastian on 20.04.2015.
@@ -24,12 +24,12 @@ public class ZusiProtocolNodeCommand {
         ZusiProtocolNode nodeRoot = new ZusiProtocolNode();
         ZusiProtocolNode nodeAusbilderAnwendung = new ZusiProtocolNode(nodeRoot, "0300", "");
         ZusiProtocolNode nodeBefehlSignalDirect = new ZusiProtocolNode(nodeAusbilderAnwendung, "1201", "");
-        ZusiProtocolNode nodeStreckenmodul = new ZusiProtocolNode(nodeBefehlSignalDirect, "0100", HexTranslator.toHex(streckenModul));
-        ZusiProtocolNode nodeReferenzSignal = new ZusiProtocolNode(nodeStreckenmodul, "0200", HexTranslator.toHex(referenzNrSignal));
-        ZusiProtocolNode nodeSignalBegriff = new ZusiProtocolNode(nodeReferenzSignal, "0300", HexTranslator.toHex(signalBegriff));
-        ZusiProtocolNode nodezulGeschwSignal = new ZusiProtocolNode(nodeSignalBegriff, "0400", HexTranslator.toHex(zulGeschwSignal));
+        ZusiProtocolNode nodeStreckenmodul = new ZusiProtocolNode(nodeBefehlSignalDirect, "0100", UtilityHex.toHex(streckenModul));
+        ZusiProtocolNode nodeReferenzSignal = new ZusiProtocolNode(nodeStreckenmodul, "0200", UtilityHex.toHex(referenzNrSignal));
+        ZusiProtocolNode nodeSignalBegriff = new ZusiProtocolNode(nodeReferenzSignal, "0300", UtilityHex.toHex(signalBegriff));
+        ZusiProtocolNode nodezulGeschwSignal = new ZusiProtocolNode(nodeSignalBegriff, "0400", UtilityHex.toHex(zulGeschwSignal));
         ZusiProtocolNode nodeEreignis = new ZusiProtocolNode(nodezulGeschwSignal, "0500", "");
-        ZusiProtocolNode nodeEreignisWert = new ZusiProtocolNode(nodeEreignis, "0100", HexTranslator.toHex(ereignisWert));
+        ZusiProtocolNode nodeEreignisWert = new ZusiProtocolNode(nodeEreignis, "0100", UtilityHex.toHex(ereignisWert));
 
         nodeRoot.addNode(nodeAusbilderAnwendung);
         nodeAusbilderAnwendung.addNode(nodeBefehlSignalDirect);
@@ -67,11 +67,11 @@ public class ZusiProtocolNodeCommand {
         ZusiProtocolNode nodeRoot = new ZusiProtocolNode();
         ZusiProtocolNode nodeAusbilderAnwendung = new ZusiProtocolNode(nodeRoot, "0300", "");
         ZusiProtocolNode nodeBefehl = new ZusiProtocolNode(nodeAusbilderAnwendung, "0D01", "");
-        ZusiProtocolNode nodeStreckenmodul = new ZusiProtocolNode(nodeBefehl, "0100", HexTranslator.toHex(streckenModul));
-        ZusiProtocolNode nodeReferenzSignal = new ZusiProtocolNode(nodeStreckenmodul, "0200", HexTranslator.toHex(referenzNr));
-        ZusiProtocolNode nodeSignalModus = new ZusiProtocolNode(nodeReferenzSignal, "0300", HexTranslator.toHex(signalModus));
-        ZusiProtocolNode nodeSignalMatrixSpalte = new ZusiProtocolNode(nodeSignalModus, "0400", HexTranslator.toHex(signalMatrixSpalte));
-        ZusiProtocolNode nodeSignalMatrixZeile = new ZusiProtocolNode(nodeSignalMatrixSpalte, "0500", HexTranslator.toHex(signalMatrixZeile));
+        ZusiProtocolNode nodeStreckenmodul = new ZusiProtocolNode(nodeBefehl, "0100", UtilityHex.toHex(streckenModul));
+        ZusiProtocolNode nodeReferenzSignal = new ZusiProtocolNode(nodeStreckenmodul, "0200", UtilityHex.toHex(referenzNr));
+        ZusiProtocolNode nodeSignalModus = new ZusiProtocolNode(nodeReferenzSignal, "0300", UtilityHex.toHex(signalModus));
+        ZusiProtocolNode nodeSignalMatrixSpalte = new ZusiProtocolNode(nodeSignalModus, "0400", UtilityHex.toHex(signalMatrixSpalte));
+        ZusiProtocolNode nodeSignalMatrixZeile = new ZusiProtocolNode(nodeSignalMatrixSpalte, "0500", UtilityHex.toHex(signalMatrixZeile));
 
         nodeRoot.addNode(nodeAusbilderAnwendung);
         nodeAusbilderAnwendung.addNode(nodeBefehl);
@@ -102,9 +102,9 @@ public class ZusiProtocolNodeCommand {
         ZusiProtocolNode nodeRoot = new ZusiProtocolNode();
         ZusiProtocolNode nodeAusbilderAnwendung = new ZusiProtocolNode(nodeRoot, "0300", "");
         ZusiProtocolNode nodeBefehl = new ZusiProtocolNode(nodeAusbilderAnwendung, "0C01", "");
-        ZusiProtocolNode nodeStreckenmodul = new ZusiProtocolNode(nodeBefehl, "0100", HexTranslator.toHex(streckenModul));
-        ZusiProtocolNode nodeReferenzNummer = new ZusiProtocolNode(nodeStreckenmodul, "0200", HexTranslator.toHex(referenzNr));
-        ZusiProtocolNode nodePosition = new ZusiProtocolNode(nodeReferenzNummer, "0300", HexTranslator.toHex(position));
+        ZusiProtocolNode nodeStreckenmodul = new ZusiProtocolNode(nodeBefehl, "0100", UtilityHex.toHex(streckenModul));
+        ZusiProtocolNode nodeReferenzNummer = new ZusiProtocolNode(nodeStreckenmodul, "0200", UtilityHex.toHex(referenzNr));
+        ZusiProtocolNode nodePosition = new ZusiProtocolNode(nodeReferenzNummer, "0300", UtilityHex.toHex(position));
 
         nodeRoot.addNode(nodeAusbilderAnwendung);
         nodeAusbilderAnwendung.addNode(nodeBefehl);
@@ -123,9 +123,9 @@ public class ZusiProtocolNodeCommand {
         ZusiProtocolNode nodeStart = new ZusiProtocolNode(nodeRoot, "0100", "");
         ZusiProtocolNode nodeHello = new ZusiProtocolNode(nodeStart, "0100", "");
         ZusiProtocolNode nodeProtocolVersion = new ZusiProtocolNode(nodeHello, "0100", "0200");
-        ZusiProtocolNode nodeClientType = new ZusiProtocolNode(nodeProtocolVersion, "0200", HexTranslator.toHex(clientType, 4));
-        ZusiProtocolNode nodeClientDescription = new ZusiProtocolNode(nodeClientType, "0300", HexTranslator.toHex(description));
-        ZusiProtocolNode nodeClientVersion = new ZusiProtocolNode(nodeClientDescription, "0400", HexTranslator.toHex(version));
+        ZusiProtocolNode nodeClientType = new ZusiProtocolNode(nodeProtocolVersion, "0200", UtilityHex.toHex(clientType, 4));
+        ZusiProtocolNode nodeClientDescription = new ZusiProtocolNode(nodeClientType, "0300", UtilityHex.toHex(description));
+        ZusiProtocolNode nodeClientVersion = new ZusiProtocolNode(nodeClientDescription, "0400", UtilityHex.toHex(version));
 
         nodeRoot.addNode(nodeStart);
         nodeStart.addNode(nodeHello);

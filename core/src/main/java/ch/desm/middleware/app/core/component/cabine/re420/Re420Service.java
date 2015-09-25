@@ -2,9 +2,9 @@ package ch.desm.middleware.app.core.component.cabine.re420;
 
 import ch.desm.middleware.app.core.component.ComponentServiceBase;
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32MessageProcessing;
+import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.*;
+import ch.desm.middleware.app.core.component.cabine.re420.map.*;
 
 /**
  * Created by Sebastian on 11.04.2015.
@@ -16,7 +16,7 @@ public class Re420Service extends ComponentServiceBase {
     private Re420EndpointUbw32 endpointUbw;
     private Re420MessageProcessor processor;
     private Re420MapZusiFahrpult mapZusi;
-    private EndpointUbw32MessageProcessing endpointUbw32MessageProcessing;
+    private ComponentMessageProcessorBase componentEndpointUbw32MessageProcessor;
 
     /**
      *
@@ -28,7 +28,7 @@ public class Re420Service extends ComponentServiceBase {
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new Re420MessageProcessor();
         this.mapZusi = new Re420MapZusiFahrpult();
-        this.endpointUbw32MessageProcessing = new EndpointUbw32MessageProcessing();
+        this.componentEndpointUbw32MessageProcessor = new Re420MessageProcessor();
     }
 
     public Re420EndpointUbw32 getEndpoint(){
@@ -56,8 +56,8 @@ public class Re420Service extends ComponentServiceBase {
         return new Re420MapPetrinetCabineRe420();
     }
 
-    public EndpointUbw32MessageProcessing getEndpointMessageProcessor(){
-        return endpointUbw32MessageProcessing;
+    public ComponentMessageProcessorBase getEndpointMessageProcessor(){
+        return componentEndpointUbw32MessageProcessor;
     }
 
     public Re420MapUbw32Digital getMapDigital(){

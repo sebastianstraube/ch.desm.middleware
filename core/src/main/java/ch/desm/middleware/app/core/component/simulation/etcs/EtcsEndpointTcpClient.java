@@ -1,28 +1,28 @@
-package ch.desm.middleware.app.core.component.etcs.tiu;
+package ch.desm.middleware.app.core.component.simulation.etcs;
 
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import java.io.IOException;
 
-public class TiuEndpointTcpClient extends EndpointTcpClient {
+public class EtcsEndpointTcpClient extends EndpointTcpClient {
 
-    private static Logger LOGGER = Logger.getLogger(TiuEndpointTcpClient.class);
+    private static Logger LOGGER = Logger.getLogger(EtcsEndpointTcpClient.class);
 
-    private TiuService service;
-    private TiuEndpointTcpClientThread messageHandler;
+    private EtcsService service;
+    private EtcsEndpointTcpClientThread messageHandler;
 
-	public TiuEndpointTcpClient(TiuService service, String ip, int port, String topic, String name) {
+	public EtcsEndpointTcpClient(EtcsService service, String ip, int port, String topic, String name) {
 		super(ip, port, name);
         this.registerEndpointListener();
         this.service = service;
-        this.messageHandler = new TiuEndpointTcpClientThread(service, topic);
+        this.messageHandler = new EtcsEndpointTcpClientThread(service, topic);
         messageHandler.start();
     }
 
     @Override
     public void onIncomingEndpointMessage(String stream){
-        LOGGER.log(Level.TRACE, "client receive message: " + stream);
+        LOGGER.log(Level.INFO, "client receive message: " + stream);
         messageHandler.addEtcsStream(stream);
     }
 

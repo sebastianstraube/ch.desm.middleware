@@ -58,6 +58,7 @@ public class PetrinetRe420EndpointExportThread extends ThreadBase {
     }
 
     private void simulatePetriNet() {
+        petrinetAdapter.calcBooleanPlaces();
         while (petrinetAdapter.fireOneTransition()) {
             petrinetAdapter.writeActors();
         }

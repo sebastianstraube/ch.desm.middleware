@@ -1,9 +1,10 @@
 package ch.desm.middleware.app.core.component.simulation.locsim;
 
+import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
+import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.component.simulation.locsim.logic.LocsimLogicFahrschalter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
@@ -138,7 +139,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
                 }
                 String channelType = channelData.substring(0, 1);
                 String channel = channelData.substring(1, 3);
-                String parameter = util.getParameterValueLocsim(message
+                String parameter = getParameterValueLocsim(message
                         .getParameter());
                 String locsimCommand = "X" + channelType + channel + parameter
                         + "Y";
@@ -168,11 +169,11 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
                     // conversion Hauptleitung, Bremszylinder pressure
                     if (channelData.equals("V00") || channelData.equals("V01")) {
 
-                        parameter = util.conversionFahrschalter(parameter);
+                        parameter = conversionFahrschalter(parameter);
 
                     } else if (channelData.equals("V02")) {
 
-                        parameter = util.conversionFahrschalter(parameter);
+                        parameter = conversionFahrschalter(parameter);
 
                     } else if (channelData.equals("V03")) {
 
@@ -180,7 +181,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
 
                     else {
 
-                        parameter = util.getParameterValueLocsim(parameter);
+                        parameter = getParameterValueLocsim(parameter);
                     }
 
                     if (channelData.isEmpty()) {
@@ -287,4 +288,55 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
                 MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
     }
 
+    /**
+     *
+     * @param value
+     * @return
+     */
+    public static String getParameterValueLocsim(String value) {
+        String returnValue = "";
+
+        if (value
+                .equals(MessageUbw32DigitalRegisterComplete.MESSAGE_PARAMETER_OFF)) {
+            returnValue = "0000";
+        } else if (value
+                .equals(MessageUbw32DigitalRegisterComplete.MESSAGE_PARAMETER_ON)) {
+            returnValue = "0001";
+        } else {
+            returnValue = value;
+            if (returnValue.length() < 4) {
+                while (returnValue.length() < 4) {
+                    returnValue = "0" + returnValue;
+                }
+            }
+        }
+        return returnValue.toUpperCase();
+    }
+
+
+    public static String conversionFahrschalter(String parameter) {
+        double x = Double.valueOf(parameter);
+        x = (x - 180) / 100;
+        // (x^2)/8
+
+        double locsimValue = Math.sqrt(Math.pow(x, 3)); // ((Math.pow(x, 3)) /
+        // 100);
+        locsimValue *= 100;
+        if (locsimValue < 0) {
+            locsimValue = 0;
+        } else if (locsimValue > 255) {
+            locsimValue = 255;
+        }
+
+        String locsimParameter = Integer.toHexString((int) locsimValue);
+
+        while (locsimParameter.length() < 4) {
+            locsimParameter = locsimParameter + "0";
+        }
+
+        LOGGER.log(Level.TRACE, "x: " + x + ", locsimValue: " + locsimValue
+                + ", locsimParameter: " + locsimParameter);
+
+        return locsimParameter;
+    }
 }

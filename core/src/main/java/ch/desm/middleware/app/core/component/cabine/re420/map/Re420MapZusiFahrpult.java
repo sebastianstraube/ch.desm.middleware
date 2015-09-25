@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.cabine.re420.maps;
+package ch.desm.middleware.app.core.component.cabine.re420.map;
 
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 
@@ -26,7 +26,7 @@ public class Re420MapZusiFahrpult extends ComponentMapBase {
 	}
 
 	protected void init() {
-// map.put("S126.1",""); //Haupthahn
+		// map.put("S126.1",""); //Haupthahn
 // map.put("S126",""); //Steuerstrom
 // map.put("S129",""); //Stromabnehmer
 // map.put("S132",""); //Hauptschalter
@@ -45,15 +45,6 @@ public class Re420MapZusiFahrpult extends ComponentMapBase {
 // map.put("S150f",""); //Fahrschalter 150f
 // map.put("S150g",""); //Fahrschalter 150g
 // map.put("S150l",""); //Fahrschalter 150l
-// map.put("fahrschalter.bremsen.plus",""); //Fahrschalter.bremsen.plus
-// map.put("fahrschalter.bremsen.punkt",""); //Fahrschalter.bremsen.punkt
-// map.put("fahrschalter.bremsen.minus",""); //Fahrschalter.bremsen.minus
-// map.put("fahrschalter.neutral",""); //Fahrschalter.neutral
-// map.put("fahrschalter.fahren.minus",""); //Fahrschalter.fahren.minus
-// map.put("fahrschalter.fahren.punkt",""); //Fahrschalter.fahren.punkt
-// map.put("fahrschalter.fahren.m",""); //Fahrschalter.fahren.m
-// map.put("fahrschalter.fahren.plus",""); //Fahrschalter.fahren.plus
-// map.put("fahrschalter.fahren.plusplus",""); //Fahrschalter.fahren.plusplus
 // map.put("S189.1",""); //Pfeife Stufe 1
 // map.put("S189.2",""); //Pfeife Stufe 2
 // map.put("S242.01",""); //Rückstelltaste Zugsicherung
@@ -79,7 +70,6 @@ public class Re420MapZusiFahrpult extends ComponentMapBase {
 // map.put("S316.6",""); //Stirnlampe rechts rot
 // map.put("S324",""); //Führerstandsbeleuchtung
 // map.put("S333",""); //Instrumentenbeleuchtung
-		map.put("S235","0200-0A01-0100::0100:10,0200:00,0300:07,0400:01,0500:00"); //Totmannpedal
 // map.put("W238_t",""); //Tiefton (Schnellgang, Signum, Totmann)
 // map.put("W238_h",""); //Hochton (Langsamgang)
 // map.put("L317",""); //Lampe Aufblendung

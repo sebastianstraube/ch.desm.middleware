@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.gui.management;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageEncoder;
-import ch.desm.middleware.app.core.communication.message.converter.MessageConverter;
+import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorWebsocket;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
 
@@ -15,7 +15,7 @@ public class ManagementService {
     private ManagementMessageTranslator translator;
     private ManagementMessageProcessor processor;
     private EndpointWebsocketMessageEncoder encoder;
-    private MessageConverter converter;
+    private MessageTranslatorWebsocket converter;
     private ManagementBrokerClient client;
     private ManagementEndpoint endpoint;
 
@@ -27,7 +27,7 @@ public class ManagementService {
         translator = new ManagementMessageTranslator();
         processor = new ManagementMessageProcessor();
         encoder = new EndpointWebsocketMessageEncoder();
-        converter = new MessageConverter();
+        converter = new MessageTranslatorWebsocket();
     }
 
 
@@ -55,7 +55,7 @@ public class ManagementService {
         return encoder;
     }
 
-    public MessageConverter getConverter(){
+    public MessageTranslatorWebsocket getConverter(){
         return converter;
     }
 }

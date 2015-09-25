@@ -7,6 +7,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -18,17 +19,21 @@ public class StartAppMain {
 
     public static void main(String[] args){
         LOGGER.log(Level.INFO, "initialise middleware...");
+        LOGGER.log(Level.INFO, "starting directory: "+ System.getProperty("user.dir"));
+
         RunAppSingleton main = RunAppSingleton.getSingleton();
 
+        //String host, String port, String websocketContextPath, String serverEndpointContextPath, String jettyPath
         if(args.length >0 && args.length <= 4){
             main.setConfiguration(args[0], args[1], args[2], args[3], args[4]);
-        }
-        else {
+        } else {
             if(SystemUtils.IS_OS_UNIX){
-                main.setConfiguration("localhost", "8080", "/websocket", "/gui", "/opt/desm/middleware/core");
+                main.setConfiguration("192.168.1.19", "8080", "/websocket", "/gui", System.getProperty("user.dir"));//"/opt/desm/middleware/core");
             }
-            else{
-                main.setConfiguration("localhost", "8080", "/websocket", "/gui", "C:/svn.it-hotspot.de/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/core");
+            else if(SystemUtils.IS_OS_WINDOWS){
+                main.setConfiguration("192.168.1.19", "8080", "/websocket", "/gui", System.getProperty("user.dir"));//"C:/Users/Sebastian/Dropbox/DESM-Verein/Projekte/DESM-Middleware/code/ch.desm.middleware.app/core");
+            } else{
+                LOGGER.log(Level.ERROR, "unsupported OS");
             }
         }
 

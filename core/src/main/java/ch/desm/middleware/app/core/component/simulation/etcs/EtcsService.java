@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.etcs.tiu;
+package ch.desm.middleware.app.core.component.simulation.etcs;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.broker.BrokerClient;
@@ -13,7 +13,7 @@ import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiP
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class TiuService extends ComponentServiceBase {
+public class EtcsService extends ComponentServiceBase {
 
     private BrokerClient broker;
     private String ip;
@@ -26,11 +26,11 @@ public class TiuService extends ComponentServiceBase {
      * @param ip
      * @param port
      */
-    public TiuService(Broker broker, String ip, int port){
+    public EtcsService(Broker broker, String ip, int port){
         this.ip = ip;
         this.port = port;
-        this.broker = new TiuBrokerClient(broker, this);
-        this.endpoint = new TiuEndpointTcpClient(this, ip, port, MessageBase.MESSAGE_TOPIC_ETCS_TIU, "ETCS_TIU");
+        this.broker = new EtcsBrokerClient(broker, this);
+        this.endpoint = new EtcsEndpointTcpClient(this, ip, port, MessageBase.MESSAGE_TOPIC_ETCS_TIU, "ETCS_TIU");
 
     }
 
@@ -46,8 +46,8 @@ public class TiuService extends ComponentServiceBase {
      *
      * @return
      */
-    public TiuMessageProcessor getMessageProcessor(){
-        return new TiuMessageProcessor();
+    public EtcsMessageProcessor getMessageProcessor(){
+        return new EtcsMessageProcessor();
     }
 
     @Override

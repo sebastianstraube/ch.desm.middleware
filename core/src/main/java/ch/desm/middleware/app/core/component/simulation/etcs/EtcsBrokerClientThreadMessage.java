@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.etcs.tiu;
+package ch.desm.middleware.app.core.component.simulation.etcs;
 
 import ch.desm.middleware.app.core.component.ComponentThreadMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
@@ -10,13 +10,13 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class TiuBrokerClientThreadMessage extends ComponentThreadMessageProcessorBase<MessageMiddleware> {
+public class EtcsBrokerClientThreadMessage extends ComponentThreadMessageProcessorBase<MessageMiddleware> {
 
-    private static Logger LOGGER = Logger.getLogger(TiuBrokerClientThreadMessage.class);
-    private TiuService service;
+    private static Logger LOGGER = Logger.getLogger(EtcsBrokerClientThreadMessage.class);
+    private EtcsService service;
     private Object processMessagesLock;
 
-    public TiuBrokerClientThreadMessage(TiuService service){
+    public EtcsBrokerClientThreadMessage(EtcsService service){
         this.service = service;
         this.processMessagesLock = new Object();
     }

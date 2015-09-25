@@ -1,11 +1,8 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
 import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageCommon;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapUbw32Analog;
-import ch.desm.middleware.app.core.component.cabine.re420.maps.Re420MapUbw32Digital;
+import ch.desm.middleware.app.core.component.cabine.re420.map.Re420MapUbw32Analog;
+import ch.desm.middleware.app.core.component.cabine.re420.map.Re420MapUbw32Digital;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

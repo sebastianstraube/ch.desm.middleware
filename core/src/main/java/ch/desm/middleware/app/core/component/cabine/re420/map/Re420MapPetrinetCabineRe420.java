@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.cabine.re420.maps;
+package ch.desm.middleware.app.core.component.cabine.re420.map;
 
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 
@@ -26,7 +26,10 @@ public class Re420MapPetrinetCabineRe420 extends ComponentMapBase {
 	}
 
 	protected void init() {
-// map.put("S126.1",""); //Schalter
+		map.put("S235","cabine_re420_totmannpedal_controller_$S235"); //Schalter
+
+
+		// map.put("S126.1",""); //Schalter
 // map.put("S126",""); //Schalter
 		map.put("S129","cabine_re420_stromabnehmer_controller_$S129"); //Schalter
 		map.put("S132","cabine_re420_hauptschalter_controller_$S132"); //Schalter
@@ -45,15 +48,6 @@ public class Re420MapPetrinetCabineRe420 extends ComponentMapBase {
 		map.put("S150f","cabine_re420_fahrschalter_controller_$s150f"); //
 		map.put("S150g","cabine_re420_fahrschalter_controller_$s150g"); //
 		map.put("S150l","cabine_re420_fahrschalter_controller_$s150l"); //
-// map.put("fahrschalter.bremsen.plus",""); //Fahrschalter
-// map.put("fahrschalter.bremsen.punkt",""); //Fahrschalter
-// map.put("fahrschalter.bremsen.minus",""); //Fahrschalter
-// map.put("fahrschalter.neutral",""); //Fahrschalter
-// map.put("fahrschalter.fahren.minus",""); //Fahrschalter
-// map.put("fahrschalter.fahren.punkt",""); //Fahrschalter
-// map.put("fahrschalter.fahren.m",""); //Fahrschalter
-// map.put("fahrschalter.fahren.plus",""); //Fahrschalter
-// map.put("fahrschalter.fahren.plusplus",""); //Fahrschalter
 // map.put("S189.1",""); //Schalter
 // map.put("S189.2",""); //Schalter
 // map.put("S242.01",""); //Schalter

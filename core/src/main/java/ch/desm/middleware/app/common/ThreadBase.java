@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.common;
 
-
 import ch.desm.middleware.app.common.utility.UtilityRandomGenerator;
 
 /**
@@ -11,7 +10,7 @@ import ch.desm.middleware.app.common.utility.UtilityRandomGenerator;
  */
 public abstract class ThreadBase extends Thread {
 
-    private int sleepTime = 10;
+    private int sleepTime = 40;
 
 	public ThreadBase(){
 		this.setDaemon(true);

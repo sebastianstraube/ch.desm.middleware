@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.etcs.tiu;
+package ch.desm.middleware.app.core.component.simulation.etcs;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.broker.BrokerClient;
@@ -10,17 +10,17 @@ import org.apache.log4j.Logger;
 import java.util.LinkedList;
 
 
-public class TiuBrokerClient extends BrokerClient {
+public class EtcsBrokerClient extends BrokerClient {
     private static Logger LOGGER = Logger.getLogger(ch.desm.middleware.app.core.component.simulation.zusi.ZusiBrokerClient.class);
 
-    private TiuBrokerClientThreadMessage thread;
-    private TiuService service;
+    private EtcsBrokerClientThreadMessage thread;
+    private EtcsService service;
 
-    public TiuBrokerClient(Broker broker, TiuService service) {
+    public EtcsBrokerClient(Broker broker, EtcsService service) {
         super(broker);
         this.service = service;
 
-        this.thread = new TiuBrokerClientThreadMessage(service);
+        this.thread = new EtcsBrokerClientThreadMessage(service);
         this.thread.start();
     }
 

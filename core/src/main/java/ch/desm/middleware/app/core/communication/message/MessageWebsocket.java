@@ -6,6 +6,6 @@ public class MessageWebsocket extends MessageBase {
 
 	public MessageWebsocket(String topic, String payload) {
 		super(payload, topic);
-	}	
+	}
 
 }

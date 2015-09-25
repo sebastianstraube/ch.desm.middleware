@@ -16,11 +16,11 @@ public class ZusiMapCabineRe420 extends ComponentMapBase {
 
     @Override
     protected void init(){
-// map.put("0100-0200::0100",""); //Initialisierung acknowledge command from zusi
+        // map.put("0100-0200::0100",""); //Initialisierung acknowledge command from zusi
 // map.put("0100-0200::0100",""); //Initialisierung acknowledge command from zusi
 // map.put("0100-0200::0100",""); //Initialisierung acknowledge command from zusi
 // map.put("0200-0400::0100",""); //Initialisierung acknowledge command needed data from zusi
-// map.put("0200-0A01-0100::0100:2b00,0200:0000,0300:0700,0400:0100,0500:00000000",""); //Stromabnehmer heben
+// map.put("0200-0A01-0100::0100:2b00,0200:0000,0300:0700,0400:0200,0500:00000000",""); //Stromabnehmer heben
 // map.put("0200-0A01-0100::0100:2200,0200:0000,0300:0700,0400:2200,0500:00000000",""); //Stromabnehmer mittelstellung
 // map.put("0200-0A01-0100::0100:2b00,0200:0000,0300:0700,0400:0000,0500:00000000",""); //Stromabnehmer senken
 // map.put("0200-0A01-0100::0100:1100,0200:0000,0300:0700,0400:0200,0500:00000000",""); //Hauptschalter ein
@@ -41,7 +41,6 @@ public class ZusiMapCabineRe420 extends ComponentMapBase {
 // map.put("0200-0A01-0100::0100:0100,0200:0000,0300:0700,0400:0000,0500:00000000",""); //Fahrschalter.fahren.plusplus
 // map.put("0200-0A01-0100::0100:0c00,0200:0000,0300:0700,0400:0200,0500:00000000",""); //Pfeife ein
 // map.put("0200-0A01-0100::0100:1300,0200:0000,0300:0700,0400:,0500:00000000",""); //Schleuderschutz
-        map.put("0200-0A01-0100::0100:1000,0200:0000,0300:0700,0400:0100,0500:00000000","S235"); //Sifa
 // map.put("0200-0A01-0100::0100:1000,0200:0000,0300:0700,0400:0200,0500:00000000",""); //Sifa
 // map.put("0200-0A00::0100",""); //Geschwindigkeit
 // map.put("",""); //Uhrzeit

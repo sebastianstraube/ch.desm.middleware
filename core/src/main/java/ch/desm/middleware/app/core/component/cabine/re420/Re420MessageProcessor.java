@@ -2,6 +2,7 @@ package ch.desm.middleware.app.core.component.cabine.re420;
 
 import java.util.LinkedList;
 
+import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32MessageProcessor;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
@@ -113,13 +114,13 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 
 		String middlewareMessagesInput = "";
 		if (message instanceof MessageUbw32DigitalRegisterSingle) {
-            middlewareMessagesInput = service.getEndpointMessageProcessor().getUbwSingleRegisterValues(service, service.getEndpoint(), (MessageUbw32DigitalRegisterSingle) message);
+            middlewareMessagesInput = EndpointUbw32MessageProcessor.getUbwSingleRegisterValues(service, service.getEndpoint(), (MessageUbw32DigitalRegisterSingle) message);
         }
 		else if (message instanceof MessageUbw32DigitalRegisterComplete){
-            middlewareMessagesInput = service.getEndpointMessageProcessor().getUbwAllRegisterValues(service, service.getEndpoint(), (MessageUbw32DigitalRegisterComplete) message);
+            middlewareMessagesInput = EndpointUbw32MessageProcessor.getUbwAllRegisterValues(service, service.getEndpoint(), (MessageUbw32DigitalRegisterComplete) message);
         }
 		else if (message instanceof MessageUbw32Analog){
-            middlewareMessagesInput = service.getEndpointMessageProcessor().getUbwAnalogRegisterValues(service, service.getEndpoint(), (MessageUbw32Analog) message);
+            middlewareMessagesInput = EndpointUbw32MessageProcessor.getUbwAnalogRegisterValues(service, service.getEndpoint(), (MessageUbw32Analog) message);
         }
 
 		LOGGER.log(Level.TRACE,"processing middleware message: " + middlewareMessagesInput);

@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
-import ch.desm.middleware.app.common.HexTranslator;
+import ch.desm.middleware.app.common.utility.UtilityHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -67,10 +67,10 @@ public abstract class EndpointTcpClient extends EndpointCommon {
      */
     public void receiveEvent(byte[] message) throws IOException {
         synchronized(receiveEventLock){
-            String hexMessage = HexTranslator.toHex(message);
 
-            LOGGER.log(Level.TRACE, "Thread active: " + hexMessage);
-            onIncomingEndpointMessage(hexMessage);
+            //TODO implement
+            LOGGER.log(Level.INFO, "Thread active: " + Arrays.toString(message));
+            onIncomingEndpointMessage("");
         }
     }
 
@@ -78,7 +78,7 @@ public abstract class EndpointTcpClient extends EndpointCommon {
         synchronized (sendEventLock) {
 
             if(message != null && !message.isEmpty()){
-                byte[] byteStream = getByteStream(message);
+                byte[] byteStream = UtilityHex.getByteStream(message);
                 this.send(byteStream);
             }else{
                 LOGGER.log(Level.WARN, "client tried to send malformed endpoint message: " + message);
@@ -113,20 +113,6 @@ public abstract class EndpointTcpClient extends EndpointCommon {
         synchronized (socketLock){
             return !socket.isClosed() && socket.isConnected();
         }
-    }
-
-    private byte[] getByteStream(String hexMessage){
-
-        hexMessage = HexTranslator.removeControleCharacter(hexMessage);
-
-        byte[] byteStream = new byte[hexMessage.length()/2];
-        for(int i=0; i<hexMessage.length()/2; i++){
-            String value = "" + hexMessage.charAt(i*2) + hexMessage.charAt(i*2+1);
-            Integer val = Integer.valueOf(value, 16);
-            byteStream[i] = val.byteValue();
-        }
-
-        return byteStream;
     }
 
     public String toString(){

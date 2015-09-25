@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.etcs.tiu;
+package ch.desm.middleware.app.core.component.simulation.etcs;
 
 import ch.desm.middleware.app.core.component.ComponentThreadMessageProcessorBase;
 import org.apache.log4j.Level;
@@ -9,14 +9,14 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class TiuEndpointTcpClientThread extends ComponentThreadMessageProcessorBase {
+public class EtcsEndpointTcpClientThread extends ComponentThreadMessageProcessorBase {
 
-    private Logger LOGGER = Logger.getLogger(TiuEndpointTcpClientThread.class);
-    private TiuService service;
+    private Logger LOGGER = Logger.getLogger(EtcsEndpointTcpClientThread.class);
+    private EtcsService service;
     private Object processMessagesLock;
     private String topic;
 
-    public TiuEndpointTcpClientThread(TiuService service, String topic){
+    public EtcsEndpointTcpClientThread(EtcsService service, String topic){
         this.service = service;
         this.processMessagesLock = new Object();
         this.topic = topic;

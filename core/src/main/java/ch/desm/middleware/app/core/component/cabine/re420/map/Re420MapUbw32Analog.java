@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.component.cabine.re420.maps;
+package ch.desm.middleware.app.core.component.cabine.re420.map;
 
 import java.util.Map;
 
