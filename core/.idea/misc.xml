@@ -4,9 +4,11 @@
     <entry_points version="2.0" />
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
     <file type="web" url="file://$PROJECT_DIR$/out/artifacts/webapp/grayscale/grayscale/font-awesome-4.1.0/css" />
     <file type="web" url="file://$PROJECT_DIR$/out/artifacts/webapp/WEB-INF/web.xml" />
   </component>
+  <component name="IdProvider" IDEtalkID="86611D7D5FA91744B93FD7F7144FAFDE" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -24,7 +26,7 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/target" />
   </component>
 </project>
