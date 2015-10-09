@@ -156,7 +156,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
             String parameter = isEnabled == true ? "on" : "off";
             String key = entry.getKey();
 
-            if(service.getState().hasChanged(key, parameter)){
+            if(service.getEndpoint().getState().hasChanged(key, parameter)){
 
                 //find the middleware message of the changed key
                 String stream =  service.getComponentMapMiddleware().getValue(key);

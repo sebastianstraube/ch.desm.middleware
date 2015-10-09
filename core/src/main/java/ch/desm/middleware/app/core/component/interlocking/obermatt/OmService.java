@@ -18,23 +18,15 @@ public class OmService {
     private OmEndpointUbw32 endpoint;
     private OmMapPetrinet map;
 
-    //TODO refactor move to common ubw
-    private EndpointUbw32State state;
-
-
-
-
     public OmService(Broker broker, String port){
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new OmMessageProcessor(this);
-        this.state = new EndpointUbw32State();
         this.map = new OmMapPetrinet();
 
         this.client = new OmBrokerClient(broker, this);
         this.endpoint = new OmEndpointUbw32(port, this);
     }
-
 
     public ComponentMapMiddleware getComponentMapMiddleware(){
         return componentMapMiddleware;
@@ -54,10 +46,6 @@ public class OmService {
 
     public OmEndpointUbw32 getEndpoint(){
         return endpoint;
-    }
-
-    public EndpointUbw32State getState(){
-        return state;
     }
 
     public OmMapPetrinet getMapPetrinet(){
