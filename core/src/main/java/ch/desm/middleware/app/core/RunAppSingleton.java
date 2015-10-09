@@ -2,17 +2,17 @@ package ch.desm.middleware.app.core;
 
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420Service;
-import ch.desm.middleware.app.core.component.interlocking.obermatt.OmService;
-import ch.desm.middleware.app.core.component.mgmt.gui.ManagementService;
-import ch.desm.middleware.app.core.component.petrinet.obermatt.PetrinetOmService;
-import ch.desm.middleware.app.core.component.petrinet.re420.PetrinetRe420Service;
-import ch.desm.middleware.app.core.component.simulation.etcs.EtcsService;
-import ch.desm.middleware.app.core.component.simulation.locsim.Locsim;
-import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointDll;
-import ch.desm.middleware.app.core.component.simulation.locsim.LocsimEndpointRs232;
+import ch.desm.middleware.app.module.re420.Re420Service;
+import ch.desm.middleware.app.module.obermatt.OmService;
+import ch.desm.middleware.app.module.gui.ManagementService;
+import ch.desm.middleware.app.module.petrinet.obermatt.PetrinetOmService;
+import ch.desm.middleware.app.module.petrinet.re420.PetrinetRe420Service;
+import ch.desm.middleware.app.module.simulation.etcs.EtcsService;
+import ch.desm.middleware.app.module.simulation.locsim.Locsim;
+import ch.desm.middleware.app.module.simulation.locsim.LocsimEndpointDll;
+import ch.desm.middleware.app.module.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.common.ThreadBase;
-import ch.desm.middleware.app.core.component.simulation.zusi.ZusiService;
+import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.server.JettyServer;
 import ch.desm.middleware.app.core.server.TyrusServer;
 import org.apache.log4j.Level;

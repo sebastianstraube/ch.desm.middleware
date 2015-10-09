@@ -1,11 +1,11 @@
 package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
 
-import ch.desm.middleware.app.common.component.ComponentServiceBase;
+import ch.desm.middleware.app.core.component.ComponentServiceBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
-import ch.desm.middleware.app.core.component.cabine.re420.Re420EndpointUbw32;
+import ch.desm.middleware.app.module.re420.Re420EndpointUbw32;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
