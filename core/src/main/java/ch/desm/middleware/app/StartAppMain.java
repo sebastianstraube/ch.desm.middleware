@@ -1,17 +1,13 @@
 package ch.desm.middleware.app;
 
-import ch.desm.middleware.app.core.RunAppSingleton;
-import jssc.SerialPortList;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 public class StartAppMain {
 

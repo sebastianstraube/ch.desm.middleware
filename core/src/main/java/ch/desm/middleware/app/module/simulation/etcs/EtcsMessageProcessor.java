@@ -72,7 +72,6 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
                 }
             };
         }
-
     }
 
     /**

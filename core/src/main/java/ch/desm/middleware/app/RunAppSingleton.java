@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core;
+package ch.desm.middleware.app;
 
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
@@ -78,7 +78,7 @@ public class RunAppSingleton extends ThreadBase {
         //startCabineRe420("COM10"); //linux: dev/ttyACM0
         //startPetrinetRe420();
 
-        //startEtcsTiu("192.168.200.21", 50000);
+        startEtcsTiu("192.168.200.21", 50000);
         startEtcsOdo("192.168.200.21", 50002);
     }
 
@@ -100,63 +100,95 @@ public class RunAppSingleton extends ThreadBase {
         tiu.getEndpoint().init();
         tiu.getEndpoint().start();
 
-        /*
-        84,
-        48, //Sleeping
-        49, //Pantograph
-        48, //MainCircuitBrake
-        48,49, //CabStatus
-        48,49, //DirectionController
-        48, //TrainIntegrity
-        48, //PassengerBrake
-        49,48, //DoorControl
-        49, //ETCSMainSwitch
-        48, //Isolation
-        48, //SystemFailure
-        48, //ServiceBrake
-        48, //EmergencyBrake
-        36};
-         */
         try {
-            /*
-            byte[] ba = {
-                    84,
-                    49, //Sleeping
-                    49, //Pantograph
-                    49, //MainCircuitBrake
-                    49,49, //CabStatus
-                    49,49, //DirectionController
-                    49, //TrainIntegrity
-                    49, //PassengerBrake
-                    49,49, //DoorControl
-                    49, //ETCSMainSwitch
-                    49, //Isolation
-                    49, //SystemFailure
-                    49, //ServiceBrake
-                    49, //EmergencyBrake
-                    36};
-*/
 
-            byte[] ba = {
+            byte[] init = {
                     84,
                     48, //Sleeping
-                    48, //Pantograph
-                    48, //MainCircuitBrake
-                    48,48, //CabStatus
+                    //48, //Pantograph //is og
+                    //48, //MainCircuitBrake
+                    48,49, //CabStatus
                     48,48, //DirectionController
-                    48, //TrainIntegrity
-                    48, //PassengerBrake
-                    48,48, //DoorControl
+                    //48, //TrainIntegrity
+                    //48, //PassengerBrake
+                    //48,48, //DoorControl
                     49, //ETCSMainSwitch
                     48, //Isolation
-                    48, //SystemFailure
+                    //48, //SystemFailure
+                    49, //ServiceBrake
+                    48, //EmergencyBrake
+                    36};
+
+            tiu.getEndpoint().send(init);
+
+            Thread.sleep(3000);
+
+            byte[] directionForward = {
+                    84,
+                    48, //Sleeping
+                    //48, //Pantograph //is og
+                    //48, //MainCircuitBrake
+                    48,49, //CabStatus
+                    48,49, //DirectionController
+                    //48, //TrainIntegrity
+                    //48, //PassengerBrake
+                    //48,48, //DoorControl
+                    49, //ETCSMainSwitch
+                    48, //Isolation
+                    //48, //SystemFailure
+                    49, //ServiceBrake
+                    48, //EmergencyBrake
+                    36};
+
+            tiu.getEndpoint().send(directionForward);
+
+            Thread.sleep(3000);
+
+            byte[] directionBackward = {
+                    84,
+                    48, //Sleeping
+                    //48, //Pantograph //is og
+                    //48, //MainCircuitBrake
+                    48,49, //CabStatus
+                    49,48, //DirectionController
+                    //48, //TrainIntegrity
+                    //48, //PassengerBrake
+                    //48,48, //DoorControl
+                    49, //ETCSMainSwitch
+                    48, //Isolation
+                    //48, //SystemFailure
+                    49, //ServiceBrake
+                    48, //EmergencyBrake
+                    36};
+
+            tiu.getEndpoint().send(directionBackward);
+
+            Thread.sleep(3000);
+
+            byte[] releaseBreak = {
+                    84,
+                    48, //Sleeping
+                    //48, //Pantograph //is og
+                    //48, //MainCircuitBrake
+                    49,48, //CabStatus
+                    48,49, //DirectionController
+                    //48, //TrainIntegrity
+                    //48, //PassengerBrake
+                    //48,48, //DoorControl
+                    49, //ETCSMainSwitch
+                    48, //Isolation
+                    //48, //SystemFailure
                     48, //ServiceBrake
                     48, //EmergencyBrake
                     36};
 
+            tiu.getEndpoint().send(releaseBreak);
 
-            tiu.getEndpoint().send(ba);
+            Thread.sleep(500);
+
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
