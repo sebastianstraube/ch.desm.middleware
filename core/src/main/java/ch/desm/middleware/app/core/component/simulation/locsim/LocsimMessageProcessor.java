@@ -5,10 +5,10 @@ import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
+import ch.desm.middleware.app.common.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.component.simulation.locsim.logic.LocsimLogicFahrschalter;
 import ch.desm.middleware.app.core.component.simulation.locsim.maps.LocsimMapRs232;
-import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageDll;
+import ch.desm.middleware.app.core.component.simulation.locsim.message.LocsimMessageDll;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

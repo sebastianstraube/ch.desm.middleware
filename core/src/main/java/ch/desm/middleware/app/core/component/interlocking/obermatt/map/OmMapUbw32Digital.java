@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.component.interlocking.obermatt.map;
 
 import java.util.Map;
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+import ch.desm.middleware.app.common.component.ComponentMapBase;
 
 public class OmMapUbw32Digital extends ComponentMapBase {
 
@@ -13,10 +13,6 @@ public class OmMapUbw32Digital extends ComponentMapBase {
 
 	public boolean isKeyAvailable(String id) {
 		return map.containsKey(id);
-	}
-
-	public boolean isValueAvailable(String id) {
-		return map.containsValue(id);
 	}
 
 	@Override

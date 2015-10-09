@@ -5,8 +5,8 @@ import ch.desm.middleware.app.core.communication.broker.BrokerClient;
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
-import ch.desm.middleware.app.core.component.ComponentServiceBase;
+import ch.desm.middleware.app.common.component.ComponentMapMiddleware;
+import ch.desm.middleware.app.common.component.ComponentServiceBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.*;
 import ch.desm.middleware.app.core.component.simulation.zusi.protocol.node.ZusiProtocolNodeCodec;
 

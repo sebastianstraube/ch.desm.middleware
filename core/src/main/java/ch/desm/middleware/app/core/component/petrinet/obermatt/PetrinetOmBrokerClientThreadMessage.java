@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.component.petrinet.obermatt;
 
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.component.ComponentThreadMessageProcessorBase;
+import ch.desm.middleware.app.common.component.ComponentMessageProcessorThreadBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -10,7 +10,7 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class PetrinetOmBrokerClientThreadMessage extends ComponentThreadMessageProcessorBase<MessageMiddleware> {
+public class PetrinetOmBrokerClientThreadMessage extends ComponentMessageProcessorThreadBase<MessageMiddleware> {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmBrokerClientThreadMessage.class);
     private PetrinetOmService service;

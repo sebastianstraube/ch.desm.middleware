@@ -1,8 +1,8 @@
 package ch.desm.middleware.app.core.component.cabine.re420;
 
-import ch.desm.middleware.app.core.component.ComponentServiceBase;
+import ch.desm.middleware.app.common.component.ComponentServiceBase;
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
+import ch.desm.middleware.app.common.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.cabine.re420.map.*;
 

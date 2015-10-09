@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.*;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
+import ch.desm.middleware.app.common.component.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.component.interlocking.obermatt.logic.OmLogicFahrstrassenSchalter;

@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.component.simulation.locsim.map;
 
 import java.util.Map;
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+import ch.desm.middleware.app.common.component.ComponentMapBase;
 
 
 public class LocsimMapSignal extends ComponentMapBase {

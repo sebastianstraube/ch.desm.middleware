@@ -2,7 +2,7 @@ package ch.desm.middleware.app.core.component.interlocking.obermatt.map;
 
 import java.util.Map;
 
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+import ch.desm.middleware.app.common.component.ComponentMapBase;
 
 public class OmMapPetrinet extends ComponentMapBase{
 
@@ -10,14 +10,6 @@ public class OmMapPetrinet extends ComponentMapBase{
 	public Map<String, String> getMap() {
 		return map;
 	}
-
-    public String mapEndpointToBrokerMessage(String message) throws Exception {
-        String mappedMessage = this.getKey(message);
-        if(mappedMessage.isEmpty()) {
-            throw new Exception("unable to map petri net message \"" + message + "\"");
-        }
-        return mappedMessage;
-    }
 
     public String mapBrokerToEndpointMessage(String message) throws Exception {
         String mappedMessage = this.getKey(message);

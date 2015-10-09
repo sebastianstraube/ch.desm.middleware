@@ -4,9 +4,9 @@ import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.component.ComponentMapBase;
-import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
-import ch.desm.middleware.app.core.component.ComponentServiceBase;
+import ch.desm.middleware.app.common.component.ComponentMapBase;
+import ch.desm.middleware.app.common.component.ComponentMapMiddleware;
+import ch.desm.middleware.app.common.component.ComponentServiceBase;
 import ch.desm.middleware.app.core.component.simulation.zusi.logic.ZusiLogicIsolierung;
 import ch.desm.middleware.app.core.component.simulation.zusi.map.*;
 import ch.desm.middleware.app.core.component.simulation.zusi.message.ZusiMessageParameterHelper;
@@ -123,9 +123,9 @@ public class ZusiService extends ComponentServiceBase {
      */
     public ComponentMapBase getMap(String topic){
         if(topic.equals(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
-            return new ZusiMapInitAusbildung();
+            return new ZusiMapAusbildungInit();
         }else if(topic.equals(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
-            return new ZusiMapInitFahrpult();
+            return new ZusiMapFahrpultInit();
         }
 
         return null;

@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.petrinet.re420.map;
 
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+import ch.desm.middleware.app.common.component.ComponentMapBase;
 
 import java.util.Map;
 

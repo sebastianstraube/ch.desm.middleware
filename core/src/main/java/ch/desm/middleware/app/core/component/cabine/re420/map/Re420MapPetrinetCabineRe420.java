@@ -1,12 +1,10 @@
 package ch.desm.middleware.app.core.component.cabine.re420.map;
 
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+import ch.desm.middleware.app.common.component.ComponentMapBase;
 
 import java.util.Map;
 
 public class Re420MapPetrinetCabineRe420 extends ComponentMapBase {
-
-	public static final String PINBITMASK_CONFIGURATION_DIGITAL = "17943,65336,16,49152,768,12596,960";
 
 	public Re420MapPetrinetCabineRe420() {
 		super();
@@ -16,10 +14,6 @@ public class Re420MapPetrinetCabineRe420 extends ComponentMapBase {
 		return map.containsKey(id);
 	}
 
-	public boolean isValueAvailable(String id) {
-		return map.containsValue(id);
-	}
-
 	@Override
 	public Map<String, String> getMap() {
 		return map;
@@ -27,8 +21,6 @@ public class Re420MapPetrinetCabineRe420 extends ComponentMapBase {
 
 	protected void init() {
 		map.put("S235","cabine_re420_totmannpedal_controller_$S235"); //Schalter
-
-
 		// map.put("S126.1",""); //Schalter
 // map.put("S126",""); //Schalter
 		map.put("S129","cabine_re420_stromabnehmer_controller_$S129"); //Schalter

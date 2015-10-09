@@ -1,7 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
 
-import ch.desm.middleware.app.core.component.ComponentMapBase;
-import ch.desm.middleware.app.core.component.ComponentServiceBase;
+import ch.desm.middleware.app.common.component.ComponentServiceBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;

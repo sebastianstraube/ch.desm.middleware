@@ -1,12 +1,10 @@
 package ch.desm.middleware.app.core.component.cabine.re420.map;
 
-import ch.desm.middleware.app.core.component.ComponentMapBase;
+import ch.desm.middleware.app.common.component.ComponentMapBase;
 
 import java.util.Map;
 
 public class Re420MapZusiFahrpult extends ComponentMapBase {
-
-	public static final String PINBITMASK_CONFIGURATION_DIGITAL = "17943,65336,16,49152,768,12596,960";
 
 	public Re420MapZusiFahrpult() {
 		super();
@@ -14,10 +12,6 @@ public class Re420MapZusiFahrpult extends ComponentMapBase {
 
 	public boolean isKeyAvailable(String id) {
 		return map.containsKey(id);
-	}
-
-	public boolean isValueAvailable(String id) {
-		return map.containsValue(id);
 	}
 
 	@Override

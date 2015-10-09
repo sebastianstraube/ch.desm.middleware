@@ -9,16 +9,9 @@ public class OmMapSignalStellung {
 	
 	public OmMapSignalStellung() {
 		this.mapSignalStellung = new HashMap<String, String>();
-		
 		this.initializeSignalStellung();
 	}
 
-	/**
-	 * TODO mapping to Locsim DLL data
-	 * 
-	 * source: MiddlewareMessages.xlsx: Legende
-	 * 
-	 */
 	private void initializeSignalStellung() {
 		mapSignalStellung.put("11", "ZSH"); //Signaltyp:Zwergsignal, Bedeutung: Halt, Signalbild :zwei Lampen horizontal
 		mapSignalStellung.put("11", "ZSV"); //Signaltyp:Zwergsignal, Bedeutung: Vorsicht, Signalbild :zwei Lampen schr�g

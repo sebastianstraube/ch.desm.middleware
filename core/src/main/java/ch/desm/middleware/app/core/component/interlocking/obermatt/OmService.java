@@ -3,7 +3,7 @@ package ch.desm.middleware.app.core.component.interlocking.obermatt;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32State;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
+import ch.desm.middleware.app.common.component.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.interlocking.obermatt.map.OmMapPetrinet;
 
 /**

@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.petrinet.re420;
 
-import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
+import ch.desm.middleware.app.common.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import org.apache.log4j.Level;

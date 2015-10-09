@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.simulation.etcs;
 
-import ch.desm.middleware.app.core.component.ComponentThreadMessageProcessorBase;
+import ch.desm.middleware.app.common.component.ComponentMessageProcessorThreadBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 28.11.2014.
  */
-public class EtcsEndpointTcpClientThread extends ComponentThreadMessageProcessorBase {
+public class EtcsEndpointTcpClientThread extends ComponentMessageProcessorThreadBase<String> {
 
     private Logger LOGGER = Logger.getLogger(EtcsEndpointTcpClientThread.class);
     private EtcsService service;

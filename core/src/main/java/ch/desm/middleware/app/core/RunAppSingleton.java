@@ -4,7 +4,7 @@ package ch.desm.middleware.app.core;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.component.cabine.re420.Re420Service;
 import ch.desm.middleware.app.core.component.interlocking.obermatt.OmService;
-import ch.desm.middleware.app.core.component.gui.management.ManagementService;
+import ch.desm.middleware.app.core.component.mgmt.gui.ManagementService;
 import ch.desm.middleware.app.core.component.petrinet.obermatt.PetrinetOmService;
 import ch.desm.middleware.app.core.component.petrinet.re420.PetrinetRe420Service;
 import ch.desm.middleware.app.core.component.simulation.etcs.EtcsService;

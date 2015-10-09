@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.component.petrinet.re420;
 
-import ch.desm.middleware.app.core.component.ComponentThreadMessageProcessorBase;
+import ch.desm.middleware.app.common.component.ComponentMessageProcessorThreadBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -10,7 +10,7 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class PetrinetRe420BrokerClientThreadMessage extends ComponentThreadMessageProcessorBase<MessageMiddleware> {
+public class PetrinetRe420BrokerClientThreadMessage extends ComponentMessageProcessorThreadBase<MessageMiddleware> {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetRe420BrokerClientThreadMessage.class);
     private PetrinetRe420Service service;

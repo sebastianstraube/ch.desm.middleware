@@ -8,7 +8,7 @@ import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import ch.desm.middleware.app.core.communication.endpoint.dll.objects.EndpointObjectDllSignal;
 import ch.desm.middleware.app.core.communication.endpoint.dll.objects.EndpointObjectDllTrainPosition;
 import ch.desm.middleware.app.core.communication.endpoint.dll.objects.EndpointObjectDllWeiche;
-import ch.desm.middleware.app.core.component.simulation.locsim.messages.LocsimMessageTranslatorDll;
+import ch.desm.middleware.app.core.component.simulation.locsim.message.LocsimMessageTranslatorDll;
 
 public abstract class EndpointDll extends EndpointCommon implements EndpointDllListenerInterface {
 
