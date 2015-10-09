@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="ear" name="middleware-ear">
-    <output-path>$PROJECT_DIR$/out/artifacts/middleware_ear</output-path>
-    <root id="archive" name="middleware-ear.ear">
-      <element id="artifact" artifact-name="webapp:war" />
-    </root>
-  </artifact>
-</component>
