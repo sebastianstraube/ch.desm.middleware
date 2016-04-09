@@ -75,7 +75,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 try {
                     throw new Exception("unsupported topic, broker message delegation skipped: " + message.toString());
                 } catch (Exception e) {
-                    LOGGER.log(Level.ERROR, e);
+                    LOGGER.log(Level.WARN, e);
                 }
             };
         }

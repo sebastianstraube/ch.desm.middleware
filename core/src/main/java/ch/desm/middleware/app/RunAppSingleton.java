@@ -65,19 +65,32 @@ public class RunAppSingleton extends ThreadBase {
 	public void run(){
 
         /************************** Start Server ************************************/
-        //TyrusServer tyrusServer = startServerTyrus(host, port, tyrusWebsocketContextPath);
-        //JettyServer jettyServer = startJettyServer(serverJettyPath);
-        //startManagement(jettyServer, "ws://" + host + ":" + port + tyrusWebsocketContextPath + serverEndpointContextPath);
+        TyrusServer tyrusServer = startServerTyrus(host, port, tyrusWebsocketContextPath);
+        JettyServer jettyServer = startJettyServer(serverJettyPath);
+        startManagement(jettyServer, "ws://" + host + ":" + port + tyrusWebsocketContextPath + serverEndpointContextPath);
         /***************************************************************************/
-        //startOmStellwerk("COM12");
-        //startPetrinetOm();
 
-        //startZusiFahrpult("192.168.1.19", 1436); // lokal: 192.168.1.19, vpn : 7.94.80.35
-        //startZusiAusbildung("192.168.1.19", 1436); //192.168.1.19
+        //startOm();
+        startZusi();
+        //startCabine();
+    }
 
-        //startCabineRe420("COM10"); //linux: dev/ttyACM0
-        //startPetrinetRe420();
+    private void startOm(){
+        startOmStellwerk("COM14");
+        startPetrinetOm();
+    }
 
+    private void startCabine(){
+        startCabineRe420("COM15"); //linux: dev/ttyACM0
+        startPetrinetRe420();
+    }
+
+    private void startZusi(){
+        startZusiFahrpult("192.168.1.32", 1436); // lokal: 192.168.1.32, vpn : 7.94.80.35
+        startZusiAusbildung("192.168.1.32", 1436); //192.168.1.32
+    }
+
+    private void startEtcs(){
         startEtcsTiu("192.168.200.21", 50000);
         startEtcsOdo("192.168.200.21", 50002);
     }

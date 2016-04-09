@@ -63,7 +63,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
             try {
                 throw new Exception("unsupported topic, broker message delegation skipped: " + element.toString());
             } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
+                LOGGER.log(Level.WARN, e);
             }
         }
     }

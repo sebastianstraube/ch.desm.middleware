@@ -4,7 +4,7 @@ import ch.desm.middleware.app.core.component.ComponentMapBase;
 
 import java.util.Map;
 
-public class PetrinetRe420MapSimZusiFahrpult extends ComponentMapBase{
+public class PetrinetRe420MapZusiFahrpult extends ComponentMapBase{
 
 	@Override
 	public Map<String, String> getMap() {
