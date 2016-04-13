@@ -8,7 +8,6 @@ import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegi
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.module.simulation.locsim.logic.LocsimLogicFahrschalter;
 import ch.desm.middleware.app.module.simulation.locsim.maps.LocsimMapRs232;
-import ch.desm.middleware.app.module.simulation.locsim.message.LocsimMessageDll;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -45,13 +44,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
      */
     protected void processBrokerMessage(Locsim impl, MessageMiddleware message) {
 
-        if (impl.isLocsimDllMessage(message.getGlobalId())) {
-
-            // TODO implementation of dll messages
-            // ....
-        }
-
-        else if (UtilityMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
+        if (UtilityMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
 
             // send locsim interface ready to start simulation
             if (message.getGlobalId().equalsIgnoreCase(
@@ -82,26 +75,6 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
                     }
                 }
             }
-
-            else if (message.getGlobalId().equalsIgnoreCase(
-                    "mgmt.simulation.locsim.dll")) {
-
-                switch (message.getParameter()) {
-                    case ("init"): {
-                        impl.getEndpointDll().init();
-                        break;
-                    }
-                    case ("start"): {
-                        impl.getEndpointDll().start();
-                        break;
-                    }
-                    case ("stop"): {
-                        impl.getEndpointDll().stop();
-                        break;
-                    }
-                }
-            }
-
         }
 
         else {
@@ -240,52 +213,6 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
                         MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232);
             }
         }
-    }
-
-
-    /**
-     * TODO implementation
-     *
-     * @param message
-     */
-    public void processIncomingDataDll(Locsim impl, String message) {
-
-        LocsimMessageDll messageDll = new LocsimMessageDll(message,
-                MessageCommon.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
-
-        String stream = "";
-
-        if (messageDll.isGleislistMessage()) {
-            System.out
-                    .println("processEndpointDataDll: not yet supported message: "
-                            + message);
-
-        } else if (messageDll.isSignalMessage()) {
-            // TODO implementation
-            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
-                    + message);
-        } else if (messageDll.isTrackMessage()) {
-            // TODO implementation
-            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
-                    + message);
-
-        } else if (messageDll.isTrainpositionMessage()) {
-            // TODO implementation
-            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
-                    + message);
-
-        } else if (messageDll.isWeicheMessage()) {
-            // TODO implementation
-            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
-                    + message);
-
-        } else {
-            LOGGER.fatal("processEndpointDataDll: not yet supported message: "
-                    + message);
-        }
-
-        processEndpointMessage(impl, stream,
-                MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
     }
 
     /**

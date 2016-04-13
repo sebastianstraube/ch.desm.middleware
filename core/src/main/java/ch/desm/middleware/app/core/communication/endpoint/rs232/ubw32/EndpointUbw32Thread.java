@@ -4,7 +4,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointThreadBase;
-import ch.desm.middleware.app.core.communication.endpoint.dll.EndpointDllThread;
 
 /**
  * Inherits the Daeon class to execute polling
@@ -13,7 +12,7 @@ import ch.desm.middleware.app.core.communication.endpoint.dll.EndpointDllThread;
  */
 class EndpointUbw32Thread extends EndpointThreadBase {
 	
-	private static Logger LOGGER = Logger.getLogger(EndpointDllThread.class);
+	private static Logger LOGGER = Logger.getLogger(EndpointUbw32Thread.class);
 	
 	private EndpointUbw32 endpoint;
 	

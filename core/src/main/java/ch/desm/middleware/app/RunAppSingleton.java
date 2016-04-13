@@ -9,7 +9,6 @@ import ch.desm.middleware.app.module.petrinet.obermatt.PetrinetOmService;
 import ch.desm.middleware.app.module.petrinet.re420.PetrinetRe420Service;
 import ch.desm.middleware.app.module.simulation.etcs.EtcsService;
 import ch.desm.middleware.app.module.simulation.locsim.Locsim;
-import ch.desm.middleware.app.module.simulation.locsim.LocsimEndpointDll;
 import ch.desm.middleware.app.module.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
@@ -353,9 +352,8 @@ public class RunAppSingleton extends ThreadBase {
     }
 
 	public void startLocsim(String port){
-		LocsimEndpointDll endpointDll = new LocsimEndpointDll("dispatcher.json");
 		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(port);
-		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232, endpointDll);
+		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232);
 	}
 
 	/**
