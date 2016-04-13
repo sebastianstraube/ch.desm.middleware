@@ -3,9 +3,9 @@ package ch.desm.middleware.app.core.communication.message;
 
 public class MessageBase{
 	
-	public static final String MESSAGE_PARAMETER_DELIMITER = "?";
-    public static final String MESSAGE_ELEMENT_CUT = ";";
-    public static final String MESSAGE_MESSAGE_CUT = "#";
+	public static final String MESSAGE_PARAMETER_PLACEHOLDER = "?";
+    public static final String MESSAGE_ELEMENT_DELIMITER = ";";
+    public static final String MESSAGE_MESSAGE_DELIMITER = "#";
 	public static final String MESSAGE_PARAMETER_ON = "on";
 	public static final String MESSAGE_PARAMETER_OFF = "off";
 	

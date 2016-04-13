@@ -135,7 +135,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
                         LOGGER.log(Level.ERROR, e);
                     }
                 }
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
+                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -174,7 +174,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
                     }
                 }
 
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
+                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -212,12 +212,12 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
                 String FSSidEnabled = fahrStrassenSchalter.getglobalId(Integer.valueOf(parameter));
 
                 if(key.equals(FSSidEnabled)){
-                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, MessageCommon.MESSAGE_PARAMETER_ON);
+                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_ON);
 
                     LOGGER.log(Level.INFO, "FSS enabled contact: " + stream);
 
                 }else{
-                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, MessageCommon.MESSAGE_PARAMETER_OFF);
+                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_OFF);
                 }
                 messageInput = messageInput.concat(stream);
             }

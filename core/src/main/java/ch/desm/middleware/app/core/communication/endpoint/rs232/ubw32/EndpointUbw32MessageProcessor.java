@@ -46,7 +46,7 @@ public class EndpointUbw32MessageProcessor {
                         LOGGER.log(Level.ERROR, e);
                     }
                 }
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
+                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -84,7 +84,7 @@ public class EndpointUbw32MessageProcessor {
                     }
                 }
 
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
+                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -118,7 +118,7 @@ public class EndpointUbw32MessageProcessor {
 
                 // convert input to common parameter
                 String parameter = message.getInputValue(entry.getValue(), "");
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
+                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
