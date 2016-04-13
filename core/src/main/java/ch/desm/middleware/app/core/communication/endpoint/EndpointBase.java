@@ -12,17 +12,10 @@ import ch.desm.middleware.app.core.communication.message.translator.MessageTrans
  */
 public abstract class EndpointBase{
 
-	protected Set<EndpointCommonListenerInterface> listeners;
+	protected Set<EndpointCommonListenerInterface> listeners = new HashSet<>();;
 
 	/**
-	 * 
-	 */
-	public EndpointBase() {
-		this.listeners = new HashSet<EndpointCommonListenerInterface>();
-	}
-
-	/**
-	 * 
+	 *
 	 * @param listener
 	 * @throws Exception
 	 */

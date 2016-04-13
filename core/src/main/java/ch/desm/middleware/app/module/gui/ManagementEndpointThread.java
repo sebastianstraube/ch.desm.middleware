@@ -44,7 +44,7 @@ public class ManagementEndpointThread extends ThreadBase {
         while(!isInterrupted()){
             try {
                 checkMessages();
-                doHangout();
+                Thread.sleep(40);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

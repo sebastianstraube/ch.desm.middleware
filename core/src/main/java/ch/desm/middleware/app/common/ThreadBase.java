@@ -10,8 +10,6 @@ import ch.desm.middleware.app.common.utility.UtilityRandomGenerator;
  */
 public abstract class ThreadBase extends Thread {
 
-    private int sleepTime = 40;
-
 	public ThreadBase(){
 	}
 	
@@ -22,26 +20,5 @@ public abstract class ThreadBase extends Thread {
 
     public ThreadBase(String name, int sleepTime) {
         this(name);
-        this.sleepTime = sleepTime;
-    }
-
-    public void doHangout() throws InterruptedException {
-        this.doHangout(sleepTime);
-    }
-
-    public void doHangout(int sleepTime) throws InterruptedException {
-        Thread.sleep(sleepTime);
-    }
-
-    public void doRandomHangout() throws InterruptedException{
-        doHangout(UtilityRandomGenerator.randInt());
-    }
-
-    public int getSleepTime(){
-        return sleepTime;
-    }
-
-    public void setSleeptTime(int sleepTime){
-        this.sleepTime = sleepTime;
     }
 }

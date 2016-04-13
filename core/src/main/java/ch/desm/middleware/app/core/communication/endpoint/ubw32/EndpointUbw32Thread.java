@@ -29,7 +29,7 @@ class EndpointUbw32Thread extends EndpointThreadBase {
 			while (!isInterrupted()) {
 				LOGGER.log(Level.TRACE, "Polling Thread active: " + this.getName() + " wait time: " + EndpointUbw32Config.SLEEP_POLLING);
 				endpoint.pollingCommand();
-				doHangout();
+				Thread.sleep(40);
 			}
 
 		} catch (InterruptedException e) {

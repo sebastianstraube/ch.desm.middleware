@@ -29,7 +29,7 @@ public class TyrusServer extends ThreadBase {
 
         try {
             server.start();
-            doHangout(2000);
+            Thread.sleep(2000);
             isRunning = true;
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, "Tyrus Websocket Server start failed:" + e);

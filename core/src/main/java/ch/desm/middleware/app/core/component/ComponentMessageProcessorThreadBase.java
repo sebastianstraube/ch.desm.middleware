@@ -50,7 +50,7 @@ public abstract class ComponentMessageProcessorThreadBase<T> extends ThreadBase 
         while(!interrupted()){
                processPendingMessages();
             try {
-                doHangout();
+                Thread.sleep(40);
             } catch (InterruptedException e) {
                 LOGGER.log(Level.ERROR, e);
             }

@@ -25,9 +25,8 @@ public class PetrinetOmEndpointDelayThread extends ThreadBase {
 
     public void run(){
         while(!isDelegated && !isInterrupted()){
-
             try {
-                doHangout();
+                Thread.sleep(40);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

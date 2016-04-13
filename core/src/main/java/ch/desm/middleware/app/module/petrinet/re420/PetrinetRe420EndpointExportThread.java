@@ -50,7 +50,7 @@ public class PetrinetRe420EndpointExportThread extends ThreadBase {
             delegatePendingSensorEvents();
             delegateChangedPlaces();
             try {
-                doHangout();
+                Thread.sleep(40);
             } catch (InterruptedException e) {
                 LOGGER.log(Level.ERROR, e);
             }

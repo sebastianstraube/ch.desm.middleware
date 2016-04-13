@@ -330,13 +330,13 @@ public class RunApp extends ThreadBase {
 
     public void testZusiAusbildung(ZusiService serviceAusbildung){
         try {
-            doHangout(3000);
+            Thread.sleep(3000);
             serviceAusbildung.getEndpointAusbildung().sendCommandSignalAspect();
-            doHangout(3000);
+            Thread.sleep(3000);
             serviceAusbildung.getEndpointAusbildung().sendCommandSwitch();
-            doHangout(3000);
+            Thread.sleep(3000);
             serviceAusbildung.getEndpointAusbildung().sendCommand("0300-0d01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:01");
-            doHangout(3000);
+            Thread.sleep(3000);
             serviceAusbildung.getEndpointAusbildung().sendCommand("0300-0D01::0100:526f757465735c5363687765697a5c3332545f303030345f303035325c3030303430365f3030353230315f4f6265726d6174745c3133303931382d454d4d2d4f4d2d4c4e2e737433,0200:49,0300:00,0400:00,0500:00");
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -484,21 +484,10 @@ public class RunApp extends ThreadBase {
 		*/
 	}
 
-     public void doHangout(){
-
-         while(!isInterrupted()){
-             try {
-                 doHangout(1000*60);
-             } catch (InterruptedException e) {
-                 e.printStackTrace();
-             }
-         }
-     }
-
     private boolean isServerStarted(JettyServer server){
         while(!server.isStarted()){
             try {
-                doHangout(50);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
