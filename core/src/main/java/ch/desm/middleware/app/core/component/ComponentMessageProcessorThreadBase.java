@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.core.component;
 
-import ch.desm.middleware.app.common.ThreadBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -9,7 +8,7 @@ import java.util.LinkedList;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public abstract class ComponentMessageProcessorThreadBase<T> extends ThreadBase {
+public abstract class ComponentMessageProcessorThreadBase<T> extends Thread {
 
     private static Logger LOGGER = Logger.getLogger(ComponentMessageProcessorThreadBase.class);
 

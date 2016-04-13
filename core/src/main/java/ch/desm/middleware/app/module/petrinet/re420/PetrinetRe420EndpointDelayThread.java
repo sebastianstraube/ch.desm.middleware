@@ -1,12 +1,11 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
-import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.common.Pair;
 
 /**
  * Created by Sebastian on 11.12.2014.
  */
-public class PetrinetRe420EndpointDelayThread extends ThreadBase {
+public class PetrinetRe420EndpointDelayThread extends Thread {
 
     private PetrinetRe420EndpointExportThread t;
     private Pair<String, Integer> place;

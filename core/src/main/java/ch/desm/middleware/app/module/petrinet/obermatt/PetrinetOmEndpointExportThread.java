@@ -5,12 +5,11 @@ import java.util.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.common.Pair;
 
 import javax.websocket.EncodeException;
 
-public class PetrinetOmEndpointExportThread extends ThreadBase {
+public class PetrinetOmEndpointExportThread extends Thread {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmEndpointExportThread.class);
 

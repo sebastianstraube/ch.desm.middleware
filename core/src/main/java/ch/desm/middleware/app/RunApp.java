@@ -10,7 +10,6 @@ import ch.desm.middleware.app.module.petrinet.re420.PetrinetRe420Service;
 import ch.desm.middleware.app.module.simulation.etcs.EtcsService;
 import ch.desm.middleware.app.module.simulation.locsim.Locsim;
 import ch.desm.middleware.app.module.simulation.locsim.LocsimEndpointRs232;
-import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.server.JettyServer;
 import ch.desm.middleware.app.core.server.TyrusServer;
@@ -19,7 +18,7 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class RunApp extends ThreadBase {
+public class RunApp extends Thread {
 
 	private static Logger LOGGER = Logger.getLogger(RunApp.class);
 

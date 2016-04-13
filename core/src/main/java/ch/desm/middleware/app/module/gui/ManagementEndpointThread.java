@@ -1,13 +1,11 @@
 package ch.desm.middleware.app.module.gui;
 
-import ch.desm.middleware.app.common.ThreadBase;
-
 import java.util.LinkedList;
 
 /**
  * Created by Sebastian on 30.10.2014.
  */
-public class ManagementEndpointThread extends ThreadBase {
+public class ManagementEndpointThread extends Thread {
 
     private ManagementEndpoint endpoint;
 
