@@ -1,12 +1,13 @@
 package ch.desm.middleware.app.core.communication.broker;
 
 import java.util.LinkedList;
+import java.util.List;
 
 
 public abstract class BrokerClient {
 
-	protected ch.desm.middleware.app.core.communication.broker.Broker broker;
-	private LinkedList<String> subscribedTopics;
+	protected Broker broker;
+	private List<String> subscribedTopics;
 
     abstract protected void initializeTopicSubscriptions();
 

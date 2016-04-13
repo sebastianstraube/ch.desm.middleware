@@ -16,6 +16,7 @@ public class ZusiTestsAll {
 
 	private static Logger LOGGER = Logger.getLogger(ZusiTestsAll.class);
 
+    private Broker broker;
     private ZusiServiceTest service;
 
     public static void main(String args[]){
@@ -24,7 +25,8 @@ public class ZusiTestsAll {
 
     @Before
     public void setUp() throws Exception {
-        service = new ZusiServiceTest(Broker.getInstance(), "7.94.80.35", 1436);
+        broker = new Broker();
+        service = new ZusiServiceTest(broker, "7.94.80.35", 1436);
     }
 
     @Test

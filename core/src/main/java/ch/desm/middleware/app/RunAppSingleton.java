@@ -31,6 +31,8 @@ public class RunAppSingleton extends ThreadBase {
     private String serverJettyPath;
     private boolean isConfigured = false;
 
+    private Broker broker = new Broker();
+
 	private RunAppSingleton(){
 		if (singleton != null)
 	        throw new IllegalStateException("Already instantiated, only use of singleton allowed!");
@@ -96,14 +98,14 @@ public class RunAppSingleton extends ThreadBase {
 
     private void startEtcsTiu(String ip, int port){
 
-        EtcsService tiu = new EtcsService(Broker.getInstance(), ip, port);
+        EtcsService tiu = new EtcsService(broker, ip, port);
 
         testEtcsTiu(tiu);
     }
 
     private void startEtcsOdo(String ip, int port){
 
-        EtcsService tiu = new EtcsService(Broker.getInstance(), ip, port);
+        EtcsService tiu = new EtcsService(broker, ip, port);
 
         testEtcsOdo(tiu);
     }
@@ -241,15 +243,15 @@ public class RunAppSingleton extends ThreadBase {
     }
 
 	public void startManagement(JettyServer server, String uri){
-        ManagementService management = isServerStarted(server) ? new ManagementService(Broker.getInstance(), uri) : null;
+        ManagementService management = isServerStarted(server) ? new ManagementService(broker, uri) : null;
 	}
 
 	public void startPetrinetOm(){
-        PetrinetOmService petrinet = new PetrinetOmService(Broker.getInstance());
+        PetrinetOmService petrinet = new PetrinetOmService(broker);
 	}
 
     public void startPetrinetRe420(){
-        PetrinetRe420Service petrinet = new PetrinetRe420Service(Broker.getInstance());
+        PetrinetRe420Service petrinet = new PetrinetRe420Service(broker);
     }
 
     public void testPetrinetRe420(PetrinetRe420Service petrinet){
@@ -266,15 +268,15 @@ public class RunAppSingleton extends ThreadBase {
 
 
     public void startOmStellwerk(String port){
-        OmService oml = new OmService(Broker.getInstance(), port);
+        OmService oml = new OmService(broker, port);
 	}
 
     public void startCabineRe420(String port){
-        Re420Service service = new Re420Service(Broker.getInstance(), port);
+        Re420Service service = new Re420Service(broker, port);
     }
 
     public void startZusiFahrpult(String ip, int port){
-        ZusiService serviceFahrpult = new ZusiService(Broker.getInstance(), ip, port);
+        ZusiService serviceFahrpult = new ZusiService(broker, ip, port);
         serviceFahrpult.getEndpointFahrpult().init();
         serviceFahrpult.getEndpointFahrpult().start();
         serviceFahrpult.getEndpointFahrpult().sendCommandRegisterClientFahrpult();
@@ -312,7 +314,7 @@ public class RunAppSingleton extends ThreadBase {
     }
 
     public void startZusiAusbildung(String ip, int port){
-        ZusiService serviceAusbildung = new ZusiService(Broker.getInstance(), ip, port);
+        ZusiService serviceAusbildung = new ZusiService(broker, ip, port);
         serviceAusbildung.getEndpointAusbildung().init();
         serviceAusbildung.getEndpointAusbildung().start();
         serviceAusbildung.getEndpointAusbildung().sendCommandRegisterClientAusbildung();
@@ -353,7 +355,7 @@ public class RunAppSingleton extends ThreadBase {
 
 	public void startLocsim(String port){
 		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(port);
-		Locsim locsimImpl = new Locsim(Broker.getInstance(), endpointRs232);
+		Locsim locsimImpl = new Locsim(broker, endpointRs232);
 	}
 
 	/**
