@@ -36,7 +36,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT)){
             try {
                 String globalId = element.getGlobalId();
-                String parameter = util.getParameterValueEndpoint(element.getParameter());
+                String parameter = MessageBase.getParameterValueEndpoint(element.getParameter());
                 boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
                 String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
@@ -59,7 +59,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
         }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT)){
             try {
                 String globalId = element.getGlobalId();
-                String parameter = util.getParameterValueEndpoint(element.getParameter());
+                String parameter = MessageBase.getParameterValueEndpoint(element.getParameter());
                 boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
                 delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, parameter, isInput);

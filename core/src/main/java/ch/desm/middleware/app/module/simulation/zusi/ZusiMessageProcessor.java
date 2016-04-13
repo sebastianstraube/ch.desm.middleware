@@ -1,7 +1,6 @@
 package ch.desm.middleware.app.module.simulation.zusi;
 
 import ch.desm.middleware.app.common.Pair;
-import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;;
@@ -160,7 +159,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             String key = service.getZusiMapPetrinet().getKey(message.getGlobalId());
             if(!key.isEmpty()){
                 String mwmStream = service.getComponentMapMiddleware().getValue(key);
-                mwmStream = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
+                mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
                 MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
                 mwm.setParameter(mwm.getParameter());
 
@@ -184,7 +183,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             String key = service.getZusiMapPetrinetRe420().getKey(message.getGlobalId());
             if(!key.isEmpty()){
                 String mwmStream = service.getComponentMapMiddleware().getValue(key);
-                mwmStream = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
+                mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
                 MessageMiddleware mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
 
                 if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
@@ -289,7 +288,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 if(parameter.getLeft().equals(parameterValue)) parameterValue = "on";
                 else if(parameter.getRight().equals(parameterValue)) parameterValue = "off";
             }
-            mwm = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwm, parameterValue);
+            mwm = MessageBase.replaceMiddlewareMessageDelimiter(mwm, parameterValue);
 
             if(!mwm.isEmpty()){
                 processLogicParameter(service, globalId, parameterValue);

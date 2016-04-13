@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.simulation.zusi.protocol.node;
 
-import ch.desm.middleware.app.common.utility.UtilityHex;
+import ch.desm.middleware.app.common.UtilityHex;
 
 /**
  * Created by Sebastian on 20.04.2015.

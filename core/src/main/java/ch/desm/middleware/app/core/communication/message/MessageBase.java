@@ -1,9 +1,13 @@
 package ch.desm.middleware.app.core.communication.message;
 
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 public class MessageBase{
-	
-	public static final String MESSAGE_PARAMETER_PLACEHOLDER = "?";
+    private static Logger LOGGER = Logger.getLogger(MessageBase.class);
+
+    public static final String MESSAGE_PARAMETER_PLACEHOLDER = "?";
     public static final String MESSAGE_ELEMENT_DELIMITER = ";";
     public static final String MESSAGE_MESSAGE_DELIMITER = "#";
 	public static final String MESSAGE_PARAMETER_ON = "on";
@@ -37,6 +41,22 @@ public class MessageBase{
     	this.payload = payload;
     	this.topic = topic;
 
+    }
+
+    public static String replaceMiddlewareMessageDelimiter(String middlewareMessage, String parameterValue){
+        return middlewareMessage.replace(MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
+    }
+
+    public static String getParameterValueEndpoint(String value) {
+        switch (value) {
+            case MESSAGE_PARAMETER_ON:
+                return "1";
+            case MESSAGE_PARAMETER_OFF:
+                return "0";
+            default:
+                LOGGER.log(Level.ERROR, "unexpected (0,1) parameter value: " + value);
+                return "";
+        }
     }
 
     @Override

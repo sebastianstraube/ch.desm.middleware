@@ -1,10 +1,6 @@
 package ch.desm.middleware.app.module.simulation.locsim;
 
-import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageCommon;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
+import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.module.simulation.locsim.logic.LocsimLogicFahrschalter;
 import ch.desm.middleware.app.module.simulation.locsim.maps.LocsimMapRs232;
@@ -44,7 +40,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
      */
     protected void processBrokerMessage(Locsim impl, MessageMiddleware message) {
 
-        if (UtilityMessageProcessor.isSoftwareMessage(message.getOutputInput())) {
+        if (MessageUbw32Base.isSoftwareMessage(message.getOutputInput())) {
 
             // send locsim interface ready to start simulation
             if (message.getGlobalId().equalsIgnoreCase(

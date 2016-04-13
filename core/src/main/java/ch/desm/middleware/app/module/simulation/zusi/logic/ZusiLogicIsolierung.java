@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.module.simulation.zusi.logic;
 
-import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
@@ -8,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ZusiLogicIsolierung {
 
@@ -84,8 +84,18 @@ public class ZusiLogicIsolierung {
                 }
             }
 
-            return new ArrayList<String>(Arrays.asList(UtilityMessageProcessor.trimList(TRAIN_POSITION)));
+            return new ArrayList<String>(Arrays.asList(trimList(TRAIN_POSITION)));
         }
+    }
+
+    private static String[] trimList(String[] list){
+        List<String> tmp = new ArrayList<>();
+        for(int i=0; i<list.length; i++){
+            if(list[i] != null && !list[i].isEmpty()){
+                tmp.add(list[i]);
+            }
+        }
+        return (String[])tmp.toArray();
     }
 
     public ArrayList getAllIsoMwm(ZusiService service, int gesamtweg){
@@ -95,8 +105,8 @@ public class ZusiLogicIsolierung {
 
         for(int i=0; i< ISOLIERUNGEN.length; i++){
             String mwMessage = service.getComponentMapMiddleware().getValue(ISOLIERUNGEN[i]);
-            if(occ.contains(ISOLIERUNGEN[i])) mwMessage = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwMessage, MessageBase.MESSAGE_PARAMETER_ON);
-            else mwMessage = UtilityMessageProcessor.replaceMiddlewareMessageDelimiter(mwMessage, MessageBase.MESSAGE_PARAMETER_OFF);
+            if(occ.contains(ISOLIERUNGEN[i])) mwMessage = MessageBase.replaceMiddlewareMessageDelimiter(mwMessage, MessageBase.MESSAGE_PARAMETER_ON);
+            else mwMessage = MessageBase.replaceMiddlewareMessageDelimiter(mwMessage, MessageBase.MESSAGE_PARAMETER_OFF);
             if(!mwMessage.isEmpty()) messages.add(mwMessage);
         }
 

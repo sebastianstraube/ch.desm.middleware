@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.simulation.zusi.protocol.node;
 
-import ch.desm.middleware.app.common.utility.UtilityHex;
+import ch.desm.middleware.app.common.UtilityHex;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import org.apache.log4j.Logger;

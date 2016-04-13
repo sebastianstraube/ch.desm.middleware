@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
-import ch.desm.middleware.app.common.utility.UtilityHex;
+import ch.desm.middleware.app.common.UtilityHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

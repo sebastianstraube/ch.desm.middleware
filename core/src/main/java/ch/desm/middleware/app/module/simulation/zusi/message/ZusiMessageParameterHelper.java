@@ -2,7 +2,7 @@ package ch.desm.middleware.app.module.simulation.zusi.message;
 
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.module.simulation.zusi.protocol.ZusiProtocolConstants;
-import ch.desm.middleware.app.common.utility.UtilityHex;
+import ch.desm.middleware.app.common.UtilityHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

@@ -29,7 +29,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT)){
             try {
                 String sensorName = service.getMap().mapBrokerToEndpointMessage(element.getGlobalId());
-                int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
+                int sensorValue = Integer.valueOf(MessageBase.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
                 delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
             } catch (Exception e) {
                 //LOGGER.log(Level.ERROR, e);
@@ -37,7 +37,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
             try {
                 String sensorName = service.getMapZusi().getKey(element.getGlobalId());
-                int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
+                int sensorValue = Integer.valueOf(MessageBase.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
                 delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
             } catch (Exception e) {
                 //LOGGER.log(Level.ERROR, e);
