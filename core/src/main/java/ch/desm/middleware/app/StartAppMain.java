@@ -17,7 +17,7 @@ public class StartAppMain {
         LOGGER.log(Level.INFO, "initialise middleware...");
         LOGGER.log(Level.INFO, "starting directory: "+ System.getProperty("user.dir"));
 
-        RunAppSingleton main = RunAppSingleton.getSingleton();
+        RunApp main = new RunApp();
 
         //String host, String port, String websocketContextPath, String serverEndpointContextPath, String jettyPath
         if(args.length >0 && args.length <= 4){

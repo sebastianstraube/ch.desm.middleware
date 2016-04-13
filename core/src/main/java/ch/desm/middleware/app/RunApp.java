@@ -19,10 +19,9 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class RunAppSingleton extends ThreadBase {
+public class RunApp extends ThreadBase {
 
-	private static Logger LOGGER = Logger.getLogger(RunAppSingleton.class);
-	private static final RunAppSingleton singleton = new RunAppSingleton();
+	private static Logger LOGGER = Logger.getLogger(RunApp.class);
 
     private String host;
     private int port;
@@ -32,15 +31,6 @@ public class RunAppSingleton extends ThreadBase {
     private boolean isConfigured = false;
 
     private Broker broker = new Broker();
-
-	private RunAppSingleton(){
-		if (singleton != null)
-	        throw new IllegalStateException("Already instantiated, only use of singleton allowed!");
-	}
-	
-	public static RunAppSingleton getSingleton(){
-		return RunAppSingleton.singleton;
-	}
 
     public void setConfiguration(String host, String port, String websocketContextPath, String serverEndpointContextPath, String jettyPath){
         this.host = host;
