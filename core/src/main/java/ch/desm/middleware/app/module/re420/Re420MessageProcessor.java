@@ -2,7 +2,7 @@ package ch.desm.middleware.app.module.re420;
 
 import java.util.LinkedList;
 
-import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32MessageProcessor;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageProcessor;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.*;
 import ch.desm.middleware.app.common.utility.UtilityMessageProcessor;

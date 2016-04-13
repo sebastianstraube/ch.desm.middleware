@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
+package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 
 
 public class EndpointUbw32RegisterDigital extends EndpointUbw32RegisterBase  {

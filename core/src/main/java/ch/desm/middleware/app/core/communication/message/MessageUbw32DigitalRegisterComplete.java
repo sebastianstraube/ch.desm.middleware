@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32RegisterDigital;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32RegisterDigital;
 
 public class MessageUbw32DigitalRegisterComplete extends MessageUbw32Base {
 

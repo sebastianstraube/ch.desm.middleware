@@ -1,4 +1,4 @@
-package ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32;
+package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 
 import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232;
 import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232Config;

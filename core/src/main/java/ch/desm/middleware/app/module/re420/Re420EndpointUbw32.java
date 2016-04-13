@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.re420;
 
-import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.module.re420.map.Re420MapUbw32Analog;
 import ch.desm.middleware.app.module.re420.map.Re420MapUbw32Digital;
 import org.apache.log4j.Level;

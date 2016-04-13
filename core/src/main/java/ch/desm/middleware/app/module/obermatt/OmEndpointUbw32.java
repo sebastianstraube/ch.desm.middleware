@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.obermatt;
 
-import ch.desm.middleware.app.core.communication.endpoint.rs232.ubw32.EndpointUbw32;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
