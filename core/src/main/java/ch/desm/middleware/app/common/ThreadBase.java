@@ -13,7 +13,6 @@ public abstract class ThreadBase extends Thread {
     private int sleepTime = 40;
 
 	public ThreadBase(){
-		this.setDaemon(true);
 	}
 	
 	public ThreadBase(String name) {
