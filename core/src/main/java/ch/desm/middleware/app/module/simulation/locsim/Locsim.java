@@ -54,9 +54,9 @@ public class Locsim extends LocsimBrokerClientBase implements EndpointRs232Liste
 	}
 
 	@Override
-	protected void intializeSignedTopic() {
-        signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-        signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
+	protected void initializeTopicSubscriptions() {
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
 	}
 
 }

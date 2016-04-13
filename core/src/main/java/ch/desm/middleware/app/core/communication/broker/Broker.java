@@ -31,7 +31,7 @@ public class Broker {
         synchronized (lockClients){
             for(BrokerClient client : clients) {
 
-                if(client.hasTopicSigned(topic)) {
+                if(client.isSubscribedToTopic(topic)) {
                     client.receive(message);
                 }
             }

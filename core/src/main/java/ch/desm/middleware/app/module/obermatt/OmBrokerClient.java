@@ -25,10 +25,10 @@ public class OmBrokerClient extends ComponentBrokerClientBase {
      *
      */
     @Override
-    protected void intializeSignedTopic() {
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
-        signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
-        signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
+    protected void initializeTopicSubscriptions() {
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
     }
 
     @Override

@@ -31,10 +31,10 @@ public class PetrinetOmBrokerClient extends ComponentBrokerClientBase {
     }
 
     @Override
-    protected void intializeSignedTopic() {
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
-        signForTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
-        signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
+    protected void initializeTopicSubscriptions() {
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
     }
 }

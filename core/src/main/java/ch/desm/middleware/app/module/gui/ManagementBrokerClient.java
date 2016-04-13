@@ -43,13 +43,13 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 	}
 
 	@Override
-	protected void intializeSignedTopic() {
-		signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-		signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
-		signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
-        signForTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+	protected void initializeTopicSubscriptions() {
+		subscribeToTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
+		subscribeToTopic(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
+		subscribeToTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
+        subscribeToTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
 	}
 
 }

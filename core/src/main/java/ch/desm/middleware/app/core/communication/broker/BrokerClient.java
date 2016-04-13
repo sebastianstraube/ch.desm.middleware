@@ -1,36 +1,33 @@
 package ch.desm.middleware.app.core.communication.broker;
 
 import java.util.LinkedList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 
 public abstract class BrokerClient {
 
 	protected ch.desm.middleware.app.core.communication.broker.Broker broker;
-	private LinkedList<String> signedTopics;
+	private LinkedList<String> subscribedTopics;
 
-    abstract protected void intializeSignedTopic();
+    abstract protected void initializeTopicSubscriptions();
 
 	abstract protected void onIncomingBrokerMessage(String message);
 
-    protected void signForTopic(String topic) {
-        signedTopics.add(topic);
+    protected void subscribeToTopic(String topic) {
+        subscribedTopics.add(topic);
     }
 
-    public boolean hasTopicSigned(String topic) {
-        return signedTopics.contains(topic);
+    public boolean isSubscribedToTopic(String topic) {
+        return subscribedTopics.contains(topic);
     }
 
 	public BrokerClient(Broker broker) {		
 		this.broker = broker;
-		signedTopics = new LinkedList<String>();
+		subscribedTopics = new LinkedList<String>();
 		init();
 	}
 
 	private void init() {
-		this.intializeSignedTopic();
+		this.initializeTopicSubscriptions();
 		broker.connect(this);
 	}
 
