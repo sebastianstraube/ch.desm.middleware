@@ -1,12 +1,14 @@
 package ch.desm.middleware.app.core.communication.message.translator;
 
-import java.util.LinkedList;
-
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+import java.util.List;
 
 /**
  * TODO implementation
@@ -15,13 +17,15 @@ import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegi
  *
  */
 public class MessageTranslatorMiddleware extends MessageTranslatorMiddlewareBase {
-	
+
+	private static Logger LOGGER = Logger.getLogger(MessageTranslatorMiddleware.class);
+
 	/**
-	 * 
+	 *
 	 * @param stream
 	 * 
 	 */
-	public LinkedList<MessageMiddleware> toMiddlewareMessageList(String stream){
+	public List<MessageMiddleware> toMiddlewareMessageList(String stream){
 		return decodeMiddlewareMessages(stream);
 	}
 

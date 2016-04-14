@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.obermatt;
 
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.*;
@@ -24,7 +24,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
     /**
      * @param messages
      */
-    public void processBrokerMessage(OmService service, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(OmService service, List<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(service, message);
         }

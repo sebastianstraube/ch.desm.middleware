@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sebastian on 28.11.2014.
@@ -24,7 +24,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
     /**
      * @param messages
      */
-    public void processBrokerMessage(ZusiService service, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(ZusiService service, List<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(service, message);
         }
@@ -239,7 +239,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param messages
      * @param topic
      */
-    public synchronized void processEndpointMessage(ZusiService service, LinkedList<String> messages, String topic){
+    public synchronized void processEndpointMessage(ZusiService service, List<String> messages, String topic){
         for(String s : messages){
             processEndpointMessage(service, s, topic);
         }
@@ -252,14 +252,12 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param topic
      */
     public void processEndpointMessage(ZusiService service, String message, String topic){
-        LinkedList<String> globalIds;
-        ZusiMessageEndpoint zusiMessage;
         try {
             LOGGER.log(Level.INFO, "process endpoint message: " + message + ", topic: " + topic);
-            globalIds = service.getZusiProtocolNodeHelper().getGlobalId(message);
+            List<String> globalIds = service.getZusiProtocolNodeHelper().getGlobalId(message);
 
             for(String globalId : globalIds){
-                zusiMessage = new ZusiMessageEndpoint(globalId);
+                ZusiMessageEndpoint zusiMessage = new ZusiMessageEndpoint(globalId);
                 processEndpointFahrpultMessage(service, zusiMessage, topic);
             }
         } catch (Exception e) {

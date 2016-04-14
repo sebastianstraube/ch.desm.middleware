@@ -6,7 +6,7 @@ import ch.desm.middleware.app.core.communication.message.processor.MessageProces
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sebastian on 04.11.2014.
@@ -20,7 +20,7 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
      * @param service
      * @param messages
      */
-    public abstract void processBrokerMessage(T1 service, LinkedList<MessageMiddleware> messages);
+    public abstract void processBrokerMessage(T1 service, List<MessageMiddleware> messages);
 
     /**
      *

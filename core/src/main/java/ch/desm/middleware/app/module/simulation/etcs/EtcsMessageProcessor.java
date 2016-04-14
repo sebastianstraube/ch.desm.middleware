@@ -6,7 +6,7 @@ import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sebastian on 28.11.2014.
@@ -18,7 +18,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
     /**
      * @param messages
      */
-    public void processBrokerMessage(EtcsService service, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(EtcsService service, List<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(service, message);
         }
@@ -148,7 +148,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param messages
      * @param topic
      */
-    public synchronized void processEndpointMessage(EtcsService service, LinkedList<String> messages, String topic){
+    public synchronized void processEndpointMessage(EtcsService service, List<String> messages, String topic){
         for(String s : messages){
             processEndpointMessage(service, s, topic);
         }

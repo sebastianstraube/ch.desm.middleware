@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.re420;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageProcessor;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
@@ -16,7 +16,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 	 * @param messages
 	 */
 	@Override
-	public void processBrokerMessage(Re420Service service, LinkedList<MessageMiddleware> messages) {
+	public void processBrokerMessage(Re420Service service, List<MessageMiddleware> messages) {
 		for(MessageMiddleware message : messages){
 			processBrokerMessage(service, message);
 		}

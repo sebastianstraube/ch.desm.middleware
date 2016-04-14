@@ -1,15 +1,14 @@
 package ch.desm.middleware.app.module.re420;
 
-import java.util.LinkedList;
-
-import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
+import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+import java.util.List;
 
 public class Re420BrokerClient extends ComponentBrokerClientBase {
 
@@ -36,7 +35,7 @@ public class Re420BrokerClient extends ComponentBrokerClientBase {
 		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: "
                 + message);
 
-		LinkedList<MessageMiddleware> messageCommon = translator
+		List<MessageMiddleware> messageCommon = translator
 				.toMiddlewareMessageList(message);
 
 		processor.processBrokerMessage(service, messageCommon);

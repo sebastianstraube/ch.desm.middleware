@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.gui;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
@@ -28,7 +28,7 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 		LOGGER.log(Level.INFO, "receive broker message: " + message);
 		
 		//translation
-		LinkedList<MessageMiddleware> messageList = service.getTranslator().toMiddlewareMessageList(message);
+		List<MessageMiddleware> messageList = service.getTranslator().toMiddlewareMessageList(message);
 		
 		//send all messages
 		for(MessageMiddleware element: messageList){

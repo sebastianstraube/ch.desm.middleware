@@ -6,7 +6,7 @@ import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sebastian on 04.11.2014.
@@ -18,7 +18,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     /**
      * @param messages
      */
-    public void processBrokerMessage(PetrinetOmService service, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(PetrinetOmService service, List<MessageMiddleware> messages) {
         for(MessageMiddleware message : messages){
             processBrokerMessage(service, message);
         }

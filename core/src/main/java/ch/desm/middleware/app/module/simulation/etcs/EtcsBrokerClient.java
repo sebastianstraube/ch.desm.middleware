@@ -7,7 +7,7 @@ import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
+import java.util.List;
 
 
 public class EtcsBrokerClient extends ComponentBrokerClientBase {
@@ -28,7 +28,7 @@ public class EtcsBrokerClient extends ComponentBrokerClientBase {
 	protected void onIncomingBrokerMessage(String message) {
 		LOGGER.log(Level.INFO, this.getClass().getSimpleName() + " received broker message: " + message);
 
-        LinkedList<MessageMiddleware> l = service.getTranslator().toMiddlewareMessageList(message);
+        List<MessageMiddleware> l = service.getTranslator().toMiddlewareMessageList(message);
         thread.addMessages(l);
     }
 

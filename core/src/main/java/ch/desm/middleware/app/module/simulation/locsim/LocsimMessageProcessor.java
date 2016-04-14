@@ -7,8 +7,8 @@ import ch.desm.middleware.app.module.simulation.locsim.maps.LocsimMapRs232;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,7 +27,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
      * @param impl
      * @param messages
      */
-    public void processBrokerMessage(Locsim impl, LinkedList<MessageMiddleware> messages) {
+    public void processBrokerMessage(Locsim impl, List<MessageMiddleware> messages) {
 
         for (MessageMiddleware message : messages) {
             this.processBrokerMessage(impl, message);
