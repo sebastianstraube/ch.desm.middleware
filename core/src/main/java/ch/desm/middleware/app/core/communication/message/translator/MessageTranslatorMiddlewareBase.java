@@ -24,49 +24,51 @@ abstract class MessageTranslatorMiddlewareBase {
 	private static final int INSTANCE = 5;
 	private static final int PARAMETER = 6;
 	private static final int TOPIC = 7;
+	private static final int NUM_PARTS = 8;
 
-	protected LinkedList<MessageMiddleware> decodeMiddlewareMessages(String stream) {
+	protected List<MessageMiddleware> decodeMiddlewareMessages(String stream) {
 		String[] messageArray = stream.split(MessageBase.MESSAGE_MESSAGE_DELIMITER);
-		LinkedList<MessageMiddleware> messageList = new LinkedList<MessageMiddleware>();
+		List<MessageMiddleware> messageList = new ArrayList<>(messageArray.length);
 
 		for (int i = 0; i < messageArray.length; i++) {
-			messageList.add(decodeMiddlewareMessage(messageArray[i]));
+			MessageMiddleware message = null;
+			try {
+				message = decodeMiddlewareMessage(messageArray[i]);
+			} catch(Exception e) {
+				LOGGER.log(Level.ERROR, e);
+			}
+			messageList.add(message);
 		}
 		return messageList;
 	}
 
 	/**
 	 * decodes a message to fit the message object
-	 * 
+	 *
 	 * TODO refactor EnumMessageTopic topic, move it to standard message stream
-	 * 
+	 *
 	 * @param message
 	 * @return {@link MessageBase}
 	 */
-	protected MessageMiddleware decodeMiddlewareMessage(String message) {
-		MessageMiddleware messageCommon = null;
-		try {
-			if (message == null || message.isEmpty()) {
-				throw new Exception("there is no message to translate");
-			} else {
-				String[] parts = message.split(MessageBase.MESSAGE_ELEMENT_DELIMITER);
-				
-				messageCommon = new MessageMiddleware(parts[TOPIC], parts[ID], parts[EXTERN_INTERN],
-						parts[ELEMENT], parts[FUNCTION], parts[INSTANCE],
-						parts[PARAMETER], message, parts[OUTPUT_INPUT]);
-				
-				
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			LOGGER.log(Level.ERROR, e);
+	protected MessageMiddleware decodeMiddlewareMessage(String message)throws Exception {
+		if (message == null || message.isEmpty()) {
+			throw new MalformedMessageException("Message must not be empty", message);
 		}
-		return messageCommon;
+
+		String[] parts = message.split(MessageBase.MESSAGE_ELEMENT_DELIMITER);
+		if (parts.length != NUM_PARTS) {
+			throw new MalformedMessageException("Message does not contain required number of arguments: " +
+                    String.valueOf(parts.length) + " but expected " + String.valueOf(NUM_PARTS), message);
+		}
+
+		return new MessageMiddleware(parts[TOPIC], parts[ID], parts[EXTERN_INTERN],
+				parts[ELEMENT], parts[FUNCTION], parts[INSTANCE],
+				parts[PARAMETER], message, parts[OUTPUT_INPUT]);
 	}
 
 	/**
 	 * TODO implementation decode to the common middleware message
-	 * 
+	 *
 	 * @param
 	 * @param
 	 */
@@ -90,9 +92,9 @@ abstract class MessageTranslatorMiddlewareBase {
 
 		return endpointMessage;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param wildcard
 	 * @param replace
 	 * @param message
@@ -100,5 +102,11 @@ abstract class MessageTranslatorMiddlewareBase {
 	 */
 	protected String replaceMiddlewareMessageParameter(String wildcard, String replace, String message) {
 		return message.replaceAll(wildcard, replace);
+	}
+
+	private class MalformedMessageException extends Exception {
+		public MalformedMessageException(String msg, String rawMessage) {
+			super(msg + " - " + rawMessage);
+		}
 	}
 }
