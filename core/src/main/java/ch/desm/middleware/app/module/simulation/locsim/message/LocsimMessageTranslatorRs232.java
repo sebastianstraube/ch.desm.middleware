@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.simulation.locsim.message;
 
-import ch.desm.middleware.app.core.communication.message.MessageCommon;
+import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorRs232Base;
 import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
 import ch.desm.middleware.app.module.simulation.locsim.maps.LocsimMapMiddlewareParameter;
@@ -25,7 +25,7 @@ public class LocsimMessageTranslatorRs232 extends MessageTranslatorRs232Base {
 		String commonMessage = mapMiddlewareMessages.getValue(middlewareKey);
 		
 		String dataValue = locsimMessage.getData();
-		commonMessage = replaceMiddlewareMessageParameter(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, mapParameter.getValue(dataValue), commonMessage);
+		commonMessage = replaceMiddlewareMessageParameter(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, mapParameter.getValue(dataValue), commonMessage);
 
 		return commonMessage;
 	}

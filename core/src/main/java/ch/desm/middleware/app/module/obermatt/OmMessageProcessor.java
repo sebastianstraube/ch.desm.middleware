@@ -3,7 +3,12 @@ package ch.desm.middleware.app.module.obermatt;
 import java.util.List;
 import java.util.Map.Entry;
 
-import ch.desm.middleware.app.core.communication.message.*;
+import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
+import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
+import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
+import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -135,7 +140,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
                         LOGGER.log(Level.ERROR, e);
                     }
                 }
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
+                stream = stream.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -174,7 +179,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
                     }
                 }
 
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
+                stream = stream.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -212,12 +217,12 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
                 String FSSidEnabled = fahrStrassenSchalter.getglobalId(Integer.valueOf(parameter));
 
                 if(key.equals(FSSidEnabled)){
-                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_ON);
+                    stream = stream.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, MessageBase.MESSAGE_PARAMETER_ON);
 
                     LOGGER.log(Level.INFO, "FSS enabled contact: " + stream);
 
                 }else{
-                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, MessageCommon.MESSAGE_PARAMETER_OFF);
+                    stream = stream.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, MessageBase.MESSAGE_PARAMETER_OFF);
                 }
                 messageInput = messageInput.concat(stream);
             }

@@ -220,10 +220,10 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
         String returnValue = "";
 
         if (value
-                .equals(MessageUbw32DigitalRegisterComplete.MESSAGE_PARAMETER_OFF)) {
+                .equals(MessageBase.MESSAGE_PARAMETER_OFF)) {
             returnValue = "0000";
         } else if (value
-                .equals(MessageUbw32DigitalRegisterComplete.MESSAGE_PARAMETER_ON)) {
+                .equals(MessageBase.MESSAGE_PARAMETER_ON)) {
             returnValue = "0001";
         } else {
             returnValue = value;

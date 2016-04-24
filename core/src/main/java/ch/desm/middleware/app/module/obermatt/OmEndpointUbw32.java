@@ -2,7 +2,6 @@ package ch.desm.middleware.app.module.obermatt;
 
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.module.obermatt.map.OmMapUbw32Analog;
 import ch.desm.middleware.app.module.obermatt.map.OmMapUbw32Digital;
@@ -46,8 +45,7 @@ public class OmEndpointUbw32 extends EndpointUbw32 {
         LOGGER.log(Level.TRACE, "endpoint (" + getSerialPortName() + ") received message: " + message);
 
         MessageUbw32Base ubw32Message = service.getTranslator()
-                .decodeUbw32EndpointMessage(message,
-                        MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+                .decodeUbw32EndpointMessage(message, MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
 
         //processable message
         if(ubw32Message != null){

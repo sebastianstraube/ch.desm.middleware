@@ -1,10 +1,10 @@
 package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 
-import ch.desm.middleware.app.core.component.ComponentServiceBase;
-import ch.desm.middleware.app.core.communication.message.MessageCommon;
+import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
+import ch.desm.middleware.app.core.component.ComponentServiceBase;
 import ch.desm.middleware.app.module.re420.Re420EndpointUbw32;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -46,7 +46,7 @@ public class EndpointUbw32MessageProcessor {
                         LOGGER.log(Level.ERROR, e);
                     }
                 }
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
+                stream = stream.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -84,7 +84,7 @@ public class EndpointUbw32MessageProcessor {
                     }
                 }
 
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
+                stream = stream.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
@@ -118,7 +118,7 @@ public class EndpointUbw32MessageProcessor {
 
                 // convert input to common parameter
                 String parameter = message.getInputValue(entry.getValue(), "");
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
+                stream = stream.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 messageInput = messageInput.concat(stream);
             }
         }
