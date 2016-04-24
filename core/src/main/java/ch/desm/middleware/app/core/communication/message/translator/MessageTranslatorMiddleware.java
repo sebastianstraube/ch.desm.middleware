@@ -45,15 +45,6 @@ public class MessageTranslatorMiddleware extends MessageTranslatorMiddlewareBase
 
 	/**
 	 * 
-	 * @param commonMessage
-	 * 
-	 */
-	public String toMiddlewareMessage(MessageMiddleware commonMessage){
-		return encodeMiddlewareMessage(commonMessage);
-	}
-
-	/**
-	 * 
 	 * @param payload
 	 * @param topic
 	 * @return

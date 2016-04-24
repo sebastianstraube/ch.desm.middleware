@@ -67,33 +67,6 @@ abstract class MessageTranslatorMiddlewareBase {
 	}
 
 	/**
-	 * TODO implementation decode to the common middleware message
-	 *
-	 * @param
-	 * @param
-	 */
-	protected String encodeMiddlewareMessage(MessageMiddleware message) {
-
-		String endpointMessage = "";
-		endpointMessage += message.getGlobalId();
-		endpointMessage += MessageBase.MESSAGE_ELEMENT_DELIMITER;
-		endpointMessage += message.getGlobalId();
-		endpointMessage += MessageBase.MESSAGE_ELEMENT_DELIMITER;
-		endpointMessage += message.getExternIntern();
-		endpointMessage += MessageBase.MESSAGE_ELEMENT_DELIMITER;
-		endpointMessage += message.getElement();
-		endpointMessage += MessageBase.MESSAGE_ELEMENT_DELIMITER;
-		endpointMessage += message.getFunction();
-		endpointMessage += MessageBase.MESSAGE_ELEMENT_DELIMITER;
-		endpointMessage += message.getInstance();
-		endpointMessage += MessageBase.MESSAGE_ELEMENT_DELIMITER;
-		endpointMessage += message.getParameter();
-		endpointMessage += MessageBase.MESSAGE_MESSAGE_DELIMITER;
-
-		return endpointMessage;
-	}
-
-	/**
 	 *
 	 * @param wildcard
 	 * @param replace
