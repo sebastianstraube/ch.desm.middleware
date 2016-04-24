@@ -22,8 +22,8 @@ abstract class MessageTranslatorMiddlewareBase {
 	private static final int ELEMENT = 3;
 	private static final int FUNCTION = 4;
 	private static final int INSTANCE = 5;
-	private static final int PARAMETER = 6;
-	private static final int TOPIC = 7;
+	private static final int TOPIC = 6;
+	private static final int PARAMETER = 7;
 	private static final int NUM_PARTS = 8;
 
 	protected List<MessageMiddleware> decodeMiddlewareMessages(String stream) {
