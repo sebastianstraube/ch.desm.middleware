@@ -7,16 +7,22 @@ public class MessageMiddleware extends MessageCommon {
 	
 	protected String outputInput;
 
+	/**
+	 * TODO: is this one needed?
+     */
 	public MessageMiddleware(MessageUbw32DigitalRegisterComplete message) {
 		super(message);
 	}
 
+	/**
+	 * TODO: is this one needed?
+	 */
     public MessageMiddleware(MessageMiddleware message){
         this(message.getTopic(), message.getGlobalId(), message.getExternIntern(),
                 message.getElement(), message.getFunction(), message.getInstance(), message.getParameter(),
                 message.getPayload(), message.getOutputInput());
     }
-	
+
 	public MessageMiddleware(String topic, String globalId, String externIntern,
 			String element, String function, String instance, String parameter,
 			String payload, String outputInput) {

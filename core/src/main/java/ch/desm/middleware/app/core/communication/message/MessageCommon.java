@@ -9,10 +9,13 @@ public class MessageCommon extends MessageBase {
 	protected String parameter;
 	protected String instance;
 
-	public MessageCommon(MessageUbw32DigitalRegisterComplete message) {
+	/**
+	 * TODO: is this one needed?
+	 */
+	public MessageCommon(MessageBase message) {
 		super(message.getPayload(), message.getTopic());
 	}
-	
+
 	public MessageCommon(String topic, String payload) {
 		super(payload, topic);
 	}
