@@ -58,13 +58,13 @@ public class RunApp extends Thread {
         startManagement(jettyServer, "ws://" + host + ":" + port + tyrusWebsocketContextPath + serverEndpointContextPath);
         /***************************************************************************/
 
-        //startOm();
-        startZusi();
+        startOm();
+        //startZusi();
         //startCabine();
     }
 
     private void startOm(){
-        startOmStellwerk("COM14");
+        startOmStellwerk("COM3");
         startPetrinetOm();
     }
 
