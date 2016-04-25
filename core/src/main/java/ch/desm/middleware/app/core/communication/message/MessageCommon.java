@@ -128,18 +128,23 @@ public class MessageCommon extends MessageBase {
 	}
 
 	public static ParameterType parseParameterType(String type) throws InvalidParameterTypeException {
-		if (type.equalsIgnoreCase("N")) {
-			return ParameterType.NULL;
-		} else if (type.equalsIgnoreCase("B")) {
-			return ParameterType.BOOLEAN;
-		} else if (type.equalsIgnoreCase("I")) {
-			return ParameterType.INTEGER;
-		} else if (type.equalsIgnoreCase("D")) {
-			return ParameterType.DOUBLE;
-		} else if (type.equalsIgnoreCase("S")) {
-			return ParameterType.STRING;
-		} else {
+		if (type.length() != 1) {
 			throw new InvalidParameterTypeException();
+		}
+
+		switch (type.toLowerCase().charAt(0)) {
+			case 'n':
+				return ParameterType.NULL;
+			case 'b':
+				return ParameterType.BOOLEAN;
+			case 'i':
+				return ParameterType.INTEGER;
+			case 'd':
+				return ParameterType.DOUBLE;
+			case 's':
+				return ParameterType.STRING;
+			default:
+				throw new InvalidParameterTypeException();
 		}
 	}
 
