@@ -83,8 +83,8 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
 
         // Todo implementation
         // activate this, when gui taken controle over this endpoint
-        if (service.getComponentMapMiddleware().isKeyAvailable(message.getGlobalId())) {
-            final String sensorName = message.getGlobalId();
+        if (service.getMap().isKeyAvailable(message.getGlobalId())) {
+            final String sensorName = service.getMap().getKey(message.getGlobalId());
 
             final int sensorValue;
             try {
