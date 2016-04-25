@@ -16,8 +16,10 @@ public class ManagementMapMiddleware extends ComponentMapBase {
 	}
 
 	protected void init() {
-		map.put("mgmt.stellwerk.obermattlangnau", "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;?;management;#");map.put("mgmt.petrinet.obermatlangnau", "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;?;management;#");map.put("mgmt.cabine.re420.ubw32", "mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;?;management;#");
-
+		map.put("mgmt.stellwerk.obermattlangnau", "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;s;?;#");
+		map.put("mgmt.petrinet.obermattlangnau", "mgmt.petrinet.obermattlangnau;os;0;management;petrinet;obermattlangnau;management;s;?;#");
+		map.put("mgmt.petrinet.re420", "mgmt.petrinet.re420;os;0;management;petrinet;cabinere420;management;s;?;#");
+		map.put("mgmt.cabine.re420.ubw32", "mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;management;s;?;#");
 	}
 
 }
