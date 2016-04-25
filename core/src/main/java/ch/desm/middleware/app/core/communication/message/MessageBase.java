@@ -44,15 +44,19 @@ public class MessageBase{
         return middlewareMessage.replace(MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
     }
 
-    public static String getParameterValueEndpoint(String value) {
-        switch (value) {
+    public static String mapOnOffParameterTo10String(String value) {
+        return String.valueOf(mapOnOffParameterTo10(value));
+    }
+
+    public static Integer mapOnOffParameterTo10(String value) {
+        switch (value.toLowerCase()) {
             case MESSAGE_PARAMETER_ON:
-                return "1";
+                return 1;
             case MESSAGE_PARAMETER_OFF:
-                return "0";
+                return 0;
             default:
                 LOGGER.log(Level.ERROR, "unexpected (0,1) parameter value: " + value);
-                return "";
+                return 0;
         }
     }
 

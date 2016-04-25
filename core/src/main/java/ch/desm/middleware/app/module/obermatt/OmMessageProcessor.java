@@ -50,7 +50,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
                 try {
                     String globalId = element.getGlobalId();
-                    String endpointParameter = MessageBase.getParameterValueEndpoint(parameterAsOnOff);
+                    String endpointParameter = MessageBase.mapOnOffParameterTo10String(parameterAsOnOff);
                     boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
                     String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
@@ -87,7 +87,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
                 try {
                     String globalId = element.getGlobalId();
-                    String endpointParameter = MessageBase.getParameterValueEndpoint(parameterAsOnOff);
+                    String endpointParameter = MessageBase.mapOnOffParameterTo10String(parameterAsOnOff);
                     boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
                     delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, endpointParameter, isInput);

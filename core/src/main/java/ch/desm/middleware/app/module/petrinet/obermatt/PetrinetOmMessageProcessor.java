@@ -44,8 +44,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     private void processBrokerMessageObermatt(PetrinetOmService service, MessageCommon message) {
         final int sensorValue;
         try {
-            // TODO: take a less hacky approach!
-            sensorValue = Integer.valueOf(MessageBase.getParameterValueEndpoint(message.getParameterAsOnOff()));
+            sensorValue = MessageBase.mapOnOffParameterTo10(message.getParameterAsOnOff());
         } catch (MessageCommon.BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
@@ -62,8 +61,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     private void processBrokerMessageZusiAusbildung(PetrinetOmService service, MessageCommon message) {
         final int sensorValue;
         try {
-            // TODO: take a less hacky approach!
-            sensorValue = Integer.valueOf(MessageBase.getParameterValueEndpoint(message.getParameterAsOnOff()));
+            sensorValue = MessageBase.mapOnOffParameterTo10(message.getParameterAsOnOff());
         } catch (MessageCommon.BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
@@ -90,8 +88,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
 
             final int sensorValue;
             try {
-                // TODO: take a less hacky approach!
-                sensorValue = Integer.valueOf(MessageBase.getParameterValueEndpoint(message.getParameterAsOnOff()));
+                sensorValue = MessageBase.mapOnOffParameterTo10(message.getParameterAsOnOff());
             } catch (MessageCommon.BadParameterTypeCastException e) {
                 LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
                 return;
