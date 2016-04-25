@@ -114,7 +114,15 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      */
     private void processInitEndpoint(EtcsEndpointTcpClient endpoint, MessageCommon element){
 
-        switch (element.getParameter()) {
+        final String parameter;
+        try {
+            parameter = element.getParameterAsString();
+        } catch (MessageCommon.BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+            return;
+        }
+
+        switch (parameter) {
             case ("init"): {
                 endpoint.init();
                 break;

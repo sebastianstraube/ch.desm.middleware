@@ -2,6 +2,7 @@ package ch.desm.middleware.app.module.re420;
 
 import java.util.List;
 
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageProcessor;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
@@ -9,6 +10,7 @@ import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
+import ch.desm.middleware.app.core.component.ComponentMapBase;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -57,7 +59,15 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 	}
 
 	private void processInitEndpoint(Re420EndpointUbw32 endpoint, MessageCommon element){
-		switch (element.getParameter()) {
+		final String parameter;
+		try {
+			parameter = element.getParameterAsString();
+		} catch (MessageCommon.BadParameterTypeCastException e) {
+			LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+			return;
+		}
+
+		switch (parameter) {
 			case ("init"): {
 				endpoint.init();
 				break;
@@ -76,13 +86,17 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 	private void processBrokerMessageZusiFahrpult(Re420Service service, MessageCommon message) {
         String globalId = message.getGlobalId();
         String key = service.getMapZusi().getKey(globalId);
-        delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message.getParameter(), true);
+		// TODO: check type or whatever but get rid of getParameterRaw!
+		String parameter = message.getParameterRaw();
+		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, parameter, true);
 	}
 
 	private void processBrokerMessagePetrinetRe420(Re420Service service, MessageCommon message) {
 		String globalId = message.getGlobalId();
 		String key = service.getMapPetrinetRe420().getKey(globalId);
-		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message.getParameter(), true);
+		// TODO: check type or whatever but get rid of getParameterRaw!
+		String parameter = message.getParameterRaw();
+		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, parameter, true);
 	}
 
 	private void processBrokerMessageManagement(Re420Service service, MessageCommon message) {

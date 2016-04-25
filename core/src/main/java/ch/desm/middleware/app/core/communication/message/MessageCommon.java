@@ -1,19 +1,27 @@
 package ch.desm.middleware.app.core.communication.message;
 
-
 public class MessageCommon extends MessageBase {
 
-	protected String globalId;
-	protected String outputInput;
-	protected String externIntern;
-	protected String element;
-	protected String function;
-	protected String instance;
-	protected String parameter;
+	public enum ParameterType {
+		NULL,
+		BOOLEAN,
+		INTEGER,
+		DOUBLE,
+		STRING,
+	}
+
+	private final String globalId;
+	private final String outputInput;
+	private final String externIntern;
+	private final String element;
+	private final String function;
+	private final String instance;
+	private final ParameterType type;
+	private final String parameter;
 
 	public MessageCommon(String payload, String topic, String globalId, String outputInput,
 						 String externIntern, String element, String function, String instance,
-						 String parameter) {
+						 ParameterType type, String parameter) {
 		super(payload, topic);
 		this.globalId = globalId;
 		this.outputInput = outputInput;
@@ -21,15 +29,12 @@ public class MessageCommon extends MessageBase {
 		this.element = element;
 		this.function = function;
 		this.instance = instance;
+		this.type = type;
 		this.parameter = parameter;
 	}
 
 	public String getGlobalId() {
 		return this.globalId;
-	}
-
-	public void setGlobalId(String value){
-		this.globalId = value;
 	}
 
 	public String getOutputInput() {
@@ -40,41 +45,65 @@ public class MessageCommon extends MessageBase {
 		return this.externIntern;
 	}
 
-	public void setExternIntern(String value){
-		this.externIntern = value;
-	}
-
 	public String getElement() {
 		return this.element;
-	}
-
-	public void setElement(String value){
-		this.element = value;
 	}
 
 	public String getFunction() {
 		return this.function;
 	}
 
-	public void setFunction(String value){
-		this.function = value;
-	}
-
-    public void setInstance(String instance) {
-        this.instance = instance;
-    }
-
     public String getInstance() {
         return this.instance;
     }
 
-	public String getParameter() {
-		return this.parameter;
+    public ParameterType getType() {
+        return this.type;
+    }
+
+	public String getTypeName() {
+		return type.name();
 	}
 
-	public void setParameter(String value){
-		this.parameter = value;
+	public Boolean getParameterAsBoolean() throws BadParameterTypeCastException {
+		if (type != ParameterType.BOOLEAN) {
+			throw new BadParameterTypeCastException(ParameterType.BOOLEAN, type);
+		}
+		return parameter.equalsIgnoreCase(MESSAGE_PARAMETER_ON);
 	}
+
+	public String getParameterAsOnOff() throws BadParameterTypeCastException {
+		if (type != ParameterType.BOOLEAN) {
+			throw new BadParameterTypeCastException(ParameterType.BOOLEAN, type);
+		}
+		return parameter.equalsIgnoreCase(MESSAGE_PARAMETER_ON) ? MESSAGE_PARAMETER_ON : MESSAGE_PARAMETER_OFF;
+	}
+
+	public Integer getParameterAsInteger() throws BadParameterTypeCastException {
+		if (type != ParameterType.INTEGER) {
+			throw new BadParameterTypeCastException(ParameterType.INTEGER, type);
+		}
+		return Integer.valueOf(parameter);
+	}
+
+	public Double getParameterAsDouble() throws BadParameterTypeCastException {
+		if (type != ParameterType.DOUBLE) {
+			throw new BadParameterTypeCastException(ParameterType.DOUBLE, type);
+		}
+		return Double.valueOf(parameter);
+	}
+
+	public String getParameterAsString() throws BadParameterTypeCastException {
+		if (type != ParameterType.STRING) {
+			throw new BadParameterTypeCastException(ParameterType.STRING, type);
+		}
+		return parameter;
+	}
+
+	// TODO: fix/refactor all usages!
+    public String getParameterRaw() {
+        return this.parameter;
+    }
 
 	public String toString() {
 		String s = super.toString();
@@ -90,9 +119,35 @@ public class MessageCommon extends MessageBase {
 		s += "function: " + function;
         s += ", ";
         s += "instance: " + instance;
-		s += ", ";
-		s += "parameter: " + parameter;
+        s += ", ";
+        s += "type: " + type;
+        s += ", ";
+        s += "parameter: " + parameter;
 
 		return s;
+	}
+
+	public static ParameterType parseParameterType(String type) throws InvalidParameterTypeException {
+		if (type.equalsIgnoreCase("N")) {
+			return ParameterType.NULL;
+		} else if (type.equalsIgnoreCase("B")) {
+			return ParameterType.BOOLEAN;
+		} else if (type.equalsIgnoreCase("I")) {
+			return ParameterType.INTEGER;
+		} else if (type.equalsIgnoreCase("D")) {
+			return ParameterType.DOUBLE;
+		} else if (type.equalsIgnoreCase("S")) {
+			return ParameterType.STRING;
+		} else {
+			throw new InvalidParameterTypeException();
+		}
+	}
+
+	public static class InvalidParameterTypeException extends Exception {}
+
+	public static class BadParameterTypeCastException extends Exception {
+		public BadParameterTypeCastException(ParameterType requested, ParameterType actual) {
+			super("Unable to cast message parameter type from " + requested.name() + " to " + actual.name());
+		}
 	}
 }

@@ -143,22 +143,43 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param message
      */
     protected void processBrokerMessagePetrinetOm(ZusiService service, MessageCommon message){
-        if(message.getParameter().equalsIgnoreCase(MessageBase.MESSAGE_PARAMETER_ON)){
-            String key = service.getZusiMapPetrinet().getKey(message.getGlobalId());
-            if(!key.isEmpty()){
-                String mwmStream = service.getComponentMapMiddleware().getValue(key);
-                mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
-                MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
-                mwm.setParameter(mwm.getParameter());
+        final Boolean isParameterOn;
+        final String parameterAsOnOff;
+        try {
+            isParameterOn = message.getParameterAsBoolean();
+            parameterAsOnOff = message.getParameterAsOnOff();
+        } catch (MessageCommon.BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
+            return;
+        }
 
-                if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
-                    processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
-                }
-                else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
-                    processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
-                }
-            }else LOGGER.log(Level.INFO, "petrinet broker message processing skipped: " + message);
-        } LOGGER.log(Level.INFO, "petrinet broker message processing skipped cause parameter off: " + message);
+        if (!isParameterOn) {
+            LOGGER.log(Level.INFO, "petrinet broker message processing skipped cause parameter off: " + message);
+            return;
+        }
+
+        String key = service.getZusiMapPetrinet().getKey(message.getGlobalId());
+        if(key.isEmpty()) {
+            LOGGER.log(Level.INFO, "petrinet broker message processing skipped: " + message);
+            return;
+        }
+
+        String mwmStream = service.getComponentMapMiddleware().getValue(key);
+        // TODO: improve how parameter replacement is done
+        mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, parameterAsOnOff);
+        MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
+
+        switch (mwm.getTopic().toLowerCase()) {
+            case MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG:
+                processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
+                break;
+            case MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT:
+                processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
+                break;
+            default:
+                LOGGER.log(Level.WARN, "Received message for topic we did not subscribe to: " + mwm.getTopic());
+                break;
+        }
     }
 
     /**
@@ -167,20 +188,38 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param message
      */
     protected void processBrokerMessagePetrinetRe420(ZusiService service, MessageCommon message){
-        if(message.getParameter().equalsIgnoreCase(MessageBase.MESSAGE_PARAMETER_ON)){
-            String key = service.getZusiMapPetrinetRe420().getKey(message.getGlobalId());
-            if(!key.isEmpty()){
-                String mwmStream = service.getComponentMapMiddleware().getValue(key);
-                mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, message.getParameter());
-                MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
+        final Boolean isParameterOn;
+        final String parameterAsOnOff;
+        try {
+            isParameterOn = message.getParameterAsBoolean();
+            parameterAsOnOff = message.getParameterAsOnOff();
+        } catch (MessageCommon.BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
+            return;
+        }
 
-                if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
-                    processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
-                } else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
-                    processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
-                }
-            }else LOGGER.log(Level.INFO, "petrinet broker message processing skipped: " + message);
-        } LOGGER.log(Level.INFO, "petrinet broker message processing skipped cause parameter off: " + message);
+        if (!isParameterOn) {
+            LOGGER.log(Level.INFO, "petrinet broker message processing skipped cause parameter off: " + message);
+            return;
+        }
+
+        String key = service.getZusiMapPetrinetRe420().getKey(message.getGlobalId());
+        if(key.isEmpty()) {
+            LOGGER.log(Level.INFO, "petrinet broker message processing skipped: " + message);
+            return;
+        }
+
+        String mwmStream = service.getComponentMapMiddleware().getValue(key);
+        // TODO: improve how parameter replacement is done
+        mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, parameterAsOnOff);
+        MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
+
+        if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
+            processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
+        } else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
+            processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
+        }
+
     }
 
     /**
@@ -205,7 +244,15 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      */
     private void processInitEndpoint(ZusiEndpointTcpClient endpoint, MessageCommon element){
 
-        switch (element.getParameter()) {
+        final String parameter;
+        try {
+            parameter = element.getParameterAsString();
+        } catch (MessageCommon.BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+            return;
+        }
+
+        switch (parameter) {
             case ("init"): {
                 endpoint.init();
                 break;

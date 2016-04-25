@@ -25,55 +25,94 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
     }
 
     private void processBrokerMessage(PetrinetRe420Service service, MessageCommon element){
-        String sensorName = "";
-        int sensorValue = 0;
+        switch(element.getTopic().toLowerCase()) {
+            case MessageBase.MESSAGE_TOPIC_CABINE_RE420:
+                processBrokerMessageCabineRe420(service, element);
+                break;
+            case MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT:
+                processBrokerMessageZusiFahrpult(service, element);
+                break;
+            case MessageBase.MESSAGE_TOPIC_MANAGEMENT:
+                processBrokerMessageManagement(service, element);
+                break;
+            default:
+                LOGGER.log(Level.WARN, "unsupported topic, broker message delegation skipped: " + element.toString());
+                return;
+        }
+    }
 
-        if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_CABINE_RE420)){
-            try {
-                sensorName = service.getMapCabineRe420().getKey(element.getGlobalId());
-                sensorValue = element.getParameter().equalsIgnoreCase(MessageBase.MESSAGE_PARAMETER_ON) ? 1 : 0;//element.getParameter().equals("on") ? 1 : 0;
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
-        } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
-            try {
-                sensorName = service.getMapZusi().getKey(element.getGlobalId());
-                sensorValue = element.getParameter().equalsIgnoreCase(MessageBase.MESSAGE_PARAMETER_ON) ? 1 : 0;//element.getParameter().equals("on") ? 1 : 0;
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
-        } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
-            try {
-                if (isInitProcessMessage(element)) {
-                    processInitEndpoint(service.getEndpoint(), element);
-                }else{
+    private void processBrokerMessageCabineRe420(PetrinetRe420Service service, MessageCommon message) {
+        final String sensorName = service.getMapCabineRe420().getKey(message.getGlobalId());
+        final int sensorValue;
 
-                    // Todo implementation
-                    // activate this, when gui taken controle over this endpoint
-                    if(service.getComponentMapMiddleware().isKeyAvailable(element.getGlobalId())){
-                        sensorName =element.getGlobalId();
-                        sensorValue = element.getParameter().equals("on") ? 1 : 0;
-                    }
-                }
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
-        }else{
-            try {
-                throw new Exception("unsupported topic, broker message delegation skipped: " + element.toString());
-            } catch (Exception e) {
-                LOGGER.log(Level.WARN, e);
-            }
+        try {
+            sensorValue = message.getParameterAsBoolean() ? 1 : 0;
+        } catch (MessageCommon.BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
+            return;
         }
 
-        if(!sensorName.isEmpty()){
+        try {
+            delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+            return;
+        }
+    }
+
+    private void processBrokerMessageZusiFahrpult(PetrinetRe420Service service, MessageCommon message) {
+        final String sensorName = service.getMapZusi().getKey(message.getGlobalId());
+        final int sensorValue;
+
+        try {
+            sensorValue = message.getParameterAsBoolean() ? 1 : 0;
+        } catch (MessageCommon.BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
+            return;
+        }
+
+        try {
+            delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, e);
+            return;
+        }
+    }
+
+    private void processBrokerMessageManagement(PetrinetRe420Service service, MessageCommon message) {
+        if (isInitProcessMessage(message)) {
+            processInitEndpoint(service.getEndpoint(), message);
+            return;
+        }
+
+        // Todo implementation
+        // activate this, when gui taken controle over this endpoint
+        if(service.getComponentMapMiddleware().isKeyAvailable(message.getGlobalId())){
+            final String sensorName = message.getGlobalId();
+            final int sensorValue;
+
+            try {
+                sensorValue = message.getParameterAsBoolean() ? 1 : 0;
+            } catch (MessageCommon.BadParameterTypeCastException e) {
+                LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
+                return;
+            }
+
             delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
         }
     }
 
     private void processInitEndpoint(PetrinetRe420Endpoint endpoint, MessageCommon element){
 
-        switch (element.getParameter()) {
+        final String parameter;
+        try {
+            parameter = element.getParameterAsString();
+        } catch (MessageCommon.BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+            return;
+        }
+
+        switch (parameter) {
             case ("init"): {
                 endpoint.init();
                 break;

@@ -37,52 +37,81 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
     private void processBrokerMessage(OmService service, MessageCommon element){
 
-        //incoming message with OML topic
-        if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT)){
-            try {
-                String globalId = element.getGlobalId();
-                String parameter = MessageBase.getParameterValueEndpoint(element.getParameter());
-                boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
-
-                String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
-                delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(),  service.getEndpoint().getMapAnalog(), key, parameter, isInput);
-            } catch (Exception e) {
-                //LOGGER.log(Level.WARN, e.getMessage());
-            }
-        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
-            try {
-                if (isInitProcessMessage(element)) {
-                    processInitEndpoint(service.getEndpoint(), element);
-                }else{
-
-                    // Todo implementation
-                    // activate this, when gui taken controle over this endpoint
+        switch(element.getTopic()) {
+            case MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT:
+            {
+                final String parameterAsOnOff;
+                try {
+                    parameterAsOnOff = element.getParameterAsOnOff();
+                } catch (MessageCommon.BadParameterTypeCastException e) {
+                    LOGGER.log(Level.ERROR, "Received broker message with type " + element.getTypeName() + " but expected Boolean");
+                    return;
                 }
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
-        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT)){
-            try {
-                String globalId = element.getGlobalId();
-                String parameter = MessageBase.getParameterValueEndpoint(element.getParameter());
-                boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
 
-                delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, parameter, isInput);
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
+                try {
+                    String globalId = element.getGlobalId();
+                    String endpointParameter = MessageBase.getParameterValueEndpoint(parameterAsOnOff);
+                    boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
+
+                    String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
+                    delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), key, endpointParameter, isInput);
+                } catch (Exception e) {
+                    //LOGGER.log(Level.WARN, e.getMessage());
+                }
+                break;
             }
-        }else{
-            try {
-                throw new Exception("unsupported topic, broker message delegation skipped: " + element.toString());
-            } catch (Exception e) {
-                LOGGER.log(Level.WARN, e);
+            case MessageBase.MESSAGE_TOPIC_MANAGEMENT:
+            {
+                try {
+                    if (isInitProcessMessage(element)) {
+                        processInitEndpoint(service.getEndpoint(), element);
+                    }else{
+
+                        // Todo implementation
+                        // activate this, when gui taken controle over this endpoint
+                    }
+                } catch (Exception e) {
+                    LOGGER.log(Level.ERROR, e);
+                }
+                break;
             }
+            case MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT:
+            {
+                final String parameterAsOnOff;
+                try {
+                    parameterAsOnOff = element.getParameterAsOnOff();
+                } catch (MessageCommon.BadParameterTypeCastException e) {
+                    LOGGER.log(Level.ERROR, "Received broker message with type " + element.getTypeName() + " but expected Boolean");
+                    return;
+                }
+
+                try {
+                    String globalId = element.getGlobalId();
+                    String endpointParameter = MessageBase.getParameterValueEndpoint(parameterAsOnOff);
+                    boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
+
+                    delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, endpointParameter, isInput);
+                } catch (Exception e) {
+                    LOGGER.log(Level.ERROR, e);
+                }
+                break;
+            }
+            default:
+                LOGGER.log(Level.WARN, "unsupported topic, broker message delegation skipped: " + element.toString());
         }
     }
 
     private void processInitEndpoint(OmEndpointUbw32 endpoint, MessageCommon element){
 
-        switch (element.getParameter()) {
+        final String parameter;
+        try {
+            parameter = element.getParameterAsString();
+        } catch (MessageCommon.BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+            return;
+        }
+
+        switch (parameter) {
             case ("init"): {
                 endpoint.init();
                 break;
