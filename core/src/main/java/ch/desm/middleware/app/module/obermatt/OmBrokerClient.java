@@ -26,7 +26,6 @@ public class OmBrokerClient extends ComponentBrokerClientBase {
      */
     @Override
     protected void initializeTopicSubscriptions() {
-        subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
         subscribeToTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
         subscribeToTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
     }

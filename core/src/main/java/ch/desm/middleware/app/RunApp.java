@@ -8,8 +8,6 @@ import ch.desm.middleware.app.module.gui.ManagementService;
 import ch.desm.middleware.app.module.petrinet.obermatt.PetrinetOmService;
 import ch.desm.middleware.app.module.petrinet.re420.PetrinetRe420Service;
 import ch.desm.middleware.app.module.simulation.etcs.EtcsService;
-import ch.desm.middleware.app.module.simulation.locsim.Locsim;
-import ch.desm.middleware.app.module.simulation.locsim.LocsimEndpointRs232;
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.server.JettyServer;
 import ch.desm.middleware.app.core.server.TyrusServer;
@@ -341,11 +339,6 @@ public class RunApp extends Thread {
             e.printStackTrace();
         }
     }
-
-	public void startLocsim(String port){
-		LocsimEndpointRs232 endpointRs232 = new LocsimEndpointRs232(port);
-		Locsim locsimImpl = new Locsim(broker, endpointRs232);
-	}
 
 	/**
 	 * The "PM" Command : Set hardware PWM output values command Sets a PWM

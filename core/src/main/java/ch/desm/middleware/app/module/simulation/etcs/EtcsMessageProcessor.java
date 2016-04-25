@@ -32,10 +32,6 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
     public void processBrokerMessage(EtcsService service, MessageCommon message){
 
         switch(message.getTopic()){
-            case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM):{
-                //TODO implementation
-                break;
-            }
             case(MessageBase.MESSAGE_TOPIC_CABINE_RE420):{
                 processBrokerMessageCabineRe420(service, message);
                 break;
@@ -54,14 +50,6 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
             }
             case(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
                 processBrokerMessagePetrinetRe420(service, message);
-                break;
-            }
-            case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL):{
-                //TODO implementation
-                break;
-            }
-            case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232):{
-                //TODO implementation
                 break;
             }
             default:{

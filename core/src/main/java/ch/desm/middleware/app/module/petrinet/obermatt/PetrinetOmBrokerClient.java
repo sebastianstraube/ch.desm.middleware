@@ -32,7 +32,6 @@ public class PetrinetOmBrokerClient extends ComponentBrokerClientBase {
 
     @Override
     protected void initializeTopicSubscriptions() {
-        subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
         subscribeToTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
         subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
         subscribeToTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
