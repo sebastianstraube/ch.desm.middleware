@@ -48,8 +48,7 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
             String pin = String.valueOf(endpointRegister.substring(1));
 
             if (isInput) {
-                endpoint.getPinInputDigital(registerName,
-                        pin);
+                endpoint.getPinInputDigital(registerName, pin);
             } else {
                 endpoint.setPinOutputDigital(registerName, pin, parameter);
             }

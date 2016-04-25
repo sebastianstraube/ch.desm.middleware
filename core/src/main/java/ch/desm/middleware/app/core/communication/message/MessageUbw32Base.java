@@ -3,6 +3,7 @@ package ch.desm.middleware.app.core.communication.message;
 
 public abstract class MessageUbw32Base extends MessageBase {
 
+	// TODO: move to MessageCommon
 	public static final String MESSAGE_CHAR_INPUT = "i";
 	public static final String MESSAGE_CHAR_ONLYSOFTWARE = "os";
 

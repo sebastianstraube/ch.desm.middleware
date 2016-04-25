@@ -84,7 +84,7 @@ abstract class MessageTranslatorMiddlewareBase {
 		return message.replaceAll(wildcard, replace);
 	}
 
-	public class MalformedMessageException extends Exception {
+	public static class MalformedMessageException extends Exception {
 		public MalformedMessageException(String msg, String rawMessage) {
 			super(msg + " - " + rawMessage);
 		}

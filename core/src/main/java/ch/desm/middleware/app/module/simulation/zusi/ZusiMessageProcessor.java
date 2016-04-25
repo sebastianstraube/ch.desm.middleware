@@ -340,8 +340,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param parameterValue
      */
     protected void processLogicParameter(ZusiService service, String globalId, String parameterValue){
-        ArrayList<String> l = service.getZusiEndpointLogic().getIsoMwmFromParameter(service, globalId, parameterValue);
-        for(String mwm : l){
+        for(String mwm : service.getZusiEndpointLogic().getIsoMwmFromParameter(service, globalId, parameterValue)){
             super.processEndpointMessage(service.getBrokerClient(), mwm, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
         }
     }

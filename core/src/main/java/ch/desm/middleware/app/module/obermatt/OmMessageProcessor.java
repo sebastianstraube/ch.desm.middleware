@@ -262,7 +262,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
 
 	/**
-	 * 
+	 *
 	 * @param endpoint
 	 * @param message
 	 * @return
