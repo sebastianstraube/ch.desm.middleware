@@ -39,10 +39,6 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
     public void processBrokerMessage(ZusiService service, MessageCommon message){
 
         switch(message.getTopic()){
-            case(MessageBase.MESSAGE_TOPIC_CABINE_RE420):{
-                processBrokerMessageCabineRe420(service, message);
-                break;
-            }
             case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT):{
                 //TODO implementation
                 break;
@@ -110,31 +106,6 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      */
     private void processBrokerMessageManagament(ZusiService service, MessageCommon message){
         //TODO implementation, but only messages with zusi topic (take control in gui)
-    }
-
-    /**
-     *
-     * @param service
-     * @param message
-     */
-    private void processBrokerMessageCabineRe420(ZusiService service, MessageCommon message){
-        String zusiGlobalId = service.getZusiMapRe420().getKey(message.getGlobalId());
-
-        //key found ?
-        if(!zusiGlobalId.isEmpty()){
-            String mwmStream = service.getComponentMapMiddleware().getValue(zusiGlobalId);
-
-            if(mwmStream.isEmpty()) {
-                LOGGER.log(Level.WARN, "error mapping between: " + message);
-            }else{
-                MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
-                if(service.getZusiMapParameterMiddleware().hasValue(message.getGlobalId())) {
-                    processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
-                }else{
-                    LOGGER.log(Level.ERROR, "prcoessing broker message from cabine re420 has no parameter value mapping: " + message);
-                }
-            }
-        }
     }
 
     /**

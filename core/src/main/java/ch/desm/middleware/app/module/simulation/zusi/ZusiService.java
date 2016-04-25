@@ -204,14 +204,6 @@ public class ZusiService extends ComponentServiceBase {
         return new ZusiEndpointLogic();
     }
 
-    /**
-     *
-     * @return
-     */
-    public ZusiMapCabineRe420 getZusiMapRe420(){
-        return new ZusiMapCabineRe420();
-    }
-
     public ZusiMapPetrinetRe420 getZusiMapPetrinetRe420(){
         return new ZusiMapPetrinetRe420();
     }
