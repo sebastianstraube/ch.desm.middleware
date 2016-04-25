@@ -37,7 +37,7 @@ public class MessageTranslatorMiddleware extends MessageTranslatorMiddlewareBase
     public MessageMiddleware toMiddlewareMessage(String stream){
 		try {
 			return decodeMiddlewareMessage(stream);
-		} catch (Exception e) {
+		} catch (MalformedMessageException e) {
 			LOGGER.log(Level.ERROR, e);
 			return null;
 		}

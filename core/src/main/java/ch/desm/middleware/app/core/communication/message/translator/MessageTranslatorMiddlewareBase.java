@@ -34,7 +34,7 @@ abstract class MessageTranslatorMiddlewareBase {
 			MessageMiddleware message = null;
 			try {
 				message = decodeMiddlewareMessage(messageArray[i]);
-			} catch(Exception e) {
+			} catch(MalformedMessageException e) {
 				LOGGER.log(Level.ERROR, e);
 			}
 			messageList.add(message);
@@ -50,7 +50,7 @@ abstract class MessageTranslatorMiddlewareBase {
 	 * @param message
 	 * @return {@link MessageBase}
 	 */
-	protected MessageMiddleware decodeMiddlewareMessage(String message)throws Exception {
+	protected MessageMiddleware decodeMiddlewareMessage(String message)throws MalformedMessageException {
 		if (message == null || message.isEmpty()) {
 			throw new MalformedMessageException("Message must not be empty", message);
 		}
@@ -77,7 +77,7 @@ abstract class MessageTranslatorMiddlewareBase {
 		return message.replaceAll(wildcard, replace);
 	}
 
-	private class MalformedMessageException extends Exception {
+	public class MalformedMessageException extends Exception {
 		public MalformedMessageException(String msg, String rawMessage) {
 			super(msg + " - " + rawMessage);
 		}
