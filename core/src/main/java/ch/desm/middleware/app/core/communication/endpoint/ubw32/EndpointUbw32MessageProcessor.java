@@ -29,7 +29,7 @@ public class EndpointUbw32MessageProcessor {
 
                 String key = entry.getKey();
                 boolean isEnabled = ((MessageUbw32DigitalRegisterSingle) message).isEnabled();
-                String parameter = isEnabled == true ? "on" : "off";
+                String parameter = isEnabled ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
                 if (isEnabled) LOGGER.log(Level.INFO, "key: " + key);
                 String stream = null;
                 stream = service.getComponentMapMiddleware().getMap().get(key);
@@ -62,8 +62,9 @@ public class EndpointUbw32MessageProcessor {
                 .getMap().entrySet()) {
 
             // convert input to common parameter
+            // TODO: uhm. looks a bit ugly. really two times the substring? and why contains("1")?
             boolean isEnabled = message.getInputValue(entry.getValue().substring(0), entry.getValue().substring(1)).contains("1");
-            String parameter = isEnabled == true ? "on" : "off";
+            String parameter = isEnabled ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
             String key = entry.getKey();
 
             if (endpoint.getState().hasChanged(key, parameter)) {

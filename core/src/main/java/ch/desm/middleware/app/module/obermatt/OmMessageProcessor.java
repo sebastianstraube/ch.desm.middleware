@@ -147,7 +147,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
                 String key = entry.getKey();
 
                 boolean isEnabled = ((MessageUbw32DigitalRegisterSingle) message).isEnabled();
-                String parameter = isEnabled == true ? "on" : "off";
+                String parameter = isEnabled ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
 
                 if (isEnabled) {
                     LOGGER.log(Level.INFO, "key: " + key);
@@ -187,7 +187,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
             // convert input to common parameter
             boolean isEnabled = message.getInputValue(entry.getValue().substring(0),entry.getValue().substring(1)).contains("1");
-            String parameter = isEnabled == true ? "on" : "off";
+            String parameter = isEnabled ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
             String key = entry.getKey();
 
             if(service.getEndpoint().getState().hasChanged(key, parameter)){

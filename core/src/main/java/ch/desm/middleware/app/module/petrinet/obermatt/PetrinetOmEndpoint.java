@@ -60,7 +60,7 @@ public class PetrinetOmEndpoint extends EndpointCommon {
             Bucket bucket = service.getDecoder().decode(jsonMessage);
             String message = service.getComponentMapMiddleware().getValue(bucket.getName());
             if(!message.isEmpty()){
-                String parameter = bucket.getTokenCount() == 0? "off" : "on";
+                String parameter = bucket.getTokenCount() > 0 ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
                 message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
             }

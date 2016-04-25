@@ -319,8 +319,8 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             ZusiMapParameterRe420.OnOffState state = service.getZusiMapParameterMiddleware().getValue(globalId);
             if(state!=null){
                 // TODO: fix parameter value deduction
-                if(state.getOnState().equals(parameterValue)) parameterValue = "on";
-                else if(state.getOffState().equals(parameterValue)) parameterValue = "off";
+                if(state.getOnState().equals(parameterValue)) parameterValue = MessageBase.MESSAGE_PARAMETER_ON;
+                else if(state.getOffState().equals(parameterValue)) parameterValue = MessageBase.MESSAGE_PARAMETER_OFF;
             }
             mwm = MessageBase.replaceMiddlewareMessageDelimiter(mwm, parameterValue);
 
