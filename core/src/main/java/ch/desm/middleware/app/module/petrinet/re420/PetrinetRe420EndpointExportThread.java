@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
-import ch.desm.middleware.app.common.Pair;
+import ch.desm.middleware.app.core.component.petrinet.Bucket;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -15,7 +15,7 @@ public class PetrinetRe420EndpointExportThread extends Thread {
     private Object pendingSensorEventsLock;
     private Object delegateLockBroker;
     private Object delegateLockEndpoint;
-    private List<Pair<String, Integer>> pendingSensorEvents;
+    private List<Bucket> pendingSensorEvents;
     private PetrinetRe420Service service;
     private PetrinetRe420EndpointExportAdapter petrinetAdapter;
 
@@ -24,7 +24,7 @@ public class PetrinetRe420EndpointExportThread extends Thread {
         this.delegateLockBroker = new Object();
         this.delegateLockEndpoint = new Object();
         this.pendingSensorEventsLock = new Object();
-        this.pendingSensorEvents = new LinkedList<Pair<String, Integer>>();
+        this.pendingSensorEvents = new LinkedList<Bucket>();
         this.service = service;
         this.petrinetAdapter = new PetrinetRe420EndpointExportAdapter();
     }
@@ -38,8 +38,8 @@ public class PetrinetRe420EndpointExportThread extends Thread {
 
     public void setSensor(String signalName, int value) {
         synchronized (pendingSensorEventsLock) {
-            Pair<String, Integer> pair = new Pair<String, Integer>(signalName, value);
-            pendingSensorEvents.add(pair);
+            Bucket bucket = new Bucket(signalName, value);
+            pendingSensorEvents.add(bucket);
         }
     }
 
@@ -65,23 +65,23 @@ public class PetrinetRe420EndpointExportThread extends Thread {
 
     private void delegatePendingSensorEvents() {
         synchronized (pendingSensorEventsLock) {
-            List<Pair<String, Integer>> pendingSensorEventsCopy = new LinkedList<Pair<String, Integer>>();
+            List<Bucket> pendingSensorEventsCopy = new LinkedList<Bucket>();
             pendingSensorEventsCopy.addAll(pendingSensorEvents);
             pendingSensorEvents.clear();
 
-            for (Pair<String, Integer> sensorEvent : pendingSensorEventsCopy) {
+            for (Bucket sensorEvent : pendingSensorEventsCopy) {
                 delegateToEndpoint(sensorEvent, false);
             }
         }
     }
 
     private void delegateChangedPlaces() {
-        for (Pair<String, Integer> changedPlace : petrinetAdapter.getChangedPlaces()) {
+        for (Bucket changedPlace : petrinetAdapter.getChangedPlaces()) {
             delegateToBroker(changedPlace, false);
         }
     }
 
-    public void delegateToBroker(Pair<String, Integer> changedPlace, boolean isAccessedFromDelayThread){
+    public void delegateToBroker(Bucket changedPlace, boolean isAccessedFromDelayThread){
         synchronized(delegateLockBroker){
             try{
                 String encodedMessage = service.getEncoder().encode(changedPlace);
@@ -92,9 +92,9 @@ public class PetrinetRe420EndpointExportThread extends Thread {
         }
     }
 
-    public void delegateToEndpoint(Pair<String, Integer> sensorEvent,  boolean isAccessedFromDelayThread){
+    public void delegateToEndpoint(Bucket sensorEvent, boolean isAccessedFromDelayThread){
         synchronized (delegateLockEndpoint){
-            petrinetAdapter.setSensor(sensorEvent.getLeft(), sensorEvent.getRight());
+            petrinetAdapter.setSensor(sensorEvent.getName(), sensorEvent.getTokenCount());
         }
     }
 }

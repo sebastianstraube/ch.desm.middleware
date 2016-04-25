@@ -1,7 +1,5 @@
 package ch.desm.middleware.app.core.component.petrinet;
 
-import ch.desm.middleware.app.common.Pair;
-
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.websocket.DecodeException;
@@ -10,7 +8,7 @@ import javax.websocket.EndpointConfig;
 import java.io.StringReader;
 
 public class PetrinetMessageDecoder implements
-		Decoder.Text<Pair<String, Integer>> {
+		Decoder.Text<Bucket> {
 	//@Override
 	public void init(final EndpointConfig config) {
 	}
@@ -20,12 +18,12 @@ public class PetrinetMessageDecoder implements
 	}
 
 	//@Override
-	public Pair<String, Integer> decode(final String message) throws DecodeException {
+	public Bucket decode(final String message) throws DecodeException {
 		
 		JsonObject obj = Json.createReader(new StringReader(message))
 				.readObject();
 
-        Pair<String, Integer> place = new Pair<String, Integer>(
+        Bucket place = new Bucket(
                 obj.getString("name"),
                 obj.getInt("value")
         );

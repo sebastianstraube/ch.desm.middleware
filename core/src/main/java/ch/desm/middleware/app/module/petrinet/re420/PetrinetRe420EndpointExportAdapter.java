@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
-import ch.desm.middleware.app.common.Pair;
+import ch.desm.middleware.app.core.component.petrinet.Bucket;
 import ch.desm.middleware.app.module.petrinet.re420.map.PetrinetRe420MapDelay;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -16,8 +16,8 @@ public class PetrinetRe420EndpointExportAdapter extends PetrinetRe420EndpointExp
 
 	private static Logger LOGGER = Logger.getLogger(PetrinetRe420EndpointExportAdapter.class);
 
-	private List<Pair<String, Integer>> basePlaces;
-    private List<Pair<String, Integer>> changedPlacesList;
+	private List<Bucket> basePlaces;
+    private List<Bucket> changedPlacesList;
     private Object lockChangedPlacesList;
     private Object delayLock;
     private PetrinetRe420MapDelay mapDelay = new PetrinetRe420MapDelay();
@@ -25,8 +25,8 @@ public class PetrinetRe420EndpointExportAdapter extends PetrinetRe420EndpointExp
     private Set<PetrinetRe420EndpointDelayThread> listDelayThreads;
 
     public PetrinetRe420EndpointExportAdapter(){
-        basePlaces = new LinkedList<Pair<String, Integer>>();
-        changedPlacesList = new LinkedList<Pair<String, Integer>>();
+        basePlaces = new LinkedList<Bucket>();
+        changedPlacesList = new LinkedList<Bucket>();
         lockChangedPlacesList = new Object();
         this.delayLock = new Object();
         this.listDelayThreads = new HashSet<PetrinetRe420EndpointDelayThread>();
@@ -115,7 +115,7 @@ public class PetrinetRe420EndpointExportAdapter extends PetrinetRe420EndpointExp
             Class<?> petriNetClass = super.getClass();
             Field field = petriNetClass.getField(name);
             field.setInt(this, value);
-            addChangedPlace(new Pair<String, Integer>(name, value) );
+            addChangedPlace(new Bucket(name, value) );
 
             LOGGER.log(Level.INFO, "setting sensor: " + name + " to: " + value);
         } catch (NoSuchFieldException e) {
@@ -125,9 +125,9 @@ public class PetrinetRe420EndpointExportAdapter extends PetrinetRe420EndpointExp
         }
     }
 
-    public List<Pair<String, Integer>> getChangedPlaces(){
+    public List<Bucket> getChangedPlaces(){
         synchronized (lockChangedPlacesList){
-            List<Pair<String, Integer>> changeList = new LinkedList<Pair<String, Integer>>();
+            List<Bucket> changeList = new LinkedList<Bucket>();
             if(!changedPlacesList.isEmpty()){
                 changeList.addAll(changedPlacesList);
                 changedPlacesList.clear();
@@ -137,27 +137,27 @@ public class PetrinetRe420EndpointExportAdapter extends PetrinetRe420EndpointExp
         }
     }
 
-    private void addAllPlacesToChangedPlaces(List<Pair<String, Integer>> base){
-        refreshChangedPlacesList(base, new LinkedList<Pair<String, Integer>>());
+    private void addAllPlacesToChangedPlaces(List<Bucket> base){
+        refreshChangedPlacesList(base, new LinkedList<Bucket>());
     }
 
-    public void addChangedPlace(Pair<String, Integer> pair){
+    public void addChangedPlace(Bucket bucket){
         synchronized (lockChangedPlacesList){
-            changedPlacesList.add(pair);
-            LOGGER.log(Level.INFO, "changed place: " + pair.toString());
+            changedPlacesList.add(bucket);
+            LOGGER.log(Level.INFO, "changed place: " + bucket.toString());
         }
     }
 
-    public boolean isInChangedPlacesList(Pair<String, Integer> pair){
+    public boolean isInChangedPlacesList(Bucket bucket){
         synchronized (lockChangedPlacesList){
-            boolean contains = changedPlacesList.contains(pair);
-            if(contains) LOGGER.log(Level.TRACE, "changed place:" + pair.toString() + "already contained in list: " + lockChangedPlacesList.toString());
+            boolean contains = changedPlacesList.contains(bucket);
+            if(contains) LOGGER.log(Level.TRACE, "changed place:" + bucket.toString() + "already contained in list: " + lockChangedPlacesList.toString());
             return contains;
         }
     }
 
-    private void refreshChangedPlacesList(List<Pair<String, Integer>> changed, List<Pair<String, Integer>> base){
-        for(Pair<String, Integer> actualElement: changed){
+    private void refreshChangedPlacesList(List<Bucket> changed, List<Bucket> base){
+        for(Bucket actualElement: changed){
             if(!base.contains(actualElement)){
                 if(!isInChangedPlacesList(actualElement)) {
                     addChangedPlace(actualElement);
@@ -170,8 +170,8 @@ public class PetrinetRe420EndpointExportAdapter extends PetrinetRe420EndpointExp
         }
     }
 
-	private List<Pair<String, Integer>> getAllPlaces() {
-        List<Pair<String, Integer>> newPlaces = new LinkedList<Pair<String, Integer>>();
+	private List<Bucket> getAllPlaces() {
+        List<Bucket> newPlaces = new LinkedList<Bucket>();
 		Class<?> superClass = this.getClass().getSuperclass();
 		Field[] fields = superClass.getDeclaredFields();
 
@@ -181,7 +181,7 @@ public class PetrinetRe420EndpointExportAdapter extends PetrinetRe420EndpointExp
 				try {
 					Integer value = Integer.valueOf(String.valueOf(classField.getInt(this)));
                     String name = classField.getName();
-                    newPlaces.add(new Pair<String, Integer>(name, value));
+                    newPlaces.add(new Bucket(name, value));
                 } catch (IllegalArgumentException e) {
                     LOGGER.log(Level.ERROR, e);
 				} catch (IllegalAccessException e) {

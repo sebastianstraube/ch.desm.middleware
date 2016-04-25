@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
-import ch.desm.middleware.app.common.Pair;
+import ch.desm.middleware.app.core.component.petrinet.Bucket;
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import org.apache.log4j.Level;
@@ -56,10 +56,10 @@ public class PetrinetRe420Endpoint extends EndpointCommon {
     @Override
     public void onIncomingEndpointMessage(String jsonMessage){
         try {
-            Pair<String, Integer> pair = service.getDecoder().decode(jsonMessage);
-            String message = service.getComponentMapMiddleware().getValue(pair.getLeft());
+            Bucket bucket = service.getDecoder().decode(jsonMessage);
+            String message = service.getComponentMapMiddleware().getValue(bucket.getName());
             if(!message.isEmpty()){
-                String parameter = pair.getRight() == 0? "off" : "on";
+                String parameter = bucket.getTokenCount() == 0? "off" : "on";
                 message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
             }else{

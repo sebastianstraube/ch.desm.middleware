@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.obermatt;
 
-import ch.desm.middleware.app.common.Pair;
+import ch.desm.middleware.app.core.component.petrinet.Bucket;
 
 /**
  * Created by Sebastian on 11.12.2014.
@@ -8,7 +8,7 @@ import ch.desm.middleware.app.common.Pair;
 public class PetrinetOmEndpointDelayThread extends Thread {
 
     private PetrinetOmEndpointExportThread t;
-    private Pair<String, Integer> place;
+    private Bucket place;
     private long delegateTime;
     private boolean isDelegated;
     private String transition;

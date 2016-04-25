@@ -1,7 +1,5 @@
 package ch.desm.middleware.app.module.simulation.zusi.map;
 
-import ch.desm.middleware.app.common.Pair;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,34 +8,45 @@ import java.util.Map;
  */
 public class ZusiMapParameterRe420 {
 
-    HashMap<String, Pair<String, String>> map;
+    public class OnOffState {
+        private final String onState;
+        private final String offState;
 
-    public ZusiMapParameterRe420(){
-        this.map = new HashMap();
-        this.init();
+        public OnOffState(String onState, String offState) {
+            this.onState = onState;
+            this.offState = offState;
+        }
+
+        public String getOffState() {
+            return offState;
+        }
+
+        public String getOnState() {
+            return onState;
+        }
     }
 
-    public Map<String, Pair<String, String>> getMap() {
-        return map;
+    Map<String, OnOffState> map = new HashMap();
+
+    public ZusiMapParameterRe420() {
+        map.put("S129", new OnOffState("02","00")); // Stromabnehmer
+        map.put("S132", new OnOffState("02","00")); // Hauptschalter
+        map.put("S140a", new OnOffState("02","01")); // Steuerstrom
+        map.put("S140b", new OnOffState("00","01")); // Steuerstrom
+        map.put("S235", new OnOffState("01","02")); // Steuerstrom
     }
 
-    //Pair{on, off}
-    protected void init(){
-        map.put("S129", new Pair<String, String>("02","00")); // Stromabnehmer
-        map.put("S132", new Pair<String, String>("02","00")); // Hauptschalter
-        map.put("S140a", new Pair<String, String>("02","01")); // Steuerstrom
-        map.put("S140b", new Pair<String, String>("00","01")); // Steuerstrom
-        map.put("S235", new Pair<String, String>("01","02")); // Steuerstrom
-
+    public boolean hasValue(String key) {
+        for(Map.Entry<String, OnOffState> entry : map.entrySet()){
+            if(entry.getKey().equalsIgnoreCase(key)){
+                return true;
+            }
+        }
+        return false;
     }
 
-    /**
-     *
-     * @param key
-     * @return
-     */
-    public Pair<String, String> getValue(String key){
-        for(Map.Entry<String, Pair<String, String>> entry : map.entrySet()){
+    public OnOffState getValue(String key){
+        for(Map.Entry<String, OnOffState> entry : map.entrySet()){
             if(entry.getKey().equalsIgnoreCase(key)){
                 return entry.getValue();
             }

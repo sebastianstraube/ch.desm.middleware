@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
-import ch.desm.middleware.app.common.Pair;
+import ch.desm.middleware.app.core.component.petrinet.Bucket;
 
 /**
  * Created by Sebastian on 11.12.2014.
@@ -8,7 +8,7 @@ import ch.desm.middleware.app.common.Pair;
 public class PetrinetRe420EndpointDelayThread extends Thread {
 
     private PetrinetRe420EndpointExportThread t;
-    private Pair<String, Integer> place;
+    private Bucket place;
     private long delegateTime;
     private boolean isDelegated;
     private String transition;
