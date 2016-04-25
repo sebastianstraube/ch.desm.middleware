@@ -61,9 +61,8 @@ abstract class MessageTranslatorMiddlewareBase {
                     String.valueOf(parts.length) + " but expected " + String.valueOf(NUM_PARTS), message);
 		}
 
-		return new MessageCommon(parts[TOPIC], parts[ID], parts[EXTERN_INTERN],
-				parts[ELEMENT], parts[FUNCTION], parts[INSTANCE],
-				parts[PARAMETER], message, parts[OUTPUT_INPUT]);
+		return new MessageCommon(message, parts[TOPIC], parts[ID], parts[OUTPUT_INPUT], parts[EXTERN_INTERN],
+				parts[ELEMENT], parts[FUNCTION], parts[INSTANCE], parts[PARAMETER]);
 	}
 
 	/**

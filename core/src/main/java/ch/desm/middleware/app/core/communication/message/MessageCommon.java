@@ -8,24 +8,20 @@ public class MessageCommon extends MessageBase {
 	protected String externIntern;
 	protected String element;
 	protected String function;
-	protected String parameter;
 	protected String instance;
+	protected String parameter;
 
-	public MessageCommon(String topic, String globalId, String externIntern,
-						 String element, String function, String instance, String parameter,
-						 String payload, String outputInput) {
+	public MessageCommon(String payload, String topic, String globalId, String outputInput,
+						 String externIntern, String element, String function, String instance,
+						 String parameter) {
 		super(payload, topic);
 		this.globalId = globalId;
+		this.outputInput = outputInput;
 		this.externIntern = externIntern;
 		this.element = element;
 		this.function = function;
 		this.instance = instance;
 		this.parameter = parameter;
-		this.outputInput = outputInput;
-	}
-
-	public String getOutputInput() {
-		return this.outputInput;
 	}
 
 	public String getGlobalId() {
@@ -34,6 +30,10 @@ public class MessageCommon extends MessageBase {
 
 	public void setGlobalId(String value){
 		this.globalId = value;
+	}
+
+	public String getOutputInput() {
+		return this.outputInput;
 	}
 
 	public String getExternIntern() {
@@ -60,6 +60,14 @@ public class MessageCommon extends MessageBase {
 		this.function = value;
 	}
 
+    public void setInstance(String instance) {
+        this.instance = instance;
+    }
+
+    public String getInstance() {
+        return this.instance;
+    }
+
 	public String getParameter() {
 		return this.parameter;
 	}
@@ -68,30 +76,22 @@ public class MessageCommon extends MessageBase {
 		this.parameter = value;
 	}
 
-	public void setInstance(String instance) {
-		this.instance = instance;
-	}
-
-	public String getInstance() {
-		return this.instance;
-	}
-
 	public String toString() {
 		String s = super.toString();
 		s += ", ";
 		s += "globalId: " + globalId;
+        s += ", ";
+        s += "outputInput: " + outputInput;
 		s += ", ";
 		s += "externIntern: " + externIntern;
 		s += ", ";
 		s += "element: " + element;
 		s += ", ";
 		s += "function: " + function;
+        s += ", ";
+        s += "instance: " + instance;
 		s += ", ";
 		s += "parameter: " + parameter;
-		s += ", ";
-		s += "instance: " + instance;
-		s += ", ";
-		s += "outputInput: " + outputInput;
 
 		return s;
 	}
