@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorThreadBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class PetrinetRe420BrokerClientThreadMessage extends ComponentMessageProcessorThreadBase<MessageMiddleware> {
+public class PetrinetRe420BrokerClientThreadMessage extends ComponentMessageProcessorThreadBase<MessageCommon> {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetRe420BrokerClientThreadMessage.class);
     private PetrinetRe420Service service;
@@ -24,7 +24,7 @@ public class PetrinetRe420BrokerClientThreadMessage extends ComponentMessageProc
     @Override
     public void processPendingMessages() {
         synchronized (processMessagesLock){
-            List<MessageMiddleware> messages = getMessages();
+            List<MessageCommon> messages = getMessages();
 
             if(!messages.isEmpty()){
                 LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());

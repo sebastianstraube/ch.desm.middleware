@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.message.translator;
 
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
@@ -25,7 +25,7 @@ public class MessageTranslatorMiddleware extends MessageTranslatorMiddlewareBase
 	 * @param stream
 	 * 
 	 */
-	public List<MessageMiddleware> toMiddlewareMessageList(String stream){
+	public List<MessageCommon> toMiddlewareMessageList(String stream){
 		return decodeMiddlewareMessages(stream);
 	}
 
@@ -34,7 +34,7 @@ public class MessageTranslatorMiddleware extends MessageTranslatorMiddlewareBase
      * @param stream
      *
      */
-    public MessageMiddleware toMiddlewareMessage(String stream){
+    public MessageCommon toMiddlewareMessage(String stream){
 		try {
 			return decodeMiddlewareMessage(stream);
 		} catch (MalformedMessageException e) {

@@ -7,7 +7,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 
 abstract class MessageTranslatorMiddlewareBase {
 
@@ -26,12 +26,12 @@ abstract class MessageTranslatorMiddlewareBase {
 	private static final int PARAMETER = 7;
 	private static final int NUM_PARTS = 8;
 
-	protected List<MessageMiddleware> decodeMiddlewareMessages(String stream) {
+	protected List<MessageCommon> decodeMiddlewareMessages(String stream) {
 		String[] messageArray = stream.split(MessageBase.MESSAGE_MESSAGE_DELIMITER);
-		List<MessageMiddleware> messageList = new ArrayList<>(messageArray.length);
+		List<MessageCommon> messageList = new ArrayList<>(messageArray.length);
 
 		for (int i = 0; i < messageArray.length; i++) {
-			MessageMiddleware message = null;
+			MessageCommon message = null;
 			try {
 				message = decodeMiddlewareMessage(messageArray[i]);
 			} catch(MalformedMessageException e) {
@@ -50,7 +50,7 @@ abstract class MessageTranslatorMiddlewareBase {
 	 * @param message
 	 * @return {@link MessageBase}
 	 */
-	protected MessageMiddleware decodeMiddlewareMessage(String message)throws MalformedMessageException {
+	protected MessageCommon decodeMiddlewareMessage(String message)throws MalformedMessageException {
 		if (message == null || message.isEmpty()) {
 			throw new MalformedMessageException("Message must not be empty", message);
 		}
@@ -61,7 +61,7 @@ abstract class MessageTranslatorMiddlewareBase {
                     String.valueOf(parts.length) + " but expected " + String.valueOf(NUM_PARTS), message);
 		}
 
-		return new MessageMiddleware(parts[TOPIC], parts[ID], parts[EXTERN_INTERN],
+		return new MessageCommon(parts[TOPIC], parts[ID], parts[EXTERN_INTERN],
 				parts[ELEMENT], parts[FUNCTION], parts[INSTANCE],
 				parts[PARAMETER], message, parts[OUTPUT_INPUT]);
 	}

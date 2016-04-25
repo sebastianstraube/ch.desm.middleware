@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.core.communication.message.translator;
 
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
 
 /**
@@ -8,7 +8,7 @@ import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
  */
 public class MessageTranslatorWebsocket {
 
-    public MessageWebsocket toCharacterStream(MessageMiddleware message){
+    public MessageWebsocket toCharacterStream(MessageCommon message){
         return new MessageWebsocket(message.getTopic(), message.getPayload());
     }
 }

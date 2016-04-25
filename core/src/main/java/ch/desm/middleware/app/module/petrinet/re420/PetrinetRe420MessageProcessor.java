@@ -2,7 +2,7 @@ package ch.desm.middleware.app.module.petrinet.re420;
 
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -18,13 +18,13 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
     /**
      * @param messages
      */
-    public void processBrokerMessage(PetrinetRe420Service service, List<MessageMiddleware> messages) {
-        for(MessageMiddleware message : messages){
+    public void processBrokerMessage(PetrinetRe420Service service, List<MessageCommon> messages) {
+        for(MessageCommon message : messages){
             processBrokerMessage(service, message);
         }
     }
 
-    private void processBrokerMessage(PetrinetRe420Service service, MessageMiddleware element){
+    private void processBrokerMessage(PetrinetRe420Service service, MessageCommon element){
         String sensorName = "";
         int sensorValue = 0;
 
@@ -71,7 +71,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
         }
     }
 
-    private void processInitEndpoint(PetrinetRe420Endpoint endpoint, MessageMiddleware element){
+    private void processInitEndpoint(PetrinetRe420Endpoint endpoint, MessageCommon element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -95,7 +95,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
     }
 
     //TODO refactoring
-    public boolean isInitProcessMessage(MessageMiddleware element){
+    public boolean isInitProcessMessage(MessageCommon element){
         if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.re420")) return true;
         return false;
     }

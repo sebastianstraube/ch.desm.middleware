@@ -2,7 +2,7 @@ package ch.desm.middleware.app.module.simulation.etcs;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -28,7 +28,7 @@ public class EtcsBrokerClient extends ComponentBrokerClientBase {
 	protected void onIncomingBrokerMessage(String message) {
 		LOGGER.log(Level.INFO, this.getClass().getSimpleName() + " received broker message: " + message);
 
-        List<MessageMiddleware> l = service.getTranslator().toMiddlewareMessageList(message);
+        List<MessageCommon> l = service.getTranslator().toMiddlewareMessageList(message);
         thread.addMessages(l);
     }
 

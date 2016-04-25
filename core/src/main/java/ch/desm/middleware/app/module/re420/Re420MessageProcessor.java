@@ -4,7 +4,7 @@ import java.util.List;
 
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageProcessor;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
@@ -21,8 +21,8 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 	 * @param messages
 	 */
 	@Override
-	public void processBrokerMessage(Re420Service service, List<MessageMiddleware> messages) {
-		for(MessageMiddleware message : messages){
+	public void processBrokerMessage(Re420Service service, List<MessageCommon> messages) {
+		for(MessageCommon message : messages){
 			processBrokerMessage(service, message);
 		}
 	}
@@ -39,7 +39,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 		}
 	}
 
-	private void processBrokerMessage(Re420Service service, MessageMiddleware element){
+	private void processBrokerMessage(Re420Service service, MessageCommon element){
 		switch(element.getTopic()){
 			case (MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT):{
 				processBrokerMessageZusiFahrpult(service, element);
@@ -56,7 +56,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 		}
 	}
 
-	private void processInitEndpoint(Re420EndpointUbw32 endpoint, MessageMiddleware element){
+	private void processInitEndpoint(Re420EndpointUbw32 endpoint, MessageCommon element){
 		switch (element.getParameter()) {
 			case ("init"): {
 				endpoint.init();
@@ -73,19 +73,19 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 		}
 	}
 
-	private void processBrokerMessageZusiFahrpult(Re420Service service, MessageMiddleware message) {
+	private void processBrokerMessageZusiFahrpult(Re420Service service, MessageCommon message) {
         String globalId = message.getGlobalId();
         String key = service.getMapZusi().getKey(globalId);
         delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message.getParameter(), true);
 	}
 
-	private void processBrokerMessagePetrinetRe420(Re420Service service, MessageMiddleware message) {
+	private void processBrokerMessagePetrinetRe420(Re420Service service, MessageCommon message) {
 		String globalId = message.getGlobalId();
 		String key = service.getMapPetrinetRe420().getKey(globalId);
 		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message.getParameter(), true);
 	}
 
-	private void processBrokerMessageManagement(Re420Service service, MessageMiddleware message) {
+	private void processBrokerMessageManagement(Re420Service service, MessageCommon message) {
 		try {
 			if (isInitProcessMessage(message)) {
 				processInitEndpoint(service.getEndpoint(), message);
@@ -100,7 +100,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 	}
 
 	//TODO refactoring
-	public boolean isInitProcessMessage(MessageMiddleware element){
+	public boolean isInitProcessMessage(MessageCommon element){
 		if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.ubw32")) return true;
 		return false;
 	}

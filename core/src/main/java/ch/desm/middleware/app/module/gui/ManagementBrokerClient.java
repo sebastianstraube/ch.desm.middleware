@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 
 import javax.websocket.EncodeException;
 
@@ -28,10 +28,10 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 		LOGGER.log(Level.INFO, "receive broker message: " + message);
 		
 		//translation
-		List<MessageMiddleware> messageList = service.getTranslator().toMiddlewareMessageList(message);
+		List<MessageCommon> messageList = service.getTranslator().toMiddlewareMessageList(message);
 		
 		//send all messages
-		for(MessageMiddleware element: messageList){
+		for(MessageCommon element: messageList){
             try {
                 String messageWebsocket = service.getEncoder().encode(service.getConverter().toCharacterStream(element));
 				ManagementEndpointClientWebsocket.sendMessage(messageWebsocket);

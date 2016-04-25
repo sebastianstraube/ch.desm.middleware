@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232ListenerInterface;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 
 public class Locsim extends LocsimBrokerClientBase implements EndpointRs232ListenerInterface {
@@ -47,7 +47,7 @@ public class Locsim extends LocsimBrokerClientBase implements EndpointRs232Liste
 		
 		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: " + message);
 
-		List<MessageMiddleware> messageList = translator
+		List<MessageCommon> messageList = translator
 				.toMiddlewareMessageList(message);
 
 		processor.processBrokerMessage(this, messageList);

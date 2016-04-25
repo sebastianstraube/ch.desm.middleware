@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.module.simulation.zusi.protocol.node;
 
 import ch.desm.middleware.app.common.UtilityHex;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import org.apache.log4j.Logger;
 
@@ -189,7 +189,7 @@ public class ZusiProtocolNodeHelperTest extends ZusiProtocolNodeHelper {
      */
     public boolean testIntegratedMiddlewareMessage(ZusiService service, String middlewareMessage) throws Exception {
         //middleware message object
-        MessageMiddleware mm = service.getTranslator().toMiddlewareMessage(middlewareMessage);
+        MessageCommon mm = service.getTranslator().toMiddlewareMessage(middlewareMessage);
         //0300-1301-0100::0100:11,0200:00,0300:01,0400:00,0500:00;;;hauptschalter;aus;taste n;?;zusi;#
         //zusi data transfer object
         ZusiProtocolNode root = service.getZusiProtocolNodeHelper().getRoot(mm.getGlobalId());

@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.core.component;
 
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.processor.MessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -20,7 +20,7 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
      * @param service
      * @param messages
      */
-    public abstract void processBrokerMessage(T1 service, List<MessageMiddleware> messages);
+    public abstract void processBrokerMessage(T1 service, List<MessageCommon> messages);
 
     /**
      *

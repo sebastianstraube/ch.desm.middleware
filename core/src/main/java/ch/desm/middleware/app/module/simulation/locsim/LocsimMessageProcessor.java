@@ -27,9 +27,9 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
      * @param impl
      * @param messages
      */
-    public void processBrokerMessage(Locsim impl, List<MessageMiddleware> messages) {
+    public void processBrokerMessage(Locsim impl, List<MessageCommon> messages) {
 
-        for (MessageMiddleware message : messages) {
+        for (MessageCommon message : messages) {
             this.processBrokerMessage(impl, message);
         }
     }
@@ -38,7 +38,7 @@ public class LocsimMessageProcessor extends ComponentMessageProcessorBase<Locsim
      * @param impl
      * @param message
      */
-    protected void processBrokerMessage(Locsim impl, MessageMiddleware message) {
+    protected void processBrokerMessage(Locsim impl, MessageCommon message) {
 
         if (MessageUbw32Base.isSoftwareMessage(message.getOutputInput())) {
 

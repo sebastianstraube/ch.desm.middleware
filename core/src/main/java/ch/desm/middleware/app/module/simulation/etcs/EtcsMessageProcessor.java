@@ -2,7 +2,7 @@ package ch.desm.middleware.app.module.simulation.etcs;
 
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -18,8 +18,8 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
     /**
      * @param messages
      */
-    public void processBrokerMessage(EtcsService service, List<MessageMiddleware> messages) {
-        for(MessageMiddleware message : messages){
+    public void processBrokerMessage(EtcsService service, List<MessageCommon> messages) {
+        for(MessageCommon message : messages){
             processBrokerMessage(service, message);
         }
     }
@@ -29,7 +29,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    public void processBrokerMessage(EtcsService service, MessageMiddleware message){
+    public void processBrokerMessage(EtcsService service, MessageCommon message){
 
         switch(message.getTopic()){
             case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM):{
@@ -79,7 +79,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    private void processBrokerMessageManagament(EtcsService service, MessageMiddleware message){
+    private void processBrokerMessageManagament(EtcsService service, MessageCommon message){
         //TODO implementation, but only messages with zusi topic (take control in gui)
     }
 
@@ -88,7 +88,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    private void processBrokerMessageCabineRe420(EtcsService service, MessageMiddleware message){
+    private void processBrokerMessageCabineRe420(EtcsService service, MessageCommon message){
 
     }
 
@@ -97,7 +97,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    protected void processBrokerMessagePetrinetOm(EtcsService service, MessageMiddleware message){
+    protected void processBrokerMessagePetrinetOm(EtcsService service, MessageCommon message){
 
     }
 
@@ -106,7 +106,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    protected void processBrokerMessagePetrinetRe420(EtcsService service, MessageMiddleware message){
+    protected void processBrokerMessagePetrinetRe420(EtcsService service, MessageCommon message){
 
     }
 
@@ -124,7 +124,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param endpoint
      * @param element
      */
-    private void processInitEndpoint(EtcsEndpointTcpClient endpoint, MessageMiddleware element){
+    private void processInitEndpoint(EtcsEndpointTcpClient endpoint, MessageCommon element){
 
         switch (element.getParameter()) {
             case ("init"): {

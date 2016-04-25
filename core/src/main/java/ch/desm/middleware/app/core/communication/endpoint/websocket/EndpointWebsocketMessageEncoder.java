@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.core.communication.endpoint.websocket;
 
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
 import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
 import org.apache.log4j.Logger;
 

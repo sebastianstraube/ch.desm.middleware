@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
@@ -29,13 +29,13 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
     /**
      * @param messages
      */
-    public void processBrokerMessage(OmService service, List<MessageMiddleware> messages) {
-        for(MessageMiddleware message : messages){
+    public void processBrokerMessage(OmService service, List<MessageCommon> messages) {
+        for(MessageCommon message : messages){
             processBrokerMessage(service, message);
         }
     }
 
-    private void processBrokerMessage(OmService service, MessageMiddleware element){
+    private void processBrokerMessage(OmService service, MessageCommon element){
 
         //incoming message with OML topic
         if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT)){
@@ -80,7 +80,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
         }
     }
 
-    private void processInitEndpoint(OmEndpointUbw32 endpoint, MessageMiddleware element){
+    private void processInitEndpoint(OmEndpointUbw32 endpoint, MessageCommon element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -99,7 +99,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
     }
 
     //TODO refactoring
-    public boolean isInitProcessMessage(MessageMiddleware element){
+    public boolean isInitProcessMessage(MessageCommon element){
         if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) return true;
         return false;
     }

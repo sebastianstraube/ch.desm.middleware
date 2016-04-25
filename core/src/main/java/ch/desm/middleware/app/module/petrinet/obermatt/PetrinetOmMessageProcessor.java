@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.module.petrinet.obermatt;
 
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -18,13 +18,13 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     /**
      * @param messages
      */
-    public void processBrokerMessage(PetrinetOmService service, List<MessageMiddleware> messages) {
-        for(MessageMiddleware message : messages){
+    public void processBrokerMessage(PetrinetOmService service, List<MessageCommon> messages) {
+        for(MessageCommon message : messages){
             processBrokerMessage(service, message);
         }
     }
 
-    private void processBrokerMessage(PetrinetOmService service, MessageMiddleware element){
+    private void processBrokerMessage(PetrinetOmService service, MessageCommon element){
 
         if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT)){
             try {
@@ -68,7 +68,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         }
     }
 
-    private void processInitEndpoint(PetrinetOmEndpoint endpoint, MessageMiddleware element){
+    private void processInitEndpoint(PetrinetOmEndpoint endpoint, MessageCommon element){
 
         switch (element.getParameter()) {
             case ("init"): {
@@ -92,7 +92,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     }
 
     //TODO refactoring
-    public boolean isInitProcessMessage(MessageMiddleware element){
+    public boolean isInitProcessMessage(MessageCommon element){
         if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) return true;
         return false;
     }

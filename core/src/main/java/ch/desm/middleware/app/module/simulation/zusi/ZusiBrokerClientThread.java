@@ -1,6 +1,6 @@
 package ch.desm.middleware.app.module.simulation.zusi;
 
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorThreadBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -23,7 +23,7 @@ public class ZusiBrokerClientThread extends ComponentMessageProcessorThreadBase 
 
     public void processPendingMessages() {
         synchronized (processMessagesLock){
-            List<MessageMiddleware> messages = getMessages();
+            List<MessageCommon> messages = getMessages();
 
             if(!messages.isEmpty()){
                 LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
