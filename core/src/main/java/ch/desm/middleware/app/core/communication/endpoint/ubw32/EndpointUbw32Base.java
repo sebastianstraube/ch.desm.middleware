@@ -14,26 +14,42 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
 	}
 
     private static Logger LOGGER = Logger.getLogger(EndpointUbw32Base.class);
+
 	/**
 	 * 
 	 * @param port
 	 * @param pin
 	 * @param value
 	 */
-	public abstract void setPinOutputDigital(String port, String pin, String value);
+	public void setPinOutputDigital(String port, Integer pin, Boolean value) {
+        sendCommandPinOutput(port, pin, value);
+    }
 
 	/**
 	 * 
 	 * @param port
 	 * @param pin
 	 */
-	public abstract void getPinInputDigital(String port, String pin);
+	public void getPinInputDigital(String port, Integer pin) {
+        // TODO: return result
+        sendCommandPinInput(port, pin);
+    }
 	
 	/**
 	 * 
 	 * @param register
 	 */
-	public abstract void getPinInputAnalog(String register);
+	public void getPinInputAnalog(String register) {
+        // TODO: return result
+        String pinBitMask = "";
+        if (register.equals("B0")) {
+            pinBitMask = "1";
+        } else if (register.equals("B1")) {
+            pinBitMask = "2";
+        }
+
+        sendCommandInputAnalog(pinBitMask);
+    }
 
     /**
      * The "T1" command stands for "Run Test 1". It set all pins to be digital

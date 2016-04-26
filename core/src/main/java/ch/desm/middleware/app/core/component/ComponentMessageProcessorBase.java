@@ -43,14 +43,14 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
         if (mapDigital.isKeyAvailable(key)) {
 
             String endpointRegister = mapDigital.getMap().get(key);
-            String registerName = String
-                    .valueOf(endpointRegister.charAt(0));
-            String pin = String.valueOf(endpointRegister.substring(1));
+            String registerName = String.valueOf(endpointRegister.charAt(0));
+            Integer pin = Integer.valueOf(endpointRegister.substring(1));
+            Boolean boolParam = (parameter == "1");
 
             if (isInput) {
                 endpoint.getPinInputDigital(registerName, pin);
             } else {
-                endpoint.setPinOutputDigital(registerName, pin, parameter);
+                endpoint.setPinOutputDigital(registerName, pin, boolParam);
             }
         }
         // is ubw analog message

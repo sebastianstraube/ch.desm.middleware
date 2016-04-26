@@ -200,42 +200,4 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
             }
         }
 	}
-
-	/**
-	 * 
-	 * @param port
-	 * @param pin
-	 * @param value
-	 */
-	@Override
-	public void setPinOutputDigital(String port, String pin, String value) {
-		this.sendCommandPinOutput(port, pin, value);
-	}
-
-	/**
-	 * 
-	 * @param port
-	 * @param pin
-	 */
-	@Override
-	public void getPinInputDigital(String port, String pin) {
-		this.sendCommandPinInput(port, pin);
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public void getPinInputAnalog(String register) {
-
-		String pinBitMask = "";
-		if (register.equals("B0")) {
-			pinBitMask = "1";
-		} else if (register.equals("B1")) {
-			pinBitMask = "2";
-		}
-
-		this.sendCommandInputAnalog(pinBitMask);
-	}
-
 }
