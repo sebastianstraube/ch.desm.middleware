@@ -166,8 +166,7 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 
                     String[] messages = message.split("\r\r\n");
                     String singleMessage = "";
-                    for(
-                            int i=0; i < messages.length; i++){
+                    for(int i=0; i < messages.length; i++){
 
                         singleMessage = messages[i];
                         singleMessage = singleMessage.replaceAll("\r\r\n", "");

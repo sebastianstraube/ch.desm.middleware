@@ -2,7 +2,6 @@ package ch.desm.middleware.app.module.re420;
 
 import java.util.List;
 
-import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageProcessor;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
@@ -10,7 +9,6 @@ import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
-import ch.desm.middleware.app.core.component.ComponentMapBase;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -31,8 +29,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 
 	public void processEndpointMessage(Re420Service service, String message){
 		MessageUbw32Base ubw32Message = service.getTranslator()
-				.decodeUbw32EndpointMessage(message,
-						MessageBase.MESSAGE_TOPIC_CABINE_RE420);
+				.decodeUbw32EndpointMessage(message, MessageBase.MESSAGE_TOPIC_CABINE_RE420);
 
 		//processable message
 		if(ubw32Message != null){

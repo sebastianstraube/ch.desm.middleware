@@ -40,9 +40,6 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
             case MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT:
                 processBrokerMessagePetrinetObermatt(service, element);
                 break;
-            case MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT:
-                processBrokerMessageInterlockingObermatt(service, element);
-                break;
             case MessageBase.MESSAGE_TOPIC_MANAGEMENT:
                 processBrokerMessageManagement(service, element);
                 break;
@@ -63,30 +60,10 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
         }
     }
 
-    private void processBrokerMessageInterlockingObermatt(OmService service, MessageCommon element) {
-        try {
-            final String globalId = element.getGlobalId();
-            // TODO: no mapping required here?
-            //final String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
-            final boolean isInput = element.isInputMessage();
-
-            delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, element, isInput);
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-    }
-
     private void processBrokerMessageManagement(OmService service, MessageCommon element) {
         if (isInitProcessMessage(element)) {
             processInitEndpoint(service.getEndpoint(), element);
             return;
-        }
-
-        try {
-            // Todo implementation
-            // activate this, when gui taken controle over this endpoint
-        } catch (Exception e) {
-            LOGGER.log(Level.ERROR, e);
         }
     }
 

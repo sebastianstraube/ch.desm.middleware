@@ -47,6 +47,7 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
 
         switch(message.getType()) {
             case BOOLEAN: {
+                // TODO: get rid of the maps?
                 if (!mapDigital.isKeyAvailable(key)) {
                     throw new RuntimeException("Digital pin must be controlled through message of type boolean!");
                 }
@@ -67,6 +68,7 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
                 break;
             }
             case DOUBLE: {
+                // TODO: get rid of the maps?
                 if (!mapAnalog.isKeyAvailable(key)) {
                     throw new RuntimeException("Analog pin must be controlled through message of type double!");
                 }

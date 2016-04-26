@@ -19,24 +19,20 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	protected EndpointRs232Config config;
 	private Object writeLock = new Object();
 
-	public static enum EnumSerialPorts {
-		COM1, COM2, COM3, COM4, COM5, COM6, COM7, COM8, COM9, COM10, COM11, COM12, COM13, COM14, COM15, COM16, COM17, COM18, COM19, COM20, COM21, COM22, COM23, COM24, COM25, COM26, COM27, COM28, COM29, COM30, COM31, COM32, COM33, COM34, COM35, COM36, COM37, COM38
-	}
-
 	public EndpointRs232(String port, EndpointRs232Config config) {
 		this.serialPort = new SerialPort(port);
 		this.config = config;
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public String getSerialPortName() {
 		return serialPort.getPortName();
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void init() {
 
@@ -139,20 +135,13 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	}
 
 	protected String getSerialPortMessage(SerialPortEvent event) {
-		String message = "";
-
 		if (event.isRXCHAR()) {
-
-			if (event.getEventValue() > 1) {
+			final int numAvailableBytes = event.getEventValue();
+			if (numAvailableBytes > 0) {
 				try {
-					byte buffer[] = serialPort.readBytes();
-
-					for (int i = 0; i < buffer.length; i++) {
-						message += (char) buffer[i];
-					}
-					
+					return new String(serialPort.readBytes());
 				} catch (SerialPortException ex) {
-					ex.printStackTrace();
+					LOGGER.log(Level.ERROR, ex);
 				}
 			}
 		}
@@ -173,6 +162,6 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			}
 		}
 
-		return message;
+		return null;
 	}
 }
