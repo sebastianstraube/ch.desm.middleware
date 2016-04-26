@@ -104,7 +104,7 @@ public class ZusiLogicIsolierung {
         ArrayList occ = getAllIsoOcc(gesamtweg);
 
         for(int i=0; i< ISOLIERUNGEN.length; i++){
-            String mwMessage = service.getComponentMapMiddleware().getValue(ISOLIERUNGEN[i]);
+            String mwMessage = service.getComponentMapMiddleware().getValueForKey(ISOLIERUNGEN[i]);
             if(occ.contains(ISOLIERUNGEN[i])) mwMessage = MessageBase.replaceMiddlewareMessageDelimiter(mwMessage, MessageBase.MESSAGE_PARAMETER_ON);
             else mwMessage = MessageBase.replaceMiddlewareMessageDelimiter(mwMessage, MessageBase.MESSAGE_PARAMETER_OFF);
             if(!mwMessage.isEmpty()) messages.add(mwMessage);

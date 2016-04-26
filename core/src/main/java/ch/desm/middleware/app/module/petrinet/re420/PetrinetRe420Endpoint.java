@@ -57,7 +57,7 @@ public class PetrinetRe420Endpoint extends EndpointCommon {
     public void onIncomingEndpointMessage(String jsonMessage){
         try {
             Bucket bucket = service.getDecoder().decode(jsonMessage);
-            String message = service.getComponentMapMiddleware().getValue(bucket.getName());
+            String message = service.getComponentMapMiddleware().getValueForKey(bucket.getName());
             if(!message.isEmpty()){
                 String parameter = bucket.getTokenCount() > 0 ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
                 message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);

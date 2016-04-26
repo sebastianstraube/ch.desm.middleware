@@ -70,7 +70,7 @@ public class EndpointUbw32MessageProcessor {
             if (endpoint.getState().hasChanged(key, parameter)) {
 
                 //find the middleware message of the changed key
-                String stream = service.getComponentMapMiddleware().getValue(key);
+                String stream = service.getComponentMapMiddleware().getValueForKey(key);
 
                 if (stream == null || (stream != null && stream.isEmpty())) {
                     try {

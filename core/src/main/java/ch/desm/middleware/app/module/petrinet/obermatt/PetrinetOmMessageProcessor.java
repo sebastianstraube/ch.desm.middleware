@@ -68,7 +68,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         }
 
         try {
-            String sensorName = service.getMapZusi().getKey(message.getGlobalId());
+            String sensorName = service.getMapZusi().getKeyForValue(message.getGlobalId());
             delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
         } catch (Exception e) {
             //LOGGER.log(Level.ERROR, e);
@@ -84,7 +84,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         // Todo implementation
         // activate this, when gui taken controle over this endpoint
         if (service.getMap().isKeyAvailable(message.getGlobalId())) {
-            final String sensorName = service.getMap().getKey(message.getGlobalId());
+            final String sensorName = service.getMap().getKeyForValue(message.getGlobalId());
 
             final int sensorValue;
             try {

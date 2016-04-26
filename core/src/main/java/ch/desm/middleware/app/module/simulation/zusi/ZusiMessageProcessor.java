@@ -129,13 +129,13 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             return;
         }
 
-        String key = service.getZusiMapPetrinet().getKey(message.getGlobalId());
+        String key = service.getZusiMapPetrinet().getKeyForValue(message.getGlobalId());
         if(key.isEmpty()) {
             LOGGER.log(Level.INFO, "petrinet broker message processing skipped: " + message);
             return;
         }
 
-        String mwmStream = service.getComponentMapMiddleware().getValue(key);
+        String mwmStream = service.getComponentMapMiddleware().getValueForKey(key);
         // TODO: improve how parameter replacement is done
         mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, parameterAsOnOff);
         MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
@@ -174,13 +174,13 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             return;
         }
 
-        String key = service.getZusiMapPetrinetRe420().getKey(message.getGlobalId());
+        String key = service.getZusiMapPetrinetRe420().getKeyForValue(message.getGlobalId());
         if(key.isEmpty()) {
             LOGGER.log(Level.INFO, "petrinet broker message processing skipped: " + message);
             return;
         }
 
-        String mwmStream = service.getComponentMapMiddleware().getValue(key);
+        String mwmStream = service.getComponentMapMiddleware().getValueForKey(key);
         // TODO: improve how parameter replacement is done
         mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, parameterAsOnOff);
         MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
@@ -283,7 +283,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
         for(Map.Entry<String, String> p: zusiMessage.getParameterList().entrySet()){
             String globalId = getGlobalId(zusiMessage, p.getKey());
             String mwm = service.getMap(topic).getStartWithKey(globalId);
-            if(mwm.isEmpty()) mwm = service.getComponentMapMiddleware().getValue(globalId);
+            if(mwm.isEmpty()) mwm = service.getComponentMapMiddleware().getValueForKey(globalId);
             String parameterValue = service.getZusiParameterConverter().getNumber(globalId, p.getValue());
             parameterValue = parameterValue.isEmpty() ? p.getValue() : parameterValue;
 

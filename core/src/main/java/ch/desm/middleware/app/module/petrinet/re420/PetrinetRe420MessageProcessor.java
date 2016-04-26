@@ -42,7 +42,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
     }
 
     private void processBrokerMessageCabineRe420(PetrinetRe420Service service, MessageCommon message) {
-        final String sensorName = service.getMapCabineRe420().getKey(message.getGlobalId());
+        final String sensorName = service.getMapCabineRe420().getKeyForValue(message.getGlobalId());
         final int sensorValue;
 
         try {
@@ -61,7 +61,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
     }
 
     private void processBrokerMessageZusiFahrpult(PetrinetRe420Service service, MessageCommon message) {
-        final String sensorName = service.getMapZusi().getKey(message.getGlobalId());
+        final String sensorName = service.getMapZusi().getKeyForValue(message.getGlobalId());
         final int sensorValue;
 
         try {

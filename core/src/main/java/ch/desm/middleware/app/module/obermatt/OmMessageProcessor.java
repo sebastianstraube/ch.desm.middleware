@@ -182,7 +182,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
             if(service.getEndpoint().getState().hasChanged(key, parameter)){
 
                 //find the middleware message of the changed key
-                String stream =  service.getComponentMapMiddleware().getValue(key);
+                String stream =  service.getComponentMapMiddleware().getValueForKey(key);
 
                 if (stream == null) {
                     try {

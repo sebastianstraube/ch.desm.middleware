@@ -62,7 +62,7 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
 
     private boolean isDelayedTransition(String transition){
         synchronized (delayLock){
-            String delay = mapDelay.getValue(transition);
+            String delay = mapDelay.getValueForKey(transition);
             return !delay.isEmpty();
         }
     }
@@ -90,7 +90,7 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
 
     private void createDelayTransitionThread(String transition){
         synchronized (listDelayLock){
-            String delay = mapDelay.getValue(transition);
+            String delay = mapDelay.getValueForKey(transition);
             PetrinetOmEndpointDelayThread delayThread = new PetrinetOmEndpointDelayThread(this, transition, delay);
             listDelayThreads.add(delayThread);
         }

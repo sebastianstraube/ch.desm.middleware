@@ -12,7 +12,7 @@ public class PetrinetOmMapInterlockingOm extends ComponentMapBase{
 	}
 
     public String mapBrokerToEndpointMessage(String globalId) throws Exception {
-        String message = this.getKey(globalId);
+        String message = this.getKeyForValue(globalId);
         if(message.isEmpty()) {
             throw new Exception("unable to map broker message with globalId\"" + globalId + "\"");
         }

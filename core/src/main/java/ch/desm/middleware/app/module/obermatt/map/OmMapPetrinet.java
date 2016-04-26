@@ -12,7 +12,7 @@ public class OmMapPetrinet extends ComponentMapBase{
 	}
 
     public String mapBrokerToEndpointMessage(String message) throws Exception {
-        String mappedMessage = this.getKey(message);
+        String mappedMessage = this.getKeyForValue(message);
         if(mappedMessage.isEmpty()) {
             throw new Exception("unable to map broker message \"" + message + "\"");
         }
