@@ -10,6 +10,10 @@ public class MessageCommon extends MessageBase {
 		STRING,
 	}
 
+	// input/output types
+	public static final String MESSAGE_CHAR_INPUT = "i";
+	public static final String MESSAGE_CHAR_ONLYSOFTWARE = "os";
+
 	private final String globalId;
 	private final String outputInput;
 	private final String externIntern;
@@ -39,6 +43,10 @@ public class MessageCommon extends MessageBase {
 
 	public String getOutputInput() {
 		return this.outputInput;
+	}
+
+	public boolean isInputMessage() {
+		return outputInput != null && outputInput.equalsIgnoreCase(MESSAGE_CHAR_INPUT);
 	}
 
 	public String getExternIntern() {

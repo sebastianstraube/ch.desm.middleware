@@ -37,30 +37,49 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
         }
     }
 
-    public void delegateToEndpoint(EndpointUbw32 endpoint, ComponentMapBase mapDigital, ComponentMapBase mapAnalog, String key, String parameter, boolean isInput){
+    // TODO: can isInput be determined from messageCommon.isInput()?
+    // TODO: move to some place where it belongs to UBW32 endpoints only!
+    public void delegateToEndpoint(EndpointUbw32 endpoint, ComponentMapBase mapDigital, ComponentMapBase mapAnalog, String key, MessageCommon message, boolean isInput){
 
-        // is ubw digital message
-        if (mapDigital.isKeyAvailable(key)) {
+        switch(message.getType()) {
+            case BOOLEAN: {
+                if (!mapDigital.isKeyAvailable(key)) {
+                    throw new RuntimeException("Digital pin must be controlled through message of type boolean!");
+                }
 
-            String endpointRegister = mapDigital.getMap().get(key);
-            String registerName = String.valueOf(endpointRegister.charAt(0));
-            Integer pin = Integer.valueOf(endpointRegister.substring(1));
-            Boolean boolParam = (parameter == "1");
+                final String endpointRegister = mapDigital.getMap().get(key);
+                final String registerName = String.valueOf(endpointRegister.charAt(0));
+                final Integer pin = Integer.valueOf(endpointRegister.substring(1));
 
-            if (isInput) {
-                endpoint.getPinInputDigital(registerName, pin);
-            } else {
-                endpoint.setPinOutputDigital(registerName, pin, boolParam);
+                if (isInput) {
+                    endpoint.getPinInputDigital(registerName, pin);
+                } else {
+                    try {
+                        endpoint.setPinOutputDigital(registerName, pin, message.getParameterAsBoolean());
+                    } catch (MessageCommon.BadParameterTypeCastException e) {
+                        // should not happen as we checked for bool type above already
+                    }
+                }
+                break;
             }
-        }
-        // is ubw analog message
-        else if (mapAnalog.isKeyAvailable(key)) {
+            case DOUBLE: {
+                if (!mapAnalog.isKeyAvailable(key)) {
+                    throw new RuntimeException("Analog pin must be controlled through message of type double!");
+                }
 
-            String endpointRegister = mapAnalog.getMap().get(key);
+                final String endpointRegister = mapAnalog.getMap().get(key);
 
-            if (isInput) {
-                endpoint.getPinInputAnalog(endpointRegister);
+                if (isInput) {
+                    endpoint.getPinInputAnalog(endpointRegister);
+                } else {
+                    // TODO: implement
+                    throw new RuntimeException("setting analog pins not implemented yet");
+                }
+
+                break;
             }
+            default:
+                throw new RuntimeException("Unable to map message of type " + message.getTypeName() + " to UBW32 pin");
         }
     }
 }

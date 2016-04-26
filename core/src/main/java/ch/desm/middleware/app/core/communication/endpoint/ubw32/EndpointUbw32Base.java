@@ -41,6 +41,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
 	 */
 	public void getPinInputAnalog(String register) {
         // TODO: return result
+        // TODO: do not hard-code pin bit masks
         String pinBitMask = "";
         if (register.equals("B0")) {
             pinBitMask = "1";

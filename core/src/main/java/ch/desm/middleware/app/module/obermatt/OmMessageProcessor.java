@@ -52,41 +52,25 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
     }
 
     private void processBrokerMessagePetrinetObermatt(OmService service, MessageCommon element) {
-        final String parameterAsOnOff;
         try {
-            parameterAsOnOff = element.getParameterAsOnOff();
-        } catch (MessageCommon.BadParameterTypeCastException e) {
-            LOGGER.log(Level.ERROR, "Received broker message with type " + element.getTypeName() + " but expected Boolean");
-            return;
-        }
+            final String globalId = element.getGlobalId();
+            final String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
+            final boolean isInput = element.isInputMessage();
 
-        try {
-            String globalId = element.getGlobalId();
-            String endpointParameter = MessageBase.mapOnOffParameterTo10String(parameterAsOnOff);
-            boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
-
-            String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
-            delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), key, endpointParameter, isInput);
+            delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), key, element, isInput);
         } catch (Exception e) {
             //LOGGER.log(Level.WARN, e.getMessage());
         }
     }
 
     private void processBrokerMessageInterlockingObermatt(OmService service, MessageCommon element) {
-        final String parameterAsOnOff;
         try {
-            parameterAsOnOff = element.getParameterAsOnOff();
-        } catch (MessageCommon.BadParameterTypeCastException e) {
-            LOGGER.log(Level.ERROR, "Received broker message with type " + element.getTypeName() + " but expected Boolean");
-            return;
-        }
+            final String globalId = element.getGlobalId();
+            // TODO: no mapping required here?
+            //final String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
+            final boolean isInput = element.isInputMessage();
 
-        try {
-            String globalId = element.getGlobalId();
-            String endpointParameter = MessageBase.mapOnOffParameterTo10String(parameterAsOnOff);
-            boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
-
-            delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, endpointParameter, isInput);
+            delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, element, isInput);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }
