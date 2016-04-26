@@ -75,7 +75,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * @param stream
 	 * @throws SerialPortException
 	 */
-	protected void sendStream(String stream) throws SerialPortException {
+	public void sendStream(String stream) throws SerialPortException {
 		synchronized (writeLock){
             if (stream != null && !stream.isEmpty() && serialPort.writeString(stream)) {
 
@@ -92,7 +92,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * @param stream
 	 * @throws SerialPortException
 	 */
-	protected void sendStream(byte[] stream) throws SerialPortException {
+	public void sendStream(byte[] stream) throws SerialPortException {
         synchronized (writeLock) {
             if (stream != null && serialPort.writeBytes(stream)) {
 
@@ -109,7 +109,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * @param stream
 	 * @throws SerialPortException
 	 */
-	protected void sendStream(int[] stream) throws SerialPortException {
+	public void sendStream(int[] stream) throws SerialPortException {
         synchronized (writeLock) {
             if (stream != null && serialPort.writeIntArray(stream)) {
 

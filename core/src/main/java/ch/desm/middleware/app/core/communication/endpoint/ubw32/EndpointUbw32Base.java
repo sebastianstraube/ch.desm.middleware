@@ -2,15 +2,18 @@ package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 
 import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232;
 import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232Config;
-import jssc.SerialPortException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 public abstract class EndpointUbw32Base extends EndpointRs232 {
 
-	public EndpointUbw32Base(String port,
+    protected final EndpointUbw32MessageHandler handler;
+    protected final EndpointUbw32Cache cache = new EndpointUbw32Cache();
+
+    public EndpointUbw32Base(String port,
 			EndpointRs232Config config) {
 		super(port, config);
+        handler = new EndpointUbw32MessageHandler(this, cache);
 	}
 
     private static Logger LOGGER = Logger.getLogger(EndpointUbw32Base.class);
@@ -72,7 +75,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param iterations
      */
     public void sendCommandT1(String duration, String iterations) {
-        formatAndSendCommand("T1,%s,%s", duration, iterations);
+        formatAndSendMessage("T1,%s,%s", duration, iterations);
     }
 
     /**
@@ -88,7 +91,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      */
     public void sendCommandOutputState(String configuration) {
         // TODO: provide configuration of each port separately
-        formatAndSendCommand("O,%s", configuration);
+        formatAndSendMessage("O,%s", configuration);
     }
 
     /**
@@ -107,7 +110,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      */
     public void sendCommandConfigure(String configuration) {
         // TODO: provide configuration of each port separately
-        formatAndSendCommand("C,%s", configuration);
+        formatAndSendMessage("C,%s", configuration);
     }
 
     /**
@@ -125,7 +128,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      *
      */
     public void sendCommandInputState() {
-        formatAndSendCommand("I");
+        formatAndSendMessage("I");
     }
 
     /**
@@ -136,7 +139,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      *
      */
     public void sendCommandVersion() {
-        formatAndSendCommand("V");
+        formatAndSendMessage("V");
     }
 
     /**
@@ -146,7 +149,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      *
      */
     public void sendCommandReset() {
-        formatAndSendCommand("R");
+        formatAndSendMessage("R");
     }
 
     /**
@@ -164,7 +167,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param direction
      */
     public void sendCommandPinDirection(String port, Integer pin, Boolean direction) {
-        formatAndSendCommand("PD,%s,%d,%d", port, pin, direction ? "1" : "0");
+        formatAndSendMessage("PD,%s,%d,%d", port, pin, direction ? "1" : "0");
     }
 
     /**
@@ -182,7 +185,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param pin
      */
     public void sendCommandPinInput(String port, Integer pin) {
-        formatAndSendCommand("PI,%s,%d", port, pin);
+        formatAndSendMessage("PI,%s,%d", port, pin);
     }
 
     /**
@@ -200,7 +203,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param value
      */
     public void sendCommandPinOutput(String port, Integer pin, Boolean value) {
-        formatAndSendCommand("PO,%s,%d,%d", port, pin, value ? "1" : "0");
+        formatAndSendMessage("PO,%s,%d,%d", port, pin, value ? "1" : "0");
     }
 
     /**
@@ -215,7 +218,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param dutyCycle
      */
     public void sendCommandPwm(String channel, String dutyCycle) {
-        formatAndSendCommand("PM,%s,%s", channel, dutyCycle);
+        formatAndSendMessage("PM,%s,%s", channel, dutyCycle);
     }
 
     /**
@@ -238,7 +241,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param dutyCycle
      */
     public void sendCommandSoftwarePwmOutputValue(String channel, String dutyCycle) {
-        formatAndSendCommand("SP,%s,%s", channel, dutyCycle);
+        formatAndSendMessage("SP,%s,%s", channel, dutyCycle);
     }
 
     /**
@@ -287,22 +290,22 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
         // TODO: check that unused values are empty
         switch(subCommand) {
             case "0":
-                formatAndSendCommand("PC,%s,%s", subCommand, value1);
+                formatAndSendMessage("PC,%s,%s", subCommand, value1);
                 break;
             case "1":
-                formatAndSendCommand("PC,%s,%s", subCommand, value1);
+                formatAndSendMessage("PC,%s,%s", subCommand, value1);
                 break;
             case "2":
-                formatAndSendCommand("PC,%s,%s,%s,%s", subCommand, value1, value2, value3);
+                formatAndSendMessage("PC,%s,%s,%s,%s", subCommand, value1, value2, value3);
                 break;
             case "3":
-                formatAndSendCommand("PC,%s,%s", subCommand, value1);
+                formatAndSendMessage("PC,%s,%s", subCommand, value1);
                 break;
             case "4":
-                formatAndSendCommand("PC,%s,%s", subCommand, value1);
+                formatAndSendMessage("PC,%s,%s", subCommand, value1);
                 break;
             case "5":
-                formatAndSendCommand("PC,%s,%s", subCommand, value1);
+                formatAndSendMessage("PC,%s,%s", subCommand, value1);
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported PWM configuration sub command " + subCommand);
@@ -322,7 +325,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param pinBitmask
      */
     public void sendCommandConfigureAnalogInputs(String pinBitmask) {
-        formatAndSendCommand("CA,%s", pinBitmask);
+        formatAndSendMessage("CA,%s", pinBitmask);
     }
 
     /**
@@ -356,7 +359,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param pinBitmask
      */
     public void sendCommandInputAnalog(String pinBitmask) {
-        formatAndSendCommand("IA,%s,%d,%d", pinBitmask,
+        formatAndSendMessage("IA,%s,%d,%d", pinBitmask,
                 EndpointUbw32Config.ANALOG_COMMAND_IA_DELAY,
                 EndpointUbw32Config.ANALOG_COMMAND_IA_COUNT);
     }
@@ -365,22 +368,17 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * disable OK packets
      */
     public void sendCommandConfigureUbw32(String parameter, String value) {
-        formatAndSendCommand("CU,%s,%s", parameter, value);
+        formatAndSendMessage("CU,%s,%s", parameter, value);
     }
 
-    private void formatAndSendCommand(String format, Object ...args) {
-        String command = String.format(format, args);
+    private void formatAndSendMessage(String format, Object ...args) {
+        String message = String.format(format, args);
 
-        LOGGER.log(Level.TRACE, "sending command to ubw(" + serialPort.getPortName() + "): " + command);
+        LOGGER.log(Level.TRACE, "sending command to ubw(" + serialPort.getPortName() + "): " + message);
 
         // is here to prevent the terminator in the trace log
-        command += EndpointUbw32Config.MESSAGE_TERMINATOR;
+        message += EndpointUbw32Config.MESSAGE_TERMINATOR;
 
-        try {
-            sendStream(command);
-            // TODO: wait for response here!
-        } catch (SerialPortException e) {
-            LOGGER.log(Level.ERROR, e);
-        }
+        handler.sendMessage(message);
     }
 }

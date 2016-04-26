@@ -51,7 +51,7 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 	protected String configurationDigital;
 	private String pinbitMaskInputAnalog;
 	private EndpointUbw32Thread thread;
-	private EndpointUbw32Cache cache;
+	private Thread handlerThread;
     private Object serialEventBlock;
 	private EndpointUbw32State state;
 
@@ -72,7 +72,7 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 		this.pinbitMaskInputAnalog = pinbitMaskInputAnalog;
 		this.configurationDigital = configurationDigital;
 		this.thread = new EndpointUbw32Thread(this);
-		this.cache = new EndpointUbw32Cache();
+		this.handlerThread = new Thread(handler);
         this.serialEventBlock = new Object();
 		this.state = new EndpointUbw32State();
 	}
@@ -80,6 +80,9 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
     @Override
     public void init() {
         super.init();
+		if (!handlerThread.isAlive()) {
+			handlerThread.start();
+		}
 		reset();
     }
 
@@ -96,6 +99,9 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
         if (!thread.isInterrupted()) {
             this.thread.interrupt();
         }
+		if (!handlerThread.isInterrupted()) {
+			handlerThread.interrupt();
+		}
     }
 
 	public void reset() {
@@ -104,7 +110,7 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 		this.sendCommandVersion();
 		if (isConfigurationDigitalAvailable()) this.sendCommandConfigure(configurationDigital);
 		if (isPinBitMaskAnalogAvailable()) this.sendCommandConfigureAnalogInputs(pinbitMaskInputAnalog);
-		this.cache = new EndpointUbw32Cache();
+		this.cache.reset();
 		this.serialEventBlock = new Object();
 		this.state = new EndpointUbw32State();
 	}
@@ -153,50 +159,13 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 	@Override
 	/**
 	 * this listener receives a command from UBW32
-	 * 
+	 *
 	 * @param SerialPortEvent event
 	 */
 	public void serialEvent(SerialPortEvent event) {
-
-        synchronized (serialEventBlock){
-            String message = super.getSerialPortMessage(event);
-
-            if (!message.trim().isEmpty()) {
-                if (!message.contains("!")) {
-
-                    String[] messages = message.split("\r\r\n");
-                    String singleMessage = "";
-                    for(int i=0; i < messages.length; i++){
-
-                        singleMessage = messages[i];
-                        singleMessage = singleMessage.replaceAll("\r\r\n", "");
-
-                        if(!singleMessage.isEmpty() && !singleMessage.equals("OK")){
-
-                            if (cache.isStateChanged(singleMessage, this.serialPort)) {
-
-                                LOGGER.log(Level.TRACE, "received message on ubw(" + serialPort.getPortName()
-                                        + "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
-
-                                onIncomingEndpointMessage(singleMessage);
-                            }
-                            else {
-                                LOGGER.log(Level.TRACE, "skipped received message on ubw(" + serialPort.getPortName()
-                                        + "), cache enabled: " + cache.isCacheEnabled() + ", message: " + singleMessage.replaceAll("\n", ""));
-                            }
-                        }
-
-                    }
-                } else {
-                    LOGGER.log(Level.ERROR, "error message received on ubw("
-                            + serialPort.getPortName() + "): " + message);
-
-                }
-            } else {
-
-                LOGGER.log(Level.TRACE, "empty message received on ubw("
-                        + serialPort.getPortName() + "): " + message);
-            }
-        }
+		final String message = getSerialPortMessage(event);
+		if (message != null) {
+			handler.serialEvent(message);
+		}
 	}
 }

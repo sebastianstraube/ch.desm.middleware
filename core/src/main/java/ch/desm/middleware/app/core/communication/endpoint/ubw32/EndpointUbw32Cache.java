@@ -40,7 +40,7 @@ public class EndpointUbw32Cache {
 		return this.isCacheEnabled;
 	}
 	
-	public boolean isStateChanged(String message, SerialPort serialPort) {
+	public boolean isStateChanged(String message) {
 
 		if(!isCacheEnabled){
 			LOGGER.log(Level.TRACE, "cache disabled.");
@@ -154,11 +154,6 @@ public class EndpointUbw32Cache {
 			}
 		}
 
-		if (isChanged) {
-			LOGGER.log(Level.TRACE, "cache state changed on ubw("
-					+ serialPort.getPortName() + "): " + message);
-		}
-		
 		return isChanged;
 	}
 
