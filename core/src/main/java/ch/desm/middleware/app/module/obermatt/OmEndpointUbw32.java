@@ -63,14 +63,4 @@ public class OmEndpointUbw32 extends EndpointUbw32 {
         return this.mapAnalog;
     }
 
-    public void testDigitalMapSetAll(Boolean value){
-
-        for(String element : mapDigital.getMap().values())
-        {
-            String port = element.substring(0,1);
-            Integer pin = Integer.valueOf(element.substring(1,2));
-            this.sendCommandPinOutput(port, pin, value);
-        }
-    }
-
 }

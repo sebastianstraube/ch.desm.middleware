@@ -52,7 +52,7 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
                     throw new RuntimeException("Digital pin must be controlled through message of type boolean!");
                 }
 
-                final String endpointRegister = mapDigital.getMap().get(key);
+                final String endpointRegister = mapDigital.getValueForKey(key);
                 final String registerName = String.valueOf(endpointRegister.charAt(0));
                 final Integer pin = Integer.valueOf(endpointRegister.substring(1));
 
@@ -73,7 +73,7 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
                     throw new RuntimeException("Analog pin must be controlled through message of type double!");
                 }
 
-                final String endpointRegister = mapAnalog.getMap().get(key);
+                final String endpointRegister = mapAnalog.getValueForKey(key);
 
                 if (isInput) {
                     endpoint.getPinInputAnalog(endpointRegister);

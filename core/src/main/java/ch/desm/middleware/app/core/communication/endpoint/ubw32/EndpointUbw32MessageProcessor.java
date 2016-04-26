@@ -20,8 +20,7 @@ public class EndpointUbw32MessageProcessor {
 
     public static String getUbwSingleRegisterValues(ComponentServiceBase service, Re420EndpointUbw32 endpoint, MessageUbw32DigitalRegisterSingle message) {
         String messageInput = "";
-        for (Map.Entry<String, String> entry : endpoint.getMapDigital()
-                .getMap().entrySet()) {
+        for (Map.Entry<String, String> entry : endpoint.getMapDigital().getMap().entrySet()) {
 
             if (entry.getValue()
                     .equals(((MessageUbw32DigitalRegisterSingle) message)
@@ -32,7 +31,7 @@ public class EndpointUbw32MessageProcessor {
                 String parameter = isEnabled ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
                 if (isEnabled) LOGGER.log(Level.INFO, "key: " + key);
                 String stream = null;
-                stream = service.getComponentMapMiddleware().getMap().get(key);
+                stream = service.getComponentMapMiddleware().getValueForKey(key);
 
                 if (stream == null) {
                     try {
@@ -58,8 +57,7 @@ public class EndpointUbw32MessageProcessor {
 
         String messageInput = "";
 
-        for (Map.Entry<String, String> entry : endpoint.getMapDigital()
-                .getMap().entrySet()) {
+        for (Map.Entry<String, String> entry : endpoint.getMapDigital().getMap().entrySet()) {
 
             // convert input to common parameter
             // TODO: uhm. looks a bit ugly. really two times the substring? and why contains("1")?
@@ -96,13 +94,12 @@ public class EndpointUbw32MessageProcessor {
 
         String messageInput = "";
 
-        for (Map.Entry<String, String> entry : endpoint.getMapAnalog()
-                .getMap().entrySet()) {
+        for (Map.Entry<String, String> entry : endpoint.getMapAnalog().getMap().entrySet()) {
 
             String key = entry.getKey();
 
             if (!key.isEmpty()) {
-                String stream = service.getComponentMapMiddleware().getMap().get(key);
+                String stream = service.getComponentMapMiddleware().getValueForKey(key);
 
                 if (stream == null) {
                     try {

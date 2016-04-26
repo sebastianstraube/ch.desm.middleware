@@ -16,11 +16,6 @@ public class Re420MapUbw32Digital extends ComponentMapBase {
 		return map.containsKey(id);
 	}
 
-	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
 	protected void init() {
 
 		map.put("s126", "C4"); //Steuerstrom

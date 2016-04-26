@@ -17,11 +17,6 @@ import java.util.Map;
 public class ComponentMapMiddleware extends ComponentMapBase {
 
 	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-	
-	@Override
 	protected void init(){
         //petrinet re420
         map.putAll(new PetrinetRe420MapMiddleware().getMap());

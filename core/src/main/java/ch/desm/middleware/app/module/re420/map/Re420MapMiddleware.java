@@ -15,10 +15,6 @@ public class Re420MapMiddleware extends ComponentMapBase {
 	}
 
 	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
 	protected void init() {
 		map.put("s126.1", "s126.1;;0;schalter;haupthahn;1;kabinere420;b;?;#");
 		map.put("s126", "s126;i;0;schalter;steuerstrom;0;kabinere420;b;?;#");

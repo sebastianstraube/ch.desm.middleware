@@ -10,11 +10,6 @@ import java.util.Map;
 public class ZusiMapAusbildungMiddleware extends ComponentMapBase {
 
     @Override
-    public Map<String, String> getMap() {
-        return map;
-    }
-
-    @Override
     protected void init(){
         map.put("0100-0200::0100", "0100-0200::0100;;;command;ack_hello;zusi_version;zusi_ausbildung;b;?;#");
         map.put("0100-0200::0200", "0100-0200::0200;;;command;ack_hello;zusi_verbindungsinfo;zusi_ausbildung;b;?;#");

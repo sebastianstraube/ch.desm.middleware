@@ -103,8 +103,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
         String messageInput = "";
 
-        for (Entry<String, String> entry : endpoint.getMapDigital()
-                .getMap().entrySet()) {
+        for (Entry<String, String> entry : endpoint.getMapDigital().getMap().entrySet()) {
 
             if (entry.getValue()
                     .equals(((MessageUbw32DigitalRegisterSingle) message)
@@ -121,7 +120,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
                 String stream = null;
 
-                stream = service.getComponentMapMiddleware().getMap().get(key);
+                stream = service.getComponentMapMiddleware().getValueForKey(key);
 
                 if (stream == null) {
                     try {
@@ -148,8 +147,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
         String messageInput = "";
 
-        for (Entry<String, String> entry : endpoint.getMapDigital()
-                .getMap().entrySet()) {
+        for (Entry<String, String> entry : endpoint.getMapDigital().getMap().entrySet()) {
 
             // convert input to common parameter
             boolean isEnabled = message.getInputValue(entry.getValue().substring(0),entry.getValue().substring(1)).contains("1");
@@ -185,13 +183,12 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
 
         String messageInput = "";
 
-        for (Entry<String, String> entry : endpoint.getMapAnalog()
-                .getMap().entrySet()) {
+        for (Entry<String, String> entry : endpoint.getMapAnalog().getMap().entrySet()) {
 
             String key = entry.getKey();
 
             if (!key.isEmpty()) {
-                String stream = service.getComponentMapMiddleware().getMap().get(key);
+                String stream = service.getComponentMapMiddleware().getValueForKey(key);
 
                 if (stream == null) {
                     try {

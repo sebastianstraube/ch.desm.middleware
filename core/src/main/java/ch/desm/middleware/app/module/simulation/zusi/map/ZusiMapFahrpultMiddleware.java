@@ -10,11 +10,6 @@ import java.util.Map;
 public class ZusiMapFahrpultMiddleware extends ComponentMapBase {
 
     @Override
-    public Map<String, String> getMap() {
-        return map;
-    }
-
-    @Override
     protected void init(){
         map.put("0100-0200::0100", "0100-0200::0100;;;command;ack_hello;zusi_version;zusi_fahrpult;s;?;#");
         map.put("0100-0200::0100", "0100-0200::0100;;;command;ack_hello;zusi_verbindungsinfo;zusi_fahrpult;s;?;#");

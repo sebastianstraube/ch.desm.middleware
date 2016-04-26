@@ -11,10 +11,6 @@ public class ManagementMapMiddleware extends ComponentMapBase {
 	}
 
 	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
 	protected void init() {
 		map.put("mgmt.stellwerk.obermattlangnau", "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;s;?;#");
 		map.put("mgmt.petrinet.obermattlangnau", "mgmt.petrinet.obermattlangnau;os;0;management;petrinet;obermattlangnau;management;s;?;#");

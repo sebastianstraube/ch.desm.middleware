@@ -6,11 +6,6 @@ import ch.desm.middleware.app.core.component.ComponentMapBase;
 
 public class OmMapPetrinet extends ComponentMapBase{
 
-	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
     public String mapBrokerToEndpointMessage(String message) throws Exception {
         String mappedMessage = this.getKeyForValue(message);
         if(mappedMessage.isEmpty()) {

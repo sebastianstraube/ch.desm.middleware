@@ -7,11 +7,6 @@ import java.util.Map;
 public class PetrinetRe420MapMiddleware extends ComponentMapBase{
 
 	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
-	@Override
 	protected void init(){
 		map.put("cabine_re420_stromabnehmer_controller_$s129", "cabine_re420_stromabnehmer_controller_$s129;i;0;schalter;stromabnehmer;0;petrinet_cabine_re420;b;?;#");
 		map.put("cabine_re420_stromabnehmer_$stromabnehmer_hoch", "cabine_re420_stromabnehmer_$stromabnehmer_hoch;i;0;schalter;stromabnehmer;0;petrinet_cabine_re420;b;?;#");

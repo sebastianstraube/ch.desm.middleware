@@ -7,11 +7,6 @@ import java.util.Map;
 public class OmMapMiddleware extends ComponentMapBase{
 
 	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
-	@Override
 	protected void init(){
 		map.put("1.90.01", "1.90.01;o;0;lampe;signalfstern;gestört;stellwerkobermattlangnau;b;?;#");
 		map.put("1.90.02", "1.90.02;;0;lampe;signalf;notrot;stellwerkobermattlangnau;b;?;#");

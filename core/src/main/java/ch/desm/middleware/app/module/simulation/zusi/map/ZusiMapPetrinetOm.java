@@ -10,11 +10,6 @@ import java.util.Map;
 public class ZusiMapPetrinetOm extends ComponentMapBase {
 
     @Override
-    public Map<String, String> getMap() {
-        return map;
-    }
-
-    @Override
     protected void init(){
 // map.put("0100-0200::0100",""); //Initialisierung acknowledge command from zusi
 // map.put("0100-0200::0200",""); //Initialisierung acknowledge command from zusi

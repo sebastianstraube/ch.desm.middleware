@@ -8,13 +8,11 @@ public abstract class ComponentMapBase {
 
 	protected Map<String, String> map;
 
-    /**
-     *
-     * @return initialized map
-     */
-    public abstract Map<String, String> getMap();
+	public Map<String, String> getMap() {
+		return map;
+	}
 
-    /**
+	/**
      * map initializing
      */
     protected abstract void init();

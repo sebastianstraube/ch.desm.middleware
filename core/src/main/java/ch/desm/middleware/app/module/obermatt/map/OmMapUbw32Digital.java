@@ -15,11 +15,6 @@ public class OmMapUbw32Digital extends ComponentMapBase {
 		return map.containsKey(id);
 	}
 
-	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
 	protected void init() {
         map.put("1.90.01", "C4"); //Störungslampe Einfahrvorsignal F*
 

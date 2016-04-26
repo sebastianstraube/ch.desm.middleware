@@ -18,11 +18,6 @@ public class Re420MapUbw32Analog extends ComponentMapBase {
 		return map.containsKey(id);
 	}
 
-	@Override
-	public Map<String, String> getMap(){
-		return this.map;
-	}
-	
 	public void init(){
 		map.put("a74", "D0"); //kV-Anzeige
 		map.put("a79", "D1"); //A-Anzeige Motorenstrom
