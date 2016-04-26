@@ -83,13 +83,13 @@ public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Se
 	private void processBrokerMessageZusiFahrpult(Re420Service service, MessageCommon message) {
         String globalId = message.getGlobalId();
         String key = service.getMapZusi().getKeyForValue(globalId);
-		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message, true);
+		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message);
 	}
 
 	private void processBrokerMessagePetrinetRe420(Re420Service service, MessageCommon message) {
 		String globalId = message.getGlobalId();
 		String key = service.getMapPetrinetRe420().getKeyForValue(globalId);
-		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message, true);
+		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message);
 	}
 
 	private void processBrokerMessageManagement(Re420Service service, MessageCommon message) {

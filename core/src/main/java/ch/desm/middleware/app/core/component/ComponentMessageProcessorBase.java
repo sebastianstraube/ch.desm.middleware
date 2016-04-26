@@ -38,13 +38,7 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
     }
 
     // TODO: move to some place where it belongs to UBW32 endpoints only!
-    public void delegateToEndpoint(EndpointUbw32 endpoint, ComponentMapBase mapDigital, ComponentMapBase mapAnalog, String key, MessageCommon message, boolean isInput){
-        // TODO: can isInput be determined from messageCommon.isInput()?
-        if (isInput != message.isInputMessage()) {
-            final String inputOutput = isInput ? "input" : "output";
-            throw new RuntimeException("The provided message is not configured as an " + inputOutput + " message!");
-        }
-
+    public void delegateToEndpoint(EndpointUbw32 endpoint, ComponentMapBase mapDigital, ComponentMapBase mapAnalog, String key, MessageCommon message){
         switch(message.getType()) {
             case BOOLEAN: {
                 // TODO: get rid of the maps?
@@ -56,14 +50,15 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
                 final String registerName = String.valueOf(endpointRegister.charAt(0));
                 final Integer pin = Integer.valueOf(endpointRegister.substring(1));
 
-                if (isInput) {
-                    endpoint.getPinInputDigital(registerName, pin);
-                } else {
-                    try {
-                        endpoint.setPinOutputDigital(registerName, pin, message.getParameterAsBoolean());
-                    } catch (MessageCommon.BadParameterTypeCastException e) {
-                        // should not happen as we checked for bool type above already
-                    }
+                if (message.isInputMessage()) {
+                    throw new RuntimeException("Message should not trigger an input on the UBW32");
+                    //endpoint.getPinInputDigital(registerName, pin);
+                }
+
+                try {
+                    endpoint.setPinOutputDigital(registerName, pin, message.getParameterAsBoolean());
+                } catch (MessageCommon.BadParameterTypeCastException e) {
+                    // should not happen as we checked for bool type above already
                 }
                 break;
             }
@@ -75,14 +70,14 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
 
                 final String endpointRegister = mapAnalog.getValueForKey(key);
 
-                if (isInput) {
-                    endpoint.getPinInputAnalog(endpointRegister);
-                } else {
-                    // TODO: implement
-                    throw new RuntimeException("setting analog pins not implemented yet");
+                if (message.isInputMessage()) {
+                    throw new RuntimeException("Message should not trigger an input on the UBW32");
+                    // endpoint.getPinInputAnalog(endpointRegister);
                 }
 
-                break;
+                // TODO: implement through PWM
+                throw new RuntimeException("setting analog pins not implemented yet");
+                //break;
             }
             default:
                 throw new RuntimeException("Unable to map message of type " + message.getTypeName() + " to UBW32 pin");

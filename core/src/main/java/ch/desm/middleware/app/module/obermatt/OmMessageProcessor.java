@@ -52,9 +52,8 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
         try {
             final String globalId = element.getGlobalId();
             final String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
-            final boolean isInput = element.isInputMessage();
 
-            delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), key, element, isInput);
+            delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), key, element);
         } catch (Exception e) {
             //LOGGER.log(Level.WARN, e.getMessage());
         }
