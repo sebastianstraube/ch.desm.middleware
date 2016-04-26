@@ -37,9 +37,13 @@ public abstract class ComponentMessageProcessorBase<T1> extends MessageProcessor
         }
     }
 
-    // TODO: can isInput be determined from messageCommon.isInput()?
     // TODO: move to some place where it belongs to UBW32 endpoints only!
     public void delegateToEndpoint(EndpointUbw32 endpoint, ComponentMapBase mapDigital, ComponentMapBase mapAnalog, String key, MessageCommon message, boolean isInput){
+        // TODO: can isInput be determined from messageCommon.isInput()?
+        if (isInput != message.isInputMessage()) {
+            final String inputOutput = isInput ? "input" : "output";
+            throw new RuntimeException("The provided message is not configured as an " + inputOutput + " message!");
+        }
 
         switch(message.getType()) {
             case BOOLEAN: {
