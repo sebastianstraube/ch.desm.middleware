@@ -31,17 +31,6 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	/**
 	 * 
 	 */
-	public void testSeriaPort() {
-        try {
-            sendStream("Write Test to Serialport ..." + serialPort.getPortName() + "\r\n");
-        } catch (SerialPortException e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-    }
-
-	/**
-	 * 
-	 */
 	public String getSerialPortName() {
 		return serialPort.getPortName();
 	}
