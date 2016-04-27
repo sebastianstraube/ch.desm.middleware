@@ -9,11 +9,11 @@ import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
+import ch.desm.middleware.app.core.component.ComponentMessageProcessorUbw32Base;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public class Re420MessageProcessor extends ComponentMessageProcessorBase<Re420Service> {
+public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re420Service> {
 
 	private static Logger LOGGER = Logger.getLogger(Re420MessageProcessor.class);
 

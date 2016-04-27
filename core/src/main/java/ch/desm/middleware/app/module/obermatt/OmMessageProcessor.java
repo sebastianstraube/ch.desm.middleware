@@ -9,12 +9,12 @@ import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
 import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
+import ch.desm.middleware.app.core.component.ComponentMessageProcessorUbw32Base;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.module.obermatt.logic.OmLogicFahrstrassenSchalter;
 
-public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService> {
+public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmService> {
 
 	private static Logger LOGGER = Logger.getLogger(OmMessageProcessor.class);
 
