@@ -2,6 +2,7 @@ package ch.desm.middleware.app.module.gui;
 
 import java.util.List;
 
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessage;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -33,8 +34,9 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 		//send all messages
 		for(MessageCommon element: messageList){
             try {
-                String messageWebsocket = service.getEncoder().encode(service.getConverter().toCharacterStream(element));
-				ManagementEndpointClientWebsocket.sendMessage(messageWebsocket);
+				EndpointWebsocketMessage endpointWebsocketMessage = service.getConverter().toCharacterStream(element);
+				String encodedMessageWebsocket = service.getEncoder().encode(endpointWebsocketMessage);
+				ManagementEndpointClientWebsocket.sendMessage(encodedMessageWebsocket);
             } catch (EncodeException e) {
                 LOGGER.log(Level.ERROR, e);
             }

@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.core.communication.endpoint.websocket;
 
-import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
 import org.apache.log4j.Logger;
 
 import javax.json.Json;
@@ -9,7 +8,7 @@ import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
 
-public class EndpointWebsocketMessageEncoder implements Encoder.Text<MessageWebsocket> {
+public class EndpointWebsocketMessageEncoder implements Encoder.Text<EndpointWebsocketMessage> {
 
     private static final Logger LOGGER = Logger.getLogger(EndpointWebsocketMessageEncoder.class);
 
@@ -22,7 +21,7 @@ public class EndpointWebsocketMessageEncoder implements Encoder.Text<MessageWebs
     }
 
     @Override
-    public String encode(final MessageWebsocket message) throws EncodeException {
+    public String encode(final EndpointWebsocketMessage message) throws EncodeException {
 
         JsonObjectBuilder builder = Json.createObjectBuilder()
                 .add("topic", message.getTopic())

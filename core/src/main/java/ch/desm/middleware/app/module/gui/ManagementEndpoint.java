@@ -2,7 +2,7 @@ package ch.desm.middleware.app.module.gui;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageDecoder;
-import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -36,10 +36,10 @@ public class ManagementEndpoint extends EndpointCommon {
 
         try {
             //check message syntax
-            EndpointWebsocketMessageDecoder decoder = new EndpointWebsocketMessageDecoder();
-            MessageWebsocket messageWebsocket = decoder.decode(message);
+            EndpointWebsocketMessageDecoder decoder = service.getDecoder();
+            EndpointWebsocketMessage websocketMessage = decoder.decode(message);
             //publish message
-            service.getProcessor().processEndpointMessage(service.getBrokerClient(), messageWebsocket.getPayload(), messageWebsocket.getTopic());
+            service.getProcessor().processEndpointMessage(service.getBrokerClient(), websocketMessage.getPayload(), websocketMessage.getTopic());
         } catch (DecodeException e) {
             LOGGER.log(Level.ERROR, "wrong format of endpoint message: " + message, e);
         }
