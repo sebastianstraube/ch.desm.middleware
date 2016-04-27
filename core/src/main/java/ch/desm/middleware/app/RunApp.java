@@ -64,8 +64,31 @@ public class RunApp extends Thread {
     }
 
     private void startOm(){
-        startOmStellwerk("COM3");
-        startPetrinetOm();
+        OmService omService = startOmStellwerk("COM3");
+        PetrinetOmService petrinetOmService = startPetrinetOm();
+
+        //testStellwerk(omService, petrinetOmService);
+    }
+
+    private void testStellwerk(OmService omService, PetrinetOmService petrinetOmService) {
+        petrinetOmService.getBrokerClient().emulateBrokerMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;#");
+        omService.getBrokerClient().emulateBrokerMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;init;#");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        petrinetOmService.getBrokerClient().emulateBrokerMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;#");
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        omService.getBrokerClient().emulateBrokerMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;start;#");
     }
 
     private void startCabine(){
@@ -233,8 +256,8 @@ public class RunApp extends Thread {
         ManagementService management = isServerStarted(server) ? new ManagementService(broker, uri) : null;
 	}
 
-	public void startPetrinetOm(){
-        PetrinetOmService petrinet = new PetrinetOmService(broker);
+	public PetrinetOmService startPetrinetOm(){
+        return new PetrinetOmService(broker);
 	}
 
     public void startPetrinetRe420(){
@@ -254,8 +277,8 @@ public class RunApp extends Thread {
     }
 
 
-    public void startOmStellwerk(String port){
-        OmService oml = new OmService(broker, port);
+    public OmService startOmStellwerk(String port){
+        return new OmService(broker, port);
 	}
 
     public void startCabineRe420(String port){
