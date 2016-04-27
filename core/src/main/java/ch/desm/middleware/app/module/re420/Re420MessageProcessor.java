@@ -2,13 +2,12 @@ package ch.desm.middleware.app.module.re420;
 
 import java.util.List;
 
-import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageProcessor;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32Message;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageAnalog;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageDigital;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32Analog;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterComplete;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32DigitalRegisterSingle;
+import ch.desm.middleware.app.core.component.ComponentMapBase;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorUbw32Base;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -27,15 +26,31 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 		}
 	}
 
-	public void processEndpointMessage(Re420Service service, String message){
-		MessageUbw32Base ubw32Message = service.getTranslator()
-				.decodeUbw32EndpointMessage(message, MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-
-		//processable message
-		if(ubw32Message != null){
-			String messages = service.getMessageProcessor().convertToMiddlewareMessage(service, ubw32Message);
-			processEndpointMessage(service.getBrokerClient(), messages, ubw32Message.getTopic());
+	public void processEndpointMessage(Re420Service service, String rawEndpointMessage){
+		EndpointUbw32Message ubw32Message = EndpointUbw32Message.decode(rawEndpointMessage);
+		if(ubw32Message == null) {
+			return;
 		}
+
+		final ComponentMapBase map;
+		final String parameterValue;
+		if (ubw32Message instanceof EndpointUbw32MessageAnalog) {
+			map = service.getMapAnalog();
+			parameterValue = String.valueOf(((EndpointUbw32MessageAnalog)ubw32Message).getPinValue());
+		} else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
+			map = service.getMapDigital();
+			Boolean pinValue = ((EndpointUbw32MessageDigital)ubw32Message).getPinValue();
+			parameterValue = pinValue ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
+		} else {
+			throw new RuntimeException("uhm. unknown message!");
+		}
+
+		String pinName = ubw32Message.getPin().name();
+		String globalId = map.getKeyForValue(pinName);
+		String middlewareMessage = service.getComponentMapMiddleware().getValueForKey(globalId);
+		middlewareMessage = middlewareMessage.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
+
+		processEndpointMessage(service.getBrokerClient(), middlewareMessage, MessageBase.MESSAGE_TOPIC_CABINE_RE420);
 	}
 
 	private void processBrokerMessage(Re420Service service, MessageCommon element){
@@ -52,6 +67,24 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
                 processBrokerMessageManagement(service, element);
 				break;
 			}
+		}
+	}
+
+	private void processBrokerMessageZusiFahrpult(Re420Service service, MessageCommon message) {
+		String globalId = message.getGlobalId();
+		String key = service.getMapZusi().getKeyForValue(globalId);
+		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message);
+	}
+
+	private void processBrokerMessagePetrinetRe420(Re420Service service, MessageCommon message) {
+		String globalId = message.getGlobalId();
+		String key = service.getMapPetrinetRe420().getKeyForValue(globalId);
+		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message);
+	}
+
+	private void processBrokerMessageManagement(Re420Service service, MessageCommon message) {
+		if (isInitProcessMessage(message)) {
+			processInitEndpoint(service.getEndpoint(), message);
 		}
 	}
 
@@ -80,57 +113,9 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 		}
 	}
 
-	private void processBrokerMessageZusiFahrpult(Re420Service service, MessageCommon message) {
-        String globalId = message.getGlobalId();
-        String key = service.getMapZusi().getKeyForValue(globalId);
-		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message);
-	}
-
-	private void processBrokerMessagePetrinetRe420(Re420Service service, MessageCommon message) {
-		String globalId = message.getGlobalId();
-		String key = service.getMapPetrinetRe420().getKeyForValue(globalId);
-		delegateToEndpoint(service.getEndpoint(), service.getMapDigital(), service.getMapAnalog(), key, message);
-	}
-
-	private void processBrokerMessageManagement(Re420Service service, MessageCommon message) {
-		try {
-			if (isInitProcessMessage(message)) {
-				processInitEndpoint(service.getEndpoint(), message);
-			} else {
-
-				// Todo implementation
-				// activate this, when gui taken controle over this endpoint
-			}
-		} catch (Exception e) {
-			LOGGER.log(Level.ERROR, e);
-		}
-	}
-
 	//TODO refactoring
 	public boolean isInitProcessMessage(MessageCommon element){
 		if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.ubw32")) return true;
 		return false;
-	}
-
-	/**
-	 *
-	 * @param message
-	 * @return
-	 */
-	public String convertToMiddlewareMessage(Re420Service service, MessageUbw32Base message) {
-
-		String middlewareMessagesInput = "";
-		if (message instanceof MessageUbw32DigitalRegisterSingle) {
-            middlewareMessagesInput = EndpointUbw32MessageProcessor.getUbwSingleRegisterValues(service, service.getEndpoint(), (MessageUbw32DigitalRegisterSingle) message);
-        }
-		else if (message instanceof MessageUbw32DigitalRegisterComplete){
-            middlewareMessagesInput = EndpointUbw32MessageProcessor.getUbwAllRegisterValues(service, service.getEndpoint(), (MessageUbw32DigitalRegisterComplete) message);
-        }
-		else if (message instanceof MessageUbw32Analog){
-            middlewareMessagesInput = EndpointUbw32MessageProcessor.getUbwAnalogRegisterValues(service, service.getEndpoint(), (MessageUbw32Analog) message);
-        }
-
-		LOGGER.log(Level.TRACE,"processing middleware message: " + middlewareMessagesInput);
-		return middlewareMessagesInput;
 	}
 }

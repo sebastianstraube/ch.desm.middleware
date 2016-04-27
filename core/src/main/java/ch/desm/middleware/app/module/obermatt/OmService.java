@@ -20,7 +20,7 @@ public class OmService {
     public OmService(Broker broker, String port){
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
-        this.processor = new OmMessageProcessor(this);
+        this.processor = new OmMessageProcessor();
         this.map = new OmMapPetrinet();
 
         this.client = new OmBrokerClient(broker, this);

@@ -7,13 +7,16 @@ import org.apache.log4j.Logger;
 
 public abstract class EndpointUbw32Base extends EndpointRs232 {
 
+    protected final String configurationDigital;
+    protected final String pinbitMaskInputAnalog;
     protected final EndpointUbw32MessageHandler handler;
-    protected final EndpointUbw32Cache cache = new EndpointUbw32Cache();
+    protected final EndpointUbw32State boardState = new EndpointUbw32State();
 
-    public EndpointUbw32Base(String port,
-			EndpointRs232Config config) {
+    public EndpointUbw32Base(String port, EndpointRs232Config config, String configurationDigital, String pinbitMaskInputAnalog) {
 		super(port, config);
-        handler = new EndpointUbw32MessageHandler(this, cache);
+        this.configurationDigital = configurationDigital;
+        this.pinbitMaskInputAnalog = pinbitMaskInputAnalog;
+        handler = new EndpointUbw32MessageHandler(this, boardState, pinbitMaskInputAnalog);
 	}
 
     private static Logger LOGGER = Logger.getLogger(EndpointUbw32Base.class);
@@ -25,7 +28,11 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
 	 * @param value
 	 */
 	public void setPinOutputDigital(String port, Integer pin, Boolean value) {
-        sendCommandPinOutput(port, pin, value);
+        EndpointUbw32Register ubw32Pin = EndpointUbw32Register.valueOf(port + String.valueOf(pin));
+        EndpointUbw32MessageDigital currentState = (EndpointUbw32MessageDigital)boardState.getCurrentState(ubw32Pin);
+        if (currentState == null || currentState.getRegisterValue() != value) {
+            sendCommandPinOutput(port, pin, value);
+        }
     }
 
 	/**
@@ -167,7 +174,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param direction
      */
     public void sendCommandPinDirection(String port, Integer pin, Boolean direction) {
-        formatAndSendMessage("PD,%s,%d,%d", port, pin, direction ? "1" : "0");
+        formatAndSendMessage("PD,%s,%d,%d", port, pin, direction ? 1 : 0);
     }
 
     /**
@@ -202,8 +209,8 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
      * @param pin
      * @param value
      */
-    public void sendCommandPinOutput(String port, Integer pin, Boolean value) {
-        formatAndSendMessage("PO,%s,%d,%d", port, pin, value ? "1" : "0");
+    protected void sendCommandPinOutput(String port, Integer pin, Boolean value) {
+        formatAndSendMessage("PO,%s,%d,%d", port, pin, value ? 1 : 0);
     }
 
     /**
@@ -375,9 +382,6 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
         String message = String.format(format, args);
 
         LOGGER.log(Level.TRACE, "sending command to ubw(" + serialPort.getPortName() + "): " + message);
-
-        // is here to prevent the terminator in the trace log
-        message += EndpointUbw32Config.MESSAGE_TERMINATOR;
 
         handler.sendMessage(message);
     }

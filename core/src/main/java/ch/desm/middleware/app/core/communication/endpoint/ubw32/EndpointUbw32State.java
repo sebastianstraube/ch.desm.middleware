@@ -1,40 +1,41 @@
 package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 
 import java.util.HashMap;
+import java.util.Map;
 
-/**
- * Created by Sebastian on 22.11.2014.
- */
+// TODO: replace EndpointUbw32State with this class
 public class EndpointUbw32State {
 
-    HashMap<String ,String> state;
+    // TODO: make sure is called from one thread only?
+    private final Object lock = new Object();
+    private final Map<EndpointUbw32Pin, EndpointUbw32Message> pinStates = new HashMap<>();
 
-    public EndpointUbw32State(){
-        state = new HashMap<String, String>();
+    public EndpointUbw32Message getCurrentState(EndpointUbw32Pin pin) {
+        return pinStates.get(pin);
     }
 
-    private boolean isStateAvailable(String key){
-        return state.get(key) != null;
-    }
-
-    public boolean hasChanged(String key, String value){
-
-        boolean isChanged = false;
-        if(isStateAvailable(key)){
-            String cmpValue = state.get(key);
-
-            if(!cmpValue.equals(value)){
-                isChanged = true;
+    public boolean updatePinState(EndpointUbw32Message pinState) {
+        synchronized (lock) {
+            final EndpointUbw32Pin pin = pinState.getPin();
+            if (!pinStates.containsKey(pin)) {
+                pinStates.put(pin, pinState);
+                return true;
             }
-        }else{
-            isChanged = true;
+
+            EndpointUbw32Message oldState = pinStates.get(pin);
+            // nothing changed, but keep old value to detect slowly changing analog values
+            if (oldState.isEqual(pinState)) {
+                return false;
+            }
+
+            pinStates.put(pin, pinState);
+            return true;
         }
-
-        //update the value of the key
-        state.put(key, value);
-
-        return isChanged;
     }
 
-
+    public void reset() {
+        synchronized (lock) {
+            pinStates.clear();
+        }
+    }
 }

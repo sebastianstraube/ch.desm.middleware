@@ -1,8 +1,6 @@
 package ch.desm.middleware.app.module.obermatt;
 
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageUbw32Base;
 import ch.desm.middleware.app.module.obermatt.map.OmMapUbw32Analog;
 import ch.desm.middleware.app.module.obermatt.map.OmMapUbw32Digital;
 import org.apache.log4j.Level;
@@ -12,9 +10,7 @@ public class OmEndpointUbw32 extends EndpointUbw32 {
 
     private static Logger LOGGER = Logger.getLogger(OmBrokerClient.class);
 
-	private OmMapUbw32Digital mapDigital;
-	private OmMapUbw32Analog mapAnalog;
-    private OmService service;
+	private OmService service;
 
 	public OmEndpointUbw32(String port, OmService service) {
 		super(port,
@@ -23,8 +19,6 @@ public class OmEndpointUbw32 extends EndpointUbw32 {
 
         this.registerEndpointListener();
         this.service = service;
-	    this.mapAnalog = new OmMapUbw32Analog();
-	    this.mapDigital = new OmMapUbw32Digital();
     }
 
     @Override
@@ -36,31 +30,10 @@ public class OmEndpointUbw32 extends EndpointUbw32 {
         }
     }
 
-    /**
-     *
-     * @param message
-     */
     @Override
     public void onIncomingEndpointMessage(String message) {
         LOGGER.log(Level.TRACE, "endpoint (" + getSerialPortName() + ") received message: " + message);
 
-        MessageUbw32Base ubw32Message = service.getTranslator()
-                .decodeUbw32EndpointMessage(message, MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
-
-        //processable message
-        if(ubw32Message != null){
-            String messages = service.getProcessor().convertToMiddlewareMessage(this, ubw32Message);
-            service.getProcessor().processEndpointMessage(service.getBrokerClient(), messages, MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
-        }
+        service.getProcessor().processEndpointMessage(service, message);
     }
-
-
-    public OmMapUbw32Digital getMapDigital(){
-        return this.mapDigital;
-    }
-
-    public OmMapUbw32Analog getMapAnalog(){
-        return this.mapAnalog;
-    }
-
 }

@@ -108,11 +108,6 @@ public class MessageCommon extends MessageBase {
 		return parameter;
 	}
 
-	// TODO: fix/refactor all usages!
-    public String getParameterRaw() {
-        return this.parameter;
-    }
-
 	public String toString() {
 		String s = super.toString();
 		s += ", ";

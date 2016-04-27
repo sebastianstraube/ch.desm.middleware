@@ -20,31 +20,34 @@ public class EndpointUbw32MessageHandler implements Runnable {
     private static final String SUCCESSFUL_MESSAGE_SUFFIX = "OK\r\r\n";
 
     private final EndpointRs232 endpoint;
-    private final EndpointUbw32Cache cache;
-    private final Queue<String> pendingMessages = new LinkedBlockingDeque<>();
+    private final EndpointUbw32State boardState;
+    private final EndpointUbw32MessageParser parser;
+    private final Queue<String> pendingCommands = new LinkedBlockingDeque<>();
 
     private CompletableFuture<List<String>> responseFuture;
-    private String pendingResponse = "";
+    private String partialResponse = "";
 
-    public EndpointUbw32MessageHandler(EndpointRs232 endpoint, EndpointUbw32Cache cache) {
+    public EndpointUbw32MessageHandler(EndpointRs232 endpoint, EndpointUbw32State boardState, String pinbitMaskInputAnalog) {
         this.endpoint = endpoint;
-        this.cache = cache;
+        this.boardState = boardState;
+        final int analogPortMask = Integer.parseInt(pinbitMaskInputAnalog);
+        parser = new EndpointUbw32MessageParser(analogPortMask);
     }
 
     public void sendMessage(String message) {
-        if (message.indexOf('\n') != message.length() - 1) {
+        if (message.indexOf('\n') != -1) {
             throw new RuntimeException("You must add single messages only!");
         }
 
-        pendingMessages.add(message);
+        pendingCommands.add(message);
     }
 
     @Override
     public void run() {
 
         while (true) {
-            String message = pendingMessages.poll();
-            if (message == null) {
+            String command = pendingCommands.poll();
+            if (command == null) {
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
@@ -53,30 +56,46 @@ public class EndpointUbw32MessageHandler implements Runnable {
                 continue;
             }
 
-            List<String> rawResponse = sendMessageToEndpoint(message);
+            if (!command.equals("I") && !command.startsWith("IA")) {
+                LOGGER.log(Level.INFO, "sending command to ubw " + command);
+            }
+
+            List<String> rawResponse = sendMessageToEndpoint(command + EndpointUbw32Config.MESSAGE_TERMINATOR);
             if (rawResponse == null) {
                 continue;
             }
 
-            // TODO: hacky hack hack
-            if (!message.equals("R\n")) {
+            // The reset command "R" is the only command that is not echoed by the controller
+            if (!command.equals("R")) {
                 rawResponse.remove(0);
             }
 
-            for (String response : rawResponse) {
-                if (response.isEmpty() || response.equals("OK")) {
+            // TODO: move response parsing to separate thread!
+
+            final String response;
+            switch (rawResponse.size()) {
+                case 1: // raw response is just OK
+                    response = null;
+                    break;
+                case 2: // raw response is some payload followed by OK
+                    response = rawResponse.get(0).trim();
+                    break;
+                default:
+                    throw new RuntimeException("Response must be either OK or data with OK");
+            }
+
+            List<EndpointUbw32Message> ubw32Messages = parser.parseResponse(command, response);
+            for (EndpointUbw32Message ubw32Message : ubw32Messages) {
+                if (!boardState.updatePinState(ubw32Message)) {
                     continue;
                 }
 
-                // TODO: move message parsing here
-
-                if (!cache.isStateChanged(response)) {
-                    continue;
+                // E3 is the blinking usb status led
+                if (ubw32Message.getPin() != EndpointUbw32Pin.E3) {
+                    LOGGER.log(Level.INFO, "cache state changed on ubw(" + endpoint.getSerialPortName() + "): " + ubw32Message);
                 }
 
-                LOGGER.log(Level.TRACE, "cache state changed on ubw(" + endpoint.getSerialPortName() + "): " + response);
-
-                endpoint.onIncomingEndpointMessage(response);
+                endpoint.onIncomingEndpointMessage(ubw32Message.encode());
             }
         }
     }
@@ -108,31 +127,36 @@ public class EndpointUbw32MessageHandler implements Runnable {
         } finally {
             responseFuture = null;
         }
-
     }
 
-    public void serialEvent(String partialMessage) {
-        pendingResponse += partialMessage;
+    public void serialEvent(String chunk) {
+        partialResponse += chunk;
 
-        if (pendingResponse.charAt(0) == '!') {
-            // TODO: handle error!
-            throw new RuntimeException("UBW32 returned an error: " + partialMessage);
+        if (responseFuture == null) {
+            LOGGER.log(Level.ERROR, "Received serial event without sending a command before! " + partialResponse);
+            return;
         }
 
-        if (pendingResponse.indexOf(SUCCESSFUL_MESSAGE_SUFFIX) == -1) {
+        // wrap error into the future and notify caller
+        // TODO: is exclamation mark really at the beginning or shall we check for any place?
+        if (partialResponse.charAt(0) == '!') {
+            responseFuture.completeExceptionally(new RuntimeException("UBW32 returned an error: " + partialResponse));
+            return;
+        }
+
+        if (partialResponse.indexOf(SUCCESSFUL_MESSAGE_SUFFIX) == -1) {
             // not done yet... waiting for more
             return;
         }
 
         List<String> response = new ArrayList<>();
-        for (String message : pendingResponse.split("\n")) {
+        for (String message : partialResponse.split("\n")) {
             response.add(message.replaceAll("\r\r", "").trim());
         }
 
-        pendingResponse = "";
+        partialResponse = "";
 
-        if (responseFuture != null) {
-            responseFuture.complete(response);
-        }
+        responseFuture.complete(response);
     }
+
 }

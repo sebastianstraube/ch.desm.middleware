@@ -1,15 +1,16 @@
 package ch.desm.middleware.app.module.obermatt.map;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 
 public class OmMapPetrinet extends ComponentMapBase{
 
-    public String mapBrokerToEndpointMessage(String message) throws Exception {
+    public String mapBrokerToEndpointMessage(String message) throws NoSuchElementException {
         String mappedMessage = this.getKeyForValue(message);
         if(mappedMessage.isEmpty()) {
-            throw new Exception("unable to map broker message \"" + message + "\"");
+            throw new NoSuchElementException("unable to map broker message \"" + message + "\"");
         }
         return mappedMessage;
     }

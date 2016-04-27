@@ -19,9 +19,11 @@ public class Re420MapUbw32Analog extends ComponentMapBase {
 	}
 
 	public void init(){
+		/* TODO: fix me!
 		map.put("a74", "D0"); //kV-Anzeige
 		map.put("a79", "D1"); //A-Anzeige Motorenstrom
 		map.put("a79.1", "D3"); //A-Anzeige Differenzstrom
 		map.put("a94", "D2"); //Anzeige Vist
+		*/
 	}
 }

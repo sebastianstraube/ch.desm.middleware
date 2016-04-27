@@ -48,33 +48,24 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointUbw32.class);
 
-	protected String configurationDigital;
-	private String pinbitMaskInputAnalog;
 	private EndpointUbw32Thread thread;
 	private Thread handlerThread;
-    private Object serialEventBlock;
-	private EndpointUbw32State state;
 
 	/**
 	 * 
 	 * @param port
 	 */
-	public EndpointUbw32(String port,
-			String configurationDigital, String pinbitMaskInputAnalog) {
+	public EndpointUbw32(String port, String configurationDigital, String pinbitMaskInputAnalog) {
 		super(port, new EndpointRs232ConfigBuilder()
 				.setBaudRate(EndpointRs232Config.BAUDRATE_9600)
 				.setDataBits(EndpointRs232Config.DATABITS_8)
 				.setStopBits(EndpointRs232Config.STOPBITS_1)
 				.setParity(EndpointRs232Config.PARITY_NONE)
 				.setEventMask(EndpointRs232Config.MASK_RXCHAR)
-				.setFlowControl(EndpointRs232Config.FLOWCONTROL_NONE).build());
-
-		this.pinbitMaskInputAnalog = pinbitMaskInputAnalog;
-		this.configurationDigital = configurationDigital;
+				.setFlowControl(EndpointRs232Config.FLOWCONTROL_NONE).build(),
+				configurationDigital, pinbitMaskInputAnalog);
 		this.thread = new EndpointUbw32Thread(this);
 		this.handlerThread = new Thread(handler);
-        this.serialEventBlock = new Object();
-		this.state = new EndpointUbw32State();
 	}
 
     @Override
@@ -105,26 +96,16 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
     }
 
 	public void reset() {
+		this.boardState.reset();
 		this.sendCommandReset();
 		//		this.sendCommandConfigureUbw32(); //OK Packet OFF
 		this.sendCommandVersion();
 		if (isConfigurationDigitalAvailable()) this.sendCommandConfigure(configurationDigital);
 		if (isPinBitMaskAnalogAvailable()) this.sendCommandConfigureAnalogInputs(pinbitMaskInputAnalog);
-		this.cache.reset();
-		this.serialEventBlock = new Object();
-		this.state = new EndpointUbw32State();
-	}
-
-	public EndpointUbw32State getState(){
-		return state;
 	}
 
 	public String getPinBitMaskInputAnalog() {
 		return this.pinbitMaskInputAnalog;
-	}
-
-	public void setCacheEnabled(boolean isEnabled) {
-		cache.setCacheEnabled(isEnabled);
 	}
 
     /**

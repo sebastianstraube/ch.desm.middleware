@@ -2,15 +2,20 @@ package ch.desm.middleware.app.core.component;
 
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
+import ch.desm.middleware.app.module.obermatt.OmMessageProcessor;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 public abstract class ComponentMessageProcessorUbw32Base<T1> extends ComponentMessageProcessorBase<T1> {
+
+    private static Logger LOGGER = Logger.getLogger(OmMessageProcessor.class);
 
     public void delegateToEndpoint(EndpointUbw32 endpoint, ComponentMapBase mapDigital, ComponentMapBase mapAnalog, String key, MessageCommon message){
         switch(message.getType()) {
             case BOOLEAN: {
-                // TODO: get rid of the maps?
                 if (!mapDigital.isKeyAvailable(key)) {
-                    throw new RuntimeException("Digital pin must be controlled through message of type boolean!");
+                    LOGGER.log(Level.INFO, "No mapping available for digital key " + key);
+                    return;
                 }
 
                 final String endpointRegister = mapDigital.getValueForKey(key);

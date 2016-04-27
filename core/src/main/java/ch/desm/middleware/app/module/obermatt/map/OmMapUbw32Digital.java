@@ -7,11 +7,7 @@ public class OmMapUbw32Digital extends ComponentMapBase {
 
 	public static final String PINBITMASK_CONFIGURATION_DIGITAL = "192,0,8194,16372,0,1,2";
 
-    public OmMapUbw32Digital() {
-		super();
-	}
-
-	public boolean isKeyAvailable(String id) {
+        public boolean isKeyAvailable(String id) {
 		return map.containsKey(id);
 	}
 
