@@ -36,16 +36,16 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 		final String parameterValue;
 		if (ubw32Message instanceof EndpointUbw32MessageAnalog) {
 			map = service.getMapAnalog();
-			parameterValue = String.valueOf(((EndpointUbw32MessageAnalog)ubw32Message).getPinValue());
+			parameterValue = String.valueOf(((EndpointUbw32MessageAnalog)ubw32Message).getRegisterValue());
 		} else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
 			map = service.getMapDigital();
-			Boolean pinValue = ((EndpointUbw32MessageDigital)ubw32Message).getPinValue();
+			Boolean pinValue = ((EndpointUbw32MessageDigital)ubw32Message).getRegisterValue();
 			parameterValue = pinValue ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
 		} else {
 			throw new RuntimeException("uhm. unknown message!");
 		}
 
-		String pinName = ubw32Message.getPin().name();
+		String pinName = ubw32Message.getRegister().name();
 		String globalId = map.getKeyForValue(pinName);
 		String middlewareMessage = service.getComponentMapMiddleware().getValueForKey(globalId);
 		middlewareMessage = middlewareMessage.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);

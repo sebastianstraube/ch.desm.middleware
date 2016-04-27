@@ -8,34 +8,34 @@ public class EndpointUbw32State {
 
     // TODO: make sure is called from one thread only?
     private final Object lock = new Object();
-    private final Map<EndpointUbw32Pin, EndpointUbw32Message> pinStates = new HashMap<>();
+    private final Map<EndpointUbw32Register, EndpointUbw32Message> registerStates = new HashMap<>();
 
-    public EndpointUbw32Message getCurrentState(EndpointUbw32Pin pin) {
-        return pinStates.get(pin);
+    public EndpointUbw32Message getCurrentState(EndpointUbw32Register pin) {
+        return registerStates.get(pin);
     }
 
-    public boolean updatePinState(EndpointUbw32Message pinState) {
+    public boolean updatePinState(EndpointUbw32Message registerState) {
         synchronized (lock) {
-            final EndpointUbw32Pin pin = pinState.getPin();
-            if (!pinStates.containsKey(pin)) {
-                pinStates.put(pin, pinState);
+            final EndpointUbw32Register register = registerState.getRegister();
+            if (!registerStates.containsKey(register)) {
+                registerStates.put(register, registerState);
                 return true;
             }
 
-            EndpointUbw32Message oldState = pinStates.get(pin);
+            EndpointUbw32Message oldState = registerStates.get(register);
             // nothing changed, but keep old value to detect slowly changing analog values
-            if (oldState.isEqual(pinState)) {
+            if (oldState.isEqual(registerState)) {
                 return false;
             }
 
-            pinStates.put(pin, pinState);
+            registerStates.put(register, registerState);
             return true;
         }
     }
 
     public void reset() {
         synchronized (lock) {
-            pinStates.clear();
+            registerStates.clear();
         }
     }
 }

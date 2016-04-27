@@ -110,7 +110,7 @@ public class EndpointUbw32MessageParser {
             throw new RuntimeException("Invalid number of PI response parts");
         }
 
-        final EndpointUbw32Pin pin = parsePin(commandParts[1], commandParts[2]);
+        final EndpointUbw32Register pin = parsePin(commandParts[1], commandParts[2]);
         final Boolean pinValue = (responseParts[1] == "1");
         result.add(new EndpointUbw32MessageDigital(pin, pinValue));
     }
@@ -135,7 +135,7 @@ public class EndpointUbw32MessageParser {
                     continue;
                 }
 
-                final EndpointUbw32Pin pin = parsePin(port, String.valueOf(p));
+                final EndpointUbw32Register pin = parsePin(port, String.valueOf(p));
                 final Boolean pinValue = (portMask & currentPinMask) > 0;
                 result.add(new EndpointUbw32MessageDigital(pin, pinValue));
             }
@@ -168,7 +168,7 @@ public class EndpointUbw32MessageParser {
             }
 
             Double pinValue = calculateAnalagValue(values);
-            EndpointUbw32Pin pin = EndpointUbw32Pin.valueOf(ANALOG_PORT + String.valueOf(p));
+            EndpointUbw32Register pin = EndpointUbw32Register.valueOf(ANALOG_PORT + String.valueOf(p));
             result.add(new EndpointUbw32MessageAnalog(pin, pinValue));
 
             ++currentResultPin;
@@ -194,8 +194,8 @@ public class EndpointUbw32MessageParser {
         return sum / values.size() / 1023.0;
     }
 
-    private EndpointUbw32Pin parsePin(String port, String pin) {
-        return EndpointUbw32Pin.valueOf(port + pin);
+    private EndpointUbw32Register parsePin(String port, String pin) {
+        return EndpointUbw32Register.valueOf(port + pin);
     }
 
 }

@@ -91,7 +91,7 @@ public class EndpointUbw32MessageHandler implements Runnable {
                 }
 
                 // E3 is the blinking usb status led
-                if (ubw32Message.getPin() != EndpointUbw32Pin.E3) {
+                if (ubw32Message.getRegister() != EndpointUbw32Register.E3) {
                     LOGGER.log(Level.INFO, "cache state changed on ubw(" + endpoint.getSerialPortName() + "): " + ubw32Message);
                 }
 

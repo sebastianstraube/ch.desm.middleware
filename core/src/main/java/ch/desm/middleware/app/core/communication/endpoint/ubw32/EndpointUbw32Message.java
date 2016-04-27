@@ -2,30 +2,30 @@ package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 
 public abstract class EndpointUbw32Message<T> {
 
-    private final EndpointUbw32Pin pin;
+    private final EndpointUbw32Register register;
     private final T value;
 
-    public EndpointUbw32Message(EndpointUbw32Pin pin, T value) {
-        this.pin = pin;
+    public EndpointUbw32Message(EndpointUbw32Register register, T value) {
+        this.register = register;
         this.value = value;
     }
 
-    public EndpointUbw32Pin getPin() {
-        return pin;
+    public EndpointUbw32Register getRegister() {
+        return register;
     }
 
-    public T getPinValue() {
+    public T getRegisterValue() {
         return value;
     }
 
     public boolean isEqual(EndpointUbw32Message<T> other) {
-        if (pin != other.pin) {
-            throw new IllegalArgumentException("Cannot compare pin value of two different pins");
+        if (register != other.register) {
+            throw new IllegalArgumentException("Cannot compare register value of two different registers");
         }
-        return isPinValueEqual(other.getPinValue());
+        return isRegisterValueEqual(other.getRegisterValue());
     }
 
-    protected abstract boolean isPinValueEqual(T value);
+    protected abstract boolean isRegisterValueEqual(T value);
 
     // TODO: get rid of String<->Message conversion and fix EndpointCommonListenerInterface instead!
     public abstract String encode();
@@ -36,9 +36,9 @@ public abstract class EndpointUbw32Message<T> {
             throw new RuntimeException("Message must contain three parts");
         }
 
-        EndpointUbw32Pin pin = EndpointUbw32Pin.valueOf(parts[1]);
+        EndpointUbw32Register pin = EndpointUbw32Register.valueOf(parts[1]);
         if (pin == null) {
-            throw new RuntimeException("unable to detect pin for message " + string);
+            throw new RuntimeException("unable to detect register for message " + string);
         }
 
         switch (parts[0]) {
@@ -54,7 +54,7 @@ public abstract class EndpointUbw32Message<T> {
     @Override
     public String toString() {
         return "EndpointUbw32Message{" +
-                "pin=" + pin.name() +
+                "register=" + register.name() +
                 ", value=" + value +
                 '}';
     }

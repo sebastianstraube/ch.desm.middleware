@@ -3,19 +3,19 @@ package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 import java.util.Locale;
 
 public class EndpointUbw32MessageDigital extends EndpointUbw32Message<Boolean> {
-    public EndpointUbw32MessageDigital(EndpointUbw32Pin pin, Boolean value) {
+    public EndpointUbw32MessageDigital(EndpointUbw32Register pin, Boolean value) {
         super(pin, value);
     }
 
     @Override
-    protected boolean isPinValueEqual(Boolean value) {
-        return this.getPinValue() == value;
+    protected boolean isRegisterValueEqual(Boolean value) {
+        return this.getRegisterValue() == value;
     }
 
     // TODO: remove again
     @Override
     public String encode() {
-        return String.format(Locale.ENGLISH, "D#%s#%d", getPin().name(), getPinValue() ? 1 : 0);
+        return String.format(Locale.ENGLISH, "D#%s#%d", getRegister().name(), getRegisterValue() ? 1 : 0);
     }
 
     // TODO: remove again

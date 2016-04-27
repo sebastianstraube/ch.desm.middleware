@@ -101,18 +101,18 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
             return;
         }
 
-        final String pinName = ubw32Message.getPin().name();
+        final String pinName = ubw32Message.getRegister().name();
 
         final String globalId;
         final String parameterValue;
         if (ubw32Message instanceof EndpointUbw32MessageAnalog) {
             // TODO: remove hard coded fahrstrassenschalter logic
-            Double pinValue = ((EndpointUbw32MessageAnalog) ubw32Message).getPinValue();
+            Double pinValue = ((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue();
             globalId = fahrStrassenSchalter.getglobalId(pinValue);
-            parameterValue = String.valueOf(((EndpointUbw32MessageAnalog) ubw32Message).getPinValue());
+            parameterValue = String.valueOf(((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue());
         } else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
             globalId = mapDigital.getKeyForValue(pinName);
-            Boolean pinValue = ((EndpointUbw32MessageDigital) ubw32Message).getPinValue();
+            Boolean pinValue = ((EndpointUbw32MessageDigital) ubw32Message).getRegisterValue();
             parameterValue = String.valueOf(pinValue ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF);
         } else {
             throw new RuntimeException("uhm. unknown message!");
