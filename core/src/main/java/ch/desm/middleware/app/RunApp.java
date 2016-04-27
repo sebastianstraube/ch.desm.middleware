@@ -59,7 +59,7 @@ public class RunApp extends Thread {
         /***************************************************************************/
 
         startOm();
-        //startZusi();
+        startZusi();
         //startCabine();
     }
 
@@ -71,8 +71,8 @@ public class RunApp extends Thread {
     }
 
     private void testStellwerk(OmService omService, PetrinetOmService petrinetOmService) {
-        petrinetOmService.getBrokerClient().emulateBrokerMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;#");
-        omService.getBrokerClient().emulateBrokerMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;init;#");
+        petrinetOmService.getBrokerClient().emulateBrokerMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;");
+        omService.getBrokerClient().emulateBrokerMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;init;");
 
         try {
             Thread.sleep(1000);
@@ -80,7 +80,7 @@ public class RunApp extends Thread {
             e.printStackTrace();
         }
 
-        petrinetOmService.getBrokerClient().emulateBrokerMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;#");
+        petrinetOmService.getBrokerClient().emulateBrokerMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;");
 
         try {
             Thread.sleep(5000);
@@ -88,7 +88,7 @@ public class RunApp extends Thread {
             e.printStackTrace();
         }
 
-        omService.getBrokerClient().emulateBrokerMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;start;#");
+        omService.getBrokerClient().emulateBrokerMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;start;");
     }
 
     private void startCabine(){
@@ -97,8 +97,10 @@ public class RunApp extends Thread {
     }
 
     private void startZusi(){
-        startZusiFahrpult("192.168.1.32", 1436); // lokal: 192.168.1.32, vpn : 7.94.80.35
-        startZusiAusbildung("192.168.1.32", 1436); //192.168.1.32
+        // lokal: 192.168.1.20, vpn : 7.94.80.35
+        ZusiService service = new ZusiService(broker, "7.94.80.35", 1436);
+        startZusiFahrpult(service); //new ZusiService(broker, "7.94.80.35", 1436));
+        startZusiAusbildung(service); //new ZusiService(broker, "7.94.80.35", 1436));
     }
 
     private void startEtcs(){
@@ -267,13 +269,13 @@ public class RunApp extends Thread {
     public void testPetrinetRe420(PetrinetRe420Service petrinet){
         petrinet.getEndpoint().init();
         petrinet.getEndpoint().start();
-        petrinet.getBrokerClient().emulateBrokerMessage("s150a;i;;;;;?;kabinere420;#");
-        petrinet.getBrokerClient().emulateBrokerMessage("s150b;i;;;;;on;kabinere420;#");
-        petrinet.getBrokerClient().emulateBrokerMessage("s150d;i;;;;;?;kabinere420;#");
-        petrinet.getBrokerClient().emulateBrokerMessage("s150e;i;;;;;on;kabinere420;#");
-        petrinet.getBrokerClient().emulateBrokerMessage("s150f;i;;;;;on;kabinere420;#");
-        petrinet.getBrokerClient().emulateBrokerMessage("s150g;i;;;;;on;kabinere420;#");
-        petrinet.getBrokerClient().emulateBrokerMessage("s150l;i;;;;;on;kabinere420;#");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150a;i;;;;;?;kabinere420;");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150b;i;;;;;on;kabinere420;");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150d;i;;;;;?;kabinere420;");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150e;i;;;;;on;kabinere420;");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150f;i;;;;;on;kabinere420;");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150g;i;;;;;on;kabinere420;");
+        petrinet.getBrokerClient().emulateBrokerMessage("s150l;i;;;;;on;kabinere420;");
     }
 
 
@@ -285,50 +287,48 @@ public class RunApp extends Thread {
         Re420Service service = new Re420Service(broker, port);
     }
 
-    public void startZusiFahrpult(String ip, int port){
-        ZusiService serviceFahrpult = new ZusiService(broker, ip, port);
-        serviceFahrpult.getEndpointFahrpult().init();
-        serviceFahrpult.getEndpointFahrpult().start();
-        serviceFahrpult.getEndpointFahrpult().sendCommandRegisterClientFahrpult();
-        serviceFahrpult.getEndpointFahrpult().sendCommandNeededDataFahrpult();
+    public void startZusiFahrpult(ZusiService service){
+        service.getEndpointFahrpult().init();
+        service.getEndpointFahrpult().start();
+        service.getEndpointFahrpult().sendCommandRegisterClientFahrpult();
+        service.getEndpointFahrpult().sendCommandNeededDataFahrpult();
     }
 
     public void testZusiFahrpult(ZusiService serviceFahrpult){
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_stromabnehmer_$stromabnehmer_tief;i;0;schalter;stromabnehmer;0;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_stromabnehmer_$stromabnehmer_hoch;i;0;schalter;stromabnehmer;0;on;petrinet_cabine_re420;#");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_stromabnehmer_$stromabnehmer_tief;i;0;schalter;stromabnehmer;0;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_stromabnehmer_$stromabnehmer_hoch;i;0;schalter;stromabnehmer;0;on;petrinet_cabine_re420;");
 
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_hauptschalter_$hauptschalter_ein;i;0;schalter;haupt;0;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_hauptschalter_$hauptschalter_aus;i;0;schalter;haupt;0;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_hauptschalter_$hauptschalter_ein;i;0;schalter;haupt;0;on;petrinet_cabine_re420;#");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_hauptschalter_$hauptschalter_ein;i;0;schalter;haupt;0;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_hauptschalter_$hauptschalter_aus;i;0;schalter;haupt;0;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_hauptschalter_$hauptschalter_ein;i;0;schalter;haupt;0;on;petrinet_cabine_re420;");
 
 
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_wendeschalter_$wendeschalter_0;i;0;schalter;wende;null;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_wendeschalter_$wendeschalter_r;i;0;schalter;wende;rückwärts;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_wendeschalter_$wendeschalter_0;i;0;schalter;wende;null;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_wendeschalter_$wendeschalter_v;i;0;schalter;wende;vorwärts;on;petrinet_cabine_re420;#");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_wendeschalter_$wendeschalter_0;i;0;schalter;wende;null;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_wendeschalter_$wendeschalter_r;i;0;schalter;wende;rückwärts;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_wendeschalter_$wendeschalter_0;i;0;schalter;wende;null;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_wendeschalter_$wendeschalter_v;i;0;schalter;wende;vorwärts;on;petrinet_cabine_re420;");
 
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$neutral;i;0;fahrschalter;neutral;;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_punkt;i;0;fahrschalter;bremse;punkt;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_minus;i;0;fahrschalter;bremse;minus;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_plus;i;0;fahrschalter;bremse;plus;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_minus;i;0;fahrschalter;bremse;minus;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_punkt;i;0;fahrschalter;bremse;punkt;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$neutral;i;0;fahrschalter;neutral;;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_minus;i;0;fahrschalter;fahren;minus;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_punkt;i;0;fahrschalter;fahren;punkt;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_m;i;0;fahrschalter;fahren;m;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_plus;i;0;fahrschalter;fahren;plus;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_plusplus;i;0;fahrschalter;fahren;plusplus;on;petrinet_cabine_re420;#");
-        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$hasstate;i;0;controller;state;settled;on;petrinet_cabine_re420;#");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$neutral;i;0;fahrschalter;neutral;;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_punkt;i;0;fahrschalter;bremse;punkt;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_minus;i;0;fahrschalter;bremse;minus;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_plus;i;0;fahrschalter;bremse;plus;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_minus;i;0;fahrschalter;bremse;minus;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$bremsen_punkt;i;0;fahrschalter;bremse;punkt;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$neutral;i;0;fahrschalter;neutral;;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_minus;i;0;fahrschalter;fahren;minus;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_punkt;i;0;fahrschalter;fahren;punkt;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_m;i;0;fahrschalter;fahren;m;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_plus;i;0;fahrschalter;fahren;plus;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$fahren_plusplus;i;0;fahrschalter;fahren;plusplus;on;petrinet_cabine_re420;");
+        serviceFahrpult.getBrokerClient().emulateBrokerMessage("cabine_re420_fahrschalter_controller_$hasstate;i;0;controller;state;settled;on;petrinet_cabine_re420;");
 
     }
 
-    public void startZusiAusbildung(String ip, int port){
-        ZusiService serviceAusbildung = new ZusiService(broker, ip, port);
-        serviceAusbildung.getEndpointAusbildung().init();
-        serviceAusbildung.getEndpointAusbildung().start();
-        serviceAusbildung.getEndpointAusbildung().sendCommandRegisterClientAusbildung();
-        serviceAusbildung.getEndpointAusbildung().sendCommandNeededDataAusbildung();
+    public void startZusiAusbildung(ZusiService service){
+        service.getEndpointAusbildung().init();
+        service.getEndpointAusbildung().start();
+        service.getEndpointAusbildung().sendCommandRegisterClientAusbildung();
+        service.getEndpointAusbildung().sendCommandNeededDataAusbildung();
 
 
         /*

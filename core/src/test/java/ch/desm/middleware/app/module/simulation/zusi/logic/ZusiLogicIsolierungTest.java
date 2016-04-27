@@ -91,11 +91,11 @@ public class ZusiLogicIsolierungTest extends ZusiLogicIsolierung {
         int gesamtweg = 3180;
 
         ArrayList cmp = new ArrayList();
-        cmp.add("logic_iso_ce_belegen;;;isolierung;ce;belegen;zusi_ausbildung;B;off;#");
-        cmp.add("logic_iso_egf_belegen;;;isolierung;egf;belegen;zusi_ausbildung;B;off;#");
-        cmp.add("logic_iso_1_belegen;;;isolierung;1;belegen;zusi_ausbildung;B;off;#");
-        cmp.add("logic_iso_ef_belegen;;;isolierung;ef;belegen;zusi_ausbildung;B;on;#");
-        cmp.add("logic_iso_cd_belegen;;;isolierung;cd;belegen;zusi_ausbildung;B;off;#");
+        cmp.add("logic_iso_ce_belegen;;;isolierung;ce;belegen;zusi_ausbildung;B;off;");
+        cmp.add("logic_iso_egf_belegen;;;isolierung;egf;belegen;zusi_ausbildung;B;off;");
+        cmp.add("logic_iso_1_belegen;;;isolierung;1;belegen;zusi_ausbildung;B;off;");
+        cmp.add("logic_iso_ef_belegen;;;isolierung;ef;belegen;zusi_ausbildung;B;on;");
+        cmp.add("logic_iso_cd_belegen;;;isolierung;cd;belegen;zusi_ausbildung;B;off;");
         ArrayList l = getAllIsoMwm(service, gesamtweg);
         boolean b = cmp.equals(l);
         LOGGER.log(Level.INFO, "(true) test occupied isolierung middleware messages: " + b);

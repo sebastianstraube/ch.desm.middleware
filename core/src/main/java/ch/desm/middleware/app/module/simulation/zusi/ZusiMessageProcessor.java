@@ -138,6 +138,9 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
         // TODO: improve how parameter replacement is done
         mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, parameterAsOnOff);
         MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
+        if (mwm == null) {
+            LOGGER.log(Level.ERROR, "Unable to translate message " + mwmStream);
+        }
 
         switch (mwm.getTopic().toLowerCase()) {
             case MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG:

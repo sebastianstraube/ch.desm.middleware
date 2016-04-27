@@ -25,7 +25,23 @@ public class ZusiService extends ComponentServiceBase {
     private int port;
     private ZusiEndpointTcpClient endpointAusbildung;
     private ZusiEndpointTcpClient endpointFahrpult;
-
+    private final ComponentMapMiddleware middleware = new ComponentMapMiddleware();
+    private final ZusiMessageProcessor messageProcessor = new ZusiMessageProcessor();
+    private final ZusiProtocolMessageHelper protocolMessageHelper = new ZusiProtocolMessageHelper();
+    private final MessageTranslatorMiddleware messageTranslatorMiddleware = new MessageTranslatorMiddleware();
+    private final ZusiProtocolNodeCodec protocolNodeCodec = new ZusiProtocolNodeCodec();
+    private final ZusiMapParameterDataType mapParameterDataType = new ZusiMapParameterDataType();
+    private final ZusiMapParameter mapParameter = new ZusiMapParameter();
+    private final ZusiMapParameterRe420 mapParameterRe420 = new ZusiMapParameterRe420();
+    private final ZusiProtocolNodeCommand protocolNodeCommand = new ZusiProtocolNodeCommand();
+    private final ZusiMapPetrinetOm mapPetrinetOm = new ZusiMapPetrinetOm();
+    private final ZusiLogicIsolierung logicIsolierung = new ZusiLogicIsolierung();
+    private final ZusiEndpointLogic endpointLogic = new ZusiEndpointLogic();
+    private final ZusiMapPetrinetRe420 mapPetrinetRe420 = new ZusiMapPetrinetRe420();
+    private final ZusiMapAusbildungInit mapAusbildungInit = new ZusiMapAusbildungInit();
+    private final ZusiMapFahrpultInit mapFahrpultInit = new ZusiMapFahrpultInit();
+    private final ZusiMessageParameterHelper messageParameterHelper;
+    private final ZusiProtocolNodeHelper protocolNodeHelper;
 
     /**
      *
@@ -39,20 +55,21 @@ public class ZusiService extends ComponentServiceBase {
         this.broker = new ZusiBrokerClient(broker, this);
         this.endpointAusbildung = new ZusiEndpointTcpClient(this, ip, port, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG, ZusiEndpointTcpClient.class.getSimpleName() + "(Ausbildung)");
         this.endpointFahrpult = new ZusiEndpointTcpClient(this, ip, port, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT, ZusiEndpointTcpClient.class.getSimpleName() + "(Fahrpult)");
+        this.messageParameterHelper = new ZusiMessageParameterHelper(this);
+        this.protocolNodeHelper = new ZusiProtocolNodeHelper(this);
     }
 
-
-    /**
-     *
-     */
-    public ZusiService() {}
+    public ZusiService() {
+        this.messageParameterHelper = new ZusiMessageParameterHelper(this);
+        this.protocolNodeHelper = new ZusiProtocolNodeHelper(this);
+    }
 
     /**
      *
      * @return
      */
     public ComponentMapMiddleware getComponentMapMiddleware(){
-        return new ComponentMapMiddleware();
+        return middleware;
     }
 
     /**
@@ -60,7 +77,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiMessageProcessor getMessageProcessor(){
-        return new ZusiMessageProcessor();
+        return messageProcessor;
     }
 
     @Override
@@ -73,7 +90,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiProtocolMessageHelper getMessageCheck(){
-        return new ZusiProtocolMessageHelper();
+        return protocolMessageHelper;
     }
 
 
@@ -82,7 +99,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public MessageTranslatorMiddleware getTranslator(){
-        return new MessageTranslatorMiddleware();
+        return messageTranslatorMiddleware;
     }
 
     /**
@@ -90,7 +107,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiProtocolNodeCodec getCodec(){
-        return new ZusiProtocolNodeCodec();
+        return protocolNodeCodec;
     }
 
     /**
@@ -123,9 +140,9 @@ public class ZusiService extends ComponentServiceBase {
      */
     public ComponentMapBase getMap(String topic){
         if(topic.equals(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
-            return new ZusiMapAusbildungInit();
+            return mapAusbildungInit;
         }else if(topic.equals(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
-            return new ZusiMapFahrpultInit();
+            return mapFahrpultInit;
         }
 
         return null;
@@ -136,7 +153,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiMapParameterDataType getZusiMapParameterDataType(){
-        return new ZusiMapParameterDataType();
+        return mapParameterDataType;
     }
 
     /**
@@ -144,7 +161,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiMapParameter getZusiMapParameter(){
-        return new ZusiMapParameter();
+        return mapParameter;
     }
 
 
@@ -153,7 +170,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiMessageParameterHelper getZusiParameterConverter(){
-        return new ZusiMessageParameterHelper(this);
+        return messageParameterHelper;
     }
 
     /**
@@ -161,7 +178,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiProtocolNodeHelper getZusiProtocolNodeHelper(){
-        return new ZusiProtocolNodeHelper(this);
+        return protocolNodeHelper;
     }
 
     /**
@@ -169,7 +186,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiMapParameterRe420 getZusiMapParameterMiddleware(){
-        return new ZusiMapParameterRe420();
+        return mapParameterRe420;
     }
 
     /**
@@ -177,7 +194,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiProtocolNodeCommand getZusiProtocolCommand(){
-        return new ZusiProtocolNodeCommand();
+        return protocolNodeCommand;
     }
 
     /**
@@ -185,7 +202,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiMapPetrinetOm getZusiMapPetrinet(){
-        return new ZusiMapPetrinetOm();
+        return mapPetrinetOm;
     }
 
     /**
@@ -193,7 +210,7 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiLogicIsolierung getZusiLogicIsolierung(){
-        return new ZusiLogicIsolierung();
+        return logicIsolierung;
     }
 
     /**
@@ -201,10 +218,10 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ZusiEndpointLogic getZusiEndpointLogic(){
-        return new ZusiEndpointLogic();
+        return endpointLogic;
     }
 
     public ZusiMapPetrinetRe420 getZusiMapPetrinetRe420(){
-        return new ZusiMapPetrinetRe420();
+        return mapPetrinetRe420;
     }
 }
