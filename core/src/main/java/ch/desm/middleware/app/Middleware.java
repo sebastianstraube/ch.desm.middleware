@@ -2,6 +2,9 @@ package ch.desm.middleware.app;
 
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
+import ch.desm.middleware.app.core.communication.replay.ReplayFilter;
+import ch.desm.middleware.app.core.communication.replay.ReplayFilterAllowEverything;
+import ch.desm.middleware.app.core.communication.replay.ReplayLoader;
 import ch.desm.middleware.app.module.re420.Re420Service;
 import ch.desm.middleware.app.module.obermatt.OmService;
 import ch.desm.middleware.app.module.gui.ManagementService;
@@ -11,7 +14,10 @@ import ch.desm.middleware.app.module.simulation.etcs.EtcsService;
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.core.server.JettyServer;
 import ch.desm.middleware.app.core.server.TyrusServer;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
 
 public class Middleware extends Thread {
 
@@ -154,5 +160,19 @@ public class Middleware extends Thread {
         }
 
         return true;
+    }
+
+    public void runReplay(String file) {
+        runReplay(file, new ReplayFilterAllowEverything());
+    }
+
+    public void runReplay(String file, ReplayFilter filter) {
+        try {
+            final ReplayLoader loader = new ReplayLoader();
+            loader.loadFromLogFile(file).run(broker, filter);
+            LOGGER.log(Level.INFO, "==================== DONE REPLAYING " + file);
+        } catch (IOException e) {
+            LOGGER.log(Level.ERROR, "Error while running replay from " + file + ": " + e);
+        }
     }
 }
