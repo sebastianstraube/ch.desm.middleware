@@ -11,8 +11,8 @@ public class MessageCommon extends MessageBase {
 	}
 
 	// input/output types
-	public static final String MESSAGE_CHAR_INPUT = "i";
-	public static final String MESSAGE_CHAR_ONLYSOFTWARE = "os";
+	public static final String MESSAGE_CHAR_INPUT = "I";
+	public static final String MESSAGE_CHAR_ONLYSOFTWARE = "OS";
 
 	private final String globalId;
 	private final String outputInput;
