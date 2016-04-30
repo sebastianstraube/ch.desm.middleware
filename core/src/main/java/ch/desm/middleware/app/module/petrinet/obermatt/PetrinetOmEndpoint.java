@@ -71,7 +71,7 @@ public class PetrinetOmEndpoint extends EndpointCommon {
         }
     }
 
-    public void setSensor(String message, int value) {
+    public void setSensor(String message, boolean value) {
     	petriNetThread.setSensor(message, value);
     }
     

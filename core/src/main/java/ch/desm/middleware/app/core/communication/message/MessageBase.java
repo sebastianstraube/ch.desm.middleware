@@ -51,14 +51,18 @@ public class MessageBase{
     }
 
     public static Integer mapOnOffParameterTo10(String value) {
+        return mapOnOffParameterToBool(value) ? 1 : 0;
+    }
+
+    public static Boolean mapOnOffParameterToBool(String value) {
         switch (value.toLowerCase()) {
             case MESSAGE_PARAMETER_ON:
-                return 1;
+                return true;
             case MESSAGE_PARAMETER_OFF:
-                return 0;
+                return false;
             default:
                 LOGGER.log(Level.ERROR, "unexpected (0,1) parameter value: " + value);
-                return 0;
+                return false;
         }
     }
 

@@ -111,8 +111,13 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
         try {
             Class<?> petriNetClass = super.getClass();
             Field field = petriNetClass.getField(name);
+            if (field.getInt(this) == value) {
+                LOGGER.log(Level.DEBUG, "Ignoring sensor change request for " + name + " as its value is already " + value);
+                return;
+            }
+
             field.setInt(this, value);
-            addChangedPlace(new Bucket(name, value) );
+            addChangedPlace(new Bucket(name, value));
 
             LOGGER.log(Level.INFO, "setting sensor: " + name + " to: " + value);
         } catch (NoSuchFieldException e) {

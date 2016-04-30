@@ -43,9 +43,9 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     }
 
     private void processBrokerMessageObermatt(PetrinetOmService service, MessageCommon message) {
-        final int sensorValue;
+        final boolean sensorValue;
         try {
-            sensorValue = MessageBase.mapOnOffParameterTo10(message.getParameterAsOnOff());
+            sensorValue = message.getParameterAsBoolean();
         } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
@@ -60,9 +60,9 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     }
 
     private void processBrokerMessageZusiAusbildung(PetrinetOmService service, MessageCommon message) {
-        final int sensorValue;
+        final boolean sensorValue;
         try {
-            sensorValue = MessageBase.mapOnOffParameterTo10(message.getParameterAsOnOff());
+            sensorValue = message.getParameterAsBoolean();
         } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
@@ -87,9 +87,9 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         if (service.getMap().isKeyAvailable(message.getGlobalId())) {
             final String sensorName = message.getGlobalId();
 
-            final int sensorValue;
+            final Boolean sensorValue;
             try {
-                sensorValue = MessageBase.mapOnOffParameterTo10(message.getParameterAsOnOff());
+                sensorValue = message.getParameterAsBoolean();
             } catch (BadParameterTypeCastException e) {
                 LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
                 return;
@@ -129,7 +129,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         }
     }
 
-    private void delegateToEndpoint(PetrinetOmEndpoint endpoint, String sensorName, int sensorValue){
+    private void delegateToEndpoint(PetrinetOmEndpoint endpoint, String sensorName, boolean sensorValue){
         LOGGER.log(Level.INFO, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
         endpoint.setSensor(sensorName, sensorValue);
     }
