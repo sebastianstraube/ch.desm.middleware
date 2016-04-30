@@ -37,10 +37,9 @@ public class MessageCommon extends MessageBase {
 	private final ParameterType type;
 	private final String parameter;
 
-	public MessageCommon(String payload, String topic, String globalId, String outputInput,
-						 String externIntern, String element, String function, String instance,
-						 ParameterType type, String parameter) {
-		super(payload, topic);
+	MessageCommon(String globalId, String outputInput, String externIntern, String element,
+                  String function, String instance, String topic, ParameterType type, String parameter) {
+		super(topic);
 		this.globalId = globalId;
 		this.outputInput = outputInput;
 		this.externIntern = externIntern;
@@ -144,32 +143,4 @@ public class MessageCommon extends MessageBase {
 		return s;
 	}
 
-	public static ParameterType parseParameterType(String type) throws InvalidParameterTypeException {
-		if (type.length() != 1) {
-			throw new InvalidParameterTypeException();
-		}
-
-		switch (type.toLowerCase().charAt(0)) {
-			case 'n':
-				return ParameterType.NULL;
-			case 'b':
-				return ParameterType.BOOLEAN;
-			case 'i':
-				return ParameterType.INTEGER;
-			case 'd':
-				return ParameterType.DOUBLE;
-			case 's':
-				return ParameterType.STRING;
-			default:
-				throw new InvalidParameterTypeException();
-		}
-	}
-
-	public static class InvalidParameterTypeException extends Exception {}
-
-	public static class BadParameterTypeCastException extends Exception {
-		public BadParameterTypeCastException(ParameterType requested, ParameterType actual) {
-			super("Unable to cast message parameter type from " + requested.name() + " to " + actual.name());
-		}
-	}
 }

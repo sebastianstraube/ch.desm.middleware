@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.module.simulation.zusi;
 
+import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;;
@@ -118,7 +119,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
         try {
             isParameterOn = message.getParameterAsBoolean();
             parameterAsOnOff = message.getParameterAsOnOff();
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
         }
@@ -166,7 +167,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
         try {
             isParameterOn = message.getParameterAsBoolean();
             parameterAsOnOff = message.getParameterAsOnOff();
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
         }
@@ -220,7 +221,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
         final String parameter;
         try {
             parameter = element.getParameterAsString();
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
             return;
         }

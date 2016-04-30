@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
+import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
@@ -47,7 +48,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
 
         try {
             sensorValue = message.getParameterAsBoolean() ? 1 : 0;
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
         }
@@ -66,7 +67,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
 
         try {
             sensorValue = message.getParameterAsBoolean() ? 1 : 0;
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
         }
@@ -93,7 +94,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
 
             try {
                 sensorValue = message.getParameterAsBoolean() ? 1 : 0;
-            } catch (MessageCommon.BadParameterTypeCastException e) {
+            } catch (BadParameterTypeCastException e) {
                 LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
                 return;
             }
@@ -107,7 +108,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
         final String parameter;
         try {
             parameter = element.getParameterAsString();
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
             return;
         }

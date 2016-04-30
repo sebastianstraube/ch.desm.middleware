@@ -12,7 +12,7 @@ public class MessageBase{
     public static final String MESSAGE_MESSAGE_DELIMITER = "#";
 	public static final String MESSAGE_PARAMETER_ON = "on";
 	public static final String MESSAGE_PARAMETER_OFF = "off";
-	
+
 	public static final String MESSAGE_TOPIC_CABINE_RE420 = "kabinere420";
 	public static final String MESSAGE_TOPIC_INTERLOCKING_OBERMATT = "stellwerkobermattlangnau";
 	public static final String MESSAGE_TOPIC_PETRINET_OBERMATT = "petrinet_obermatt";
@@ -21,11 +21,10 @@ public class MessageBase{
     public static final String MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT = "zusi_fahrpult";
     public static final String MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG = "zusi_ausbildung";
     public static final String MESSAGE_TOPIC_ETCS_TIU = "etcstiu";
-	
+
 	private String topic;
     private String messageId;
-	private String payload;
-	
+
     /**
      * 
      */
@@ -33,9 +32,8 @@ public class MessageBase{
     	this.messageId = String.valueOf(System.currentTimeMillis());
     }
         
-    public MessageBase(String payload, String topic) {
+    public MessageBase(String topic) {
     	this();
-    	this.payload = payload;
     	this.topic = topic;
 
     }
@@ -79,14 +77,6 @@ public class MessageBase{
     
     public void setMessageId(String value) {
         this.messageId = value;
-    }
-    
-    public String getPayload(){
-    	return this.payload;
-    }
-    
-    public void setPayload(String value) {
-        this.payload = value;
     }
     
     public String getTopic(){

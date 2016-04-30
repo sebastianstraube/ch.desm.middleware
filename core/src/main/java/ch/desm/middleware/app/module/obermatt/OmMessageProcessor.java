@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32Message;
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageAnalog;
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageDigital;
+import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorUbw32Base;
@@ -68,7 +69,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
         final String parameter;
         try {
             parameter = element.getParameterAsString();
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
             return;
         }

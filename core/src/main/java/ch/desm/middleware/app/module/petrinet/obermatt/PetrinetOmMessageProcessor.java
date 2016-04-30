@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.obermatt;
 
+import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
@@ -45,7 +46,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         final int sensorValue;
         try {
             sensorValue = MessageBase.mapOnOffParameterTo10(message.getParameterAsOnOff());
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
         }
@@ -62,7 +63,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         final int sensorValue;
         try {
             sensorValue = MessageBase.mapOnOffParameterTo10(message.getParameterAsOnOff());
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
             return;
         }
@@ -89,7 +90,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
             final int sensorValue;
             try {
                 sensorValue = MessageBase.mapOnOffParameterTo10(message.getParameterAsOnOff());
-            } catch (MessageCommon.BadParameterTypeCastException e) {
+            } catch (BadParameterTypeCastException e) {
                 LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
                 return;
             }
@@ -107,7 +108,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         final String parameter;
         try {
             parameter = element.getParameterAsString();
-        } catch (MessageCommon.BadParameterTypeCastException e) {
+        } catch (BadParameterTypeCastException e) {
             LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
             return;
         }

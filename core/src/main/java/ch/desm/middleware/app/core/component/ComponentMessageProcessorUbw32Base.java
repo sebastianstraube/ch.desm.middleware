@@ -1,6 +1,7 @@
 package ch.desm.middleware.app.core.component;
 
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
+import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.module.obermatt.OmMessageProcessor;
 import org.apache.log4j.Level;
@@ -29,7 +30,7 @@ public abstract class ComponentMessageProcessorUbw32Base<T1> extends ComponentMe
 
                 try {
                     endpoint.setPinOutputDigital(registerName, pin, message.getParameterAsBoolean());
-                } catch (MessageCommon.BadParameterTypeCastException e) {
+                } catch (BadParameterTypeCastException e) {
                     // should not happen as we checked for bool type above already
                 }
                 break;
