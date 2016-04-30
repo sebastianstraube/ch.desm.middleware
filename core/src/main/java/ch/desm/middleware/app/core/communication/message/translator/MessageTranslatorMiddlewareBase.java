@@ -9,23 +9,9 @@ import org.apache.log4j.Logger;
 import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 
-abstract class MessageTranslatorMiddlewareBase {
+public abstract class MessageTranslatorMiddlewareBase {
 
 	private static Logger LOGGER = Logger.getLogger(MessageTranslatorMiddlewareBase.class);
-
-	/**
-	 * positions
-	 */
-	private static final int ID = 0;
-	private static final int OUTPUT_INPUT = 1;
-	private static final int EXTERN_INTERN = 2;
-	private static final int ELEMENT = 3;
-	private static final int FUNCTION = 4;
-	private static final int INSTANCE = 5;
-	private static final int TOPIC = 6;
-	private static final int TYPE = 7;
-	private static final int PARAMETER = 8;
-	private static final int NUM_PARTS = 9;
 
 	protected List<MessageCommon> decodeMiddlewareMessages(String stream) {
 		String[] messageArray = stream.split(MessageBase.MESSAGE_MESSAGE_DELIMITER);
@@ -57,20 +43,28 @@ abstract class MessageTranslatorMiddlewareBase {
 		}
 
 		String[] parts = message.split(MessageBase.MESSAGE_ELEMENT_DELIMITER);
-		if (parts.length != NUM_PARTS) {
+		if (parts.length != MessageCommon.NUM_PARTS) {
 			throw new MalformedMessageException("Message does not contain required number of arguments: " +
-                    String.valueOf(parts.length) + " but expected " + String.valueOf(NUM_PARTS), message);
+                    String.valueOf(parts.length) + " but expected " + String.valueOf(MessageCommon.NUM_PARTS), message);
 		}
 
 		final MessageCommon.ParameterType type;
 		try {
-			type = MessageCommon.parseParameterType(parts[TYPE]);
+			type = MessageCommon.parseParameterType(parts[MessageCommon.TYPE]);
 		} catch (MessageCommon.InvalidParameterTypeException e) {
-			throw new MalformedMessageException("Message contains invalid parameter type " + parts[TYPE], message);
+			throw new MalformedMessageException("Message contains invalid parameter type " + parts[MessageCommon.TYPE], message);
 		}
 
-		return new MessageCommon(message, parts[TOPIC], parts[ID], parts[OUTPUT_INPUT], parts[EXTERN_INTERN],
-				parts[ELEMENT], parts[FUNCTION], parts[INSTANCE], type, parts[PARAMETER]);
+		return new MessageCommon(message,
+				parts[MessageCommon.TOPIC],
+				parts[MessageCommon.ID],
+				parts[MessageCommon.OUTPUT_INPUT],
+				parts[MessageCommon.EXTERN_INTERN],
+				parts[MessageCommon.ELEMENT],
+				parts[MessageCommon.FUNCTION],
+				parts[MessageCommon.INSTANCE],
+				type,
+				parts[MessageCommon.PARAMETER]);
 	}
 
 	/**

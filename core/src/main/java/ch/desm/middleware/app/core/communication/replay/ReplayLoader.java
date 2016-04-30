@@ -1,8 +1,7 @@
 package ch.desm.middleware.app.core.communication.replay;
 
 import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddlewareBase;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -77,7 +76,7 @@ public class ReplayLoader {
 
         final String[] messageParts = parseMessage(lineParts[2]);
         final String message = String.join(MessageBase.MESSAGE_ELEMENT_DELIMITER, messageParts);
-        final String topic = messageParts[MessageTranslatorMiddlewareBase.TOPIC];
+        final String topic = messageParts[MessageCommon.TOPIC];
 
         return new LogEntry(time, offset, topic, message);
     }

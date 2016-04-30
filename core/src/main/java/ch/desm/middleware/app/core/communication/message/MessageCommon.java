@@ -14,6 +14,20 @@ public class MessageCommon extends MessageBase {
 	public static final String MESSAGE_CHAR_INPUT = "I";
 	public static final String MESSAGE_CHAR_ONLYSOFTWARE = "OS";
 
+	/**
+	 * positions
+	 */
+	public static final int ID = 0;
+	public static final int OUTPUT_INPUT = 1;
+	public static final int EXTERN_INTERN = 2;
+	public static final int ELEMENT = 3;
+	public static final int FUNCTION = 4;
+	public static final int INSTANCE = 5;
+	public static final int TOPIC = 6;
+	public static final int TYPE = 7;
+	public static final int PARAMETER = 8;
+	public static final int NUM_PARTS = 9;
+
 	private final String globalId;
 	private final String outputInput;
 	private final String externIntern;
