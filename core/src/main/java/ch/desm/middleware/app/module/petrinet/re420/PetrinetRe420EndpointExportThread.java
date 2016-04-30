@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
+import ch.desm.middleware.app.common.FrequencyLimiter;
 import ch.desm.middleware.app.core.component.petrinet.Bucket;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -11,6 +12,8 @@ import java.util.List;
 public class PetrinetRe420EndpointExportThread extends Thread {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetRe420EndpointExportThread.class);
+
+    private static final Float PETRINET_SIMULATION_FREQ = 25.0f;
 
     private Object pendingSensorEventsLock;
     private Object delegateLockBroker;
@@ -44,16 +47,23 @@ public class PetrinetRe420EndpointExportThread extends Thread {
     }
 
     public void run() {
-        while (!isInterrupted()) {
+        final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(PETRINET_SIMULATION_FREQ);
+
+        while(!isInterrupted()){
+            final long startMillis = System.currentTimeMillis();
+
             simulatePetriNet();
             delegatePendingSensorEvents();
             delegateChangedPlaces();
+
             try {
-                Thread.sleep(40);
+                frequencyLimiter.ensureLimit(startMillis);
             } catch (InterruptedException e) {
                 LOGGER.log(Level.ERROR, e);
+                break;
             }
         }
+
     }
 
     private void simulatePetriNet() {

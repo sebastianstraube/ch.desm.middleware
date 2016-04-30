@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 
+import ch.desm.middleware.app.common.FrequencyLimiter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -24,19 +25,22 @@ class EndpointUbw32Thread extends EndpointThreadBase {
 	
 	@Override
 	public void run() {
+		final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(EndpointUbw32Config.POLLING_FREQ);
+
 		try {
-
 			while (!isInterrupted()) {
-				LOGGER.log(Level.TRACE, "Polling Thread active: " + this.getName() + " wait time: " + EndpointUbw32Config.SLEEP_POLLING);
-				endpoint.pollingCommand();
-				Thread.sleep(EndpointUbw32Config.SLEEP_POLLING);
-			}
+				final long startMillis = System.currentTimeMillis();
 
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			LOGGER.log(Level.ERROR, e);
+				endpoint.pollingCommand();
+
+				try {
+					frequencyLimiter.ensureLimit(startMillis);
+				} catch (InterruptedException e) {
+					LOGGER.log(Level.ERROR, e);
+					break;
+				}
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			LOGGER.log(Level.ERROR, e);
 		}
 	}

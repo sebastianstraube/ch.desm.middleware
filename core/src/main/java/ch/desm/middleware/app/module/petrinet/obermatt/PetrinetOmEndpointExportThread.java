@@ -2,6 +2,7 @@ package ch.desm.middleware.app.module.petrinet.obermatt;
 
 import java.util.*;
 
+import ch.desm.middleware.app.common.FrequencyLimiter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -12,6 +13,8 @@ import javax.websocket.EncodeException;
 public class PetrinetOmEndpointExportThread extends Thread {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmEndpointExportThread.class);
+
+    private static final Float PETRINET_SIMULATION_FREQ = 25.0f;
 
     private final Object pendingSensorEventsLock = new Object();
     private final Map<String, Integer> pendingSensorEvents = new HashMap<>();
@@ -47,14 +50,20 @@ public class PetrinetOmEndpointExportThread extends Thread {
     }
 
     public void run() {
+        final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(PETRINET_SIMULATION_FREQ);
+
         while (!isInterrupted()) {
+            final long startMillis = System.currentTimeMillis();
+
             simulatePetriNet();
             delegatePendingSensorEvents();
             delegateChangedPlaces();
+
             try {
-                Thread.sleep(40);
+                frequencyLimiter.ensureLimit(startMillis);
             } catch (InterruptedException e) {
                 LOGGER.log(Level.ERROR, e);
+                break;
             }
         }
     }

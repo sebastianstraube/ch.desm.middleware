@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.component;
 
+import ch.desm.middleware.app.common.FrequencyLimiter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -13,6 +14,8 @@ import java.util.List;
 public abstract class ComponentMessageProcessorThreadBase<T> extends Thread {
 
     private static Logger LOGGER = Logger.getLogger(ComponentMessageProcessorThreadBase.class);
+
+    private static final float DEFAULT_POLLING_FREQUENCY = 25;
 
     private Object pendingMessagesLock;
     private List<T> pendingMessages;
@@ -45,13 +48,18 @@ public abstract class ComponentMessageProcessorThreadBase<T> extends Thread {
     }
 
     public void run(){
+        final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(DEFAULT_POLLING_FREQUENCY);
 
-        while(!interrupted()){
-               processPendingMessages();
+        while (!interrupted()) {
+            final long startMillis = System.currentTimeMillis();
+
+            processPendingMessages();
+
             try {
-                Thread.sleep(40);
+                frequencyLimiter.ensureLimit(startMillis);
             } catch (InterruptedException e) {
                 LOGGER.log(Level.ERROR, e);
+                break;
             }
         }
     }

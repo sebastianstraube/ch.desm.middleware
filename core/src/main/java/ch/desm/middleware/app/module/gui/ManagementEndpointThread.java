@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.module.gui;
 
+import ch.desm.middleware.app.common.FrequencyLimiter;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessage;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageDecoder;
 import org.apache.log4j.Level;
@@ -15,6 +16,8 @@ import java.util.List;
 public class ManagementEndpointThread extends Thread {
 
     private static final Logger LOGGER = Logger.getLogger(ManagementEndpoint.class);
+
+    private static final float DEFAULT_POLLING_FREQUENCY = 25;
 
     private ManagementEndpoint endpoint;
 
@@ -53,12 +56,18 @@ public class ManagementEndpointThread extends Thread {
     }
 
     public void run(){
+        final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(DEFAULT_POLLING_FREQUENCY);
+
         while(!isInterrupted()){
+            final long startMillis = System.currentTimeMillis();
+
+            checkMessages();
+
             try {
-                checkMessages();
-                Thread.sleep(40); // TODO: allow configuring the frequency
+                frequencyLimiter.ensureLimit(startMillis);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.ERROR, e);
+                break;
             }
         }
     }
