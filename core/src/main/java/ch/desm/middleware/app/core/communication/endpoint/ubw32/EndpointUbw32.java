@@ -137,16 +137,4 @@ public abstract class EndpointUbw32 extends EndpointUbw32Base {
 		return false;
 	}
 
-	@Override
-	/**
-	 * this listener receives a command from UBW32
-	 *
-	 * @param SerialPortEvent event
-	 */
-	public void serialEvent(SerialPortEvent event) {
-		final String message = getSerialPortMessage(event);
-		if (message != null) {
-			handler.serialEvent(message);
-		}
-	}
 }

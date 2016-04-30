@@ -8,16 +8,18 @@ import jssc.SerialPortException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class EndpointRs232 extends EndpointCommon implements
-		SerialPortEventListener {
+// TODO: is not a real endpoint any longer!
+public class EndpointRs232 implements SerialPortEventListener {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointRs232.class);
 	
 	protected SerialPort serialPort;
 	protected EndpointRs232Config config;
 	private Object writeLock = new Object();
+	private List<EndpointRs232ListenerInterface> listenerList = new ArrayList<>();
 
 	public EndpointRs232(String port, EndpointRs232Config config) {
 		this.serialPort = new SerialPort(port);
@@ -29,6 +31,12 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 */
 	public String getSerialPortName() {
 		return serialPort.getPortName();
+	}
+
+	// TODO: wrap the listener interface!
+	public void addSerialPortEventListener(EndpointRs232ListenerInterface listener) {
+		listenerList.add(listener);
+
 	}
 
 	/**
@@ -120,21 +128,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
         }
 	}
 
-	@Override
-	/**
-	 * this listener receives a command from UBW32
-	 * 
-	 * @param SerialPortEvent event
-	 */
-	public synchronized void serialEvent(SerialPortEvent event) {
-		String message = this.getSerialPortMessage(event);
-		
-		LOGGER.log(Level.DEBUG, "received serial port message on port: " + this.serialPort.getPortName() + " with message: " + message);
-		
-		onIncomingEndpointMessage(message);
-	}
-
-	protected String getSerialPortMessage(SerialPortEvent event) {
+	protected String readDataFromSerialPort(SerialPortEvent event) {
 		if (event.isRXCHAR()) {
 			final int numAvailableBytes = event.getEventValue();
 			if (numAvailableBytes > 0) {
@@ -163,5 +157,22 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 		}
 
 		return null;
+	}
+
+	@Override
+	/**
+	 * this listener receives a command from UBW32
+	 *
+	 * @param SerialPortEvent event
+	 */
+	public void serialEvent(SerialPortEvent event) {
+		final String data = readDataFromSerialPort(event);
+		if (data == null || data.isEmpty()) {
+			return;
+		}
+
+		for (EndpointRs232ListenerInterface listener : listenerList) {
+			listener.onData(data);
+		}
 	}
 }

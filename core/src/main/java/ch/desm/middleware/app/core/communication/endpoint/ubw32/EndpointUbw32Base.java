@@ -1,27 +1,40 @@
 package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 
+import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232;
 import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232Config;
+import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232ListenerInterface;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public abstract class EndpointUbw32Base extends EndpointRs232 {
+public abstract class EndpointUbw32Base extends EndpointCommon {
 
+    private static Logger LOGGER = Logger.getLogger(EndpointUbw32Base.class);
+
+    protected final EndpointRs232 serialEndpoint;
     protected final String configurationDigital;
     protected final String pinbitMaskInputAnalog;
     protected final EndpointUbw32MessageHandler handler;
     protected final EndpointUbw32State boardState = new EndpointUbw32State();
 
     public EndpointUbw32Base(String port, EndpointRs232Config config, String configurationDigital, String pinbitMaskInputAnalog) {
-		super(port, config);
+        this.serialEndpoint = new EndpointRs232(port, config);
         this.configurationDigital = configurationDigital;
         this.pinbitMaskInputAnalog = pinbitMaskInputAnalog;
-        handler = new EndpointUbw32MessageHandler(this, boardState, pinbitMaskInputAnalog);
+        this.handler = new EndpointUbw32MessageHandler(this, serialEndpoint, boardState, pinbitMaskInputAnalog);
+        serialEndpoint.addSerialPortEventListener(handler);
 	}
 
-    private static Logger LOGGER = Logger.getLogger(EndpointUbw32Base.class);
+    @Override
+    public void init() {
+        serialEndpoint.init();
+    }
 
-	/**
+    public String getSerialPortName() {
+        return serialEndpoint.getSerialPortName();
+    }
+
+    /**
 	 * 
 	 * @param port
 	 * @param pin
@@ -381,7 +394,7 @@ public abstract class EndpointUbw32Base extends EndpointRs232 {
     private void formatAndSendMessage(String format, Object ...args) {
         String message = String.format(format, args);
 
-        LOGGER.log(Level.TRACE, "sending command to ubw(" + serialPort.getPortName() + "): " + message);
+        LOGGER.log(Level.TRACE, "sending command to ubw(" + getSerialPortName() + "): " + message);
 
         handler.sendMessage(message);
     }
