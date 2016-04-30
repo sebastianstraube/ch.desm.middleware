@@ -133,9 +133,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         endpoint.setSensor(sensorName, sensorValue);
     }
 
-    //TODO refactoring
     public boolean isInitProcessMessage(MessageCommon element){
-        if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) return true;
-        return false;
+        return element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau");
     }
 }

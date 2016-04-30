@@ -16,22 +16,9 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
 
 	private static Logger LOGGER = Logger.getLogger(PetrinetOmEndpointExportAdapter.class);
 
-	private List<Bucket> basePlaces;
-    private List<Bucket> changedPlacesList;
-    private Object lockChangedPlacesList;
-    private Object delayLock;
-    private PetrinetOmMapDelay mapDelay = new PetrinetOmMapDelay();
-    private Object listDelayLock;
-    private Set<PetrinetOmEndpointDelayThread> listDelayThreads;
-
-    public PetrinetOmEndpointExportAdapter(){
-        basePlaces = new LinkedList<Bucket>();
-        changedPlacesList = new LinkedList<Bucket>();
-        lockChangedPlacesList = new Object();
-        this.delayLock = new Object();
-        this.listDelayThreads = new HashSet<PetrinetOmEndpointDelayThread>();
-        listDelayLock = new Object();
-    }
+	private final List<Bucket> basePlaces = new LinkedList<>();
+    private final List<Bucket> changedPlacesList = new LinkedList<>();
+    private final Object lockChangedPlacesList = new Object();
 
     @Override
     public void init(){
@@ -42,11 +29,6 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
     @Override
 	public boolean canFire(String s) {
 		LOGGER.log(Level.TRACE, "transition can fire: " + s);
-        /*
-        if(isDelayedTransition(s)){
-            return isTransitionNotDelayed(s);
-        }
-        */
         return true;
 	}
 
@@ -54,57 +36,9 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
 	public void fire(String s) {
         LOGGER.log(Level.INFO, "transitions fired: " + s);
 
-        //cleanDelayThread();
         refreshChangedPlacesList(getAllPlaces(), basePlaces);
         basePlaces.clear();
         basePlaces.addAll(getAllPlaces());
-    }
-
-    private boolean isDelayedTransition(String transition){
-        synchronized (delayLock){
-            String delay = mapDelay.getValueForKey(transition);
-            return !delay.isEmpty();
-        }
-    }
-
-    private boolean isTransitionNotDelayed(String transition) {
-        synchronized (listDelayLock) {
-
-            boolean isThreadExisiting = false;
-            for (PetrinetOmEndpointDelayThread t : listDelayThreads) {
-                if (t.isAssociated(transition)) {
-                    isThreadExisiting = true;
-                    if (t.isTimeToDelegate()) {
-                        t.setAsDelegated();
-                        return true;
-                    }
-                }
-            }
-
-            if (!isThreadExisiting) {
-                createDelayTransitionThread(transition);
-            }
-            return false;
-        }
-    }
-
-    private void createDelayTransitionThread(String transition){
-        synchronized (listDelayLock){
-            String delay = mapDelay.getValueForKey(transition);
-            PetrinetOmEndpointDelayThread delayThread = new PetrinetOmEndpointDelayThread(this, transition, delay);
-            listDelayThreads.add(delayThread);
-        }
-    }
-
-    public void cleanDelayThread(){
-        synchronized (listDelayLock){
-            for(Iterator<PetrinetOmEndpointDelayThread> iterator = listDelayThreads.iterator(); iterator.hasNext();){
-                PetrinetOmEndpointDelayThread t = iterator.next();
-                if(t.isDelegated()){
-                    iterator.remove();
-                }
-            }
-        }
     }
 
     public void setSensor(String name, int value) {
@@ -128,19 +62,16 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
     }
 
     public List<Bucket> getChangedPlaces(){
+        List<Bucket> changeList = new LinkedList<>();
         synchronized (lockChangedPlacesList){
-            List<Bucket> changeList = new LinkedList<Bucket>();
-            if(!changedPlacesList.isEmpty()){
-                changeList.addAll(changedPlacesList);
-                changedPlacesList.clear();
-                LOGGER.log(Level.TRACE, "list changed places: " + changeList);
-            }
-            return changeList;
+            changeList.addAll(changedPlacesList);
+            changedPlacesList.clear();
         }
+        return changeList;
     }
 
     private void addAllPlacesToChangedPlaces(List<Bucket> base){
-        refreshChangedPlacesList(base, new LinkedList<Bucket>());
+        refreshChangedPlacesList(base, new LinkedList<>());
     }
 
     public void addChangedPlace(Bucket bucket){

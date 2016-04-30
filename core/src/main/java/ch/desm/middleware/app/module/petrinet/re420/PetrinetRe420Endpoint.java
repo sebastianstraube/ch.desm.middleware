@@ -18,7 +18,7 @@ public class PetrinetRe420Endpoint extends EndpointCommon<Bucket> {
         this.registerEndpointListener();
 
         this.service = service;
-        petriNetThread = new PetrinetRe420EndpointExportThread("OMLPetriNetSimulationThread", service);
+        petriNetThread = new PetrinetRe420EndpointExportThread("Re420PetriNetSimulationThread", service);
     }
 
     @Override

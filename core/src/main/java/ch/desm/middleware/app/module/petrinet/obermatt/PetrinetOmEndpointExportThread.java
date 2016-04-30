@@ -13,18 +13,13 @@ public class PetrinetOmEndpointExportThread extends Thread {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmEndpointExportThread.class);
 
-    private Object pendingSensorEventsLock;
-    private Object delegateLockBroker;
-    private Object delegateLockEndpoint;
-    private Map<String, Integer> pendingSensorEvents = new HashMap<>();
+    private final Object pendingSensorEventsLock = new Object();
+    private final Map<String, Integer> pendingSensorEvents = new HashMap<>();
     private PetrinetOmService service;
     private PetrinetOmEndpointExportAdapter petrinetAdapter;
 
     public PetrinetOmEndpointExportThread(String threadName, PetrinetOmService service) {
         super(threadName);
-        this.delegateLockBroker = new Object();
-        this.delegateLockEndpoint = new Object();
-        this.pendingSensorEventsLock = new Object();
         this.service = service;
         this.petrinetAdapter = new PetrinetOmEndpointExportAdapter();
     }
@@ -82,23 +77,17 @@ public class PetrinetOmEndpointExportThread extends Thread {
         }
     }
 
-    // TODO: wtf? something is wrong with the delegateLockBroker here!
     private void delegateChangedPlaces() {
         for (Bucket changedPlace : petrinetAdapter.getChangedPlaces()) {
             delegateToBroker(changedPlace, false);
         }
     }
 
-    // TODO: wtf? something is wrong with the delegateLockBroker here!
     public void delegateToBroker(Bucket changedPlace, boolean isAccessedFromDelayThread){
-        synchronized(delegateLockBroker){
-            service.getEndpoint().onIncomingEndpointMessage(changedPlace);
-        }
+        service.getEndpoint().onIncomingEndpointMessage(changedPlace);
     }
 
     public void delegateToEndpoint(String sensor, int tokenCount, boolean isAccessedFromDelayThread){
-        synchronized (delegateLockEndpoint){
-            petrinetAdapter.setSensor(sensor, tokenCount);
-        }
+        petrinetAdapter.setSensor(sensor, tokenCount);
     }
 }

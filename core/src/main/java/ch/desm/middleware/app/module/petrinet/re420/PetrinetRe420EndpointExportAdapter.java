@@ -19,18 +19,11 @@ public class PetrinetRe420EndpointExportAdapter extends PetrinetRe420EndpointExp
 	private List<Bucket> basePlaces;
     private List<Bucket> changedPlacesList;
     private Object lockChangedPlacesList;
-    private Object delayLock;
-    private PetrinetRe420MapDelay mapDelay = new PetrinetRe420MapDelay();
-    private Object listDelayLock;
-    private Set<PetrinetRe420EndpointDelayThread> listDelayThreads;
 
     public PetrinetRe420EndpointExportAdapter(){
         basePlaces = new LinkedList<Bucket>();
         changedPlacesList = new LinkedList<Bucket>();
         lockChangedPlacesList = new Object();
-        this.delayLock = new Object();
-        this.listDelayThreads = new HashSet<PetrinetRe420EndpointDelayThread>();
-        listDelayLock = new Object();
     }
 
     @Override
