@@ -2,7 +2,6 @@ package ch.desm.middleware.app.module.simulation.etcs;
 
 import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -33,23 +32,23 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
     public void processBrokerMessage(EtcsService service, MessageCommon message){
 
         switch(message.getTopic()){
-            case(MessageBase.MESSAGE_TOPIC_CABINE_RE420):{
+            case(MessageCommon.MESSAGE_TOPIC_CABINE_RE420):{
                 processBrokerMessageCabineRe420(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT):{
+            case(MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT):{
                 //TODO implementation
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_MANAGEMENT):{
+            case(MessageCommon.MESSAGE_TOPIC_MANAGEMENT):{
                 processBrokerMessageManagament(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT):{
+            case(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT):{
                 processBrokerMessagePetrinetOm(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
+            case(MessageCommon.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
                 processBrokerMessagePetrinetRe420(service, message);
                 break;
             }

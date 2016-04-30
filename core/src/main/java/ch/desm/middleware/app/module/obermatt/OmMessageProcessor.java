@@ -7,7 +7,6 @@ import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32Mes
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageAnalog;
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageDigital;
 import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorUbw32Base;
 import ch.desm.middleware.app.module.obermatt.map.OmMapUbw32Analog;
@@ -35,10 +34,10 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
 
     private void processBrokerMessage(OmService service, MessageCommon element){
         switch(element.getTopic()) {
-            case MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT:
+            case MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT:
                 processBrokerMessagePetrinetObermatt(service, element);
                 break;
-            case MessageBase.MESSAGE_TOPIC_MANAGEMENT:
+            case MessageCommon.MESSAGE_TOPIC_MANAGEMENT:
                 processBrokerMessageManagement(service, element);
                 break;
             default:
@@ -109,15 +108,15 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
         } else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
             globalId = mapDigital.getKeyForValue(pinName);
             Boolean pinValue = ((EndpointUbw32MessageDigital) ubw32Message).getRegisterValue();
-            parameterValue = MessageBase.mapBoolToOnOffParameter(pinValue);
+            parameterValue = MessageCommon.mapBoolToOnOffParameter(pinValue);
         } else {
             throw new RuntimeException("uhm. unknown message!");
         }
 
         String middlewareMessage = service.getComponentMapMiddleware().getValueForKey(globalId);
-        middlewareMessage = middlewareMessage.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
+        middlewareMessage = middlewareMessage.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
 
-        processEndpointMessage(service.getBrokerClient(), middlewareMessage, MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+        processEndpointMessage(service.getBrokerClient(), middlewareMessage, MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
     }
 
 }

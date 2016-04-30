@@ -1,7 +1,6 @@
 package ch.desm.middleware.app.module.simulation.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorThreadBase;
@@ -35,9 +34,9 @@ public class ZusiBrokerClient extends ComponentBrokerClientBase {
 
 	@Override
 	protected void initializeTopicSubscriptions() {
-        subscribeToTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-        subscribeToTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
-        subscribeToTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_MANAGEMENT);
 	}
 
 }

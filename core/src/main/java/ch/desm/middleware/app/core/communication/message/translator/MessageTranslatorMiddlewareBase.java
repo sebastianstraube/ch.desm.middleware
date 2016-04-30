@@ -7,7 +7,6 @@ import ch.desm.middleware.app.core.communication.message.MessageCommonDecoder;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 
 public abstract class MessageTranslatorMiddlewareBase {
@@ -16,7 +15,7 @@ public abstract class MessageTranslatorMiddlewareBase {
 	private final MessageCommonDecoder decoder = new MessageCommonDecoder();
 
 	protected List<MessageCommon> decodeMiddlewareMessages(String stream) {
-		String[] messageArray = stream.split(MessageBase.MESSAGE_MESSAGE_DELIMITER);
+		String[] messageArray = stream.split(MessageCommon.MESSAGE_MESSAGE_DELIMITER);
 		List<MessageCommon> messageList = new ArrayList<>(messageArray.length);
 
 		for (int i = 0; i < messageArray.length; i++) {
@@ -37,7 +36,7 @@ public abstract class MessageTranslatorMiddlewareBase {
 	 * TODO refactor EnumMessageTopic topic, move it to standard message stream
 	 *
 	 * @param message
-	 * @return {@link MessageBase}
+	 * @return {@link MessageCommon}
 	 */
 	protected MessageCommon decodeMiddlewareMessage(String message)throws MalformedMessageException {
 		return decoder.decode(message);

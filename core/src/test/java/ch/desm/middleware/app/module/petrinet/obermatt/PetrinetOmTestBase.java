@@ -1,7 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.obermatt;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.MessageCommonBuilder;
 import ch.desm.middleware.app.core.communication.message.MessageCommonEncoder;
@@ -23,9 +22,9 @@ public abstract class PetrinetOmTestBase {
     private static Logger LOGGER = Logger.getLogger(PetrinetOmTestBase.class);
 
     public static final List<String> RECORDED_TOPICS = Arrays.asList(
-            MessageBase.MESSAGE_TOPIC_MANAGEMENT,
-            MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT,
-            MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT
+            MessageCommon.MESSAGE_TOPIC_MANAGEMENT,
+            MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT,
+            MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT
     );
 
     protected Broker broker;
@@ -51,7 +50,7 @@ public abstract class PetrinetOmTestBase {
     protected void runReplay(List<ReplayEvent> events) {
         final Replay replay = new Replay(events);
         final ReplayFilterByTopic filter = new ReplayFilterByTopic();
-        filter.disableTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT); // in case we copy&paste one accidentally
+        filter.disableTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT); // in case we copy&paste one accidentally
         replay.run(broker, filter);
     }
 
@@ -60,7 +59,7 @@ public abstract class PetrinetOmTestBase {
     }
 
     protected boolean didRecordPetrinetTrigger(String trigger, Boolean state) {
-        final String topic = MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT;
+        final String topic = MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT;
         final String expectedMessage = buildMessage(topic, trigger, state);
         final String triggerLowercase = trigger.toLowerCase();
         String foundTriggerButDifferentMessage = null;
@@ -91,7 +90,7 @@ public abstract class PetrinetOmTestBase {
                     .setTopic(topic)
                     .setGlobalId(triggerName)
                     .setType(MessageCommon.ParameterType.BOOLEAN)
-                    .setParameter(MessageBase.mapBoolToOnOffParameter(triggerState))
+                    .setParameter(MessageCommon.mapBoolToOnOffParameter(triggerState))
                     .setOutputInput(MessageCommon.MESSAGE_CHAR_ONLYSOFTWARE)
                     .build());
         } catch (MessageCommonBuilder.MissingArgumentsException e) {

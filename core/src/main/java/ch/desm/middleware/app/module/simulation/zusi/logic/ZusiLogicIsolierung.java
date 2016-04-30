@@ -1,12 +1,11 @@
 package ch.desm.middleware.app.module.simulation.zusi.logic;
 
-import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ZusiLogicIsolierung {
@@ -86,8 +85,8 @@ public class ZusiLogicIsolierung {
 
         for(int i=0; i< ISOLIERUNGEN.length; i++){
             String mwMessage = service.getComponentMapMiddleware().getValueForKey(ISOLIERUNGEN[i]);
-            if(occ.contains(ISOLIERUNGEN[i])) mwMessage = MessageBase.replaceMiddlewareMessageDelimiter(mwMessage, MessageBase.MESSAGE_PARAMETER_ON);
-            else mwMessage = MessageBase.replaceMiddlewareMessageDelimiter(mwMessage, MessageBase.MESSAGE_PARAMETER_OFF);
+            if(occ.contains(ISOLIERUNGEN[i])) mwMessage = MessageCommon.replaceMiddlewareMessageDelimiter(mwMessage, MessageCommon.MESSAGE_PARAMETER_ON);
+            else mwMessage = MessageCommon.replaceMiddlewareMessageDelimiter(mwMessage, MessageCommon.MESSAGE_PARAMETER_OFF);
             if(!mwMessage.isEmpty()) messages.add(mwMessage);
         }
 

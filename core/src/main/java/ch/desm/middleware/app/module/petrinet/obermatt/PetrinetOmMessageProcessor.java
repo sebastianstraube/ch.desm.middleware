@@ -1,7 +1,6 @@
 package ch.desm.middleware.app.module.petrinet.obermatt;
 
 import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
@@ -27,13 +26,13 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
 
     private void processBrokerMessage(PetrinetOmService service, MessageCommon element){
         switch(element.getTopic().toLowerCase()) {
-            case MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT:
+            case MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT:
                 processBrokerMessageObermatt(service, element);
                 break;
-            case MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG:
+            case MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG:
                 processBrokerMessageZusiAusbildung(service, element);
                 break;
-            case MessageBase.MESSAGE_TOPIC_MANAGEMENT:
+            case MessageCommon.MESSAGE_TOPIC_MANAGEMENT:
                 processBrokerMessageManagement(service, element);
                 break;
             default:

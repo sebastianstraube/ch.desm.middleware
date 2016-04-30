@@ -2,7 +2,7 @@ package ch.desm.middleware.app.module.simulation.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
@@ -53,8 +53,8 @@ public class ZusiService extends ComponentServiceBase {
         this.ip = ip;
         this.port = port;
         this.broker = new ZusiBrokerClient(broker, this);
-        this.endpointAusbildung = new ZusiEndpointTcpClient(this, ip, port, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG, ZusiEndpointTcpClient.class.getSimpleName() + "(Ausbildung)");
-        this.endpointFahrpult = new ZusiEndpointTcpClient(this, ip, port, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT, ZusiEndpointTcpClient.class.getSimpleName() + "(Fahrpult)");
+        this.endpointAusbildung = new ZusiEndpointTcpClient(this, ip, port, MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG, ZusiEndpointTcpClient.class.getSimpleName() + "(Ausbildung)");
+        this.endpointFahrpult = new ZusiEndpointTcpClient(this, ip, port, MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT, ZusiEndpointTcpClient.class.getSimpleName() + "(Fahrpult)");
         this.messageParameterHelper = new ZusiMessageParameterHelper(this);
         this.protocolNodeHelper = new ZusiProtocolNodeHelper(this);
     }
@@ -139,9 +139,9 @@ public class ZusiService extends ComponentServiceBase {
      * @return
      */
     public ComponentMapBase getMap(String topic){
-        if(topic.equals(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
+        if(topic.equals(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
             return mapAusbildungInit;
-        }else if(topic.equals(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
+        }else if(topic.equals(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
             return mapFahrpultInit;
         }
 

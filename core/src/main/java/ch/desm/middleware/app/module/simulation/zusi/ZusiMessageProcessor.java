@@ -1,7 +1,6 @@
 package ch.desm.middleware.app.module.simulation.zusi;
 
 import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;;
 import ch.desm.middleware.app.module.simulation.zusi.map.ZusiMapParameterRe420;
@@ -39,19 +38,19 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
     public void processBrokerMessage(ZusiService service, MessageCommon message){
 
         switch(message.getTopic()){
-            case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT):{
+            case(MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT):{
                 //TODO implementation
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_MANAGEMENT):{
+            case(MessageCommon.MESSAGE_TOPIC_MANAGEMENT):{
                 processBrokerMessageManagament(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT):{
+            case(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT):{
                 processBrokerMessagePetrinetOm(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
+            case(MessageCommon.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
                 processBrokerMessagePetrinetRe420(service, message);
                 break;
             }
@@ -137,17 +136,17 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
 
         String mwmStream = service.getComponentMapMiddleware().getValueForKey(key);
         // TODO: improve how parameter replacement is done
-        mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, parameterAsOnOff);
+        mwmStream = MessageCommon.replaceMiddlewareMessageDelimiter(mwmStream, parameterAsOnOff);
         MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
         if (mwm == null) {
             LOGGER.log(Level.ERROR, "Unable to translate message " + mwmStream);
         }
 
         switch (mwm.getTopic().toLowerCase()) {
-            case MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG:
+            case MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG:
                 processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
                 break;
-            case MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT:
+            case MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT:
                 processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
                 break;
             default:
@@ -185,12 +184,12 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
 
         String mwmStream = service.getComponentMapMiddleware().getValueForKey(key);
         // TODO: improve how parameter replacement is done
-        mwmStream = MessageBase.replaceMiddlewareMessageDelimiter(mwmStream, parameterAsOnOff);
+        mwmStream = MessageCommon.replaceMiddlewareMessageDelimiter(mwmStream, parameterAsOnOff);
         MessageCommon mwm = service.getTranslator().toMiddlewareMessage(mwmStream);
 
-        if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
+        if(mwm.getTopic().equalsIgnoreCase(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
             processBrokerMessageZusiAusbildung(service, mwm.getGlobalId());
-        } else if(mwm.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
+        } else if(mwm.getTopic().equalsIgnoreCase(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT)){
             processBrokerMessageZusiFahrpult(service, mwm.getGlobalId());
         }
 
@@ -293,10 +292,10 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
             ZusiMapParameterRe420.OnOffState state = service.getZusiMapParameterMiddleware().getValue(globalId);
             if(state!=null){
                 // TODO: fix parameter value deduction
-                if(state.getOnState().equals(parameterValue)) parameterValue = MessageBase.MESSAGE_PARAMETER_ON;
-                else if(state.getOffState().equals(parameterValue)) parameterValue = MessageBase.MESSAGE_PARAMETER_OFF;
+                if(state.getOnState().equals(parameterValue)) parameterValue = MessageCommon.MESSAGE_PARAMETER_ON;
+                else if(state.getOffState().equals(parameterValue)) parameterValue = MessageCommon.MESSAGE_PARAMETER_OFF;
             }
-            mwm = MessageBase.replaceMiddlewareMessageDelimiter(mwm, parameterValue);
+            mwm = MessageCommon.replaceMiddlewareMessageDelimiter(mwm, parameterValue);
 
             if(!mwm.isEmpty()){
                 processLogicParameter(service, globalId, parameterValue);
@@ -315,7 +314,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      */
     protected void processLogicParameter(ZusiService service, String globalId, String parameterValue){
         for(String mwm : service.getZusiEndpointLogic().getIsoMwmFromParameter(service, globalId, parameterValue)){
-            super.processEndpointMessage(service.getBrokerClient(), mwm, MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
+            super.processEndpointMessage(service.getBrokerClient(), mwm, MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
         }
     }
 

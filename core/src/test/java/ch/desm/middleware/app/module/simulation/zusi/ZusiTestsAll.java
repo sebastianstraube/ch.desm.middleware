@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.module.simulation.zusi;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.module.simulation.zusi.protocol.node.ZusiProtocolNode;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -215,7 +215,7 @@ public class ZusiTestsAll {
     @Test
     public void testProcessEndpointMessage(){
         String message = "000000000200000000000a00060000000100000000000600000013000000803f060000001900c664e44306000000550000000000ffffffffffffffff";
-        String topic = MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT;
+        String topic = MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT;
         service.getZusiMessageProcessorTest().testProcessEndpointMessage(service, message, topic);
     }
 

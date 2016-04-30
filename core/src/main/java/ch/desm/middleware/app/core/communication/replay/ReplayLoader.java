@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.core.communication.replay;
 
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -75,17 +74,17 @@ public class ReplayLoader {
         final long offset = (firstTs != null) ? (time - firstTs) : 0;
 
         final String[] messageParts = parseMessage(lineParts[2]);
-        final String message = String.join(MessageBase.MESSAGE_ELEMENT_DELIMITER, messageParts);
+        final String message = String.join(MessageCommon.MESSAGE_ELEMENT_DELIMITER, messageParts);
         final String topic = messageParts[MessageCommon.TOPIC];
 
         return new LogEntry(time, offset, topic, message);
     }
 
     private String[] parseMessage(String message) throws ParseException {
-        String parts[] = message.split(MessageBase.MESSAGE_ELEMENT_DELIMITER);
+        String parts[] = message.split(MessageCommon.MESSAGE_ELEMENT_DELIMITER);
 
         // remove pending message delimiter
-        if (parts.length > 0 && parts[parts.length - 1 ].equals(MessageBase.MESSAGE_MESSAGE_DELIMITER)) {
+        if (parts.length > 0 && parts[parts.length - 1 ].equals(MessageCommon.MESSAGE_MESSAGE_DELIMITER)) {
             parts = Arrays.copyOfRange(parts, 0, parts.length - 1);
         }
 

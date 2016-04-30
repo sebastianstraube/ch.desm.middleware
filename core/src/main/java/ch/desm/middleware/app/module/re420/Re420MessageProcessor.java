@@ -6,7 +6,6 @@ import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32Mes
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageAnalog;
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageDigital;
 import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMapBase;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorUbw32Base;
@@ -36,7 +35,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 		} else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
 			map = service.getMapDigital();
 			Boolean pinValue = ((EndpointUbw32MessageDigital)ubw32Message).getRegisterValue();
-			parameterValue = MessageBase.mapBoolToOnOffParameter(pinValue);
+			parameterValue = MessageCommon.mapBoolToOnOffParameter(pinValue);
 		} else {
 			throw new RuntimeException("uhm. unknown message!");
 		}
@@ -44,22 +43,22 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 		String pinName = ubw32Message.getRegister().name();
 		String globalId = map.getKeyForValue(pinName);
 		String middlewareMessage = service.getComponentMapMiddleware().getValueForKey(globalId);
-		middlewareMessage = middlewareMessage.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
+		middlewareMessage = middlewareMessage.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
 
-		processEndpointMessage(service.getBrokerClient(), middlewareMessage, MessageBase.MESSAGE_TOPIC_CABINE_RE420);
+		processEndpointMessage(service.getBrokerClient(), middlewareMessage, MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
 	}
 
 	private void processBrokerMessage(Re420Service service, MessageCommon element){
 		switch(element.getTopic()){
-			case (MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT):{
+			case (MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT):{
 				processBrokerMessageZusiFahrpult(service, element);
 				break;
 			}
-			case (MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
+			case (MessageCommon.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
 				processBrokerMessagePetrinetRe420(service, element);
 				break;
 			}
-			case (MessageBase.MESSAGE_TOPIC_MANAGEMENT):{
+			case (MessageCommon.MESSAGE_TOPIC_MANAGEMENT):{
                 processBrokerMessageManagement(service, element);
 				break;
 			}

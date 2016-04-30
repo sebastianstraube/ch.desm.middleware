@@ -8,7 +8,7 @@ public class MessageCommonDecoder {
             throw new MalformedMessageException("Message must not be empty", message);
         }
 
-        String[] parts = message.split(MessageBase.MESSAGE_ELEMENT_DELIMITER);
+        String[] parts = message.split(MessageCommon.MESSAGE_ELEMENT_DELIMITER);
         if (parts.length != MessageCommon.NUM_PARTS) {
             throw new MalformedMessageException("Message does not contain required number of arguments: " +
                     String.valueOf(parts.length) + " but expected " + String.valueOf(MessageCommon.NUM_PARTS), message);

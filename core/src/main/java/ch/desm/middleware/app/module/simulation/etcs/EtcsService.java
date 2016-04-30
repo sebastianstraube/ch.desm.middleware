@@ -3,7 +3,7 @@ package ch.desm.middleware.app.module.simulation.etcs;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.broker.BrokerClient;
 import ch.desm.middleware.app.core.communication.endpoint.tcp.EndpointTcpClient;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.component.ComponentServiceBase;
@@ -30,7 +30,7 @@ public class EtcsService extends ComponentServiceBase {
         this.ip = ip;
         this.port = port;
         this.broker = new EtcsBrokerClient(broker, this);
-        this.endpoint = new EtcsEndpointTcpClient(this, ip, port, MessageBase.MESSAGE_TOPIC_ETCS_TIU, "ETCS_TIU");
+        this.endpoint = new EtcsEndpointTcpClient(this, ip, port, MessageCommon.MESSAGE_TOPIC_ETCS_TIU, "ETCS_TIU");
 
     }
 

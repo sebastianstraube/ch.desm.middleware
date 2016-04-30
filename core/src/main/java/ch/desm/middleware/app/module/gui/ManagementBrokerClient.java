@@ -8,7 +8,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 
 import javax.websocket.EncodeException;
@@ -46,12 +45,12 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 
 	@Override
 	protected void initializeTopicSubscriptions() {
-		subscribeToTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-		subscribeToTopic(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
-		subscribeToTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
-        subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
-        subscribeToTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
-        subscribeToTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
+		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
+		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
 	}
 
 }

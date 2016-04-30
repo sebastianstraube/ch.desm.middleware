@@ -1,8 +1,8 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.petrinet.Bucket;
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -58,9 +58,9 @@ public class PetrinetRe420Endpoint extends EndpointCommon<Bucket> {
         try {
             String message = service.getComponentMapMiddleware().getValueForKey(bucket.getName());
             if(!message.isEmpty()){
-                final String parameter = MessageBase.mapBoolToOnOffParameter(bucket.getTokenCount() > 0);
-                message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
-                service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
+                final String parameter = MessageCommon.mapBoolToOnOffParameter(bucket.getTokenCount() > 0);
+                message = message.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
+                service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT);
             }else{
                 LOGGER.log(Level.WARN, "component map lookup failed with message: " + bucket);
             }

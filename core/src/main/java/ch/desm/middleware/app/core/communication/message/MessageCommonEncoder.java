@@ -46,7 +46,7 @@ public class MessageCommonEncoder {
             case NULL:
                 return "";
             case BOOLEAN:
-                return MessageBase.mapBoolToOnOffParameter(messageCommon.getParameterAsBoolean());
+                return MessageCommon.mapBoolToOnOffParameter(messageCommon.getParameterAsBoolean());
             case INTEGER:
                 return String.valueOf(messageCommon.getParameterAsInteger());
             case DOUBLE:

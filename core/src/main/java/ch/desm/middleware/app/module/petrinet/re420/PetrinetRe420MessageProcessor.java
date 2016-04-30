@@ -2,7 +2,6 @@ package ch.desm.middleware.app.module.petrinet.re420;
 
 import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -27,13 +26,13 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
 
     private void processBrokerMessage(PetrinetRe420Service service, MessageCommon element){
         switch(element.getTopic().toLowerCase()) {
-            case MessageBase.MESSAGE_TOPIC_CABINE_RE420:
+            case MessageCommon.MESSAGE_TOPIC_CABINE_RE420:
                 processBrokerMessageCabineRe420(service, element);
                 break;
-            case MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT:
+            case MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT:
                 processBrokerMessageZusiFahrpult(service, element);
                 break;
-            case MessageBase.MESSAGE_TOPIC_MANAGEMENT:
+            case MessageCommon.MESSAGE_TOPIC_MANAGEMENT:
                 processBrokerMessageManagement(service, element);
                 break;
             default:
