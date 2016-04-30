@@ -129,7 +129,7 @@ public class ZusiTestsAll {
 
     @Test
     public void testGetConvertToInputCommand() throws Exception{
-        String middlewareMessage = "0200-0A01-0100::0100:11,0200:00,0300:01,0400:00,0500:00;;;hauptschalter;aus;taste n;?;zusi;";
+        String middlewareMessage = "0200-0A01-0100::0100:11,0200:00,0300:01,0400:00,0500:00;;;hauptschalter;aus;taste n;zusi;b;?;";
         boolean b = service.getZusiProtocolNodeHelperTest().testIntegratedMiddlewareMessage(service, middlewareMessage);
         LOGGER.log(Level.INFO, "(true)test encode decode: " + b);
         Assert.assertEquals(true, b);
