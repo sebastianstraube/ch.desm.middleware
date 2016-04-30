@@ -17,6 +17,7 @@ public class PetrinetOmService {
     private PetrinetOmBrokerClient client;
     private PetrinetOmEndpoint endpoint;
     private PetrinetOmMapInterlockingOm map;
+    private PetrinetOmMapZusi mapZusi = new PetrinetOmMapZusi();
 
     public PetrinetOmService(Broker broker){
         this.componentMapMiddleware = new ComponentMapMiddleware();
@@ -50,11 +51,11 @@ public class PetrinetOmService {
     }
 
     public PetrinetOmMapInterlockingOm getMap(){
-        return this.map;
+        return map;
     }
 
     public PetrinetOmMapZusi getMapZusi(){
-        return new PetrinetOmMapZusi();
+        return mapZusi;
     }
 
 }

@@ -18,6 +18,9 @@ public class PetrinetRe420Service {
     private PetrinetRe420MapInterlockingOm mapInterlockingOm;
     private PetrinetRe420BrokerClient client;
     private PetrinetRe420Endpoint endpoint;
+    private PetrinetRe420MapCabineRe420 mapCabineRe420 = new PetrinetRe420MapCabineRe420();
+    private PetrinetRe420MapZusiFahrpult mapZusi = new PetrinetRe420MapZusiFahrpult();
+
 
 
     public PetrinetRe420Service(Broker broker){
@@ -52,15 +55,15 @@ public class PetrinetRe420Service {
     }
 
     public PetrinetRe420MapInterlockingOm getMapInterlockingOm(){
-        return this.mapInterlockingOm;
+        return mapInterlockingOm;
     }
 
     public PetrinetRe420MapCabineRe420 getMapCabineRe420(){
-        return new PetrinetRe420MapCabineRe420();
+        return mapCabineRe420;
     }
 
     public PetrinetRe420MapZusiFahrpult getMapZusi(){
-        return new PetrinetRe420MapZusiFahrpult();
+        return mapZusi;
     }
 
 }
