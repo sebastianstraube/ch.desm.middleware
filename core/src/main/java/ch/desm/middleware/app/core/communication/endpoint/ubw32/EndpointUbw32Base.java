@@ -3,11 +3,10 @@ package ch.desm.middleware.app.core.communication.endpoint.ubw32;
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232;
 import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232Config;
-import ch.desm.middleware.app.core.communication.endpoint.rs232.EndpointRs232ListenerInterface;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public abstract class EndpointUbw32Base extends EndpointCommon {
+public abstract class EndpointUbw32Base extends EndpointCommon<EndpointUbw32Message> {
 
     private static Logger LOGGER = Logger.getLogger(EndpointUbw32Base.class);
 

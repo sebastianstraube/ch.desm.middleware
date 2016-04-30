@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 
-public class PetrinetOmEndpoint extends EndpointCommon {
+public class PetrinetOmEndpoint extends EndpointCommon<Bucket> {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetOmEndpoint.class);
 
@@ -55,9 +55,8 @@ public class PetrinetOmEndpoint extends EndpointCommon {
     }
 
     @Override
-    public void onIncomingEndpointMessage(String jsonMessage){
+    public void onIncomingEndpointMessage(Bucket bucket){
         try {
-            Bucket bucket = service.getDecoder().decode(jsonMessage);
             String message = service.getComponentMapMiddleware().getValueForKey(bucket.getName());
             if(!message.isEmpty()){
                 final String parameter = MessageBase.mapBoolToOnOffParameter(bucket.getTokenCount() > 0);
@@ -65,7 +64,7 @@ public class PetrinetOmEndpoint extends EndpointCommon {
                 service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
             }
         } catch (ClassCastException e) {
-            LOGGER.log(Level.ERROR, "Error on message: " + jsonMessage + "with: " + e);
+            LOGGER.log(Level.ERROR, "Error on message: " + bucket + "with: " + e);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }

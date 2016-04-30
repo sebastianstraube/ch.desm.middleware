@@ -1,6 +1,7 @@
 package ch.desm.middleware.app.module.obermatt;
 
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32Message;
 import ch.desm.middleware.app.module.obermatt.map.OmMapUbw32Analog;
 import ch.desm.middleware.app.module.obermatt.map.OmMapUbw32Digital;
 import org.apache.log4j.Level;
@@ -31,7 +32,7 @@ public class OmEndpointUbw32 extends EndpointUbw32 {
     }
 
     @Override
-    public void onIncomingEndpointMessage(String message) {
+    public void onIncomingEndpointMessage(EndpointUbw32Message message) {
         LOGGER.log(Level.TRACE, "endpoint (" + getSerialPortName() + ") received message: " + message);
 
         service.getProcessor().processEndpointMessage(service, message);

@@ -13,7 +13,7 @@ import ch.desm.middleware.app.common.UtilityHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public abstract class EndpointTcpClient extends EndpointCommon {
+public abstract class EndpointTcpClient extends EndpointCommon<String> {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpClient.class);
 

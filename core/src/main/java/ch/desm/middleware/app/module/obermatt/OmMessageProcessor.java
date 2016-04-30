@@ -96,12 +96,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
         return false;
     }
 
-    public void processEndpointMessage(OmService service, String rawEndpointMessage) {
-        EndpointUbw32Message ubw32Message = EndpointUbw32Message.decode(rawEndpointMessage);
-        if (ubw32Message == null) {
-            return;
-        }
-
+    public void processEndpointMessage(OmService service, EndpointUbw32Message ubw32Message) {
         final String pinName = ubw32Message.getRegister().name();
 
         final String globalId;

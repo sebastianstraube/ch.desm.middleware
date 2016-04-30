@@ -6,7 +6,7 @@ import ch.desm.middleware.app.core.communication.message.MessageBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public class PetrinetRe420Endpoint extends EndpointCommon {
+public class PetrinetRe420Endpoint extends EndpointCommon<Bucket> {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetRe420Endpoint.class);
 
@@ -54,19 +54,18 @@ public class PetrinetRe420Endpoint extends EndpointCommon {
     }
 
     @Override
-    public void onIncomingEndpointMessage(String jsonMessage){
+    public void onIncomingEndpointMessage(Bucket bucket){
         try {
-            Bucket bucket = service.getDecoder().decode(jsonMessage);
             String message = service.getComponentMapMiddleware().getValueForKey(bucket.getName());
             if(!message.isEmpty()){
                 final String parameter = MessageBase.mapBoolToOnOffParameter(bucket.getTokenCount() > 0);
                 message = message.replace(MessageBase.MESSAGE_PARAMETER_PLACEHOLDER, parameter);
                 service.getProcessor().processEndpointMessage(service.getBrokerClient(), message, MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
             }else{
-                LOGGER.log(Level.WARN, "component map lookup failed with message: " + jsonMessage);
+                LOGGER.log(Level.WARN, "component map lookup failed with message: " + bucket);
             }
         } catch (ClassCastException e) {
-            LOGGER.log(Level.ERROR, "Error on message: " + jsonMessage + "with: " + e);
+            LOGGER.log(Level.ERROR, "Error on message: " + bucket + "with: " + e);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, e);
         }

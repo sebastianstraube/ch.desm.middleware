@@ -89,15 +89,10 @@ public class PetrinetOmEndpointExportThread extends Thread {
         }
     }
 
+    // TODO: wtf? something is wrong with the delegateLockBroker here!
     public void delegateToBroker(Bucket changedPlace, boolean isAccessedFromDelayThread){
         synchronized(delegateLockBroker){
-            try{
-                // TODO: wtf! why is this encoded into json and then decoded again in the next function?
-                String encodedMessage = service.getEncoder().encode(changedPlace);
-                service.getEndpoint().onIncomingEndpointMessage(encodedMessage);
-            } catch (EncodeException e) {
-            LOGGER.log(Level.ERROR, e);
-            }
+            service.getEndpoint().onIncomingEndpointMessage(changedPlace);
         }
     }
 

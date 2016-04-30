@@ -98,7 +98,7 @@ public class EndpointUbw32MessageHandler implements Runnable, EndpointRs232Liste
                     LOGGER.log(Level.INFO, "cache state changed on ubw(" + serialEndpoint.getSerialPortName() + "): " + ubw32Message);
                 }
 
-                ubw32Endpoint.onIncomingEndpointMessage(ubw32Message.encode());
+                ubw32Endpoint.onIncomingEndpointMessage(ubw32Message);
             }
         }
     }

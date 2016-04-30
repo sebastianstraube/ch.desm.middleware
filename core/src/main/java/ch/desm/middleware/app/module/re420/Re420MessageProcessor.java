@@ -27,12 +27,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 		}
 	}
 
-	public void processEndpointMessage(Re420Service service, String rawEndpointMessage){
-		EndpointUbw32Message ubw32Message = EndpointUbw32Message.decode(rawEndpointMessage);
-		if(ubw32Message == null) {
-			return;
-		}
-
+	public void processEndpointMessage(Re420Service service, EndpointUbw32Message ubw32Message){
 		final ComponentMapBase map;
 		final String parameterValue;
 		if (ubw32Message instanceof EndpointUbw32MessageAnalog) {

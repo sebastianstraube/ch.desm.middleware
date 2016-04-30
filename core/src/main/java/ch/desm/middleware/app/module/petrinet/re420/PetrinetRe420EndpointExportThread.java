@@ -81,14 +81,10 @@ public class PetrinetRe420EndpointExportThread extends Thread {
         }
     }
 
+    // TODO: why do we need the delegateLockBroker here?
     public void delegateToBroker(Bucket changedPlace, boolean isAccessedFromDelayThread){
         synchronized(delegateLockBroker){
-            try{
-                String encodedMessage = service.getEncoder().encode(changedPlace);
-                service.getEndpoint().onIncomingEndpointMessage(encodedMessage);
-            } catch (EncodeException e) {
-            LOGGER.log(Level.ERROR, e);
-            }
+            service.getEndpoint().onIncomingEndpointMessage(changedPlace);
         }
     }
 

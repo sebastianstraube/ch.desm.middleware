@@ -1,6 +1,7 @@
 package ch.desm.middleware.app.module.re420;
 
 import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32Message;
 import ch.desm.middleware.app.module.re420.map.Re420MapUbw32Analog;
 import ch.desm.middleware.app.module.re420.map.Re420MapUbw32Digital;
 import org.apache.log4j.Level;
@@ -45,7 +46,7 @@ public class Re420EndpointUbw32 extends EndpointUbw32 {
 	 * @param message
 	 */
 	@Override
-	public void onIncomingEndpointMessage(String message) {
+	public void onIncomingEndpointMessage(EndpointUbw32Message message) {
 		LOGGER.log(Level.TRACE, "endpoint (" + getSerialPortName() + ") received message: " + message);
 
 		service.getMessageProcessor().processEndpointMessage(service, message);

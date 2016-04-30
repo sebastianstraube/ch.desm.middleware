@@ -27,30 +27,6 @@ public abstract class EndpointUbw32Message<T> {
 
     protected abstract boolean isRegisterValueEqual(T value);
 
-    // TODO: get rid of String<->Message conversion and fix EndpointCommonListenerInterface instead!
-    public abstract String encode();
-
-    public static EndpointUbw32Message decode(String string) {
-        String[] parts = string.split("#");
-        if (parts.length != 3) {
-            throw new RuntimeException("Message must contain three parts");
-        }
-
-        EndpointUbw32Register pin = EndpointUbw32Register.valueOf(parts[1]);
-        if (pin == null) {
-            throw new RuntimeException("unable to detect register for message " + string);
-        }
-
-        switch (parts[0]) {
-            case "A":
-                return new EndpointUbw32MessageAnalog(pin, EndpointUbw32MessageAnalog.decodeValue(parts[2]));
-            case "D":
-                return new EndpointUbw32MessageDigital(pin, EndpointUbw32MessageDigital.decodeValue(parts[2]));
-            default:
-                throw new RuntimeException("Received message with unknown type " + string);
-        }
-    }
-
     @Override
     public String toString() {
         return "EndpointUbw32Message{" +
