@@ -113,7 +113,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
         } else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
             globalId = mapDigital.getKeyForValue(pinName);
             Boolean pinValue = ((EndpointUbw32MessageDigital) ubw32Message).getRegisterValue();
-            parameterValue = String.valueOf(pinValue ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF);
+            parameterValue = MessageBase.mapBoolToOnOffParameter(pinValue);
         } else {
             throw new RuntimeException("uhm. unknown message!");
         }

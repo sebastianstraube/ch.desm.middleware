@@ -44,6 +44,10 @@ public class MessageBase{
         return middlewareMessage.replace(MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
     }
 
+    public static String mapBoolToOnOffParameter(Boolean v) {
+        return v ? MESSAGE_PARAMETER_ON : MESSAGE_PARAMETER_OFF;
+    }
+
     public static String mapOnOffParameterTo10String(String value) {
         return String.valueOf(mapOnOffParameterTo10(value));
     }

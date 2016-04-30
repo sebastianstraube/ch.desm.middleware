@@ -40,7 +40,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 		} else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
 			map = service.getMapDigital();
 			Boolean pinValue = ((EndpointUbw32MessageDigital)ubw32Message).getRegisterValue();
-			parameterValue = pinValue ? MessageBase.MESSAGE_PARAMETER_ON : MessageBase.MESSAGE_PARAMETER_OFF;
+			parameterValue = MessageBase.mapBoolToOnOffParameter(pinValue);
 		} else {
 			throw new RuntimeException("uhm. unknown message!");
 		}
