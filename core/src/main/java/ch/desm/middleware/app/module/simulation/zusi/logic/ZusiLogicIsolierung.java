@@ -23,12 +23,6 @@ public class ZusiLogicIsolierung {
     public static String[] ISOLIERUNGEN = {LOGIC_ISOLIERUNG_BELEGEN_CE, LOGIC_ISOLIERUNG_BELEGEN_TMP, LOGIC_ISOLIERUNG_BELEGEN_EGF, LOGIC_ISOLIERUNG_BELEGEN_1, LOGIC_ISOLIERUNG_BELEGEN_EF, LOGIC_ISOLIERUNG_BELEGEN_CD};
 
     private static Logger LOGGER = Logger.getLogger(ZusiLogicIsolierung.class);
-    private Object trainPositionLock;
-    private static String[] TRAIN_POSITION = new String[ISOLIERUNGEN.length];
-
-    public ZusiLogicIsolierung(){
-        this.trainPositionLock = new Object();
-    }
 
     /**
      *
@@ -59,49 +53,36 @@ public class ZusiLogicIsolierung {
         return getGlobalId(gesamtweg - TRAIN_LENGTH);
     }
 
-    protected ArrayList<String> getAllIsoOcc(int gesamtweg){
-        synchronized (trainPositionLock){
-            String occZugspitze = getIsoOccZugspitze(gesamtweg);
-            String occZugschluss = getIsoOccZugschluss(gesamtweg);
+    protected List<String> getAllIsoOcc(int gesamtweg){
+        final List<String> result = new ArrayList<>(ISOLIERUNGEN.length);
+        final String occZugspitze = getIsoOccZugspitze(gesamtweg);
+        final String occZugschluss = getIsoOccZugschluss(gesamtweg);
+
+        if(occZugspitze.equalsIgnoreCase(occZugschluss)) {
+            result.add(occZugspitze);
+        } else {
             boolean start = false;
             boolean end = false;
-
-            if(occZugspitze.equalsIgnoreCase(occZugschluss)){
-                TRAIN_POSITION[0] = occZugspitze;
-            }else{
-                for(int i=0; i< ISOLIERUNGEN.length; i++){
-                    if((occZugschluss.equalsIgnoreCase(ISOLIERUNGEN[i])) && !start){
-                        TRAIN_POSITION[i] = ISOLIERUNGEN[i];
-                        end = true;
-                    }else if(occZugspitze.equalsIgnoreCase(ISOLIERUNGEN[i])){
-                        TRAIN_POSITION[i] = ISOLIERUNGEN[i];
-                        start = true;
-                    }else if(end && !start){
-                        TRAIN_POSITION[i] = ISOLIERUNGEN[i];
-                    }else{
-                        TRAIN_POSITION[i] = "";
-                    }
+            for (int i = 0; i < ISOLIERUNGEN.length; i++) {
+                if ((occZugschluss.equalsIgnoreCase(ISOLIERUNGEN[i])) && !start) {
+                    result.add(ISOLIERUNGEN[i]);
+                    end = true;
+                } else if (occZugspitze.equalsIgnoreCase(ISOLIERUNGEN[i])) {
+                    result.add(ISOLIERUNGEN[i]);
+                    start = true;
+                } else if (end && !start) {
+                    result.add(ISOLIERUNGEN[i]);
                 }
             }
-
-            return new ArrayList<String>(Arrays.asList(trimList(TRAIN_POSITION)));
         }
+
+        return result;
     }
 
-    private static String[] trimList(String[] list){
-        List<String> tmp = new ArrayList<>();
-        for(int i=0; i<list.length; i++){
-            if(list[i] != null && !list[i].isEmpty()){
-                tmp.add(list[i]);
-            }
-        }
-        return (String[])tmp.toArray();
-    }
+    public List<String> getAllIsoMwm(ZusiService service, int gesamtweg){
 
-    public ArrayList getAllIsoMwm(ZusiService service, int gesamtweg){
-
-        ArrayList messages = new ArrayList();
-        ArrayList occ = getAllIsoOcc(gesamtweg);
+        List<String> messages = new ArrayList<>();
+        List<String> occ = getAllIsoOcc(gesamtweg);
 
         for(int i=0; i< ISOLIERUNGEN.length; i++){
             String mwMessage = service.getComponentMapMiddleware().getValueForKey(ISOLIERUNGEN[i]);

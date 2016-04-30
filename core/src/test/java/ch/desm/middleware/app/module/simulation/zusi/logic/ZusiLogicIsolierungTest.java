@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 //Register = AN, Pin = 0
 public class ZusiLogicIsolierungTest extends ZusiLogicIsolierung {
@@ -72,9 +73,9 @@ public class ZusiLogicIsolierungTest extends ZusiLogicIsolierung {
          if(value >= 3092 && value < 3182){globalId = isolierungen[3];} else //OML_Iso_ef_$belegen
         */
         int gesamtweg = 3180;
-        ArrayList<String> listOccIso= new ArrayList<>(Arrays.asList(ZusiLogicIsolierung.LOGIC_ISOLIERUNG_BELEGEN_EF));
-        ArrayList<String> listCmp = getAllIsoOcc(gesamtweg);
-        boolean b = listOccIso.equals(listCmp);
+        List<String> listOccIso= new ArrayList<>(Arrays.asList(ZusiLogicIsolierung.LOGIC_ISOLIERUNG_BELEGEN_EF));
+        List<String> listCmp = getAllIsoOcc(gesamtweg);
+        boolean b = listOccIso.equals(listCmp); // TODO: does this really compare each element with string equals?
 
         LOGGER.log(Level.INFO, "(true) test all occupied isolierung with gesamtweg: " + gesamtweg + " is: " + b);
         Assert.assertEquals(true, b);
@@ -90,13 +91,13 @@ public class ZusiLogicIsolierungTest extends ZusiLogicIsolierung {
         ZusiService service = new ZusiService();
         int gesamtweg = 3180;
 
-        ArrayList cmp = new ArrayList();
+        List<String> cmp = new ArrayList<>();
         cmp.add("logic_iso_ce_belegen;;;isolierung;ce;belegen;zusi_ausbildung;B;off;");
         cmp.add("logic_iso_egf_belegen;;;isolierung;egf;belegen;zusi_ausbildung;B;off;");
         cmp.add("logic_iso_1_belegen;;;isolierung;1;belegen;zusi_ausbildung;B;off;");
         cmp.add("logic_iso_ef_belegen;;;isolierung;ef;belegen;zusi_ausbildung;B;on;");
         cmp.add("logic_iso_cd_belegen;;;isolierung;cd;belegen;zusi_ausbildung;B;off;");
-        ArrayList l = getAllIsoMwm(service, gesamtweg);
+        List<String> l = getAllIsoMwm(service, gesamtweg);
         boolean b = cmp.equals(l);
         LOGGER.log(Level.INFO, "(true) test occupied isolierung middleware messages: " + b);
         Assert.assertEquals(true, b);
