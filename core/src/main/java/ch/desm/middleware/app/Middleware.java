@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class Middleware extends Thread {
+public class Middleware {
 
     private static Logger LOGGER = Logger.getLogger(Middleware.class);
 
@@ -30,7 +30,7 @@ public class Middleware extends Thread {
         this.config = config;
     }
 
-    public void run() {
+    public void start() {
         for (String module : config.getEnabledModules()) {
             startModule(module);
         }
