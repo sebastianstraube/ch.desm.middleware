@@ -111,7 +111,7 @@ public class EndpointUbw32MessageParser {
         }
 
         final EndpointUbw32Register pin = parsePin(commandParts[1], commandParts[2]);
-        final Boolean pinValue = (responseParts[1] == "1");
+        final Boolean pinValue = responseParts[1].equals("1");
         result.add(new EndpointUbw32MessageDigital(pin, pinValue));
     }
 
