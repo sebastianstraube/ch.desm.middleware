@@ -71,7 +71,7 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
     }
 
     private void addAllPlacesToChangedPlaces(List<Bucket> base){
-        refreshChangedPlacesList(base, new LinkedList<>());
+        refreshChangedPlacesList(base, new LinkedList<Bucket>());
     }
 
     public void addChangedPlace(Bucket bucket){
