@@ -73,8 +73,6 @@ public class EndpointUbw32MessageHandler implements Runnable, EndpointRs232Liste
                 rawResponse.remove(0);
             }
 
-            // TODO: move response parsing to separate thread!
-
             final String response;
             switch (rawResponse.size()) {
                 case 1: // raw response is just OK
@@ -87,19 +85,27 @@ public class EndpointUbw32MessageHandler implements Runnable, EndpointRs232Liste
                     throw new RuntimeException("Response must be either OK or data with OK");
             }
 
-            List<EndpointUbw32Message> ubw32Messages = parser.parseResponse(command, response);
-            for (EndpointUbw32Message ubw32Message : ubw32Messages) {
-                if (!boardState.updatePinState(ubw32Message)) {
-                    continue;
-                }
+            System.out.println(">>>>>>>> " + command + " => " + response);
+            // TODO: move command processing to separate thread!
+            processCommandResponse(command, response);
+        }
+    }
 
-                // E3 is the blinking usb status led
-                if (ubw32Message.getRegister() != EndpointUbw32Register.E3) {
-                    LOGGER.log(Level.INFO, "cache state changed on ubw(" + serialEndpoint.getSerialPortName() + "): " + ubw32Message);
-                }
-
-                ubw32Endpoint.onIncomingEndpointMessage(ubw32Message);
+    // is public to allow emulating responses from the controller.
+    public void processCommandResponse(String command, String response) {
+        List<EndpointUbw32Message> ubw32Messages = parser.parseResponse(command, response);
+        for (EndpointUbw32Message ubw32Message : ubw32Messages) {
+            final boolean didChange =boardState.updatePinState(ubw32Message);
+            if (!didChange) {
+                continue;
             }
+
+            // E3 is the blinking usb status led
+            if (ubw32Message.getRegister() != EndpointUbw32Register.E3) {
+                LOGGER.log(Level.INFO, "cache state changed on ubw(" + serialEndpoint.getSerialPortName() + "): " + ubw32Message);
+            }
+
+            ubw32Endpoint.onIncomingEndpointMessage(ubw32Message);
         }
     }
 

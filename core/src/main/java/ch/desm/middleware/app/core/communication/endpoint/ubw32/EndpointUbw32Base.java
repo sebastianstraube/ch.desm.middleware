@@ -29,6 +29,10 @@ public abstract class EndpointUbw32Base extends EndpointCommon<EndpointUbw32Mess
         serialEndpoint.init();
     }
 
+    public EndpointUbw32MessageHandler getHandler() {
+        return handler;
+    }
+
     public String getSerialPortName() {
         return serialEndpoint.getSerialPortName();
     }
