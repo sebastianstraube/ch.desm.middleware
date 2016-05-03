@@ -1,6 +1,8 @@
 package ch.desm.middleware.app.module.petrinet.obermatt;
 
 import java.util.*;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import ch.desm.middleware.app.common.FrequencyLimiter;
 import org.apache.log4j.Level;
@@ -12,12 +14,7 @@ import javax.websocket.EncodeException;
 
 public class PetrinetOmEndpointExportThread extends Thread {
 
-    private static Logger LOGGER = Logger.getLogger(PetrinetOmEndpointExportThread.class);
-
-    private static final Float PETRINET_SIMULATION_FREQ = 25.0f;
-
-    private final Object pendingSensorEventsLock = new Object();
-    private final Map<String, Integer> pendingSensorEvents = new HashMap<>();
+    private final BlockingDeque<Bucket> pendingSensorEventsQueue = new LinkedBlockingDeque<>();
     private PetrinetOmService service;
     private PetrinetOmEndpointExportAdapter petrinetAdapter;
 
@@ -35,14 +32,7 @@ public class PetrinetOmEndpointExportThread extends Thread {
     }
 
     public void setSensor(String signalName, boolean value) {
-        synchronized (pendingSensorEventsLock) {
-            final Integer currValue = pendingSensorEvents.get(signalName);
-            final Integer actualValue = (currValue != null) ? currValue : 0;
-            final Integer diffValue = value ? 1 : -1;
-            // TODO: clamp to 1 or allow more than one token per signal/bucket?
-            final Integer newValue = clamp(actualValue + diffValue, 0, 1);
-            pendingSensorEvents.put(signalName, newValue);
-        }
+        pendingSensorEventsQueue.add(new Bucket(signalName, value ? 1 : 0));
     }
 
     private int clamp(int value, int min, int max) {
@@ -50,21 +40,24 @@ public class PetrinetOmEndpointExportThread extends Thread {
     }
 
     public void run() {
-        final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(PETRINET_SIMULATION_FREQ);
+        // one initial petrinet run
+        simulatePetriNet();
+        delegateChangedPlaces();
 
-        while (!isInterrupted()) {
-            final long startMillis = System.currentTimeMillis();
+        try {
+            while (!isInterrupted()) {
+                final Bucket bucket = popPendingSensorEvents();
+                if (bucket == null) {
+                    Thread.sleep(1);
+                    continue;
+                }
 
-            simulatePetriNet();
-            delegatePendingSensorEvents();
-            delegateChangedPlaces();
-
-            try {
-                frequencyLimiter.ensureLimit(startMillis);
-            } catch (InterruptedException e) {
-                LOGGER.log(Level.ERROR, e);
-                break;
+                delegateToEndpoint(bucket.getName(), bucket.getTokenCount(), false);
+                simulatePetriNet();
+                delegateChangedPlaces();
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -74,16 +67,8 @@ public class PetrinetOmEndpointExportThread extends Thread {
         }
     }
 
-    private void delegatePendingSensorEvents() {
-        Map<String, Integer> pendingSensorEventsCopy = new HashMap<>();
-        synchronized (pendingSensorEventsLock) {
-            pendingSensorEventsCopy.putAll(pendingSensorEvents);
-            pendingSensorEvents.clear();
-        }
-
-        for (Map.Entry<String, Integer> sensorEvent : pendingSensorEventsCopy.entrySet()) {
-            delegateToEndpoint(sensorEvent.getKey(), sensorEvent.getValue(), false);
-        }
+    private Bucket popPendingSensorEvents() {
+        return pendingSensorEventsQueue.poll();
     }
 
     private void delegateChangedPlaces() {
