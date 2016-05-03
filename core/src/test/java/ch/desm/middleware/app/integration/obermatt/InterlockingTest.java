@@ -16,8 +16,10 @@ import java.util.List;
 public class InterlockingTest {
 
     public static final List<ReplayEvent> INIT_REPLAY_EVENTS = Arrays.asList(
-            new ReplayEvent(0, "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;#"),
-            new ReplayEvent(0, "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;#")
+            new ReplayEvent(0000, "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;init;#"),
+            new ReplayEvent(1000, "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;#"),
+            new ReplayEvent(5000, "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;#"),
+            new ReplayEvent(8000, "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;start;#")
     );
 
     private Broker broker;
@@ -38,10 +40,10 @@ public class InterlockingTest {
     @Test
     public void shouldTriggerF4FastEnought() throws InterruptedException {
         final EndpointUbw32MessageHandler handler = ubw32OmService.getEndpoint().getHandler();
-        final String command = "I";
-        final String maskOn =  "I,32785,09224,00000,03104,00143,00024,00268";
-        final String maskOff = "I,32785,09224,00000,01056,00143,00024,00268";
-        for(int i = 0; i < 500; ++i) {
+        final String command = "PI,D,11";
+        final String maskOn =  "PI,1";
+        final String maskOff = "PI,1";
+        for(int i = 0; i < 20; ++i) {
             handler.processCommandResponse(command, maskOn);
             Thread.sleep(10);
             handler.processCommandResponse(command, maskOff);
