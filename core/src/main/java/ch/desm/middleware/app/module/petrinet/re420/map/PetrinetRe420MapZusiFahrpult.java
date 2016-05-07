@@ -7,11 +7,6 @@ import java.util.Map;
 public class PetrinetRe420MapZusiFahrpult extends ComponentMapBase{
 
 	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
-	@Override
 	protected void init(){
 		map.put("cabine_re420_totmannpedal_$on","0200-0A01-0100::0100:1000,0200:0000,0300:0100,0400:0000,0500:00000000"); //
 		map.put("cabine_re420_totmannpedal_$off","0200-0A01-0100::0100:1000,0200:0000,0300:0200,0400:0000,0500:00000000"); //

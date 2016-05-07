@@ -8,7 +8,9 @@ public class OmLogicFahrstrassenSchalter {
 
 	private static Logger LOGGER = Logger.getLogger(OmLogicFahrstrassenSchalter.class);
 	
-	public String getglobalId(int value){
+	public String getglobalId(Double percentValue) {
+		int value = (int)Math.round(percentValue * 1023);
+
 		String globalId = "";
 
         LOGGER.log(Level.TRACE, this.getClass().getName() + "processing value: " + value);

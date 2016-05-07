@@ -11,11 +11,6 @@ import java.util.Map;
 public class ZusiMapParameterDataType extends ComponentMapBase {
 
     @Override
-    public Map<String, String> getMap() {
-        return map;
-    }
-
-    @Override
     protected void init(){
         //map.put("0300-1400-0100::0100", ZusiParameterConverter.ZUSINUMBERFORMAT_SINGLE);
         map.put("0300-1400-0100::0200", ZusiMessageParameterHelper.ZUSINUMBERFORMAT_SINGLE);

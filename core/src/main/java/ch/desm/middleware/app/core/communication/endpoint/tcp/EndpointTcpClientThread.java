@@ -41,7 +41,7 @@ public class EndpointTcpClientThread extends EndpointThreadBase {
                     endpoint.receiveEvent(inBuffer);
                 }else{
                     LOGGER.log(Level.INFO, "try to receive event in "+this.toString()+", but endpoint is disconnected: " + endpoint.toString());
-                    doHangout(1000*10);
+                    Thread.sleep(1000*10);
                 }
             } catch (IOException e) {
                 LOGGER.log(Level.ERROR, e);

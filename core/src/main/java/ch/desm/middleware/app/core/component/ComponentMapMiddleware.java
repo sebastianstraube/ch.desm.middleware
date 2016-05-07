@@ -9,7 +9,6 @@ import ch.desm.middleware.app.module.gui.map.ManagementMapMiddleware;
 import ch.desm.middleware.app.module.petrinet.obermatt.map.PetrinetOmMapMiddleware;
 import ch.desm.middleware.app.module.petrinet.re420.map.PetrinetRe420MapMiddleware;
 import ch.desm.middleware.app.module.simulation.zusi.map.ZusiMapAusbildungMiddleware;
-import ch.desm.middleware.app.module.simulation.zusi.map.ZusiMapCabineRe420;
 import ch.desm.middleware.app.module.simulation.zusi.map.ZusiMapFahrpultMiddleware;
 import ch.desm.middleware.app.module.simulation.zusi.map.ZusiMapPetrinetRe420;
 
@@ -17,11 +16,6 @@ import java.util.Map;
 
 public class ComponentMapMiddleware extends ComponentMapBase {
 
-	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-	
 	@Override
 	protected void init(){
         //petrinet re420

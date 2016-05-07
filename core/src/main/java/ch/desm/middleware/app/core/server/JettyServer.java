@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.core.server;
 
-import ch.desm.middleware.app.common.ThreadBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
@@ -12,7 +11,7 @@ import java.net.InetSocketAddress;
 /**
  * Created by Sebastian on 21.10.2014.
  */
-public class JettyServer extends ThreadBase {
+public class JettyServer extends Thread {
 
     private InetSocketAddress inetSocketAddress;
     private String targetDir;
@@ -23,7 +22,7 @@ public class JettyServer extends ThreadBase {
 
     public JettyServer(String projectDir){
         this.inetSocketAddress = new InetSocketAddress("0.0.0.0", 8071);
-        targetDir = File.separator+"target"+File.separator+"artifacts"+File.separator+"core_war_exploded";
+        targetDir = File.separator+"target"+File.separator+"core-0.1";
         tempDir = targetDir+ File.separator+"tmp";
         warDir = projectDir + targetDir;
         descriptorDir = projectDir + targetDir+File.separator+"WEB-INF"+File.separator+"web.xml";

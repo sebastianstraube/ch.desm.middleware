@@ -8,20 +8,18 @@ import jssc.SerialPortException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class EndpointRs232 extends EndpointCommon implements
-		SerialPortEventListener {
+// TODO: is not a real endpoint any longer!
+public class EndpointRs232 implements SerialPortEventListener {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointRs232.class);
 	
 	protected SerialPort serialPort;
 	protected EndpointRs232Config config;
 	private Object writeLock = new Object();
-
-	public static enum EnumSerialPorts {
-		COM1, COM2, COM3, COM4, COM5, COM6, COM7, COM8, COM9, COM10, COM11, COM12, COM13, COM14, COM15, COM16, COM17, COM18, COM19, COM20, COM21, COM22, COM23, COM24, COM25, COM26, COM27, COM28, COM29, COM30, COM31, COM32, COM33, COM34, COM35, COM36, COM37, COM38
-	}
+	private List<EndpointRs232ListenerInterface> listenerList = new ArrayList<>();
 
 	public EndpointRs232(String port, EndpointRs232Config config) {
 		this.serialPort = new SerialPort(port);
@@ -29,25 +27,20 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	}
 
 	/**
-	 * 
-	 */
-	public void testSeriaPort() {
-        try {
-            sendStream("Write Test to Serialport ..." + serialPort.getPortName() + "\r\n");
-        } catch (SerialPortException e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-    }
-
-	/**
-	 * 
+	 *
 	 */
 	public String getSerialPortName() {
 		return serialPort.getPortName();
 	}
 
+	// TODO: wrap the listener interface!
+	public void addSerialPortEventListener(EndpointRs232ListenerInterface listener) {
+		listenerList.add(listener);
+
+	}
+
 	/**
-	 * 
+	 *
 	 */
 	public void init() {
 
@@ -90,7 +83,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * @param stream
 	 * @throws SerialPortException
 	 */
-	protected void sendStream(String stream) throws SerialPortException {
+	public void sendStream(String stream) throws SerialPortException {
 		synchronized (writeLock){
             if (stream != null && !stream.isEmpty() && serialPort.writeString(stream)) {
 
@@ -107,7 +100,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * @param stream
 	 * @throws SerialPortException
 	 */
-	protected void sendStream(byte[] stream) throws SerialPortException {
+	public void sendStream(byte[] stream) throws SerialPortException {
         synchronized (writeLock) {
             if (stream != null && serialPort.writeBytes(stream)) {
 
@@ -124,7 +117,7 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 	 * @param stream
 	 * @throws SerialPortException
 	 */
-	protected void sendStream(int[] stream) throws SerialPortException {
+	public void sendStream(int[] stream) throws SerialPortException {
         synchronized (writeLock) {
             if (stream != null && serialPort.writeIntArray(stream)) {
 
@@ -135,35 +128,14 @@ public abstract class EndpointRs232 extends EndpointCommon implements
         }
 	}
 
-	@Override
-	/**
-	 * this listener receives a command from UBW32
-	 * 
-	 * @param SerialPortEvent event
-	 */
-	public synchronized void serialEvent(SerialPortEvent event) {
-		String message = this.getSerialPortMessage(event);
-		
-		LOGGER.log(Level.DEBUG, "received serial port message on port: " + this.serialPort.getPortName() + " with message: " + message);
-		
-		onIncomingEndpointMessage(message);
-	}
-
-	protected String getSerialPortMessage(SerialPortEvent event) {
-		String message = "";
-
+	protected String readDataFromSerialPort(SerialPortEvent event) {
 		if (event.isRXCHAR()) {
-
-			if (event.getEventValue() > 1) {
+			final int numAvailableBytes = event.getEventValue();
+			if (numAvailableBytes > 0) {
 				try {
-					byte buffer[] = serialPort.readBytes();
-
-					for (int i = 0; i < buffer.length; i++) {
-						message += (char) buffer[i];
-					}
-					
+					return new String(serialPort.readBytes());
 				} catch (SerialPortException ex) {
-					ex.printStackTrace();
+					LOGGER.log(Level.ERROR, ex);
 				}
 			}
 		}
@@ -184,6 +156,23 @@ public abstract class EndpointRs232 extends EndpointCommon implements
 			}
 		}
 
-		return message;
+		return null;
+	}
+
+	@Override
+	/**
+	 * this listener receives a command from UBW32
+	 *
+	 * @param SerialPortEvent event
+	 */
+	public void serialEvent(SerialPortEvent event) {
+		final String data = readDataFromSerialPort(event);
+		if (data == null || data.isEmpty()) {
+			return;
+		}
+
+		for (EndpointRs232ListenerInterface listener : listenerList) {
+			listener.onData(data);
+		}
 	}
 }

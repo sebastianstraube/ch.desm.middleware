@@ -1,14 +1,17 @@
 package ch.desm.middleware.app.core.communication.message.translator;
 
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessage;
+import ch.desm.middleware.app.core.communication.message.MessageCommonEncoder;
 
 /**
  * Created by Sebastian on 23.10.2014.
  */
 public class MessageTranslatorWebsocket {
 
-    public MessageWebsocket toCharacterStream(MessageMiddleware message){
-        return new MessageWebsocket(message.getTopic(), message.getPayload());
+    private final MessageCommonEncoder encoder = new MessageCommonEncoder();
+
+    public EndpointWebsocketMessage toCharacterStream(MessageCommon message){
+        return new EndpointWebsocketMessage(message.getTopic(), encoder.encode(message));
     }
 }

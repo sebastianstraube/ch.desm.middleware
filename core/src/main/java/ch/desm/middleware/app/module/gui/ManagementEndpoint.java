@@ -2,7 +2,7 @@ package ch.desm.middleware.app.module.gui;
 
 import ch.desm.middleware.app.core.communication.endpoint.EndpointCommon;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageDecoder;
-import ch.desm.middleware.app.core.communication.message.MessageWebsocket;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -10,10 +10,9 @@ import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
 
-public class ManagementEndpoint extends EndpointCommon {
+public class ManagementEndpoint extends EndpointCommon<EndpointWebsocketMessage> {
 
-    private static final Logger LOGGER = Logger
-            .getLogger(ManagementEndpoint.class);
+    private static final Logger LOGGER = Logger.getLogger(ManagementEndpoint.class);
 
     private Session webSocketSession;
     private ManagementEndpointThread thread;
@@ -31,19 +30,10 @@ public class ManagementEndpoint extends EndpointCommon {
     }
 
     @Override
-    public void onIncomingEndpointMessage(String message) {
+    public void onIncomingEndpointMessage(EndpointWebsocketMessage message) {
         LOGGER.log(Level.TRACE, "receive endpoint message: " + message);
 
-        try {
-            //check message syntax
-            EndpointWebsocketMessageDecoder decoder = new EndpointWebsocketMessageDecoder();
-            MessageWebsocket messageWebsocket = decoder.decode(message);
-            //publish message
-            service.getProcessor().processEndpointMessage(service.getBrokerClient(), messageWebsocket.getPayload(), messageWebsocket.getTopic());
-        } catch (DecodeException e) {
-            LOGGER.log(Level.ERROR, "wrong format of endpoint message: " + message, e);
-        }
-
+        service.getProcessor().processEndpointMessage(service.getBrokerClient(), message.getPayload(), message.getTopic());
     }
 
     @Override

@@ -18,6 +18,10 @@ public class Re420Service extends ComponentServiceBase {
     private Re420MapZusiFahrpult mapZusi;
     private ComponentMessageProcessorBase componentEndpointUbw32MessageProcessor;
 
+    private final Re420MapPetrinetCabineRe420 re420MapPetrinetCabineRe420 = new Re420MapPetrinetCabineRe420();
+    private final Re420MapUbw32Digital re420MapUbw32Digital = new Re420MapUbw32Digital();
+    private final Re420MapUbw32Analog re420MapUbw32Analog = new Re420MapUbw32Analog();
+
     /**
      *
      * @param broker
@@ -32,7 +36,7 @@ public class Re420Service extends ComponentServiceBase {
     }
 
     public Re420EndpointUbw32 getEndpoint(){
-        return this.endpointUbw;
+        return endpointUbw;
     }
 
     public MessageTranslatorMiddleware getTranslator(){
@@ -53,7 +57,7 @@ public class Re420Service extends ComponentServiceBase {
     }
 
     public Re420MapPetrinetCabineRe420 getMapPetrinetRe420(){
-        return new Re420MapPetrinetCabineRe420();
+        return re420MapPetrinetCabineRe420;
     }
 
     public ComponentMessageProcessorBase getEndpointMessageProcessor(){
@@ -61,10 +65,10 @@ public class Re420Service extends ComponentServiceBase {
     }
 
     public Re420MapUbw32Digital getMapDigital(){
-        return new Re420MapUbw32Digital();
+        return re420MapUbw32Digital;
     }
 
     public Re420MapUbw32Analog getMapAnalog(){
-        return new Re420MapUbw32Analog();
+        return re420MapUbw32Analog;
     }
 }

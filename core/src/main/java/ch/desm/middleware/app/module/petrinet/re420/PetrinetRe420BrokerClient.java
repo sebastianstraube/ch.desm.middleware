@@ -1,8 +1,8 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -32,8 +32,8 @@ public class PetrinetRe420BrokerClient extends ComponentBrokerClientBase {
     }
 
     @Override
-    protected void intializeSignedTopic() {
-        signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-        signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
+    protected void initializeTopicSubscriptions() {
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_MANAGEMENT);
     }
 }

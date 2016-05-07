@@ -1,8 +1,7 @@
 package ch.desm.middleware.app.module.simulation.zusi;
 
-import ch.desm.middleware.app.common.Pair;
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.module.simulation.zusi.protocol.node.ZusiProtocolNode;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -11,11 +10,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class ZusiTestsAll {
 
 	private static Logger LOGGER = Logger.getLogger(ZusiTestsAll.class);
 
+    private Broker broker;
     private ZusiServiceTest service;
 
     public static void main(String args[]){
@@ -24,7 +25,8 @@ public class ZusiTestsAll {
 
     @Before
     public void setUp() throws Exception {
-        service = new ZusiServiceTest(Broker.getInstance(), "7.94.80.35", 1436);
+        broker = new Broker();
+        service = new ZusiServiceTest(broker, "7.94.80.35", 1436);
     }
 
     @Test
@@ -127,7 +129,7 @@ public class ZusiTestsAll {
 
     @Test
     public void testGetConvertToInputCommand() throws Exception{
-        String middlewareMessage = "0200-0A01-0100::0100:11,0200:00,0300:01,0400:00,0500:00;;;hauptschalter;aus;taste n;?;zusi;#";
+        String middlewareMessage = "0200-0A01-0100::0100:11,0200:00,0300:01,0400:00,0500:00;;;hauptschalter;aus;taste n;zusi;b;?;";
         boolean b = service.getZusiProtocolNodeHelperTest().testIntegratedMiddlewareMessage(service, middlewareMessage);
         LOGGER.log(Level.INFO, "(true)test encode decode: " + b);
         Assert.assertEquals(true, b);
@@ -147,14 +149,32 @@ public class ZusiTestsAll {
         Assert.assertEquals(false, b);
     }
 
+    private class TestCase {
+        private final String input;
+        private final String expectedResult;
+
+        public TestCase(String input, String expectedResult) {
+            this.input = input;
+            this.expectedResult = expectedResult;
+        }
+
+        public String getInput() {
+            return input;
+        }
+
+        public String getExpectedResult() {
+            return expectedResult;
+        }
+    }
+
     @Test
     public void testZusiProtocolMessageHelper() throws Exception{
-        LinkedList<Pair<String, String>> streamList = new LinkedList<>();
-        streamList.add(new Pair("00000000030000000000140000000000010006000000010031323334060000000200937874c4060000000300f44d04c40600000004001b9f224406000000050085de3c3e060000000600000000000600000007006b1a78c4060000000800210205c4060000000900ab9d2244060000000a00c6d84f3effffffff00000000010006000000010074657374060000000200ae2caa4406000000030067fcdfc4060000000400fe3f2844060000000500f9201b40060000000600000000000600000007005f91ab44060000000800ed33e1c4060000000900fe3f2844060000000a00cd1d1b40ffffffffffffffffffffffff" + "000000000100000000000200020000000100FF", "00000000030000000000140000000000010006000000010031323334060000000200937874c4060000000300f44d04c40600000004001b9f224406000000050085de3c3e060000000600000000000600000007006b1a78c4060000000800210205c4060000000900ab9d2244060000000a00c6d84f3effffffff00000000010006000000010074657374060000000200ae2caa4406000000030067fcdfc4060000000400fe3f2844060000000500f9201b40060000000600000000000600000007005f91ab44060000000800ed33e1c4060000000900fe3f2844060000000a00cd1d1b40ffffffffffffffffffffffff"));
+        List<TestCase> streamList = new LinkedList<>();
+        streamList.add(new TestCase("00000000030000000000140000000000010006000000010031323334060000000200937874c4060000000300f44d04c40600000004001b9f224406000000050085de3c3e060000000600000000000600000007006b1a78c4060000000800210205c4060000000900ab9d2244060000000a00c6d84f3effffffff00000000010006000000010074657374060000000200ae2caa4406000000030067fcdfc4060000000400fe3f2844060000000500f9201b40060000000600000000000600000007005f91ab44060000000800ed33e1c4060000000900fe3f2844060000000a00cd1d1b40ffffffffffffffffffffffff" + "000000000100000000000200020000000100FF", "00000000030000000000140000000000010006000000010031323334060000000200937874c4060000000300f44d04c40600000004001b9f224406000000050085de3c3e060000000600000000000600000007006b1a78c4060000000800210205c4060000000900ab9d2244060000000a00c6d84f3effffffff00000000010006000000010074657374060000000200ae2caa4406000000030067fcdfc4060000000400fe3f2844060000000500f9201b40060000000600000000000600000007005f91ab44060000000800ed33e1c4060000000900fe3f2844060000000a00cd1d1b40ffffffffffffffffffffffff"));
 
         boolean b = true;
-        for (Pair<String, String> stream : streamList){
-            b = b && service.getZusiProtocolMessageHelperTest().testGetSingleZusiMessage(stream.getLeft(), stream.getRight());
+        for (TestCase stream : streamList){
+            b = b && service.getZusiProtocolMessageHelperTest().testGetSingleZusiMessage(stream.getInput(), stream.getExpectedResult());
             if(!b) break;
         }
         LOGGER.log(Level.INFO, "(true)test get global id: " + b);
@@ -186,7 +206,7 @@ public class ZusiTestsAll {
      */
     @Test
     public void testBrokerClient(){
-        service.getBrokerClient().emulateBrokerMessage("OML_LN_$C26_FB1;OS;;;;;on;petrinet_obermatt;#");
+        service.getBrokerClient().emulateBrokerMessage("OML_LN_$C26_FB1;OS;;;;;on;petrinet_obermatt;");
     }
 
     /**
@@ -195,7 +215,7 @@ public class ZusiTestsAll {
     @Test
     public void testProcessEndpointMessage(){
         String message = "000000000200000000000a00060000000100000000000600000013000000803f060000001900c664e44306000000550000000000ffffffffffffffff";
-        String topic = MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT;
+        String topic = MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT;
         service.getZusiMessageProcessorTest().testProcessEndpointMessage(service, message, topic);
     }
 

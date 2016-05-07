@@ -1,5 +1,6 @@
 package ch.desm.middleware.app.core.communication.endpoint.tcp;
 
+import ch.desm.middleware.app.common.FrequencyLimiter;
 import ch.desm.middleware.app.core.communication.endpoint.EndpointThreadBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -14,7 +15,9 @@ public class EndpointTcpServerThread extends EndpointThreadBase {
 
 	private static Logger LOGGER = Logger.getLogger(EndpointTcpServerThread.class);
 
-	private EndpointTcpServer endpoint;
+	private static final Float POLLING_FREQ = 25.0f;
+
+	private final EndpointTcpServer endpoint;
 
 	public EndpointTcpServerThread(EndpointTcpServer endpoint) {
 		super("EndpointTcpClientThread");
@@ -23,19 +26,25 @@ public class EndpointTcpServerThread extends EndpointThreadBase {
 
 	@Override
 	public void run() {
+		final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(POLLING_FREQ);
 
         while (!isInterrupted()) {
+			final long startMillis = System.currentTimeMillis();
+
 			try {
 				LOGGER.log(Level.TRACE,"Thread active: " + this.getName());
                 handleClientConnection();
                 endpoint.checkClientAlive();
-                doHangout();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (IOException e) {
                 e.printStackTrace();
             }
+
+			try {
+				frequencyLimiter.ensureLimit(startMillis);
+			} catch (InterruptedException e) {
+				LOGGER.log(Level.ERROR, e);
+				break;
+			}
 		}
 	}
 

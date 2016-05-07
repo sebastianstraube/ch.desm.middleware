@@ -11,11 +11,6 @@ import java.util.Map;
 public class ZusiMapParameter extends ComponentMapBase {
 
     @Override
-    public Map<String, String> getMap() {
-        return map;
-    }
-
-    @Override
     protected void init(){
         map.put("0200-0a00::0100", ZusiProtocolConstants.MAP_PARAMETER_VALUE_GESCHWINDIGKEIT);
     }

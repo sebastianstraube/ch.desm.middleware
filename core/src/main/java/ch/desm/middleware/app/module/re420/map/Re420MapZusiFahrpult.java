@@ -14,11 +14,6 @@ public class Re420MapZusiFahrpult extends ComponentMapBase {
 		return map.containsKey(id);
 	}
 
-	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
 	protected void init() {
 		// map.put("S126.1",""); //Haupthahn
 // map.put("S126",""); //Steuerstrom

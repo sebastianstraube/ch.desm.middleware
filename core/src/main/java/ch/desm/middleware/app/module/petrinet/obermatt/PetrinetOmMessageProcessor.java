@@ -1,12 +1,12 @@
 package ch.desm.middleware.app.module.petrinet.obermatt;
 
-import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sebastian on 04.11.2014.
@@ -18,59 +18,101 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     /**
      * @param messages
      */
-    public void processBrokerMessage(PetrinetOmService service, LinkedList<MessageMiddleware> messages) {
-        for(MessageMiddleware message : messages){
+    public void processBrokerMessage(PetrinetOmService service, List<MessageCommon> messages) {
+        for(MessageCommon message : messages){
             processBrokerMessage(service, message);
         }
     }
 
-    private void processBrokerMessage(PetrinetOmService service, MessageMiddleware element){
+    private void processBrokerMessage(PetrinetOmService service, MessageCommon element){
+        switch(element.getTopic().toLowerCase()) {
+            case MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT:
+                processBrokerMessageObermatt(service, element);
+                break;
+            case MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG:
+                processBrokerMessageZusiAusbildung(service, element);
+                break;
+            case MessageCommon.MESSAGE_TOPIC_MANAGEMENT:
+                processBrokerMessageManagement(service, element);
+                break;
+            default:
+                LOGGER.log(Level.WARN, "unsupported topic, broker message delegation skipped: " + element.toString());
+                return;
+        }
+    }
 
-        if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT)){
-            try {
-                String sensorName = service.getMap().mapBrokerToEndpointMessage(element.getGlobalId());
-                int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
-                delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
-            } catch (Exception e) {
-                //LOGGER.log(Level.ERROR, e);
-            }
-        } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG)){
-            try {
-                String sensorName = service.getMapZusi().getKey(element.getGlobalId());
-                int sensorValue = Integer.valueOf(util.getParameterValueEndpoint(element.getParameter()));//element.getParameter().equals("on") ? 1 : 0;
-                delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
-            } catch (Exception e) {
-                //LOGGER.log(Level.ERROR, e);
-            }
-        } else if(element.getTopic().equalsIgnoreCase(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
-            try {
-                if (isInitProcessMessage(element)) {
-                    processInitEndpoint(service.getEndpoint(), element);
-                }else{
+    private void processBrokerMessageObermatt(PetrinetOmService service, MessageCommon message) {
+        final boolean sensorValue;
+        try {
+            sensorValue = message.getParameterAsBoolean();
+        } catch (BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
+            return;
+        }
 
-                    // Todo implementation
-                    // activate this, when gui taken controle over this endpoint
-                    if(service.getComponentMapMiddleware().isKeyAvailable(element.getGlobalId())){
-                        String sensorName =element.getGlobalId();
-                        int sensorValue = element.getParameter().equals("on") ? 1 : 0;
-                        delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
-                    }
-                }
+        try {
+            String sensorName = service.getMap().mapBrokerToEndpointMessage(message.getGlobalId());
+            delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
+        } catch (Exception e) {
+            //LOGGER.log(Level.ERROR, e);
+        }
+    }
+
+    private void processBrokerMessageZusiAusbildung(PetrinetOmService service, MessageCommon message) {
+        final boolean sensorValue;
+        try {
+            sensorValue = message.getParameterAsBoolean();
+        } catch (BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
+            return;
+        }
+
+        try {
+            String sensorName = service.getMapZusi().getKeyForValue(message.getGlobalId());
+            delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
+        } catch (Exception e) {
+            //LOGGER.log(Level.ERROR, e);
+        }
+    }
+
+    private void processBrokerMessageManagement(PetrinetOmService service, MessageCommon message) {
+        if (isInitProcessMessage(message)) {
+            processInitEndpoint(service.getEndpoint(), message);
+            return;
+        }
+
+        // Todo implementation
+        // activate this, when gui taken controle over this endpoint
+        if (service.getMap().isKeyAvailable(message.getGlobalId())) {
+            final String sensorName = message.getGlobalId();
+
+            final Boolean sensorValue;
+            try {
+                sensorValue = message.getParameterAsBoolean();
+            } catch (BadParameterTypeCastException e) {
+                LOGGER.log(Level.ERROR, "Received broker message with type " + message.getTypeName() + " but expected Boolean");
+                return;
+            }
+
+            try {
+                delegateToEndpoint(service.getEndpoint(), sensorName, sensorValue);
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, e);
-            }
-        }else{
-            try {
-                throw new Exception("unsupported topic, broker message delegation skipped: " + element.toString());
-            } catch (Exception e) {
-                LOGGER.log(Level.WARN, e);
             }
         }
     }
 
-    private void processInitEndpoint(PetrinetOmEndpoint endpoint, MessageMiddleware element){
+    private void processInitEndpoint(PetrinetOmEndpoint endpoint, MessageCommon element){
 
-        switch (element.getParameter()) {
+        final String parameter;
+        try {
+            parameter = element.getParameterAsString();
+        } catch (BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+            return;
+        }
+
+        switch (parameter) {
             case ("init"): {
                 endpoint.init();
                 break;
@@ -86,14 +128,12 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         }
     }
 
-    private void delegateToEndpoint(PetrinetOmEndpoint endpoint, String sensorName, int sensorValue){
+    private void delegateToEndpoint(PetrinetOmEndpoint endpoint, String sensorName, boolean sensorValue){
         LOGGER.log(Level.INFO, "processing endpoint sensor name: " + sensorName + ", value: " + sensorValue);
         endpoint.setSensor(sensorName, sensorValue);
     }
 
-    //TODO refactoring
-    public boolean isInitProcessMessage(MessageMiddleware element){
-        if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau")) return true;
-        return false;
+    public boolean isInitProcessMessage(MessageCommon element){
+        return element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau");
     }
 }

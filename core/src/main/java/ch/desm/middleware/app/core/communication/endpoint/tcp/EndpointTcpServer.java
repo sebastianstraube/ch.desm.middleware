@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * Created by Sebastian on 17.12.2014.
  */
-public abstract class EndpointTcpServer  extends EndpointCommon {
+public abstract class EndpointTcpServer  extends EndpointCommon<String> {
 
     private static Logger LOGGER = Logger.getLogger(EndpointTcpClient.class);
 

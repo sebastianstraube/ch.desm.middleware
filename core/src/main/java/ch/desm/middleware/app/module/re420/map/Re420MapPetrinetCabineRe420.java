@@ -14,11 +14,6 @@ public class Re420MapPetrinetCabineRe420 extends ComponentMapBase {
 		return map.containsKey(id);
 	}
 
-	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
 	protected void init() {
 		map.put("S235","cabine_re420_totmannpedal_controller_$S235"); //Schalter
 		// map.put("S126.1",""); //Schalter

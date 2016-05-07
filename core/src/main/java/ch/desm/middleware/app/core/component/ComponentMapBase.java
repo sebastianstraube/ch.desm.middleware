@@ -8,13 +8,11 @@ public abstract class ComponentMapBase {
 
 	protected Map<String, String> map;
 
-    /**
-     *
-     * @return initialized map
-     */
-    public abstract Map<String, String> getMap();
+	public Map<String, String> getMap() {
+		return map;
+	}
 
-    /**
+	/**
      * map initializing
      */
     protected abstract void init();
@@ -32,7 +30,7 @@ public abstract class ComponentMapBase {
 	 * @param value
 	 * @return
 	 */
-	public String getKey(String value){
+	public String getKeyForValue(String value){
 		for(Entry<String, String> entry : map.entrySet()){
 			if(entry.getValue().equalsIgnoreCase(value)){
 				return entry.getKey();
@@ -46,7 +44,7 @@ public abstract class ComponentMapBase {
 	 * @param key
 	 * @return
 	 */
-	public String getValue(String key){
+	public String getValueForKey(String key){
 		for(Entry<String, String> entry : map.entrySet()){
 			if(entry.getKey().equalsIgnoreCase(key)){
 				return entry.getValue();

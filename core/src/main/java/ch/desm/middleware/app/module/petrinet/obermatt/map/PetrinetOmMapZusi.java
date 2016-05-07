@@ -7,11 +7,6 @@ import java.util.Map;
 public class PetrinetOmMapZusi extends ComponentMapBase{
 
 	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
-	@Override
 	protected void init(){
 // map.put("OML_BL_OM_LN_$1",""); //
 // map.put("OML_BL_OM_LN_$2",""); //

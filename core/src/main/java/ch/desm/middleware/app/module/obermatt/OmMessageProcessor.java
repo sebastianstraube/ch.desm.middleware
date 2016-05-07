@@ -1,83 +1,79 @@
 package ch.desm.middleware.app.module.obermatt;
 
-import java.util.LinkedList;
-import java.util.Map.Entry;
+import java.util.List;
+import java.util.NoSuchElementException;
 
-import ch.desm.middleware.app.core.communication.message.*;
-import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32Message;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageAnalog;
+import ch.desm.middleware.app.core.communication.endpoint.ubw32.EndpointUbw32MessageDigital;
+import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
+import ch.desm.middleware.app.core.component.ComponentMessageProcessorUbw32Base;
+import ch.desm.middleware.app.module.obermatt.map.OmMapUbw32Analog;
+import ch.desm.middleware.app.module.obermatt.map.OmMapUbw32Digital;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ch.desm.middleware.app.module.obermatt.logic.OmLogicFahrstrassenSchalter;
 
-public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService> {
+public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmService> {
 
 	private static Logger LOGGER = Logger.getLogger(OmMessageProcessor.class);
 
-	private OmLogicFahrstrassenSchalter fahrStrassenSchalter;
-    private OmService service;
-
-    public OmMessageProcessor(OmService service) {
-		this.fahrStrassenSchalter = new OmLogicFahrstrassenSchalter();
-        this.service = service;
-	}
+	private OmLogicFahrstrassenSchalter fahrStrassenSchalter = new OmLogicFahrstrassenSchalter();
+    private OmMapUbw32Digital mapDigital = new OmMapUbw32Digital();
+    private OmMapUbw32Analog mapAnalog = new OmMapUbw32Analog();
 
     /**
      * @param messages
      */
-    public void processBrokerMessage(OmService service, LinkedList<MessageMiddleware> messages) {
-        for(MessageMiddleware message : messages){
+    public void processBrokerMessage(OmService service, List<MessageCommon> messages) {
+        for(MessageCommon message : messages){
             processBrokerMessage(service, message);
         }
     }
 
-    private void processBrokerMessage(OmService service, MessageMiddleware element){
-
-        //incoming message with OML topic
-        if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT)){
-            try {
-                String globalId = element.getGlobalId();
-                String parameter = util.getParameterValueEndpoint(element.getParameter());
-                boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
-
-                String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
-                delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(),  service.getEndpoint().getMapAnalog(), key, parameter, isInput);
-            } catch (Exception e) {
-                //LOGGER.log(Level.WARN, e.getMessage());
-            }
-        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_MANAGEMENT)){
-            try {
-                if (isInitProcessMessage(element)) {
-                    processInitEndpoint(service.getEndpoint(), element);
-                }else{
-
-                    // Todo implementation
-                    // activate this, when gui taken controle over this endpoint
-                }
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
-        }else if(element.getTopic().equals(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT)){
-            try {
-                String globalId = element.getGlobalId();
-                String parameter = util.getParameterValueEndpoint(element.getParameter());
-                boolean isInput = element.getOutputInput().equals(MessageUbw32Base.MESSAGE_CHAR_INPUT);
-
-                delegateToEndpoint(service.getEndpoint(), service.getEndpoint().getMapDigital(), service.getEndpoint().getMapAnalog(), globalId, parameter, isInput);
-            } catch (Exception e) {
-                LOGGER.log(Level.ERROR, e);
-            }
-        }else{
-            try {
-                throw new Exception("unsupported topic, broker message delegation skipped: " + element.toString());
-            } catch (Exception e) {
-                LOGGER.log(Level.WARN, e);
-            }
+    private void processBrokerMessage(OmService service, MessageCommon element){
+        switch(element.getTopic()) {
+            case MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT:
+                processBrokerMessagePetrinetObermatt(service, element);
+                break;
+            case MessageCommon.MESSAGE_TOPIC_MANAGEMENT:
+                processBrokerMessageManagement(service, element);
+                break;
+            default:
+                LOGGER.log(Level.WARN, "unsupported topic, broker message delegation skipped: " + element.toString());
         }
     }
 
-    private void processInitEndpoint(OmEndpointUbw32 endpoint, MessageMiddleware element){
+    private void processBrokerMessagePetrinetObermatt(OmService service, MessageCommon element) {
+        try {
+            final String globalId = element.getGlobalId();
+            final String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
 
-        switch (element.getParameter()) {
+            delegateToEndpoint(service.getEndpoint(), mapDigital, mapAnalog, key, element);
+        } catch (NoSuchElementException e) {
+            //LOGGER.log(Level.WARN, e.getMessage());
+        }
+    }
+
+    private void processBrokerMessageManagement(OmService service, MessageCommon element) {
+        if (isInitProcessMessage(element)) {
+            processInitEndpoint(service.getEndpoint(), element);
+            return;
+        }
+    }
+
+    private void processInitEndpoint(OmEndpointUbw32 endpoint, MessageCommon element){
+
+        final String parameter;
+        try {
+            parameter = element.getParameterAsString();
+        } catch (BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+            return;
+        }
+
+        switch (parameter) {
             case ("init"): {
                 endpoint.init();
                 break;
@@ -94,168 +90,33 @@ public class OmMessageProcessor extends ComponentMessageProcessorBase<OmService>
     }
 
     //TODO refactoring
-    public boolean isInitProcessMessage(MessageMiddleware element){
+    public boolean isInitProcessMessage(MessageCommon element){
         if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) return true;
         return false;
     }
 
-    private String getUbwSingleRegisterValues(OmEndpointUbw32 endpoint, MessageUbw32DigitalRegisterSingle message) {
+    public void processEndpointMessage(OmService service, EndpointUbw32Message ubw32Message) {
+        final String pinName = ubw32Message.getRegister().name();
 
-        String messageInput = "";
-
-        for (Entry<String, String> entry : endpoint.getMapDigital()
-                .getMap().entrySet()) {
-
-            if (entry.getValue()
-                    .equals(((MessageUbw32DigitalRegisterSingle) message)
-                            .getPort())) {
-
-                String key = entry.getKey();
-
-                boolean isEnabled = ((MessageUbw32DigitalRegisterSingle) message).isEnabled();
-                String parameter = isEnabled == true ? "on" : "off";
-
-                if (isEnabled) {
-                    LOGGER.log(Level.INFO, "key: " + key);
-                }
-
-                String stream = null;
-
-                stream = service.getComponentMapMiddleware().getMap().get(key);
-
-                if (stream == null) {
-                    try {
-                        throw new Exception(
-                                "mapping error no global id in middleware message with key: "
-                                        + entry.getKey() + " and value: "
-                                        + entry.getValue()
-                                        + " in message: " + message);
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        LOGGER.log(Level.ERROR, e);
-                    }
-                }
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
-                messageInput = messageInput.concat(stream);
-            }
+        final String globalId;
+        final String parameterValue;
+        if (ubw32Message instanceof EndpointUbw32MessageAnalog) {
+            // TODO: remove hard coded fahrstrassenschalter logic
+            Double pinValue = ((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue();
+            globalId = fahrStrassenSchalter.getglobalId(pinValue);
+            parameterValue = String.valueOf(((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue());
+        } else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
+            globalId = mapDigital.getKeyForValue(pinName);
+            Boolean pinValue = ((EndpointUbw32MessageDigital) ubw32Message).getRegisterValue();
+            parameterValue = MessageCommon.mapBoolToOnOffParameter(pinValue);
+        } else {
+            throw new RuntimeException("uhm. unknown message!");
         }
 
-        return messageInput;
+        String middlewareMessage = service.getComponentMapMiddleware().getValueForKey(globalId);
+        middlewareMessage = middlewareMessage.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
 
+        processEndpointMessage(service.getBrokerClient(), middlewareMessage, MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
     }
 
-    private String getUbwAllRegisterValues(OmEndpointUbw32 endpoint, MessageUbw32DigitalRegisterComplete message){
-
-        String messageInput = "";
-
-        for (Entry<String, String> entry : endpoint.getMapDigital()
-                .getMap().entrySet()) {
-
-            // convert input to common parameter
-            boolean isEnabled = message.getInputValue(entry.getValue().substring(0),entry.getValue().substring(1)).contains("1");
-            String parameter = isEnabled == true ? "on" : "off";
-            String key = entry.getKey();
-
-            if(service.getEndpoint().getState().hasChanged(key, parameter)){
-
-                //find the middleware message of the changed key
-                String stream =  service.getComponentMapMiddleware().getValue(key);
-
-                if (stream == null) {
-                    try {
-                        throw new Exception(
-                                "mapping error no global id in middleware message with key: "
-                                        + entry.getKey() + " and value: "
-                                        + entry.getValue()
-                                        + " in message: " + message);
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        LOGGER.log(Level.ERROR, e);
-                    }
-                }
-
-                stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, parameter);
-                messageInput = messageInput.concat(stream);
-            }
-        }
-        return messageInput;
-    }
-
-    private String getUbwAnalogRegisterValues(OmEndpointUbw32 endpoint, MessageUbw32Analog message){
-
-        String messageInput = "";
-
-        for (Entry<String, String> entry : endpoint.getMapAnalog()
-                .getMap().entrySet()) {
-
-            String key = entry.getKey();
-
-            if (!key.isEmpty()) {
-                String stream = service.getComponentMapMiddleware().getMap().get(key);
-
-                if (stream == null) {
-                    try {
-                        throw new Exception(
-                                "mapping error found no global id in middleware message with key: "
-                                        + entry.getKey() + " and value: "
-                                        + entry.getValue()
-                                        + " in message: " + message);
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        LOGGER.log(Level.ERROR, e);
-                    }
-                }
-
-                // convert input to common parameter
-                String parameter = message.getInputValue(entry.getValue(),"");
-                // handle Fahrstrassenschalter (FSS)
-                String FSSidEnabled = fahrStrassenSchalter.getglobalId(Integer.valueOf(parameter));
-
-                if(key.equals(FSSidEnabled)){
-                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, MessageCommon.MESSAGE_PARAMETER_ON);
-
-                    LOGGER.log(Level.INFO, "FSS enabled contact: " + stream);
-
-                }else{
-                    stream = stream.replace(MessageCommon.MESSAGE_PARAMETER_DELIMITER, MessageCommon.MESSAGE_PARAMETER_OFF);
-                }
-                messageInput = messageInput.concat(stream);
-            }
-        }
-
-        return messageInput;
-    }
-
-
-	/**
-	 * 
-	 * @param endpoint
-	 * @param message
-	 * @return
-	 */
-	public String convertToMiddlewareMessage(OmEndpointUbw32 endpoint,
-			MessageUbw32Base message) {
-
-		String middlewareMessagesInput = "";
-
-		if (message instanceof MessageUbw32DigitalRegisterSingle) {
-
-            middlewareMessagesInput = getUbwSingleRegisterValues(endpoint, (MessageUbw32DigitalRegisterSingle)message);
-
-		}
-
-		else if (message instanceof MessageUbw32DigitalRegisterComplete) {
-
-            middlewareMessagesInput = getUbwAllRegisterValues(endpoint, (MessageUbw32DigitalRegisterComplete)message);
-
-		} else if (message instanceof MessageUbw32Analog) {
-
-            middlewareMessagesInput = getUbwAnalogRegisterValues(endpoint, (MessageUbw32Analog)message);
-
-		}
-
-		LOGGER.log(Level.TRACE,"processing middleware message: " + middlewareMessagesInput);
-
-		return middlewareMessagesInput;
-	}
 }

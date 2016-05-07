@@ -1,11 +1,11 @@
 package ch.desm.middleware.app.module.petrinet.obermatt;
 
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
 
 /**
  * Created by max on 06/08/14.
@@ -31,10 +31,9 @@ public class PetrinetOmBrokerClient extends ComponentBrokerClientBase {
     }
 
     @Override
-    protected void intializeSignedTopic() {
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL);
-        signForTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
-        signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
+    protected void initializeTopicSubscriptions() {
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_MANAGEMENT);
     }
 }

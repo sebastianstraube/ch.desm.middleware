@@ -7,11 +7,6 @@ import java.util.Map;
 public class PetrinetRe420MapCabineRe420 extends ComponentMapBase{
 
 	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
-	@Override
 	protected void init(){
 
 		map.put("cabine_re420_totmannpedal_controller_$S235","S235"); //

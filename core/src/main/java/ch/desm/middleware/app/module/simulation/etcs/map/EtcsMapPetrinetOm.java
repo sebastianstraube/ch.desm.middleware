@@ -10,11 +10,6 @@ import java.util.Map;
 public class EtcsMapPetrinetOm extends ComponentMapBase {
 
     @Override
-    public Map<String, String> getMap() {
-        return map;
-    }
-
-    @Override
     protected void init(){
     }
 }

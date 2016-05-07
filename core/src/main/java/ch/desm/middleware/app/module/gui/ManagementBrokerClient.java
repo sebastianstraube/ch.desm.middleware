@@ -1,14 +1,14 @@
 package ch.desm.middleware.app.module.gui;
 
-import java.util.LinkedList;
+import java.util.List;
 
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessage;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 
 import javax.websocket.EncodeException;
 
@@ -28,13 +28,14 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 		LOGGER.log(Level.INFO, "receive broker message: " + message);
 		
 		//translation
-		LinkedList<MessageMiddleware> messageList = service.getTranslator().toMiddlewareMessageList(message);
+		List<MessageCommon> messageList = service.getTranslator().toMiddlewareMessageList(message);
 		
 		//send all messages
-		for(MessageMiddleware element: messageList){
+		for(MessageCommon element: messageList){
             try {
-                String messageWebsocket = service.getEncoder().encode(service.getConverter().toCharacterStream(element));
-				ManagementEndpointClientWebsocket.sendMessage(messageWebsocket);
+				EndpointWebsocketMessage endpointWebsocketMessage = service.getConverter().toCharacterStream(element);
+				String encodedMessageWebsocket = service.getEncoder().encode(endpointWebsocketMessage);
+				ManagementEndpointClientWebsocket.sendMessage(encodedMessageWebsocket);
             } catch (EncodeException e) {
                 LOGGER.log(Level.ERROR, e);
             }
@@ -43,13 +44,13 @@ public class ManagementBrokerClient extends ComponentBrokerClientBase {
 	}
 
 	@Override
-	protected void intializeSignedTopic() {
-		signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-		signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
-		signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
-        signForTopic(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+	protected void initializeTopicSubscriptions() {
+		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
+		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
+		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
 	}
 
 }

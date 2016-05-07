@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 import ch.desm.middleware.app.module.petrinet.obermatt.map.PetrinetOmMapDelay;
-import ch.desm.middleware.app.common.Pair;
+import ch.desm.middleware.app.core.component.petrinet.Bucket;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -16,22 +16,9 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
 
 	private static Logger LOGGER = Logger.getLogger(PetrinetOmEndpointExportAdapter.class);
 
-	private List<Pair<String, Integer>> basePlaces;
-    private List<Pair<String, Integer>> changedPlacesList;
-    private Object lockChangedPlacesList;
-    private Object delayLock;
-    private PetrinetOmMapDelay mapDelay = new PetrinetOmMapDelay();
-    private Object listDelayLock;
-    private Set<PetrinetOmEndpointDelayThread> listDelayThreads;
-
-    public PetrinetOmEndpointExportAdapter(){
-        basePlaces = new LinkedList<Pair<String, Integer>>();
-        changedPlacesList = new LinkedList<Pair<String, Integer>>();
-        lockChangedPlacesList = new Object();
-        this.delayLock = new Object();
-        this.listDelayThreads = new HashSet<PetrinetOmEndpointDelayThread>();
-        listDelayLock = new Object();
-    }
+	private final List<Bucket> basePlaces = new LinkedList<>();
+    private final List<Bucket> changedPlacesList = new LinkedList<>();
+    private final Object lockChangedPlacesList = new Object();
 
     @Override
     public void init(){
@@ -42,11 +29,6 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
     @Override
 	public boolean canFire(String s) {
 		LOGGER.log(Level.TRACE, "transition can fire: " + s);
-        /*
-        if(isDelayedTransition(s)){
-            return isTransitionNotDelayed(s);
-        }
-        */
         return true;
 	}
 
@@ -54,65 +36,22 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
 	public void fire(String s) {
         LOGGER.log(Level.INFO, "transitions fired: " + s);
 
-        //cleanDelayThread();
         refreshChangedPlacesList(getAllPlaces(), basePlaces);
         basePlaces.clear();
         basePlaces.addAll(getAllPlaces());
-    }
-
-    private boolean isDelayedTransition(String transition){
-        synchronized (delayLock){
-            String delay = mapDelay.getValue(transition);
-            return !delay.isEmpty();
-        }
-    }
-
-    private boolean isTransitionNotDelayed(String transition) {
-        synchronized (listDelayLock) {
-
-            boolean isThreadExisiting = false;
-            for (PetrinetOmEndpointDelayThread t : listDelayThreads) {
-                if (t.isAssociated(transition)) {
-                    isThreadExisiting = true;
-                    if (t.isTimeToDelegate()) {
-                        t.setAsDelegated();
-                        return true;
-                    }
-                }
-            }
-
-            if (!isThreadExisiting) {
-                createDelayTransitionThread(transition);
-            }
-            return false;
-        }
-    }
-
-    private void createDelayTransitionThread(String transition){
-        synchronized (listDelayLock){
-            String delay = mapDelay.getValue(transition);
-            PetrinetOmEndpointDelayThread delayThread = new PetrinetOmEndpointDelayThread(this, transition, delay);
-            listDelayThreads.add(delayThread);
-        }
-    }
-
-    public void cleanDelayThread(){
-        synchronized (listDelayLock){
-            for(Iterator<PetrinetOmEndpointDelayThread> iterator = listDelayThreads.iterator(); iterator.hasNext();){
-                PetrinetOmEndpointDelayThread t = iterator.next();
-                if(t.isDelegated()){
-                    iterator.remove();
-                }
-            }
-        }
     }
 
     public void setSensor(String name, int value) {
         try {
             Class<?> petriNetClass = super.getClass();
             Field field = petriNetClass.getField(name);
+            if (field.getInt(this) == value) {
+                LOGGER.log(Level.DEBUG, "Ignoring sensor change request for " + name + " as its value is already " + value);
+                return;
+            }
+
             field.setInt(this, value);
-            addChangedPlace(new Pair<String, Integer>(name, value) );
+            addChangedPlace(new Bucket(name, value));
 
             LOGGER.log(Level.INFO, "setting sensor: " + name + " to: " + value);
         } catch (NoSuchFieldException e) {
@@ -122,39 +61,36 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
         }
     }
 
-    public List<Pair<String, Integer>> getChangedPlaces(){
+    public List<Bucket> getChangedPlaces(){
+        List<Bucket> changeList = new LinkedList<>();
         synchronized (lockChangedPlacesList){
-            List<Pair<String, Integer>> changeList = new LinkedList<Pair<String, Integer>>();
-            if(!changedPlacesList.isEmpty()){
-                changeList.addAll(changedPlacesList);
-                changedPlacesList.clear();
-                LOGGER.log(Level.TRACE, "list changed places: " + changeList);
-            }
-            return changeList;
+            changeList.addAll(changedPlacesList);
+            changedPlacesList.clear();
+        }
+        return changeList;
+    }
+
+    private void addAllPlacesToChangedPlaces(List<Bucket> base){
+        refreshChangedPlacesList(base, new LinkedList<Bucket>());
+    }
+
+    public void addChangedPlace(Bucket bucket){
+        synchronized (lockChangedPlacesList){
+            changedPlacesList.add(bucket);
+            LOGGER.log(Level.INFO, "changed place: " + bucket.toString());
         }
     }
 
-    private void addAllPlacesToChangedPlaces(List<Pair<String, Integer>> base){
-        refreshChangedPlacesList(base, new LinkedList<Pair<String, Integer>>());
-    }
-
-    public void addChangedPlace(Pair<String, Integer> pair){
+    public boolean isInChangedPlacesList(Bucket bucket){
         synchronized (lockChangedPlacesList){
-            changedPlacesList.add(pair);
-            LOGGER.log(Level.INFO, "changed place: " + pair.toString());
-        }
-    }
-
-    public boolean isInChangedPlacesList(Pair<String, Integer> pair){
-        synchronized (lockChangedPlacesList){
-            boolean contains = changedPlacesList.contains(pair);
-            if(contains) LOGGER.log(Level.TRACE, "changed place:" + pair.toString() + "already contained in list: " + lockChangedPlacesList.toString());
+            boolean contains = changedPlacesList.contains(bucket);
+            if(contains) LOGGER.log(Level.TRACE, "changed place:" + bucket.toString() + "already contained in list: " + lockChangedPlacesList.toString());
             return contains;
         }
     }
 
-    private void refreshChangedPlacesList(List<Pair<String, Integer>> changed, List<Pair<String, Integer>> base){
-        for(Pair<String, Integer> actualElement: changed){
+    private void refreshChangedPlacesList(List<Bucket> changed, List<Bucket> base){
+        for(Bucket actualElement: changed){
             if(!base.contains(actualElement)){
                 if(!isInChangedPlacesList(actualElement)) {
                     addChangedPlace(actualElement);
@@ -167,8 +103,8 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
         }
     }
 
-	private List<Pair<String, Integer>> getAllPlaces() {
-        List<Pair<String, Integer>> newPlaces = new LinkedList<Pair<String, Integer>>();
+	private List<Bucket> getAllPlaces() {
+        List<Bucket> newPlaces = new LinkedList<Bucket>();
 		Class<?> superClass = this.getClass().getSuperclass();
 		Field[] fields = superClass.getDeclaredFields();
 
@@ -178,7 +114,7 @@ public class PetrinetOmEndpointExportAdapter extends PetrinetOmEndpointExportBas
 				try {
 					Integer value = Integer.valueOf(String.valueOf(classField.getInt(this)));
                     String name = classField.getName();
-                    newPlaces.add(new Pair<String, Integer>(name, value));
+                    newPlaces.add(new Bucket(name, value));
                 } catch (IllegalArgumentException e) {
                     LOGGER.log(Level.ERROR, e);
 				} catch (IllegalAccessException e) {

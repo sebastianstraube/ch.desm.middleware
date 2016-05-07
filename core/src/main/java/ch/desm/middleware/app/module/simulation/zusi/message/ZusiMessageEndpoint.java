@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.module.simulation.zusi.message;
 
-import ch.desm.middleware.app.common.Pair;
 import ch.desm.middleware.app.module.simulation.zusi.protocol.ZusiProtocolConstants;
 import org.apache.log4j.Logger;
 
@@ -26,7 +25,7 @@ public class ZusiMessageEndpoint {
     /**
      *
      */
-    private List<Pair<String, String>> parameterList;
+    private Map<String, String> parameterList = new HashMap<>();
 
     /**
      *
@@ -53,8 +52,8 @@ public class ZusiMessageEndpoint {
      */
     public boolean hasParameter(String key, String value){
         boolean hasParameter = false;
-        for(Pair el : parameterList){
-            if(el.getLeft().equals(key) && el.getRight().equals(value)){
+        for(Map.Entry<String, String> el : parameterList.entrySet()){
+            if(el.getKey().equals(key) && el.getValue().equals(value)){
                 hasParameter = true;
             }
         }
@@ -91,7 +90,7 @@ public class ZusiMessageEndpoint {
      *
      * @return
      */
-    public List<Pair<String, String>> getParameterList(){
+    public Map<String, String> getParameterList(){
         return this.parameterList;
     }
 
@@ -100,7 +99,7 @@ public class ZusiMessageEndpoint {
      * @param stream
      */
     private void parseStream(String stream){
-        parameterList = new ArrayList<Pair<String, String>>();
+        parameterList.clear();
 
         if(stream.contains(ZusiProtocolConstants.DELIMITER_GROUP) &&
                 stream.contains(ZusiProtocolConstants.DELIMITER_PARAMETER_VALUE)){
@@ -115,7 +114,7 @@ public class ZusiMessageEndpoint {
             for(String el : parameter) {
                 String key = el.substring(0, el.indexOf(ZusiProtocolConstants.DELIMITER_PARAMETER_VALUE));
                 String value = el.substring(el.indexOf(ZusiProtocolConstants.DELIMITER_PARAMETER_VALUE) + 1, el.length());
-                parameterList.add(new Pair(key, value));
+                parameterList.put(key, value);
             }
         }else{
             groupId = stream;
@@ -126,10 +125,10 @@ public class ZusiMessageEndpoint {
     public String toString(){
         String s = this.getGroupId() + ZusiProtocolConstants.DELIMITER_GROUP;
 
-        for(Pair<String, String> el : parameterList){
-            s+= el.getLeft();
+        for(Map.Entry<String, String> el : parameterList.entrySet()){
+            s+= el.getKey();
             s+= ZusiProtocolConstants.DELIMITER_PARAMETER_VALUE;
-            s+= el.getRight();
+            s+= el.getValue();
             s+= ZusiProtocolConstants.DELIMITER_PARAMETER;
         }
 

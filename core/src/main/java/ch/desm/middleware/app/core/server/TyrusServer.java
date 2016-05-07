@@ -1,6 +1,5 @@
 package ch.desm.middleware.app.core.server;
 
-import ch.desm.middleware.app.common.ThreadBase;
 import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketServerGui;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -9,7 +8,7 @@ import org.glassfish.tyrus.server.Server;
 /**
  * Created by Sebastian on 21.10.2014.
  */
-public class TyrusServer extends ThreadBase {
+public class TyrusServer extends Thread {
 
     private static Logger LOGGER = Logger.getLogger(TyrusServer.class);
     private boolean isRunning = false;
@@ -29,7 +28,7 @@ public class TyrusServer extends ThreadBase {
 
         try {
             server.start();
-            doHangout(2000);
+            Thread.sleep(2000);
             isRunning = true;
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, "Tyrus Websocket Server start failed:" + e);

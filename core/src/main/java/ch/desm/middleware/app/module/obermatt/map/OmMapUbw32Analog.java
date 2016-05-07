@@ -12,11 +12,6 @@ public class OmMapUbw32Analog extends ComponentMapBase {
 		super();
 	}
 	
-	@Override
-	public Map<String, String> getMap(){
-		return this.map;
-	}
-	
 	public void init(){
 		
 		map.put("8.91.01", "B0"); //FSS Grundstellung

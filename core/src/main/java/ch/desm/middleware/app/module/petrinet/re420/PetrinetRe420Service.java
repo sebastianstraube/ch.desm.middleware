@@ -3,8 +3,6 @@ package ch.desm.middleware.app.module.petrinet.re420;
 import ch.desm.middleware.app.core.component.ComponentMapMiddleware;
 import ch.desm.middleware.app.core.communication.broker.Broker;
 import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageDecoder;
-import ch.desm.middleware.app.core.component.petrinet.PetrinetMessageEncoder;
 import ch.desm.middleware.app.module.petrinet.re420.map.PetrinetRe420MapInterlockingOm;
 import ch.desm.middleware.app.module.petrinet.re420.map.PetrinetRe420MapCabineRe420;
 import ch.desm.middleware.app.module.petrinet.re420.map.PetrinetRe420MapZusiFahrpult;
@@ -16,20 +14,19 @@ public class PetrinetRe420Service {
 
     private MessageTranslatorMiddleware translator;
     private PetrinetRe420MessageProcessor processor;
-    private PetrinetMessageEncoder encoder;
-    private PetrinetMessageDecoder decoder;
     private ComponentMapMiddleware componentMapMiddleware;
     private PetrinetRe420MapInterlockingOm mapInterlockingOm;
     private PetrinetRe420BrokerClient client;
     private PetrinetRe420Endpoint endpoint;
+    private PetrinetRe420MapCabineRe420 mapCabineRe420 = new PetrinetRe420MapCabineRe420();
+    private PetrinetRe420MapZusiFahrpult mapZusi = new PetrinetRe420MapZusiFahrpult();
+
 
 
     public PetrinetRe420Service(Broker broker){
         this.componentMapMiddleware = new ComponentMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new PetrinetRe420MessageProcessor();
-        this.encoder = new PetrinetMessageEncoder();
-        this.decoder = new PetrinetMessageDecoder();
         this.mapInterlockingOm = new PetrinetRe420MapInterlockingOm();
 
         this.client = new PetrinetRe420BrokerClient(broker, this);
@@ -45,14 +42,6 @@ public class PetrinetRe420Service {
         return processor;
     }
 
-    public PetrinetMessageEncoder getEncoder(){
-        return encoder;
-    }
-
-    public PetrinetMessageDecoder getDecoder(){
-        return decoder;
-    }
-
     public MessageTranslatorMiddleware getTranslator(){
         return translator;
     }
@@ -66,15 +55,15 @@ public class PetrinetRe420Service {
     }
 
     public PetrinetRe420MapInterlockingOm getMapInterlockingOm(){
-        return this.mapInterlockingOm;
+        return mapInterlockingOm;
     }
 
     public PetrinetRe420MapCabineRe420 getMapCabineRe420(){
-        return new PetrinetRe420MapCabineRe420();
+        return mapCabineRe420;
     }
 
     public PetrinetRe420MapZusiFahrpult getMapZusi(){
-        return new PetrinetRe420MapZusiFahrpult();
+        return mapZusi;
     }
 
 }

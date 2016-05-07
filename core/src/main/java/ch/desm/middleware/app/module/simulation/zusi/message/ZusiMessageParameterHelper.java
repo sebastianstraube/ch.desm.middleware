@@ -2,7 +2,7 @@ package ch.desm.middleware.app.module.simulation.zusi.message;
 
 import ch.desm.middleware.app.module.simulation.zusi.ZusiService;
 import ch.desm.middleware.app.module.simulation.zusi.protocol.ZusiProtocolConstants;
-import ch.desm.middleware.app.common.utility.UtilityHex;
+import ch.desm.middleware.app.common.UtilityHex;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -29,7 +29,7 @@ public class ZusiMessageParameterHelper {
     }
 
     public String getNumber(String globalId, String parameter){
-        String format = service.getZusiMapParameterDataType().getValue(globalId);
+        String format = service.getZusiMapParameterDataType().getValueForKey(globalId);
 
         switch(format){
             case ZUSINUMBERFORMAT_SINGLE: {
@@ -47,7 +47,7 @@ public class ZusiMessageParameterHelper {
     }
 
     private float getVal(String globalId, float val){
-        String type = service.getZusiMapParameter().getValue(globalId);
+        String type = service.getZusiMapParameter().getValueForKey(globalId);
         switch(type){
             case(ZusiProtocolConstants.MAP_PARAMETER_VALUE_GESCHWINDIGKEIT):{
                 val = val * 3.6f;

@@ -1,12 +1,12 @@
 package ch.desm.middleware.app.module.simulation.etcs;
 
+import ch.desm.middleware.app.core.communication.message.BadParameterTypeCastException;
 import ch.desm.middleware.app.core.component.ComponentMessageProcessorBase;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sebastian on 28.11.2014.
@@ -18,8 +18,8 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
     /**
      * @param messages
      */
-    public void processBrokerMessage(EtcsService service, LinkedList<MessageMiddleware> messages) {
-        for(MessageMiddleware message : messages){
+    public void processBrokerMessage(EtcsService service, List<MessageCommon> messages) {
+        for(MessageCommon message : messages){
             processBrokerMessage(service, message);
         }
     }
@@ -29,39 +29,27 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    public void processBrokerMessage(EtcsService service, MessageMiddleware message){
+    public void processBrokerMessage(EtcsService service, MessageCommon message){
 
         switch(message.getTopic()){
-            case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM):{
-                //TODO implementation
-                break;
-            }
-            case(MessageBase.MESSAGE_TOPIC_CABINE_RE420):{
+            case(MessageCommon.MESSAGE_TOPIC_CABINE_RE420):{
                 processBrokerMessageCabineRe420(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_INTERLOCKING_OBERMATT):{
+            case(MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT):{
                 //TODO implementation
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_MANAGEMENT):{
+            case(MessageCommon.MESSAGE_TOPIC_MANAGEMENT):{
                 processBrokerMessageManagament(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT):{
+            case(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT):{
                 processBrokerMessagePetrinetOm(service, message);
                 break;
             }
-            case(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
+            case(MessageCommon.MESSAGE_TOPIC_PETRINET_CABINE_RE420):{
                 processBrokerMessagePetrinetRe420(service, message);
-                break;
-            }
-            case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_DLL):{
-                //TODO implementation
-                break;
-            }
-            case(MessageBase.MESSAGE_TOPIC_SIMULATION_LOCSIM_RS232):{
-                //TODO implementation
                 break;
             }
             default:{
@@ -79,7 +67,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    private void processBrokerMessageManagament(EtcsService service, MessageMiddleware message){
+    private void processBrokerMessageManagament(EtcsService service, MessageCommon message){
         //TODO implementation, but only messages with zusi topic (take control in gui)
     }
 
@@ -88,7 +76,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    private void processBrokerMessageCabineRe420(EtcsService service, MessageMiddleware message){
+    private void processBrokerMessageCabineRe420(EtcsService service, MessageCommon message){
 
     }
 
@@ -97,7 +85,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    protected void processBrokerMessagePetrinetOm(EtcsService service, MessageMiddleware message){
+    protected void processBrokerMessagePetrinetOm(EtcsService service, MessageCommon message){
 
     }
 
@@ -106,7 +94,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param service
      * @param message
      */
-    protected void processBrokerMessagePetrinetRe420(EtcsService service, MessageMiddleware message){
+    protected void processBrokerMessagePetrinetRe420(EtcsService service, MessageCommon message){
 
     }
 
@@ -124,9 +112,17 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param endpoint
      * @param element
      */
-    private void processInitEndpoint(EtcsEndpointTcpClient endpoint, MessageMiddleware element){
+    private void processInitEndpoint(EtcsEndpointTcpClient endpoint, MessageCommon element){
 
-        switch (element.getParameter()) {
+        final String parameter;
+        try {
+            parameter = element.getParameterAsString();
+        } catch (BadParameterTypeCastException e) {
+            LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+            return;
+        }
+
+        switch (parameter) {
             case ("init"): {
                 endpoint.init();
                 break;
@@ -148,7 +144,7 @@ public class EtcsMessageProcessor extends ComponentMessageProcessorBase<EtcsServ
      * @param messages
      * @param topic
      */
-    public synchronized void processEndpointMessage(EtcsService service, LinkedList<String> messages, String topic){
+    public synchronized void processEndpointMessage(EtcsService service, List<String> messages, String topic){
         for(String s : messages){
             processEndpointMessage(service, s, topic);
         }

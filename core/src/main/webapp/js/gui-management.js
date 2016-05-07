@@ -181,9 +181,9 @@ $(document).ready(function() {
 
         var parts = payload.split(';');
 
-        var topic = parts[7].replace("#","");
+        var topic = parts[6].replace("#","");
         var id = parts[0];
-        var parameter = parts[6];
+        var parameter = parts[8];
 
         id = checkButtonGroup(topic, id);
 
@@ -521,7 +521,8 @@ $(document).ready(function() {
         var topicManagement = "management";
 
         //change message topic to management
-        payload = parts[0]+";"+parts[1]+";"+parts[2]+";"+parts[3]+";"+parts[4]+";"+parts[5]+";"+parts[6]+";"+topicManagement+"#";
+        // TODO: payload = parts[0]+";"+parts[1]+";"+parts[2]+";"+parts[3]+";"+parts[4]+";"+parts[5]+";"+parts[6]+";"+topicManagement+"#";
+        payload = parts[0]+";"+parts[1]+";"+parts[2]+";"+parts[3]+";"+parts[4]+";"+parts[5]+";"+topicManagement+";"+parts[7]+";"+parts[8]+"#";
 
         var msg =
             '{'+
@@ -608,64 +609,64 @@ $(document).ready(function() {
     //INIT
     $('#init_interlocking').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;init;management;#")
+        sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;init;")
     });
 
     $('#init_petrinet').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;init;management;#")
+        sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;")
     });
 
     $('#init_petrinet_re420').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.petrinet.re420;os;0;management;petrinet;re420;init;management;#")
+        sendMessage("mgmt.petrinet.re420;os;0;management;petrinet;re420;management;S;init;")
     });
 
     $('#init_cabine-ubw32').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;init;management;#")
+        sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;management;S;init;")
     });
     
     //start
     $('#start_interlocking').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;start;management;#")
+        sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;start;")
     });
 
     $('#start_petrinet').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;start;management;#")
+        sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;")
     });
 
     $('#start_petrinet_re420').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.petrinet.re420;os;0;management;petrinet;re420;start;management;#")
+        sendMessage("mgmt.petrinet.re420;os;0;management;petrinet;re420;management;S;start;")
     });
 
     $('#start_cabine-ubw32').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;start;management;#")
+        sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;management;S;start;")
     });
 
     //stop
     $('#stop_interlocking').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;stop;management;#")
+        sendMessage("mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;stop;")
     });
 
     $('#stop_petrinet').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;stop;management;#")
+        sendMessage("mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;stop;")
     });
 
     $('#stop_petrinet_re420').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.petrinet.re420;os;0;management;petrinet;re420;stop;management;#")
+        sendMessage("mgmt.petrinet.re420;os;0;management;petrinet;re420;management;S;stop;")
     });
 
     $('#stop_cabine-ubw32').click(function(){
         buttonHighLight($(this));
-        sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;stop;management;#")
+        sendMessage("mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;management;S;stop;")
     });
 
     //GUI

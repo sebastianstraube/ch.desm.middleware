@@ -1,15 +1,13 @@
 package ch.desm.middleware.app.module.re420;
 
-import java.util.LinkedList;
-
+import ch.desm.middleware.app.core.communication.broker.Broker;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
+import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
-import ch.desm.middleware.app.core.communication.message.translator.MessageTranslatorMiddleware;
+import java.util.List;
 
 public class Re420BrokerClient extends ComponentBrokerClientBase {
 
@@ -36,7 +34,7 @@ public class Re420BrokerClient extends ComponentBrokerClientBase {
 		LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: "
                 + message);
 
-		LinkedList<MessageMiddleware> messageCommon = translator
+		List<MessageCommon> messageCommon = translator
 				.toMiddlewareMessageList(message);
 
 		processor.processBrokerMessage(service, messageCommon);
@@ -46,10 +44,10 @@ public class Re420BrokerClient extends ComponentBrokerClientBase {
 	 * 
 	 */
 	@Override
-	protected void intializeSignedTopic() {
-        signForTopic(MessageBase.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
-		signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
-		signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
+	protected void initializeTopicSubscriptions() {
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
+		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
+		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_MANAGEMENT);
 	}
 
 

@@ -11,13 +11,11 @@ public class ManagementMapMiddleware extends ComponentMapBase {
 	}
 
 	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
 	protected void init() {
-		map.put("mgmt.stellwerk.obermattlangnau", "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;?;management;#");map.put("mgmt.petrinet.obermatlangnau", "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;?;management;#");map.put("mgmt.cabine.re420.fabisch", "mgmt.cabine.re420.fabisch;os;0;management;cabine;re420.fabisch;?;management;#");map.put("mgmt.cabine.re420.ubw32", "mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;?;management;#");map.put("mgmt.simulation.locsim.rs232", "mgmt.simulation.locsim.rs232;os;0;management;simulation;locsim.rs232;?;management;#");map.put("mgmt.simulation.locsim.dll", "mgmt.simulation.locsim.dll;os;0;management;simulation;locsim.dll;?;management;#");
-
+		map.put("mgmt.stellwerk.obermattlangnau", "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;s;?;");
+		map.put("mgmt.petrinet.obermattlangnau", "mgmt.petrinet.obermattlangnau;os;0;management;petrinet;obermattlangnau;management;s;?;");
+		map.put("mgmt.petrinet.re420", "mgmt.petrinet.re420;os;0;management;petrinet;cabinere420;management;s;?;");
+		map.put("mgmt.cabine.re420.ubw32", "mgmt.cabine.re420.ubw32;os;0;management;cabine;re420.ubw32;management;s;?;");
 	}
 
 }

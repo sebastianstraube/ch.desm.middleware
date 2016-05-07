@@ -1,7 +1,7 @@
 package ch.desm.middleware.app.module.petrinet.re420;
 
-import ch.desm.middleware.app.common.ThreadBase;
-import ch.desm.middleware.app.common.Pair;
+import ch.desm.middleware.app.common.FrequencyLimiter;
+import ch.desm.middleware.app.core.component.petrinet.Bucket;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -9,14 +9,16 @@ import javax.websocket.EncodeException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PetrinetRe420EndpointExportThread extends ThreadBase {
+public class PetrinetRe420EndpointExportThread extends Thread {
 
     private static Logger LOGGER = Logger.getLogger(PetrinetRe420EndpointExportThread.class);
+
+    private static final Float PETRINET_SIMULATION_FREQ = 25.0f;
 
     private Object pendingSensorEventsLock;
     private Object delegateLockBroker;
     private Object delegateLockEndpoint;
-    private List<Pair<String, Integer>> pendingSensorEvents;
+    private List<Bucket> pendingSensorEvents;
     private PetrinetRe420Service service;
     private PetrinetRe420EndpointExportAdapter petrinetAdapter;
 
@@ -25,7 +27,7 @@ public class PetrinetRe420EndpointExportThread extends ThreadBase {
         this.delegateLockBroker = new Object();
         this.delegateLockEndpoint = new Object();
         this.pendingSensorEventsLock = new Object();
-        this.pendingSensorEvents = new LinkedList<Pair<String, Integer>>();
+        this.pendingSensorEvents = new LinkedList<Bucket>();
         this.service = service;
         this.petrinetAdapter = new PetrinetRe420EndpointExportAdapter();
     }
@@ -39,22 +41,29 @@ public class PetrinetRe420EndpointExportThread extends ThreadBase {
 
     public void setSensor(String signalName, int value) {
         synchronized (pendingSensorEventsLock) {
-            Pair<String, Integer> pair = new Pair<String, Integer>(signalName, value);
-            pendingSensorEvents.add(pair);
+            Bucket bucket = new Bucket(signalName, value);
+            pendingSensorEvents.add(bucket);
         }
     }
 
     public void run() {
-        while (!isInterrupted()) {
+        final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(PETRINET_SIMULATION_FREQ);
+
+        while(!isInterrupted()){
+            final long startMillis = System.currentTimeMillis();
+
             simulatePetriNet();
             delegatePendingSensorEvents();
             delegateChangedPlaces();
+
             try {
-                doHangout();
+                frequencyLimiter.ensureLimit(startMillis);
             } catch (InterruptedException e) {
                 LOGGER.log(Level.ERROR, e);
+                break;
             }
         }
+
     }
 
     private void simulatePetriNet() {
@@ -66,36 +75,32 @@ public class PetrinetRe420EndpointExportThread extends ThreadBase {
 
     private void delegatePendingSensorEvents() {
         synchronized (pendingSensorEventsLock) {
-            List<Pair<String, Integer>> pendingSensorEventsCopy = new LinkedList<Pair<String, Integer>>();
+            List<Bucket> pendingSensorEventsCopy = new LinkedList<Bucket>();
             pendingSensorEventsCopy.addAll(pendingSensorEvents);
             pendingSensorEvents.clear();
 
-            for (Pair<String, Integer> sensorEvent : pendingSensorEventsCopy) {
+            for (Bucket sensorEvent : pendingSensorEventsCopy) {
                 delegateToEndpoint(sensorEvent, false);
             }
         }
     }
 
     private void delegateChangedPlaces() {
-        for (Pair<String, Integer> changedPlace : petrinetAdapter.getChangedPlaces()) {
+        for (Bucket changedPlace : petrinetAdapter.getChangedPlaces()) {
             delegateToBroker(changedPlace, false);
         }
     }
 
-    public void delegateToBroker(Pair<String, Integer> changedPlace, boolean isAccessedFromDelayThread){
+    // TODO: why do we need the delegateLockBroker here?
+    public void delegateToBroker(Bucket changedPlace, boolean isAccessedFromDelayThread){
         synchronized(delegateLockBroker){
-            try{
-                String encodedMessage = service.getEncoder().encode(changedPlace);
-                service.getEndpoint().onIncomingEndpointMessage(encodedMessage);
-            } catch (EncodeException e) {
-            LOGGER.log(Level.ERROR, e);
-            }
+            service.getEndpoint().onIncomingEndpointMessage(changedPlace);
         }
     }
 
-    public void delegateToEndpoint(Pair<String, Integer> sensorEvent,  boolean isAccessedFromDelayThread){
+    public void delegateToEndpoint(Bucket sensorEvent, boolean isAccessedFromDelayThread){
         synchronized (delegateLockEndpoint){
-            petrinetAdapter.setSensor(sensorEvent.getLeft(), sensorEvent.getRight());
+            petrinetAdapter.setSensor(sensorEvent.getName(), sensorEvent.getTokenCount());
         }
     }
 }

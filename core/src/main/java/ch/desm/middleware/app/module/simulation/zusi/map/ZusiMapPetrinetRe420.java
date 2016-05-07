@@ -10,11 +10,6 @@ import java.util.Map;
 public class ZusiMapPetrinetRe420 extends ComponentMapBase {
 
     @Override
-    public Map<String, String> getMap() {
-        return map;
-    }
-
-    @Override
     protected void init(){
 
         map.put("0200-0A01-0100::0100:1000,0200:0000,0300:0100,0400:0000,0500:00000000","cabine_re420_totmannpedal_$on"); //an

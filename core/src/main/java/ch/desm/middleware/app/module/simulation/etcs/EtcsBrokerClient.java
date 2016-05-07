@@ -1,13 +1,12 @@
 package ch.desm.middleware.app.module.simulation.etcs;
 
 import ch.desm.middleware.app.core.communication.broker.Broker;
-import ch.desm.middleware.app.core.communication.message.MessageBase;
-import ch.desm.middleware.app.core.communication.message.MessageMiddleware;
+import ch.desm.middleware.app.core.communication.message.MessageCommon;
 import ch.desm.middleware.app.core.component.ComponentBrokerClientBase;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
+import java.util.List;
 
 
 public class EtcsBrokerClient extends ComponentBrokerClientBase {
@@ -28,15 +27,15 @@ public class EtcsBrokerClient extends ComponentBrokerClientBase {
 	protected void onIncomingBrokerMessage(String message) {
 		LOGGER.log(Level.INFO, this.getClass().getSimpleName() + " received broker message: " + message);
 
-        LinkedList<MessageMiddleware> l = service.getTranslator().toMiddlewareMessageList(message);
+        List<MessageCommon> l = service.getTranslator().toMiddlewareMessageList(message);
         thread.addMessages(l);
     }
 
 	@Override
-	protected void intializeSignedTopic() {
-        signForTopic(MessageBase.MESSAGE_TOPIC_CABINE_RE420);
-        signForTopic(MessageBase.MESSAGE_TOPIC_PETRINET_OBERMATT);
-        signForTopic(MessageBase.MESSAGE_TOPIC_MANAGEMENT);
+	protected void initializeTopicSubscriptions() {
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_MANAGEMENT);
 	}
 
 }

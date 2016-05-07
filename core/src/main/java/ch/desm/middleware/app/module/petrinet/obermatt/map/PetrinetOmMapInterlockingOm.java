@@ -6,13 +6,8 @@ import java.util.Map;
 
 public class PetrinetOmMapInterlockingOm extends ComponentMapBase{
 
-	@Override
-	public Map<String, String> getMap() {
-		return map;
-	}
-
     public String mapBrokerToEndpointMessage(String globalId) throws Exception {
-        String message = this.getKey(globalId);
+        String message = this.getKeyForValue(globalId);
         if(message.isEmpty()) {
             throw new Exception("unable to map broker message with globalId\"" + globalId + "\"");
         }

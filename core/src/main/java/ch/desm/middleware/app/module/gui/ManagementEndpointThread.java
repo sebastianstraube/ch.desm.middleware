@@ -1,17 +1,27 @@
 package ch.desm.middleware.app.module.gui;
 
-import ch.desm.middleware.app.common.ThreadBase;
+import ch.desm.middleware.app.common.FrequencyLimiter;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessage;
+import ch.desm.middleware.app.core.communication.endpoint.websocket.EndpointWebsocketMessageDecoder;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
+import javax.websocket.DecodeException;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sebastian on 30.10.2014.
  */
-public class ManagementEndpointThread extends ThreadBase {
+public class ManagementEndpointThread extends Thread {
+
+    private static final Logger LOGGER = Logger.getLogger(ManagementEndpoint.class);
+
+    private static final float DEFAULT_POLLING_FREQUENCY = 25;
 
     private ManagementEndpoint endpoint;
 
-    private static final LinkedList<String> pendingMessageQueue = new LinkedList<String>();
+    private static final List<String> pendingMessageQueue = new LinkedList<>();
     private static Object pendingMessageQueueLock = new Object();
 
     public ManagementEndpointThread(ManagementEndpoint endpoint){
@@ -26,27 +36,38 @@ public class ManagementEndpointThread extends ThreadBase {
     }
 
     private void checkMessages(){
-        synchronized (pendingMessageQueueLock){
-            LinkedList<String> pendingMessageQueueCopy = new LinkedList<String>();
+        LinkedList<String> pendingMessageQueueCopy = new LinkedList<>();
+        synchronized (pendingMessageQueueLock) {
             pendingMessageQueueCopy.addAll(pendingMessageQueue);
             pendingMessageQueue.clear();
+        }
 
-            if(!pendingMessageQueueCopy.isEmpty()){
-                for(String element : pendingMessageQueueCopy){
-                    endpoint.onIncomingEndpointMessage(element);
-                }
+        // TODO: refactor to service.getDecoder() again
+        final EndpointWebsocketMessageDecoder decoder = new EndpointWebsocketMessageDecoder();
+
+        for(String rawMessage : pendingMessageQueueCopy){
+            try {
+                final EndpointWebsocketMessage message = decoder.decode(rawMessage);
+                endpoint.onIncomingEndpointMessage(message);
+            } catch (DecodeException e) {
+                LOGGER.log(Level.ERROR, "wrong format of endpoint message: " + rawMessage, e);
             }
         }
     }
 
     public void run(){
+        final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(DEFAULT_POLLING_FREQUENCY);
 
         while(!isInterrupted()){
+            final long startMillis = System.currentTimeMillis();
+
+            checkMessages();
+
             try {
-                checkMessages();
-                doHangout();
+                frequencyLimiter.ensureLimit(startMillis);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.ERROR, e);
+                break;
             }
         }
     }
