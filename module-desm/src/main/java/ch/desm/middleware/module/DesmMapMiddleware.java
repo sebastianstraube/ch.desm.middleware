@@ -1,13 +1,13 @@
 package ch.desm.middleware.module;
 
 import ch.desm.middleware.core.component.ComponentMapBase;
-import ch.desm.middleware.module.gui.map.ManagementMapMiddleware;
-import ch.desm.middleware.module.obermatt.map.OmMapMiddleware;
-import ch.desm.middleware.module.petrinet.obermatt.map.PetrinetOmMapMiddleware;
-import ch.desm.middleware.module.petrinet.re420.map.PetrinetRe420MapMiddleware;
-import ch.desm.middleware.module.re420.map.Re420MapMiddleware;
-import ch.desm.middleware.module.simulation.zusi.map.ZusiMapAusbildungMiddleware;
-import ch.desm.middleware.module.simulation.zusi.map.ZusiMapFahrpultMiddleware;
+import ch.desm.middleware.module.desm.cabine.re420.map.Re420MapMiddleware;
+import ch.desm.middleware.module.desm.gui.map.ManagementMapMiddleware;
+import ch.desm.middleware.module.desm.interlocking.obermatt.map.OmMapMiddleware;
+import ch.desm.middleware.module.desm.petrinet.obermatt.map.PetrinetOmMapMiddleware;
+import ch.desm.middleware.module.desm.petrinet.re420.map.PetrinetRe420MapMiddleware;
+import ch.desm.middleware.module.desm.simulation.zusi.map.ZusiMapAusbildungMiddleware;
+import ch.desm.middleware.module.desm.simulation.zusi.map.ZusiMapFahrpultMiddleware;
 
 public class DesmMapMiddleware extends ComponentMapBase {
 

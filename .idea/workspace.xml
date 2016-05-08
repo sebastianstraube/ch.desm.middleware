@@ -2,305 +2,116 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f19cbdf-db97-4501-aac2-4abb9ef97b57" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/lib/DesmMiddlewarePlugin.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/Middleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/MiddlewareConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/StartAppMain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/common/FrequencyLimiter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/common/UtilityHex.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/broker/Broker.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/broker/BrokerClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/EndpointBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/EndpointCommon.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/EndpointCommonListenerInterface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/EndpointThreadBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/rs232/EndpointRs232.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/rs232/EndpointRs232Config.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/rs232/EndpointRs232ConfigBuilder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/rs232/EndpointRs232ListenerInterface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/tcp/EndpointTcpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/tcp/EndpointTcpClientThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/tcp/EndpointTcpServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/tcp/EndpointTcpServerThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32Base.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32Config.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32Message.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32MessageAnalog.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32MessageDigital.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32MessageHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32MessageParser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32Register.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32State.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/ubw32/EndpointUbw32Thread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/websocket/EndpointWebsocketMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/websocket/EndpointWebsocketMessageDecoder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/websocket/EndpointWebsocketMessageEncoder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/websocket/EndpointWebsocketServerEcho.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/endpoint/websocket/EndpointWebsocketServerGui.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/BadParameterTypeCastException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/InvalidParameterTypeException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/MessageCommon.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/MessageCommonBuilder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/MessageCommonDecoder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/MessageCommonEncoder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/processor/MessageProcessorBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/translator/MalformedMessageException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/translator/MessageTranslatorMiddleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/translator/MessageTranslatorMiddlewareBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/message/translator/MessageTranslatorWebsocket.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/replay/Replay.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/replay/ReplayEvent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/replay/ReplayFilter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/replay/ReplayFilterAllowEverything.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/replay/ReplayFilterByTopic.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/communication/replay/ReplayLoader.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/component/ComponentBrokerClientBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/component/ComponentMapBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/component/ComponentMapMiddleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/component/ComponentMessageProcessorBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/component/ComponentMessageProcessorThreadBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/component/ComponentMessageProcessorUbw32Base.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/component/ComponentServiceBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/component/petrinet/Bucket.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/server/JettyServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/core/server/TyrusServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/gui/ManagementBrokerClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/gui/ManagementEndpoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/gui/ManagementEndpointClientWebsocket.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/gui/ManagementEndpointThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/gui/ManagementMessageProcessor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/gui/ManagementMessageTranslator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/gui/ManagementService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/gui/map/ManagementMapMiddleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/OmBrokerClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/OmEndpointUbw32.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/OmGenericClientThreadMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/OmMessageProcessor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/OmService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/logic/OmLogicFahrstrassenSchalter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/map/OmMapMiddleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/map/OmMapPetrinet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/map/OmMapSignalStellung.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/map/OmMapUbw32Analog.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/obermatt/map/OmMapUbw32Digital.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmBrokerClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmBrokerClientThreadMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmEndpoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmEndpointExportAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmEndpointExportBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmEndpointExportThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmMessageProcessor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/map/PetrinetOmMapDelay.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/map/PetrinetOmMapInterlockingOm.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/map/PetrinetOmMapMiddleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/obermatt/map/PetrinetOmMapZusi.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/PetrinetRe420BrokerClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/PetrinetRe420BrokerClientThreadMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/PetrinetRe420Endpoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/PetrinetRe420EndpointExportAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/PetrinetRe420EndpointExportBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/PetrinetRe420EndpointExportThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/PetrinetRe420MessageProcessor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/PetrinetRe420Service.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/map/PetrinetRe420MapCabineRe420.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/map/PetrinetRe420MapDelay.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/map/PetrinetRe420MapInterlockingOm.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/map/PetrinetRe420MapMiddleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/petrinet/re420/map/PetrinetRe420MapZusiFahrpult.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/re420/Re420BrokerClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/re420/Re420EndpointUbw32.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/re420/Re420MessageProcessor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/re420/Re420Service.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/re420/map/Re420MapMiddleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/re420/map/Re420MapPetrinetCabineRe420.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/re420/map/Re420MapUbw32Analog.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/re420/map/Re420MapUbw32Digital.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/re420/map/Re420MapZusiFahrpult.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/EtcsBrokerClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/EtcsBrokerClientThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/EtcsEndpointTcpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/EtcsEndpointTcpClientThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/EtcsMessageProcessor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/EtcsProtocolConstants.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/EtcsProtocolMessageHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/EtcsService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/map/EtcsMapCabineRe420.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/map/EtcsMapPetrinetOm.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/map/EtcsMapPetrinetRe420.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/etcs/protocol/EtcsStateTIU.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/ZusiBrokerClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/ZusiBrokerClientThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/ZusiEndpointLogic.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/ZusiEndpointTcpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/ZusiEndpointTcpClientThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/ZusiMessageProcessor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/ZusiService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/logic/ZusiLogicIsolierung.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/map/ZusiMapAusbildungInit.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/map/ZusiMapAusbildungMiddleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/map/ZusiMapFahrpultInit.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/map/ZusiMapFahrpultMiddleware.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/map/ZusiMapParameter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/map/ZusiMapParameterDataType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/map/ZusiMapParameterRe420.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/map/ZusiMapPetrinetOm.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/map/ZusiMapPetrinetRe420.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/message/ZusiMessageEndpoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/message/ZusiMessageParameterHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/message/ZusiMessageProtocolStream.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/protocol/ZusiProtocolConstants.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/protocol/ZusiProtocolMessageHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/protocol/node/ZusiProtocolNode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/protocol/node/ZusiProtocolNodeBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/protocol/node/ZusiProtocolNodeCodec.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/protocol/node/ZusiProtocolNodeCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/app/module/simulation/zusi/protocol/node/ZusiProtocolNodeHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/resources/glassfish-resources.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/WEB-INF/glassfish-web.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/WEB-INF/web.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/WEB-INF/web.xml-faces" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/css/animate.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/css/bootstrap-theme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/css/bootstrap-theme.css.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/css/bootstrap-theme.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/css/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/css/bootstrap.css.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/css/grayscale.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/css/standard.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/editor_gui.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/faces/index.xhtml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/css/font-awesome.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/fonts/FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/fonts/fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/fonts/fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/fonts/fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/fonts/fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/bordered-pulled.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/core.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/fixed-width.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/font-awesome.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/icons.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/larger.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/list.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/mixins.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/path.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/rotated-flipped.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/spinning.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/stacked.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/less/variables.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_bordered-pulled.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_core.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_fixed-width.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_icons.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_larger.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_list.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_mixins.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_path.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_rotated-flipped.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_spinning.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_stacked.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/_variables.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/font-awesome-4.1.0/scss/font-awesome.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/css/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/css/grayscale.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/css/font-awesome.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/fonts/FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/fonts/fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/fonts/fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/fonts/fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/fonts/fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/bordered-pulled.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/core.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/fixed-width.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/font-awesome.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/icons.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/larger.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/list.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/mixins.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/path.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/rotated-flipped.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/spinning.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/stacked.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/less/variables.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_bordered-pulled.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_core.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_fixed-width.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_icons.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_larger.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_list.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_mixins.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_path.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_rotated-flipped.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_spinning.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_stacked.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/_variables.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/font-awesome-4.1.0/scss/font-awesome.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/img/downloads-bg.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/img/intro-bg.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/img/map-marker.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/js/bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/js/grayscale.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/js/jquery-1.11.0.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/js/jquery.easing.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/less/grayscale.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/less/mixins.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/grayscale/grayscale/less/variables.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/img/desm_logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/img/detail_iltis_background.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/img/downloads-bg.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/img/iltis_arrowright-green.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/img/iltis_arrowright-red.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/img/iltis_background.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/img/intro-bg.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/img/petrinetz-iltis.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/img/petrinetz-kontakte.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/index_grayscale.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/js/grayscale.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/js/gui-management.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/js/jquery-2.1.3.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/js/jquery-2.1.3.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/js/jquery-2.1.3.min.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/js/npm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/less/grayscale.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/less/mixins.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/main/webapp/less/variables.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/common/MessageRecorderBrokerClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/integration/obermatt/InterlockingTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmInitTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmTestBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmTestBaseWithInit.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmWeichenschalterTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/simulation/zusi/ZusiMessageProcessorTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/simulation/zusi/ZusiServiceTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/simulation/zusi/ZusiTestsAll.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/simulation/zusi/logic/ZusiLogicIsolierungTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/simulation/zusi/message/ZusiProtocolStreamTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/simulation/zusi/protocol/ZusiProtocolMessageHelperTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/simulation/zusi/protocol/node/ZusiProtocolNodeCodecTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/simulation/zusi/protocol/node/ZusiProtocolNodeHelperTest.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/pom.xml" afterPath="$PROJECT_DIR$/core/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/core/src/main/java/META-INF/MANIFEST.MF" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/integration/obermatt/InterlockingTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmInitTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmTestBaseWithInit.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmWeichenschalterTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiMessageProcessorTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiServiceTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiTestsAll.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/simulation/zusi/logic/ZusiLogicIsolierungTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/simulation/zusi/message/ZusiProtocolStreamTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/ZusiProtocolMessageHelperTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/node/ZusiProtocolNodeCodecTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/node/ZusiProtocolNodeHelperTest.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/StartAppMain.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/StartAppMain.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/ManagementBrokerClient.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementBrokerClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/ManagementEndpoint.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementEndpoint.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/ManagementEndpointClientWebsocket.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementEndpointClientWebsocket.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/ManagementEndpointThread.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementEndpointThread.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/ManagementMessageProcessor.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementMessageProcessor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/ManagementMessageTranslator.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementMessageTranslator.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/ManagementService.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/map/ManagementMapMiddleware.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/map/ManagementMapMiddleware.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/OmBrokerClient.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/OmBrokerClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/OmEndpointUbw32.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/OmEndpointUbw32.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/OmGenericClientThreadMessage.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/OmGenericClientThreadMessage.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/OmMessageProcessor.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/OmMessageProcessor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/OmService.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/OmService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/logic/OmLogicFahrstrassenSchalter.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/logic/OmLogicFahrstrassenSchalter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/map/OmMapMiddleware.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/map/OmMapMiddleware.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/map/OmMapPetrinet.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/map/OmMapPetrinet.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/map/OmMapSignalStellung.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/map/OmMapSignalStellung.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/map/OmMapUbw32Analog.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/map/OmMapUbw32Analog.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/map/OmMapUbw32Digital.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/map/OmMapUbw32Digital.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmBrokerClient.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmBrokerClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmBrokerClientThreadMessage.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmBrokerClientThreadMessage.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmEndpoint.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpoint.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmEndpointExportAdapter.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpointExportAdapter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmEndpointExportBase.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpointExportBase.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmEndpointExportThread.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpointExportThread.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmMessageProcessor.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmMessageProcessor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmService.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/map/PetrinetOmMapDelay.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapDelay.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/map/PetrinetOmMapInterlockingOm.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapInterlockingOm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/map/PetrinetOmMapMiddleware.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapMiddleware.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/map/PetrinetOmMapZusi.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapZusi.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420BrokerClient.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420BrokerClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420BrokerClientThreadMessage.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420BrokerClientThreadMessage.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420Endpoint.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420Endpoint.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420EndpointExportAdapter.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420EndpointExportAdapter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420EndpointExportBase.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420EndpointExportBase.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420EndpointExportThread.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420EndpointExportThread.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420MessageProcessor.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420MessageProcessor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420Service.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420Service.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/map/PetrinetRe420MapCabineRe420.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapCabineRe420.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/map/PetrinetRe420MapDelay.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapDelay.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/map/PetrinetRe420MapInterlockingOm.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapInterlockingOm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/map/PetrinetRe420MapMiddleware.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapMiddleware.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/map/PetrinetRe420MapZusiFahrpult.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapZusiFahrpult.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/Re420BrokerClient.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/Re420BrokerClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/Re420EndpointUbw32.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/Re420EndpointUbw32.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/Re420MessageProcessor.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/Re420MessageProcessor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/Re420Service.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/Re420Service.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/map/Re420MapMiddleware.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/map/Re420MapMiddleware.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/map/Re420MapPetrinetCabineRe420.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/map/Re420MapPetrinetCabineRe420.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/map/Re420MapUbw32Analog.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/map/Re420MapUbw32Analog.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/map/Re420MapUbw32Digital.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/map/Re420MapUbw32Digital.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/map/Re420MapZusiFahrpult.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/map/Re420MapZusiFahrpult.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsBrokerClient.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsBrokerClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsBrokerClientThread.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsBrokerClientThread.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsEndpointTcpClient.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsEndpointTcpClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsEndpointTcpClientThread.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsEndpointTcpClientThread.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsMessageProcessor.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsMessageProcessor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsProtocolConstants.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsProtocolConstants.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsProtocolMessageHelper.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsProtocolMessageHelper.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsService.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/map/EtcsMapCabineRe420.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/map/EtcsMapCabineRe420.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/map/EtcsMapPetrinetOm.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/map/EtcsMapPetrinetOm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/map/EtcsMapPetrinetRe420.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/map/EtcsMapPetrinetRe420.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/protocol/EtcsStateTIU.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/protocol/EtcsStateTIU.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiBrokerClient.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiBrokerClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiBrokerClientThread.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiBrokerClientThread.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiEndpointLogic.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiEndpointLogic.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiEndpointTcpClient.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiEndpointTcpClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiEndpointTcpClientThread.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiEndpointTcpClientThread.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiMessageProcessor.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiMessageProcessor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiService.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/logic/ZusiLogicIsolierung.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/logic/ZusiLogicIsolierung.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/map/ZusiMapAusbildungInit.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/map/ZusiMapAusbildungInit.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/map/ZusiMapAusbildungMiddleware.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/map/ZusiMapAusbildungMiddleware.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/map/ZusiMapFahrpultInit.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/map/ZusiMapFahrpultInit.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/map/ZusiMapFahrpultMiddleware.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/map/ZusiMapFahrpultMiddleware.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/map/ZusiMapParameter.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/map/ZusiMapParameter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/map/ZusiMapParameterDataType.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/map/ZusiMapParameterDataType.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/map/ZusiMapParameterRe420.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/map/ZusiMapParameterRe420.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/map/ZusiMapPetrinetOm.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/map/ZusiMapPetrinetOm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/map/ZusiMapPetrinetRe420.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/map/ZusiMapPetrinetRe420.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/message/ZusiMessageEndpoint.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/message/ZusiMessageEndpoint.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/message/ZusiMessageParameterHelper.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/message/ZusiMessageParameterHelper.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/message/ZusiMessageProtocolStream.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/message/ZusiMessageProtocolStream.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/protocol/ZusiProtocolConstants.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/ZusiProtocolConstants.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/protocol/ZusiProtocolMessageHelper.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/ZusiProtocolMessageHelper.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/protocol/node/ZusiProtocolNode.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/node/ZusiProtocolNode.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/protocol/node/ZusiProtocolNodeBase.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/node/ZusiProtocolNodeBase.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/protocol/node/ZusiProtocolNodeCodec.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/node/ZusiProtocolNodeCodec.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/protocol/node/ZusiProtocolNodeCommand.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/node/ZusiProtocolNodeCommand.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/protocol/node/ZusiProtocolNodeHelper.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/protocol/node/ZusiProtocolNodeHelper.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmTestBase.java" afterPath="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmTestBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module-desm/src/main/java/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/module-desm/src/main/java/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/DesmMapMiddleware.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/DesmMapMiddleware.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/Middleware.java" afterPath="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/Middleware.java" />
     </list>
     <ignored path="parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -324,7 +135,125 @@
     <favorites_list name="parent" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Middleware.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/Middleware.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="403">
+              <caret line="107" column="50" selection-start-line="107" selection-start-column="50" selection-end-line="107" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JettyServer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/server/JettyServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MiddlewareConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/MiddlewareConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PetrinetOmTestBase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/test/petrinet/obermatt/PetrinetOmTestBase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="38" />
+              <folding>
+                <element signature="e#1730#1731#0" expanded="false" />
+                <element signature="e#1768#1769#0" expanded="false" />
+                <element signature="e#1819#1820#0" expanded="false" />
+                <element signature="e#1866#1867#0" expanded="false" />
+                <element signature="e#2244#2245#0" expanded="false" />
+                <element signature="e#2286#2287#0" expanded="false" />
+                <element signature="e#4166#4167#0" expanded="false" />
+                <element signature="e#4223#4224#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InterlockingTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/test/integration/obermatt/InterlockingTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PetrinetOmBrokerClientThreadMessage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmBrokerClientThreadMessage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StartAppMain.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/StartAppMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MANIFEST.MF" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/META-INF/MANIFEST.MF">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DesmMapMiddleware.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/DesmMapMiddleware.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="521">
+              <caret line="56" column="37" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EtcsBrokerClient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsBrokerClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -337,31 +266,54 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/StartAppMain.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/MiddlewareConfig.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/Middleware.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module-desm/Middleware.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/StartAppMain.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/component/ComponentMessageProcessorUbw32Base.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/component/ComponentMapMiddleware.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/DesmMapMiddleware.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/component/ComponentMapBase.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/component/ComponentServiceBase.java" />
-        <option value="$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmTestBase.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiService.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsService.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420Service.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/ManagementService.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/Re420Service.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmService.java" />
-        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/OmService.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/communication/broker/MessageRecorderBrokerClient.java" />
         <option value="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmTestBase.java" />
         <option value="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/integration/obermatt/InterlockingTest.java" />
         <option value="$PROJECT_DIR$/core/pom.xml" />
         <option value="$PROJECT_DIR$/module-desm/pom.xml" />
         <option value="$PROJECT_DIR$/common/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/module-automation/src/main/java/ch/desm/middleware/module/obermatt/map/OmMapMiddleware.java" />
+        <option value="$PROJECT_DIR$/module-automation/src/main/java/ch/desm/middleware/module/obermatt/map/OmMapPetrinet.java" />
+        <option value="$PROJECT_DIR$/module-automation/src/main/java/ch/desm/middleware/module/obermatt/map/OmMapUbw32Digital.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/Re420Service.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapMiddleware.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapCabineRe420.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapDelay.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapInterlockingOm.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapZusiFahrpult.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420BrokerClient.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420BrokerClientThreadMessage.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420Endpoint.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420EndpointExportThread.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420EndpointExportBase.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420MessageProcessor.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420Service.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420EndpointExportAdapter.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementService.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/map/ManagementMapMiddleware.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementBrokerClient.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementEndpoint.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementEndpointClientWebsocket.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementEndpointThread.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementMessageTranslator.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementMessageProcessor.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmBrokerClient.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmBrokerClientThreadMessage.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpoint.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpointExportBase.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpointExportThread.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmMessageProcessor.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapDelay.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapInterlockingOm.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapMiddleware.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapZusi.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmService.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpointExportAdapter.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsBrokerClient.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/DesmMapMiddleware.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/test/petrinet/obermatt/PetrinetOmTestBase.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/test/integration/obermatt/InterlockingTest.java" />
+        <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/StartAppMain.java" />
         <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/MiddlewareConfig.java" />
         <option value="$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/Middleware.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/server/JettyServer.java" />
@@ -456,6 +408,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -474,11 +427,348 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="obermatt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.desm.middleware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -490,6 +780,9 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ch.desm.middleware.module.desm" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="ch.desm.middleware.module" />
     </key>
@@ -585,9 +878,7 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
-      <method>
-        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="clean install package" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="CompoundRunConfigurationType" factoryName="Compound Run Configuration">
       <method />
@@ -762,7 +1053,7 @@
     </configuration>
     <configuration default="false" name="ch.desm.middleware" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" track_test_folders="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="ch.desm.middleware.module.StartAppMain" />
+      <option name="MAIN_CLASS_NAME" value="ch.desm.middleware.module.desm.StartAppMain" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -774,7 +1065,6 @@
       <module name="module-desm" />
       <envs />
       <method>
-        <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="clean install package" />
       </method>
     </configuration>
@@ -809,24 +1099,33 @@
       <configuration name="ch.desm.middleware.module.re420.map in module-desm" configurationId="JUnit" />
     </history-entry>
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="270" y="24" width="1400" height="1000" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33679354" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298731" sideWeight="0.49701494" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33679354" sideWeight="0.44626865" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3194925" sideWeight="0.5074627" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33679354" sideWeight="0.5537313" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298731" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32756633" sideWeight="0.49701494" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298731" sideWeight="0.49253732" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298731" sideWeight="0.49701494" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32756633" sideWeight="0.49402985" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298731" sideWeight="0.48955223" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3335821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33794695" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34925374" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33794695" sideWeight="0.49701494" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -859,385 +1158,339 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/module-automation/src/main/java/ch/desm/middleware/module/automation/map/OmMapUbw32Analog.java" />
+    <entry file="file://$PROJECT_DIR$/module-automation/src/main/java/ch/desm/middleware/module/automation/map/OmMapUbw32Digital.java" />
+    <entry file="file://$PROJECT_DIR$/module-automation/src/main/java/ch/desm/middleware/module/automation/map/OmMapMiddleware.java" />
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/cabine/re420/Re420Service.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="49" column="21" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="329">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module-desm/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+        <state relative-caret-position="1122">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="21" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/StartAppMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/MiddlewareConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/Middleware.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module-desm/Middleware.java">
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapInterlockingOm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
-          <folding />
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/StartAppMain.java">
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapCabineRe420.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapDelay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapMiddleware.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/map/PetrinetRe420MapZusiFahrpult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420BrokerClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiBrokerClient.java">
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420BrokerClientThreadMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420Endpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420EndpointExportThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420EndpointExportBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420MessageProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420Service.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/re420/PetrinetRe420EndpointExportAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-714">
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/logic/OmLogicFahrstrassenSchalter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/communication/replay/ReplayFilterByTopic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#322#323#0" expanded="false" />
-            <element signature="e#362#363#0" expanded="false" />
-            <element signature="e#408#409#0" expanded="false" />
-            <element signature="e#449#450#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/OmMessageProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/component/ComponentMessageProcessorUbw32Base.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="67" selection-start-line="4" selection-start-column="67" selection-end-line="4" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/component/ComponentMapMiddleware.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="61" column="59" selection-start-line="61" selection-start-column="59" selection-end-line="61" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/component/ComponentMessageProcessorBase.java">
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/OmGenericClientThreadMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-          <folding />
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/component/ComponentServiceBase.java">
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/interlocking/obermatt/map/OmMapMiddleware.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
-          <folding />
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/test/java/ch/desm/middleware/app/module/petrinet/obermatt/PetrinetOmTestBase.java">
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/map/ManagementMapMiddleware.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="51" selection-start-line="0" selection-start-column="51" selection-end-line="0" selection-end-column="51" />
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementBrokerClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementEndpointClientWebsocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="26" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementEndpointThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="27" selection-start-line="0" selection-start-column="27" selection-end-line="0" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementMessageTranslator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/gui/ManagementMessageProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmBrokerClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpointExportBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpointExportThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmMessageProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapDelay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapInterlockingOm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapMiddleware.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/map/PetrinetOmMapZusi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmEndpointExportAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/zusi/ZusiBrokerClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/simulation/etcs/EtcsBrokerClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/test/petrinet/obermatt/PetrinetOmTestBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="38" />
+          <folding>
+            <element signature="e#1730#1731#0" expanded="false" />
+            <element signature="e#1768#1769#0" expanded="false" />
+            <element signature="e#1819#1820#0" expanded="false" />
+            <element signature="e#1866#1867#0" expanded="false" />
+            <element signature="e#2244#2245#0" expanded="false" />
+            <element signature="e#2286#2287#0" expanded="false" />
+            <element signature="e#4166#4167#0" expanded="false" />
+            <element signature="e#4223#4224#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/desm/test/integration/obermatt/InterlockingTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/petrinet/obermatt/PetrinetOmBrokerClientThreadMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/DesmMapMiddleware.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="11" column="55" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/component/ComponentMapBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/zusi/ZusiService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-697">
-          <caret line="70" column="28" selection-start-line="70" selection-start-column="28" selection-end-line="70" selection-end-column="28" />
+        <state relative-caret-position="521">
+          <caret line="56" column="37" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="37" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/simulation/etcs/EtcsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/re420/PetrinetRe420Service.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1575#1576#0" expanded="false" />
-            <element signature="e#1620#1621#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/gui/ManagementService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="92" selection-start-line="6" selection-start-column="92" selection-end-line="6" selection-end-column="92" />
-          <folding>
-            <element signature="e#1591#1592#0" expanded="false" />
-            <element signature="e#1636#1637#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/Re420Service.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1737#1738#0" expanded="false" />
-            <element signature="e#1771#1772#0" expanded="false" />
-            <element signature="e#1946#1947#0" expanded="false" />
-            <element signature="e#1979#1980#0" expanded="false" />
-            <element signature="e#2050#2051#0" expanded="false" />
-            <element signature="e#2082#2083#0" expanded="false" />
-            <element signature="e#2131#2132#0" expanded="false" />
-            <element signature="e#2160#2161#0" expanded="false" />
-            <element signature="e#2207#2208#0" expanded="false" />
-            <element signature="e#2237#2238#0" expanded="false" />
-            <element signature="e#2300#2301#0" expanded="false" />
-            <element signature="e#2350#2351#0" expanded="false" />
-            <element signature="e#2534#2535#0" expanded="false" />
-            <element signature="e#2577#2578#0" expanded="false" />
-            <element signature="e#2625#2626#0" expanded="false" />
-            <element signature="e#2667#2668#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/obermatt/OmService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
-          <folding>
-            <element signature="e#1080#1081#0" expanded="false" />
-            <element signature="e#1125#1126#0" expanded="false" />
-            <element signature="e#1172#1173#0" expanded="false" />
-            <element signature="e#1204#1205#0" expanded="false" />
-            <element signature="e#1261#1262#0" expanded="false" />
-            <element signature="e#1294#1295#0" expanded="false" />
-            <element signature="e#1340#1341#0" expanded="false" />
-            <element signature="e#1369#1370#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-            <element signature="e#1443#1444#0" expanded="false" />
-            <element signature="e#1487#1488#0" expanded="false" />
-            <element signature="e#1518#1519#0" expanded="false" />
-            <marker date="1462665279018" expanded="true" signature="52:310" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/communication/broker/MessageRecorderBrokerClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="3" column="65" selection-start-line="3" selection-start-column="65" selection-end-line="3" selection-end-column="65" />
-          <folding>
-            <element signature="e#750#751#0" expanded="false" />
-            <element signature="e#789#790#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmTestBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="80" />
-          <folding>
-            <element signature="e#1650#1651#0" expanded="false" />
-            <element signature="e#1688#1689#0" expanded="false" />
-            <element signature="e#1739#1740#0" expanded="false" />
-            <element signature="e#1786#1787#0" expanded="false" />
-            <element signature="e#2164#2165#0" expanded="false" />
-            <element signature="e#2206#2207#0" expanded="false" />
-            <element signature="e#4086#4087#0" expanded="false" />
-            <element signature="e#4143#4144#0" expanded="false" />
-            <marker date="1462665522555" expanded="true" signature="61:793" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/petrinet/obermatt/PetrinetOmService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
-          <folding>
-            <element signature="e#1315#1316#0" expanded="false" />
-            <element signature="e#1360#1361#0" expanded="false" />
-            <element signature="e#1415#1416#0" expanded="false" />
-            <element signature="e#1447#1448#0" expanded="false" />
-            <element signature="e#1504#1505#0" expanded="false" />
-            <element signature="e#1537#1538#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1614#1615#0" expanded="false" />
-            <element signature="e#1668#1669#0" expanded="false" />
-            <element signature="e#1697#1698#0" expanded="false" />
-            <element signature="e#1747#1748#0" expanded="false" />
-            <element signature="e#1773#1774#0" expanded="false" />
-            <element signature="e#1817#1818#0" expanded="false" />
-            <element signature="e#1847#1848#0" expanded="false" />
-            <marker date="1462665257163" expanded="true" signature="61:416" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/glassfish-resources.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="50" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/test/java/ch/desm/middleware/integration/obermatt/InterlockingTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/Re420MessageProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="44" column="43" selection-start-line="44" selection-start-column="43" selection-end-line="44" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="23" column="59" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-986">
-          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/re420/Re420BrokerClient.java">
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/desm/StartAppMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
@@ -1245,29 +1498,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/MiddlewareConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="28" column="59" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="59" />
-          <folding>
-            <element signature="e#2718#2719#0" expanded="true" />
-            <element signature="e#2766#2767#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="272">
+          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module-desm/src/main/java/ch/desm/middleware/module/Middleware.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="107" column="37" selection-start-line="107" selection-start-column="37" selection-end-line="107" selection-end-column="37" />
-          <folding />
+        <state relative-caret-position="403">
+          <caret line="107" column="50" selection-start-line="107" selection-start-column="50" selection-end-line="107" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ch/desm/middleware/core/server/JettyServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-79">
-          <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+        <state relative-caret-position="216">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
           <folding />
         </state>
       </provider>
