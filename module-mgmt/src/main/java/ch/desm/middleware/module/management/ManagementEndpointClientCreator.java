@@ -7,6 +7,10 @@ import org.apache.log4j.Logger;
 
 import javax.websocket.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import static ch.desm.middleware.core.server.ServerConfig.SERVER_WEBSOCKET_URL;
 
 class ManagementEndpointClientCreator extends EndpointCommon<EndpointWebsocketMessage> {
 
@@ -41,7 +45,11 @@ class ManagementEndpointClientCreator extends EndpointCommon<EndpointWebsocketMe
 
     @Override
     public void init() {
-        client = new ManagementEndpointClientConnector();
+        try {
+            client = new ManagementEndpointClientConnector(new URI(SERVER_WEBSOCKET_URL));
+        } catch (URISyntaxException e) {
+            LOGGER.log(Level.ERROR, "Endpoint init failed: " + SERVER_WEBSOCKET_URL  + e);
+        }
     }
 
     @Override

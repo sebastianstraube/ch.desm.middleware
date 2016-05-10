@@ -20,20 +20,18 @@ public class ManagementEndpointClientConnector {
 
     private static final Logger LOGGER = Logger.getLogger(ManagementEndpointClientConnector.class);
 
-    WebSocketContainer container=null;//
-    Session session=null;
+    private WebSocketContainer container=null;//
+    private Session session=null;
+    private URI uri;
 
-    public ManagementEndpointClientConnector(){
+
+    public ManagementEndpointClientConnector(URI uri){
         LOGGER.log(Level.INFO, "ManagementEndpointClientService instantiated");
+        this.uri = uri;
     }
 
     public void connect() {
-
         try {
-
-            //URI uri = new URI(SERVER_WEBSOCKET_URL);
-            URI uri = new URI("ws://localhost:8025/websocket/echo");
-
             LOGGER.log(Level.INFO, "ManagementEndpointClientService connects to server: " + uri);
             container = ContainerProvider.getWebSocketContainer();
             session = container.connectToServer(ManagementEndpointClient.class, uri);
@@ -41,8 +39,6 @@ public class ManagementEndpointClientConnector {
         } catch (DeploymentException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
