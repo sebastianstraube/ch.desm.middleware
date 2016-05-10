@@ -13,14 +13,6 @@ public class EndpointWebsocketMessageEncoder implements Encoder.Text<EndpointWeb
     private static final Logger LOGGER = Logger.getLogger(EndpointWebsocketMessageEncoder.class);
 
     @Override
-    public void init(final EndpointConfig config) {
-    }
-
-    @Override
-    public void destroy() {
-    }
-
-    @Override
     public String encode(final EndpointWebsocketMessage message) throws EncodeException {
 
         JsonObjectBuilder builder = Json.createObjectBuilder()
@@ -29,5 +21,13 @@ public class EndpointWebsocketMessageEncoder implements Encoder.Text<EndpointWeb
 
         return builder.build().toString();
 
+    }
+
+    @Override
+    public void init(final EndpointConfig config) {
+    }
+
+    @Override
+    public void destroy() {
     }
 }

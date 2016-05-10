@@ -10,7 +10,7 @@ public class Broker {
     /**
      * @param client
      */
-    public void connect(BrokerClient client) {
+    protected void connect(BrokerClient client) {
         synchronized (lockClients){
             clients.add(client);
         }
@@ -30,4 +30,6 @@ public class Broker {
             }
         }
     }
+
+
 }

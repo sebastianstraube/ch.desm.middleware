@@ -91,7 +91,7 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
 
     //TODO refactoring
     public boolean isInitProcessMessage(MessageCommon element){
-        if (element.getGlobalId().equalsIgnoreCase("mgmt.stellwerk.obermattlangnau")) return true;
+        if (element.getGlobalId().equalsIgnoreCase("management.stellwerk.obermattlangnau")) return true;
         return false;
     }
 

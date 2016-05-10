@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class ComponentMapBase {
+public abstract class ComponentMapBase {
 
 	protected Map<String, String> map;
 

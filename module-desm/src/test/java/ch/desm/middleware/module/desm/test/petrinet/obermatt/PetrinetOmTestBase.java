@@ -1,7 +1,7 @@
-package ch.desm.middleware.module.desm.petrinet.obermatt;
+package ch.desm.middleware.module.desm.test.petrinet.obermatt;
 
 import ch.desm.middleware.core.communication.broker.Broker;
-import ch.desm.middleware.core.communication.broker.MessageRecorderBrokerClient;
+import ch.desm.middleware.core.communication.broker.BrokerClientMessageRecorder;
 import ch.desm.middleware.core.communication.message.MessageCommon;
 import ch.desm.middleware.core.communication.message.MessageCommonBuilder;
 import ch.desm.middleware.core.communication.message.MessageCommonEncoder;
@@ -30,13 +30,13 @@ public abstract class PetrinetOmTestBase {
 
     protected Broker broker;
     protected PetrinetOmService service;
-    protected MessageRecorderBrokerClient recorder;
+    protected BrokerClientMessageRecorder recorder;
 
     @Before
     public void setUpPetrinetOmTestBase() throws InterruptedException {
         broker = new Broker();
         service = new PetrinetOmService(broker);
-        recorder = new MessageRecorderBrokerClient(broker, getTopicsForRecording());
+        recorder = new BrokerClientMessageRecorder(broker, getTopicsForRecording());
     }
 
     // Overwrite if different recordings required

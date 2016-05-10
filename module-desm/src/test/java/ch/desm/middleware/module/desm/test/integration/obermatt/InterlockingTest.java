@@ -5,7 +5,7 @@ import ch.desm.middleware.core.communication.broker.Broker;
 import ch.desm.middleware.core.communication.endpoint.ubw32.EndpointUbw32MessageHandler;
 import ch.desm.middleware.core.communication.replay.Replay;
 import ch.desm.middleware.core.communication.replay.ReplayEvent;
-import ch.desm.middleware.module.MiddlewareConfig;
+import ch.desm.middleware.module.desm.DesmServiceConfig;
 import ch.desm.middleware.module.desm.interlocking.obermatt.OmService;
 import ch.desm.middleware.module.desm.petrinet.obermatt.PetrinetOmService;
 import org.junit.Before;
@@ -17,10 +17,10 @@ import java.util.List;
 public class InterlockingTest {
 
     public static final List<ReplayEvent> INIT_REPLAY_EVENTS = Arrays.asList(
-            new ReplayEvent(0000, "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;init;#"),
-            new ReplayEvent(1000, "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;#"),
-            new ReplayEvent(5000, "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;#"),
-            new ReplayEvent(8000, "mgmt.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;start;#")
+            new ReplayEvent(0000, "management.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;init;#"),
+            new ReplayEvent(1000, "management.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;#"),
+            new ReplayEvent(5000, "management.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;#"),
+            new ReplayEvent(8000, "management.stellwerk.obermattlangnau;os;0;management;stellwerk;obermattlangnau;management;S;start;#")
     );
 
     private Broker broker;
@@ -29,7 +29,7 @@ public class InterlockingTest {
 
     @Before
     public void setUp() throws InterruptedException {
-        final MiddlewareConfig config = new MiddlewareConfig();
+        final DesmServiceConfig config = new DesmServiceConfig();
         broker = new Broker();
         ubw32OmService = new OmService(broker, config.getObermattUbw32ComPort());
         petrinetOmService = new PetrinetOmService(broker);

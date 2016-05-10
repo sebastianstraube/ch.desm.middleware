@@ -1,4 +1,4 @@
-package ch.desm.middleware.module.desm.petrinet.obermatt;
+package ch.desm.middleware.module.desm.test.petrinet.obermatt;
 
 import ch.desm.middleware.core.communication.replay.ReplayEvent;
 import org.junit.Before;

@@ -2,7 +2,7 @@ package ch.desm.middleware.module.desm.petrinet.re420;
 
 import ch.desm.middleware.core.communication.broker.Broker;
 import ch.desm.middleware.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.module.DesmMapMiddleware;
+import ch.desm.middleware.module.desm.DesmServiceMapMiddleware;
 import ch.desm.middleware.module.desm.petrinet.re420.map.PetrinetRe420MapInterlockingOm;
 import ch.desm.middleware.module.desm.petrinet.re420.map.PetrinetRe420MapCabineRe420;
 import ch.desm.middleware.module.desm.petrinet.re420.map.PetrinetRe420MapZusiFahrpult;
@@ -14,7 +14,7 @@ public class PetrinetRe420Service {
 
     private MessageTranslatorMiddleware translator;
     private PetrinetRe420MessageProcessor processor;
-    private DesmMapMiddleware componentMapMiddleware;
+    private DesmServiceMapMiddleware componentMapMiddleware;
     private PetrinetRe420MapInterlockingOm mapInterlockingOm;
     private PetrinetRe420BrokerClient client;
     private PetrinetRe420Endpoint endpoint;
@@ -24,7 +24,7 @@ public class PetrinetRe420Service {
 
 
     public PetrinetRe420Service(Broker broker){
-        this.componentMapMiddleware = new DesmMapMiddleware();
+        this.componentMapMiddleware = new DesmServiceMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new PetrinetRe420MessageProcessor();
         this.mapInterlockingOm = new PetrinetRe420MapInterlockingOm();
@@ -34,7 +34,7 @@ public class PetrinetRe420Service {
     }
 
 
-    public DesmMapMiddleware getComponentMapMiddleware(){
+    public DesmServiceMapMiddleware getComponentMapMiddleware(){
         return componentMapMiddleware;
     }
 

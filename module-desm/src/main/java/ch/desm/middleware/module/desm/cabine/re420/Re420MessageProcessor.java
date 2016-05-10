@@ -110,7 +110,7 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 
 	//TODO refactoring
 	public boolean isInitProcessMessage(MessageCommon element){
-		if (element.getGlobalId().equalsIgnoreCase("mgmt.cabine.re420.ubw32")) return true;
+		if (element.getGlobalId().equalsIgnoreCase("management.cabine.re420.ubw32")) return true;
 		return false;
 	}
 }

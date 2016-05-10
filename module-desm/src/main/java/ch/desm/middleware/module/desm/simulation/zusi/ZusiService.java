@@ -6,7 +6,7 @@ import ch.desm.middleware.core.communication.message.MessageCommon;
 import ch.desm.middleware.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.core.component.ComponentMapBase;
 import ch.desm.middleware.core.component.ComponentServiceBase;
-import ch.desm.middleware.module.DesmMapMiddleware;
+import ch.desm.middleware.module.desm.DesmServiceMapMiddleware;
 import ch.desm.middleware.module.desm.simulation.zusi.logic.ZusiLogicIsolierung;
 import ch.desm.middleware.module.desm.simulation.zusi.map.*;
 import ch.desm.middleware.module.desm.simulation.zusi.message.ZusiMessageParameterHelper;
@@ -25,7 +25,7 @@ public class ZusiService extends ComponentServiceBase {
     private int port;
     private ZusiEndpointTcpClient endpointAusbildung;
     private ZusiEndpointTcpClient endpointFahrpult;
-    private final DesmMapMiddleware middleware = new DesmMapMiddleware();
+    private final DesmServiceMapMiddleware middleware = new DesmServiceMapMiddleware();
     private final ZusiMessageProcessor messageProcessor = new ZusiMessageProcessor();
     private final ZusiProtocolMessageHelper protocolMessageHelper = new ZusiProtocolMessageHelper();
     private final MessageTranslatorMiddleware messageTranslatorMiddleware = new MessageTranslatorMiddleware();
@@ -68,7 +68,7 @@ public class ZusiService extends ComponentServiceBase {
      *
      * @return
      */
-    public DesmMapMiddleware getComponentMapMiddleware(){
+    public DesmServiceMapMiddleware getComponentMapMiddleware(){
         return middleware;
     }
 

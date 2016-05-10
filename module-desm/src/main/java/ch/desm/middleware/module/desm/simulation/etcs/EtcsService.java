@@ -6,7 +6,7 @@ import ch.desm.middleware.core.communication.endpoint.tcp.EndpointTcpClient;
 import ch.desm.middleware.core.communication.message.MessageCommon;
 import ch.desm.middleware.core.communication.message.translator.MessageTranslatorMiddleware;
 import ch.desm.middleware.core.component.ComponentServiceBase;
-import ch.desm.middleware.module.DesmMapMiddleware;
+import ch.desm.middleware.module.desm.DesmServiceMapMiddleware;
 import ch.desm.middleware.module.desm.simulation.zusi.protocol.*;
 import ch.desm.middleware.module.desm.simulation.zusi.protocol.node.ZusiProtocolNodeCodec;
 
@@ -38,8 +38,8 @@ public class EtcsService extends ComponentServiceBase {
      *
      * @return
      */
-    public DesmMapMiddleware getComponentMapMiddleware(){
-        return new DesmMapMiddleware();
+    public DesmServiceMapMiddleware getComponentMapMiddleware(){
+        return new DesmServiceMapMiddleware();
     }
 
     /**

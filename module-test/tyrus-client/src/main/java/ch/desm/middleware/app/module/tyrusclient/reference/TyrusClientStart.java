@@ -22,7 +22,7 @@ public class TyrusClientStart {
 
         try {
             //URI uri = new URI("ws://localhost:8025/websocket/echo");
-            URI uri = new URI("ws://localhost:8070/websocket/gui");
+            URI uri = new URI("ws://localhost:8025/websocket/echo");
 
             container.connectToServer(ManagementEndpointClientWebsocket.class, uri);
         } catch (DeploymentException e) {

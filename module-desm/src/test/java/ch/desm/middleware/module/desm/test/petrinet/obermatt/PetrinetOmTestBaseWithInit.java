@@ -1,4 +1,4 @@
-package ch.desm.middleware.module.desm.petrinet.obermatt;
+package ch.desm.middleware.module.desm.test.petrinet.obermatt;
 
 import ch.desm.middleware.core.communication.replay.ReplayEvent;
 import org.apache.log4j.Logger;
@@ -12,8 +12,8 @@ public abstract class PetrinetOmTestBaseWithInit extends PetrinetOmTestBase {
     private static Logger LOGGER = Logger.getLogger(PetrinetOmTestBaseWithInit.class);
 
     public static final List<ReplayEvent> INIT_REPLAY_EVENTS = Arrays.asList(
-            new ReplayEvent(0, "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;#"),
-            new ReplayEvent(0, "mgmt.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;#")
+            new ReplayEvent(0, "management.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;init;#"),
+            new ReplayEvent(0, "management.petrinet.obermatlangnau;os;0;management;petrinet;obermattlangnau;management;S;start;#")
     );
 
     @Before

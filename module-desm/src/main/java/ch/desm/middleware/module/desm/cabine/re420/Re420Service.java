@@ -5,7 +5,7 @@ import ch.desm.middleware.core.component.ComponentServiceBase;
 import ch.desm.middleware.core.communication.broker.Broker;
 import ch.desm.middleware.core.component.ComponentMessageProcessorBase;
 import ch.desm.middleware.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.module.DesmMapMiddleware;
+import ch.desm.middleware.module.desm.DesmServiceMapMiddleware;
 import ch.desm.middleware.module.desm.cabine.re420.map.Re420MapPetrinetCabineRe420;
 import ch.desm.middleware.module.desm.cabine.re420.map.Re420MapUbw32Analog;
 import ch.desm.middleware.module.desm.cabine.re420.map.Re420MapUbw32Digital;
@@ -27,7 +27,7 @@ public class Re420Service extends ComponentServiceBase {
     private final Re420MapPetrinetCabineRe420 re420MapPetrinetCabineRe420 = new Re420MapPetrinetCabineRe420();
     private final Re420MapUbw32Digital re420MapUbw32Digital = new Re420MapUbw32Digital();
     private final Re420MapUbw32Analog re420MapUbw32Analog = new Re420MapUbw32Analog();
-    private final DesmMapMiddleware componentMapMiddleware = new DesmMapMiddleware();
+    private final DesmServiceMapMiddleware componentMapMiddleware = new DesmServiceMapMiddleware();
 
     /**
      *

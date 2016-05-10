@@ -23,8 +23,8 @@ public abstract class BrokerClient {
 
 	public BrokerClient(Broker broker) {		
 		this.broker = broker;
-		subscribedTopics = new LinkedList<String>();
-		init();
+		this.subscribedTopics = new LinkedList<String>();
+		this.init();
 	}
 
 	private void init() {

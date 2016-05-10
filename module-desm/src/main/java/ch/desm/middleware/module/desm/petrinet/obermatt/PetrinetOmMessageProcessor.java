@@ -134,6 +134,6 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     }
 
     public boolean isInitProcessMessage(MessageCommon element){
-        return element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.obermatlangnau");
+        return element.getGlobalId().equalsIgnoreCase("management.petrinet.obermatlangnau");
     }
 }

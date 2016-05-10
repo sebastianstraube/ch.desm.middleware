@@ -2,7 +2,7 @@ package ch.desm.middleware.module.desm.petrinet.obermatt;
 
 import ch.desm.middleware.core.communication.broker.Broker;
 import ch.desm.middleware.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.module.DesmMapMiddleware;
+import ch.desm.middleware.module.desm.DesmServiceMapMiddleware;
 import ch.desm.middleware.module.desm.petrinet.obermatt.map.PetrinetOmMapInterlockingOm;
 import ch.desm.middleware.module.desm.petrinet.obermatt.map.PetrinetOmMapZusi;
 
@@ -13,14 +13,14 @@ public class PetrinetOmService {
 
     private MessageTranslatorMiddleware translator;
     private PetrinetOmMessageProcessor processor;
-    private DesmMapMiddleware componentMapMiddleware;
+    private DesmServiceMapMiddleware componentMapMiddleware;
     private PetrinetOmBrokerClient client;
     private PetrinetOmEndpoint endpoint;
     private PetrinetOmMapInterlockingOm map;
     private PetrinetOmMapZusi mapZusi = new PetrinetOmMapZusi();
 
     public PetrinetOmService(Broker broker){
-        this.componentMapMiddleware = new DesmMapMiddleware();
+        this.componentMapMiddleware = new DesmServiceMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new PetrinetOmMessageProcessor();
         this.map = new PetrinetOmMapInterlockingOm();
@@ -30,7 +30,7 @@ public class PetrinetOmService {
     }
 
 
-    public DesmMapMiddleware getComponentMapMiddleware(){
+    public DesmServiceMapMiddleware getComponentMapMiddleware(){
         return componentMapMiddleware;
     }
 

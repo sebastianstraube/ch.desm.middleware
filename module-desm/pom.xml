@@ -10,7 +10,7 @@
 	
     <groupId>ch.desm.middleware</groupId>
     <artifactId>module-desm</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>0.1</version>
     <name>${project.artifactId}</name>
 
@@ -33,75 +33,60 @@
             <version>0.1</version>
         </dependency>
 
-        <!-- Test Automation -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
+            <groupId>ch.desm.middleware</groupId>
+            <artifactId>module-mgmt</artifactId>
+            <version>0.1</version>
         </dependency>
 
-        <!-- Logging -->
+        <!-- Jetty Server-->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>9.3.9.M1</version>
         </dependency>
 
-        <!-- Apache Common Utils -->
+        <!-- Jetty Webapp-->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>9.3.9.M1</version>
         </dependency>
 
-        <!-- Serial Interface -->
+        <!-- Tyrus Server -->
         <dependency>
-            <groupId>org.scream3r</groupId>
-            <artifactId>jssc</artifactId>
-            <version>2.8.0</version>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-server</artifactId>
+            <version>1.12</version>
         </dependency>
 
-        <!-- Java EE Standard -->
+        <!-- Tyrus Client -->
         <dependency>
-            <groupId>javax.websocket</groupId>
-            <artifactId>javax.websocket-api</artifactId>
-            <version>1.1</version>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-client</artifactId>
+            <version>1.12</version>
         </dependency>
 
-        <!-- Json api -->
+        <!-- Tyrus Container Grizzly -->
         <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.json</artifactId>
-            <version>1.0.4</version>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-container-grizzly</artifactId>
+            <version>1.2.1</version>
         </dependency>
 
+        <!-- Tyrus Container Grizzly Server -->
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-container-grizzly-server</artifactId>
+            <version>1.12</version>
+        </dependency>
 
     </dependencies>
     <build>
         <directory>${project.basedir}/target</directory>
 
         <plugins>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.0.M2</version>
-                <configuration>
-                    <scanIntervalSeconds>1</scanIntervalSeconds>
-                    <webApp>
-                        <contextPath>/</contextPath>
-                    </webApp>
-                </configuration>
-            </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
@@ -110,7 +95,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>ch.desm.middleware.StartAppMain</mainClass>
+                            <mainClass>ch.desm.middleware.module.desm.DesmServiceStart</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

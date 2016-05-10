@@ -1,4 +1,4 @@
-package ch.desm.middleware.module.desm.petrinet.obermatt;
+package ch.desm.middleware.module.desm.test.petrinet.obermatt;
 
 import org.junit.Test;
 

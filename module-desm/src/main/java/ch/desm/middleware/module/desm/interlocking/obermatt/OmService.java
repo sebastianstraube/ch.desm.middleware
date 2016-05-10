@@ -2,7 +2,7 @@ package ch.desm.middleware.module.desm.interlocking.obermatt;
 
 import ch.desm.middleware.core.communication.broker.Broker;
 import ch.desm.middleware.core.communication.message.translator.MessageTranslatorMiddleware;
-import ch.desm.middleware.module.DesmMapMiddleware;
+import ch.desm.middleware.module.desm.DesmServiceMapMiddleware;
 import ch.desm.middleware.module.desm.interlocking.obermatt.map.OmMapPetrinet;
 
 /**
@@ -12,13 +12,13 @@ public class OmService {
 
     private MessageTranslatorMiddleware translator;
     private OmMessageProcessor processor;
-    private DesmMapMiddleware componentMapMiddleware;
+    private DesmServiceMapMiddleware componentMapMiddleware;
     private OmBrokerClient client;
     private OmEndpointUbw32 endpoint;
     private OmMapPetrinet map;
 
     public OmService(Broker broker, String port){
-        this.componentMapMiddleware = new DesmMapMiddleware();
+        this.componentMapMiddleware = new DesmServiceMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new OmMessageProcessor();
         this.map = new OmMapPetrinet();
@@ -27,7 +27,7 @@ public class OmService {
         this.endpoint = new OmEndpointUbw32(port, this);
     }
 
-    public DesmMapMiddleware getComponentMapMiddleware(){
+    public DesmServiceMapMiddleware getComponentMapMiddleware(){
         return componentMapMiddleware;
     }
 

@@ -135,7 +135,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
 
     //TODO refactoring
     public boolean isInitProcessMessage(MessageCommon element){
-        if (element.getGlobalId().equalsIgnoreCase("mgmt.petrinet.re420")) return true;
+        if (element.getGlobalId().equalsIgnoreCase("management.petrinet.re420")) return true;
         return false;
     }
 }
