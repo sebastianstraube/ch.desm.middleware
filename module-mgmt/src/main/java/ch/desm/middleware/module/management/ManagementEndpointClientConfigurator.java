@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class ManagementEndpointClientConfigurator extends ClientEndpointConfig.Configurator {
 
-    private static final Logger LOGGER = Logger.getLogger(TyrusClientAnnotated.class);
+    private static final Logger LOGGER = Logger.getLogger(ManagementEndpointClientConfigurator.class);
     @Override
     public void beforeRequest(Map<String, List<String>> headers) {
         //affect the headers before request is sent

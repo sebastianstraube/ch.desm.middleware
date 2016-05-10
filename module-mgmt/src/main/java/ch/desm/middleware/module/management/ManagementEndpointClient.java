@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
         )
 */
 @ClientEndpoint
-class ManagementEndpointClient {
+public class ManagementEndpointClient {
 
     private static final Logger LOGGER = Logger.getLogger(ManagementEndpointClient.class);
     private final static ConcurrentLinkedQueue<Session> sessionSet = new ConcurrentLinkedQueue<>();
@@ -30,12 +30,6 @@ class ManagementEndpointClient {
     public void onOpen(Session session, EndpointConfig config) {
         this.sessionSet.add(session);
         //this.propertiesList.add(config.getUserProperties());
-
-        try {
-            session.getBasicRemote().sendText("TEST");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         LOGGER.log(Level.TRACE, "ManagementEndpointClientWebsocket is Connected with session: " + session.getId());
     }

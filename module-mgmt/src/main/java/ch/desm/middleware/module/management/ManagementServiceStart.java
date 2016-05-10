@@ -14,6 +14,7 @@ public class ManagementServiceStart {
 
         ServerService server = new ServerService();
         server.startTyrus();
+        server.startJetty();
 
         ManagementService mgmtService = new ManagementService();
         mgmtService.getEndpoint().init();
