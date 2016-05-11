@@ -39,39 +39,10 @@
             <version>0.1</version>
         </dependency>
 
-        <!-- Jetty Server-->
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>9.3.9.M1</version>
-        </dependency>
-
-        <!-- Jetty Webapp-->
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
-            <version>9.3.9.M1</version>
-        </dependency>
-
-        <!-- Tyrus Server -->
-        <dependency>
-            <groupId>org.glassfish.tyrus</groupId>
-            <artifactId>tyrus-server</artifactId>
-            <version>1.12</version>
-        </dependency>
-
-        <!-- Tyrus Client -->
-        <dependency>
-            <groupId>org.glassfish.tyrus</groupId>
-            <artifactId>tyrus-client</artifactId>
-            <version>1.12</version>
-        </dependency>
-
-        <!-- Tyrus Container Grizzly -->
-        <dependency>
-            <groupId>org.glassfish.tyrus</groupId>
-            <artifactId>tyrus-container-grizzly</artifactId>
-            <version>1.2.1</version>
+            <groupId>ch.desm.middleware</groupId>
+            <artifactId>module-mgmt-web</artifactId>
+            <version>0.1</version>
         </dependency>
 
         <!-- Tyrus Container Grizzly Server -->
@@ -81,6 +52,12 @@
             <version>1.12</version>
         </dependency>
 
+        <!-- Tyrus Server -->
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-server</artifactId>
+            <version>1.12</version>
+        </dependency>
     </dependencies>
     <build>
         <directory>${project.basedir}/target</directory>

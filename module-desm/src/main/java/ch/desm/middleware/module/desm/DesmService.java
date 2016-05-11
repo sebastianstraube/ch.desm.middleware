@@ -10,6 +10,8 @@ import ch.desm.middleware.module.desm.petrinet.obermatt.PetrinetOmService;
 import ch.desm.middleware.module.desm.petrinet.re420.PetrinetRe420Service;
 import ch.desm.middleware.module.desm.simulation.etcs.EtcsService;
 import ch.desm.middleware.module.desm.simulation.zusi.ZusiService;
+import ch.desm.middleware.module.management.web.ManagementServiceStart;
+import ch.desm.middleware.module.management.web.WebServiceStart;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -49,6 +51,12 @@ public class DesmService {
                 break;
             case "zusi":
                 startZusi();
+                break;
+            case "management-websocket":
+                startManagementWebsocket();
+                break;
+            case "management-web":
+                startManagementWeb();
                 break;
             default:
                 throw new IllegalArgumentException("Unknown module " + name);
@@ -115,6 +123,17 @@ public class DesmService {
         service.getEndpointAusbildung().start();
         service.getEndpointAusbildung().sendCommandRegisterClientAusbildung();
         service.getEndpointAusbildung().sendCommandNeededDataAusbildung();
+    }
+
+    public void startManagementWebsocket(){
+        ManagementServiceStart mgmt =  new ManagementServiceStart();
+        mgmt.start();
+    }
+
+    public void startManagementWeb(){
+        WebServiceStart mgmt =  new WebServiceStart();
+        mgmt.start();
+
     }
 
     public void runReplay(String file) {

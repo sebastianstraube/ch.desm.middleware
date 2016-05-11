@@ -9,11 +9,7 @@ import java.util.List;
  */
 public class DesmServiceConfig {
 
-    public static final List<String> DEFAULT_MODULES = Arrays.asList("management", "stellwerk");
-
-    public static final String LABOR_RECHNER_IP_INTERN = "192.168.1.32";
-    public static final String LABOR_RECHNER_IP_EXTERN = "7.94.80.35";
-
+    public static final List<String> DEFAULT_MODULES = Arrays.asList("management-websocket", "management-web", "stellwerk_petrinet");
     public static final String MANAGEMENT_DEFAULT_HOST = "127.0.0.1";
     public static final Integer MANAGEMENT_DEFAULT_PORT = 8070;
 
