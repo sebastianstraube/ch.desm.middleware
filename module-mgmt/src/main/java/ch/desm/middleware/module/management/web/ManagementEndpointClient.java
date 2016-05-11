@@ -1,27 +1,23 @@
 package ch.desm.middleware.module.management.web;
 
+import ch.desm.middleware.core.communication.endpoint.websocket.EndpointWebsocketMessageDecoder;
+import ch.desm.middleware.core.communication.endpoint.websocket.EndpointWebsocketMessageEncoder;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import javax.websocket.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-
-/*      (
+@ClientEndpoint(
         encoders = EndpointWebsocketMessageEncoder.class,
-        decoders = EndpointWebsocketMessageDecoder.class
-        //,configurator = ManagementEndpointClientConfigurator.class
-        )
-*/
-@ClientEndpoint
+        decoders = EndpointWebsocketMessageDecoder.class ,
+        configurator = ManagementEndpointClientConfigurator.class)
 public class ManagementEndpointClient {
 
     private static final Logger LOGGER = Logger.getLogger(ManagementEndpointClient.class);
     private final static ConcurrentLinkedQueue<Session> sessionSet = new ConcurrentLinkedQueue<>();
-    private final List<Map<String, Object>> propertiesList = new ArrayList<>();
+    private Map<String, Object> properties;
 
     @OnMessage
     public void onMessage(String message, Session session) {
@@ -32,8 +28,7 @@ public class ManagementEndpointClient {
     @OnOpen
     public void onOpen(Session session, EndpointConfig config) {
         this.sessionSet.add(session);
-        //this.propertiesList.add(config.getUserProperties());
-
+        this.properties = new HashMap<String, Object>(config.getUserProperties());
         LOGGER.log(Level.TRACE, "ManagementEndpointClientWebsocket is Connected with session: " + session.getId());
     }
 

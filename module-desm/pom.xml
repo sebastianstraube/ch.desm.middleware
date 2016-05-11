@@ -43,6 +43,7 @@
             <groupId>ch.desm.middleware</groupId>
             <artifactId>module-mgmt-web</artifactId>
             <version>0.1</version>
+            <classifier>classes</classifier>
         </dependency>
 
         <!-- Tyrus Container Grizzly Server -->

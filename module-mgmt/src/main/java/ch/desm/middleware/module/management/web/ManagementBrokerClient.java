@@ -33,14 +33,13 @@ class ManagementBrokerClient extends ComponentBrokerClientBase {
             try {
 				EndpointWebsocketMessage endpointWebsocketMessage = service.getConverter().toCharacterStream(element);
 				String encodedMessageWebsocket = service.getEncoder().encode(endpointWebsocketMessage);
-				//TODO clean implementation for indirect messaging
-				//ManagementEndpointClientWebsocket.sendMessage(encodedMessageWebsocket);
+
+				//TODO fix implementation for indirect messaging
 				LOGGER.log(Level.INFO, "ManagementBrokerClient receive broker message: " + message);
-				LOGGER.log(Level.ERROR, "IMPLEMENTATION NOT DONE+");
+				ManagementEndpointClient.sendMessage(encodedMessageWebsocket);
             } catch (EncodeException e) {
                 LOGGER.log(Level.ERROR, e);
             }
-
 		}
 	}
 
