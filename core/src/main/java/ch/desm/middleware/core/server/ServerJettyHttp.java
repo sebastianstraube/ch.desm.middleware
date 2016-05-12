@@ -1,6 +1,5 @@
 package ch.desm.middleware.core.server;
 
-import ch.desm.middleware.core.communication.endpoint.websocket.EndpointWebsocketServerGui;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
@@ -15,22 +14,23 @@ import java.net.InetSocketAddress;
 public class ServerJettyHttp extends ServerBase {
 
     private final InetSocketAddress inetSocketAddress;
-    private final String targetDir;
+    private final int listenPort;
+    private String contextPath;
     private final String tempDir;
-    private final String warDir;
     private final String descriptorDir;
-    private final String contextPath;
 
-    public ServerJettyHttp(String projectDir, String warDeploymentName, String warModuleName, int listenPort, String listenIp){
+    public ServerJettyHttp(String contextPath, int listenPort, String listenIp){
+        this.listenPort = listenPort;
+        this.contextPath = contextPath;
+        this.tempDir = contextPath + File.separator+"tmp";
+        this.descriptorDir = contextPath +File.separator+"WEB-INF"+File.separator+"web.xml";
         this.inetSocketAddress = new InetSocketAddress(listenIp, listenPort);
 
-        String moduleName = "";
-        if(warModuleName != null && !warModuleName.isEmpty()) moduleName = File.separator+warModuleName;
-        targetDir = projectDir + moduleName+ File.separator+"target"+File.separator+warDeploymentName;
-        tempDir = projectDir+ File.separator+"tmp";
-        warDir = targetDir;
-        descriptorDir = targetDir+File.separator+"WEB-INF"+File.separator+"web.xml";
-        contextPath = File.separator;
+        LOGGER.log(Level.INFO, " Jetty Configuration");
+        LOGGER.log(Level.INFO, "contextPath: " + contextPath);
+        LOGGER.log(Level.INFO, "tempDir: " + tempDir);
+        LOGGER.log(Level.INFO, "descriptorDir: " + descriptorDir);
+        LOGGER.log(Level.INFO, "inetSocketAddress: " + inetSocketAddress);
     }
 
     private static Logger LOGGER = Logger.getLogger(ServerJettyHttp.class);
@@ -40,13 +40,14 @@ public class ServerJettyHttp extends ServerBase {
 
         LOGGER.log(Level.TRACE, "Jetty Webserver is starting ...");
 
-        this.server = new Server(inetSocketAddress);
+        this.server = new Server(listenPort);
 
         WebAppContext context = new WebAppContext();
-        context.setContextPath(contextPath);
+        context.setContextPath("/");
         context.setDescriptor(descriptorDir);//location.toExternalForm() + "WEB-INF/web.xml");
         context.setServer(server);
-        context.setWar(warDir);//);
+        //TODO refactor for dynamic path
+        context.setWar(contextPath);//C:\Users\Sebastian\Dropbox\DESM-Verein\Projekte\DESM-Middleware\code\ch.desm.middleware\module-mgmt-web\target\module-mgmt-web-0.1
 
         // (Optional) Set the directory the war will extract to.
         // If not set, java.io.tmpdir will be used, which can cause problems
@@ -55,10 +56,6 @@ public class ServerJettyHttp extends ServerBase {
         context.setTempDirectory(new File(tempDir));
         server.setHandler(context);
         try {
-            // Initialize javax.websocket layer
-            //ServerContainer wscontainer = WebSocketServerContainerInitializer.configureContext(context);
-            // Add WebSocket endpoint to javax.websocket layer
-            //wscontainer.addEndpoint(EndpointWebsocketServer.class);
             server.start();
             server.join();
         } catch (Exception e) {

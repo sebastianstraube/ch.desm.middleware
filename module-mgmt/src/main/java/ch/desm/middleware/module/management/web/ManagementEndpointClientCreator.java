@@ -8,8 +8,6 @@ import org.apache.log4j.Logger;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static ch.desm.middleware.core.server.ServerConfig.SERVER_WEBSOCKET_URL;
-
 class ManagementEndpointClientCreator extends EndpointCommon<EndpointWebsocketMessage> {
 
     private static final Logger LOGGER = Logger.getLogger(ManagementEndpointClientCreator.class);
@@ -44,9 +42,9 @@ class ManagementEndpointClientCreator extends EndpointCommon<EndpointWebsocketMe
     @Override
     public void init() {
         try {
-            client = new ManagementEndpointClientConnector(new URI(SERVER_WEBSOCKET_URL));
+            client = new ManagementEndpointClientConnector(new URI(ManagementEndpointClientConfigurator.TYRUS_SERVER_WEBSOCKET_URL));
         } catch (URISyntaxException e) {
-            LOGGER.log(Level.ERROR, "Endpoint init failed: " + SERVER_WEBSOCKET_URL  + e);
+            LOGGER.log(Level.ERROR, "Endpoint init failed: " + ManagementEndpointClientConfigurator.TYRUS_SERVER_WEBSOCKET_URL + e);
         }
     }
 

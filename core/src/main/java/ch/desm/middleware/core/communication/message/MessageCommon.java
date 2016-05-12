@@ -20,7 +20,7 @@ public class MessageCommon {
 	public static final String MESSAGE_TOPIC_MANAGEMENT = "management";
 	public static final String MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT = "zusi_fahrpult";
 	public static final String MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG = "zusi_ausbildung";
-	public static final String MESSAGE_TOPIC_ETCS_TIU = "etcstiu";
+	public static final String MESSAGE_TOPIC_AUTOMATION = "automation";
 
 	public enum ParameterType {
 		NULL,
@@ -114,7 +114,7 @@ public class MessageCommon {
 	}
 
 	public Boolean getParameterAsBoolean() throws BadParameterTypeCastException {
-		if (type != ParameterType.BOOLEAN) {
+		if (type != ParameterType.BOOLEAN || (!parameter.equalsIgnoreCase(MESSAGE_PARAMETER_ON) && !parameter.equalsIgnoreCase(MESSAGE_PARAMETER_OFF))) {
 			throw new BadParameterTypeCastException(ParameterType.BOOLEAN, type);
 		}
 		return parameter.equalsIgnoreCase(MESSAGE_PARAMETER_ON);

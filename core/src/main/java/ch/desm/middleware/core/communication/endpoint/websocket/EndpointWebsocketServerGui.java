@@ -9,12 +9,10 @@ import java.io.IOException;
 import java.util.Set;
 
 @ServerEndpoint(
-        value = "/gui"
-        /*,
+        value = "/gui",
         encoders = EndpointWebsocketMessageEncoder.class,
         decoders = EndpointWebsocketMessageDecoder.class,
         configurator = EndpointWebsocketServerConfigurator.class
-        */
         )
 public class EndpointWebsocketServerGui {
 	

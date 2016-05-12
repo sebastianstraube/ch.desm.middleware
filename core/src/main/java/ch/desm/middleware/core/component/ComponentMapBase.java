@@ -1,6 +1,7 @@
 package ch.desm.middleware.core.component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -8,23 +9,20 @@ public abstract class ComponentMapBase {
 
 	protected Map<String, String> map;
 
-	public Map<String, String> getMap() {
-		return map;
-	}
+	//implement in specialization class
+	protected void init(){
 
-	/**
-	 * map initializing
-	 */
-	protected void init() {
-		//implement this method
 	}
-
 	/**
 	 * 
 	 */
 	public ComponentMapBase() {
-        this.map = new HashMap<String, String>();
-		this.init();
+        this.map = new HashMap<>();
+		init();
+	}
+
+	public Map<String, String> getMap() {
+		return map;
 	}
 	
 	/**
@@ -80,4 +78,27 @@ public abstract class ComponentMapBase {
 		}
 		return "";
 	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public String getKeyForValue(ComponentMapBase list){
+		for(Entry<String, String> entry : list.getMap().entrySet()){
+			return getKeyForValue(entry.getValue());
+		}
+		return "";
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public String getValueForKey(ComponentMapBase list){
+		for(Entry<String, String> entry : list.getMap().entrySet()){
+			return getValueForKey(entry.getKey());
+		}
+		return "";
+	}
+
 }

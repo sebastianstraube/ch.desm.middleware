@@ -8,7 +8,6 @@ import ch.desm.middleware.module.desm.cabine.re420.Re420Service;
 import ch.desm.middleware.module.desm.interlocking.obermatt.OmService;
 import ch.desm.middleware.module.desm.petrinet.obermatt.PetrinetOmService;
 import ch.desm.middleware.module.desm.petrinet.re420.PetrinetRe420Service;
-import ch.desm.middleware.module.desm.simulation.etcs.EtcsService;
 import ch.desm.middleware.module.desm.simulation.zusi.ZusiService;
 import ch.desm.middleware.module.management.web.ManagementServiceStart;
 import ch.desm.middleware.module.management.web.WebServiceStart;
@@ -79,20 +78,6 @@ public class DesmService {
         startZusiFahrpult(service);
         startZusiAusbildung(service);
     }
-
-    private void startEtcs() {
-        startEtcsTiu();
-        startEtcsOdo();
-    }
-
-    private void startEtcsTiu() {
-        EtcsService tiu = new EtcsService(BrokerInstance.getSingleton(), config.getEtcsHost(), config.getEtcsPortTiu());
-    }
-
-    private void startEtcsOdo() {
-        EtcsService tiu = new EtcsService(BrokerInstance.getSingleton(), config.getEtcsHost(), config.getEtcsPortOdo());
-    }
-
 
     public PetrinetOmService startPetrinetOm() {
         return new PetrinetOmService(BrokerInstance.getSingleton());

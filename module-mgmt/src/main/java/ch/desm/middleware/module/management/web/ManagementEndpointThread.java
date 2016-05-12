@@ -35,6 +35,8 @@ class ManagementEndpointThread extends Thread {
     private void checkMessages(){
         LinkedList<String> pendingMessageQueueCopy = new LinkedList<>();
         synchronized (pendingMessageQueueLock) {
+            if(pendingMessageQueue.isEmpty()) return;
+
             pendingMessageQueueCopy.addAll(pendingMessageQueue);
             pendingMessageQueue.clear();
         }

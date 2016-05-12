@@ -85,7 +85,7 @@ public class EndpointUbw32MessageHandler implements Runnable, EndpointRs232Liste
                     throw new RuntimeException("Response must be either OK or data with OK");
             }
 
-            System.out.println(">>>>>>>> " + command + " => " + response);
+            LOGGER.log(Level.TRACE, ">>>>>>>>" + command + " => " + response);
             // TODO: move command processing to separate thread!
             processCommandResponse(command, response);
         }
@@ -105,6 +105,10 @@ public class EndpointUbw32MessageHandler implements Runnable, EndpointRs232Liste
                 LOGGER.log(Level.INFO, "cache state changed on ubw(" + serialEndpoint.getSerialPortName() + "): " + ubw32Message);
             }
 
+            if (ubw32Message.getRegister() == EndpointUbw32Register.E3) {
+                LOGGER.log(Level.TRACE, "skipping endpoint message for register E3 blinking (" + serialEndpoint.getSerialPortName() + "): " + ubw32Message);
+                return;
+            }
             ubw32Endpoint.onIncomingEndpointMessage(ubw32Message);
         }
     }

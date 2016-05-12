@@ -68,6 +68,11 @@
             <artifactId>jetty-webapp</artifactId>
             <version>9.3.9.M1</version>
         </dependency>
+        <dependency>
+            <groupId>ch.desm.middleware</groupId>
+            <artifactId>common</artifactId>
+            <version>0.1</version>
+        </dependency>
     </dependencies>
 
     <build>

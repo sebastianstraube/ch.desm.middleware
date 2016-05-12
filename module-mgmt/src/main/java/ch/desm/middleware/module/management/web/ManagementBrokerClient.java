@@ -45,12 +45,14 @@ class ManagementBrokerClient extends ComponentBrokerClientBase {
 
 	@Override
 	protected void initializeTopicSubscriptions() {
+		//TODO refactoring for dyanmical login of a specific module
 		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
 		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
 		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT);
         subscribeToTopic(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_FAHRPULT);
         subscribeToTopic(MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG);
         subscribeToTopic(MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+		subscribeToTopic(MessageCommon.MESSAGE_TOPIC_AUTOMATION);
 	}
 
 }
