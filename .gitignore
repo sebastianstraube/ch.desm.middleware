@@ -9,3 +9,5 @@ ipch
 *.sdf
 *.opensdf
 *.iml
+target
+.idea
