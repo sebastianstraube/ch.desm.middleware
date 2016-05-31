@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: ch.desm.middleware.module.desm.DesmServiceStart
+Main-Class: sebastianstraube.connectx.module.desm.DesmServiceStart

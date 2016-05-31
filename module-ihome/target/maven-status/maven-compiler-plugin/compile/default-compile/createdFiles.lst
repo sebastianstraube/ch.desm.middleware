@@ -1,0 +1,11 @@
+sebastianstraube/connectx/module/ihome/map/AutomationMapMiddleware.class
+sebastianstraube/connectx/module/ihome/AutomationModuleService.class
+sebastianstraube/connectx/module/ihome/AutomationEndpointUbw32.class
+sebastianstraube/connectx/module/ihome/AutomationMessageProcessor.class
+sebastianstraube/connectx/module/ihome/AutomationServiceStart.class
+sebastianstraube/connectx/module/ihome/AutomationService.class
+sebastianstraube/connectx/module/ihome/map/AutomationMapUbw32Analog.class
+sebastianstraube/connectx/module/ihome/map/AutomationMapAll.class
+sebastianstraube/connectx/module/ihome/AutomationModuleConfig.class
+sebastianstraube/connectx/module/ihome/AutomationBrokerClient.class
+sebastianstraube/connectx/module/ihome/map/AutomationMapUbw32Digital.class
