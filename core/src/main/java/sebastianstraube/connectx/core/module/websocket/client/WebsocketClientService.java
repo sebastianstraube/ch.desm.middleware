@@ -1,6 +1,7 @@
 package sebastianstraube.connectx.core.module.websocket.client;
 
 import sebastianstraube.connectx.core.component.ComponentMapBase;
+import sebastianstraube.connectx.core.module.server.ServerConfig;
 import sebastianstraube.connectx.core.module.websocket.client.map.WebsocketClientMapMiddleware;
 import org.apache.log4j.Logger;
 
@@ -13,8 +14,16 @@ class WebsocketClientService extends WebsocketClientServiceBase {
 
     private final ComponentMapBase mapMiddleware = new WebsocketClientMapMiddleware();
 
-    public WebsocketClientService() {
+    private ServerConfig config;
+
+
+    public WebsocketClientService(ServerConfig config) {
         super();
+        this.config = config;
+    }
+
+    public ServerConfig getServerConfig() {
+        return config;
     }
 
     @Override

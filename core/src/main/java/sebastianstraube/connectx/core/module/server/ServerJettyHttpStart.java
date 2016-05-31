@@ -10,12 +10,10 @@ import java.security.ProtectionDomain;
  */
 public class ServerJettyHttpStart {
 
-    public static void start(){
-
+    public static void start(ServerConfig config){
 
         ServerJettyHttp serverJettyHttp = new ServerJettyHttp(
-                ServerJettyHttpStart.getWarLocation(), ServerConfig.PORT_HTTP, "0.0.0.0");
-
+                ServerJettyHttpStart.getWarLocation(), config.getPORT_HTTP(), config.getDEFAULT_HOST());
 
         serverJettyHttp.startServer();
 

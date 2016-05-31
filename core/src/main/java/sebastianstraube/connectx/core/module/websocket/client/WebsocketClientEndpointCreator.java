@@ -13,14 +13,14 @@ class WebsocketClientEndpointCreator extends EndpointCommon<EndpointWebsocketMes
     private static final Logger LOGGER = Logger.getLogger(WebsocketClientEndpointCreator.class);
 
     private WebsocketClientEndpointThread thread;
-    private WebsocketClientServiceBase service;
+    private WebsocketClientService service;
     private WebsocketClientEndpointConnector client;
 
     public WebsocketClientEndpointCreator(WebsocketClientServiceBase service){
         super();
         this.registerEndpointListener();
         this.thread = new WebsocketClientEndpointThread(this);
-        this.service = service;
+        this.service = (WebsocketClientService) service;
     }
 
     @Override
@@ -42,9 +42,12 @@ class WebsocketClientEndpointCreator extends EndpointCommon<EndpointWebsocketMes
     @Override
     public void init() {
         try {
-            client = new WebsocketClientEndpointConnector(new URI(WebsocketClientEndpointConfigurator.TYRUS_SERVER_WEBSOCKET_URL));
+
+            String url = service.getServerConfig().getTyrusServerWebsocketUrl();
+
+            client = new WebsocketClientEndpointConnector(new URI(url));
         } catch (URISyntaxException e) {
-            LOGGER.log(Level.ERROR, "Endpoint init failed: " + WebsocketClientEndpointConfigurator.TYRUS_SERVER_WEBSOCKET_URL + e);
+            LOGGER.log(Level.ERROR, "Endpoint init failed: ", e);
         }
     }
 

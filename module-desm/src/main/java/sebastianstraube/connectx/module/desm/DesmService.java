@@ -1,5 +1,6 @@
 package sebastianstraube.connectx.module.desm;
 
+import com.google.gson.Gson;
 import sebastianstraube.connectx.core.communication.broker.BrokerInstance;
 import sebastianstraube.connectx.core.communication.replay.ReplayFilter;
 import sebastianstraube.connectx.core.communication.replay.ReplayFilterAllowEverything;
@@ -12,15 +13,17 @@ import sebastianstraube.connectx.module.desm.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class DesmService {
 
     private static Logger LOGGER = Logger.getLogger(DesmService.class);
 
-    private final DesmServiceConfig config;
+    private DesmServiceConfig config;
 
-    public DesmService(DesmServiceConfig config) {
+    public DesmService(DesmServiceConfig config){
         this.config = config;
     }
 
@@ -64,7 +67,10 @@ public class DesmService {
 
     private void startZusi() {
         // TODO: do they need separate services or can they share one?
-        ZusiService service = new ZusiService(BrokerInstance.getSingleton(), config.getZusiHost(), config.getZusiPort());
+        ZusiService service = new ZusiService(BrokerInstance.getSingleton(),
+        config.getZusiHostIp(),
+        config.getZusiPort());
+
         startZusiFahrpult(service);
         startZusiAusbildung(service);
     }
@@ -108,7 +114,7 @@ public class DesmService {
         try {
             final ReplayLoader loader = new ReplayLoader();
             loader.loadFromLogFile(file).run(BrokerInstance.getSingleton(), filter);
-            LOGGER.log(Level.INFO, "==================== DONE REPLAYING " + file);
+            LOGGER.log(Level.INFO, "==================== DONE REPLAYING ====================" + file);
         } catch (IOException e) {
             LOGGER.log(Level.ERROR, "Error while running replay from " + file + ": " + e);
         }

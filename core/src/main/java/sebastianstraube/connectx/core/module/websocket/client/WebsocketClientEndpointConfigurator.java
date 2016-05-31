@@ -13,18 +13,6 @@ import java.util.Map;
  */
 public class WebsocketClientEndpointConfigurator extends ClientEndpointConfig.Configurator {
 
-    public static final String TYRUS_WEBSOCKET_CONTEXT_WEBSOCKET = "/websocket";
-    public static final String TYRUS_WEBSOCKET_CONTEXT_GUI = "/gui";
-    public static final Integer TYRUS_WEBSOCKET_PORT = 8070;
-
-    public static final String TYRUS_SERVER_WEBSOCKET_URL = String.format(
-            "ws://%s:%d%s%s",
-            ServerConfig.DEFAULT_HOST,
-            TYRUS_WEBSOCKET_PORT,
-            TYRUS_WEBSOCKET_CONTEXT_WEBSOCKET,
-            TYRUS_WEBSOCKET_CONTEXT_GUI);
-
-
     private static final Logger LOGGER = Logger.getLogger(WebsocketClientEndpointConfigurator.class);
     @Override
     public void beforeRequest(Map<String, List<String>> headers) {

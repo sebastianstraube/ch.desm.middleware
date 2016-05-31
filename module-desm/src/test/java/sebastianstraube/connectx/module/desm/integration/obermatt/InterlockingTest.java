@@ -29,9 +29,8 @@ public class InterlockingTest {
 
     @Before
     public void setUp() throws InterruptedException {
-        final DesmServiceConfig config = new DesmServiceConfig();
         broker = new Broker();
-        ubw32OmService = new OmService(broker, config.getObermattUbw32ComPort());
+        ubw32OmService = new OmService(broker, "");
         petrinetOmService = new PetrinetOmService(broker);
         Thread.sleep(1000);
         new Replay(INIT_REPLAY_EVENTS).run(broker);

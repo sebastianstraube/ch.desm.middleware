@@ -10,10 +10,10 @@ import java.security.ProtectionDomain;
  */
 public class ServerTyrusWebsocketStart {
 
-    public static void start(){
+    public static void start(ServerConfig config){
 
         ServerTyrusWebsocket serverTyrusWebsocket = new ServerTyrusWebsocket(
-                "0.0.0.0", ServerConfig.PORT_WEBSOCKET, "/websocket", EndpointWebsocketServerGui.class);
+                config.getDEFAULT_HOST(), config.getPORT_WEBSOCKET(), "/websocket", EndpointWebsocketServerGui.class);
 
 
         serverTyrusWebsocket.startServer();

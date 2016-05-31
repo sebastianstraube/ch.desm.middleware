@@ -1,2 +1,13 @@
 Manifest-Version: 1.0
+Class-Path: javax.mail-1.5.0.jar tyrus-server-1.12.jar jetty-io-9.3.9.
+ M1.jar jetty-util-9.3.9.M1.jar tyrus-core-1.12.jar jetty-webapp-9.3.9
+ .M1.jar jetty-servlet-9.3.9.M1.jar javax.json-1.0.4.jar grizzly-http-
+ server-2.3.22.jar tyrus-spi-1.12.jar jssc-2.8.0.jar gson-2.6.2.jar ja
+ vax.servlet-api-3.1.0.jar jetty-http-9.3.9.M1.jar javaee-api-7.0.jar 
+ grizzly-framework-2.3.22.jar jetty-server-9.3.9.M1.jar activation-1.1
+ .jar tyrus-container-grizzly-server-1.12.jar tyrus-client-1.12.jar ja
+ vax.websocket-api-1.1.jar log4j-1.2.17.jar jetty-xml-9.3.9.M1.jar gri
+ zzly-http-2.3.22.jar tyrus-container-grizzly-client-1.12.jar jetty-se
+ curity-9.3.9.M1.jar
 Main-Class: sebastianstraube.connectx.module.desm.DesmServiceStart
+

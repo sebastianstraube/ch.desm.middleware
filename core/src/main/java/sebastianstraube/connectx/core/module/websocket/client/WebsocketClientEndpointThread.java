@@ -3,7 +3,6 @@ package sebastianstraube.connectx.core.module.websocket.client;
 import sebastianstraube.connectx.core.common.FrequencyLimiter;
 import sebastianstraube.connectx.core.communication.endpoint.websocket.EndpointWebsocketMessage;
 import sebastianstraube.connectx.core.communication.endpoint.websocket.EndpointWebsocketMessageDecoder;
-import sebastianstraube.connectx.core.component.ComponentServiceConfig;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -55,8 +54,7 @@ class WebsocketClientEndpointThread extends Thread {
     }
 
     public void run(){
-        final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(ComponentServiceConfig.DEFAULT_POLLING_FREQUENCY);
-
+        final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(25f);
         while(!isInterrupted()){
             final long startMillis = System.currentTimeMillis();
 

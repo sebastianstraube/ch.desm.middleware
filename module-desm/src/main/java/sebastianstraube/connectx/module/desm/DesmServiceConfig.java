@@ -1,5 +1,9 @@
 package sebastianstraube.connectx.module.desm;
 
+import com.google.gson.Gson;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,31 +19,17 @@ public class DesmServiceConfig {
     private List<String> enabledModules = new ArrayList<>(DEFAULT_MODULES);
 
     // Obermatt
-    private String obermattUbw32ComPort = "COM3"; // linux: dev/ttyACM0
+    // linux: dev/ttyACM0
+    private String obermattUbw32ComPort;
 
     // Cabine
-    private String cabineUbw32ComPort = "COM15";
+    private String cabineUbw32ComPort;
 
     // Zusi
-    private String zusiHost = "127.0.0.1";
-    private Integer zusiPort = 1436;
+    private String zusiHostIp;
+    private Integer zusiPort;
 
-    // DLR ETCS
-    private String etcsHost = "127.0.0.1";
-    private Integer etcsPortTiu = 50000;
-    private Integer etcsPortOdo = 50002;
-
-    public void enableModule(String module) {
-        enabledModules.add(module);
-    }
-
-    public void setEnabledModules(String[] modules) {
-        enabledModules = Arrays.asList(modules);
-    }
-
-    public List<String> getEnabledModules() {
-        return enabledModules;
-    }
+    private Integer DEFAULT_POLLING_FREQUENCY;
 
     public String getObermattUbw32ComPort() {
         return obermattUbw32ComPort;
@@ -57,12 +47,12 @@ public class DesmServiceConfig {
         this.cabineUbw32ComPort = cabineUbw32ComPort;
     }
 
-    public String getZusiHost() {
-        return zusiHost;
+    public String getZusiHostIp() {
+        return zusiHostIp;
     }
 
-    public void setZusiHost(String zusiHost) {
-        this.zusiHost = zusiHost;
+    public void setZusiHostIp(String zusiHostIp) {
+        this.zusiHostIp = zusiHostIp;
     }
 
     public Integer getZusiPort() {
@@ -73,28 +63,32 @@ public class DesmServiceConfig {
         this.zusiPort = zusiPort;
     }
 
-    public String getEtcsHost() {
-        return etcsHost;
+    public Integer getDEFAULT_POLLING_FREQUENCY() {
+        return DEFAULT_POLLING_FREQUENCY;
     }
 
-    public void setEtcsHost(String etcsHost) {
-        this.etcsHost = etcsHost;
+    public void setDEFAULT_POLLING_FREQUENCY(Integer DEFAULT_POLLING_FREQUENCY) {
+        this.DEFAULT_POLLING_FREQUENCY = DEFAULT_POLLING_FREQUENCY;
     }
 
-    public Integer getEtcsPortTiu() {
-        return etcsPortTiu;
+    public List<String> getEnabledModules() {
+        return enabledModules;
     }
 
-    public void setEtcsPortTiu(Integer etcsPortTiu) {
-        this.etcsPortTiu = etcsPortTiu;
+    public void setEnabledModules(List<String> enabledModules) {
+        this.enabledModules = enabledModules;
     }
 
-    public Integer getEtcsPortOdo() {
-        return etcsPortOdo;
-    }
+    public static DesmServiceConfig readConfigFile(String configPath){
+        DesmServiceConfig config = null;
 
-    public void setEtcsPortOdo(Integer etcsPortOdo) {
-        this.etcsPortOdo = etcsPortOdo;
+        try {
+            config = new Gson().fromJson(new FileReader(configPath), DesmServiceConfig.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return config;
     }
 
     @Override
@@ -103,11 +97,8 @@ public class DesmServiceConfig {
                 "enabledModules=" + enabledModules +
                 ", obermattUbw32ComPort='" + obermattUbw32ComPort + '\'' +
                 ", cabineUbw32ComPort='" + cabineUbw32ComPort + '\'' +
-                ", zusiHost='" + zusiHost + '\'' +
                 ", zusiPort=" + zusiPort +
-                ", etcsHost='" + etcsHost + '\'' +
-                ", etcsPortTiu=" + etcsPortTiu +
-                ", etcsPortOdo=" + etcsPortOdo +
                 '}';
     }
+
 }

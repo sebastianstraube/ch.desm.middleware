@@ -21,7 +21,6 @@ sebastianstraube/connectx/core/communication/endpoint/websocket/EndpointWebsocke
 sebastianstraube/connectx/core/communication/message/BadParameterTypeCastException.class
 sebastianstraube/connectx/core/communication/message/MessageCommonBuilder$MissingArgumentsException.class
 sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConfigurator.class
-sebastianstraube/connectx/core/component/ComponentServiceConfig.class
 sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceStart.class
 sebastianstraube/connectx/core/component/ComponentMessageProcessorUbw32Base.class
 sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpoint.class
