@@ -2,83 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fd9821a-36b0-483a-a21a-207aa5ce1a70" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/src/main/resources/config_server.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/config_desm.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../core/src/main/java/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/component/ComponentServiceConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../core/target/classes/grayscale/grayscale/less/grayscale.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../core/target/classes/grayscale/grayscale/less/mixins.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../core/target/classes/grayscale/grayscale/less/variables.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/component/ComponentServiceConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/ZusiBrokerClient.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/ZusiBrokerClientThread.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/ZusiEndpointLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/ZusiEndpointTcpClient.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/ZusiEndpointTcpClientThread.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/ZusiMessageProcessor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/ZusiService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/logic/ZusiLogicIsolierung.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapAusbildungInit.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapAusbildungMiddleware.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapFahrpultInit.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapFahrpultMiddleware.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapParameter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapParameterDataType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapParameterRe420$OnOffState.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapParameterRe420.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapPetrinetOm.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/map/ZusiMapPetrinetRe420.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/message/ZusiMessageEndpoint.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/message/ZusiMessageParameterHelper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/message/ZusiMessageProtocolStream.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/protocol/ZusiProtocolConstants.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/protocol/ZusiProtocolMessageHelper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/protocol/node/ZusiProtocolNode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/protocol/node/ZusiProtocolNodeBase.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/protocol/node/ZusiProtocolNodeCodec.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/protocol/node/ZusiProtocolNodeCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/simulation/zusi (sestraub@cisco.com)/protocol/node/ZusiProtocolNodeHelper.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/CoreModuleServiceStart.class" afterPath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/CoreModuleServiceStart.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../core-web/target/core-web-0.1/grayscale/grayscale/less (sestraub@cisco.com)/grayscale.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../core-web/target/core-web-0.1/grayscale/grayscale/less (sestraub@cisco.com)/mixins.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../core-web/target/core-web-0.1/grayscale/grayscale/less (sestraub@cisco.com)/variables.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../core/src/main/resources/config_server.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/config_desm.json" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core-web/target/core-web-0.1.war" afterPath="$PROJECT_DIR$/../core-web/target/core-web-0.1.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/server/ServerConfig.class" afterPath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/server/ServerConfig.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/server/ServerJettyHttpStart.class" afterPath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/server/ServerJettyHttpStart.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocketStart.class" afterPath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocketStart.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConfigurator.class" afterPath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConfigurator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointCreator.class" afterPath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointCreator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointThread.class" afterPath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientService.class" afterPath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceStart.class" afterPath="$PROJECT_DIR$/../core/target/classes/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceStart.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/core-0.1-jar-with-dependencies.jar" afterPath="$PROJECT_DIR$/../core/target/core-0.1-jar-with-dependencies.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/core-0.1.jar" afterPath="$PROJECT_DIR$/../core/target/core-0.1.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/DesmService.class" afterPath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/DesmService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/DesmServiceConfig.class" afterPath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/DesmServiceConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/DesmServiceStart.class" afterPath="$PROJECT_DIR$/target/classes/sebastianstraube/connectx/module/desm/DesmServiceStart.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/module-desm-0.1-jar-with-dependencies.jar" afterPath="$PROJECT_DIR$/target/module-desm-0.1-jar-with-dependencies.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/module-desm-0.1.jar" afterPath="$PROJECT_DIR$/target/module-desm-0.1.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/sebastianstraube/connectx/module/desm/integration/obermatt/InterlockingTest.class" afterPath="$PROJECT_DIR$/target/test-classes/sebastianstraube/connectx/module/desm/integration/obermatt/InterlockingTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/pom.xml" afterPath="$PROJECT_DIR$/../core/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/CoreModuleServiceStart.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/CoreModuleServiceStart.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core-web/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../core-web/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core-web/src/main/webapp/index.html" afterPath="$PROJECT_DIR$/../core-web/src/main/webapp/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core-web/target/core-web-0.1/index.html" afterPath="$PROJECT_DIR$/../core-web/target/core-web-0.1/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core-web/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/../core-web/target/maven-archiver/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerConfig.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttp.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttpStart.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttpStart.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocketStart.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocketStart.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConfigurator.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConfigurator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConnector.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConnector.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointCreator.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointThread.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientService.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceStart.java" afterPath="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceStart.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/classes/index.html" afterPath="$PROJECT_DIR$/../core/target/classes/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/../core/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/../core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/../core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmService.java" afterPath="$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceConfig.java" afterPath="$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceStart.java" afterPath="$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceStart.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/integration/obermatt/InterlockingTest.java" afterPath="$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/integration/obermatt/InterlockingTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/DesmServiceConfigTest.java" afterPath="$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/DesmServiceConfigTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
     </list>
     <ignored path="module-desm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,44 +51,109 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DesmServiceStart.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceStart.java">
+      <file leaf-file-name="WebsocketClientEndpointConnector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConnector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="127">
+              <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebsocketClientEndpoint.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebsocketClientBrokerClient.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientBrokerClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebsocketClientServiceStart.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceStart.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebsocketClientServiceBase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceBase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="56" selection-end-column="5" />
               <folding>
-                <element signature="e#482#483#0" expanded="true" />
-                <element signature="e#521#522#0" expanded="true" />
+                <element signature="e#1603#1604#0" expanded="true" />
+                <element signature="e#1635#1636#0" expanded="true" />
+                <element signature="e#1692#1693#0" expanded="true" />
+                <element signature="e#1725#1726#0" expanded="true" />
+                <element signature="e#1784#1785#0" expanded="true" />
+                <element signature="e#1813#1814#0" expanded="true" />
+                <element signature="e#1871#1872#0" expanded="true" />
+                <element signature="e#1902#1903#0" expanded="true" />
+                <element signature="e#1960#1961#0" expanded="true" />
+                <element signature="e#1990#1991#0" expanded="true" />
+                <element signature="e#2048#2049#0" expanded="true" />
+                <element signature="e#2078#2079#0" expanded="true" />
+                <element signature="e#2133#2134#0" expanded="true" />
+                <element signature="e#2165#2166#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="WebsocketClientService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="50" column="21" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
+            <state relative-caret-position="67">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EndpointWebsocketServerGui.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/communication/endpoint/websocket/EndpointWebsocketServerGui.java">
+      <file leaf-file-name="WebsocketClientMessageTranslator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientMessageTranslator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="105">
+              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../core/pom.xml">
+      <file leaf-file-name="WebsocketClientMessageProcessor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientMessageProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-803">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+              <folding>
+                <element signature="e#691#692#0" expanded="true" />
+                <element signature="e#719#720#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebsocketClientEndpointThread.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -147,64 +162,11 @@
       <file leaf-file-name="WebsocketClientEndpointCreator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="47" column="41" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="41" />
+            <state relative-caret-position="112">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerTyrusWebsocketStart.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocketStart.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerJettyHttpStart.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttpStart.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="15" column="102" selection-start-line="15" selection-start-column="102" selection-end-line="15" selection-end-column="102" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-              <folding>
-                <element signature="e#592#593#0" expanded="true" />
-                <element signature="e#627#628#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerTyrusWebsocket.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocket.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config_server.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../core/src/main/resources/config_server.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -255,20 +217,24 @@
         <option value="$PROJECT_DIR$/../core/start.sh" />
         <option value="$PROJECT_DIR$/start.sh" />
         <option value="$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/DesmServiceStartTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/DesmServiceConfigTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceConfig.java" />
         <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConfigurator.java" />
-        <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientService.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmService.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceStart.java" />
         <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceStart.java" />
         <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/CoreModuleServiceStart.java" />
         <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointCreator.java" />
         <option value="$PROJECT_DIR$/../core/src/main/resources/config_server.json" />
-        <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerConfig.java" />
-        <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttpStart.java" />
         <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocketStart.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/DesmServiceConfigTest.java" />
+        <option value="$PROJECT_DIR$/../core/config_server.json" />
+        <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerConfig.java" />
+        <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttp.java" />
+        <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttpStart.java" />
+        <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConnector.java" />
+        <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientService.java" />
+        <option value="$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceBase.java" />
       </list>
     </option>
   </component>
@@ -315,7 +281,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -347,48 +313,6 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module-desm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module-desm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zusi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -405,10 +329,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -499,6 +419,104 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module-desm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -632,7 +650,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -641,7 +659,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -946,27 +964,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="789" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32855093" sideWeight="0.49427754" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998565" sideWeight="0.47711015" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27259684" sideWeight="0.5286123" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47632712" sideWeight="0.55007154" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998565" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998565" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998565" sideWeight="0.49427754" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27259684" sideWeight="0.47138768" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27181688" sideWeight="0.45708156" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998565" sideWeight="0.49713877" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.48855507" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47632712" sideWeight="0.4527897" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47632712" sideWeight="0.44992846" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1038,18 +1056,6 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceStart.java</url>
-          <line>22</line>
-          <properties />
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerConfig.java</url>
-          <line>74</line>
-          <properties />
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointCreator.java</url>
           <line>45</line>
           <properties />
@@ -1061,11 +1067,17 @@
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttp.java</url>
+          <line>22</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="20" />
+      <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1074,56 +1086,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/cabine/re420/Re420MessageProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/component/ComponentMessageProcessorUbw32Base.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="8" column="74" selection-start-line="8" selection-start-column="74" selection-end-line="8" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientMessageTranslator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientBrokerClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-101">
-          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-386">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/component/ComponentMessageProcessorBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientMessageProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/interlocking/obermatt/OmMessageProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
@@ -1179,39 +1141,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/serverconfig.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/serverconfig.json" />
     <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="66" selection-start-line="1" selection-start-column="66" selection-end-line="1" selection-end-column="66" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/META-INF/MANIFEST.MF" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1219,7 +1164,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
           <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1227,7 +1171,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1235,7 +1178,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="181" selection-start-line="4" selection-start-column="181" selection-end-line="4" selection-end-column="181" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1243,7 +1185,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1251,49 +1192,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-278">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/DesmServiceStartTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="31" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/DesmServiceStartTest.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/simulation/zusi/ZusiTestsAll.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2116">
           <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/DesmServiceConfigTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-338">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1316,66 +1222,129 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config_desm.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/glassfish/tyrus/tyrus-client/1.12/tyrus-client-1.12.jar!/org/glassfish/tyrus/client/ClientManager.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/resources/config_server.json" />
+    <entry file="file://$PROJECT_DIR$/../core/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-803">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceBase.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/sebastianstraube/connectx/module/desm/DesmServiceConfigTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#1902#1903#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="300">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientService.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+        <state relative-caret-position="105">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config_desm.json" />
+    <entry file="file://$PROJECT_DIR$/module-desm.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config_desm.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/config_server.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceStart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttpStart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="13" column="71" selection-start-line="13" selection-start-column="71" selection-end-line="13" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
           <folding>
-            <element signature="e#800#801#0" expanded="true" />
-            <element signature="e#829#830#0" expanded="true" />
+            <element signature="e#591#592#0" expanded="true" />
+            <element signature="e#626#627#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#695#696#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceStart.java">
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="285">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocketStart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/communication/endpoint/websocket/EndpointWebsocketServerGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1387,90 +1356,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerJettyHttpStart.java">
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceStart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="15" column="102" selection-start-line="15" selection-start-column="102" selection-end-line="15" selection-end-column="102" />
+        <state relative-caret-position="202">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/resources/config_server.json">
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientServiceBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocketStart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state relative-caret-position="135">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="56" selection-end-column="5" />
           <folding>
-            <element signature="e#592#593#0" expanded="true" />
-            <element signature="e#627#628#0" expanded="true" />
+            <element signature="e#1603#1604#0" expanded="true" />
+            <element signature="e#1635#1636#0" expanded="true" />
+            <element signature="e#1692#1693#0" expanded="true" />
+            <element signature="e#1725#1726#0" expanded="true" />
+            <element signature="e#1784#1785#0" expanded="true" />
+            <element signature="e#1813#1814#0" expanded="true" />
+            <element signature="e#1871#1872#0" expanded="true" />
+            <element signature="e#1902#1903#0" expanded="true" />
+            <element signature="e#1960#1961#0" expanded="true" />
+            <element signature="e#1990#1991#0" expanded="true" />
+            <element signature="e#2048#2049#0" expanded="true" />
+            <element signature="e#2078#2079#0" expanded="true" />
+            <element signature="e#2133#2134#0" expanded="true" />
+            <element signature="e#2165#2166#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/server/ServerTyrusWebsocket.java">
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="67">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientMessageTranslator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientMessageProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+          <folding>
+            <element signature="e#691#692#0" expanded="true" />
+            <element signature="e#719#720#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointCreator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="47" column="41" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="41" />
+        <state relative-caret-position="112">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sebastianstraube/connectx/module/desm/DesmServiceStart.java">
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpointConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#482#483#0" expanded="true" />
-            <element signature="e#521#522#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-803">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/module/websocket/client/WebsocketClientBrokerClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="50" column="21" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../core/src/main/java/sebastianstraube/connectx/core/communication/endpoint/websocket/EndpointWebsocketServerGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="60">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
           <folding />
         </state>
       </provider>

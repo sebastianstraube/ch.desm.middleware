@@ -21,7 +21,6 @@ public class WebsocketClientEndpointConnector {
     private Session session=null;
     private URI uri;
 
-
     public WebsocketClientEndpointConnector(URI uri){
         LOGGER.log(Level.INFO, "ManagementEndpointClientService instantiated");
         this.uri = uri;
@@ -34,9 +33,9 @@ public class WebsocketClientEndpointConnector {
             session = container.connectToServer(WebsocketClientEndpoint.class, uri);
             LOGGER.log(Level.INFO, "ManagementEndpointClientService connected to server: " + uri);
         } catch (DeploymentException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.INFO, "websocket client endpoint connection to server failed: ", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.INFO, "websocket client endpoint connection to server failed: ", e);
         }
     }
 }

@@ -43,7 +43,7 @@ class WebsocketClientEndpointCreator extends EndpointCommon<EndpointWebsocketMes
     public void init() {
         try {
 
-            String url = service.getServerConfig().getTyrusServerWebsocketUrl();
+            String url = service.getServerConfig().getWebsocketServerUri();
 
             client = new WebsocketClientEndpointConnector(new URI(url));
         } catch (URISyntaxException e) {

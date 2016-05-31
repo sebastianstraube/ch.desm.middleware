@@ -29,22 +29,6 @@ public class DesmServiceConfigTest {
     }
 
     @Test
-    public static DesmServiceConfig readConfigFile(){
-        DesmServiceConfig config = null;
-
-        try {
-            FileReader f = new FileReader("/Users/heisenberg/Box Sync/connectx/code/sebastianstraube/connectx/module-desm/config_desm.json");
-
-            config = new Gson().fromJson(f, DesmServiceConfig.class);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return config;
-    }
-
-    @Test
     public void testJsonRead() throws Exception{
 
      //   LOGGER.log(Level.INFO, "(true) test encode get node stream: " + b);

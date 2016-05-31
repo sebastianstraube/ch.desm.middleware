@@ -13,38 +13,33 @@ import java.net.InetSocketAddress;
  */
 public class ServerJettyHttp extends ServerBase {
 
-    private final InetSocketAddress inetSocketAddress;
     private final int listenPort;
     private String contextPath;
     private final String tempDir;
     private final String descriptorDir;
 
-    public ServerJettyHttp(String contextPath, int listenPort, String listenIp){
+    public ServerJettyHttp(String contextPath, int listenPort){
         this.listenPort = listenPort;
         this.contextPath = contextPath;
-        this.tempDir = contextPath + File.separator+"tmp";
-        this.descriptorDir = contextPath +File.separator+"WEB-INF"+File.separator+"web.xml";
-        this.inetSocketAddress = new InetSocketAddress(listenIp, listenPort);
+        this.tempDir = contextPath + "tmp";
+        this.descriptorDir = contextPath +"WEB-INF" + File.separator+"web.xml";
 
         LOGGER.log(Level.INFO, " Jetty Configuration");
         LOGGER.log(Level.INFO, "contextPath: " + contextPath);
         LOGGER.log(Level.INFO, "tempDir: " + tempDir);
         LOGGER.log(Level.INFO, "descriptorDir: " + descriptorDir);
-        LOGGER.log(Level.INFO, "inetSocketAddress: " + inetSocketAddress);
     }
 
     private static Logger LOGGER = Logger.getLogger(ServerJettyHttp.class);
     private Server server;
 
     public void run(){
-
         LOGGER.log(Level.TRACE, "Jetty Webserver is starting ...");
 
         this.server = new Server(listenPort);
-
         WebAppContext context = new WebAppContext();
         context.setContextPath("/");
-        //context.setDescriptor(descriptorDir);//location.toExternalForm() + "WEB-INF/web.xml");
+        context.setDescriptor(descriptorDir);
         context.setServer(server);
         context.setWar(contextPath);
 

@@ -1,7 +1,5 @@
 package sebastianstraube.connectx.core.module.server;
 
-import sebastianstraube.connectx.core.communication.endpoint.websocket.EndpointWebsocketServerGui;
-
 import java.net.URL;
 import java.security.ProtectionDomain;
 
@@ -13,7 +11,7 @@ public class ServerJettyHttpStart {
     public static void start(ServerConfig config){
 
         ServerJettyHttp serverJettyHttp = new ServerJettyHttp(
-                ServerJettyHttpStart.getWarLocation(), config.getPORT_HTTP(), config.getDEFAULT_HOST());
+                ServerJettyHttpStart.getCodeLocation(), config.getPORT_HTTP());
 
         serverJettyHttp.startServer();
 
@@ -27,9 +25,7 @@ public class ServerJettyHttpStart {
      *
      * @return The war location.
      */
-    protected static String getWarLocation() {
-        ProtectionDomain protectionDomain = ServerJettyHttp.class.getProtectionDomain();
-        URL location = protectionDomain.getCodeSource().getLocation();
-        return location.toExternalForm();
+    protected static String getCodeLocation() {
+        return ServerJettyHttp.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 }
