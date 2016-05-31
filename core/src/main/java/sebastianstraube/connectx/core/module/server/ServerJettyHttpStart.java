@@ -1,7 +1,10 @@
 package sebastianstraube.connectx.core.module.server;
 
+import sebastianstraube.connectx.core.module.CoreModuleServiceStart;
+
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.security.ProtectionDomain;
+import java.net.URLDecoder;
 
 /**
  * Created by Sebastian on 08.05.2016.
@@ -11,7 +14,7 @@ public class ServerJettyHttpStart {
     public static void start(ServerConfig config){
 
         ServerJettyHttp serverJettyHttp = new ServerJettyHttp(
-                ServerJettyHttpStart.getCodeLocation(), config.getPORT_HTTP());
+                ServerJettyHttpStart.getArchiveLocation(), config.getPORT_HTTP());
 
         serverJettyHttp.startServer();
 
@@ -25,7 +28,16 @@ public class ServerJettyHttpStart {
      *
      * @return The war location.
      */
-    protected static String getCodeLocation() {
-        return ServerJettyHttp.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    protected static String getArchiveLocation() {
+        URL location = CoreModuleServiceStart.class.getProtectionDomain().getCodeSource().getLocation();
+        String path = "";
+        try {
+            path = URLDecoder.decode(location.getPath(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return path;
     }
+
 }

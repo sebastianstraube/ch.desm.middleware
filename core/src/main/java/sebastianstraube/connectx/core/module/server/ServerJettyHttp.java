@@ -14,18 +14,18 @@ import java.net.InetSocketAddress;
 public class ServerJettyHttp extends ServerBase {
 
     private final int listenPort;
-    private String contextPath;
+    private String archiveLocation;
     private final String tempDir;
     private final String descriptorDir;
 
-    public ServerJettyHttp(String contextPath, int listenPort){
+    public ServerJettyHttp(String archiveLocation, int listenPort){
         this.listenPort = listenPort;
-        this.contextPath = contextPath;
-        this.tempDir = contextPath + "tmp";
-        this.descriptorDir = contextPath +"WEB-INF" + File.separator+"web.xml";
+        this.archiveLocation = archiveLocation;
+        this.tempDir = archiveLocation + "tmp";
+        this.descriptorDir = archiveLocation +"WEB-INF" + File.separator+"web.xml";
 
         LOGGER.log(Level.INFO, " Jetty Configuration");
-        LOGGER.log(Level.INFO, "contextPath: " + contextPath);
+        LOGGER.log(Level.INFO, "archiveLocation: " + archiveLocation);
         LOGGER.log(Level.INFO, "tempDir: " + tempDir);
         LOGGER.log(Level.INFO, "descriptorDir: " + descriptorDir);
     }
@@ -41,7 +41,7 @@ public class ServerJettyHttp extends ServerBase {
         context.setContextPath("/");
         context.setDescriptor(descriptorDir);
         context.setServer(server);
-        context.setWar(contextPath);
+        context.setWar(archiveLocation);
 
         // (Optional) Set the directory the war will extract to.
         // If not set, java.io.tmpdir will be used, which can cause problems

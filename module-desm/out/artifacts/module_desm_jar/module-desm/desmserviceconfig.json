@@ -1,8 +1,0 @@
-{
-  "obermattUbw32ComPort":"COM3",
-  "cabineUbw32ComPort":"COM15",
-  "zusiHostIp":"127.0.0.1",
-  "zusiPort": 1436,
-  "DEFAULT_POLLING_FREQUENCY":25,
-  "enabledModules":["stellwerk_petrinet"]
-}

@@ -10,6 +10,7 @@ import org.glassfish.tyrus.server.Server;
 public class ServerTyrusWebsocket extends ServerBase {
 
     private static Logger LOGGER = Logger.getLogger(ServerTyrusWebsocket.class);
+
     private boolean isStarted = false;
     private String ip;
     private int port;
