@@ -1,0 +1,15 @@
+*.suo
+obj
+Service References
+bin
+Release
+Debug
+ipch
+*.sdf
+*.sdf
+*.opensdf
+*.iml
+target
+.idea
+out
+.DS_Store
