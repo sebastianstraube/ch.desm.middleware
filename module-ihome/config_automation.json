@@ -1,0 +1,4 @@
+{
+  "ubw32ComPort":"dev/ttyACM0",
+  "enabledModules":["automation"]
+}

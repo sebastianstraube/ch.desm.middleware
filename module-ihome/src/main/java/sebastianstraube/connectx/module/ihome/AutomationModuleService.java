@@ -6,9 +6,9 @@ public class AutomationModuleService {
 
     private static Logger LOGGER = Logger.getLogger(AutomationModuleService.class);
 
-    private final AutomationModuleConfig config;
+    private final AutomationServiceConfig config;
 
-    public AutomationModuleService(AutomationModuleConfig config) {
+    public AutomationModuleService(AutomationServiceConfig config) {
         this.config = config;
     }
 
@@ -21,15 +21,15 @@ public class AutomationModuleService {
     private void startModule(String name) {
         switch (name) {
             case "automation":
-                startAutomation();
+                startAutomation(config.getUbw32ComPort());
                 break;
             default:
                 throw new IllegalArgumentException("Unknown module " + name);
         }
     }
 
-    public void startAutomation() {
-        AutomationService service = new AutomationService("COM9");
+    public void startAutomation(String comPort) {
+        AutomationService service = new AutomationService(comPort);
         service.getEndpoint().init();
         service.getEndpoint().start();
     }

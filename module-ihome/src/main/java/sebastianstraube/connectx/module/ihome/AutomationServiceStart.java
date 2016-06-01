@@ -13,15 +13,14 @@ public class AutomationServiceStart {
     private static Logger LOGGER = Logger.getLogger(AutomationServiceStart.class);
 
     public static void main(String[] args) {
-        AutomationServiceStart.start();
+        AutomationServiceStart.start(args[0], args[1]);
     }
 
-    public static void start(){
+    public static void start(String configPathServer, String configPathAutomation){
         LOGGER.log(Level.INFO, "initialise middleware...");
-        LOGGER.log(Level.INFO, "starting directory: " + System.getProperty("user.dir"));
-        CoreModuleServiceStart.start();
-
-        final AutomationModuleConfig config = new AutomationModuleConfig();
+        LOGGER.log(Level.INFO, "Starting middleware with server config: " + configPathServer);
+        CoreModuleServiceStart.start(configPathServer);
+        final AutomationServiceConfig config = AutomationServiceConfig.readConfigFile(configPathAutomation);
 
         LOGGER.log(Level.INFO, "Starting middleware with configuration: " + config);
         final AutomationModuleService automation = new AutomationModuleService(config);
