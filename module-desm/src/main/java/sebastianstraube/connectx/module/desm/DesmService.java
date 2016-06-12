@@ -35,9 +35,6 @@ public class DesmService {
 
     private void startModule(String name) {
         switch (name) {
-            case "stellwerk":
-                startOm();
-                break;
             case "stellwerk_ubw32":
                 startOmStellwerk();
                 break;
@@ -53,11 +50,6 @@ public class DesmService {
             default:
                 throw new IllegalArgumentException("Unknown module " + name);
         }
-    }
-
-    private void startOm() {
-        startOmStellwerk();
-        startPetrinetOm();
     }
 
     private void startCabine() {
