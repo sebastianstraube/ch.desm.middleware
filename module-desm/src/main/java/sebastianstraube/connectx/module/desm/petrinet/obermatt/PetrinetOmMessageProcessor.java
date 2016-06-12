@@ -77,8 +77,10 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
 
     protected void processBrokerMessageManagement(PetrinetOmService service, MessageCommon message) {
 
+        //TODO CHECK hard coding
         //if init message skip message processing
-        if (initEndpoint(service, message)) {
+        if (message.getGlobalId().equals("mgmt.petrinet.obermatlangnau") &&
+                initEndpoint(service, message)) {
             return;
         }
 
