@@ -1,6 +1,13 @@
 package sebastianstraube.connectx.core.communication.message;
 
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 public class MessageCommonEncoder {
+
+    private static final Logger LOGGER = Logger.getLogger(MessageCommonEncoder.class);
+
     public String encode(MessageCommon messageCommon) {
         try {
             String[] parts = new String[MessageCommon.NUM_PARTS];
@@ -19,7 +26,7 @@ public class MessageCommonEncoder {
             e.printStackTrace();
             return null;
         } catch (BadParameterTypeCastException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.ERROR, "wrong parameter in message: "+messageCommon, e);
             return null;
         }
     }
