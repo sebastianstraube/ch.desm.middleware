@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import sebastianstraube.connectx.core.communication.endpoint.ubw32.EndpointUbw32Message;
 import sebastianstraube.connectx.core.communication.endpoint.ubw32.EndpointUbw32MessageAnalog;
 import sebastianstraube.connectx.core.communication.endpoint.ubw32.EndpointUbw32MessageDigital;
+import sebastianstraube.connectx.core.communication.endpoint.ubw32.EndpointUbw32Register;
 import sebastianstraube.connectx.core.communication.message.BadParameterTypeCastException;
 import sebastianstraube.connectx.core.communication.message.MessageCommon;
 import sebastianstraube.connectx.core.component.ComponentMessageProcessorUbw32Base;
@@ -49,15 +50,16 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
         try {
             final String globalId = element.getGlobalId();
             final String key = service.getMapPetrinet().mapBrokerToEndpointMessage(globalId);
-
             delegateToEndpoint(service.getEndpoint(), mapDigital, mapAnalog, key, element);
         } catch (NoSuchElementException e) {
             //LOGGER.log(Level.WARN, e.getMessage());
         }
     }
 
+    //TODO CHECK hard coding
     private void processBrokerMessageManagement(OmService service, MessageCommon element) {
-        if (initEndpoint(service, element)) {
+        if (element.getGlobalId().equals("mgmt.stellwerk.obermattlangnau") &&
+                initEndpoint(service, element)) {
             return;
         }
     }
@@ -99,16 +101,26 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
         final String globalId;
         final String parameterValue;
         if (ubw32Message instanceof EndpointUbw32MessageAnalog) {
-            // TODO: remove hard coded fahrstrassenschalter logic
-            Double pinValue = ((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue();
-            globalId = fahrStrassenSchalter.getglobalId(pinValue);
-            parameterValue = String.valueOf(((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue());
+            if (ubw32Message.getRegister() == EndpointUbw32Register.B0) {
+                Double pinValue = ((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue();
+                globalId = fahrStrassenSchalter.getglobalId(pinValue);
+                parameterValue = MessageCommon.MESSAGE_PARAMETER_ON;
+                // TODO: emit bool message with parameter set to off for all other fahrstrassenschalter stellungen
+            } else {
+                // TODO: check whether it works!
+                globalId = mapAnalog.getKeyForValue(ubw32Message.getRegister().toString());
+                parameterValue = String.valueOf(((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue());
+            }
         } else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
             globalId = mapDigital.getKeyForValue(pinName);
             Boolean pinValue = ((EndpointUbw32MessageDigital) ubw32Message).getRegisterValue();
             parameterValue = MessageCommon.mapBoolToOnOffParameter(pinValue);
         } else {
             throw new RuntimeException("uhm. unknown message!");
+        }
+
+        if (globalId == null) {
+            return;
         }
 
         String middlewareMessage = service.getComponentMapMiddleware().getValueForKey(globalId);

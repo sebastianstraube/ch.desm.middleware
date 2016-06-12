@@ -13,7 +13,7 @@ public class OmLogicFahrstrassenSchalter {
 
 		String globalId = "";
 
-        LOGGER.log(Level.TRACE, this.getClass().getName() + "processing value: " + value);
+        LOGGER.trace("processing value: " + value);
 
 		if(value >= 270 && value < 330){globalId = "8.91.07"; } else //FSS 90� F
 		if(value >= 330 && value < 390){globalId = "8.91.06";} else //FSS 80� F
@@ -27,12 +27,7 @@ public class OmLogicFahrstrassenSchalter {
 		if(value >= 690 && value < 745){globalId = "8.91.22";} else //FSS 80� EG
 		if(value >= 745 && value < 770){globalId = "8.91.23";} else //FSS 90� EG
 		{
-			try {
-				throw new Exception(this.getClass().getName() + "mapping with value: " + value);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				LOGGER.log(Level.ERROR, e);
-			}
+			LOGGER.error("invalid mapping value: " + value);
 		}
         return globalId;
 	}
