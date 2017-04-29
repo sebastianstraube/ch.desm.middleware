@@ -102,6 +102,7 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
     @Override
     protected boolean initEndpoint(PetrinetRe420Service service, MessageCommon element){
 
+        if(!element.getGlobalId().equals("mgmt.petrinet.re420")) return false;
         if(element.getType().equals(MessageCommon.ParameterType.STRING)){
             final String parameter;
             try {

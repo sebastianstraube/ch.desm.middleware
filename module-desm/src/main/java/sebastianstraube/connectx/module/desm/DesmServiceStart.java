@@ -1,13 +1,9 @@
 package sebastianstraube.connectx.module.desm;
 
-import com.google.gson.Gson;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import sebastianstraube.connectx.core.common.Utils;
 import sebastianstraube.connectx.core.module.CoreModuleServiceStart;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 
 public class DesmServiceStart {
 
@@ -36,7 +32,6 @@ public class DesmServiceStart {
 
         LOGGER.log(Level.INFO, "shutting down middleware...");
         System.exit(0);
-
     }
 
 

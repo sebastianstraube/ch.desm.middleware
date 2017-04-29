@@ -13,10 +13,8 @@ import java.util.List;
  */
 public class DesmServiceConfig {
 
-    public static final List<String> DEFAULT_MODULES = Arrays.asList("stellwerk_petrinet");
-
     // list of modules that should be connected to the middleware
-    private List<String> enabledModules = new ArrayList<>(DEFAULT_MODULES);
+    private List<String> enabledModules = new ArrayList<>();
 
     // Obermatt
     // linux: dev/ttyACM0

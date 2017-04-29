@@ -102,7 +102,7 @@ public class EndpointUbw32MessageHandler implements Runnable, EndpointRs232Liste
 
             // E3 is the blinking usb status led
             if (ubw32Message.getRegister() != EndpointUbw32Register.E3) {
-                LOGGER.log(Level.INFO, "cache state changed on ubw(" + serialEndpoint.getSerialPortName() + "): " + ubw32Message);
+                LOGGER.log(Level.TRACE, "cache state changed on ubw(" + serialEndpoint.getSerialPortName() + "): " + ubw32Message);
             }
 
             if (ubw32Message.getRegister() == EndpointUbw32Register.E3) {

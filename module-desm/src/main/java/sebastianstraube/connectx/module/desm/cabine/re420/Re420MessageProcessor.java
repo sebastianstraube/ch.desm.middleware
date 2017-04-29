@@ -83,7 +83,34 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 
 	@Override
 	protected boolean initEndpoint(Re420Service service, MessageCommon element) {
+
+		if(element.getType().equals(MessageCommon.ParameterType.STRING)){
+			final String parameter;
+			try {
+				parameter = element.getParameterAsString();
+			} catch (BadParameterTypeCastException e) {
+				LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+				return false;
+			}
+
+			switch (parameter) {
+				case ("init"): {
+					service.getEndpoint().init();
+					return true;
+				}
+				case ("start"): {
+					service.getEndpoint().start();
+					return true;
+				}
+				case ("stop"): {
+					service.getEndpoint().stop();
+					return true;
+				}
+			}
+		}
+
 		return false;
+
 	}
 
 }

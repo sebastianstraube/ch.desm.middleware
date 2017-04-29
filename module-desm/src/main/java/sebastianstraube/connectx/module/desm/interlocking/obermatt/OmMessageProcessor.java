@@ -101,32 +101,46 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
         final String globalId;
         final String parameterValue;
         if (ubw32Message instanceof EndpointUbw32MessageAnalog) {
+
+            //Fahrstrassenschalter impl
+            //TODO register should be configurable
             if (ubw32Message.getRegister() == EndpointUbw32Register.B0) {
                 Double pinValue = ((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue();
-                globalId = fahrStrassenSchalter.getglobalId(pinValue);
-                parameterValue = MessageCommon.MESSAGE_PARAMETER_ON;
+                String enabledGlobalId = fahrStrassenSchalter.getEnabledGlobalId(pinValue);
+                if (enabledGlobalId == null) {
+                    throw new RuntimeException("fahrStrassenSchalter.getEnabledGlobalId(pinValue);" + "register: B0" + "pinValue :" + pinValue + "pinValue :" + pinName);
+                }
+                List<String> disabledGlobalIdList = fahrStrassenSchalter.getDisabledGlobalIdList(enabledGlobalId);
+                disabledGlobalIdList.stream().forEach(s-> sendEndpointMessage(service,s, MessageCommon.MESSAGE_PARAMETER_OFF));
+                sendEndpointMessage(service, enabledGlobalId, MessageCommon.MESSAGE_PARAMETER_ON);
                 // TODO: emit bool message with parameter set to off for all other fahrstrassenschalter stellungen
             } else {
                 // TODO: check whether it works!
                 globalId = mapAnalog.getKeyForValue(ubw32Message.getRegister().toString());
+                if (globalId == null) {
+                    throw new RuntimeException("mapAnalog.getKeyForValue(ubw32Message.getRegister().toString());" + pinName);
+                }
                 parameterValue = String.valueOf(((EndpointUbw32MessageAnalog) ubw32Message).getRegisterValue());
+                sendEndpointMessage(service, globalId, parameterValue);
             }
         } else if (ubw32Message instanceof EndpointUbw32MessageDigital) {
             globalId = mapDigital.getKeyForValue(pinName);
+            if (globalId == null) {
+                throw new RuntimeException("mapDigital.getKeyForValue(pinName)" + pinName);
+            }
             Boolean pinValue = ((EndpointUbw32MessageDigital) ubw32Message).getRegisterValue();
             parameterValue = MessageCommon.mapBoolToOnOffParameter(pinValue);
+            sendEndpointMessage(service, globalId, parameterValue);
         } else {
             throw new RuntimeException("uhm. unknown message!");
         }
+    }
 
-        if (globalId == null) {
-            return;
-        }
-
+    private void sendEndpointMessage(OmService service, String globalId, String parameterValue){
         String middlewareMessage = service.getComponentMapMiddleware().getValueForKey(globalId);
         middlewareMessage = middlewareMessage.replace(MessageCommon.MESSAGE_PARAMETER_PLACEHOLDER, parameterValue);
-
         processEndpointMessage(service.getBrokerClient(), middlewareMessage, MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT);
+
     }
 
 }

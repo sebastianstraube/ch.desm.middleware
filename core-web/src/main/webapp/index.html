@@ -44,11 +44,8 @@
                 <div class="btn-group">
                     <label for="hostname">Server</label>
                     <select id="hostname">
+                        <option>192.168.1.32</option>
                         <option>0.0.0.0</option>
-                        <option>sestraub-m-r23v</option>
-                        <option>simulation1-pc</option>
-                        <option>heisenberg</option>
-                        <option>raspberrypi</option>
                     </select>
 
                     <label for="hostport">Port</label>
@@ -86,9 +83,11 @@
                     <span class="glyphicon glyphicon-send"></span> COMMUNICATION
                 </button>
 
+                <!--
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_gui">
                     <span class="glyphicon glyphicon-user"></span> ILTIS (GUI)
                 </button>
+                -->
 
                 <button class="btn btn-large btn-primary" data-toggle="button" type="button" id="switch_remote">
                     <span class="glyphicon glyphicon-transfer"></span> DYNAMIC REMOTE CONTROL
@@ -114,54 +113,40 @@
 
         <div class="container-fluid init-wrapper">
             <fieldset>
-                <legend>Initialize Endpoint</legend>
+                <legend>Initialize</legend>
                 <div class="btn-group controls">
 
                     <button class="btn btn-large btn-default" type="button"
-                            id="init_interlocking">STELLWERK (OML)</button>
+                            id="init_oml">OML</button>
 
                     <button class="btn btn-large btn-default" type="button"
-                            id="init_petrinet">PETRINET (OM)</button>
+                            id="init_oml_logic">OML-LOGIC</button>
 
                     <button class="btn btn-large btn-default" type="button"
-                            id="init_petrinet_re420">PETRINET (RE420)</button>
+                            id="init_re420_logic">RE420-LOGIC</button>
 
                     <button class="btn btn-large btn-default" type="button"
-                            id="init_cabine-ubw32">CABINE</button>
+                            id="init_re420">RE420</button>
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Start Controller Events</legend>
+                <legend>Start</legend>
                 <div class="btn-group controls">
                     <button class="btn btn-large btn-default" type="button"
-                            id="start_interlocking">STELLWERK (OML)</button>
+                            id="start_oml">OML</button>
 
                     <button class="btn btn-large btn-default" type="button"
-                            id="start_petrinet">PETRINET (OM)</button>
+                            id="start_oml_logic">OML-LOGIC</button>
 
                     <button class="btn btn-large btn-default" type="button"
-                            id="start_petrinet_re420">PETRINET (RE420)</button>
+                            id="start_re420_logic">RE420-LOGIC</button>
 
                     <button class="btn btn-large btn-default" type="button"
-                            id="start_cabine-ubw32">CABINE</button>
+                            id="start_re420">RE420</button>
                 </div>
             </fieldset>
-            <fieldset>
-                <legend>Stop Controller Events</legend>
-                <div class="btn-group controls">
-                    <button class="btn btn-large btn-default" type="button"
-                            id="stop_interlocking">STELLWERK (OML)</button>
 
-                    <button class="btn btn-large btn-default" type="button"
-                            id="stop_petrinet">PETRINET (OM)</button>
-
-                    <button class="btn btn-large btn-default" type="button"
-                            id="stop_petrinet_re420">PETRINET (RE420)</button>
-
-                    <button class="btn btn-large btn-default" type="button"
-                            id="stop_cabine-ubw32">CABINE</button>
-                </div>
-            </fieldset>
+            <!--
 
             <fieldset>
                 <legend>Power Controller</legend>
@@ -178,6 +163,8 @@
 
                 </div>
             </fieldset>
+
+            -->
         </div>
 
         <div class="container-fluid communication-wrapper">

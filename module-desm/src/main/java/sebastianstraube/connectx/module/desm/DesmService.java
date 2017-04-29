@@ -1,6 +1,5 @@
 package sebastianstraube.connectx.module.desm;
 
-import com.google.gson.Gson;
 import sebastianstraube.connectx.core.communication.broker.BrokerInstance;
 import sebastianstraube.connectx.core.communication.replay.ReplayFilter;
 import sebastianstraube.connectx.core.communication.replay.ReplayFilterAllowEverything;
@@ -13,8 +12,6 @@ import sebastianstraube.connectx.module.desm.simulation.zusi.ZusiService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class DesmService {
@@ -39,10 +36,13 @@ public class DesmService {
                 startOmStellwerk();
                 break;
             case "stellwerk_petrinet":
-                startPetrinetOm();
+                startOmPetrinet();
                 break;
-            case "cabine":
-                startCabine();
+            case "re420":
+                startRe420Cabine();
+                break;
+            case "re420_petrinet":
+                startRe420Petrinet();
                 break;
             case "zusi":
                 startZusi();
@@ -50,11 +50,6 @@ public class DesmService {
             default:
                 throw new IllegalArgumentException("Unknown module " + name);
         }
-    }
-
-    private void startCabine() {
-        startCabineRe420();
-        startPetrinetRe420();
     }
 
     private void startZusi() {
@@ -67,20 +62,23 @@ public class DesmService {
         startZusiAusbildung(service);
     }
 
-    public PetrinetOmService startPetrinetOm() {
+    public PetrinetOmService startOmPetrinet() {
         return new PetrinetOmService(BrokerInstance.getSingleton());
     }
 
-    public void startPetrinetRe420() {
-        PetrinetRe420Service petrinet = new PetrinetRe420Service(BrokerInstance.getSingleton());
+    public PetrinetRe420Service startRe420Petrinet() {
+        PetrinetRe420Service service = new PetrinetRe420Service(BrokerInstance.getSingleton());
+        return service;
     }
 
-    public void startOmStellwerk() {
+    public OmService startOmStellwerk() {
         OmService oml = new OmService(BrokerInstance.getSingleton(), config.getObermattUbw32ComPort());
+        return oml;
     }
 
-    public void startCabineRe420() {
+    public Re420Service startRe420Cabine() {
         Re420Service service = new Re420Service(BrokerInstance.getSingleton(), config.getCabineUbw32ComPort());
+        return service;
     }
 
     public void startZusiFahrpult(ZusiService service) {
