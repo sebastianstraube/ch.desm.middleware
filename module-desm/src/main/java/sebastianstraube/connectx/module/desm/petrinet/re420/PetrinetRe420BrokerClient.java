@@ -6,28 +6,27 @@ import sebastianstraube.connectx.core.communication.broker.Broker;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+
 /**
  * Created by max on 06/08/14.
  */
 public class PetrinetRe420BrokerClient extends ComponentBrokerClientBase {
     private static Logger LOGGER = Logger.getLogger(PetrinetRe420BrokerClient.class);
 
-    private PetrinetRe420BrokerClientThreadMessage thread;
     private PetrinetRe420Service service;
 
     public PetrinetRe420BrokerClient(Broker broker, PetrinetRe420Service service) {
         super(broker);
         this.service = service;
-
-        this.thread = new PetrinetRe420BrokerClientThreadMessage(service);
-        this.thread.start();
     }
 
     @Override
     protected void onIncomingBrokerMessage(String message) {
         LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: " + message);
 
-        if(!message.isEmpty())  thread.addMessages(service.getTranslator().toMiddlewareMessageList(message));
+        List<MessageCommon> messageList = service.getTranslator().toMiddlewareMessageList(message);
+        if(!message.isEmpty()) service.getPetrinetRe420BrokerClientMessageQueue().addMessages(messageList);
         else LOGGER.log(Level.INFO, "incoming broker message is empty " + getClass().getSimpleName());
     }
 

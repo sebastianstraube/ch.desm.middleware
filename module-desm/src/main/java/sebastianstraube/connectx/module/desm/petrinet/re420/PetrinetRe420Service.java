@@ -14,6 +14,9 @@ public class PetrinetRe420Service {
 
     private MessageTranslatorMiddleware translator;
     private PetrinetRe420MessageProcessor processor;
+    private PetrinetRe420BrokerClientMessageQueue petrinetRe420BrokerClientMessageQueue = new PetrinetRe420BrokerClientMessageQueue(this);
+
+
     private DesmServiceMapMiddleware componentMapMiddleware;
     private PetrinetRe420MapInterlockingOm mapInterlockingOm;
     private PetrinetRe420BrokerClient client;
@@ -33,6 +36,9 @@ public class PetrinetRe420Service {
         this.endpoint = new PetrinetRe420Endpoint(this);
     }
 
+    PetrinetRe420BrokerClientMessageQueue getPetrinetRe420BrokerClientMessageQueue(){
+        return petrinetRe420BrokerClientMessageQueue;
+    }
 
     public DesmServiceMapMiddleware getComponentMapMiddleware(){
         return componentMapMiddleware;

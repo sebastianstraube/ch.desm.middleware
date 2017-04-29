@@ -25,6 +25,7 @@ public class ZusiService extends ComponentServiceBase {
     private int port;
     private ZusiEndpointTcpClient endpointAusbildung;
     private ZusiEndpointTcpClient endpointFahrpult;
+    private ZusiBrokerClientMessageQueue zusiBrokerClientMessageQueue = new ZusiBrokerClientMessageQueue(this);
     private final DesmServiceMapMiddleware middleware = new DesmServiceMapMiddleware();
     private final ZusiMessageProcessor messageProcessor = new ZusiMessageProcessor();
     private final ZusiProtocolMessageHelper protocolMessageHelper = new ZusiProtocolMessageHelper();
@@ -62,6 +63,14 @@ public class ZusiService extends ComponentServiceBase {
     public ZusiService() {
         this.messageParameterHelper = new ZusiMessageParameterHelper(this);
         this.protocolNodeHelper = new ZusiProtocolNodeHelper(this);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ZusiBrokerClientMessageQueue geZusiBrokerClientMessageQueue(){
+        return zusiBrokerClientMessageQueue;
     }
 
     /**
