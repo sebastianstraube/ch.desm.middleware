@@ -4,7 +4,8 @@
   "zusiHostIp":"127.0.0.1",
   "zusiPort": 1436,
   "DEFAULT_POLLING_FREQUENCY":25,
-  "enabledModules":["re420", "re420_petrinet","zusi"] // test cabine zusi
+  "enabledModules":["re420", "re420_petrinet","stellwerk_ubw32","stellwerk_petrinet","zusi"] // test all
+  //"enabledModules":["re420", "re420_petrinet","zusi"] // test cabine zusi
   //"enabledModules":["re420", "re420_petrinet"] //test cabine
-  //"enabledModules":["stellwerk_ubw32","stellwerk_petrinet"] /test stellwerk
+  //"enabledModules":["stellwerk_ubw32","stellwerk_petrinet"] //test stellwerk
 }

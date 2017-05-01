@@ -58,15 +58,15 @@ public class OmMessageProcessor extends ComponentMessageProcessorUbw32Base<OmSer
 
     //TODO CHECK hard coding
     private void processBrokerMessageManagement(OmService service, MessageCommon element) {
-        if (element.getGlobalId().equals("mgmt.stellwerk.obermattlangnau") &&
-                initEndpoint(service, element)) {
-            return;
-        }
+         if(initEndpoint(service, element)) return;
     }
 
     @Override
     protected boolean initEndpoint(OmService service, MessageCommon element){
 
+        //TODO CHECK hard coding
+        //if init message skip message processing
+        if (!element.getGlobalId().equals("mgmt.stellwerk.obermattlangnau")) return false;
         if(element.getType().equals(MessageCommon.ParameterType.STRING)){
             final String parameter;
             try {

@@ -78,12 +78,15 @@ public class Re420MessageProcessor extends ComponentMessageProcessorUbw32Base<Re
 	}
 
 	private void processBrokerMessageManagement(Re420Service service, MessageCommon message) {
-		initEndpoint(service, message);
+		if(initEndpoint(service, message)) return;
 	}
 
 	@Override
 	protected boolean initEndpoint(Re420Service service, MessageCommon element) {
 
+		//TODO CHECK hard coding
+		//if init message skip message processing
+		if (!element.getGlobalId().equals("mgmt.cabine.re420.ubw32")) return false;
 		if(element.getType().equals(MessageCommon.ParameterType.STRING)){
 			final String parameter;
 			try {

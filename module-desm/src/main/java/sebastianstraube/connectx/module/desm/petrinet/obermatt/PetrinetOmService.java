@@ -17,14 +17,14 @@ public class PetrinetOmService extends ComponentServiceBase<PetrinetOmEndpoint> 
     private DesmServiceMapMiddleware componentMapMiddleware;
     private PetrinetOmBrokerClient client;
     private PetrinetOmEndpoint endpoint;
-    private PetrinetOmMapInterlockingOm map;
+    private PetrinetOmMapInterlockingOm mapInterlockingOm;
     private PetrinetOmMapZusi mapZusi = new PetrinetOmMapZusi();
 
     public PetrinetOmService(Broker broker){
         this.componentMapMiddleware = new DesmServiceMapMiddleware();
         this.translator = new MessageTranslatorMiddleware();
         this.processor = new PetrinetOmMessageProcessor();
-        this.map = new PetrinetOmMapInterlockingOm();
+        this.mapInterlockingOm = new PetrinetOmMapInterlockingOm();
 
         this.client = new PetrinetOmBrokerClient(broker, this);
         this.endpoint = new PetrinetOmEndpoint(this);
@@ -54,8 +54,8 @@ public class PetrinetOmService extends ComponentServiceBase<PetrinetOmEndpoint> 
         return client;
     }
 
-    public PetrinetOmMapInterlockingOm getMap(){
-        return map;
+    public PetrinetOmMapInterlockingOm getMapInterlockingOm(){
+        return mapInterlockingOm;
     }
 
     public PetrinetOmMapZusi getMapZusi(){

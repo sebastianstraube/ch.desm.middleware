@@ -25,6 +25,5 @@ public class PetrinetOmBrokerClientMessageQueue extends ComponentMessageProcesso
     public void processPendingMessages(List<MessageCommon> messages) {
         LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
         service.getMessageProcessor().processBrokerMessage(service, messages);
-
     }
 }

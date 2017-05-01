@@ -33,6 +33,7 @@ public class PetrinetRe420BrokerClient extends ComponentBrokerClientBase {
     @Override
     protected void initializeTopicSubscriptions() {
         subscribeToTopic(MessageCommon.MESSAGE_TOPIC_CABINE_RE420);
+        subscribeToTopic(MessageCommon.MESSAGE_TOPIC_PETRINET_CABINE_RE420);
         subscribeToTopic(MessageCommon.MESSAGE_TOPIC_MANAGEMENT);
     }
 }

@@ -19,15 +19,17 @@ public abstract class ComponentMessageProcessorThreadBase<T> extends Thread {
     private Object pendingMessagesLock;
     private List<T> pendingMessages;
 
+    public abstract void processPendingMessages(List<T> messages);
+
     public ComponentMessageProcessorThreadBase() {
         pendingMessages = new ArrayList<T>();
         pendingMessagesLock = new Object();
+        this.start();
     }
 
-    public abstract void processPendingMessages();
-
-    public List<T> getMessages(){
+    private List<T> getMessages(){
         synchronized (pendingMessagesLock){
+            if(pendingMessages.isEmpty()) return new ArrayList<T>();
             List<T> messages = new ArrayList<>(pendingMessages);
             pendingMessages.clear();
             return messages;
@@ -46,13 +48,15 @@ public abstract class ComponentMessageProcessorThreadBase<T> extends Thread {
         }
     }
 
+
     public void run(){
         final FrequencyLimiter frequencyLimiter = new FrequencyLimiter(DEFAULT_POLLING_FREQUENCY);
 
         while (!interrupted()) {
             final long startMillis = System.currentTimeMillis();
 
-            processPendingMessages();
+            List<T> messages = getMessages();
+            if(!messages.isEmpty())processPendingMessages(messages);
 
             try {
                 frequencyLimiter.ensureLimit(startMillis);
@@ -62,7 +66,4 @@ public abstract class ComponentMessageProcessorThreadBase<T> extends Thread {
             }
         }
     }
-
-
-
 }

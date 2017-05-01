@@ -26,7 +26,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     private void processBrokerMessage(PetrinetOmService service, MessageCommon element){
         switch(element.getTopic().toLowerCase()) {
             case MessageCommon.MESSAGE_TOPIC_INTERLOCKING_OBERMATT:
-                processBrokerMessageObermatt(service, element);
+                processBrokerMessageInterlockingObermatt(service, element);
                 break;
             case MessageCommon.MESSAGE_TOPIC_SIMULATION_ZUSI_AUSBILDUNG:
                 processBrokerMessageZusiAusbildung(service, element);
@@ -40,7 +40,7 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         }
     }
 
-    private void processBrokerMessageObermatt(PetrinetOmService service, MessageCommon message) {
+    private void processBrokerMessageInterlockingObermatt(PetrinetOmService service, MessageCommon message) {
         final boolean sensorValue;
         try {
             sensorValue = message.getParameterAsBoolean();
@@ -50,10 +50,10 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
         }
 
         try {
-            String sensorName = service.getMap().mapBrokerToEndpointMessage(message.getGlobalId());
+            String sensorName = service.getMapInterlockingOm().mapBrokerToEndpointMessage(message.getGlobalId());
             delegateToEndpoint(service, sensorName, sensorValue);
         } catch (Exception e) {
-            //LOGGER.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, e);
         }
     }
 
@@ -71,22 +71,14 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
             String sensorName = service.getMapZusi().getKeyForValue(message.getGlobalId());
             delegateToEndpoint(service, sensorName, sensorValue);
         } catch (Exception e) {
-            //LOGGER.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, e);
         }
     }
 
     protected void processBrokerMessageManagement(PetrinetOmService service, MessageCommon message) {
 
-        //TODO CHECK hard coding
-        //if init message skip message processing
-        if (message.getGlobalId().equals("mgmt.petrinet.obermatlangnau") &&
-                initEndpoint(service, message)) {
-            return;
-        }
-
-        // Todo implementation
-        // activate this, when gui taken controle over this endpoint
-        if (service.getMap().isKeyAvailable(message.getGlobalId())) {
+        if(initEndpoint(service, message)) return;
+        if (service.getComponentMapMiddleware().isKeyAvailable(message.getGlobalId())) {
             final String sensorName = message.getGlobalId();
 
             final Boolean sensorValue;
@@ -106,14 +98,17 @@ public class PetrinetOmMessageProcessor extends ComponentMessageProcessorBase<Pe
     }
 
     @Override
-    protected boolean initEndpoint(PetrinetOmService service, MessageCommon element){
+    protected boolean initEndpoint(PetrinetOmService service, MessageCommon message){
 
-        if(element.getType().equals(MessageCommon.ParameterType.STRING)){
+        //TODO CHECK hard coding
+        //if init message skip message processing
+        if (!message.getGlobalId().equals("mgmt.petrinet.obermatlangnau")) return false;
+        if(message.getType().equals(MessageCommon.ParameterType.STRING)){
             final String parameter;
             try {
-                parameter = element.getParameterAsString();
+                parameter = message.getParameterAsString();
             } catch (BadParameterTypeCastException e) {
-                LOGGER.log(Level.ERROR, "Received init message with type " + element.getTypeName() + " but expected String");
+                LOGGER.log(Level.ERROR, "Received init message with type " + message.getTypeName() + " but expected String");
                 return false;
             }
 

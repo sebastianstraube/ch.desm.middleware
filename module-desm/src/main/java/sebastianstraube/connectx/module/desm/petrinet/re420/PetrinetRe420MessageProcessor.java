@@ -80,10 +80,8 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
     }
 
     private void processBrokerMessageManagement(PetrinetRe420Service service, MessageCommon message) {
-        if (initEndpoint(service, message)) return;
 
-        // Todo implementation
-        // activate this, when gui taken controle over this endpoint
+        if (initEndpoint(service, message)) return;
         if(service.getComponentMapMiddleware().isKeyAvailable(message.getGlobalId())){
             final String sensorName = message.getGlobalId();
             final int sensorValue;
@@ -102,6 +100,8 @@ public class PetrinetRe420MessageProcessor extends ComponentMessageProcessorBase
     @Override
     protected boolean initEndpoint(PetrinetRe420Service service, MessageCommon element){
 
+        //TODO CHECK hard coding
+        //if init message skip message processing
         if(!element.getGlobalId().equals("mgmt.petrinet.re420")) return false;
         if(element.getType().equals(MessageCommon.ParameterType.STRING)){
             final String parameter;

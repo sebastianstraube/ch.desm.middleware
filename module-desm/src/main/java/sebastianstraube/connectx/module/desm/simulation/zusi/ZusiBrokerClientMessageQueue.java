@@ -10,26 +10,17 @@ import java.util.List;
 /**
  * Created by Sebastian on 08.11.2014.
  */
-public class ZusiBrokerClientMessageQueue extends ComponentMessageProcessorThreadBase {
+public class ZusiBrokerClientMessageQueue extends ComponentMessageProcessorThreadBase<MessageCommon> {
 
     private static Logger LOGGER = Logger.getLogger(ZusiBrokerClientMessageQueue.class);
     private ZusiService service;
-    private Object processMessagesLock;
 
     public ZusiBrokerClientMessageQueue(ZusiService service){
         this.service = service;
-        this.processMessagesLock = new Object();
-        this.start();
     }
 
-    public void processPendingMessages() {
-        synchronized (processMessagesLock){
-            List<MessageCommon> messages = getMessages();
-
-            if(!messages.isEmpty()){
-                LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
-                service.getMessageProcessor().processBrokerMessage(service, messages);
-            }
+    public void processPendingMessages(List<MessageCommon> messages) {
+        LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
+        service.getMessageProcessor().processBrokerMessage(service, messages);
         }
-    }
 }

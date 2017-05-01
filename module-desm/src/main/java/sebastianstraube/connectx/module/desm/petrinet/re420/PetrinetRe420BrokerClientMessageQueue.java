@@ -14,24 +14,14 @@ public class PetrinetRe420BrokerClientMessageQueue extends ComponentMessageProce
 
     private static Logger LOGGER = Logger.getLogger(PetrinetRe420BrokerClientMessageQueue.class);
     private PetrinetRe420Service service;
-    private Object processMessagesLock;
 
     public PetrinetRe420BrokerClientMessageQueue(PetrinetRe420Service service){
         this.service = service;
-        this.processMessagesLock = new Object();
-        this.start();
     }
 
     @Override
-    public void processPendingMessages() {
-        synchronized (processMessagesLock){
-            List<MessageCommon> messages = getMessages();
-
-            if(!messages.isEmpty()){
-                LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
-                service.getProcessor().processBrokerMessage(service, messages);
-            }
-        }
-
+    public void processPendingMessages(List<MessageCommon> messages) {
+        LOGGER.log(Level.TRACE, "processing broker message: " + messages.toString());
+        service.getProcessor().processBrokerMessage(service, messages);
     }
 }

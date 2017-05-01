@@ -90,7 +90,7 @@
     <build>
         <directory>${project.basedir}/target</directory>
 
-        <!--exploded war into jar file-->
+		<!--exploded war into jar file-->
         <resources>
             <resource>
                 <directory>${project.basedir}/../core-web/target/core-web-0.1</directory>
@@ -106,7 +106,7 @@
                 <targetPath>sebastianstraube</targetPath>
             </resource>
         </resources>
-
+		
         <plugins>
 
             <plugin>
@@ -114,6 +114,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
+                    <compilerVersion>1.8</compilerVersion>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>

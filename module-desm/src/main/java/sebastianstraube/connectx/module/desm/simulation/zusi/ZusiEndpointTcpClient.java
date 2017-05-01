@@ -20,7 +20,6 @@ public class ZusiEndpointTcpClient extends EndpointTcpClient {
         this.registerEndpointListener();
         this.service = service;
         this.messageHandler = new ZusiEndpointTcpClientThread(service, topic);
-        messageHandler.start();
     }
 
     @Override

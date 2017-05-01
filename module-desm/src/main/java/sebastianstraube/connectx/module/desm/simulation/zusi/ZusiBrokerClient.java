@@ -13,18 +13,23 @@ public class ZusiBrokerClient extends ComponentBrokerClientBase {
     private static Logger LOGGER = Logger.getLogger(ZusiBrokerClient.class);
 
     private ZusiService service;
+    //private ZusiBrokerClientMessageQueue zusiBrokerClientMessageQueue;
 
     public ZusiBrokerClient(Broker broker, ZusiService service) {
         super(broker);
         this.service = service;
+        //this.zusiBrokerClientMessageQueue = new ZusiBrokerClientMessageQueue(service);
     }
 
 	@Override
 	protected void onIncomingBrokerMessage(String message) {
 		LOGGER.log(Level.INFO, this.getClass().getSimpleName() + " received broker message: " + message);
 
-        List<MessageCommon> l = service.getTranslator().toMiddlewareMessageList(message);
-        service.geZusiBrokerClientMessageQueue().addMessages(l);
+        List<MessageCommon> messages = service.getTranslator().toMiddlewareMessageList(message);
+        service.getMessageProcessor().processBrokerMessage(service, messages);
+
+        //ToDo Thread optimization?!
+        //zusiBrokerClientMessageQueue.addMessages(messages);
     }
 
 	@Override

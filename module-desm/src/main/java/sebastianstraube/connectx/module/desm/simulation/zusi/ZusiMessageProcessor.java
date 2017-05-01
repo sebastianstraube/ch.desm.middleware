@@ -43,7 +43,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 break;
             }
             case(MessageCommon.MESSAGE_TOPIC_MANAGEMENT):{
-                processBrokerMessageManagament(service, message);
+                processBrokerMessageManagement(service, message);
                 break;
             }
             case(MessageCommon.MESSAGE_TOPIC_PETRINET_OBERMATT):{
@@ -62,7 +62,6 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
                 }
             };
         }
-
     }
 
     /**
@@ -103,7 +102,7 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
      * @param service
      * @param message
      */
-    private void processBrokerMessageManagament(ZusiService service, MessageCommon message){
+    private void processBrokerMessageManagement(ZusiService service, MessageCommon message){
         //if init message skip message processing
         if (initEndpoint(service, message)) {
             return;
@@ -281,6 +280,8 @@ public class ZusiMessageProcessor extends ComponentMessageProcessorBase<ZusiServ
     @Override
     protected boolean initEndpoint(ZusiService service, MessageCommon element) {
 
+        //TODO check valid globalId
+        if(!element.getGlobalId().equals("not-defined-zusi")) return false;
         if(element.getType().equals(MessageCommon.ParameterType.STRING)){
             final String parameter;
             try {

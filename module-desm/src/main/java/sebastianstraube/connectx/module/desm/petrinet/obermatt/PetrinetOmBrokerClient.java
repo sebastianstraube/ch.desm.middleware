@@ -13,21 +13,20 @@ import sebastianstraube.connectx.core.communication.broker.Broker;
 public class PetrinetOmBrokerClient extends ComponentBrokerClientBase {
     private static Logger LOGGER = Logger.getLogger(PetrinetOmBrokerClient.class);
 
-    private PetrinetOmBrokerClientThreadMessage thread;
+    //private PetrinetOmBrokerClientMessageQueue thread;
     private PetrinetOmService service;
 
     public PetrinetOmBrokerClient(Broker broker, PetrinetOmService service) {
         super(broker);
         this.service = service;
-
-        this.thread = new PetrinetOmBrokerClientThreadMessage(service);
-        this.thread.start();
+       // this.thread = new PetrinetOmBrokerClientMessageQueue(service);
     }
 
     @Override
     protected void onIncomingBrokerMessage(String message) {
         LOGGER.log(Level.TRACE, "broker (" + this.getClass() + ") received message: " + message);
-        thread.addMessages(service.getTranslator().toMiddlewareMessageList(message));
+        service.getMessageProcessor().processBrokerMessage(service, service.getTranslator().toMiddlewareMessageList(message));
+        //thread.addMessages(service.getTranslator().toMiddlewareMessageList(message));
     }
 
     @Override
