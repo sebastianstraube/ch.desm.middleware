@@ -19,7 +19,7 @@
 		<dependency>
             <groupId>sebastianstraube.connectx</groupId>
             <artifactId>core</artifactId>
-            <version>0.1</version>
+            <version>0.101</version>
         </dependency>
 
         <!-- Test Automation -->

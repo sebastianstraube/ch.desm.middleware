@@ -158,7 +158,7 @@ public class ZusiProtocolNodeCommand {
 
         nodeRoot.addNode(nodeClientAusbilder);
         nodeClientAusbilder.addNode(nodeNeededData);
-        //needed_data.addNode(trainpos);
+        //nodeNeededData.addNode(trainpos);
 
         return nodeRoot;
     }

@@ -5,7 +5,7 @@
     <groupId>sebastianstraube.connectx</groupId>
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
-    <version>0.1</version>
+    <version>0.101</version>
     <name>${project.artifactId}</name>
 
     <properties>

@@ -62,15 +62,20 @@ public abstract class EndpointTcpClient extends EndpointCommon<String> {
 
     /**
      *
-     * @param message
+     * @param byteStream
      * @throws IOException
      */
-    public void receiveEvent(byte[] message) throws IOException {
+    public void receiveEvent(byte[] byteStream) throws IOException {
         synchronized(receiveEventLock){
 
-            //TODO implement
-            LOGGER.trace("Thread active: " + Arrays.toString(message));
-            onIncomingEndpointMessage("");
+            if(byteStream != null && byteStream.length > 0){
+
+                String charStream=Arrays.toString(byteStream).replace("[","").replace("]","").replace(", ","");
+                LOGGER.debug("Thread active: " + charStream);
+                onIncomingEndpointMessage(charStream);
+            }else{
+                LOGGER.log(Level.WARN, "zusi client tried to send malformed endpoint message: " + byteStream);
+            }
         }
     }
 
